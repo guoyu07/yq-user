@@ -1,0 +1,64 @@
+<%
+'if request.cookies("jhjbkid")="" then
+   'response.write "<script language='javascript'>"
+   'response.write "alert('账号或密码错误！');"
+   'response.write "gmjh.asp"
+   'response.write "</script>"
+   'response.end
+'else
+   jhjbkid=request.cookies("jhjbkid")
+   response.cookies("gpa")="12345"
+'end if
+%>
+<!--#include file="../shopmfh.asp"-->
+<!--#include file="../shopjbk.asp"-->
+<%
+pdid=request("id")
+pdpa=request("jh")
+Set rs= Server.CreateObject("ADODB.Recordset")
+sql="select * from ejbk where pdid = '"&pdid&"'" 
+rs.open sql,conn0,1,1
+if rs.eof and rs.bof then
+   response.write "<script language='javascript'>"
+   response.write "alert('该消费编号不存在或已被使用，请检查后再试！');"
+   response.write "history.go(-1);"
+   response.write "</script>" 
+   response.end
+end if
+%>
+<script language="JavaScript"> 
+ function checkdate()  {
+  if (Form.sjuser.value=="") {      alert("请输入受赠方用户名!");   return false;    } 
+  if (Form.sjuser.value=="<%=rs("up")%>") {      alert("不能转给自己!");      return false;    }
+  return true;  }  
+</script>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+</head>
+<div align="center">
+	　<p><font color="#FF0000"><b>提示：</b></font><font color="#0000FF">一经转赠将无法撤销，请谨慎操作并认真核对！</font></p>
+	<p>　</p>
+	<table border="0" width="35%" id="table1" height="120">
+		<tr>
+			<td>
+			<form method="POST" action="jbkzj02.asp" name="Form" onSubmit="return checkdate()">
+			<b>要转赠的消费编号为：<font color="#FF0000"><%=pdid%><input type="hidden" name="pdid" size="20" value="<%=pdid%>" readonly></font></b><p>
+			<b>当前持有者用户名：<font color="#008000"><%=rs("up")%><input type="hidden" name="jh" size="20" value="<%=rs("up")%>" readonly></font></b></p>
+			<p><b>受赠方用户名：<input type="text" name="sjuser" size="18">&nbsp;&nbsp;&nbsp;</b><input type="submit" value="提交" name="B1" style="font-family: 宋体; font-size: 12pt; font-weight: bold"></p>
+			</form>
+			<p align="center">　<p align="center">
+			<a href="gmjh.asp?jh=<%=jhjbkid%>" style="text-decoration: none; font-weight: 700"><font size="4" color="#FF0000">不转赠点击返回</font></a></td>
+		</tr>
+	</table>
+	<p align="center">　</p>
+	<table border="0" width="45%" id="table2" cellspacing="1">
+		<tr>
+			<td width="204" rowspan="2">
+			<img border="0" src="tixing.jpg" align="right"></td>
+			<td>　</td>
+		</tr>
+		<tr>
+			<td><font color="#008000"><b>&nbsp;</b></font><b><font color="#008000">该编号并未激活</font></b></td>
+			</tr>
+		</table>
+	</div>

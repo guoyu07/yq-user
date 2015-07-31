@@ -1,0 +1,17 @@
+<!--#include file="../ct0618.asp"-->
+<%
+gid=request("gid")
+%>
+<%
+set rs1=server.CreateObject("adodb.recordset")
+sql1="select * from gcuser where username = '"&gid&"'"
+rs1.open sql1,conn2,2,3
+rs1("addsheng")=trim(request("ProvinceName"))
+rs1("addshi")=trim(request("CityName"))
+rs1("addqu")=trim(request("AreaName"))
+rs1.update
+%>
+<%
+response.Write "<script language=javascript>alert('ÐÞ¸Ä³É¹¦£¡');location.href='../vipadd.asp?addid="&gid&"'</script>"
+response.end
+%>

@@ -1,0 +1,150 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="other" extends="managerInterceptor" namespace="/">
+	    <action name="manager" class="com.yq.user.action.ManagerAction">
+		    <result name="success">
+		        vip/manager.jsp
+		    </result>
+		</action>
+	    <action name="adminmenu" class="com.yq.user.action.AdminMenu">
+		    <result name="success">
+		        vip/admin_menu.jsp
+		    </result>
+		</action>
+		<action name="gg" class="com.yq.user.action.GgAction">
+			<result name="success">vgo/gg.jsp</result>
+		</action>
+		
+		<action name="userlist" class="com.yq.user.action.UserListAction">
+			<result name="success">vip/userlist.jsp</result>
+		</action>
+		
+		<action name="datepay" class="com.yq.user.action.DatePayAction">
+			<result name="success">vip/datepay.jsp</result>
+		</action>		
+		
+		<action name="tgurl" class="com.yq.user.action.TgurlAction">
+		    <result name="success">vip/tgurl.jsp</result>
+		</action>
+		
+		<action name="login2j" class="com.yq.user.action.Login2jAction">
+		    <result name="input">vip/${inputUrl}</result>
+		    <result name="success" type="json"></result>
+		</action>
+		
+		
+		<action name="userga" class="com.yq.user.action.UpdateUserInfoAction">
+		    <result name="input">vip/userga.jsp</result>
+		    <result name="success" type="json"></result>
+		</action>
+		
+		
+		<action name="updateuserjc" class="com.yq.user.action.UpdateUserJcAction">
+		    <result name="input">vip/dateuserjc.jsp</result>
+		    <result name="success" type="json"></result>
+		</action>
+		
+		<action name="gcbf" class="com.yq.user.action.GcfhAction">
+		    <result name="p0">vip/gcbf.jsp</result>
+		    <result name="p1">vip/gcbftj.jsp</result>
+		</action>
+		
+		
+		<action name="ybsf" class="com.yq.user.action.YbsfAction">
+		    <result name="input">vip/ybsf.jsp</result>
+		    <result name="success" type="json"></result>
+		</action>
+		
+		<action name="yb" class="com.yq.user.action.GetUserYb">
+		    <result name="success" type="json"></result>
+		</action>
+		
+		<action name="dldate" class="com.yq.user.action.LoginLogListAction">
+		    <result name="success">vgo/dldate.jsp</result>
+		</action>
+		<action name="ggck" class="com.yq.user.action.GgckAction">
+		    <result name="success">vgo/ggck.jsp</result>
+		</action>
+		
+		<action name="logout" class="com.yq.user.action.LogoutAction">
+		    <result name="ch" type="redirect">http://www.zgyce.com/</result>
+		    <result name="en" type="redirect">http://www.zgyce.com/english</result>
+		</action>
+		
+		<action name="sgks01" class="com.yq.user.action.Sgks01Action">
+		    <result name="success">vip/sgks01.jsp</result>
+		</action>
+		<action name="sgreg" class="com.yq.user.action.SgRegAction">
+		    <result name="success">vip/sgreg.jsp</result>
+		</action>			
+		<action name="bdreg" class="com.yq.user.action.BdRegAction">
+		    <result name="success">vip/bdreg.jsp</result>
+		    <result name="sgks01" type="redirect">sgks01?myup=${up}&amp;lb=1</result>
+		</action>
+		
+		<action name="vipup" class="com.yq.user.action.VipUpAction">
+		   <result name="success">vip/vipup.jsp</result>
+		</action>
+		
+		<action name="bdbdate" class="com.yq.user.action.DateBdbAction">
+		   <result name="success">vip/bdbdate.jsp</result>
+		</action>
+		
+		<action name="bdbzz" class="com.yq.user.action.BdbZzAction">
+		   <result name="success">vip/bdbjzpay.jsp</result>
+		   <result name="bdbdate" type="redirect">bdbdate</result>
+		</action>
+		
+		<action name="tgdown" class="com.yq.user.action.TgdownAction">
+		   <result name="success">vip/tgdown.jsp</result>
+		</action>
+		
+		<action name="regTheSame" class="com.yq.user.action.RegTheSameAction">
+		   <result name="success">vip/reg.jsp</result>
+		</action>			
+		
+		<action name="tjz" class="com.yq.user.action.TjzAction">
+		   <result name="success">vip/tjz.jsp</result>
+		</action>
+		
+		<action name="epjqks" class="com.yq.user.action.EpjqksAction">
+		   <result name="input">vip/epjqks.jsp</result>
+		</action>	
+		
+		<action name="epkjjl" class="com.yq.user.action.EpkjjlAction">
+		   <result name="success">vip/epkjjl.jsp</result>
+		</action>				
+	</package>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="login" extends="myInterceptor" namespace="/">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="login" class="com.yq.user.action.AdminLogin">
+			<result name="success" type="json">
+			  <param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
+		<action name="reg" class="com.yq.user.action.RegAction">
+			<result name="input">reg.jsp</result>
+		    <result name="success" type="json">
+		       <param name="includeProperties">erroCodeNum</param>
+		    </result>
+		</action>
+		<action name="checkreg" class="com.yq.user.action.CheckReg">
+			<result name="success" type="json" />
+		</action>
+		
+		<action name="updateuser" class="com.yq.user.action.UpdateUserAction">
+		    <result name="input">vip/upuser.jsp</result>
+			<result name="success" type="json" >
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

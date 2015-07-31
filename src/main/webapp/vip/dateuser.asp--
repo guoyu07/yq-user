@@ -1,0 +1,211 @@
+<!--#include file="../ct0618.asp"-->
+<!--#include file="../zqcjimg.asp"-->
+<!--#include file="cfvip.asp"-->
+<%
+if request.cookies("regid")="" or request.cookies("password")="" then
+   response.write "<script language='javascript'>"
+   response.write "alert('账号或密码错误！');"
+   response.redirect"../login.aspx"  
+   response.write "</script>"
+   response.end
+else
+username=request.cookies("regid")
+password=request.cookies("password")
+end if
+%>
+<%
+Set rs1= Server.CreateObject("ADODB.Recordset") 
+sql1="select * from gcuser where username = '"&username&"' and password = '" &password&"'" 
+rs1.open sql1,conn2,1,1
+if rs1.eof and rs1.bof then
+   response.write "<script language='javascript'>"
+   response.write "alert('操作错误(a)，请检查输入是否正确！');"
+   response.write "history.go(-1);"
+   response.write "</script>" 
+   response.end
+elseif rs1("addsheng")<>"" or rs1("addshi")<>"" or rs1("addqu")<>"" then
+else
+response.write"<script>alert('注意：请您补充好您银行卡开户行所在城市的详细地址！谢谢！');location.href='../vipadd.asp?addid="&username&"'</script>"
+response.end
+end if
+%>
+<%
+dim action
+action=request.QueryString("action")
+'//保存信息
+if action="save" then
+  Dim rs2,sql2
+  Set rs2= Server.CreateObject("ADODB.Recordset") 
+  sql2="select * from gcuser where username = '"&username&"'" 
+  rs2.open sql2,conn2,2,3
+if rs2("password3")<>request("pa2j") then
+   response.write "<script language='javascript'>"
+   response.write "alert('二级密码错误，请重新输入！');"
+   response.write "history.go(-1);"
+   response.write "</script>" 
+   response.end
+elseif rs2("userid")<>request("ceuserid") then
+   response.write "<script language='javascript'>"
+   response.write "alert('身份证号码不正确，请重新输入！');"
+   response.write "history.go(-1);"
+   response.write "</script>" 
+   response.end
+end if
+  'rs2("card")=request("card")
+  'rs2("bank")=request("bank")
+  'rs2("call")=request("call")
+  rs2("email")=request("email")
+  rs2.update
+  set rs_d1 = Server.CreateObject("ADODB.Recordset")
+  sql_d1 = "SELECT * FROM dateip"
+  rs_d1.open sql_d1,conn1,2,3
+  rs_d1.addnew
+  rs_d1("user")=username
+  rs_d1("dlfs")="资料"
+  rs_d1.update
+  response.cookies("regid")=rs2("username")    '修改数据提交保存后用会员名和新密码自动登录
+  response.cookies("password")=rs2("password")
+  response.Write "<script language=javascript>alert('个人资料修改成功！');history.go(-1);</script>"
+  if trim(request("password"))<>"" then
+  dim pa,pa1
+  pa2=trim(request("password"))
+  pa5=LCase(pa2)
+  'rs2("password")=md5(pa5)
+  rs2.update
+  set rs_d2 = Server.CreateObject("ADODB.Recordset")
+  sql_d2 = "SELECT * FROM dateip"
+  rs_d2.open sql_d1,conn1,2,3
+  rs_d2.addnew
+  rs_d2("user")=username
+  rs_d2("dlfs")="密码"
+  rs_d2.update
+  response.cookies("regid")=rs2("username")    '修改数据提交保存后用会员名和新密码自动登录
+  response.cookies("password")=rs2("password")
+  response.Write "<script language=javascript>alert('个人登录密码修改成功！');history.go(-1);</script>"
+  response.end
+  end if
+end if
+%>
+<%
+  Set rs= Server.CreateObject("ADODB.Recordset") 
+  sql="select * from gcuser where username = '"&username&"'" 
+  rs.open sql,conn2,1,1
+%>
+<script language="JavaScript"> 
+ function checkdate()  {  
+  if (Form.password2.value != Form.password.value) {      alert("两次输入密码不同!");      return false;    }
+  if (Form.name.value=="") {      alert("请输入您的真实姓名!");      return false;    }
+  //if (Form.bank.value=="") {      alert("请填入您的收款方式!");      return false;    }
+  if (Form.card.value=="") {      alert("请填入您的收款相应账号!");      return false;    }
+  if (Form.email.value=="") {      alert("请填入您的电子邮箱!");      return false;    }
+  if (document.Form.email.value.charAt(0)=="." ||        
+         document.Form.email.value.charAt(0)=="@"||       
+         document.Form.email.value.indexOf('@', 0) == -1 || 
+         document.Form.email.value.indexOf('.', 0) == -1 || 
+         document.Form.email.value.lastIndexOf("@")==document.Form.email.value.length-1 || 
+         document.Form.email.value.lastIndexOf(".")==document.Form.email.value.length-1)
+     {
+      alert("Email地址格式不正确！");
+      document.Form.email.focus();
+      return false;
+      }
+  if (Form.call.value=="") {      alert("请填入您的手机号码!");  Form.call.focus();      return false;    }
+  if (Form.call.value.length<11) {      alert("手机号码至少为11位数!"); Form.call.focus();     return false;    } 
+  if (Form.call.value.length>11) {      alert("手机号码至多为11位数!"); Form.call.focus();     return false;    }
+  if (Form.qq.value=="") {      alert("请填入您的qq!");      return false;    }
+  if (Form.pa2j.value=="") {      alert("请输入二级密码密码进行验证!");   Form.pa2j.focus();   return false;    } 
+  if (Form.pa2j.value!==">") {      alert("身份证号码验证不正确!");  Form.ceuserid.focus();    return false;    }
+return true;  }  
+</script>
+<html>
+<head>
+<title>修改个人信息</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+</head>
+<body bgcolor="#C9D8AD" topmargin="5" leftmargin="5">
+<div align="center">
+  <form  METHOD="POST" action="dateuser.asp?action=save" name="Form" onSubmit="return checkdate()">
+    <div align="center"><center>
+    <table border="1" width="100%" cellpadding="4" class=lowcolor cellspacing="0" style="border-collapse: collapse" bordercolor="#FFFFFF" height="416">
+      <tr bgcolor="#ffffdd">
+		<td align="right" width="100%" height="25" colspan="2" bgcolor="#FFFFFF"><p align="center"><b><font face="楷体" style="font-size: 16pt">修改个人资料</font></b></td>
+      </tr>
+      <tr bgcolor="#ffffdd"> <td align="right" width="492" height="29"><b>用户名：</b></td>
+       <td width="741" align="left" height="29"><font color="red" size="3"><b>&nbsp;<%=username%></b></font></td>
+      </tr>
+      <tr>
+        <td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD">登录密码：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD"><input type="password" name="password" size="16"><font color="#FF0000"> **不修改密码请留空</font></td>
+      </tr>
+      <tr>
+        <td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD">密码确认：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD"><input type="password" name="password2" size="16"><font color="#FF0000"> **不修改密码请留空</font></td>
+      </tr>
+      <tr bgcolor="#ffffdd"> 
+        <td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD">二级密码：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD">*************<font color="#FF0000">&nbsp; **请联系客服修改。</font></td>
+      </tr>
+      <tr>
+        <td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD">收款银行：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD"> 
+          <select size="1" name="bank">
+			<option selected><%=rs("bank")%></option>
+			<option>工商银行</option>
+			<option>农业银行</option>
+			<option>建设银行</option>
+			</select></td>
+      </tr>
+      <tr bgcolor="#ffffdd">
+		<td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD">真实姓名：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD"><input type="text" maxlength=18 name="name" size="16" value="<%=rs("name")%>" readonly style="background-color: #C0C0C0"><font color="#FF0000"> **请联系客服修改。</font></td>
+      </tr>
+      <tr>
+        <td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD">账号：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD"><input type="text" maxlength=32 name="card" size="22" value="<%=rs("card")%>" ><font color="#FF0000"> **必须填写</font> </td>
+      </tr>
+      <tr bgcolor="#ffffdd">
+		<td align="right" width="492" height="31" style="border-left: 1px solid #C9D8AD"><b><font face="Arial">手机号码</font></b>：</td>
+      <td width="741" align="left" style="border-right: 1px solid #C9D8AD">
+		<input type="text" maxlength=11 name="call" size="16" readonly></td>
+      </tr>
+      <tr bgcolor="#ffffdd"> 
+        <td align="right" width="492" height="31" style="border-left: 1px solid #C9D8AD" bgcolor="#C9D8AD"><b><font face="Arial">身份证号码</font></b>：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD" bgcolor="#C9D8AD"><b><%=left(rs("userid"),4)%>**********<%=right(rs("userid"),4)%></b></td>
+      </tr>
+      <tr>
+        <td align="right" width="492" height="31" style="border-left: 1px solid #C9D8AD"><font face="Arial">电子邮箱</font>：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD"><input type="text" maxlength=25 name="email" value="<%=rs("email")%>" size="16"></td>
+      </tr>
+		<tr>
+        <td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD" bgcolor="#C9D8AD"><b><font face="Arial">QQ</font></b>：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD" bgcolor="#C9D8AD"><font color="#FF0000"><input type="text" name="qq" size="16" value="<%=rs("qq")%>" readonly maxlength="15" style="background-color: #D9D9D9"> **要修改请凭此登记的QQ联系客服。</font></td>
+      </tr>
+      <tr bgcolor="#ffffdd"> 
+        <td align="right" width="492" height="31" style="border-left: 1px solid #C9D8AD">验证二级密码：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD"><input type="password" name="pa2j" size="20"></td>
+      </tr>
+      <tr>
+        <td align="right" width="492" height="30" style="border-left: 1px solid #C9D8AD" bgcolor="#C9D8AD">验证身份证号码：</td>
+        <td width="741" align="left" style="border-right: 1px solid #C9D8AD" bgcolor="#C9D8AD"><input type="text" name="ceuserid" size="20"></td>
+      </tr>
+      <tr>
+        <td align="center" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD; " height="29" width="492" bgcolor="#D9D9D9"><p align="right">开户行地址：</td>
+        <td align="center" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD; " height="29" width="741" bgcolor="#D9D9D9"><p align="left"><font color="#0000FF"><%=rs("addsheng")%><%=rs("addshi")%><%=rs("addqu")%>支行--<b><a href="../vipadd.asp?addid=<%=username%>" style="text-decoration: none"><font color="#FF0000">修改</font></a></b></font></td>
+      </tr>
+      <tr>
+        <td align="center" colspan="2" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD;" height="38" bgcolor="#FFFFDD"><div align="center"><input type="submit" name="submit" width="34" height="20" alt="提交" size="20" value="确定修改资料" class="lkbtn" style="font-size: 12pt"></div></td>
+      </tr>
+    </table>
+      </center>
+    </div>
+</div>
+</form>
+<table border="0" width="100%" id="table1" height="33" cellspacing="1" bgcolor="#FFFFFF">
+	<tr>
+		<td width="20"></td>
+		<td><a target="_blank" href="images/积分游戏平台用户名转让申请书.doc" style="text-decoration: none; font-weight:700">积分游戏平台用户名转让申请书</a></td>
+	</tr>
+</table>
+<p align="center" style="margin-top: 0; margin-bottom: 0"><iframe name="I1" marginwidth="1" marginheight="1" height="35%" width="100%" border="0" frameborder="0" src="dateuserjc.asp"></iframe></p>
+</body>
+</html>
