@@ -20,8 +20,6 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 	
 	private Gcuser user;
 	
-	private String userName;
-	
 	private String name;
 	
 	private String password;
@@ -47,7 +45,7 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 	public String execute() {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		if(status==0){
-			user = userService.getUserByUserName(userName);
+			user = userService.getUserByUserName(super.getUserName());
 			user.setName(user.getName().substring(0, 1));
 			int callLenght = user.getCall().length();
 			String callLeft = user.getCall().substring(0, 3);
@@ -60,7 +58,7 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 			return INPUT;
 		}else{
 			
-			Gcuser guser = userService.getUserByUserName(userName);
+			Gcuser guser = userService.getUserByUserName(super.getUserName());
 			
 			if(guser==null){
 				super.setErroCodeNum(1);//用户不存在
@@ -74,7 +72,7 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 				}
 			}
 			
-			if(!Strings.isNullOrEmpty(userName)&&!Strings.isNullOrEmpty(password)&&!Strings.isNullOrEmpty(name)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)&&!Strings.isNullOrEmpty(secondPassword)&&!Strings.isNullOrEmpty(newSecondPassword1)&&!Strings.isNullOrEmpty(newSecondPassword2)){
+			if(!Strings.isNullOrEmpty(super.getUserName())&&!Strings.isNullOrEmpty(password)&&!Strings.isNullOrEmpty(name)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)&&!Strings.isNullOrEmpty(secondPassword)&&!Strings.isNullOrEmpty(newSecondPassword1)&&!Strings.isNullOrEmpty(newSecondPassword2)){
 				if(!MD5Security.md5_16(password).toLowerCase().equals(guser.getPassword())){
 					super.setErroCodeNum(3);//alert("您填入的登录密码与您所登记的不相符！");
 					return SUCCESS;
@@ -92,7 +90,7 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 					return SUCCESS;
 				}
 				//开始更新资料操作
-				userService.updateUser(userName,name, idCard, MD5Security.md5_16(newPassWord1), newSecondPassword1, 0, qq, guser.getCall(),ServletActionContext.getRequest().getRemoteAddr());
+				userService.updateUser(super.getUserName(),name, idCard, MD5Security.md5_16(newPassWord1), newSecondPassword1, 0, qq, guser.getCall(),ServletActionContext.getRequest().getRemoteAddr());
 				return SUCCESS;
 			}else{
 				super.setErroCodeNum(3000);//有信息为空
@@ -119,13 +117,6 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 		this.user = user;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public String getName() {
 		return name;

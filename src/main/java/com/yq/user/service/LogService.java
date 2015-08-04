@@ -90,5 +90,14 @@ public class LogService {
 	public IPage<Bdbdate> getBdbPage(String zuser,int pageIndex,int pageSize){
 		return bdbDateDao.getPageList(zuser, pageSize, pageIndex);
 	}
+	/**
+	 * 获取用户最后一条的id
+	 * @param userName
+	 * @param pay
+	 * @return
+	 */
+	public int getDatePayId(String userName,int pay){
+		return datePayDao.getDatepayId(userName, pay);
+	}
 	
 }

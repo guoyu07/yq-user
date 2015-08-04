@@ -170,6 +170,25 @@ public class GcuserDao {
 		parameter.setInt(changeNum);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	/**
+	 * 减一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean saleYb(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay-?,mcpay=mcpay+?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+?,payok=1 where username=? and pay-?>=0";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		parameter.setInt(changeNum);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 	/**
 	 * 加一币
 	 * @param username
@@ -240,6 +259,15 @@ public class GcuserDao {
 		SqlParameter paramter = new SqlParameter();
 		paramter.setInt(sjb);
 		paramter.setString(userName);
+		return this.jdbc.update(sql, paramter)>0;
+	}
+	
+	public boolean updatePayOk(String name,String idCardNum,int payok){
+		String sql = "update "+table+" set payok=?  where name=? and userid=?";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setInt(payok);
+		paramter.setString(name);
+		paramter.setString(idCardNum);
 		return this.jdbc.update(sql, paramter)>0;
 	}
 }

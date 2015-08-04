@@ -79,7 +79,7 @@ function checkdate1()  {
 	<table border="0" id="table1" height="405" width="666">
 		<tr>
 			<td width="260" align="right">用户名：</td>
-			<td width="396" align="left"><input type="text" name="userName" size="20" value="${user.username}" readonly></td>
+			<td width="396" align="left"><input type="text" name="uuu" size="20" value="${user.username}" readonly></td>
 		</tr>
 		<tr>
 			<td width="260" align="right">姓名：</td>

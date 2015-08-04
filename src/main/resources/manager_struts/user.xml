@@ -116,7 +116,28 @@
 		
 		<action name="epkjjl" class="com.yq.user.action.EpkjjlAction">
 		   <result name="success">vip/epkjjl.jsp</result>
+		</action>
+		
+		
+		<action name="ybcg" class="com.yq.user.action.YbqgAction">
+		   <result name="success">vip/ybcg/epcg.jsp</result>
+		</action>
+		<action name="epcgks" class="com.yq.user.action.Ypqgks">
+		   <result name="success">vip/ybcg/epcgks.jsp</result>
+		</action>
+		
+		<action name="userpay" class="com.yq.user.action.UserPayAction">
+		   <result name="success">vip/userpay.jsp</result>
+		   <result name="success2">vip/userpay_10yh.jsp</result>
 		</action>				
+		
+		<action name="updateuser" class="com.yq.user.action.UpdateUserAction">
+		    <result name="input">vip/upuser.jsp</result>
+			<result name="success" type="json" >
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>	
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
@@ -138,13 +159,6 @@
 			<result name="success" type="json" />
 		</action>
 		
-		<action name="updateuser" class="com.yq.user.action.UpdateUserAction">
-		    <result name="input">vip/upuser.jsp</result>
-			<result name="success" type="json" >
-				<param name="ignoreHierarchy">false</param>
-				<param name="includeProperties">erroCodeNum</param>
-			</result>
-		</action>
 	</package>
 
 </struts>

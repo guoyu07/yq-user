@@ -41,5 +41,12 @@ public class DatePayDao {
 		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
 	}
 	
+	public int getDatepayId(String userName,int pay){
+		String sql = "select id from datepay where username =? and jc=? order by id desc limit 1";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		sqlParameter.setInt(pay);
+		return this.jdbc.getInt(sql, sqlParameter);
+	}
 	
 }

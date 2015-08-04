@@ -639,5 +639,11 @@ public class Gcuser{
 	public int getCbuser(){
 		return cbuser;
 	}
+	public String getSimpleCall(){
+		int callLenght = call.length();
+		String callLeft = call.substring(0, 3);
+		String CallRight = call.substring(callLenght-3, callLenght);
+		return callLeft+"*****"+CallRight;
+	}
 }
 

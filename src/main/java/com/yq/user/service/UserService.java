@@ -16,22 +16,29 @@ import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Bdbdate;
+import com.yq.user.bo.Cpuser;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Epkjdate;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Jfcp;
 import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Txifok;
+import com.yq.user.bo.Txpay;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
+import com.yq.user.dao.CpuserDao;
+import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.DateipDao;
 import com.yq.user.dao.EptzbDao;
 import com.yq.user.dao.GcuserDao;
+import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.ProvinceDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TduserDao;
+import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
@@ -65,6 +72,12 @@ public class UserService {
     private LogService logService;
     @Autowired
     private ManagerService managerService;
+    @Autowired
+    private JfcpDao jfcpDao;
+    @Autowired
+    private CpuserDao cpuserDao;
+    @Autowired
+    private TxPayDao txPayDao;
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -970,6 +983,155 @@ public class UserService {
 			managerService.updateEpkjdateBz0(0, 0, 0, ybNum);
 		}
 		eptzbDao.updateSumGuessByType(userName, type, ybNum);
+	}
+	
+	/**
+	 * 一币抢购
+	 */
+	public int yqQg(String userName,int goodsId,int buyNum,int price){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser.getPay()==0 ||  price*buyNum>gcuser.getPay()){
+			throw new ServiceException(1,"一币不足");
+		}
+		boolean result = jfcpDao.update(goodsId, buyNum);
+		if(!result){
+			throw new ServiceException(2,"本轮该产品已成功被抢购，请稍候再试或联系客服进行下一轮抢购或选择其它产品！");
+		}
+		Jfcp jfcp =jfcpDao.get(goodsId);
+		
+		if(!this.changeYb(userName, -price*buyNum, "抢购-"+jfcp.getCpmq(), 0, null)){
+			throw new ServiceException(1,"一币不足");
+		}
+		
+		if(jfcp.getDqep()==10||jfcp.getDqep()<21&&jfcp.getCglist()!=0){
+			jfcpDao.updateDqepAndCglist(goodsId, buyNum);
+		}
+		
+		jfcp =jfcpDao.get(goodsId);
+		
+		if(jfcp.getDqep()==0||jfcp.getDqep()<0&&jfcp.getCglist()==0){
+			Cpuser cpuser = new Cpuser();
+			cpuser.setCguser(userName);
+			cpuser.setCpmq("一币-"+jfcp.getCpmq());
+			cpuser.setJydate(new Date());
+			cpuser.setJyjf(jfcp.getZepsl());
+			cpuser.setJyname(gcuser.getName());
+			cpuser.setJyqq(gcuser.getQq());
+			cpuser.setJycall(gcuser.getCall());
+			cpuserDao.add(cpuser);
+			
+			Datepay datepay = new Datepay();
+			datepay.setUsername(userName);
+			datepay.setRegid("抢购成功"+jfcp.getCpmq());
+			datepay.setPay(gcuser.getPay()-buyNum*price);
+			datepay.setJydb(gcuser.getJydb());
+			
+			jfcpDao.updateDqepOrCglistOrJysl(goodsId);
+		}else{
+			//throw new ServiceException(3,"您好，本次点击抢购还差一点点，还有"+jfcp.getDqep()+"就可以抢中，继续加油！！！");
+			return jfcp.getDqep();
+		}
+		return -1;
+	}
+	
+	/**
+	 * 挂单出售一币
+	 * @param userName
+	 * @param password3
+	 * @param saleNum
+	 * @param smsCode
+	 * @param ip
+	 */
+	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
+		
+		if(saleNum<100){
+			throw new ServiceException(1,"发布一币数量有误，请检查输入是否正确！");
+		}
+		
+		
+		Gcuser gcuser = this.gcuserDao.getUser(userName);
+		
+		int txqpay = gcuser.getPay();
+		
+		Fcxt fcxt = managerService.getFcxtById(10);
+		
+		if(saleNum>gcuser.getPay()){
+			throw new ServiceException(2,"您好，您发布的一币数量不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");	
+		}
+		
+		if(saleNum>gcuser.getPay()-gcuser.getVippay() && gcuser.getRegtime().getTime()>fcxt.getJsdate().getTime()){
+			throw new ServiceException(3,"您好，您有 "+gcuser.getVippay()+"-一币是[服务中心转入]或[游戏收益部分]，此额度不提供卖出，仅用于开户使用，谢谢！");
+		}
+
+		if(!password3.equals(gcuser.getPassword3())){
+			throw new ServiceException(4,"您好，您二级密码不正确，请重新输入！");
+		}
+		
+		if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
+			throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
+		}
+		
+		if(saleNum<100){
+			throw new ServiceException(6,"您好，您发布的一币数量不能小于100，谢谢！");
+		}
+		
+		if(gcuser.getPayok()==1){
+			throw new ServiceException(7,"您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！");
+		}
+		
+		
+		double tgpay9 = 0d;
+		int tgpay09 = 0;
+		if(saleNum<1000){
+			tgpay9 = saleNum*0.85;
+			tgpay09 = (int)tgpay9;
+		}else{
+			tgpay9 = saleNum*0.9;
+			tgpay09 = (int)tgpay9;
+		}
+		
+		if(!gcuserDao.saleYb(userName, saleNum)){
+			throw new ServiceException(2,"您好，您发布的一币数量不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+		}
+		Datepay datePay = new Datepay();
+		datePay.setUsername(userName);
+		datePay.setJc(saleNum);
+		datePay.setPay(gcuser.getPay());
+		datePay.setJydb(gcuser.getJydb());
+		datePay.setRegid("实收"+tgpay09);
+		datePay.setNewbz(3);
+		datePay.setTxbz(1); 
+		datePay.setAbdate(new Date());
+		logService.addDatePay(datePay);
+		
+		Txpay txpay = txPayDao.get();
+		
+		int jypay = txpay.getPayid()+1;
+		
+		int datePayId = logService.getDatePayId(userName, saleNum);
+		gcuser = gcuserDao.getUser(userName);
+		
+		Txpay txpay2 = new Txpay();
+		txpay2.setPayusername(userName);
+		txpay2.setCxt(gcuser.getCxt());
+		txpay2.setPaynum(saleNum);
+		txpay2.setPaynum9(tgpay09);
+		txpay2.setPayname(gcuser.getName());
+		txpay2.setPaybank(gcuser.getBank());
+		txpay2.setPaycard(gcuser.getCard());
+		txpay2.setPayonoff("尚未转账");
+		txpay2.setBankbz(txqpay+"");
+		txpay2.setBz(gcuser.getPay()+"");
+		txpay2.setDqu(gcuser.getDqu());
+		txpay2.setQlid(datePayId);
+		txpay2.setPdid(11);
+		txpay2.setJyid(jypay);
+		txpay2.setVipname(gcuser.getVipname());
+		txpay2.setTxvip(gcuser.getTxlb());
+		txpay2.setTxip(ip);
+		txPayDao.add(txpay2);
+		
+		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
 	}
 	
 }

@@ -121,8 +121,8 @@ $(document).ready(function(){
           <UL>
             <LI><a target="main" href="login2j?inputUrl=loginep.jsp" style="text-decoration: none"><font color="#FF0000">一币竞猜</font></a>
             <LI><a target="main" href="datepay" style="text-decoration: none">一币明细</a><c:if test="${gcuser.username=='300fhk'}">--<b><a target="main" href="jzpay.asp"><font size="2" color="#008000">商城退款</font></a></b></c:if>
-            <LI><a target="main" href="ybcg/epcg.asp" style="text-decoration: none"><font color="#0000FF">一币抢购</font></a>
-            <LI><a target="main" href="login3j.asp" style="text-decoration: none">一币卖出</a><c:if test="${gcuser.vip==2}">--<b><a target="main" href="vipjzpay.asp"><font size="2" color="#008000">转出</font></a></b></c:if>
+            <LI><a target="main" href="ybcg" style="text-decoration: none"><font color="#0000FF">一币抢购</font></a>
+            <LI><a target="main" href="login2j?inputUrl=login3j.jsp" style="text-decoration: none">一币卖出</a><c:if test="${gcuser.vip==2}">--<b><a target="main" href="vipjzpay.asp"><font size="2" color="#008000">转出</font></a></b></c:if>
             <LI>当前信用星：<font color="#0000FF">${gcuser.cxt}</font>
             <LI><a target="main" href="login8j.asp" style="text-decoration: none">一币交易市场</a>
             <LI><a target="main" href="loginmc.asp" style="text-decoration: none">一币卖出明细</a>

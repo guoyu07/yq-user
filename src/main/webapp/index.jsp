@@ -191,7 +191,7 @@ window.onload = function () {
 				    	}else if(responseMsg.erroCodeNum==3){
 				    		alert("用户名或密码错误");
 				    	}else if(responseMsg.erroCodeNum==4){
-				    		location.href='updateuser?userName='+Form.ygid.value;
+				    		location.href='updateuser';
 				    	}
 					    return;
 				    }else{

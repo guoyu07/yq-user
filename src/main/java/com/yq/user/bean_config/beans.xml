@@ -39,6 +39,14 @@
        <!-- 用户竞猜统计 -->
        <bean id="eptzbDao" class="com.yq.user.dao.EptzbDao"></bean>
        <bean id="epkjdateDao" class="com.yq.user.dao.EpkjdateDao"></bean>
+       
+       <!-- 一币抢购相关 -->
+       <bean id="jfcpDao" class="com.yq.user.dao.JfcpDao"></bean>
+       <bean id="cpuserDao" class="com.yq.user.dao.CpuserDao"></bean>
+       
+       
+       
+       
        <!-- 用户数据service -->
        <bean id="userService" class="com.yq.user.service.UserService"></bean>
        <!-- 管理类service -->
