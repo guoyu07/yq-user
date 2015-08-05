@@ -196,5 +196,15 @@ public class Txpay{
 	public int getTxvip(){
 		return txvip;
 	}
+	
+	public String getSimplePayid(){
+		String str = String.valueOf(payid);
+		if(payid<100){
+			return str;
+		}else{
+			int lenght = str.length();
+			return str.substring(lenght-2, lenght);
+		}
+	}
 }
 

@@ -1,6 +1,8 @@
 package com.yq.common.action;
 
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * @author hzy
@@ -39,5 +41,9 @@ public class ALDAdminActionSupport extends ActionSupport {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public String ip(){
+		return ServletActionContext.getRequest().getRemoteAddr();
 	}
 }

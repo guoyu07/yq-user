@@ -170,7 +170,6 @@ public class GcuserDao {
 		parameter.setInt(changeNum);
 		return this.jdbc.update(sql, parameter)>0;
 	}
-	
 	/**
 	 * 减一币
 	 * @param username
@@ -178,7 +177,7 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean saleYb(String username,int changeNum){
-		String sql = "update "+table+" set pay=pay-?,mcpay=mcpay+?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+?,payok=1 where username=? and pay-?>=0";
+		String sql = "update "+table+" set pay=pay-?,mcpay=mcpay+?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+?,payok=1 where username=? and pay-?>=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setInt(changeNum);
@@ -189,6 +188,39 @@ public class GcuserDao {
 		parameter.setInt(changeNum);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	/**
+	 * 撤销卖出一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean backSaleYb(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay+?,mcpay= case when mcpay<? then 0 else mcpay-? end,txpay= case when txpay<? then 0 else txpay-? end,payok=0 where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	/**
+	 * YB转账减一币
+	 * @param userName
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean transferReduceYb(String userName,int changeNum){
+		String sql = "update "+table+" set pay=pay-?,txpay=txpay+?,payok=1 where username=? and pay-?>=0 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(userName);
+		parameter.setInt(changeNum);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 	/**
 	 * 加一币
 	 * @param username
@@ -196,7 +228,7 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean addYb(String username,int changeNum){
-		String sql = "update "+table+" set pay=pay+?,vippay=vippay+?,cbpay=cbpay+? where username=?";
+		String sql = "update "+table+" set pay=pay+?,vippay=vippay+?,cbpay=cbpay+? where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setInt(changeNum);

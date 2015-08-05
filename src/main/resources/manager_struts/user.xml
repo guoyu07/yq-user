@@ -128,7 +128,6 @@
 		
 		<action name="userpay" class="com.yq.user.action.UserPayAction">
 		   <result name="success">vip/userpay.jsp</result>
-		   <result name="success2">vip/userpay_10yh.jsp</result>
 		</action>				
 		
 		<action name="updateuser" class="com.yq.user.action.UpdateUserAction">
@@ -138,6 +137,25 @@
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>	
+		
+		<action name="vipjzpay" class="com.yq.user.action.VipjzpayAction">
+		   <result name="success">vip/vipjzpay.jsp</result>
+		</action>
+		
+		<action name="epjysc" class="com.yq.user.action.EphyscAction">
+		   <result name="success">vip/epjysc.jsp</result>
+		</action>
+		
+		<action name="epmcjl" class="com.yq.user.action.EpmcjlAction">
+		   <result name="success">vip/epmcjl.jsp</result>
+		</action>
+		<action name="epmyjl" class="com.yq.user.action.EpmyjlAction">
+		   <result name="success">vip/epmyjl.jsp</result>
+		</action>
+		<action name="qxepmc" class="com.yq.user.action.QxepmcAction">
+		   <result name="success">vip/qxepmc.jsp</result>
+		</action>		
+		
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

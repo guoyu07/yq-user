@@ -78,6 +78,8 @@ public class UserService {
     private CpuserDao cpuserDao;
     @Autowired
     private TxPayDao txPayDao;
+    @Autowired
+    private DatePayDao datePayDao;
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -1132,6 +1134,133 @@ public class UserService {
 		txPayDao.add(txpay2);
 		
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
+	}
+	/**
+	 * 转账一币至谁的名下
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount){
+        if(amount<0 || amount==0 || amount >100000){
+        	throw new ServiceException(1,"您好，您转账一币不能小于零或超过100000，谢谢！");
+        }
+		if(amount%100!=0){
+			throw new ServiceException(2,"转账必须是100的倍整数如：100，200，300，400，500，1000，5000，请检查输入是否正确！");
+		}
+		if(fromUser.equals(toUser)){
+			throw new ServiceException(3, "您好，不能转给自己，谢谢！");
+		}
+		
+		if(!fromUser.equals("300fhk")){
+			if(zuoMingxiDao.get(fromUser, toUser)==null&&youMingXiDao.get(fromUser, toUser)==null){
+				throw new ServiceException(4, "只能转给自己团队的并已进入双区的玩家！");
+			}
+		}
+		
+		Gcuser gcuser = gcuserDao.getUser(fromUser);
+		
+		if(!gcuser.getPassword3().equals(password3)){
+			throw new ServiceException(5, "二级密码不正确");
+		}
+		
+		if(gcuser.getPay()<50000){
+			throw new ServiceException(6, "VIP玩家一币账户余额必须大于或等于50000！");
+		}
+		
+		if(gcuser.getPay()<amount){
+			throw new ServiceException(7, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+		}
+		
+		Gcuser toGcUser = gcuserDao.getUser(toUser);
+		
+		if(toGcUser==null){
+			throw new ServiceException(8, "转入的用户名不存在，请检查输入是否正确！");
+		}
+		
+		if(!gcuserDao.transferReduceYb(fromUser, amount)){
+			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+		}
+		Datepay datePay = new Datepay();
+		datePay.setUsername(fromUser);
+		datePay.setJc(amount);
+		datePay.setPay(gcuser.getPay()-amount);
+		datePay.setJydb(gcuser.getJydb());
+		datePay.setRegid("转给-"+toUser);
+		datePay.setNewbz(0);
+		datePay.setAbdate(new Date());
+		logService.addDatePay(datePay);
+		this.changeYb(toUser, amount, "收到服务中心"+toUser.substring(0, 2)+"***转入", 0, null);
+		vipxtgcDao.updateJcYb(fromUser, DateUtils.getDate(new Date()), amount);
+	}
+	
+	/**
+	 * 获取一币交易列表
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Txpay> getTxpayPage(int pageIndex,int pageSize){
+		return txPayDao.getPageList(pageIndex, pageSize);
+	}
+	/**
+	 * 一币卖出明细
+	 * @param userName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Txpay> getTxpaySalesDetailsPage(String userName,int pageIndex,int pageSize){
+		return txPayDao.getPageListSalesDetails(userName, pageIndex, pageSize);
+	}
+	
+	/**
+	 * 一币求购明细
+	 * @param userName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Txpay> getTxpayBuyDetailsPage(String userName,int pageIndex,int pageSize){
+		return txPayDao.getPageListBuyDetails(userName, pageIndex, pageSize);
+	}
+	/**
+	 * 撤销卖出一币
+	 * @param userName
+	 * @param payid
+	 * @param ip
+	 */
+	public void cancleYbSale(String userName,int payid,String ip){
+		Txpay txpay = txPayDao.getByPayid(payid);
+		if(txpay==null||!txpay.getPayusername().equals(userName)){
+			throw new ServiceException(1, "该一币卖出方不是本人，请重新操作！");
+		}
+		
+		if(txpay.getEp()>0 || txpay.getZftime()!=null || txpay.getKjygid()!=0){
+			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
+		}
+		if(datePayDao.updateByQlid(txpay.getQlid())){
+			gcuserDao.backSaleYb(userName, txpay.getPaynum());
+			Gcuser gcuser = gcuserDao.getUser(userName);
+			Datepay datePay = new Datepay();
+			datePay.setUsername(userName);
+			datePay.setSyjz(txpay.getPaynum());
+			datePay.setPay(gcuser.getPay());
+			datePay.setJydb(gcuser.getJydb());
+			datePay.setRegid("撤销卖出");
+			datePay.setNewbz(3);
+			datePay.setTxbz(1); 
+			datePay.setAbdate(new Date());
+			logService.addDatePay(datePay);
+			
+			txPayDao.updateByPayid(payid, 0, new Date(), "已经转账", new Date(), "撤销", ip);
+			gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
+
+		}else{
+			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
+		}
+		
+		
 	}
 	
 }
