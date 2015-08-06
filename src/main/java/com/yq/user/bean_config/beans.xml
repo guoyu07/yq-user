@@ -43,9 +43,9 @@
        <!-- 一币抢购相关 -->
        <bean id="jfcpDao" class="com.yq.user.dao.JfcpDao"></bean>
        <bean id="cpuserDao" class="com.yq.user.dao.CpuserDao"></bean>
-       
-       
-       
+       <bean id="dldateDao" class="com.yq.user.dao.DldateDao"></bean>
+       <bean id="lkjlDao" class="com.yq.user.dao.LkjlDao"></bean>
+       <bean id="ejbkDao" class="com.yq.user.dao.EjbkDao"></bean>
        
        <!-- 用户数据service -->
        <bean id="userService" class="com.yq.user.service.UserService"></bean>

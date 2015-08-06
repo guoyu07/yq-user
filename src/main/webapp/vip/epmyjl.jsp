@@ -94,12 +94,12 @@ $(document).ready(function(){
                                                                交易成功-卖出方${data.payusername}已确认。
           </c:if>
           <c:if test="${empty zftime}">
-                <c:if test="${data.ep==1}"><font color="#FF00FF">您已下单，等待您在</font><font color="#0000FF"><b>${data.rgdate}</b></font><font color="#FF00FF">前付款，<b><a target="_blank" href="fbbank.asp?fb=${data.payid}"><font color="#008000">点击查看卖出方收款账号！</font></a></b></font></c:if>                                                
+                <c:if test="${data.ep==1}"><font color="#FF00FF">您已下单，等待您在</font><font color="#0000FF"><b>${data.rgdate}</b></font><font color="#FF00FF">前付款，<b><a target="_blank" href="fbbank?fb=${data.payid}"><font color="#008000">点击查看卖出方收款账号！</font></a></b></font></c:if>                                                
                 <c:if test="${data.ep==2}">${data.dfuser}--已付款，等待卖出方${data.payusername}的确认中。。。</c:if>
           </c:if>
           </td>
-          <td valign="middle" align="center" width="250"><a onClick="return confirm('提示：您确定已向发布方 ${data.payusername} 打款 ${data.paynum9}元了吗？')" href="myepok.asp?ep=${data.payid}"><font color="#FF0000" size="2">
-            <c:if test="${data.ep==1}">${data.paynum9}</c:if></font></a></td>
+          <td valign="middle" align="center" width="250"><a onClick="return confirm('提示：您确定已向发布方 ${data.payusername} 打款 ${data.paynum9}元了吗？')" href="myepok?ep=${data.payid}"><font color="#FF0000" size="2">
+            <c:if test="${data.ep==1}">已打款${data.paynum9}元，通知卖出方确认。</c:if></font></a></td>
           </tr>
          </s:iterator>
             </table> 

@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.mysql.jdbc.RandomBalanceStrategy;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.ProblemCode;
@@ -18,9 +21,11 @@ import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Cpuser;
 import com.yq.user.bo.Datepay;
+import com.yq.user.bo.Ejbk;
 import com.yq.user.bo.Epkjdate;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.Jfcp;
 import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
@@ -32,9 +37,12 @@ import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.DateipDao;
+import com.yq.user.dao.EjbkDao;
 import com.yq.user.dao.EptzbDao;
 import com.yq.user.dao.GcuserDao;
+import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.JfcpDao;
+import com.yq.user.dao.LkjlDao;
 import com.yq.user.dao.ProvinceDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TduserDao;
@@ -80,6 +88,12 @@ public class UserService {
     private TxPayDao txPayDao;
     @Autowired
     private DatePayDao datePayDao;
+    @Autowired
+    private GpjyDao gpjyDao;
+    @Autowired
+    private LkjlDao lkjlDao;
+    @Autowired
+    private EjbkDao ejbkDao;
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -1259,8 +1273,199 @@ public class UserService {
 		}else{
 			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
 		}
+	}
+	
+	/**
+	 * 购买一币的前置检查
+	 * @param userName
+	 * @param payId
+	 */
+	public Txpay buyYbPre(String userName,int payId){
+		Txpay txpay = txPayDao.getByPayid(payId);
+		if(txpay==null){
+			throw new ServiceException(1, "交易不存在，请重新操作！");
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser.getSjb()==0){
+			throw new ServiceException(2, "您好，您还不是双区玩家，暂时不能使用一币理财功能！");
+		}
 		
+		if(gcuser.getSjb()<20){
+			throw new ServiceException(3, "您好，您还没达到D套餐，暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
+		}
+		
+		if(gcuser.getCxt()<4&&gcuser.getCxdate().getTime()>System.currentTimeMillis()){
+			throw new ServiceException(4, "您好，您的诚信星为"+gcuser.getCxt()+"，离取消[限制认购]时间还有"+DateUtils.getIntervalDays(new Date(),gcuser.getCxdate())+"天，谢谢！");
+		}
+		
+		if(userName.equals(txpay.getPayusername())){
+			throw new ServiceException(5, "您好，不能认购自己的一币，请选择其它用户，谢谢！");
+		}
+		if(gcuser.getJyg()<txpay.getPaynum()){
+			throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
+		}
+		
+
+		return txpay;
+	}
+	
+	public Txpay buyYb(String userName,int payId,String password3){
+		Txpay txpay = buyYbPre(userName,payId);
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(!password3.equals(gcuser.getPassword3())){
+			throw new ServiceException(8, "您好，您的二级密码不正确，请检查输入是否正确！");
+		}
+		
+		
+		if(!txPayDao.updateEpToBeSalesPre(payId,new Date(),userName,txpay.getPaynum())){
+			throw new ServiceException(7, "该一币交易进行中或已经由它人交易成功了，不能重复，请选择其它交易！");
+		}
+		
+		if(!gcuserDao.updateJyg(userName, txpay.getPaynum())){
+			throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
+		}
+		
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMcsl(txpay.getPaynum());
+		gpjy.setSysl(gcuser.getJyg()-txpay.getPaynum());
+		gpjy.setBz("冻结-认购一币-"+txpay.getPaynum()+"诚信金-"+txpay.getPayusername());
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjy.setDfuser(payId+"");
+		gpjy.setNewjy(1);
+		
+		gpjyDao.add(gpjy);
+		
+		return txpay;
+	}
+	
+	public Txpay getTxpayById(int payId){
+		return txPayDao.getByPayid(payId);
+	}
+	/**
+	 * 确认已打钱
+	 * @param userName
+	 * @param payId
+	 */
+	public void sureIGivedMoney(String userName,int payId){
+		Txpay txpay = txPayDao.getByPayid(payId);
+		if(!txpay.getDfuser().equals(userName)||txpay.getKjygid()==0){
+			throw new ServiceException(1, "认购方出错，请检查输入是否正确！");
+		}else{
+			if(!txPayDao.updateEpToHavePay(payId, DateUtils.addDay(new Date(), 2))){
+				throw new ServiceException(1, "认购方出错，请检查输入是否正确！");
+			}
+		}
+	}
+    /**
+     * 购买金币卡
+     * @param userName  用户名
+     * @param mz        面值
+     * @param gmsl      购买数量
+     */
+	
+	private static final double[] rations = new double[]{0.1,0.03,0.01};
+	private static final String[] descs = new String[]{"商家一","商家二","商家三"};
+	public void buyJb(String userName,int mz,int gmsl){
+		//需要的一币数量
+		double needYbCountDouble = (double)mz*(double)gmsl*1.5;
+		int needYbCount = (int)needYbCountDouble;
+		//金币数量
+		int jbCount = mz*gmsl;
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(gcuser.getPay()<needYbCount){
+			throw new ServiceException(2, "注意：您的一币不够本次发卡，请充值！");
+		}
+		
+		
+		String d9 = gcuser.getAdd9dqu();
+		String sheng = gcuser.getAddsheng();
+		String shi = gcuser.getAddshi();
+		String qu = gcuser.getAddqu();
+		if(!this.changeYb(userName, -needYbCount, "一币余额购金币卡"+jbCount, 0, null)){
+			throw new ServiceException(2, "注意：您的一币不够本次发卡，请充值！");
+		}
+		//更新gmdate
+		gcuserDao.updateGmdate(userName, new Date());
+		
+		//更新3线上家
+		Gcuser tempUser = gcuser;
+		for(int i=0;i<rations.length;i++){
+			if(tempUser!=null){
+				updateUpJbAndYj(tempUser.getUp(), descs[i]+userName+"自助购卡"+jbCount, (int)(rations[i]*jbCount));
+				tempUser = gcuserDao.getUser(tempUser.getUp());
+			}
+		}
+		
+		//区总上限
+		Gcuser quUser = gcuserDao.getGcuserByQu(qu);
+		if(quUser!=null){
+			int addNum = (int)(0.01*jbCount);
+			gcuserDao.updateQuPay(quUser.getUsername(),addNum);
+			logService.addDlDate(quUser.getUsername(), addNum, quUser.getQupay()+addNum, "区内商家"+userName+"自助购卡"+jbCount);
+		}
+		//市
+		Gcuser shiUser = gcuserDao.getGcuserByShi(shi);
+		if(shiUser!=null){
+			int addNum = (int)(0.005*jbCount);
+			gcuserDao.updateShiPay(shiUser.getUsername(),addNum);
+			logService.addDlDate(shiUser.getUsername(), addNum, shiUser.getShipay()+addNum, "市内商家"+userName+"自助购卡"+jbCount);
+		}
+		//省
+		Gcuser shengUser = gcuserDao.getGcuserBySheng(sheng);
+		if(shengUser!=null){
+			int addNum = (int)(0.002*jbCount);
+			gcuserDao.updateShengPay(shengUser.getUsername(), addNum);
+			logService.addDlDate(shengUser.getUsername(), addNum, shengUser.getShengpay()+addNum, "省内商家"+userName+"自助购卡"+jbCount);
+		}
+		//大区
+		Gcuser dquUser = gcuserDao.getGcuserByDqu9(d9);
+		if(dquUser!=null){
+			int addNum = (int)(0.001*jbCount);
+			gcuserDao.update9QuPay(dquUser.getUsername(), addNum);
+			logService.addDlDate(dquUser.getUsername(), addNum, dquUser.getDqupay()+addNum, "大区内商家"+userName+"自助购卡"+jbCount);
+		}
+		
+		
+//		lkjlDao.updatelksl(userName, gmsl);
+		
+		batchGeneratorEjbk(userName,gmsl,mz);
 		
 	}
 	
+	private static final char[] RANDOMCHAR = new char[]{'0','1','2','3','4','9','a','b','c','d','e','f','g','5','6','7','8','h','j','k','x','y','z','i'};
+	private void batchGeneratorEjbk(String userName,int count,int value){
+		value = value/10;
+		List<Ejbk> list = Lists.newArrayList();
+		for(int i=0;i<count;i++){
+			Ejbk ejbk = new Ejbk();
+			ejbk.setPdid(userName+""+RandomStringUtils.random(6,RANDOMCHAR));
+			ejbk.setUp(userName);
+			ejbk.setGpa(1);
+			ejbk.setBf2(value);
+			ejbk.setGmdate(new Date());
+			list.add(ejbk);
+		}
+		ejbkDao.batchAdd(list);
+	}
+	/**
+	 * 更新业绩
+	 */
+	private void updateUpJbAndYj(String upUserName,String desc,int count){
+		gcuserDao.addWhenOtherPersionBuyJbCard(upUserName, count);
+		Gcuser gcuser = gcuserDao.getUser(upUserName);
+		Datepay datePay = new Datepay();
+		datePay.setUsername(upUserName);
+		datePay.setRegid(desc);
+		datePay.setSyjz(count);
+		datePay.setPay(gcuser.getPay());
+		datePay.setJydb(gcuser.getJydb());
+		datePay.setAbdate(new Date());
+		logService.addDatePay(datePay);
+	}
 }

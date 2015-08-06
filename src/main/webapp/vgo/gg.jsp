@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${isHaveTxPayBuy==true}"><script language=javascript>alert('您有认购他人一币还没有付款，请尽快完成付款！');location.replace('../vip/epmyjl.asp');</script></c:if>
-<c:if test="${isHaveTxPaySale==true}"><script language=javascript>alert('您的一币卖出已有他人收购并给您付款，请你尽快查收并及时确认，如有问题联系客服！');location.replace('../vip/epmcjl.asp');</script></c:if>
+<c:if test="${isHaveTxPayBuy==true}"><script language=javascript>alert('您有认购他人一币还没有付款，请尽快完成付款！');location.replace('epmyjl');</script></c:if>
+<c:if test="${isHaveTxPaySale==true}"><script language=javascript>alert('您的一币卖出已有他人收购并给您付款，请你尽快查收并及时确认，如有问题联系客服！');location.replace('epmcjl');</script></c:if>
 <c:if test="${dq=='0' or dq=='2' or dq=='7' or dq=='8'}">
 <c:set var="cz01" value="中国一川【①号】客服QQ：613697151"></c:set>
 <c:set var="qq" value="613697151"></c:set>

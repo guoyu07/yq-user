@@ -155,7 +155,23 @@
 		<action name="qxepmc" class="com.yq.user.action.QxepmcAction">
 		   <result name="success">vip/qxepmc.jsp</result>
 		</action>		
+		<action name="epmy" class="com.yq.user.action.EpmyAction">
+		   <result name="success">vip/epmy.jsp</result>
+		</action>
 		
+		<action name="fbbank" class="com.yq.user.action.FbbankAction">
+		   <result name="success">vip/fbbank.jsp</result>
+		</action>
+		<action name="myepok" class="com.yq.user.action.MyepokAction">
+		   <result name="success">vip/myepok.jsp</result>
+		</action>
+		
+		<action name="jztojb" class="com.yq.user.action.JztobjAction">
+		   <result name="success">vip/jztojb.jsp</result>
+		   <result name="suc2">vip/jztojb2.jsp</result>
+		   <result name="suc3">vip/jztojb3.jsp</result>
+		   <result name="suc4">vip/jztojb4.jsp</result>
+		</action>		
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

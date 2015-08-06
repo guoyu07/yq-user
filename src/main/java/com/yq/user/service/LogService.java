@@ -1,15 +1,19 @@
 package com.yq.user.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Dateip;
 import com.yq.user.bo.Datepay;
+import com.yq.user.bo.Dldate;
 import com.yq.user.bo.Gcfh;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.DateipDao;
+import com.yq.user.dao.DldateDao;
 import com.yq.user.dao.GcfhDao;
 
 public class LogService {
@@ -21,6 +25,8 @@ public class LogService {
 	private DateipDao dateipDao;
 	@Autowired
 	private BdbDateDao bdbDateDao;
+	@Autowired
+	private DldateDao dldateDao;
 	/**
 	 * 获取一币奖励日志
 	 * @param username
@@ -98,6 +104,23 @@ public class LogService {
 	 */
 	public int getDatePayId(String userName,int pay){
 		return datePayDao.getDatepayId(userName, pay);
+	}
+	/**
+	 * 
+	 * @param userName
+	 * @param syjz
+	 * @param pay
+	 * @param desc
+	 * @return
+	 */
+	public boolean addDlDate(String userName,int syjz,int pay,String desc){
+		Dldate dldate = new Dldate();
+		dldate.setUsername(userName);
+		dldate.setSyjz(syjz);
+		dldate.setPay(pay);
+		dldate.setRegid(desc);
+		dldate.setAbdate(new Date());
+		return dldateDao.add(dldate);
 	}
 	
 }

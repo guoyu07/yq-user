@@ -302,4 +302,89 @@ public class GcuserDao {
 		paramter.setString(idCardNum);
 		return this.jdbc.update(sql, paramter)>0;
 	}
+	
+	public boolean updateJyg(String userName,int changejygNum){
+		String sql = "update "+table+" set jyg=jyg-?  where username=? and jyg-?>0  limit 1";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setInt(changejygNum);
+		paramter.setString(userName);
+		paramter.setInt(changejygNum);
+		return this.jdbc.update(sql, paramter)>0;
+	}
+	
+	public boolean updateGmdate(String userName,Date gmdate){
+		String sql = "update "+table+" set gmdate=?  where username=?  limit 1";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setObject(gmdate);
+		paramter.setString(userName);
+		return this.jdbc.update(sql, paramter)>0;
+	}
+	
+	public boolean addWhenOtherPersionBuyJbCard(String userName,int changeNum){
+		String sql = "update "+table+" set pay=pay+?,cbpay=cbpay+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public Gcuser getGcuserByQu(String qu){
+		String sql = "select * from "+table+" where addqu=? and jb=4 limit 1";
+		return this.jdbc.get(sql, Gcuser.class, SqlParameter.Instance().withString(qu));
+	}
+	
+	public boolean updateQuPay(String username,int changeNum){
+		String sql = "update "+table+" set qutj=qutj+?,qupay=qupay+?,dlpay=dlpay+? where username=? and jb=4 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public Gcuser getGcuserByShi(String shi){
+		String sql = "select * from "+table+" where addshi=? and jb=3 limit 1";
+		return this.jdbc.get(sql, Gcuser.class, SqlParameter.Instance().withString(shi));
+	}
+	
+	public boolean updateShiPay(String username,int changeNum){
+		String sql = "update "+table+" set shitj=shitj+?,shipay=shipay+?,dlpay=dlpay+? where username=? and jb=3 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public Gcuser getGcuserBySheng(String sheng){
+		String sql = "select * from "+table+" where addsheng=? and jb=2 limit 1";
+		return this.jdbc.get(sql, Gcuser.class, SqlParameter.Instance().withString(sheng));
+	}
+	
+	public boolean updateShengPay(String username,int changeNum){
+		String sql = "update "+table+" set shengtj=shengtj+?,shengpay=shengpay+?,dlpay=dlpay+? where username=? and jb=2 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public Gcuser getGcuserByDqu9(String dqu9){
+		String sql = "select username from "+table+" where add9dqu=? and jb=1 limit 1";
+		return this.jdbc.get(sql, Gcuser.class, SqlParameter.Instance().withString(dqu9));
+	}
+	public boolean update9QuPay(String username,int changeNum){
+		String sql = "update "+table+" set dqutj=dqutj+?,dqupay=dqupay+?,dlpay=dlpay+? where username=? and jb=1 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}	
 }

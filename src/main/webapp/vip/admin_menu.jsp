@@ -125,9 +125,9 @@ $(document).ready(function(){
             <LI><a target="main" href="login2j?inputUrl=login3j.jsp" style="text-decoration: none">一币卖出</a><c:if test="${gcuser.vip==2}">--<b><a target="main" href="vipjzpay"><font size="2" color="#008000">转出</font></a></b></c:if>
             <LI>当前信用星：<font color="#0000FF">${gcuser.cxt}</font>
             <LI><a target="main" href="login2j?inputUrl=login8j.jsp" style="text-decoration: none">一币交易市场</a>
-            <LI><a target="main" href="loginmc.asp" style="text-decoration: none">一币卖出明细</a>
-            <LI><a target="main" href="loginmy.asp" style="text-decoration: none">一币认购明细</a>
-            <LI><a target="main" href="login5j.asp" style="text-decoration: none">一币购金币卡</a>
+            <LI><a target="main" href="login2j?inputUrl=loginmc.jsp" style="text-decoration: none">一币卖出明细</a>
+            <LI><a target="main" href="login2j?inputUrl=loginmy.jsp" style="text-decoration: none">一币认购明细</a>
+            <LI><a target="main" href="login2j?inputUrl=login5j.jsp" style="text-decoration: none">一币购金币卡</a>
             </LI></UL></DD></DL>
         <DD>
         <DL>
@@ -150,7 +150,7 @@ $(document).ready(function(){
           <DT><b><A class=hide href="javascript:void(0);"><font size="2">消费管理</font></A></b> 
           <DD>
           <UL>
-            <LI><a target="main" href="datepay.asp"><font size="2" color="#008080">可用一币：</font><font size="2" color="#FF0000">${gcuser.pay}</font></a>
+            <LI><a target="main" href="datepay"><font size="2" color="#008080">可用一币：</font><font size="2" color="#FF0000">${gcuser.pay}</font></a>
 			<LI><a target="main" href="ybhfcj.asp">话费充值(100)</a>
 			<LI><a target="main" href="http://yb.zgyce.com/index.asp?vipid=${gcuser.username}&vippa=${gcuser.password}"><font size="2" color="#008080">一币换购商品</font></a>
 			<LI><a target="main" href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=${gcuser.username}"><font size="2" color="#008080">一币换购记录</font></a>

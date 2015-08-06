@@ -1,6 +1,8 @@
 package com.yq.user.bo;
 
 import java.util.Date;
+
+import com.yq.common.utils.DateUtils;
    /**
     * gcuser 实体类
     */ 
@@ -644,6 +646,13 @@ public class Gcuser{
 		String callLeft = call.substring(0, 3);
 		String CallRight = call.substring(callLenght-3, callLenght);
 		return callLeft+"*****"+CallRight;
+	}
+	
+	public int getCtxDays(){
+		if(cxdate!=null&&cxdate.getTime()>System.currentTimeMillis()){
+			return DateUtils.getIntervalDays(new Date(),cxdate);
+		}
+		return 0;
 	}
 }
 

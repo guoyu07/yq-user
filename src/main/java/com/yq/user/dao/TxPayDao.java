@@ -72,4 +72,15 @@ public class TxPayDao {
     	return this.jdbc.update(sql, SqlParameter.Instance().withInt(ep).withObject(rgdate).withString(payonoff).withObject(zftime).withString(dfuser).withString(clip).withInt(payId))>0;
     }
     
+    public boolean updateEpToBeSalesPre(int payId,Date rgdate,String userName,int payNum){
+    	String sql = "update "+table+" set ep=1,rgdate=?,dfuser=?,kjygid=? where payid=? and ep=0  and kjygid=0 limit 1";
+    	return this.jdbc.update(sql, SqlParameter.Instance().withObject(rgdate).withString(userName).withInt(payNum).withInt(payId))>0;
+    }
+    
+    public boolean updateEpToHavePay(int payId,Date rgdate){
+    	String sql = "update "+table+" set ep=2,rgdate=? where payid=? and ep=1 limit 1";
+    	return this.jdbc.update(sql, SqlParameter.Instance().withObject(rgdate).withInt(payId))>0;
+
+    }
+    
 }
