@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -482,6 +483,7 @@ public class UserService {
 	 * @param status    0 确认绑定   1提交绑定
 	 * @return
 	 */
+    @Transactional
 	public String bdReg(String userName,String up,String bduser,int cjpay,String pa1j,String pa2j,String idCardNum,int status){
 		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
 		Fcxt fcxt = managerService.getFcxtById(2);
@@ -893,6 +895,7 @@ public class UserService {
 	 * @param toUser
 	 * @param amount
 	 */
+	@Transactional
 	public void trasferBdb(String fromUser,String toUser,int amount,String password3){
 		Gcuser from = gcuserDao.getUser(fromUser);
 		if(from.getVip()==0){
@@ -952,6 +955,7 @@ public class UserService {
 	 * @param toUser
 	 * @param password3
 	 */
+	@Transactional
 	public void batchTrasferYb(List<String> fromUsers,String toUser,String password3){
 		Gcuser gcuser = gcuserDao.getUser(toUser);
 		if(!gcuser.getPassword3().equals(password3)){
@@ -1004,6 +1008,7 @@ public class UserService {
 	/**
 	 * 一币抢购
 	 */
+	@Transactional
 	public int yqQg(String userName,int goodsId,int buyNum,int price){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getPay()==0 ||  price*buyNum>gcuser.getPay()){
@@ -1020,7 +1025,9 @@ public class UserService {
 		}
 		
 		if(jfcp.getDqep()==10||jfcp.getDqep()<21&&jfcp.getCglist()!=0){
-			jfcpDao.updateDqepAndCglist(goodsId, buyNum);
+			if(!jfcpDao.updateDqepAndCglist(goodsId, buyNum)){
+				throw new ServiceException(3000,"未知错误");
+			}
 		}
 		
 		jfcp =jfcpDao.get(goodsId);
@@ -1042,7 +1049,9 @@ public class UserService {
 			datepay.setPay(gcuser.getPay()-buyNum*price);
 			datepay.setJydb(gcuser.getJydb());
 			
-			jfcpDao.updateDqepOrCglistOrJysl(goodsId);
+			if(!jfcpDao.updateDqepOrCglistOrJysl(goodsId)){
+				throw new ServiceException(3000,"未知错误");
+			}
 		}else{
 			//throw new ServiceException(3,"您好，本次点击抢购还差一点点，还有"+jfcp.getDqep()+"就可以抢中，继续加油！！！");
 			return jfcp.getDqep();
@@ -1058,6 +1067,7 @@ public class UserService {
 	 * @param smsCode
 	 * @param ip
 	 */
+	@Transactional
 	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
 		
 		if(saleNum<100){
@@ -1155,6 +1165,8 @@ public class UserService {
 	 * @param toUser
 	 * @param amount
 	 */
+	
+	@Transactional
 	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount){
         if(amount<0 || amount==0 || amount >100000){
         	throw new ServiceException(1,"您好，您转账一币不能小于零或超过100000，谢谢！");
@@ -1204,7 +1216,11 @@ public class UserService {
 		datePay.setNewbz(0);
 		datePay.setAbdate(new Date());
 		logService.addDatePay(datePay);
-		this.changeYb(toUser, amount, "收到服务中心"+toUser.substring(0, 2)+"***转入", 0, null);
+		
+		if(this.changeYb(toUser, amount, "收到服务中心"+toUser.substring(0, 2)+"***转入", 0, null)){
+			throw new ServiceException(3000, "未知错误！");
+		}
+		
 		vipxtgcDao.updateJcYb(fromUser, DateUtils.getDate(new Date()), amount);
 	}
 	
@@ -1244,6 +1260,7 @@ public class UserService {
 	 * @param payid
 	 * @param ip
 	 */
+	@Transactional
 	public void cancleYbSale(String userName,int payid,String ip){
 		Txpay txpay = txPayDao.getByPayid(payid);
 		if(txpay==null||!txpay.getPayusername().equals(userName)){
@@ -1267,9 +1284,12 @@ public class UserService {
 			datePay.setAbdate(new Date());
 			logService.addDatePay(datePay);
 			
-			txPayDao.updateByPayid(payid, 0, new Date(), "已经转账", new Date(), "撤销", ip);
-			gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
-
+			if(!txPayDao.updateByPayid(payid, 0, new Date(), "已经转账", new Date(), "撤销", ip)){
+				throw new ServiceException(3000, "未知错误");
+			}
+			if(!gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0)){
+				throw new ServiceException(3000, "未知错误");
+			}
 		}else{
 			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
 		}
@@ -1309,6 +1329,7 @@ public class UserService {
 		return txpay;
 	}
 	
+	@Transactional
 	public Txpay buyYb(String userName,int payId,String password3){
 		Txpay txpay = buyYbPre(userName,payId);
 		
@@ -1369,6 +1390,8 @@ public class UserService {
 	
 	private static final double[] rations = new double[]{0.1,0.03,0.01};
 	private static final String[] descs = new String[]{"商家一","商家二","商家三"};
+	
+	@Transactional
 	public void buyJb(String userName,int mz,int gmsl){
 		//需要的一币数量
 		double needYbCountDouble = (double)mz*(double)gmsl*1.5;
@@ -1387,6 +1410,7 @@ public class UserService {
 		String sheng = gcuser.getAddsheng();
 		String shi = gcuser.getAddshi();
 		String qu = gcuser.getAddqu();
+		
 		if(!this.changeYb(userName, -needYbCount, "一币余额购金币卡"+jbCount, 0, null)){
 			throw new ServiceException(2, "注意：您的一币不够本次发卡，请充值！");
 		}
