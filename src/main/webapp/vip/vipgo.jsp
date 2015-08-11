@@ -1,21 +1,5 @@
-<%
-if request.cookies("regid")="" or request.cookies("password")="" then
-   response.write "<script language='javascript'>"
-   response.write "alert('ÕËºÅ»òÃÜÂë´íÎó£¡');"
-   response.write "top.location.replace('login.asp');"
-   response.write "</script>"
-   response.end
-else
-   regid=request.cookies("regid")
-   password=request.cookies("password")   
-end if
-%>
-<!--#include file="../ct0618.asp"-->
-<% 
-set rs = Server.CreateObject("ADODB.Recordset")
-sql="select * from gcuser where username ='"&regid&"'"
-rs.open sql,conn2,1,1
-%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <html>
 <head>
 <title></title>
@@ -30,7 +14,7 @@ function writeTitle(tit){
     document.getElementById("mTitle").innerHTML=tit;
   }
   else{
-    document.getElementById("mTitle").innerHTML="Ê×Ò³";
+    document.getElementById("mTitle").innerHTML="é¦–é¡µ";
   }
 }
 
@@ -56,40 +40,40 @@ $(document).ready(function(){
 </SCRIPT>
 <script language="JavaScript"> 
  function checkdate()  {  
-  if (Form.cjpay.value==0) {      alert("ÇëÑ¡ÔñÄúÒª³äÖµµÄ½ğ¶î!");      return false;    } 
+  if (Form.cjpay.value==0) {      alert("è¯·é€‰æ‹©æ‚¨è¦å……å€¼çš„é‡‘é¢!");      return false;    } 
    return true;  }  
  </script>
 <body  text="#000000" leftmargin="0" topmargin="3" marginheight="0">
 <DIV class="top_bg cBlue">
 <DIV style="POSITION: relative; HEIGHT: 10px">
-¡¡</DIV>¡¡</DIV>
+ã€€</DIV>ã€€</DIV>
 <DIV class=daohang>
 <DIV class=mainnav>
 <DIV class=menu>
 <UL>
-  <LI>¡¡</LI>
-  <LI><A>¸öÈËĞÅÏ¢</A> </LI>
-  <LI><A>Òµ¼¨²éÑ¯</A> 
+  <LI>ã€€</LI>
+  <LI><A>ä¸ªäººä¿¡æ¯</A> </LI>
+  <LI><A>ä¸šç»©æŸ¥è¯¢</A> 
   </LI>
-  <LI><A>²ÆÎñ¹ÜÀí</A> 
+  <LI><A>è´¢åŠ¡ç®¡ç†</A> 
   </LI>
-  <LI><A>ÏûÏ¢¹ÜÀí</A> 
+  <LI><A>æ¶ˆæ¯ç®¡ç†</A> 
   </LI>
-  <LI><a style="text-decoration: none" target="_top" href="logout.asp">ÍË³öÏµÍ³</A> 
+  <LI><a style="text-decoration: none" target="_top" href="logout.asp">é€€å‡ºç³»ç»Ÿ</A> 
   </LI>
   
   </UL><!-- clear the floats if required -->
 <DIV class=clear></DIV></DIV>
-<DIV style="DISPLAY: none" class=Location>µ±Ç°Î»ÖÃ£º<SPAN id=mTitle>Ê×Ò³</SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location>å½“å‰ä½ç½®ï¼š<SPAN id=mTitle>é¦–é¡µ</SPAN></DIV></DIV></DIV>
 <DIV class=box_title></DIV>
 <DIV class=box>
 <DIV class=box_con></DIV>
-<b><font color="#008000" size="5" face="¿¬Ìå_GB2312">ÄúµÄÓÃ»§Ãû£º</font></b> </font><font color="#FF0000" size="4"><%=regid%> </font></span></p>
+<b><font color="#008000" size="5" face="æ¥·ä½“_GB2312">æ‚¨çš„ç”¨æˆ·åï¼š</font></b> </font><font color="#FF0000" size="4">${userName}</font></span></p>
   	<div align="center">
   <table width="100%" border="0" cellpadding="0" class="border" style="border-color:#C0C0C0; border-collapse: collapse; border-width: 1px" bordercolor="#111111" height="69">
   <tr>
     <td align="center" valign="top" bgcolor="#FFFFFF" width="972"> 
-      <form method="POST" align="center" name="Form" onSubmit="return checkdate()" action="vipgook.asp?kf=<%=rs("dqu")%>">
+      <form method="POST" align="center" name="Form" onSubmit="return checkdate()" action="vipgo?status=1">
       <input type="hidden" maxlength=10 name="postcode" size="6" style="border: 1px solid #99CCFF; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px" value="123456">
       <div align="center">
       <TABLE width="89%" border=0 cellSpacing=1 height="47">
@@ -97,11 +81,11 @@ $(document).ready(function(){
     <TR class=content> 
       <TD width="239" bgColor=#ffffff align="right" height="45">
 		<b>
-		<font face="Tahoma" style="font-size: 11pt">ÇëÑ¡ÔñÄúÒª³äÖµµÄ½ğ¶î£º</font></b></TD>
+		<font face="Tahoma" style="font-size: 11pt">è¯·é€‰æ‹©æ‚¨è¦å……å€¼çš„é‡‘é¢ï¼š</font></b></TD>
       <TD width="278" bgColor=#ffffff height="45">  
               <p align="center">  
               <select size="1" name="cjpay">
-				<option selected value="0">==ÇëÑ¡ÔñÊÕµ½µÄ³äÖµ½ğ¶î==</option>
+				<option selected value="0">==è¯·é€‰æ‹©æ”¶åˆ°çš„å……å€¼é‡‘é¢==</option>
 				<option value="100">100</option>
 				<option value="200">200</option>
 				<option value="300">300</option>
@@ -125,34 +109,34 @@ $(document).ready(function(){
 				<option value="7000">7000</option>
 				<option value="8000">8000</option>
 				<option value="9000">9000</option>
-				<option value="10000">1Íò</option>
-				<option value="12000">1Íò2Ç§</option>
-				<option value="15000">1Íò5Ç§</option>
-				<option value="18000">1Íò8Ç§</option>
-				<option value="20000">2Íò</option>
-				<option value="30000">3Íò</option>
-				<option value="50000">5Íò</option>
+				<option value="10000">1ä¸‡</option>
+				<option value="12000">1ä¸‡2åƒ</option>
+				<option value="15000">1ä¸‡5åƒ</option>
+				<option value="18000">1ä¸‡8åƒ</option>
+				<option value="20000">2ä¸‡</option>
+				<option value="30000">3ä¸‡</option>
+				<option value="50000">5ä¸‡</option>
 				</select><b><font color="#FF0000" size="3"> 
 				**</font></TD>
       <TD width="140" bgColor=#ffffff height="45">  
               
                       <b>
-              <INPUT class=normalButton type=submit value="È· ¶¨ ³ä Öµ" name=submit2 style="font-size: 11pt"></TD>
+              <INPUT class=normalButton type=submit value="ç¡® å®š å…… å€¼" name=submit2 style="font-size: 11pt"></TD>
       <TD width="196" bgColor=#ffffff height="45">  
               
                       <p align="center"><b><font size="3" color="#008000">
-						<a href="login6j.asp"><font color="#008000">¼¤»î½ğ±Ò¿¨</font></a></font></b></TD>
+						<a href="login2j?inputUrl=login6j.jsp"><font color="#008000">æ¿€æ´»é‡‘å¸å¡</font></a></font></b></TD>
     </TR>
   </TBODY>
 </TABLE>
-		<p align="center"><font color="#FF0000" size="2"><b>£¨×¢£ºÃ¿´Î³äÖµ×îµÍ100Ôª£¬²¢ÒÔ100ÔªµÄÕûÊıµİÔö£¬Èç200£¬300£¬400£¬Í¬Ê±ĞèÒª¼ÓÎ²Êı£©</b></font></div>
+		<p align="center"><font color="#FF0000" size="2"><b>ï¼ˆæ³¨ï¼šæ¯æ¬¡å……å€¼æœ€ä½100å…ƒï¼Œå¹¶ä»¥100å…ƒçš„æ•´æ•°é€’å¢ï¼Œå¦‚200ï¼Œ300ï¼Œ400ï¼ŒåŒæ—¶éœ€è¦åŠ å°¾æ•°ï¼‰</b></font></div>
 </form>
     </td>
     </tr>
   </table>
   	</div>
   <p style="margin-top: 0; margin-bottom: 0">
-						<iframe name="I1" marginwidth="1" marginheight="1" height="100%" width="100%" src="/vgo/cjjl.asp?cj=<%=regid%>" border="0" frameborder="0">
+						<iframe name="I1" marginwidth="1" marginheight="1" height="100%" width="100%" src="cjjl" border="0" frameborder="0">
 						</iframe>
 						</div></div>
 </body>

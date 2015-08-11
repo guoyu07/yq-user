@@ -285,6 +285,14 @@ public class GcuserDao {
 		paramter.setInt(jydb);
 		return this.jdbc.update(sql, paramter)>0;
 	}
+
+	public boolean addOnlyJB(String userName,int jydb){
+		String sql = "update "+table+" set jydb=jydb+? where username=? limit 1";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setInt(jydb);
+		paramter.setString(userName);
+		return this.jdbc.update(sql, paramter)>0;
+	}
 	
 	public boolean updateSjb(String userName,int sjb){
 		String sql = "update "+table+" set sjb=?  where username=? limit 1";

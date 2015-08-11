@@ -134,7 +134,7 @@ $(document).ready(function(){
           <DT><b><A class=hide href="javascript:void(0);"><font size="2">积分理财</font></A></b> 
           <DD>
           <UL>
-            <LI><a target="main" href="vipgo.asp" style="text-decoration: none">我要充值</a>
+            <LI><a target="main" href="vipgo" style="text-decoration: none">我要充值</a>
             <LI><a target="main" href="loginjf.asp" style="text-decoration: none"><font color="#FF0000">积分竞猜</font></a>
             <LI><a target="main" href="jfcg/0ycg.asp" style="text-decoration: none"><font color="#0000FF">积分抢购</font></a>
             <LI><a target="main" href="jfgame.asp" style="text-decoration: none"><font color="#0000FF">积分游戏</font></a>

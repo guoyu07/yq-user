@@ -48,6 +48,17 @@ public class LogService {
 	public IPage<Datepay> getDatePayListPageBykjqi(String username,int pageIndex,int pageSize){
 		return datePayDao.getPageBykjqi(username, pageIndex, pageSize);
 	}
+	
+	/**
+	 * 查询用户充值列表
+	 * @param username
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Datepay> getDatePayChargeListPage(String username,int pageIndex,int pageSize){
+		return datePayDao.getPageByCharge(username, pageIndex, pageSize);
+	}
 	/**
 	 * 分红日志
 	 * @param username
@@ -96,6 +107,8 @@ public class LogService {
 	public IPage<Bdbdate> getBdbPage(String zuser,int pageIndex,int pageSize){
 		return bdbDateDao.getPageList(zuser, pageSize, pageIndex);
 	}
+	
+	
 	/**
 	 * 获取用户最后一条的id
 	 * @param userName

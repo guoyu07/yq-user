@@ -41,6 +41,13 @@ public class DatePayDao {
 		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
 	}
 	
+	public IPage<Datepay> getPageByCharge(String username,int pageIndex,int pageSize){
+		String sql = "select * from datepay where username = ? and regid='充值&' order by id desc";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(username);
+		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
+	}
+	
 	public int getDatepayId(String userName,int pay){
 		String sql = "select id from datepay where username =? and jc=? order by id desc limit 1";
 		SqlParameter sqlParameter = new SqlParameter();

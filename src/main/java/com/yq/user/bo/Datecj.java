@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 public class Datecj{
-	private int id;
+	private Integer id;
 	private String cjuser;
 	private int dqcj;
 	private int ljcj;
@@ -19,12 +19,6 @@ public class Datecj{
 	private String cz;
 	private String bz;
 	private String ip;
-	public void setId(int id){
-	this.id=id;
-	}
-	public int getId(){
-		return id;
-	}
 	public void setCjuser(String cjuser){
 	this.cjuser=cjuser;
 	}
@@ -91,5 +85,12 @@ public class Datecj{
 	public String getIp(){
 		return ip;
 	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 }
 

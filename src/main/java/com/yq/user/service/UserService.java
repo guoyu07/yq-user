@@ -21,12 +21,18 @@ import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Cpuser;
+import com.yq.user.bo.Datecj;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Ejbk;
 import com.yq.user.bo.Epkjdate;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.Jbk10;
+import com.yq.user.bo.Jbk100;
+import com.yq.user.bo.Jbk300;
+import com.yq.user.bo.Jbk50;
+import com.yq.user.bo.Jbk500;
 import com.yq.user.bo.Jfcp;
 import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
@@ -37,11 +43,13 @@ import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
 import com.yq.user.dao.DatePayDao;
+import com.yq.user.dao.DatecjDao;
 import com.yq.user.dao.DateipDao;
 import com.yq.user.dao.EjbkDao;
 import com.yq.user.dao.EptzbDao;
 import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
+import com.yq.user.dao.JbkDao;
 import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.LkjlDao;
 import com.yq.user.dao.ProvinceDao;
@@ -95,6 +103,10 @@ public class UserService {
     private LkjlDao lkjlDao;
     @Autowired
     private EjbkDao ejbkDao;
+    @Autowired
+    private DatecjDao datecjDao;
+    @Autowired
+    private JbkDao jdbDao;
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -1489,6 +1501,210 @@ public class UserService {
 		datePay.setSyjz(count);
 		datePay.setPay(gcuser.getPay());
 		datePay.setJydb(gcuser.getJydb());
+		datePay.setAbdate(new Date());
+		logService.addDatePay(datePay);
+	}
+	/**
+	 * 查询用户金币卡列表
+	 * @param upUserName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Ejbk> getEjbkPageList(String upUserName,int pageIndex,int pageSize){
+		return ejbkDao.getPageList(upUserName, pageIndex, pageSize);
+	}
+	/**
+	 * 获取单张金币卡
+	 * @param pdid
+	 * @return
+	 */
+	public Ejbk getEjbk(String pdid){
+		return ejbkDao.get(pdid);
+	}
+	/**
+	 * 更新密码
+	 * @param pdid
+	 * @param pdpamd5
+	 * @param fwidmd5
+	 * @return
+	 */
+	public Ejbk updateEjbk(String pdid,String userName,String pdpa,String fwid){
+		Ejbk ejbk = ejbkDao.get(pdid);
+		if(!ejbk.getUp().equals(userName)){
+			throw new ServiceException(3000, "不是自己的金币卡，不能修复激活码！~");
+		}
+		String pdpamd5 = MD5Security.md5_16(pdpa).toUpperCase(); 
+		String fwidmd5 = MD5Security.md5_16(fwid).toUpperCase();
+		if(ejbkDao.update(pdid, pdpamd5, fwidmd5)){
+			return ejbkDao.get(pdid);
+		}
+		return null;
+	}
+	/**
+	 * 激活金币卡
+	 * @param userName
+	 * @param pdid
+	 * @param pdpa
+	 * @param fwid
+	 * @param ip
+	 */
+	@Transactional
+	public void activedGoldCard(String userName,String pdid,String pdpa,String fwid,String ip){
+		String pdpamd5 = MD5Security.md5_16(pdpa).toUpperCase(); 
+		String fwidmd5 = MD5Security.md5_16(fwid).toUpperCase();
+		
+		Ejbk ejbk = ejbkDao.get(pdid);
+		String gmuser = "";
+		Date gmdate= null;
+		if(ejbk==null){
+			Jbk10 jbk10 = jdbDao.getJbk10(pdid);
+			if(jbk10!=null){
+				if(!pdpamd5.equals(jbk10.getPdpamd5())){
+					throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
+				}
+				if(!fwidmd5.equals(jbk10.getFwidmd5())){
+					throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
+				}
+				int cjpay=   10;
+				vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
+				if(!jdbDao.deleteJbk10(pdid)){
+					throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+				}
+			}else{
+				Jbk50 jbk50 = jdbDao.getJbk50(pdid);
+				if(jbk50!=null){
+					if(!pdpamd5.equals(jbk50.getPdpamd5())){
+						throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
+					}
+					if(!fwidmd5.equals(jbk50.getFwidmd5())){
+						throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
+					}
+					
+					int cjpay=   50;
+					vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
+					if(!jdbDao.deleteJbk50(pdid)){
+						throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+					}
+				}else{
+					Jbk100 jbk100 = jdbDao.getJbk100(pdid);
+					if(jbk100!=null){
+						if(!pdpamd5.equals(jbk100.getPdpamd5())){
+							throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
+						}
+						if(!fwidmd5.equals(jbk100.getFwidmd5())){
+							throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
+						}
+						int cjpay=   100;
+						vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
+						if(!jdbDao.deleteJbk100(pdid)){
+							throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+						}
+					}else{
+						Jbk300 jbk300 = jdbDao.getJbk300(pdid);
+						if(jbk300!=null){
+							if(!pdpamd5.equals(jbk300.getPdpamd5())){
+								throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
+							}
+							if(!fwidmd5.equals(jbk300.getFwidmd5())){
+								throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
+							}
+							int cjpay=   300;
+							vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
+							if(!jdbDao.deleteJbk300(pdid)){
+								throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+							}
+						}else{
+							Jbk500 jbk500 = jdbDao.getJbk500(pdid);
+							if(jbk500!=null){
+								if(!pdpamd5.equals(jbk500.getPdpamd5())){
+									throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
+								}
+								if(!fwidmd5.equals(jbk500.getFwidmd5())){
+									throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
+								}
+								int cjpay=   500;
+								vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
+								if(!jdbDao.deleteJbk500(pdid)){
+									throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+								}
+							}else{
+								throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+							}
+						}
+					}
+				}
+			}
+			
+		}else{
+				if(!pdpamd5.equals(ejbk.getPdpamd5())){
+					throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
+				}
+				if(!fwidmd5.equals(ejbk.getFwidmd5())){
+					throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
+				}
+				gmuser=  ejbk.getUp();
+				gmdate=    ejbk.getGmdate();
+				int cjpay=      ejbk.getBf2()*10;
+				vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
+				if(!ejbkDao.delete(pdid)){
+					throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+				}
+		}
+	}
+	
+	private void vipgwly(String userName,String pdid,String pdpa,String fwid,String gmuser,Date gmdate,int cjpay,String ip){
+//		double zjgc = 0;
+//		if(cjpay<1000){
+//		   zjgc=0;
+//		}else if(cjpay>999 && cjpay<2000){
+//		   zjgc=cjpay*0.01;
+//		}else if(cjpay>1999 && cjpay<3000){
+//		   zjgc=cjpay*0.02;
+//		}else if(cjpay>2999 && cjpay<4000){
+//		   zjgc=cjpay*0.03;
+//		}else if(cjpay>3999 && cjpay<5000){
+//			zjgc=cjpay*0.04;
+//		}else if(cjpay>4999 && cjpay<6000){
+//			zjgc=cjpay*0.05;
+//		}else if(cjpay>5999 && cjpay<7000){
+//			zjgc=cjpay*0.06;
+//		}else if(cjpay>6999 && cjpay<8000){
+//			zjgc=cjpay*0.07;
+//		}else if(cjpay>7999 && cjpay<9000){
+//			zjgc=cjpay*0.08;
+//		}else if(cjpay>8999 && cjpay<10000){
+//			zjgc=cjpay*0.09;
+//		}else if(cjpay>9999){
+//			zjgc=cjpay*0.1;
+//		}
+		Datecj datecj = datecjDao.get(userName);
+		int cjtj = 0;
+		if(datecj!=null){
+			cjtj = datecj.getLjcj();
+		}
+		Datecj datecjTemp = new Datecj();
+		datecjTemp.setCjuser(userName);
+		datecjTemp.setDqcj(cjpay);
+		datecjTemp.setLjcj(cjtj);
+		datecjTemp.setCjfs(pdid);
+		datecjTemp.setCjdate(gmdate);
+		datecjTemp.setBz(gmuser);
+		datecjTemp.setIp(ip);
+		datecjDao.add(datecjTemp);
+		
+		Gcuser user = gcuserDao.getUser(userName);
+		int count = (int)(cjpay*0.03);
+		
+		updateUpJbAndYj(user.getUp(), "用户一"+userName+"激活金币卡"+cjpay, count);
+		gcuserDao.addOnlyJB(userName, cjpay);
+		user = gcuserDao.getUser(userName);
+		Datepay datePay = new Datepay();
+		datePay.setUsername(userName);
+		datePay.setRegid("激活金币卡"+cjpay);
+		datePay.setPay(user.getPay());
+		datePay.setJydb(user.getJydb());
+		datePay.setJyjz(cjpay);
 		datePay.setAbdate(new Date());
 		logService.addDatePay(datePay);
 	}
