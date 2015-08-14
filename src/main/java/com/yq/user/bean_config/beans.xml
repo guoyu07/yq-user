@@ -48,6 +48,8 @@
        <bean id="ejbkDao" class="com.yq.user.dao.EjbkDao"></bean>
        <bean id="datejcDao" class="com.yq.user.dao.DatecjDao"></bean>
        <bean id="jbkDao" class="com.yq.user.dao.JbkDao"></bean>
+       <bean id="jfkjdateDao" class="com.yq.user.dao.JfkjdateDao"></bean>
+       <bean id="jftzbDao" class="com.yq.user.dao.JftzbDao"></bean>
        
        <!-- 用户数据service -->
        <bean id="userService" class="com.yq.user.service.UserService"></bean>

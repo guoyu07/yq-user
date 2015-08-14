@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.mysql.jdbc.RandomBalanceStrategy;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.ProblemCode;
@@ -34,6 +33,7 @@ import com.yq.user.bo.Jbk300;
 import com.yq.user.bo.Jbk50;
 import com.yq.user.bo.Jbk500;
 import com.yq.user.bo.Jfcp;
+import com.yq.user.bo.Jfkjdate;
 import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Txifok;
@@ -51,7 +51,7 @@ import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.JbkDao;
 import com.yq.user.dao.JfcpDao;
-import com.yq.user.dao.LkjlDao;
+import com.yq.user.dao.JftzbDao;
 import com.yq.user.dao.ProvinceDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TduserDao;
@@ -100,13 +100,14 @@ public class UserService {
     @Autowired
     private GpjyDao gpjyDao;
     @Autowired
-    private LkjlDao lkjlDao;
-    @Autowired
     private EjbkDao ejbkDao;
     @Autowired
     private DatecjDao datecjDao;
     @Autowired
     private JbkDao jdbDao;
+    @Autowired
+    private JftzbDao jftzbDao;
+
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -995,7 +996,7 @@ public class UserService {
 	}
 	
 	private static final String[] ARRAY_DESC = new String[]{"单","双 ","大","小"};
-	public void guess(String userName,int type,int ybNum){
+	public void guessYb(String userName,int type,int ybNum){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getPay()==0 || gcuser.getPay()<10 || ybNum>gcuser.getPay()){
 			throw new ServiceException(1,"一币不足");
@@ -1017,6 +1018,40 @@ public class UserService {
 		eptzbDao.updateSumGuessByType(userName, type, ybNum);
 	}
 	
+
+	public void guessJf(String userName,int type,int jfNum){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser.getJyg()==0 || gcuser.getJyg()<10 || jfNum>gcuser.getJyg()){
+			throw new ServiceException(1,"操作错误，积分不足，请检查输入是否正确！");
+		}
+		Jfkjdate epkjdate = managerService.getJfkjdateBz0();
+		
+		if(!gcuserDao.updateJyg(userName, jfNum)){
+			throw new ServiceException(1, "操作错误，积分不足，请检查输入是否正确！");
+		}
+		
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMcsl(jfNum);
+		gpjy.setSysl(gcuser.getJyg()-jfNum);
+		gpjy.setBz("竞猜投注-"+ARRAY_DESC[type-1]);
+		gpjy.setKjqi(epkjdate.getKid());
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjyDao.add(gpjy);
+		
+		//更新压注池子
+		if(type==1){
+			managerService.updateEpkjdateBz0(jfNum, 0, 0, 0);
+		}else if(type==2){
+			managerService.updateEpkjdateBz0(0, jfNum, 0, 0);
+		}else if(type==3){
+			managerService.updateEpkjdateBz0(0, 0, jfNum, 0);
+		}else if(type==4){
+			managerService.updateEpkjdateBz0(0, 0, 0, jfNum);
+		}
+		jftzbDao.updateSumGuessByType(userName, type, jfNum);
+	}
 	/**
 	 * 一币抢购
 	 */
@@ -1707,5 +1742,81 @@ public class UserService {
 		datePay.setJyjz(cjpay);
 		datePay.setAbdate(new Date());
 		logService.addDatePay(datePay);
+	}
+	/**
+	 * 积分竞猜
+	 * @param userName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Gpjy> getGpjyPage(String userName,int pageIndex,int pageSize){
+		return gpjyDao.getPageList(userName, pageIndex, pageSize);
+	}
+	
+	@Transactional
+	public int jfQg(String userName,int goodsId){
+		Gcuser user = gcuserDao.getUser(userName);
+		int cost = 1;
+		int buyNum = 1;
+		if(user.getJyg()<10||user.getJyg()<cost){
+			throw new ServiceException(1, "您好，积分不足，暂时不能参与，谢谢！");
+		}
+		
+		boolean result = jfcpDao.updateJf(goodsId, buyNum);
+		if(!result){
+			throw new ServiceException(2,"本轮该产品已成功被抢购，请稍候再试或联系客服进行下一轮抢购或选择其它产品！");
+		}
+		Jfcp jfcp =jfcpDao.get(goodsId);
+		
+		if(!gcuserDao.updateJyg(userName, cost)){
+			throw new ServiceException(1, "您好，积分不足，暂时不能参与，谢谢！");
+		}
+		user = gcuserDao.getUser(userName);
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMcsl(cost);
+		gpjy.setSysl(user.getJyg());
+		gpjy.setBz("抢购-"+jfcp.getCpmq());
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjyDao.add(gpjy);
+		
+		if(jfcp.getDqjf()==10||jfcp.getDqjf()<21&&jfcp.getCglist()!=0){
+			if(!jfcpDao.updateDqjfAndCglist(goodsId, buyNum)){
+				throw new ServiceException(3000,"未知错误");
+			}
+		}
+		
+		jfcp =jfcpDao.get(goodsId);
+		
+		if(jfcp.getDqjf()==0||jfcp.getDqjf()<0&&jfcp.getCglist()==0){
+			Cpuser cpuser = new Cpuser();
+			cpuser.setCguser(userName);
+			cpuser.setCpmq("jf-"+jfcp.getCpmq());
+			cpuser.setJydate(new Date());
+			cpuser.setJyjf(jfcp.getZjfsl());
+			cpuser.setJyname(user.getName());
+			cpuser.setJyqq(user.getQq());
+			cpuser.setJycall(user.getCall());
+			cpuserDao.add(cpuser);
+			
+			Gpjy gpjy2 = new Gpjy();
+			gpjy.setUsername(userName);
+			gpjy.setSysl(user.getJyg());
+			gpjy.setBz("抢购成功-"+jfcp.getCpmq());
+			gpjy.setCgdate(new Date());
+			gpjy.setJy(1);
+			gpjyDao.add(gpjy2);
+			
+			if(!jfcpDao.updateDqjfOrCglistOrJysl(goodsId)){
+				throw new ServiceException(3000,"未知错误");
+			}
+			return -1;
+		}else{
+			//throw new ServiceException(3,"您好，本次点击抢购还差一点点，还有"+jfcp.getDqep()+"就可以抢中，继续加油！！！");
+			return jfcp.getDqjf();
+		}
+		
 	}
 }

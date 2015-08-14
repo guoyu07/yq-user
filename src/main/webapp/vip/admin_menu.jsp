@@ -135,8 +135,8 @@ $(document).ready(function(){
           <DD>
           <UL>
             <LI><a target="main" href="vipgo" style="text-decoration: none">我要充值</a>
-            <LI><a target="main" href="loginjf.asp" style="text-decoration: none"><font color="#FF0000">积分竞猜</font></a>
-            <LI><a target="main" href="jfcg/0ycg.asp" style="text-decoration: none"><font color="#0000FF">积分抢购</font></a>
+            <LI><a target="main" href="login2j?inputUrl=loginjf.jsp" style="text-decoration: none"><font color="#FF0000">积分竞猜</font></a>
+            <LI><a target="main" href="oycg" style="text-decoration: none"><font color="#0000FF">积分抢购</font></a>
             <LI><a target="main" href="jfgame.asp" style="text-decoration: none"><font color="#0000FF">积分游戏</font></a>
             <LI><a target="main" href="mysl.asp" style="text-decoration: none">积分买入(求购)</a>
             <LI><a target="main" href="mcsl.asp" style="text-decoration: none">积分卖出(出售)</a>

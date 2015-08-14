@@ -7,16 +7,17 @@ import java.util.Date;
 
 
 public class Jftzb{
-	private int tid;
+	private Integer tid;
 	private String tzuser;
 	private int tzlba;
 	private int tzsla;
 	private Date tzdate;
-	public void setTid(int tid){
-	this.tid=tid;
-	}
-	public int getTid(){
+	
+	public Integer getTid() {
 		return tid;
+	}
+	public void setTid(Integer tid) {
+		this.tid = tid;
 	}
 	public void setTzuser(String tzuser){
 	this.tzuser=tzuser;

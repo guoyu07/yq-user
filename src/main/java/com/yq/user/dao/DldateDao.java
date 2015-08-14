@@ -9,7 +9,7 @@ public class DldateDao {
 	@Autowired
 	private Jdbc jdbc;
 	
-	private final String table = "dldate";
+//	private final String table = "dldate";
 	
 	public boolean add(Dldate dldate){
 		return jdbc.insert(dldate)>0;

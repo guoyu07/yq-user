@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class GenEntityMysql {
 	
 	private String packageOutPath = "com.yq.user.bo";//指定实体生成所在包的路径
-	private String tablename = "eptzb";//表名
+	private String tablename = "jfkjdate";//表名
 	private String[] colnames; // 列名数组
 	private String[] colTypes; //列名类型数组
 	private int[] colSizes; //列名大小数组

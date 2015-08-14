@@ -9,7 +9,7 @@ public class CpuserDao {
 	@Autowired
 	private Jdbc jdbc;
 	
-	private static String table = "cpuser";
+//	private static String table = "cpuser";
 	
 	public boolean add(Cpuser cpuser){
 		return jdbc.insert(cpuser)>0;

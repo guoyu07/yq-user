@@ -1,9 +1,7 @@
 package com.yq.user.action;
 
-import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Ejbk;
-import com.yq.user.service.UserService;
 
 public class CkpaAction extends ALDAdminActionSupport {
 
@@ -18,7 +16,6 @@ public class CkpaAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		
-		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		 
 		return SUCCESS;
 	}

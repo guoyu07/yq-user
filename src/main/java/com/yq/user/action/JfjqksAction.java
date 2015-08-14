@@ -3,27 +3,25 @@ package com.yq.user.action;
 import java.util.Date;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.yq.common.ProblemCode;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.common.utils.DateUtils;
-import com.yq.user.bo.Datepay;
-import com.yq.user.bo.Epkjdate;
 import com.yq.user.bo.Gcuser;
-import com.yq.user.service.LogService;
+import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.Jfkjdate;
 import com.yq.user.service.ManagerService;
 import com.yq.user.service.UserService;
 
-public class EpjqksAction extends ALDAdminPageActionSupport<Datepay> {
+public class JfjqksAction extends ALDAdminPageActionSupport<Gpjy> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int status;
+    private int status;
 	
-	private Epkjdate epkjdate;
-	
-	private int pay;
+	private int jyg;
 	private int year;
 	private int month;
 	private int day;
@@ -34,15 +32,18 @@ public class EpjqksAction extends ALDAdminPageActionSupport<Datepay> {
 	//选择的项目  1.
 	private int tzlb;
 	
-    public String execute(){
+	private Jfkjdate jfkjdate;
+	
+	@ProblemCode //没有看懂竞猜的时间规则
+	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
     	if(status==0){
     		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
-    		pay = gcuser.getPay();
+    		jyg = gcuser.getJyg();
     		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class); 
-    		epkjdate = managerService.getEpkjdate();
-    		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class); 
-    		super.initPage(logService.getDatePayListPageBykjqi(super.getUserName(), super.getToPage(), 15));
+    		jfkjdate = managerService.getJfkjdate();
+    		
+    		super.initPage(userService.getGpjyPage(super.getUserName(), super.getToPage(), 15));
     		
     		Date now = new Date();
     		year = DateUtils.getYear(now);
@@ -50,34 +51,27 @@ public class EpjqksAction extends ALDAdminPageActionSupport<Datepay> {
     		day = DateUtils.getDay(now);
     		hours = DateUtils.getHour(now);
     		minutes = DateUtils.getMinute(now);
-    		return INPUT;
     	}else{
-    		userService.guessYb(super.getUserName(), tzlb, tzsl);
-    		super.setErroCodeNum(20);//成功提示
-    		return INPUT;
+    		userService.guessJf(super.getUserName(), tzlb, tzsl);
+    		super.setErroCodeNum(2000);//成功提示
     	}
-    }
-    
+		return SUCCESS;
+	}
+
 	public int getStatus() {
 		return status;
 	}
+
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public Epkjdate getEpkjdate() {
-		return epkjdate;
-	}
-	public void setEpkjdate(Epkjdate epkjdate) {
-		this.epkjdate = epkjdate;
+
+	public int getJyg() {
+		return jyg;
 	}
 
-	public int getPay() {
-		return pay;
-	}
-	
-
-	public void setPay(int pay) {
-		this.pay = pay;
+	public void setJyg(int jyg) {
+		this.jyg = jyg;
 	}
 
 	public int getYear() {
@@ -134,5 +128,13 @@ public class EpjqksAction extends ALDAdminPageActionSupport<Datepay> {
 
 	public void setTzlb(int tzlb) {
 		this.tzlb = tzlb;
+	}
+
+	public Jfkjdate getJfkjdate() {
+		return jfkjdate;
+	}
+
+	public void setJfkjdate(Jfkjdate jfkjdate) {
+		this.jfkjdate = jfkjdate;
 	}
 }

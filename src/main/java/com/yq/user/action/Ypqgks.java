@@ -2,7 +2,6 @@ package com.yq.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
-import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
 public class Ypqgks extends ALDAdminActionSupport {

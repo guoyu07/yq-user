@@ -201,6 +201,22 @@
 		<action name="activedGoldCard" class="com.yq.user.action.ActivGoldCardAction">
 		    <result name="success">0625fhk/pdfhk0102/chklogin.jsp</result>
 		</action>		
+		
+		<action name="jfjqks" class="com.yq.user.action.JfjqksAction">
+		    <result name="success">vip/jfjqks.jsp</result>
+		</action>
+		
+		<action name="jfkjjl" class="com.yq.user.action.JfkjjlAction">
+		    <result name="success">vip/jfkjjl.jsp</result>
+		</action>
+		
+		<action name="oycg" class="com.yq.user.action.OycgAction">
+		    <result name="success">vip/jfcg/0ycg.jsp</result>
+		</action>
+		
+		<action name="cgks" class="com.yq.user.action.CgksAction">
+		    <result name="success">vip/jfcg/cgks.jsp</result>
+		</action>				
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
