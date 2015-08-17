@@ -13,7 +13,7 @@ public class Jfkjdate{
 	private int dsh;
 	private int da;
 	private int xiao;
-	private Integer dxh;
+	private int dxh;
 	private int dskj;
 	private int kdxj;
 	private int bz;
@@ -54,11 +54,11 @@ public class Jfkjdate{
 	public int getXiao(){
 		return xiao;
 	}
-	public Integer getDxh() {
-		return dxh;
+	public void setDxh(int dxh){
+	this.dxh=dxh;
 	}
-	public void setDxh(Integer dxh) {
-		this.dxh = dxh;
+	public int getDxh(){
+		return dxh;
 	}
 	public void setDskj(int dskj){
 	this.dskj=dskj;

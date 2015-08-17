@@ -216,6 +216,33 @@
 		
 		<action name="cgks" class="com.yq.user.action.CgksAction">
 		    <result name="success">vip/jfcg/cgks.jsp</result>
+		</action>
+		
+		<action name="jfgame" class="com.yq.user.action.JfgameAction">
+		    <result name="success">vip/jfgame.jsp</result>
+		    <result name="redirect" type="redirect">http://p.cfjte.com/Manage/Reg02.aspx?user=${userName}&amp;pa=${pa}</result>
+		</action>
+		
+		<action name="mysl" class="com.yq.user.action.MyslAction">
+		    <result name="success">vip/mysl.jsp</result>
+		    <result name="mysl2">vip/mysl2.jsp</result>
+		</action>
+		
+		<action name="sgqg" class="com.yq.user.action.SgqgAction">
+		    <result name="success">vip/sgqg.jsp</result>
+		</action>		
+
+		<action name="gpjy" class="com.yq.user.action.GpjyAction">
+		    <result name="success">vip/gpjy.jsp</result>
+		</action>	
+		
+		<action name="mcsl" class="com.yq.user.action.McslAction">
+		    <result name="success">vip/mcsl.jsp</result>
+		    <result name="mcsl2">vip/mcsl2.jsp</result>
+		</action>
+		
+		<action name="sggpjy" class="com.yq.user.action.SggpjyAction">
+		    <result name="success">vip/sggpjy.jsp</result>
 		</action>				
 	</package>
 

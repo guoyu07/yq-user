@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 public class Gpjy{
-	private int id;
+	private Integer id;
 	private int jyid;
 	private int kjqi;
 	private String username;
@@ -23,11 +23,11 @@ public class Gpjy{
 	private String dfuser;
 	private Date dqdate;
 	private int newjy;
-	public void setId(int id){
-	this.id=id;
-	}
-	public int getId(){
+	public Integer getId() {
 		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public void setJyid(int jyid){
 	this.jyid=jyid;

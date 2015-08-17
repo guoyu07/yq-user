@@ -1038,6 +1038,7 @@ public class UserService {
 		gpjy.setKjqi(epkjdate.getKid());
 		gpjy.setCgdate(new Date());
 		gpjy.setJy(1);
+		gpjy.setAbdate(new Date());
 		gpjyDao.add(gpjy);
 		
 		//更新压注池子
@@ -1177,11 +1178,12 @@ public class UserService {
 		datePay.setAbdate(new Date());
 		logService.addDatePay(datePay);
 		
+		int datePayId = logService.getLasterInsertId();
+		
 		Txpay txpay = txPayDao.get();
 		
 		int jypay = txpay.getPayid()+1;
 		
-		int datePayId = logService.getDatePayId(userName, saleNum);
 		gcuser = gcuserDao.getUser(userName);
 		
 		Txpay txpay2 = new Txpay();
@@ -1404,6 +1406,7 @@ public class UserService {
 		gpjy.setJy(1);
 		gpjy.setDfuser(payId+"");
 		gpjy.setNewjy(1);
+		gpjy.setAbdate(new Date());
 		
 		gpjyDao.add(gpjy);
 		
@@ -1780,6 +1783,7 @@ public class UserService {
 		gpjy.setBz("抢购-"+jfcp.getCpmq());
 		gpjy.setCgdate(new Date());
 		gpjy.setJy(1);
+		gpjy.setAbdate(new Date());
 		gpjyDao.add(gpjy);
 		
 		if(jfcp.getDqjf()==10||jfcp.getDqjf()<21&&jfcp.getCglist()!=0){
@@ -1817,6 +1821,139 @@ public class UserService {
 			//throw new ServiceException(3,"您好，本次点击抢购还差一点点，还有"+jfcp.getDqep()+"就可以抢中，继续加油！！！");
 			return jfcp.getDqjf();
 		}
+	}
+	/**
+	 * 金币购买积分 
+	 * @param userName
+	 * @param buyNum
+	 */
+	public void buyJf(String userName,int buyNum){
 		
+		if(gpjyDao.get()!=null){
+			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+		}
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		Fcxt fcxt = managerService.getFcxtById(2);
+		
+		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		
+		if(!gcuserDao.reduceOnlyJB(userName, needJb)){
+			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
+		}
+		
+		Datepay datePay = new Datepay();
+		datePay.setUsername(userName);
+		datePay.setRegid("买入挂牌中");
+		datePay.setDbjc(needJb);
+		datePay.setPay(gcuser.getPay());
+		datePay.setJydb(gcuser.getJydb()-needJb);
+		datePay.setAbdate(new Date());
+		logService.addDatePay(datePay);
+		
+		int id = logService.getLasterInsertId();
+		
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMysl(buyNum);
+		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setPay(fcxt.getJygj());
+		gpjy.setBz("买入挂牌中");
+		gpjy.setJypay(needJb);
+		gpjy.setJyid(id);
+		gpjy.setAbdate(new Date());
+		gpjyDao.add(gpjy);
+		 
+	}
+	
+	public IPage<Gpjy> getAllGpjyPageList(String userName,int pageIndex,int pageSize){
+		return gpjyDao.getAllPageList(userName, pageIndex, pageSize);
+	}
+	
+	public IPage<Gpjy> getAllGpjyDetailsPageList(String userName,int pageIndex,int pageSize){
+		return gpjyDao.getUserPageDetailsList(userName, pageIndex, pageSize);
+	}
+	/**
+	 * 卖出积分
+	 * @param userName
+	 * @param price
+	 * @param saleNum
+	 * @param passwrod3
+	 */
+	@Transactional
+	public void saleJf(String userName,double price,int saleNum,String passwrod3){
+		checkSaleJf(userName,price,saleNum,passwrod3);
+		
+		if(!gcuserDao.updateJyg(userName, saleNum)){
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
+		}
+		if(!gcuserDao.increaseStopjyg(userName,20)){
+			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
+		}
+		
+		int needJb = (int)(Math.ceil(price*saleNum));
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMcsl(saleNum);
+		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setPay(price);
+		gpjy.setBz("卖出挂牌中");
+		gpjy.setJypay(needJb);
+		gpjy.setAbdate(new Date());
+		gpjyDao.add(gpjy);
+	}
+	/**
+	 * 检查条件
+	 * @param userName
+	 * @param price
+	 * @param saleNum
+	 * @param passwrod3
+	 */
+	public void checkSaleJf(String userName,double price,int saleNum,String passwrod3){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser.getJyg()<50000&&DateUtils.getIntervalDays(gcuser.getBddate(), new Date())<100){
+			throw new ServiceException(1,"未满100天的账户，积分暂时停止卖出交易，收益完成后自动开放！");
+		}
+		
+		Sgxt sgxt = sgxtDao.get(userName);
+		if(sgxt.getMqfh()>0&&sgxt.getMqfh()<sgxt.getZfh()&&sgxt.getXxnew()>0&&gcuser.getJyg()<50000){
+			throw new ServiceException(2,"游戏收益未完成，积分暂时停止卖出交易，收益完成后自动开放！");
+		}
+		
+		if(DateUtils.getIntervalDays(sgxt.getBddate(), new Date())==0){
+			throw new ServiceException(3,"请于开户后第二天再进行卖出操作，谢谢！");
+		}
+		
+		if(!passwrod3.equals("-1")&&!passwrod3.equals(gcuser.getPassword3())){
+			throw new ServiceException(4,"二级密码不正确");
+		}
+		
+		Fcxt fcxt = managerService.getFcxtById(2);
+		if(price<0.77){
+			throw new ServiceException(5,"卖出单价不能小于 0.77 ！");
+		}
+		if(price > fcxt.getJygj()+0.03){
+			throw new ServiceException(6,"卖出单价不能大于 "+(fcxt.getJygj()+0.03)+" 哦！");
+		}
+		
+		if(saleNum<=0){
+			throw new ServiceException(7,"您好，您卖出数量不能小于零，谢谢！");
+		}
+		if(gcuser.getStopjyg()>19){
+			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
+		}
+		
+		if(saleNum>gcuser.getJyg()){
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量 "+gcuser.getJyg()+" ，谢谢！");
+		}
+		
+		if(gcuser.getJygt1()==0){
+			if(gpjyDao.get()!=null){
+				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+			}
+		}
 	}
 }

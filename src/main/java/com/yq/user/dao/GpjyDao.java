@@ -27,4 +27,18 @@ public class GpjyDao {
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
 	}
 	
+	public Gpjy get(){
+		String sql="select * from "+table+" where jy=0 and mcsl>0 limit 1";
+		return this.jdbc.get(sql, Gpjy.class, null);
+	}
+	
+	public IPage<Gpjy> getAllPageList(String userName,int pageIndex,int pageSize){
+		String sql="select * from "+table+" where username = ? order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
+	}
+	
+	public IPage<Gpjy> getUserPageDetailsList(String userName,int pageIndex,int pageSize){
+		String sql="select * from "+table+" where username = ? and jy=0 and mcsl>0 order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
+	}
 }

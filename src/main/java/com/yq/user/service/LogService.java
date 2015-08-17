@@ -60,6 +60,16 @@ public class LogService {
 		return datePayDao.getPageByCharge(username, pageIndex, pageSize);
 	}
 	/**
+	 * 查询用户充值列表
+	 * @param username
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Datepay> getDatePayJfmrListPage(String username,int pageIndex,int pageSize){
+		return datePayDao.getPageByJfMr(username, pageIndex, pageSize);
+	}
+	/**
 	 * 分红日志
 	 * @param username
 	 * @param pageIndex
@@ -115,9 +125,9 @@ public class LogService {
 	 * @param pay
 	 * @return
 	 */
-	public int getDatePayId(String userName,int pay){
-		return datePayDao.getDatepayId(userName, pay);
-	}
+//	public int getDatePayId(String userName,int pay){
+//		return datePayDao.getDatepayId(userName, pay);
+//	}
 	/**
 	 * 
 	 * @param userName
@@ -134,6 +144,10 @@ public class LogService {
 		dldate.setRegid(desc);
 		dldate.setAbdate(new Date());
 		return dldateDao.add(dldate);
+	}
+	
+	public int getLasterInsertId(){
+		return datePayDao.getLastInsertId();
 	}
 	
 }

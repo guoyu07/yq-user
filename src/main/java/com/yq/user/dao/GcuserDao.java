@@ -293,7 +293,14 @@ public class GcuserDao {
 		paramter.setString(userName);
 		return this.jdbc.update(sql, paramter)>0;
 	}
-	
+	public boolean reduceOnlyJB(String userName,int jydb){
+		String sql = "update "+table+" set jydb=jydb-? where username=? and jydb-?>0 limit 1";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setInt(jydb);
+		paramter.setString(userName);
+		paramter.setInt(jydb);
+		return this.jdbc.update(sql, paramter)>0;
+	}	
 	public boolean updateSjb(String userName,int sjb){
 		String sql = "update "+table+" set sjb=?  where username=? limit 1";
 		SqlParameter paramter = new SqlParameter();
@@ -395,4 +402,12 @@ public class GcuserDao {
 		parameter.setString(username);
 		return this.jdbc.update(sql, parameter)>0;
 	}	
+	
+	public boolean increaseStopjyg(String userName,int max){
+		String sql = "update "+table+" set stopjyg=stopjyg+1 where username=? and stopjyg+1<=?  limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		parameter.setInt(max);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 }

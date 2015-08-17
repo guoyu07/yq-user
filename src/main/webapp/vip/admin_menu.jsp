@@ -137,11 +137,11 @@ $(document).ready(function(){
             <LI><a target="main" href="vipgo" style="text-decoration: none">我要充值</a>
             <LI><a target="main" href="login2j?inputUrl=loginjf.jsp" style="text-decoration: none"><font color="#FF0000">积分竞猜</font></a>
             <LI><a target="main" href="oycg" style="text-decoration: none"><font color="#0000FF">积分抢购</font></a>
-            <LI><a target="main" href="jfgame.asp" style="text-decoration: none"><font color="#0000FF">积分游戏</font></a>
-            <LI><a target="main" href="mysl.asp" style="text-decoration: none">积分买入(求购)</a>
-            <LI><a target="main" href="mcsl.asp" style="text-decoration: none">积分卖出(出售)</a>
-            <LI><a target="main" href="gpjy.asp" style="text-decoration: none">积分交易明细</a>
-            <LI><a target="main" href="gpjysc.asp" style="text-decoration: none">积分交易市场</a>
+            <LI><a target="main" href="jfgame" style="text-decoration: none"><font color="#0000FF">积分游戏</font></a>
+            <LI><a target="main" href="mysl" style="text-decoration: none">积分买入(求购)</a>
+            <LI><a target="main" href="mcsl" style="text-decoration: none">积分卖出(出售)</a>
+            <LI><a target="main" href="gpjy" style="text-decoration: none">积分交易明细</a>
+            <LI><a target="main" href="gpjysc" style="text-decoration: none">积分交易市场</a>
             <LI>积分拆分次数：<font color="#800000"><font size="2">${gcuser.cfa}</font></font>
             <LI>积分拆分倍数：<font color="#008000"><font size="2">${gcuser.cfb}</font></font>
             </LI></UL></DD></DL>
