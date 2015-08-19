@@ -410,4 +410,19 @@ public class GcuserDao {
 		parameter.setInt(max);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	public boolean reduceStopjyg(String userName){
+		String sql = "update "+table+" set stopjyg= case when stopjyg-1<0 then 0 else stopjyg-1 end where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean resetStopjyg(String userName){
+		String sql = "update "+table+" set stopjyg=0 where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
 }

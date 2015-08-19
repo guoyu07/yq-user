@@ -15,6 +15,7 @@ import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.ProblemCode;
 import com.yq.common.exception.ServiceException;
+import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
@@ -47,6 +48,7 @@ import com.yq.user.dao.DatecjDao;
 import com.yq.user.dao.DateipDao;
 import com.yq.user.dao.EjbkDao;
 import com.yq.user.dao.EptzbDao;
+import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.JbkDao;
@@ -107,6 +109,8 @@ public class UserService {
     private JbkDao jdbDao;
     @Autowired
     private JftzbDao jftzbDao;
+    @Autowired
+    private FcxtDao fcxtDao;
 
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
@@ -1757,6 +1761,12 @@ public class UserService {
 		return gpjyDao.getPageList(userName, pageIndex, pageSize);
 	}
 	
+	
+	public Gpjy getGpjyPage(int id){
+		return gpjyDao.getById(id);
+	}
+	
+	
 	@Transactional
 	public int jfQg(String userName,int goodsId){
 		Gcuser user = gcuserDao.getUser(userName);
@@ -1874,6 +1884,14 @@ public class UserService {
 	public IPage<Gpjy> getAllGpjyDetailsPageList(String userName,int pageIndex,int pageSize){
 		return gpjyDao.getUserPageDetailsList(userName, pageIndex, pageSize);
 	}
+	
+	public IPage<Gpjy> getMrPageList(String userName,int pageIndex,int pageSize){
+		return gpjyDao.getMrPage(userName, pageIndex, pageSize);
+	}
+	
+	public IPage<Gpjy> getMcPageList(String userName,int pageIndex,int pageSize){
+		return gpjyDao.getMcPage(userName, pageIndex, pageSize);
+	}
 	/**
 	 * 卖出积分
 	 * @param userName
@@ -1956,4 +1974,229 @@ public class UserService {
 			}
 		}
 	}
+	/**
+	 * 取消出售
+	 * @param userName
+	 * @param orderId
+	 * @param pa3
+	 */
+	@Transactional
+	public void cancelSale(String userName,int orderId,String pa3){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(!pa3.equals(gcuser.getPassword3())){
+			throw new ServiceException(1,"二级密码不正确");
+		}
+		
+		Gpjy gpjy1 = gpjyDao.getById(orderId);
+		double mcsl=gpjy1.getMcsl();
+		
+		if(!gpjy1.getUsername().equals(userName)){
+			throw new ServiceException(3000,"非法操作");
+		}
+		
+		if(!gcuserDao.updateJyg(userName, -(int)mcsl)){
+			throw new ServiceException(3000,"更新积分失败");
+		}
+		
+		if(!gcuserDao.resetStopjyg(userName)){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		if(!gpjyDao.updateJy(1, orderId)){
+			throw new ServiceException(2,"该积分交易进行中或已经由它人交易成功了，不能撒消，请选择其它交易！");
+		}
+		
+		if(!gpjyDao.updateBz(orderId, "已撒单")){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		if(!gpjyDao.updateCgdate(orderId)){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		if(!gpjyDao.updateDqdate(orderId)){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		gcuser = gcuserDao.getUser(userName);
+		
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMysl(mcsl);
+		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setBz("撒单成功");
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjyDao.add(gpjy);
+	}
+	/**
+	 * 修改出售价格
+	 * @param userName
+	 * @param id
+	 * @param price
+	 */
+	public void editGpjy(String userName,int id,double price,String pa3){
+	    Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(!pa3.equals(gcuser.getPassword3())){
+			throw new ServiceException(1,"二级密码不正确");
+		}
+		
+		Gpjy gpjy1 = gpjyDao.getById(id);
+		
+		if(!gpjy1.getUsername().equals(userName)){
+			throw new ServiceException(3000,"非法操作");
+		}
+		
+		if(price>gpjy1.getPay()){
+			throw new ServiceException(2,"修改卖出单价不能大于原来的定价");
+		}
+		
+		if(!gpjyDao.updatePayAndJyPay(id, price,(int)(Math.ceil(price*gpjy1.getMcsl())))){
+			throw new ServiceException(3,"该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
+		}
+	}
+	/**
+	 * 买入积分
+	 * @param userName
+	 * @param id
+	 */
+	@Transactional
+	public void mrJf(String userName,int id){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Gpjy gpjy1 = gpjyDao.getById(id);
+
+		if (gcuser.getJydb() < gpjy1.getJypay()) {
+			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
+		}
+
+		if (!gcuserDao.reduceOnlyJB(userName, (int) gpjy1.getJypay())) {
+			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
+		}
+
+		if (!gcuserDao.updateJyg(userName, -(int) gpjy1.getMcsl())) {
+			throw new ServiceException(3000, "未知错误");
+		}
+
+		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
+			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
+		}
+
+		gcuser = gcuserDao.getUser(userName);
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMysl(gpjy1.getMcsl());
+		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setPay(gpjy1.getPay());
+		gpjy.setJypay(gpjy1.getJypay());
+		gpjy.setBz("买入成功");
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjy.setDfuser(gpjy1.getUsername());
+		gpjyDao.add(gpjy);
+
+		String mcdj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
+
+		Datepay datePay1 = new Datepay();
+		datePay1.setUsername(userName);
+		datePay1.setDbjc((int) gpjy1.getJypay());
+		datePay1.setPay(gcuser.getPay());
+		datePay1.setJydb(gcuser.getJydb());
+		datePay1.setRegid("买入" + gpjy1.getUsername() + "-积分" + gpjy1.getMcsl() + "-单价" + mcdj);
+		datePay1.setAbdate(new Date());
+		logService.addDatePay(datePay1);
+
+		double dqpay92 = (0.9 * gpjy1.getJypay());
+		int dqpay = (int) (dqpay92 * 1 + 0.1);
+		double mc70a = 0.7 * dqpay;
+		int mc70 = (int) (mc70a * 1 + 0.1);
+		double mc30a = 0.3 * dqpay;
+		int mc30 = (int) (mc30a * 1 + 0.1);
+
+		gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70);
+		gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30);
+		gcuserDao.reduceStopjyg(gpjy1.getUsername());
+
+		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
+		Datepay datePay2 = new Datepay();
+		datePay2.setUsername(gpjy1.getUsername());
+		datePay2.setSyjz(mc70);
+		datePay2.setPay(gcuser2.getPay());
+		datePay2.setJydb(gcuser2.getJydb());
+		datePay2.setJyjz(mc30);
+		datePay2.setRegid("卖出" + gpjy1.getMcsl() + "积分单价" + mcdj + "到" + userName);
+		datePay2.setAbdate(new Date());
+		logService.addDatePay(datePay2);
+
+		fcxtDao.update(2, (int) gpjy1.getMcsl());
+		 
+	}
+	/**
+	 * 賣出積分
+	 * @param userName
+	 * @param id
+	 */
+	@Transactional
+	public void mcJf(String userName,int id){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Gpjy gpjy1 = gpjyDao.getById(id);
+		double dqpay92 = (0.9 * gpjy1.getJypay());
+		int dqpay = (int) (dqpay92 * 1 + 0.1);
+		double mc70a = 0.7 * dqpay;
+		int mc70 = (int) (mc70a * 1 + 0.1);
+		double mc30a = 0.3 * dqpay;
+		int mc30 = (int) (mc30a * 1 + 0.1);
+
+		if (gcuser.getJyg() < gpjy1.getMysl()) {
+			throw new ServiceException(1,
+					"您好，本次交易积分数量大于您剩余交易积分数量 " + gcuser.getJyg() + " ，暂时不能交易，本次交易需要 " + gpjy1.getMysl() + " 积分，谢谢！");
+		}
+
+		if (!gcuserDao.updateJyg(userName, (int) gpjy1.getMysl())) {
+			throw new ServiceException(1,
+					"您好，本次交易积分数量大于您剩余交易积分数量 " + gcuser.getJyg() + " ，暂时不能交易，本次交易需要 " + gpjy1.getMysl() + " 积分，谢谢！");
+		}
+
+		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
+		gcuserDao.addOnlyJB(userName, mc30);
+
+		gcuserDao.updateJyg(gpjy1.getUsername(), -(int) gpjy1.getMysl());
+        Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
+		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg())) {
+			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
+		}
+
+		gcuser = gcuserDao.getUser(userName);
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMysl(gpjy1.getMysl());
+		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setPay(gpjy1.getPay());
+		gpjy.setJypay(gpjy1.getJypay());
+		gpjy.setAbdate(gpjy1.getAbdate());
+		gpjy.setBz("卖出成功");
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjy.setDfuser(gpjy1.getUsername());
+		gpjyDao.add(gpjy);
+
+		String mydj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
+
+		Datepay datePay1 = new Datepay();
+		datePay1.setUsername(userName);
+		datePay1.setSyjz(mc70);
+		datePay1.setPay(gcuser.getPay());
+		datePay1.setJydb(gcuser.getJydb());
+		datePay1.setJyjz(mc30);
+		datePay1.setRegid("卖出" + gpjy1.getMysl() + "积分单价" + mydj + "到" + gpjy1.getUsername());
+		datePay1.setAbdate(new Date());
+		logService.addDatePay(datePay1);
+		logService.updateRegId(gpjy1.getJyid(), DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS)
+				+ "支出成功到" + gpjy1.getDfuser() + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
+		fcxtDao.update(2, (int) gpjy1.getMysl());
+			 
+	}
+	
+	
 }

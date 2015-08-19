@@ -243,7 +243,33 @@
 		
 		<action name="sggpjy" class="com.yq.user.action.SggpjyAction">
 		    <result name="success">vip/sggpjy.jsp</result>
-		</action>				
+		</action>
+		
+		<action name="qxyjg" class="com.yq.user.action.QxyjgAction">
+		    <result name="success">vip/qxyjg.jsp</result>
+		</action>
+		
+		<action name="diyjygj" class="com.yq.user.action.DiyjygjAction">
+		    <result name="success">vip/diyjygj.jsp</result>
+		</action>					
+
+		<action name="gpjysc" class="com.yq.user.action.GpjyscAction">
+		    <result name="success">vip/gpjysc.jsp</result>
+		</action>	
+		
+		<action name="gpjymc" class="com.yq.user.action.GpgymcAction">
+		    <result name="success">vip/gpjymc.jsp</result>
+		</action>
+		
+		<action name="gpjymy" class="com.yq.user.action.GpgymyAction">
+		    <result name="success">vip/gpjymy.jsp</result>
+		</action>
+		<action name="wymy" class="com.yq.user.action.WymrAction">
+		    <result name="success">vip/wymy.jsp</result>
+		</action>
+		<action name="wymc" class="com.yq.user.action.WymcAction">
+		    <result name="success">vip/wymc.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

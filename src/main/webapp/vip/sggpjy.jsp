@@ -27,9 +27,9 @@
               <td valign="middle" width="50" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" size="2">${data.mcsl}</font></td>
               <td valign="middle" align="center" width="55"><font size="2">${data.sysl}</font></td>
               <td valign="middle" align="center" width="111"><font color="#000000" size="2">${data.abdate}</font></td>
-			  <td align="center" width="50"><font size="2"><a href="qxyjg.asp?qxid=${data.id}" style="text-decoration: none">
+			  <td align="center" width="50"><font size="2"><a href="qxyjg?qxid=${data.id}" style="text-decoration: none">
 			  <c:if test="${data.newjy!=3}">撒销</c:if></a></font></td>
-			  <td valign="top" align="center" width="791"><iframe name="I1" marginwidth="1" marginheight="1" height="25" width="100%" border="0" frameborder="0" src="diyjygj.asp?sgid=${data.id}%>" align="center" scrolling="no"></iframe></td>
+			  <td valign="top" align="center" width="791"><iframe name="I1" marginwidth="1" marginheight="1" height="25" width="100%" border="0" frameborder="0" src="diyjygj?sgid=${data.id}" align="center" scrolling="no"></iframe></td>
               </tr>
               </s:iterator>
             </table> 

@@ -128,6 +128,10 @@ public class LogService {
 //	public int getDatePayId(String userName,int pay){
 //		return datePayDao.getDatepayId(userName, pay);
 //	}
+	
+	public boolean updateRegId(int id,String regId){
+		return datePayDao.updateRegidByQlid(id, regId);
+	}
 	/**
 	 * 
 	 * @param userName

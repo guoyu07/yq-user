@@ -73,4 +73,9 @@ public class DatePayDao {
 		return this.jdbc.getInt(sql, null);
 	}
 	
+	public boolean updateRegidByQlid(int id,String regId){
+		String sql = "update "+table+" set regid=? where id=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withString(regId).withInt(id))>0;
+	}
+	
 }
