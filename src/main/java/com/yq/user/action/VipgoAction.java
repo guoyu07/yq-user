@@ -1,11 +1,13 @@
 package com.yq.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.user.bo.Datecj;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.service.LogService;
 import com.yq.user.service.UserService;
 
-public class VipgoAction extends ALDAdminActionSupport {
+public class VipgoAction extends ALDAdminPageActionSupport<Datecj> {
 
 	/**
 	 * 
@@ -26,6 +28,10 @@ public class VipgoAction extends ALDAdminActionSupport {
 			gcuser = userService.getUserByUserName(super.getUserName());
 			return SUCCESS;
 		}
+		
+		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
+		super.initPage(logService.getDateCjPageList(super.getUserName(), super.getToPage(), 15));
+		
 		return INPUT;
 	}
 

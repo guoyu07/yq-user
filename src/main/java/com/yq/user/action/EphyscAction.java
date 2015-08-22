@@ -36,7 +36,7 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 		 */
 		
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		super.initPage(userService.getTxpayPage(super.getToPage(), 10));
+		super.initPage(userService.getTxpayPage(super.getToPage(), 15));
 		return SUCCESS;
 	}
 

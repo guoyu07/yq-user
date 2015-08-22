@@ -2,10 +2,10 @@ package com.yq.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
-import com.yq.user.bo.Datepay;
+import com.yq.user.bo.DatepayMore;
 import com.yq.user.service.LogService;
 
-public class SgqgAction extends ALDAdminPageActionSupport<Datepay> {
+public class SgqgAction extends ALDAdminPageActionSupport<DatepayMore> {
 
 	/**
 	 * 

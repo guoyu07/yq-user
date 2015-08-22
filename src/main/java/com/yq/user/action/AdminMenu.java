@@ -54,8 +54,8 @@ public class AdminMenu extends ALDAdminActionSupport {
 		
 		@NotAllowedCode
 		@ProblemCode //此处是一个批量更新数据的地方 不知道啥意思，所以有问题
-		GpjyDao gpjyDao = ServiceCacheFactory.getServiceCache().getService(GpjyDao.class);
-		gpjyDao.update();
+//		GpjyDao gpjyDao = ServiceCacheFactory.getServiceCache().getService(GpjyDao.class);
+//		gpjyDao.update();
 		
 		
 		

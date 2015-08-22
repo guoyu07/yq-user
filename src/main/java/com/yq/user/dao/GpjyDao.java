@@ -79,8 +79,13 @@ public class GpjyDao {
 		return this.jdbc.update(sql, SqlParameter.Instance().withDouble(pay).withInt(jypay).withInt(id))>0;
 	}
 	
+	public Gpjy getByJyId(int jyid){
+		String sql="select * from "+table+" where jyid=? limit 1";
+		return this.jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withInt(jyid));
+	}
+	
 	public Gpjy getById(int id){
-		String sql="select * from "+table+" where id=?";
+		String sql="select * from "+table+" where id=? limit 1";
 		return this.jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withInt(id));
 	}
 	
@@ -101,6 +106,13 @@ public class GpjyDao {
 		parameter.setObject(new Date());
 		parameter.setInt(jyg);
 		parameter.setString(buyUser);
+		parameter.setInt(id);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean delete(int id){
+		String sql = "delete from "+table+" where jyid =? and jy=0 limit 1";
+		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(id);
 		return this.jdbc.update(sql, parameter)>0;
 	}

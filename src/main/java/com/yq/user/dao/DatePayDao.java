@@ -6,6 +6,7 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.user.bo.Datepay;
+import com.yq.user.bo.DatepayMore;
 
 public class DatePayDao {
 
@@ -15,6 +16,12 @@ public class DatePayDao {
 	
 	private static final String table = "datepay";
 	
+	public Datepay getById(int id){
+		String sql = "select * from "+table+" where id=? limit 1";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setInt(id);
+		return jdbc.get(sql, Datepay.class, sqlParameter);
+	}
 	
 	public IPage<Datepay> getPage(String username,Integer newbz,int pageIndex,int pageSize){
 		String sql = "select * from "+table+" where username = ?";
@@ -33,6 +40,13 @@ public class DatePayDao {
 		return this.jdbc.insert(datepay)>0;
 	}
 	
+	public Datepay getDatepayByUserNameAndRegid(String userName,String regId){
+		String sql = "select * from "+table+" where username = ? and regid=? limit 1";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		sqlParameter.setString(regId);
+		return jdbc.get(sql, Datepay.class, sqlParameter);
+	}
 	
 	public IPage<Datepay> getPageBykjqi(String username,int pageIndex,int pageSize){
 		String sql = "select * from "+table+" where username = ? and kjqi>0 order by id desc";
@@ -61,11 +75,16 @@ public class DatePayDao {
 		return jdbc.update(sql, SqlParameter.Instance().withInt(id))>0;
 	}
 	
-	public IPage<Datepay> getPageByJfMr(String username,int pageIndex,int pageSize){
-		String sql="select * from datepay where username = ? and dbjc>0 and regid='买入挂牌中' order by id desc" ;
+	public boolean updateRegIdToCancel(int id,String regid){
+		String sql = "update "+table+" set regid=? where id=?";
+		return jdbc.update(sql, SqlParameter.Instance().withString(regid).withInt(id))>0;
+	}
+	
+	public IPage<DatepayMore> getPageByJfMr(String username,int pageIndex,int pageSize){
+		String sql="select dp.*,gp.mysl from datepay dp left join gpjy gp on dp.id=gp.jyid where dp.username = ? and dp.dbjc>0 and dp.regid='买入挂牌中' order by dp.id desc" ;
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(username);
-		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
+		return this.jdbc.getListPage(sql, DatepayMore.class, sqlParameter, pageSize, pageIndex);
 	}
 	
 	public int getLastInsertId(){

@@ -1,13 +1,14 @@
 package com.yq.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Gpjy;
 import com.yq.user.service.ManagerService;
 import com.yq.user.service.UserService;
 
-public class McslAction extends ALDAdminActionSupport {
+public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 
 	/**
 	 * 
@@ -53,6 +54,10 @@ public class McslAction extends ALDAdminActionSupport {
 		}
 		if(status==2){
 			userService.saleJf(super.getUserName(), jygj, txpay, "-1");
+			return "redirect";
+		}
+		if(status==0){
+			super.initPage(userService.getAllGpjyDetailsPageList(super.getUserName(), super.getToPage(), 15));
 		}
 		return SUCCESS;
 	}

@@ -3,7 +3,7 @@
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('二级密码不正确!');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('修改卖出单价不能大于原来的定价！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('修改卖出单价成功！');location.replace('/diyjygj?sgid=${sgid}');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('修改卖出单价成功！');location.replace('/mcsl');</script></c:if>
 
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">

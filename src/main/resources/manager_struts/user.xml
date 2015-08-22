@@ -6,7 +6,13 @@
 	<package name="other" extends="managerInterceptor" namespace="/">
 	    <action name="manager" class="com.yq.user.action.ManagerAction">
 		    <result name="success">
-		        vip/manager.jsp
+		        view/index2.jsp
+		    </result>
+		</action>
+		
+		<action name="user" class="com.yq.user.action.UserInfoAction">
+		    <result name="success">
+		        view/user.jsp
 		    </result>
 		</action>
 	    <action name="adminmenu" class="com.yq.user.action.AdminMenu">
@@ -23,7 +29,8 @@
 		</action>
 		
 		<action name="datepay" class="com.yq.user.action.DatePayAction">
-			<result name="success">vip/datepay.jsp</result>
+			<!-- <result name="success">vip/datepay.jsp</result> -->
+			<result name="success">view/yblc-details.jsp</result>
 		</action>		
 		
 		<action name="tgurl" class="com.yq.user.action.TgurlAction">
@@ -31,7 +38,8 @@
 		</action>
 		
 		<action name="login2j" class="com.yq.user.action.Login2jAction">
-		    <result name="input">vip/${inputUrl}</result>
+		   <!--  <result name="input">vip/${inputUrl}</result> -->
+		   <result name="input">view/${inputUrl}</result>
 		    <result name="success" type="json"></result>
 		</action>
 		
@@ -66,7 +74,8 @@
 		    <result name="success">vgo/dldate.jsp</result>
 		</action>
 		<action name="ggck" class="com.yq.user.action.GgckAction">
-		    <result name="success">vgo/ggck.jsp</result>
+		    <!-- <result name="success">vgo/ggck.jsp</result> -->
+		    <result name="success">view/zhgl-notice.jsp</result>
 		</action>
 		
 		<action name="logout" class="com.yq.user.action.LogoutAction">
@@ -137,20 +146,27 @@
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>	
-		
+        <action name="jzpay" class="com.yq.user.action.JzpayAction">
+		   <!-- <result name="success">vip/vipjzpay.jsp</result> -->
+		   <result name="success">view/yblc-mallback.jsp</result>
+		</action>		
 		<action name="vipjzpay" class="com.yq.user.action.VipjzpayAction">
-		   <result name="success">vip/vipjzpay.jsp</result>
+		   <!-- <result name="success">vip/vipjzpay.jsp</result> -->
+		   <result name="success">view/yblc-transferout.jsp</result>
 		</action>
 		
 		<action name="epjysc" class="com.yq.user.action.EphyscAction">
-		   <result name="success">vip/epjysc.jsp</result>
+		   <!-- <result name="success">vip/epjysc.jsp</result> -->
+		   <result name="success">view/yblc-mark.jsp</result>
 		</action>
 		
 		<action name="epmcjl" class="com.yq.user.action.EpmcjlAction">
-		   <result name="success">vip/epmcjl.jsp</result>
+		   <!-- <result name="success">vip/epmcjl.jsp</result> -->
+		   <result name="success">view/yblc-mcdetails.jsp</result>
 		</action>
 		<action name="epmyjl" class="com.yq.user.action.EpmyjlAction">
-		   <result name="success">vip/epmyjl.jsp</result>
+		  <!--  <result name="success">vip/epmyjl.jsp</result>--> 
+		  <result name="success">view/yblc-mrdetails.jsp</result>
 		</action>
 		<action name="qxepmc" class="com.yq.user.action.QxepmcAction">
 		   <result name="success">vip/qxepmc.jsp</result>
@@ -174,7 +190,8 @@
 		</action>
 		
 		<action name="vipgo" class="com.yq.user.action.VipgoAction">
-		    <result name="input">vip/vipgo.jsp</result>
+		   <!--  <result name="input">vip/vipgo.jsp</result> -->
+		   <result name="input">view/jflc-recharge.jsp</result>
 		    <result name="success">vip/vipgook.jsp</result>
 		</action>
 		
@@ -224,8 +241,13 @@
 		</action>
 		
 		<action name="mysl" class="com.yq.user.action.MyslAction">
-		    <result name="success">vip/mysl.jsp</result>
+		    <!--  <result name="success">vip/mysl.jsp</result>-->
+		    <result name="success">view/jflc-jfmr.jsp</result>
 		    <result name="mysl2">vip/mysl2.jsp</result>
+		</action>
+		
+		<action name="qxqg" class="com.yq.user.action.QxqgAction">
+		   <result name="success">vip/qxqg.jsp</result>
 		</action>
 		
 		<action name="sgqg" class="com.yq.user.action.SgqgAction">
@@ -233,11 +255,14 @@
 		</action>		
 
 		<action name="gpjy" class="com.yq.user.action.GpjyAction">
-		    <result name="success">vip/gpjy.jsp</result>
+		    <!-- <result name="success">vip/gpjy.jsp</result> -->
+		    <result name="success">view/jflc-details.jsp</result>
 		</action>	
 		
 		<action name="mcsl" class="com.yq.user.action.McslAction">
-		    <result name="success">vip/mcsl.jsp</result>
+		    <!-- <result name="success">vip/mcsl.jsp</result> -->
+		    <result name="success">view/jflc-jfmc.jsp</result>
+		    <result name="redirect" type="redirect">/mcsl</result>
 		    <result name="mcsl2">vip/mcsl2.jsp</result>
 		</action>
 		
@@ -254,7 +279,8 @@
 		</action>					
 
 		<action name="gpjysc" class="com.yq.user.action.GpjyscAction">
-		    <result name="success">vip/gpjysc.jsp</result>
+		    <!-- <result name="success">vip/gpjysc.jsp</result> -->
+		    <result name="success">view/jflc-mark.jsp</result>
 		</action>	
 		
 		<action name="gpjymc" class="com.yq.user.action.GpgymcAction">

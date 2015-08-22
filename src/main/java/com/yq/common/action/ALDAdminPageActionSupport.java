@@ -65,6 +65,7 @@ public class ALDAdminPageActionSupport<T> extends ALDAdminActionSupport {
 			dataList = (List<T>)page.getData();
 			this.totalPage = page.getTotalPage();
 			this.totalSize = page.getTotalSize();
+			this.pageSize = page.getPageSize();
 		}
 	}
 	

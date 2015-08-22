@@ -28,7 +28,7 @@ public class WymcAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		gpjy = userService.getGpjyPage(id);
+		gpjy = userService.getGpjyById(id);
 		double dqpay92=(0.9*gpjy.getJypay());
 		dqpay=(int)(dqpay92*1+0.1);
 		double	mc70a=0.7*dqpay;

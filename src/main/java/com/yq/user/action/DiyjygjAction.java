@@ -24,7 +24,7 @@ public class DiyjygjAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		gpjy = userService.getGpjyPage(sgid);
+		gpjy = userService.getGpjyById(sgid);
 		
 		if(status==1){
 			userService.editGpjy(super.getUserName(), sgid, jygj, pa3);

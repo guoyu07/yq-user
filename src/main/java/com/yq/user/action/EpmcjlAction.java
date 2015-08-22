@@ -15,7 +15,7 @@ public class EpmcjlAction extends ALDAdminPageActionSupport<Txpay> {
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		super.initPage(userService.getTxpaySalesDetailsPage(super.getUserName(), super.getToPage(), 30));
+		super.initPage(userService.getTxpaySalesDetailsPage(super.getUserName(), super.getToPage(), 15));
 		return SUCCESS;
 	}
 

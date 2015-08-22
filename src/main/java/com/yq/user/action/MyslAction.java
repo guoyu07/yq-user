@@ -1,13 +1,15 @@
 package com.yq.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.user.bo.DatepayMore;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.service.LogService;
 import com.yq.user.service.ManagerService;
 import com.yq.user.service.UserService;
 
-public class MyslAction extends ALDAdminActionSupport {
+public class MyslAction extends ALDAdminPageActionSupport<DatepayMore> {
 
 	/**
 	 * 
@@ -40,7 +42,10 @@ public class MyslAction extends ALDAdminActionSupport {
 		jygj = fcxt.getJygj();
 		jydb = gcuser.getJydb();
 		zdjyg = (int)(gcuser.getJydb()/fcxt.getJygj()+0.1);
-		
+		if(status==0){
+			LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
+			super.initPage(logService.getDatePayJfmrListPage(super.getUserName(), super.getToPage(), 15));
+		}
 		if(status==1){
 			if(!pa3.equals(gcuser.getPassword3())){
 				super.setErroCodeNum(1);

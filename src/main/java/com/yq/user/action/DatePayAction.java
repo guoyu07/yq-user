@@ -26,7 +26,7 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		
-		IPage<Datepay> page = logService.getDatePayListPage(super.getUserName(), lb, super.getToPage(), 20);
+		IPage<Datepay> page = logService.getDatePayListPage(super.getUserName(), lb, super.getToPage(), 10);
 		
 		super.initPage(page);
 		

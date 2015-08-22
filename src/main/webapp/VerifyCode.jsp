@@ -19,7 +19,7 @@ try{
 
     
    
-  int   width=60,   height=20;   
+  int   width=120,   height=40;   
   BufferedImage   image   =   new   BufferedImage(width,   height,   BufferedImage.TYPE_INT_RGB);   
     
 
@@ -33,7 +33,7 @@ try{
   g.fillRect(0,   0,   width,   height);   
     
  
-  g.setFont(new   Font("Times   New   Roman",Font.PLAIN,18));   
+  g.setFont(new   Font("Times   New   Roman",Font.PLAIN,36));   
     
 
 
@@ -57,7 +57,7 @@ try{
 
   g.setColor(new   Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110)));   
 
-  g.drawString(rand,13*i+6,16);   
+  g.drawString(rand,20*i+20,32);   
   }   
     
   

@@ -7,6 +7,7 @@ import java.util.Date;
 
 
 public class Datepay{
+	private Integer id;
 	private String username;
 	private int syjz;
 	private int jc;
@@ -21,6 +22,9 @@ public class Datepay{
 	private int bz;
 	private int newbz;
 	private int txbz;
+	
+
+	
 	public void setUsername(String username){
 	this.username=username;
 	}
@@ -104,6 +108,12 @@ public class Datepay{
 	}
 	public int getTxbz(){
 		return txbz;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }
 

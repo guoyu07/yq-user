@@ -22,7 +22,7 @@ public class WymrAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		gpjy = userService.getGpjyPage(id);
+		gpjy = userService.getGpjyById(id);
 		
 		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
 		myjddb = gcuser.getJydb();

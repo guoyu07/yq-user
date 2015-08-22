@@ -1213,6 +1213,63 @@ public class UserService {
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
 	}
 	/**
+	 * 商城退款
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	
+	@Transactional
+	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId){
+		
+		if(!password3.equals("yc201503yc")){
+			throw new ServiceException(1, "操作密码不正确！");
+		}
+		String regId=null;
+		String sct = "";
+		if(!Strings.isNullOrEmpty(orderId)){
+			regId = "退款-"+orderId;
+			sct="(商城)";
+			Datepay datepay = datePayDao.getDatepayByUserNameAndRegid(toUser, regId);
+			if(datepay!=null){
+				throw new ServiceException(2, "此订单号已经处理过，请不要重复！");
+			}
+		}else{
+			if(fromUser.equals("300fhk")){
+				regId = "收到-300***";
+			}else{
+				regId = "收到-"+fromUser;
+			}
+		}
+        Gcuser toGcUser = gcuserDao.getUser(toUser);
+		
+		if(toGcUser==null){
+			throw new ServiceException(3, "转入的用户名不存在，请检查输入是否正确！");
+		}
+		
+		if(fromUser.equals(toUser)){
+			throw new ServiceException(4, "您好，不能转给自己，谢谢！");
+		}
+		
+        if(amount<0 || amount==0){
+        	throw new ServiceException(5,"您好，您转账一币不能小于零，谢谢！");
+        }
+        Gcuser gcuser = gcuserDao.getUser(fromUser);
+		
+		
+		if(gcuser.getPay()<amount){
+			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+		}
+		
+		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser, 6, null)){
+			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+		}
+		
+		if(!this.changeYb(toUser, amount, regId, 6, null)){
+			throw new ServiceException(3000, "未知错误！");
+		}
+	}
+	/**
 	 * 转账一币至谁的名下
 	 * @param fromUser
 	 * @param toUser
@@ -1762,7 +1819,11 @@ public class UserService {
 	}
 	
 	
-	public Gpjy getGpjyPage(int id){
+	public Gpjy getGpjyByjyId(int jyid){
+		return gpjyDao.getByJyId(jyid);
+	}
+	
+	public Gpjy getGpjyById(int id){
 		return gpjyDao.getById(id);
 	}
 	
@@ -1877,6 +1938,46 @@ public class UserService {
 		 
 	}
 	
+	/**
+	 * 取消购买积分
+	 * @param userName
+	 * @param orderId
+	 * @param pa3
+	 */
+	@Transactional
+	public void cancelBuyJf(String userName,int orderId,String pa3){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(!pa3.equals(gcuser.getPassword3())){
+			throw new ServiceException(1,"二级密码不正确");
+		}
+		
+		Gpjy gpjy1 = gpjyDao.getByJyId(orderId);
+		
+		if(!gpjy1.getUsername().equals(userName)){
+			throw new ServiceException(3000,"非法操作");
+		}
+		
+		if(!gpjyDao.delete(orderId)){
+			throw new ServiceException(2,"该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
+		}
+		
+		datePayDao.updateRegIdToCancel(orderId,"已撤销");
+		Datepay datepay = datePayDao.getById(orderId);
+		//返还金币
+		gcuserDao.addOnlyJB(userName, datepay.getDbjc());
+		
+		gcuser = gcuserDao.getUser(userName);
+		Datepay datePay = new Datepay();
+		datePay.setUsername(userName);
+		datePay.setRegid("撤销求购积分");
+		datePay.setJyjz(datepay.getDbjc());
+		datePay.setJydb(gcuser.getJydb());
+		datePay.setPay(gcuser.getPay());
+		datePay.setNewbz(0);
+		datePay.setAbdate(new Date());
+		logService.addDatePay(datePay);
+	}
 	public IPage<Gpjy> getAllGpjyPageList(String userName,int pageIndex,int pageSize){
 		return gpjyDao.getAllPageList(userName, pageIndex, pageSize);
 	}
@@ -1975,7 +2076,7 @@ public class UserService {
 		}
 	}
 	/**
-	 * 取消出售
+	 * 取消出售积分
 	 * @param userName
 	 * @param orderId
 	 * @param pa3
@@ -2030,6 +2131,8 @@ public class UserService {
 		gpjy.setJy(1);
 		gpjyDao.add(gpjy);
 	}
+	
+	
 	/**
 	 * 修改出售价格
 	 * @param userName
