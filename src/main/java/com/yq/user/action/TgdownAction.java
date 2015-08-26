@@ -23,7 +23,7 @@ public class TgdownAction extends ALDAdminPageActionSupport<Gcuser> {
 		
 		up = userService.getUserByUserName(super.getUserName());
 		upName = up.getName().substring(0, 1);
-		super.initPage(userService.getMyDownUserPage(super.getUserName(), super.getToPage(), 20));
+		super.initPage(userService.getMyDownUserPage(super.getUserName(), super.getToPage(), 15));
 		
 		return SUCCESS;
 	}

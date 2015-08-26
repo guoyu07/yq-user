@@ -11,11 +11,11 @@ public class Gpjy{
 	private int jyid;
 	private int kjqi;
 	private String username;
-	private double mysl;
-	private double mcsl;
-	private double sysl;
-	private double pay;
-	private double jypay;
+	private Double mysl;
+	private Double mcsl;
+	private Double sysl;
+	private Double pay;
+	private Double jypay;
 	private Date abdate;
 	private String bz;
 	private Date cgdate;
@@ -29,95 +29,95 @@ public class Gpjy{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public void setJyid(int jyid){
-	this.jyid=jyid;
-	}
-	public int getJyid(){
+	public int getJyid() {
 		return jyid;
 	}
-	public void setKjqi(int kjqi){
-	this.kjqi=kjqi;
+	public void setJyid(int jyid) {
+		this.jyid = jyid;
 	}
-	public int getKjqi(){
+	public int getKjqi() {
 		return kjqi;
 	}
-	public void setUsername(String username){
-	this.username=username;
+	public void setKjqi(int kjqi) {
+		this.kjqi = kjqi;
 	}
-	public String getUsername(){
+	public String getUsername() {
 		return username;
 	}
-	public void setMysl(double mysl){
-	this.mysl=mysl;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public double getMysl(){
+	public Double getMysl() {
 		return mysl;
 	}
-	public void setMcsl(double mcsl){
-	this.mcsl=mcsl;
+	public void setMysl(Double mysl) {
+		this.mysl = mysl;
 	}
-	public double getMcsl(){
+	public Double getMcsl() {
 		return mcsl;
 	}
-	public void setSysl(double sysl){
-	this.sysl=sysl;
+	public void setMcsl(Double mcsl) {
+		this.mcsl = mcsl;
 	}
-	public double getSysl(){
+	public Double getSysl() {
 		return sysl;
 	}
-	public void setPay(double pay){
-	this.pay=pay;
+	public void setSysl(Double sysl) {
+		this.sysl = sysl;
 	}
-	public double getPay(){
+	public Double getPay() {
 		return pay;
 	}
-	public void setJypay(double jypay){
-	this.jypay=jypay;
+	public void setPay(Double pay) {
+		this.pay = pay;
 	}
-	public double getJypay(){
+	public Double getJypay() {
 		return jypay;
 	}
-	public void setAbdate(Date abdate){
-	this.abdate=abdate;
+	public void setJypay(Double jypay) {
+		this.jypay = jypay;
 	}
-	public Date getAbdate(){
+	public Date getAbdate() {
 		return abdate;
 	}
-	public void setBz(String bz){
-	this.bz=bz;
+	public void setAbdate(Date abdate) {
+		this.abdate = abdate;
 	}
-	public String getBz(){
+	public String getBz() {
 		return bz;
 	}
-	public void setCgdate(Date cgdate){
-	this.cgdate=cgdate;
+	public void setBz(String bz) {
+		this.bz = bz;
 	}
-	public Date getCgdate(){
+	public Date getCgdate() {
 		return cgdate;
 	}
-	public void setJy(int jy){
-	this.jy=jy;
+	public void setCgdate(Date cgdate) {
+		this.cgdate = cgdate;
 	}
-	public int getJy(){
+	public int getJy() {
 		return jy;
 	}
-	public void setDfuser(String dfuser){
-	this.dfuser=dfuser;
+	public void setJy(int jy) {
+		this.jy = jy;
 	}
-	public String getDfuser(){
+	public String getDfuser() {
 		return dfuser;
 	}
-	public void setDqdate(Date dqdate){
-	this.dqdate=dqdate;
+	public void setDfuser(String dfuser) {
+		this.dfuser = dfuser;
 	}
-	public Date getDqdate(){
+	public Date getDqdate() {
 		return dqdate;
 	}
-	public void setNewjy(int newjy){
-	this.newjy=newjy;
+	public void setDqdate(Date dqdate) {
+		this.dqdate = dqdate;
 	}
-	public int getNewjy(){
+	public int getNewjy() {
 		return newjy;
+	}
+	public void setNewjy(int newjy) {
+		this.newjy = newjy;
 	}
 }
 

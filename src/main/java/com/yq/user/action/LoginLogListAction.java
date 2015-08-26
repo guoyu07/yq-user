@@ -26,7 +26,7 @@ public class LoginLogListAction extends ALDAdminPageActionSupport<Dateip> {
 		
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
 		
-		IPage<Dateip> page = logService.getDateipListPage(gcuser.getUsername(), super.getToPage(), 30);
+		IPage<Dateip> page = logService.getDateipListPage(gcuser.getUsername(), super.getToPage(), 18);
 		
 		 super.initPage(page);
 		

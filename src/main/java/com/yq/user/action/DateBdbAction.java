@@ -104,7 +104,7 @@ public class DateBdbAction extends ALDAdminPageActionSupport<Bdbdate> {
 //		rs_qr.UpdateBatch
 //		%>
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
-		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(), super.getToPage(), 20);
+		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(), super.getToPage(), 10);
 		super.initPage(page);
 		super.setErroCodeNum(2000);
 		return SUCCESS;

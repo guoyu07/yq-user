@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -9,30 +11,14 @@
 	<div class="mainbox mw1024">
 		
 		<!-- 头部 -->
-		{{ include "head.html" }}
+		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
 				<!-- 会员中心用户信息 -->
-				{{ include "user.html" }}
-
-				<div class="system">
-					<h3>积分理财</h3>
-					<ul>
-						<li>累计奖金一币：<span class="c-r">23975</span></li>
-						<li>推广部分一币：<span class="c-z">0</span></li>
-						<li>平衡部分一币：<span class="c-z">20</span></li>
-						<li>辅导部分一币：<span class="c-z">210</span></li>
-						<li>累计认购一币：<span class="c-g">210</span></li>
-						<li>累计卖出一币：<span class="c-b">120</span></li>
-						<li>剩余金币：<span class="c-z">1.20</span></li>
-						<li>积分单价：<span class="c-r">20</span></li>
-						<li>积分数量：<span class="c-g">0</span></li>
-						<li>积分拆分次数：<span class="c-z">0</span></li>
-						<li>积分拆分倍数：<span class="c-g">0</span></li>
-			        </ul>
-				</div>
+				<%@ include file="/view/user.jsp"%>
+				<%@ include file="/view/xfgl.jsp"%>
 			</div>
 			<div class="z-l">
 				<div class="content-box1">

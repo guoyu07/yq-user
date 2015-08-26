@@ -18,7 +18,7 @@ public class Txpay{
 	private String payname;
 	private String paybank;
 	private String paycard;
-	private int dqu;
+	private Integer dqu;
 	private String bankbz;
 	private Date paytime;
 	private Date zftime;
@@ -100,10 +100,10 @@ public class Txpay{
 	public String getPaycard(){
 		return paycard;
 	}
-	public void setDqu(int dqu){
+	public void setDqu(Integer dqu){
 	this.dqu=dqu;
 	}
-	public int getDqu(){
+	public Integer getDqu(){
 		return dqu;
 	}
 	public void setBankbz(String bankbz){

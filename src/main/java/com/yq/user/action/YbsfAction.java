@@ -38,62 +38,11 @@ public class YbsfAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		
 		gcuser = userService.getUserByUserName(super.getUserName());
-		
 		if(status==0){
 			return INPUT;
 		}else{
-			if(gcuser.getJb()!=5){
-				super.setErroCodeNum(1);//alert('非商户用户名，请联系管理员！');
-				return SUCCESS;
-			}
-			
-			if(Strings.isNullOrEmpty(shpa)||!shpa.equals(gcuser.getPassword3())){
-				super.setErroCodeNum(2);//alert('输入的商户二级密码不正确，请检查输入是否正确！');
-				return SUCCESS;
-			}
-			
-			if(ybpay<=0){
-				super.setErroCodeNum(3);//alert('订单信息有误，请重新提交！');
-				return SUCCESS;
-			}
-			
-			Gcuser beReduceUser = userService.getUserByUserName(user);
-			if(beReduceUser==null){
-				super.setErroCodeNum(4);//alert('输入的用户名不存在，请检查输入是否正确！');
-				return SUCCESS;
-			}
-			
-			if(Strings.isNullOrEmpty(pa01)||!MD5Security.md5_16(pa01).equals(beReduceUser.getPassword())){
-				super.setErroCodeNum(5);//alert('输入的登录密码不正确，请检查输入是否正确！');
-				return SUCCESS;
-			}
-			
-			if(Strings.isNullOrEmpty(pa02)||!pa02.equals(beReduceUser.getPassword3())){
-				super.setErroCodeNum(6);//alert('输入的二级密码不正确，请检查输入是否正确！');
-				return SUCCESS;
-			}
-			
-			if(beReduceUser.getPay()<ybpay){
-				super.setErroCodeNum(7);//alert('您的一币余额不足，请检查输入是否正确！');
-				return SUCCESS;
-			}
-			
-			if(!beReduceUser.getVipsq().equals(sfcode)){
-				super.setErroCodeNum(8);//alert('您好，手机验证码不正确，请重新输入！');
-				return SUCCESS;
-			}
-			//减一币
-			if(!userService.changeYb(user, -ybpay,gcuser.getName(),12,null)){
-				super.setErroCodeNum(7);//alert('您的一币余额不足，请检查输入是否正确！');
-				return SUCCESS;
-			}
-			//加一币
-			if(!userService.changeYb(gcuser.getUsername(), ybpay,gcuser.getName()+"-"+beReduceUser.getName(),5,null)){
-				super.setErroCodeNum(9);//alert('未知错误');
-				return SUCCESS;
-			}
+			userService.transferYbToShop(super.getUserName(), shpa, sfpay, pay10, ybpay, user, pa01, pa02, sfcode);
 			return SUCCESS;
 		}
 	}

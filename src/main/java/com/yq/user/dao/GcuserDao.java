@@ -425,4 +425,12 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean updateSmsCode(String userName,String code){
+		String sql = "update "+table+" set vipsq=? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(code);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;	
+	}
+	
 }
