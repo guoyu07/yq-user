@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
+import com.sr178.common.jdbc.bean.IPage;
 import com.yq.user.bo.Sgxt;
 
 public class SgxtDao {
@@ -90,5 +91,10 @@ public class SgxtDao {
 		parameter.setInt(bq);
 		parameter.setString(userName);
 		return jdbc.update(sql, parameter)>0;
+	}
+	
+	public IPage<Sgxt> getPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" order by id desc";
+		return jdbc.getListPage(sql, Sgxt.class, null, pageSize, pageIndex);
 	}
 }

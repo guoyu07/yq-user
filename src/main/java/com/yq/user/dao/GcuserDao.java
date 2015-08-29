@@ -17,6 +17,11 @@ public class GcuserDao {
 	private static String table = "gcuser";
 	
 	
+	public IPage<Gcuser> getPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" order by id desc";
+		return this.jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
+	}
+	
 	public Gcuser getUser(String userName){
 		String sql = "select * from "+table+" where username=? limit 1";
 		SqlParameter paramter = new SqlParameter();

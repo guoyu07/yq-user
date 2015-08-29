@@ -29,4 +29,12 @@ public class FcxtDao {
 		parameter.setInt(id);
 		return jdbc.update(sql, parameter)>0;
 	}
+	
+	public Fcxt getByUserNameAndPassword(String userName,String password){
+		String sql = "SELECT * FROM "+table+" where adminusername=? and password=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		parameter.setString(password);
+		return this.jdbc.get(sql, Fcxt.class, parameter);
+	}
 }

@@ -2418,4 +2418,17 @@ public class UserService {
 			throw new ServiceException(3000, "发送短信发生错误");
 		}
 	}
+	/**
+	 * 查询所有玩家分页列表
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Gcuser> getUserPageList(int pageIndex,int pageSize){
+		return gcuserDao.getPageList(pageIndex, pageSize);
+	}
+	
+	public IPage<Sgxt> getSgxtPageList(int pageIndex,int pageSize){
+		return sgxtDao.getPageList(pageIndex, pageSize);
+	}
 }

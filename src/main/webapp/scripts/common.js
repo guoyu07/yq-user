@@ -32,6 +32,12 @@ $().ready(function() {
 		$(this).toggleClass("hover");
 	});
 
+	$(window).resize(function(){
+		if($(".denglu").height() < 700 ) { 
+			$(".denglu").height(700);
+		};
+		$(".denglu").height($(this).height());
+	});
 	$(".denglu").height($(this).height());
 
 });

@@ -82,5 +82,9 @@ public class TxPayDao {
     	return this.jdbc.update(sql, SqlParameter.Instance().withObject(rgdate).withInt(payId))>0;
 
     }
+    public Txpay getByPayOnoff(String payonoff){
+    	String sql = "select * from "+table+" where payonoff=? limit 1";
+    	return this.jdbc.get(sql, Txpay.class, SqlParameter.Instance().withString(payonoff));
+    } 
     
 }

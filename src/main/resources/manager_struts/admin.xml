@@ -1,0 +1,90 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="admin" extends="adminInterceptor" namespace="/admin">
+	    <action name="adminmanager" class="com.yq.manager.action.AdminManagerAction">
+		    <result name="success">
+		       manager.jsp
+		    </result>
+		</action>
+		
+	    <action name="left" class="com.yq.manager.action.LeftAction">
+		    <result name="success">
+		        left.jsp
+		    </result>
+		</action>
+		
+		<action name="readme" class="com.yq.manager.action.ReadMeAction">
+		    <result name="success">
+		        readme.jsp
+		    </result>
+		</action>
+		
+		<action name="logout001" class="com.yq.manager.action.LogoutAction">
+		    <result name="success" type="redirect">
+		        /adminindex
+		    </result>
+		</action>
+		
+		<action name="userlist" class="com.yq.manager.action.UserListAction">
+		    <result name="success">
+		        userlist.jsp
+		    </result>
+		</action>
+		
+		<action name="chargeDetails" class="com.yq.manager.action.ChargeDetailsAction">
+		    <result name="success">
+		        chargedetails.jsp
+		    </result>
+		</action>
+		
+		<action name="goldcardmanager" class="com.yq.manager.action.GoldCardManagerAction">
+		    <result name="success">
+		        goldcardmanager.jsp
+		    </result>
+		</action>
+		
+		<action name="gcSendRecord" class="com.yq.manager.action.GoldCardSendRecordAction">
+		    <result name="success">
+		        gcSendRecord.jsp
+		    </result>
+		</action>		
+		
+		<action name="outday" class="com.yq.manager.action.OutDayAction">
+		    <result name="success">
+		        outday.jsp
+		    </result>
+		</action>	
+		
+		<action name="sgtjdate" class="com.yq.manager.action.SgtjdateAction">
+		    <result name="success">
+		        sgtjdate.jsp
+		    </result>
+		</action>
+		
+		<action name="bdbdate" class="com.yq.manager.action.BdbDateAction">
+		    <result name="success">
+		        bdbdate.jsp
+		    </result>
+		</action>
+		
+		
+		<action name="tradeManager" class="com.yq.manager.action.TradeMangerAction">
+		    <result name="success">
+		        tradeManager.jsp
+		    </result>
+		</action>
+	</package>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="adminLogin" extends="myInterceptor" namespace="/">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="adminindex" class="com.yq.manager.action.AdminLoginAction">
+			<result name="success" >/admin/default.jsp</result>
+			<result name="redirect" type="redirect">/admin/adminmanager</result>
+		</action>
+	</package>
+
+</struts>

@@ -26,7 +26,12 @@ public class DatecjDao {
 	}
 	
 	public IPage<Datecj> getDatecjPageList(String userName,int pageIndex,int pageSize){
-		String sql = "select * from datecj where cjuser = ? order by id desc";
+		String sql = "select * from "+table+" where cjuser = ? order by id desc";
 		return jdbc.getListPage(sql, Datecj.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
+	}
+	
+	public IPage<Datecj> getAllDatecjPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" order by id desc";
+		return jdbc.getListPage(sql, Datecj.class, null, pageSize, pageIndex);
 	}
 }

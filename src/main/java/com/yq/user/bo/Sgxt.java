@@ -7,6 +7,7 @@ import java.util.Date;
 
 
 public class Sgxt{
+	private Integer id;
 	private String username;
 	private int vip;
 	private int sjb;
@@ -392,6 +393,11 @@ public class Sgxt{
 	public void setBz(String bz) {
 		this.bz = bz;
 	}
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }
 

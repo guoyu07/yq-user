@@ -7,7 +7,7 @@
 		<interceptors>
 			<!-- 认证拦截器-->
 			<interceptor name="adminUserInterceptor"
-				class="com.yq.common.interceptor.AdminUserInterceptor" />
+				class="com.yq.common.interceptor.UserInterceptor" />
 			<interceptor-stack name="adminStack">
 				<interceptor-ref name="adminUserInterceptor" />
 				<interceptor-ref name="myStack" />
@@ -26,5 +26,31 @@
 			</result>
 		</global-results>
 	</package>
+	
+	<package name="adminInterceptor" extends="myInterceptor">
+
+		<interceptors>
+			<!-- 认证拦截器-->
+			<interceptor name="adminInterceptor"
+				class="com.yq.common.interceptor.AdminInterceptor" />
+			<interceptor-stack name="managerStack">
+				<interceptor-ref name="adminInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="managerStack" />
+
+		<global-results>
+			<!-- 当anction抛出异常将被转向web的错误处理页面，拦截器是exceptionInterceptor -->
+			<result name="glober_error">
+				/error_manager.jsp
+			</result>
+			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
+			<result name="nologin" type="redirect">
+				/adminindex
+			</result>
+		</global-results>
+	</package>
 	<include file="manager_struts/user.xml" />
+	<include file="manager_struts/admin.xml" />
 </struts>

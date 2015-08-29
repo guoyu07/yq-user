@@ -13,7 +13,7 @@ import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.exception.ServiceException;
 import com.yq.user.service.UserService;
 
-public class AdminUserInterceptor extends AbstractInterceptor {
+public class UserInterceptor extends AbstractInterceptor {
 
 	/**
 	 * 

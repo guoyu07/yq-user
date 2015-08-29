@@ -116,4 +116,9 @@ public class GpjyDao {
 		parameter.setInt(id);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	public IPage<Gpjy> getPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" order by id desc";
+		return jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
+	}
 }
