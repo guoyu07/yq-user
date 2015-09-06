@@ -76,6 +76,45 @@
 		        tradeManager.jsp
 		    </result>
 		</action>
+		<action name="jymc" class="com.yq.manager.action.JymcAction">
+		    <result name="success">
+		        jymc.jsp
+		    </result>
+		</action>		
+		
+		<action name="jymy" class="com.yq.manager.action.JymyAction">
+		    <result name="success">
+		        jymy.jsp
+		    </result>
+		</action>			
+		<action name="ljsy" class="com.yq.manager.action.LjsyAction">
+		    <result name="success">
+		        ljsy.jsp
+		    </result>
+		</action>
+		
+		<action name="epjysc" class="com.yq.manager.action.EpjyscAction">
+		    <result name="success">
+		        epjysc.jsp
+		    </result>
+		</action>
+		
+		<action name="fhjl" class="com.yq.manager.action.FhjlAction">
+		    <result name="success">
+		        fhjl.jsp
+		    </result>
+		</action>	
+		<action name="jsfh" class="com.yq.manager.action.JsfhAction">
+		    <result name="success">
+		        jsfh.jsp
+		    </result>
+		</action>	
+		
+		<action name="sendfh" class="com.yq.manager.action.SendFhAction">
+		    <result name="success">
+		        jsfh.jsp
+		    </result>
+		</action>		
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

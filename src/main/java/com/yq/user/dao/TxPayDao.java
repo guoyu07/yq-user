@@ -50,6 +50,16 @@ public class TxPayDao {
     	return jdbc.getListPage(sql, Txpay.class, null, pageSize, pageIndex);
     }
     
+    public double getSumPayNum(){
+    	String sql="select sum(paynum) from txpay where payonoff = '尚未转账' and ep=0" ;
+    	return jdbc.getDouble(sql, null);
+    }
+    
+    public IPage<Txpay> getPageListOrder(int pageIndex,int pageSize){
+    	String sql="select * from txpay where payonoff = '尚未转账' and ep=0 order by pdid asc,jyid asc" ;
+    	return jdbc.getListPage(sql, Txpay.class, null, pageSize, pageIndex);
+    }
+    
     public IPage<Txpay> getPageListSalesDetails(String userName,int pageIndex,int pageSize){
     	String sql="select * from txpay where payusername= ? and txlb=0 order by payid desc" ;
     	SqlParameter sqlParameter = new SqlParameter();
@@ -86,5 +96,7 @@ public class TxPayDao {
     	String sql = "select * from "+table+" where payonoff=? limit 1";
     	return this.jdbc.get(sql, Txpay.class, SqlParameter.Instance().withString(payonoff));
     } 
+    
+    
     
 }

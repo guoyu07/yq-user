@@ -34,13 +34,23 @@ public class GpjyDao {
 		return this.jdbc.get(sql, Gpjy.class, null);
 	}
 	
-	public IPage<Gpjy> getMcPage(String userName,int pageIndex,int pageSize){
+	public IPage<Gpjy> getMcPage(int pageIndex,int pageSize){
 		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay,id";
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
 	
-	public IPage<Gpjy> getMrPage(String userName,int pageIndex,int pageSize){
+	public IPage<Gpjy> getAdminMcPage(int pageIndex,int pageSize){
+		String sql="select * from "+table+" where mcsl>0 order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
+	}
+	
+	public IPage<Gpjy> getMrPage(int pageIndex,int pageSize){
 		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay,id";
+		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
+	}
+	
+	public IPage<Gpjy> getAdminMrPage(int pageIndex,int pageSize){
+		String sql="select * from "+table+" where mysl>0 order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
 	

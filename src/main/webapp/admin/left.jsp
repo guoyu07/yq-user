@@ -78,10 +78,10 @@ eval("submenu" + sid + ".style.display=\"none\";");
                 <td height=20>☉  <a target="BoardList" href="/admin/tradeManager">交易数据管理</a></td>
               </tr>
               <tr> 
-                <td height=20>☉  <a target="BoardList" href="ljsy.asp">会员收益报表</a></td>
+                <td height=20>☉  <a target="BoardList" href="/admin/ljsy">会员收益报表</a></td>
               </tr>
               <tr> 
-                <td height=20>☉  <a target="BoardList" href="epjysc.asp">EP-交易市场情况</a></td>
+                <td height=20>☉  <a target="BoardList" href="/admin/epjysc">EP-交易市场情况</a></td>
               </tr>
             </table>
 </div>
@@ -98,7 +98,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <div class=sec_menu style="width:158px; height:182px">
 <table cellpadding=0 cellspacing=0 align=center width=150 height="167">
 <tr>
-<td height=20>☉   <font color="#BB0000" style="font-size: 11pt"><a target="BoardList" href="fhjl.asp"><font color="#000000">每期记录</font></a></font></td>
+<td height=20>☉   <font color="#BB0000" style="font-size: 11pt"><a target="BoardList" href="/admin/fhjl"><font color="#000000">每期记录</font></a></font></td>
 </tr>
 <tr> 
 <td height=20>☉  <a href="searchg.asp"  target="BoardList"><font color="#FF0000">搜索会员</font></a></td>

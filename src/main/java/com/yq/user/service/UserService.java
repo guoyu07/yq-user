@@ -2005,11 +2005,11 @@ public class UserService {
 	}
 	
 	public IPage<Gpjy> getMrPageList(String userName,int pageIndex,int pageSize){
-		return gpjyDao.getMrPage(userName, pageIndex, pageSize);
+		return gpjyDao.getMrPage(pageIndex, pageSize);
 	}
 	
 	public IPage<Gpjy> getMcPageList(String userName,int pageIndex,int pageSize){
-		return gpjyDao.getMcPage(userName, pageIndex, pageSize);
+		return gpjyDao.getMcPage(pageIndex, pageSize);
 	}
 	/**
 	 * 卖出积分
