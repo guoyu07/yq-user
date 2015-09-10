@@ -196,6 +196,24 @@ public class UserService {
 		}
 		return null;
 	}
+    /**
+     * 管理员登录
+     * @param sessionId
+     * @param id
+     * @param pa
+     * @param ip
+     * @return
+     */
+    public Gcuser loginByManager(String sessionId,String id,String pa,String ip){
+    	Gcuser gcUser = gcuserDao.getUser(id);
+    	if(gcUser!=null && gcUser.getPassword().equals(pa)){
+			userSession.put(sessionId, gcUser.getUsername());
+//			gcuserDao.updateLoginTime(id);
+//			this.addUserDateIpLog(id, "登录", ip);
+			return gcUser;
+		}
+		return null;
+    }
 	/**
 	 * 同名账号切换
 	 * @param loginUserName
@@ -731,7 +749,7 @@ public class UserService {
 			int zysjb = sgxt.getSjb();
 			
 			
-			cupUser(bduser,1,zysjb);//不知道他在干嘛
+			cupUser(bduser,bduser,1,zysjb);//不知道他在干嘛
 			
 			
 			List<ZuoMingxi> zList = zuoMingxiDao.getDownList(bduser);
@@ -827,26 +845,26 @@ public class UserService {
 		}
 	}
 	
-	private void cupUser(String userName,int count,int sjb){
+	private void cupUser(String userName,String constantUp,int count,int sjb){
 		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
 		if(sgxtBd!=null){
 			if(userName.equals(sgxtBd.getAuid())){
 				ZuoMingxi zuoMingxi = new ZuoMingxi();
 				zuoMingxi.setTjuser(sgxtBd.getUsername());
 				zuoMingxi.setSjb(sjb);
-				zuoMingxi.setDown(userName);
+				zuoMingxi.setDown(constantUp);
 				zuoMingxi.setCount(count);
 				zuoMingxiDao.add(zuoMingxi);
 			}else{
 				YouMingxi youMingxi = new YouMingxi();
 				youMingxi.setCount(count);
-				youMingxi.setDown(userName);
+				youMingxi.setDown(constantUp);
 				youMingxi.setTjuser(sgxtBd.getUsername());
 				youMingxi.setSjb(sjb);
 				youMingXiDao.add(youMingxi);
 			}
 			count = count+1;
-			cupUser(sgxtBd.getUsername(),count,sjb);
+			cupUser(sgxtBd.getUsername(),constantUp,count,sjb);
 		}
 	}
 	
@@ -887,6 +905,8 @@ public class UserService {
 			return result;
 		}
 	}
+	
+	
 	
 	/**
 	 * 更新金币

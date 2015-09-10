@@ -49,4 +49,14 @@ public class YouMingXiDao {
     	parameter.setInt(count);
     	return jdbc.getInt(sql,  parameter);
     }
+    
+    public boolean delete(String tjuser,String down,int count){
+    	String sql = "delete from "+table+" where tjuser=? and down=? and count =?";
+    	SqlParameter parameter = new SqlParameter();
+    	parameter.setString(tjuser);
+    	parameter.setString(down);
+    	parameter.setInt(count);
+    	return jdbc.update(sql, parameter)>0;
+    }
+    
 }

@@ -55,4 +55,15 @@ public class GcfhDao {
 		parameter.setString(endDate);
 		return this.jdbc.getDouble(sql, parameter);
 	}
+	
+	public boolean update(String userName,String bz,int amount){
+		String sql = "update "+table+" set sygc=sygc+?,ljgc=ljgc+? where userid=? and bz=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(amount).withInt(amount).withString(userName).withString(bz))>0;
+	}
+	
+	public Gcfh get(String userName,String bz){
+		String sql = "select * from "+table+" where userid=? and bz=? limit 1";
+		return jdbc.get(sql,Gcfh.class, SqlParameter.Instance().withString(userName).withString(bz));
+
+	}
 }

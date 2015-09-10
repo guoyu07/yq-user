@@ -2,32 +2,49 @@ package com.yq.manager.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.manager.bo.GcfhBean;
+import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
+import com.yq.user.bo.Datecj;
+import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Fhdate;
 import com.yq.user.bo.Gcfh;
+import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.Sgtj;
+import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.YouMingxi;
+import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
+import com.yq.user.dao.DatecjDao;
 import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcfhDao;
+import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
+import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TxPayDao;
+import com.yq.user.dao.TxifokDao;
+import com.yq.user.dao.YouMingXiDao;
+import com.yq.user.dao.ZuoMingxiDao;
+import com.yq.user.service.LogService;
 
 public class AdminService {
 	@Autowired
@@ -48,6 +65,21 @@ public class AdminService {
 	private MqfhDao mqfhDao;
 	@Autowired
 	private AddShengDao addShengDao;
+	@Autowired
+	private GcuserDao gcuserDao;
+	@Autowired
+	private LogService logService;
+	@Autowired
+	private DatecjDao datecjDao;
+	@Autowired
+	private SgxtDao sgxtDao;
+	@Autowired
+	private ZuoMingxiDao zuoMingxiDao;
+	@Autowired
+	private YouMingXiDao youMingXiDao;
+	@Autowired
+	private TxifokDao txifokDao;
+	
 	
 	private Map<String,String> adminUserMap = new HashMap<String,String>();
 	
@@ -232,4 +264,560 @@ public class AdminService {
 			mqfhDao.updateCommonUserFh(fhdate.getFhpay(), todayStart);
 		}
 	}
+	/**
+	 * 搜索用户
+	 * @param param
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Gcuser> searchUser(String param,int pageIndex,int pageSize){
+		return gcuserDao.searchPage(param, pageIndex, pageSize);
+	}
+	/**
+	 * 更新用户信息
+	 * @param userName
+	 * @param password3
+	 * @param card
+	 * @param bank
+	 * @param name
+	 * @param call
+	 * @param email
+	 * @param qq
+	 * @param userid
+	 * @param payok
+	 * @param jcname
+	 * @param jcuserid
+	 * @param password
+	 * @return
+	 */
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password){
+		return gcuserDao.updateUserByAdmin(userName,password3, card, bank, name, call, email, qq, userid, payok, jcname, jcuserid, password);
+	}
+	/**
+	 * 给用户充值
+	 * @param chargeUser
+	 * @param amount
+	 * @param bank
+	 * @param operator
+	 */
+	@Transactional
+	public void chargeToUser(String chargeUser,int amount,String bank,String operator,String ip){
+		Gcuser gcuser = gcuserDao.getUser(chargeUser);
+		if(gcuser==null){
+			throw new ServiceException(1, "该会员不存在，请检查输入是否正确！");
+		}
+		Fcxt fcxt = fcxtDao.getFcxt(operator);
+		if(fcxt==null){
+			throw new ServiceException(2, "操作员不存在，请检查输入是否正确！");
+		}
+		
+		if(!gcuserDao.updateCjtj(chargeUser, amount)){
+			throw new ServiceException(3000, "更新失败");
+		}
+		boolean result = false;
+ 
+		if(amount==5000&&gcuser.getSyep()>4999){
+			result = updateSybdbByManager(chargeUser, 5000, 10000, 10000, "充值5000与EP5000生效");
+		}else if(amount==10000&&gcuser.getSyep()==5000){
+			result = updateSybdbByManager(chargeUser, 5000, 15000, 15000, "充值10000与EP5000生效");
+		}else if(amount==10000&&gcuser.getSyep()>9999){
+			result = updateSybdbByManager(chargeUser, 10000, 20000, 20000, "充值10000与EP10000生效");
+		}else if(amount==15000&&gcuser.getSyep()==5000){
+			result = updateSybdbByManager(chargeUser, 5000, 20000, 20000, "充值15000与EP5000生效");
+		}else if(amount==15000&&gcuser.getSyep()==10000){
+			result = updateSybdbByManager(chargeUser, 10000, 25000, 25000, "充值15000与EP10000生效");
+		}else if(amount==15000&&gcuser.getSyep()>14999){
+			result = updateSybdbByManager(chargeUser, 15000, 30000, 30000, "充值15000与EP15000生效");
+		}else if(amount==20000&&gcuser.getSyep()==5000){
+			result = updateSybdbByManager(chargeUser, 5000, 25000, 25000, "充值20000与EP5000生效");
+		}else if(amount==20000&&gcuser.getSyep()==10000){
+			result = updateSybdbByManager(chargeUser, 10000, 30000, 30000, "充值20000与EP10000生效");
+		}else if(amount==20000&&gcuser.getSyep()>19999){
+			result = updateSybdbByManager(chargeUser, 20000, 40000, 40000, "充值20000与EP20000生效");
+		}else if(amount>4999){
+			result = updateSybdbByManager(chargeUser, 0, amount, amount, "充值");
+		}else{
+			result = gcuserDao.addOnlyYb(chargeUser, amount);
+			gcuser = gcuserDao.getUser(chargeUser);
+			Datepay datepay = new Datepay();
+			datepay.setUsername(chargeUser);
+			datepay.setRegid("充值");
+			datepay.setSyjz(amount);
+			datepay.setPay(gcuser.getPay());
+			datepay.setJydb(gcuser.getJydb());
+			logService.addDatePay(datepay);
+		}
+		if(!result){
+			throw new ServiceException(3000, "更新失败");
+		}
+		
+		gcuser = gcuserDao.getUser(chargeUser);
+		Datecj datecj = new Datecj();
+		datecj.setCjuser(chargeUser);
+		datecj.setDqcj(amount);
+		datecj.setLjcj(gcuser.getCjtj());
+		datecj.setCjfs(bank);
+		datecj.setCz(operator);
+		datecj.setIp(ip);
+		datecjDao.add(datecj);
+	}
+	
+	public void pmToUser(String chargeUser,int amount,String operator){
+		Gcuser gcuser = gcuserDao.getUser(chargeUser);
+		if(gcuser==null||gcuser.getSjb()>0){
+			throw new ServiceException(1, "该会员不存在或已经是双区会员，不需要重复报单，请检查输入是否正确！");
+		}
+		Fcxt fcxt = fcxtDao.getFcxt(operator);
+		if(fcxt==null){
+			throw new ServiceException(2, "操作员不存在，请检查输入是否正确！");
+		}
+		
+		int sjb = amount/500;
+		gcuserDao.updateSjb(chargeUser, sjb);
+		
+	}
+	
+	
+	public PmmltBean pmmlt(String userName){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		int sjb = gcuser.getSjb();
+		int fd=0;
+		int cfd=0;
+		if (sjb==1){
+			fd=2000;cfd=20;
+		}else if(sjb==2){
+			fd=4000;cfd=40;
+		}else if(sjb==4){
+			fd=8000;cfd=60;
+		}else if(sjb==10){
+			fd=20000;cfd=80;
+		}else if(sjb==20){
+			fd=40000;cfd=100;
+		}else if(sjb==40){
+			fd=80000;cfd=150;
+		}else if(sjb==100){
+			fd=200000;cfd=200;
+		}
+		
+		Sgxt last = sgxtDao.getLast();
+		
+		Gcuser rs10 = gcuserDao.getUser(gcuser.getUp());
+		
+		Gcuser rs11 = gcuserDao.getUser(rs10.getUp());
+		
+		Gcuser rs12 = gcuserDao.getUser(rs11.getUp());
+		
+		Gcuser rs13 = gcuserDao.getUser(rs12.getUp());
+		
+		Gcuser rs14 = gcuserDao.getUser(rs13.getUp());
+		
+		String myup = "";
+		if(rs10.getSjb()>0){
+			myup = rs10.getUsername();
+		}else if(rs11.getSjb()>0){
+			myup = rs11.getUsername();
+		}else if(rs12.getSjb()>0){
+			myup = rs12.getUsername();
+		}else if(rs13.getSjb()>0){
+			myup = rs13.getUsername();
+		}else if(rs14.getSjb()>0){
+			myup = rs14.getUsername();
+		}else{
+			myup = last.getUsername();
+		}
+		
+		PmmltBean result = generatorPmmltBean(userName,myup);
+		
+		Sgxt sgxt = new Sgxt();
+		sgxt.setUsername(userName);
+		sgxt.setSjb(sjb);
+		sgxt.setFdpay(fd);
+		sgxt.setCfd(cfd);
+		sgxt.setXxnew(3);
+		sgxt.setFhbl(0.005);
+		sgxt.setZfh(sjb*250);
+		sgxtDao.add(sgxt);
+		
+		return result;
+	}
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public PmmltBean bsReg(String userName){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		Sgxt rs2 = sgxtDao.get(userName);
+		if(rs2==null){
+			throw new ServiceException(4, "报单人还没有登记双轨系统，没办法补选，请检查输入是否正确！");
+		}
+		
+		Sgxt rs1 = sgxtDao.getByAOrBuid(userName);
+		if(rs1!=null){
+			throw new ServiceException(2, "报单人已安置好，不能重复，请检查输入是否正确！");
+		}
+		Sgxt last = sgxtDao.getLast();
+		Gcuser rs10 = gcuserDao.getUser(gcuser.getUp());
+		Gcuser rs11 = gcuserDao.getUser(rs10.getUp());
+		Gcuser rs12 = gcuserDao.getUser(rs11.getUp());
+		Gcuser rs13 = gcuserDao.getUser(rs12.getUp());
+		Gcuser rs14 = gcuserDao.getUser(rs13.getUp());
+		
+		String myup = "";
+		if(rs10.getSjb()>0){
+			myup = rs10.getUsername();
+		}else if(rs11.getSjb()>0){
+			myup = rs11.getUsername();
+		}else if(rs12.getSjb()>0){
+			myup = rs12.getUsername();
+		}else if(rs13.getSjb()>0){
+			myup = rs13.getUsername();
+		}else if(rs14.getSjb()>0){
+			myup = rs14.getUsername();
+		}else{
+			myup = last.getUsername();
+		}
+		PmmltBean result = generatorPmmltBean(userName,myup);
+		return result;
+	}
+	
+	public PmmltBean mlt(String userName,String myup){
+		Sgxt rs0 = sgxtDao.get(userName);
+		if(rs0==null){
+			throw new ServiceException(1, "报单人不存在，请检查输入是否正确！");
+		}
+		Sgxt rs1 = sgxtDao.getByAOrBuid(userName);
+		if(rs1!=null){
+			throw new ServiceException(2, "报单人已安置好，不能重复，请检查输入是否正确！");
+		}
+		Sgxt rs = sgxtDao.get(myup);
+		if(rs==null){
+			throw new ServiceException(3, "上级不存在，请检查输入是否正确！");
+		}
+		return generatorPmmltBean(userName, myup);
+	}
+	
+	/**
+	 * 
+	 * @param userName
+	 * @param myup
+	 * @return
+	 */
+	private PmmltBean generatorPmmltBean(String userName,String myup){
+		Sgxt rs = sgxtDao.get(myup);
+		String rsauid = null;
+		String rsbuid = null;
+		String rs21auid = null;
+		String rs21buid = null;
+		String rs22auid = null;
+		String rs22buid = null;
+		String rs31auid = null;
+		String rs31buid = null;
+		String rs32auid = null;
+		String rs32buid = null;
+		String rs33auid = null;
+		String rs33buid = null;
+		String rs34auid = null;
+		String rs34buid = null;
+		if(rs!=null){
+			if(!Strings.isNullOrEmpty(rs.getAuid())){
+				rsauid = rs.getAuid();
+				Sgxt rs21 = sgxtDao.get(rsauid);
+				if(rs21!=null){
+					if(!Strings.isNullOrEmpty(rs21.getAuid())){
+						rs21auid = rs21.getAuid();
+					}
+					if(!Strings.isNullOrEmpty(rs21.getBuid())){
+						rs21buid = rs21.getBuid();
+					}
+				}
+			}
+			if(!Strings.isNullOrEmpty(rs.getBuid())){
+				rsbuid = rs.getBuid();
+				Sgxt rs22 = sgxtDao.get(rsbuid);
+				if(rs22!=null){
+					if(!Strings.isNullOrEmpty(rs22.getAuid())){
+						rs22auid = rs22.getAuid();
+					}
+					if(!Strings.isNullOrEmpty(rs22.getBuid())){
+						rs22buid = rs22.getBuid();
+					}
+				}
+			}
+			
+			if(rs21auid!=null){
+				Sgxt rs31 = sgxtDao.get(rs21auid);
+				if(rs31!=null){
+					if(!Strings.isNullOrEmpty(rs31.getAuid())){
+						rs31auid = rs31.getAuid();
+					}
+					if(!Strings.isNullOrEmpty(rs31.getBuid())){
+						rs31buid = rs31.getBuid();
+					}
+				}
+			}
+			if(rs21buid!=null){
+				Sgxt rs32 = sgxtDao.get(rs21buid);
+				if(rs32!=null){
+					if(!Strings.isNullOrEmpty(rs32.getAuid())){
+						rs32auid = rs32.getAuid();
+					}
+					if(!Strings.isNullOrEmpty(rs32.getBuid())){
+						rs32buid = rs32.getBuid();
+					}
+				}
+			}
+			if(rs22auid!=null){
+				Sgxt rs33 = sgxtDao.get(rs22auid);
+				if(rs33!=null){
+					if(!Strings.isNullOrEmpty(rs33.getAuid())){
+						rs33auid = rs33.getAuid();
+					}
+					if(!Strings.isNullOrEmpty(rs33.getBuid())){
+						rs33buid = rs33.getBuid();
+					}
+				}
+			}
+			if(rs22buid!=null){
+				Sgxt rs34 = sgxtDao.get(rs22buid);
+				if(rs34!=null){
+					if(!Strings.isNullOrEmpty(rs34.getAuid())){
+						rs34auid = rs34.getAuid();
+					}
+					if(!Strings.isNullOrEmpty(rs34.getBuid())){
+						rs34buid = rs34.getBuid();
+					}
+				}
+			}
+		}
+		return new PmmltBean(userName, myup, rsauid, rsbuid, rs21auid, rs21buid, rs22auid, rs22buid, rs31auid, rs31buid, rs32auid, rs32buid, rs33auid, rs33buid, rs34auid, rs34buid);
+	}
+	
+	/**
+	 * 更新报单币
+	 * @param userName
+	 * @param changeNum
+	 * @param desc
+	 * @return
+	 */
+	private boolean updateSybdbByManager(String userName,int syep,int ljbdb,int sybdb,String desc){
+		if(syep>=0){
+			boolean result = gcuserDao.updateSyepLjbdbSybdb(userName, syep,ljbdb,sybdb);
+			if(result){
+				Gcuser gcuser = gcuserDao.getUser(userName);
+				Bdbdate bdbdate = new Bdbdate();
+				bdbdate.setZuser(userName);
+				bdbdate.setBz(desc);
+				bdbdate.setSy(sybdb);
+				bdbdate.setSybdb(gcuser.getSybdb());
+				bdbdate.setLjbdb(gcuser.getLjbdb());
+				bdbDateDao.add(bdbdate);
+			}
+			return result;
+		}else{
+//			changeNum = Math.abs(changeNum);
+//			boolean result = gcuserDao.reduceSybdb(userName, changeNum);
+//			if(result){
+//				Gcuser gcuser = gcuserDao.getUser(userName);
+//				Bdbdate bdbdate = new Bdbdate();
+//				bdbdate.setZuser(userName);
+//				bdbdate.setBz(desc);
+//				bdbdate.setSy(changeNum);
+//				bdbdate.setSybdb(gcuser.getSybdb());
+//				bdbdate.setLjbdb(gcuser.getLjbdb());
+//				bdbDateDao.add(bdbdate);
+//			}
+			throw new ServiceException(3000,"暂时不支持负数");
+		}
+	}
+	/**
+	 * 修改股份和积分
+	 * @param userName
+	 * @param addGfAmount
+	 * @param addJfAmount
+	 */
+	public void editGfAndJf(String userName,int addGfAmount,int addJfAmount){
+		gpjyDao.update(userName, addJfAmount, "系统配送");
+		gcfhDao.update(userName, "系统配送", addGfAmount);
+	}
+	
+	public Gcfh getGcfh(String userName,String bz){
+		return gcfhDao.get(userName, bz);
+	}
+	public Gpjy getGpjy(String userName,String dfuser){
+		return gpjyDao.get(userName, dfuser);
+	}
+	/**
+	 * 修改积分
+	 * @param userName
+	 * @param addAmount
+	 */
+	public void addJf(String userName,int addAmount){
+		if (!gcuserDao.updateJyg(userName, - addAmount)) {
+			throw new ServiceException(3000, "未知错误");
+		}
+
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMysl(new Double(addAmount));
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
+		gpjy.setBz("成功");
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjy.setDfuser("系统");
+		gpjyDao.add(gpjy);
+	}
+	/**
+	 * 添加金币
+	 * @param userName
+	 * @param addAmount
+	 */
+	public void addJb(String userName,int addAmount){
+		gcuserDao.addOnlyJB(userName, addAmount);
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Datepay datePay1 = new Datepay();
+		datePay1.setUsername(userName);
+		datePay1.setPay(gcuser.getPay());
+		datePay1.setJydb(gcuser.getJydb());
+		datePay1.setJyjz(addAmount);
+		datePay1.setRegid("系统补");
+		datePay1.setAbdate(new Date());
+		logService.addDatePay(datePay1);
+	}
+	/**
+	 * 修改成国内或国外玩家
+	 * @param userName
+	 * @param sjid
+	 */
+	public void changeArea(String userName,int sjid){
+		gcuserDao.updateGwuid(userName, sjid);
+	}
+	
+	@Transactional
+	public void Sgreg(String my,String up){
+		if(sgxtDao.getByAOrBuid(my)!=null){
+			throw new ServiceException(1, "报单人已安置好，不能重复，请检查输入是否正确！");
+		}
+		
+		Gcuser rs_my = gcuserDao.getUser(my);
+		if(rs_my==null){
+			throw new ServiceException(3000, "未知错误");
+		}
+		int zjjb = 0 ;
+		int cjpay = 0;		
+		if(rs_my.getSjb()==1){
+			   zjjb=200;cjpay=500;
+		}else if(rs_my.getSjb()==2){
+			   zjjb=450;cjpay=1000;
+		}else if(rs_my.getSjb()==4){
+			   zjjb=960;cjpay=2000;
+		}else if(rs_my.getSjb()==10){
+			   zjjb=2500;cjpay=5000;
+		}else if(rs_my.getSjb()==20){
+			   zjjb=5000;cjpay=10000;
+		}else if(rs_my.getSjb()==40){
+			   zjjb=11000;cjpay=20000;
+		}else if(rs_my.getSjb()==100){
+			   zjjb=30000;cjpay=50000;
+		}
+		
+		gcuserDao.addOnlyJB(my, zjjb);
+		gcuserDao.updateGmdate(my, new Date());
+		rs_my = gcuserDao.getUser(my);
+		Datepay datepay = new Datepay();
+		datepay.setUsername(my);
+		datepay.setRegid("消费"+cjpay+"送"+zjjb+"金币-"+rs_my.getUp());
+		datepay.setJyjz(zjjb);
+		datepay.setPay(rs_my.getPay());
+		datepay.setJydb(rs_my.getJydb());
+		logService.addDatePay(datepay);
+		
+		Sgxt sgxtUp = sgxtDao.get(up);
+		if(sgxtUp==null){
+			throw new ServiceException(2, "上层不存在，没法放置，请检查是否正确！");
+		}
+		if(Strings.isNullOrEmpty(sgxtUp.getAuid())){
+			sgxtDao.updateAuid(up, my);
+		}else if(Strings.isNullOrEmpty(sgxtUp.getBuid())){
+			sgxtDao.updateBuid(up, my);
+		}else{
+			throw new ServiceException(3, "位置已被占用，请重新选择！");
+		}
+		
+		Sgxt sgxtMy = sgxtDao.get(my);
+		int sjb = sgxtMy.getSjb();
+		//不知道在干嘛
+		cupUser(my,my,1,sjb);
+		//不知道在干嘛
+		List<ZuoMingxi> zList = zuoMingxiDao.getDownList(my);
+		if(zList!=null&&!zList.isEmpty()){
+			for(ZuoMingxi zuoMingxi:zList){
+				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
+				sgxtDao.updateZ(zuoMingxi.getTjuser(), sjtjzb-sjb, zuoMingxi.getCount());
+			}
+		}
+		//不知道在干嘛
+		List<YouMingxi> yList = youMingXiDao.getDownList(my);
+		if(yList!=null&&!yList.isEmpty()){
+			for(YouMingxi youMingxi:yList){
+				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
+				sgxtDao.updateY(youMingxi.getTjuser(), sjtjzb-sjb, youMingxi.getCount());
+			}
+		}
+		//更加不知道在干嘛
+		CalculateQ(my, sjb);
+	}
+	
+	private void CalculateQ(String userName,int sjb){
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
+		if(sgxtBd!=null){
+			if(userName.equals(sgxtBd.getAuid())){
+				sgxtDao.updateZaq(sgxtBd.getUsername(), sjb);
+				CalculateQ(sgxtBd.getUsername(),sjb);
+			}else{
+				sgxtDao.updateZbq(sgxtBd.getUsername(), sjb);
+				CalculateQ(sgxtBd.getUsername(),sjb);
+			}
+		}
+	}
+	
+	private void cupUser(String my,String constUp,int count,int constSjb){
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(my);
+		if(sgxtBd!=null){
+			if(my.equals(sgxtBd.getAuid())){
+				zuoMingxiDao.delete(sgxtBd.getUsername(), constUp, count);
+				ZuoMingxi zuoMingxi = new ZuoMingxi();
+				zuoMingxi.setTjuser(sgxtBd.getUsername());
+				zuoMingxi.setSjb(constSjb);
+				zuoMingxi.setDown(constUp);
+				zuoMingxi.setCount(count);
+				zuoMingxiDao.add(zuoMingxi);
+			}else{
+				youMingXiDao.delete(sgxtBd.getUsername(), constUp, count);
+				YouMingxi youMingxi = new YouMingxi();
+				youMingxi.setCount(count);
+				youMingxi.setDown(constUp);
+				youMingxi.setTjuser(sgxtBd.getUsername());
+				youMingxi.setSjb(constSjb);
+				youMingXiDao.add(youMingxi);
+			}
+			count = count+1;
+			cupUser(sgxtBd.getUsername(),constUp,count,constSjb);
+		}
+	}
+	
+	public void delUser(String userName){
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(gcuser!=null&&(gcuser.getJb()>0||gcuser.getSjb()>0||gcuser.getPay()>0||gcuser.getJyg()>0)){
+			throw new ServiceException(1, "已经是正式玩家，不能删除！！");
+		}
+		gcuserDao.delete(userName);
+		txifokDao.delete(userName);
+	}
+	
 }

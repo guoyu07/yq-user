@@ -37,4 +37,15 @@ public class FcxtDao {
 		parameter.setString(password);
 		return this.jdbc.get(sql, Fcxt.class, parameter);
 	}
+	
+	public Fcxt getFcxt(String czy){
+		String sql = "SELECT * FROM fcxt where cz01 = ? or cz02 = ? or cz03 = ? or cz04 = ? or cz05 = ? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(czy);
+		parameter.setString(czy);
+		parameter.setString(czy);
+		parameter.setString(czy);
+		parameter.setString(czy);
+		return this.jdbc.get(sql, Fcxt.class, parameter);
+	}
 }

@@ -101,7 +101,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <td height=20>☉   <font color="#BB0000" style="font-size: 11pt"><a target="BoardList" href="/admin/fhjl"><font color="#000000">每期记录</font></a></font></td>
 </tr>
 <tr> 
-<td height=20>☉  <a href="searchg.asp"  target="BoardList"><font color="#FF0000">搜索会员</font></a></td>
+<td height=20>☉  <a href="/admin/searchuser"  target="BoardList"><font color="#FF0000">搜索会员</font></a></td>
 </tr>
 <tr> 
 <td height=20>☉  <a href="w123.asp"  target="BoardList">会员提现管理</a></td> 

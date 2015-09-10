@@ -21,6 +21,11 @@ public class SgxtDao {
 		return this.jdbc.get(sql, Sgxt.class, parameter);
 	}
 	
+	public Sgxt getLast(){
+		String sql = "select * from "+table+" order by id desc limit 1";
+		return this.jdbc.get(sql, Sgxt.class, null);
+	}
+	
 	public Sgxt getByAOrBuid(String uid){
 		String sql = "select * from "+table+" where auid = ? or buid = ? limit 1";
 		SqlParameter parameter = new SqlParameter();
@@ -97,4 +102,22 @@ public class SgxtDao {
 		String sql = "select * from "+table+" order by id desc";
 		return jdbc.getListPage(sql, Sgxt.class, null, pageSize, pageIndex);
 	}
+	
+	 public boolean updateZ(String userName,int dqzuo,int count){
+	    	String sql = "update "+table+" set dqzuo=?,count=? where username=?";
+	    	SqlParameter parameter = new SqlParameter();
+	    	parameter.setInt(dqzuo);
+	    	parameter.setInt(count);
+	    	parameter.setString(userName);
+	    	return jdbc.update(sql, parameter)>0;
+	 }
+	 
+	 public boolean updateY(String userName,int dqyou,int count){
+	    	String sql = "update "+table+" set dqyou=?,count=? where username=?";
+	    	SqlParameter parameter = new SqlParameter();
+	    	parameter.setInt(dqyou);
+	    	parameter.setInt(count);
+	    	parameter.setString(userName);
+	    	return jdbc.update(sql, parameter)>0;
+	 }
 }

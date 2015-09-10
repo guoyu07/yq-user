@@ -131,4 +131,14 @@ public class GpjyDao {
 		String sql = "select * from "+table+" order by id desc";
 		return jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
+	
+	public boolean update(String userName,int amount ,String dfuser){
+		String sql = "update "+table+" set mysl=mysl+?,sysl=sysl+?,jypay=jypay+? where username=? and dfuser=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(amount).withInt(amount).withInt(amount).withString(userName).withString(dfuser))>0;
+	}
+	
+	public Gpjy get(String userName,String dfuser){
+		String sql = "select * from "+table+" where username=? and dfuser=? limit 1";
+		return jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withString(userName).withString(dfuser));
+	}
 }

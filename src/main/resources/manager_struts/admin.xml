@@ -114,7 +114,112 @@
 		    <result name="success">
 		        jsfh.jsp
 		    </result>
+		</action>
+		
+		<action name="searchuser" class="com.yq.manager.action.SearchUserAction">
+		    <result name="input">
+		        searchuser.jsp
+		    </result>
+		   <result name="success">
+		        searchresult.jsp
+		    </result>
+		</action>	
+		
+		<action name="modifyaabuser" class="com.yq.manager.action.ModifyaabuserAction">
+		    <result name="input">
+		        modifyuser.jsp
+		    </result>
+		   <result name="success">
+		        modifyuser.jsp
+		    </result>
+		</action>
+		
+		<action name="usercj" class="com.yq.manager.action.UserCjAction">
+		    <result name="input">
+		        usercj.jsp
+		    </result>
+		   <result name="comfirm">
+		        usercj_confirm.jsp
+		    </result>
+		    <result name="success">
+		        usercj.jsp
+		    </result>
+		</action>
+		
+		<action name="bcgp" class="com.yq.manager.action.BcgpAction">
+		    <result name="input">
+		        bcgp.jsp
+		    </result>
+		   <result name="success">
+		        bcgp_result.jsp
+		    </result>
+		</action>
+		<action name="bcjf" class="com.yq.manager.action.BcjfAction">
+		    <result name="input">
+		        bcjf.jsp
+		    </result>
+		   <result name="success">
+		        bcjf_result.jsp
+		    </result>
+		</action>
+		<action name="bcjb" class="com.yq.manager.action.BcjbAction">
+		    <result name="input">
+		        bcjb.jsp
+		    </result>
+		   <result name="success">
+		        bcjb_result.jsp
+		    </result>
 		</action>		
+		
+		<action name="gngw" class="com.yq.manager.action.ChangeAreaAction">
+		   <result name="success">
+		        changearea.jsp
+		    </result>
+		</action>
+		
+       <action name="pmcj" class="com.yq.manager.action.PmcjAction">
+		    <result name="input">
+		        pmcj.jsp
+		    </result>
+		   <result name="comfirm">
+		        pmcj_confirm.jsp
+		    </result>
+		    <result name="success">
+		        pmcj.jsp
+		    </result>
+		</action>
+		
+		<action name="pmmlt" class="com.yq.manager.action.PmmltAction">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		
+		<action name="sdup" class="com.yq.manager.action.SdupAction">
+		    <result name="input">
+		        sdup.jsp
+		    </result>
+		</action>	
+		<action name="mlt" class="com.yq.manager.action.MltAction">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		<action name="bsreg" class="com.yq.manager.action.MltAction" method="bsReg">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		<action name="sgreg" class="com.yq.manager.action.SgRegAction">
+		    <result name="success">
+		        sgreg.jsp
+		    </result>
+		</action>
+		<action name="delusersave" class="com.yq.manager.action.DelUserAction">
+		    <result name="success">
+		        delusersave.jsp
+		    </result>
+		</action>			
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

@@ -324,7 +324,11 @@
 			  <param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
-		
+		<action name="adminlogin" class="com.yq.user.action.ManagerLogin">
+			<result name="success" type="redirect">
+			   /manager
+			</result>
+		</action>
 		<action name="reg" class="com.yq.user.action.RegAction">
 			<result name="input">reg.jsp</result>
 		    <result name="success" type="json">
