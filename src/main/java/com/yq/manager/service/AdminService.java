@@ -1,5 +1,6 @@
 package com.yq.manager.service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +14,13 @@ import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
+import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.bo.GcfhBean;
 import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
+import com.yq.manager.dao.MtfhtjDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
@@ -28,6 +31,7 @@ import com.yq.user.bo.Fhdate;
 import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.Sgtj;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Txpay;
@@ -79,6 +83,8 @@ public class AdminService {
 	private YouMingXiDao youMingXiDao;
 	@Autowired
 	private TxifokDao txifokDao;
+	@Autowired
+	private MtfhtjDao mtfhtjDao;
 	
 	
 	private Map<String,String> adminUserMap = new HashMap<String,String>();
@@ -820,4 +826,86 @@ public class AdminService {
 		txifokDao.delete(userName);
 	}
 	
+	public IPage<Txpay> getTranserRecordList(int pageIndex,int pageSize){
+		return txPayDao.getAdminPageList(pageIndex, pageSize);
+	}
+	
+	public IPage<Mtfhtj> getMtfhtjPageList(int pageIndex,int pageSize){
+		return mtfhtjDao.getPageList(pageIndex, pageSize, "order by tjid desc");
+	}
+	
+	public boolean isCanBackCount(){
+		Mtfhtj mtfhtj = mtfhtjDao.getFirstOne("order by tjid desc");
+		if(mtfhtj!=null){
+			if(DateUtils.getIntervalDays(new Date(), mtfhtj.getFhdate())!=1){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public BackCountBean getBackCountBean(){
+		BackCountBean backCountBean = new BackCountBean();
+		String todayStr = DateUtils.getDate(new Date());
+		String todayStart = todayStr+" 00:00:00";
+		String todayEnd = todayStr+" 23:59:59";
+		backCountBean.setRs_nd(sgxtDao.getSumSjbByTime(todayStart, todayEnd));
+		backCountBean.setRs_cb(sgxtDao.getSumZfh());
+		backCountBean.setRs_mq(sgxtDao.getSumMqfh());
+		backCountBean.setRs_zd(sgxtDao.getSumSjb());
+		return backCountBean;
+	}
+	
+	/**
+	 * 执行计算
+	 */
+	public void backCount(Date date){
+		if(!isCanBackCount()){
+			throw new ServiceException(1, "还没有到结算时间！");
+		}
+		String todayStr = DateUtils.getDate(date);
+		String todayStart = todayStr+" 00:00:00";
+		IPage<Sgxt> page = null;
+		Collection<Sgxt> tempData = null;
+		int pageIndex = 0;
+		while(true){
+			page = sgxtDao.backCountPage(todayStart, pageIndex, 100);
+			tempData = page.getData();
+			if(tempData!=null&&tempData.size()>0){
+				for(Sgxt sgxt:tempData){
+					int addAmount = (int)(sgxt.getFhbl()*sgxt.getSjb()*500);
+					if(gcuserDao.addYbByBackCount(sgxt.getUsername(),addAmount )){
+						Gcuser gcuser = gcuserDao.getUser(sgxt.getUsername());
+						Datepay datepay = new Datepay();
+						datepay.setUsername(sgxt.getUsername());
+						datepay.setRegid("游戏收益");
+						datepay.setSyjz(addAmount);
+						datepay.setPay(gcuser.getPay());
+						datepay.setJydb(gcuser.getJydb());
+						logService.addDatePay(datepay);
+					}
+				}
+			}else{
+				break;
+			}
+			pageIndex++;
+		}
+		sgxtDao.backCount(todayStart);
+		
+		String yesterdayStr =  DateUtils.getDate(DateUtils.addDay(date, -1));
+		String yesterdayStart = yesterdayStr+" 00:00:00";
+		String yesterdayEnd = yesterdayStr+" 23:59:59";
+		Double rs_nd = sgxtDao.getSumSjbByTime(yesterdayStart, yesterdayEnd);
+		Double rs_cb = sgxtDao.getSumZfhBigMqfh();
+		Double rs_mq = sgxtDao.getSumMqfh();
+		
+		Mtfhtj mtfhtj = new Mtfhtj();
+		mtfhtj.setFhdate(DateUtils.addDay(date, -1));
+		mtfhtj.setNewd((int)(rs_nd*500));
+		mtfhtj.setZfh(rs_cb);
+		mtfhtj.setMqfh(rs_mq);
+		mtfhtjDao.add(mtfhtj);
+	}
 }

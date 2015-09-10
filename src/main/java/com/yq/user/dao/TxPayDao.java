@@ -60,6 +60,11 @@ public class TxPayDao {
     	return jdbc.getListPage(sql, Txpay.class, null, pageSize, pageIndex);
     }
     
+    public IPage<Txpay> getAdminPageList(int pageIndex,int pageSize){
+    	String sql="select * from txpay where payonoff = '已经转账' order by paytime desc" ;
+    	return jdbc.getListPage(sql, Txpay.class, null, pageSize, pageIndex);
+    }
+    
     public IPage<Txpay> getPageListSalesDetails(String userName,int pageIndex,int pageSize){
     	String sql="select * from txpay where payusername= ? and txlb=0 order by payid desc" ;
     	SqlParameter sqlParameter = new SqlParameter();

@@ -49,6 +49,17 @@ public class LogService {
 		return datePayDao.getPage(username, newbz, pageIndex, pageSize);
 	}
 	/**
+	 * 获取一币奖励日志
+	 * @param username
+	 * @param newbz
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Datepay> getAdminDatePayListPage(Integer newbz,int pageIndex,int pageSize){
+		return datePayDao.getAdminPage(newbz, pageIndex, pageSize);
+	}
+	/**
 	 * 
 	 * @param username
 	 * @param pageIndex

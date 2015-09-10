@@ -103,17 +103,18 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <tr> 
 <td height=20>☉  <a href="/admin/searchuser"  target="BoardList"><font color="#FF0000">搜索会员</font></a></td>
 </tr>
+<!--  此功能没法弄  少表
 <tr> 
 <td height=20>☉  <a href="w123.asp"  target="BoardList">会员提现管理</a></td> 
+</tr> -->
+<tr>
+<td height=20>☉  <font color="#FF0000"><a target="BoardList" href="/admin/transferRecord"><font color="#000000">转帐记录管理</font></a></font></td>
 </tr>
 <tr>
-<td height=20>☉  <font color="#FF0000"><a target="BoardList" href="ok.asp"><font color="#000000">转帐记录管理</font></a></font></td>
+<td height=20>☉  <font color="#FF0000"><a target="BoardList" href="/admin/datepay"><font color="#000000">统计网站数据</font></a></font></td>
 </tr>
 <tr>
-<td height=20>☉  <font color="#FF0000"><a target="BoardList" href="datepay.asp"><font color="#000000">统计网站数据</font></a></font></td>
-</tr>
-<tr>
-<td height=20>☉  <font color="#FF0000"><a target="_self" href="mtfhjl.asp"><font color="#000000">每天返本计算</font></a></font></td> 
+<td height=20>☉  <font color="#FF0000"><a target="BoardList" href="/admin/backcountinput"><font color="#000000">每天返本计算</font></a></font></td> 
 </tr>
 <tr>
 <td height=20>☉  <a href="date.asp" target="BoardList"><font color="#FF0000">数据报表</font></a></td> 

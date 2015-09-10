@@ -219,7 +219,28 @@
 		    <result name="success">
 		        delusersave.jsp
 		    </result>
-		</action>			
+		</action>
+		
+		<action name="transferRecord" class="com.yq.manager.action.TransferRecordAction">
+		    <result name="success">
+		        transferRecord.jsp
+		    </result>
+		</action>
+		<action name="datepay" class="com.yq.manager.action.AdminDatePayAction">
+		    <result name="success">
+		        datepay.jsp
+		    </result>
+		</action>
+		<action name="backcountinput" class="com.yq.manager.action.BackCountAction">
+		    <result name="success">
+		        backcount.jsp
+		    </result>
+		</action>	
+		<action name="backcount" class="com.yq.manager.action.BackCountAction" method="backCount">
+		    <result name="success">
+		        backcount.jsp
+		    </result>
+		</action>									
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

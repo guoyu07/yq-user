@@ -35,6 +35,17 @@ public class DatePayDao {
 		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
 	}
 	
+	public IPage<Datepay> getAdminPage(Integer newbz,int pageIndex,int pageSize){
+		String sql = "select * from "+table+" ";
+		SqlParameter sqlParameter = new SqlParameter();
+		if(newbz!=null){
+			sql = sql +" where newbz = ?";
+			sqlParameter.setInt(newbz);
+		}
+		sql = sql +" order by id desc";
+		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
+	}
+	
 	
 	public boolean addDatePay(Datepay datepay){
 		return this.jdbc.insert(datepay)>0;
