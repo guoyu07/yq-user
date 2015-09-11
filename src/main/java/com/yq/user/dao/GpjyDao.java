@@ -141,4 +141,30 @@ public class GpjyDao {
 		String sql = "select * from "+table+" where username=? and dfuser=? limit 1";
 		return jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withString(userName).withString(dfuser));
 	}
+	
+	public Double getSumMcsl(){
+		String sql = "select sum(mcsl) as ljmc from gpjy" ;
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumMcslByDate(String startTime,String endTime){
+		String sql = "select sum(mcsl) as ljmc from gpjy where abdate between ? and ?" ;
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(startTime);
+		parameter.setString(endTime);
+		return jdbc.getDouble(sql, parameter);
+	}
+	
+	public Double getSumMysl(){
+		String sql = "select sum(mysl) as ljmc from gpjy" ;
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumMyslByDate(String startTime,String endTime){
+		String sql = "select sum(mysl) as ljmc from gpjy where abdate between ? and ?" ;
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(startTime);
+		parameter.setString(endTime);
+		return jdbc.getDouble(sql, parameter);
+	}
 }

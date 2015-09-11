@@ -102,6 +102,9 @@ public class TxPayDao {
     	return this.jdbc.get(sql, Txpay.class, SqlParameter.Instance().withString(payonoff));
     } 
     
-    
+    public double getSumpayNumNoCondition(){
+    	String sql="select sum(paynum) from txpay" ;
+    	return jdbc.getDouble(sql, null);
+    }
     
 }

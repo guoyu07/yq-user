@@ -117,7 +117,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="/admin/backcountinput"><font color="#000000">每天返本计算</font></a></font></td> 
 </tr>
 <tr>
-<td height=20>☉  <a href="date.asp" target="BoardList"><font color="#FF0000">数据报表</font></a></td> 
+<td height=20>☉  <a href="/admin/date" target="BoardList"><font color="#FF0000">数据报表</font></a></td> 
 </tr>
 <tr>
 <td height=20>☉  <a href="bdbjzpay.asp" target="BoardList">报单币转账</a></td> 

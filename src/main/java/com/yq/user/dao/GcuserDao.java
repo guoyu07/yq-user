@@ -537,4 +537,52 @@ public class GcuserDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public Double getSumCbpay(){
+		String sql = "select sum(cbpay) from "+table+" where jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumPay(){
+		String sql = "select sum(pay) from "+table+" where jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumPayIdRange(){
+		String sql = "select sum(pay) from "+table+" where id<10586 and jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumTxpay(){
+		String sql = "select sum(txpay) from "+table+"";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumJydb(){
+		String sql = "select sum(jydb) from "+table+" where dbt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumJyg(){
+		String sql = "select sum(jyg) from "+table+" where jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumJygIdRange(){
+		String sql = "select sum(jyg) from "+table+" where id<10586 and jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumGdgc(){
+		String sql = "select sum(gdgc) from "+table+"";
+		return jdbc.getDouble(sql, null);
+	}	
+	public Double getSumGdgcIdRange(){
+		String sql = "select sum(gdgc) from "+table+" where id<10586";
+		return jdbc.getDouble(sql, null);
+	}	
+	public Double getSumLjfh(){
+		String sql = "select sum(ljfh) from "+table+"";
+		return jdbc.getDouble(sql, null);
+	}	
+	
 }

@@ -15,6 +15,7 @@ import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.manager.bo.BackCountBean;
+import com.yq.manager.bo.DateBean;
 import com.yq.manager.bo.GcfhBean;
 import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.dao.AddShengDao;
@@ -907,5 +908,41 @@ public class AdminService {
 		mtfhtj.setZfh(rs_cb);
 		mtfhtj.setMqfh(rs_mq);
 		mtfhtjDao.add(mtfhtj);
+	}
+	
+	public DateBean getDateBean(){
+		DateBean result = new DateBean();
+		result.setRs(fcxtDao.get(2));
+		result.setRs_cb(gcuserDao.getSumCbpay());
+		result.setRs_pa(gcuserDao.getSumPay());
+		result.setRs_pal(gcuserDao.getSumPayIdRange());
+		result.setRs_tx(gcuserDao.getSumTxpay());
+		result.setRs_db(gcuserDao.getSumJydb());
+		result.setRs_xt(gcuserDao.getSumJyg());
+		result.setRs_xtl(gcuserDao.getSumJygIdRange());
+		result.setRs_fhg(gcuserDao.getSumGdgc());
+		result.setRs_fhgl(gcuserDao.getSumGdgcIdRange());
+		result.setRs_zfh(gcuserDao.getSumLjfh());
+		result.setRs_ztx(txPayDao.getSumpayNumNoCondition());
+		result.setRslj1(gpjyDao.getSumMcsl());
+		result.setRslj2(gpjyDao.getSumMysl());
+		String todayStr = DateUtils.getDate(new Date());
+		String todayStart = todayStr+" 00:00:00";
+		String todayEnd = todayStr+" 23:59:59";
+		result.setRsjt1(gpjyDao.getSumMcslByDate(todayStart, todayEnd));
+		result.setRsjt2(gpjyDao.getSumMyslByDate(todayStart, todayEnd));
+		
+		String yesterdayStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -1));
+		String yesterdayStart = yesterdayStr+" 00:00:00";
+		String yesterdayEnd = yesterdayStr+" 23:59:59";
+		result.setRszt1(gpjyDao.getSumMcslByDate(yesterdayStart, yesterdayEnd));
+		result.setRszt2(gpjyDao.getSumMyslByDate(yesterdayStart, yesterdayEnd));
+		
+		String ctStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -2));
+		String ctStart = ctStr+" 00:00:00";
+		String ctEnd = ctStr+" 23:59:59";
+		result.setRsct1(gpjyDao.getSumMcslByDate(ctStart, ctEnd));
+		result.setRsct2(gpjyDao.getSumMyslByDate(ctStart, ctEnd));
+		return result;
 	}
 }
