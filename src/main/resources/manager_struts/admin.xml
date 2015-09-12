@@ -246,7 +246,33 @@
 		    <result name="success">
 		        date.jsp
 		    </result>
-		</action>											
+		</action>	
+		<action name="gpjysc" class="com.yq.manager.action.GpjyscAction">
+		    <result name="success">
+		        gpjysc.jsp
+		    </result>
+		</action>
+		
+		<action name="gpjy" class="com.yq.manager.action.GpjyAction">
+		    <result name="success">
+		        gpjy.jsp
+		    </result>
+		</action>
+		
+		<action name="bdbjzpay" class="com.yq.manager.action.BdbjzpayAction">
+		    <result name="input">
+		        bdbjzpay.jsp
+		    </result>
+		    <result name="success">
+		        bdbjzpay.jsp
+		    </result>
+		</action>
+		
+		<action name="newsdate" class="com.yq.manager.action.NewsDateAction">
+		    <result name="success">
+		        newsdate.jsp
+		    </result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

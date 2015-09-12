@@ -61,7 +61,7 @@
 		<td align="center" height="28" bgcolor="#FFFFDD" width="152"><font color="#008000" size="2"><b>${bean.rsct2}</b></font></td>
 	</tr>
 </table>
-<form method="POST" name="form" target="I1" action="gpjy.asp"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
+<form method="POST" name="form" target="I1" action="gpjy"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
 <font color="#008000"><b>交易明细</b></font>&nbsp; 搜索：<select size="1" name="jylb">
 <option selected value="0">==请选择交易类别==</option>
 <option value="username">发布方</option>

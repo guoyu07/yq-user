@@ -120,10 +120,10 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <td height=20>☉  <a href="/admin/date" target="BoardList"><font color="#FF0000">数据报表</font></a></td> 
 </tr>
 <tr>
-<td height=20>☉  <a href="bdbjzpay.asp" target="BoardList">报单币转账</a></td> 
+<td height=20>☉  <a href="/admin/bdbjzpay" target="BoardList">报单币转账</a></td> 
 </tr>
 <tr>
-<td height=20>☉  <a href="/vgo/newdate.asp" target="BoardList">会员登录日志</a></td> 
+<td height=20>☉  <a href="/admin/newsdate" target="BoardList">会员登录日志</a></td> 
 </tr>
 </table>
 </div>

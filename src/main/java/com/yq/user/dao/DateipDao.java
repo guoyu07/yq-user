@@ -46,4 +46,23 @@ public class DateipDao {
 		return jdbc.update(sql, parameter)>0;
 		
 	}
+	
+	public IPage<Dateip> getAllPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" order by id desc";
+		SqlParameter parameter = new SqlParameter();
+		return jdbc.getListPage(sql, Dateip.class, parameter, pageSize, pageIndex);
+	}
+	
+	public int getCountId(){
+		String sql = "select count(id) from "+table;
+		return jdbc.getInt(sql, null);
+	}
+	
+	public int getCountByTime(String startTime,String endTime){
+		String sql = "select count(id) from "+table+" where dldate between ? and ?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(startTime);
+		parameter.setString(endTime);
+		return jdbc.getInt(sql, parameter);
+	}
 }

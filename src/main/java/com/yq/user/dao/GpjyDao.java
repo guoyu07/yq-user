@@ -167,4 +167,10 @@ public class GpjyDao {
 		parameter.setString(endTime);
 		return jdbc.getDouble(sql, parameter);
 	}
+	
+	public IPage<Gpjy> getSearchResultPageDetailsList(String field,String value,int pageIndex,int pageSize){
+		String sql="select * from "+table+" where "+field+" = ? order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(value), pageSize, pageIndex);
+	}
+	
 }

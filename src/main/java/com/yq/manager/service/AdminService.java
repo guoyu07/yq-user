@@ -17,6 +17,7 @@ import com.yq.common.utils.MD5Security;
 import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.bo.DateBean;
 import com.yq.manager.bo.GcfhBean;
+import com.yq.manager.bo.NewsDateBean;
 import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
@@ -26,6 +27,7 @@ import com.yq.manager.dao.SgtjDao;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Datecj;
+import com.yq.user.bo.Dateip;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Fhdate;
@@ -40,6 +42,7 @@ import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.DatecjDao;
+import com.yq.user.dao.DateipDao;
 import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcfhDao;
 import com.yq.user.dao.GcuserDao;
@@ -86,6 +89,8 @@ public class AdminService {
 	private TxifokDao txifokDao;
 	@Autowired
 	private MtfhtjDao mtfhtjDao;
+	@Autowired
+	private DateipDao dateipDao;
 	
 	
 	private Map<String,String> adminUserMap = new HashMap<String,String>();
@@ -168,6 +173,10 @@ public class AdminService {
 	
 	public IPage<Fhdate> getFhdatePageList(int pageIndex,int pageSize){
 		return fhDateDao.getPageList(pageIndex, pageSize);
+	}
+	
+	public IPage<Gpjy> searchGpjyPageList(String field,String value,int pageIndex,int pageSize){
+		return gpjyDao.getSearchResultPageDetailsList(field, value, pageIndex, pageSize);
 	}
 	
 	public Double getTodaySumpdlj(){
@@ -945,4 +954,38 @@ public class AdminService {
 		result.setRsct2(gpjyDao.getSumMyslByDate(ctStart, ctEnd));
 		return result;
 	}
+	
+	public NewsDateBean getNewsDateBean(){
+		NewsDateBean result = new NewsDateBean();
+		result.setRslj(dateipDao.getCountId());
+		String todayStr = DateUtils.getDate(new Date());
+		String todayStart = todayStr+" 00:00:00";
+		String todayEnd = todayStr+" 23:59:59";
+		result.setRsjt(dateipDao.getCountByTime(todayStart, todayEnd));
+		String yesterdayStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -1));
+		String yesterdayStart = yesterdayStr+" 00:00:00";
+		String yesterdayEnd = yesterdayStr+" 23:59:59";
+		result.setRszt(dateipDao.getCountByTime(yesterdayStart, yesterdayEnd));
+		String qtStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -2));
+		String qtStart = qtStr+" 00:00:00";
+		String qtEnd = qtStr+" 23:59:59";
+		result.setRsqt(dateipDao.getCountByTime(qtStart, qtEnd));
+		String dqtStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -3));
+		String dqtStart = dqtStr+" 00:00:00";
+		String dqtEnd = dqtStr+" 23:59:59";
+		result.setRsdqt(dateipDao.getCountByTime(dqtStart, dqtEnd));
+		return result;
+		
+	}
+	/**
+	 * 所有的登录日志
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Dateip> getAllDateIp(int pageIndex,int pageSize){
+		return dateipDao.getAllPageList(pageIndex, pageSize);
+	}
+	
+	
 }

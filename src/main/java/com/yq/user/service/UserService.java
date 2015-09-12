@@ -991,6 +991,45 @@ public class UserService {
 		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
 		
 	}
+	
+	/**
+	 * 报单币转账
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	@Transactional
+	public void trasferBdbByAdmin(String fromUser,String toUser,int amount){
+		Gcuser from = gcuserDao.getUser(fromUser);
+		
+		if(from==null){
+			throw new ServiceException(5, "转出用户不存在！");
+		}
+		
+		if(fromUser.equals(toUser)){
+			throw new ServiceException(1, "不能转给自己！");
+		}
+		
+		if(amount<=0){
+			throw new ServiceException(2, "转账金额不能小于0");
+		}
+		
+		if(from.getSybdb()<amount){
+			throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		}
+		Gcuser to = gcuserDao.getUser(toUser);
+		if(to==null){
+			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
+		}
+		
+		//减被转者的报单币
+		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser)){
+			throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		}
+		
+		this.updateSybdb(toUser, amount, "收到-"+fromUser);
+		
+	}
 	/**
 	 * yb转账
 	 * @param fromUser
