@@ -1,6 +1,7 @@
 package com.yq.user.action;
 
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.service.UserService;
@@ -16,6 +17,9 @@ public class SmsAction extends ALDAdminActionSupport{
 	
 	
 	public String execute(){
+		if(Strings.isNullOrEmpty(toUserName)){
+			toUserName = super.getUserName();
+		}
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		userService.sendSmsMsg(toUserName);
 		return SUCCESS;

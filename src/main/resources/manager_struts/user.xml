@@ -49,13 +49,15 @@
 		
 		
 		<action name="userga" class="com.yq.user.action.UpdateUserInfoAction">
-		    <result name="input">vip/userga.jsp</result>
+		    <!-- <result name="input">vip/userga.jsp</result> -->
+		    <result name="input">view/grxx-edit-userinfo.jsp</result>
 		    <result name="success" type="json"></result>
 		</action>
 		
 		
 		<action name="updateuserjc" class="com.yq.user.action.UpdateUserJcAction">
-		    <result name="input">vip/dateuserjc.jsp</result>
+		     <!-- <result name="input">vip/dateuserjc.jsp</result>-->
+		     <result name="input">view/grxx-edit-jc.jsp</result>
 		    <result name="success" type="json"></result>
 		</action>
 		
@@ -150,7 +152,8 @@
 		</action>
 		
 		<action name="userpay" class="com.yq.user.action.UserPayAction">
-		   <result name="success">vip/userpay.jsp</result>
+		   <!-- <result name="success">vip/userpay.jsp</result> -->
+		   <result name="success">view/yblc-sales.jsp</result>
 		</action>				
 		
 		<action name="updateuser" class="com.yq.user.action.UpdateUserAction">
@@ -197,16 +200,21 @@
 		</action>
 		
 		<action name="jztojb" class="com.yq.user.action.JztobjAction">
-		   <result name="success">vip/jztojb.jsp</result>
-		   <result name="suc2">vip/jztojb2.jsp</result>
-		   <result name="suc3">vip/jztojb3.jsp</result>
-		   <result name="suc4">vip/jztojb4.jsp</result>
+		   <!-- <result name="success">vip/jztojb.jsp</result> -->
+		   <result name="success">view/yblc-buy-goldcard1.jsp</result>
+		   <!--<result name="suc2">vip/jztojb2.jsp</result>-->
+		    <result name="suc2">view/yblc-buy-goldcard2.jsp</result>
+		  <!-- <result name="suc3">vip/jztojb3.jsp</result>-->
+		    <result name="suc3">view/yblc-buy-goldcard3.jsp</result>
+		   <!-- <result name="suc4">vip/jztojb4.jsp</result> -->
+		    <result name="suc4">view/yblc-buy-goldcard4.jsp</result>
 		</action>
 		
 		<action name="vipgo" class="com.yq.user.action.VipgoAction">
 		   <!--  <result name="input">vip/vipgo.jsp</result> -->
 		   <result name="input">view/jflc-recharge.jsp</result>
-		    <result name="success">vip/vipgook.jsp</result>
+		   <!--  <result name="success">vip/vipgook.jsp</result> -->
+		   <result name="success">view/jflc-recharge-ok.jsp</result>
 		</action>
 		
 		<action name="bank" class="com.yq.user.action.BankAction">
@@ -216,16 +224,19 @@
 		    <result name="success">vip/cjjl.jsp</result>
 		</action>	
 		<action name="gmjh" class="com.yq.user.action.GmjhAction">
-		    <result name="success">0625fhk/pdfhk0102/gmjh.jsp</result>
+		    <!-- jflc-activie-goldcard.jsp <result name="success">0625fhk/pdfhk0102/gmjh.jsp</result>-->
+		    <result name="success">view/jflc-activie-goldcard.jsp</result>
 		</action>
 		
 		<action name="glfhk" class="com.yq.user.action.GlfhkAction">
-		    <result name="success">0625fhk/pdfhk0102/glfhk.jsp</result>
-		     <result name="ckpa">0625fhk/pdfhk0102/ckpa.jsp</result>
+		    <!--  <result name="success">0625fhk/pdfhk0102/glfhk.jsp</result>-->
+		     <result name="success">view/jflc-activie-gold-look2.jsp</result>
+		     <!-- jflc-activie-gold-look.jsp<result name="ckpa">0625fhk/pdfhk0102/ckpa.jsp</result> -->
+		     <result name="ckpa">view/jflc-activie-gold-look.jsp</result>
 		</action>		
 
 		<action name="czpa" class="com.yq.user.action.CzpaAction">
-		    <result name="success">0625fhk/pdfhk0102/czpa.jsp</result>
+		    <result name="success">view/jflc-activie-gold-look.jsp</result>
 		</action>
 		
 		
@@ -257,7 +268,7 @@
 		<action name="mysl" class="com.yq.user.action.MyslAction">
 		    <!--  <result name="success">vip/mysl.jsp</result>-->
 		    <result name="success">view/jflc-jfmr.jsp</result>
-		    <result name="mysl2">vip/mysl2.jsp</result>
+		    <result name="mysl2">view/jflc-jfmr-2.jsp</result>
 		</action>
 		
 		<action name="qxqg" class="com.yq.user.action.QxqgAction">
@@ -330,10 +341,10 @@
 			</result>
 		</action>
 		<action name="reg" class="com.yq.user.action.RegAction">
-			<result name="input">reg1.jsp</result>
-		    <result name="success" type="json">
-		       <param name="includeProperties">erroCodeNum</param>
-		    </result>
+			<result name="input1">reg1.jsp</result>
+			<result name="input2">reg2.jsp</result>
+			<result name="input3">reg3.jsp</result>
+		    <result name="success">regend.jsp</result>
 		</action>
 		<action name="checkreg" class="com.yq.user.action.CheckReg">
 			<result name="success" type="json" />

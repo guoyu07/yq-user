@@ -65,11 +65,9 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 				return SUCCESS;
 			}
 			
-			if(!Strings.isNullOrEmpty(smsCode)){
-				if(!smsCode.equals(guser.getVipsq())){
+			if(!smsCode.equals(guser.getVipsq())){
 					super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
 					return SUCCESS;
-				}
 			}
 			
 			if(!Strings.isNullOrEmpty(super.getUserName())&&!Strings.isNullOrEmpty(password)&&!Strings.isNullOrEmpty(name)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)&&!Strings.isNullOrEmpty(secondPassword)&&!Strings.isNullOrEmpty(newSecondPassword1)&&!Strings.isNullOrEmpty(newSecondPassword2)){
@@ -91,6 +89,7 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 				}
 				//开始更新资料操作
 				userService.updateUser(super.getUserName(),name, idCard, MD5Security.md5_16(newPassWord1), newSecondPassword1, 0, qq, guser.getCall(),ServletActionContext.getRequest().getRemoteAddr());
+				
 				return SUCCESS;
 			}else{
 				super.setErroCodeNum(3000);//有信息为空

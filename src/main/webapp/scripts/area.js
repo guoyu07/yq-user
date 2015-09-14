@@ -1,9 +1,9 @@
 function showLocation(province , city , town , bank) {
 	
 	var loc	= new Location();
-	var title	= ['=请选择省份=' , '=请选择城市=' , '=请选择地区=','==请选择银行=='];
+	var title	= ['=请选择省份=' , '=请选择城市=' , '=请选择地区=','=请选择银行='];
 	$.each(title , function(k , v) {
-		title[k]	= '<option value="">'+v+'</option>';
+		title[k]	= '<option value="" selected="selected">'+v+'</option>';
 	})
 	
 
@@ -45,8 +45,8 @@ function showLocation(province , city , town , bank) {
 				}
 			}	
 	} else {
-		loc.fillOption('loc_province' , '0');
-		loc.fillOption('loc_bank' , 'bank');
+//		loc.fillOption('loc_province' , '0');
+//		loc.fillOption('loc_bank' , 'bank');
 	}
 		
 }

@@ -42,13 +42,19 @@ public class RegAction extends ALDAdminActionSupport {
  	//区--> addqu
  	private String areaName;
  	
+ 	private int step;
+ 	
  	
  	private String tag;
 	public String execute() {
-		if(status==0){
+		if(step==0){
+			return "input1";
+		}else if(step==1){
+			return "input2";
+		}else if(step==2){
 			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 			provinceList = provinceDao.getProvinceList();
-			return INPUT;
+			return "input3";
 		}else{
 			//开启校验
 			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -161,6 +167,10 @@ public class RegAction extends ALDAdminActionSupport {
 	public void setAreaName(String areaName) {
 		this.areaName = areaName;
 	}
-	
-	
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
 }

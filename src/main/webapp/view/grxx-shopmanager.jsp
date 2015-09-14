@@ -43,7 +43,6 @@ function checkdate()  {
 	$("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
 	$.post("/sms?toUserName="+Form.user.value, data, function(response) {
-		alert(response);
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
 		alert("手机验证码发送成功");

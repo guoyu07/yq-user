@@ -118,6 +118,8 @@ public class UserService {
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
+    public static final boolean IS_SEND_MSG_TEST= true;
+    
     /**
      * 查看是否登录了
      * @param sessionId
@@ -373,6 +375,7 @@ public class UserService {
 		if(result){
 			addUserDateIpLog(userName, "更新资料", ip);
 		}
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
 		return result;
 	}
 	
@@ -1288,6 +1291,8 @@ public class UserService {
 		txPayDao.add(txpay2);
 		
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
+		
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
 	}
 	/**
 	 * 商城退款
@@ -2471,8 +2476,11 @@ public class UserService {
 		String randomString = RandomStringUtils.random(6, chars);
 		param.put("code", randomString);
 		if(gcuserDao.updateSmsCode(userName, randomString)){
-			SubMailSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param);
-			LogSystem.info("发送验证码为:"+randomString);
+			if(!IS_SEND_MSG_TEST){
+				SubMailSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param);
+			}else{
+				LogSystem.info("测试阶段，不真正发送验证码:code="+randomString);
+			}
 		}else{
 			throw new ServiceException(3000, "发送短信发生错误");
 		}

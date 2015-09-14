@@ -22,7 +22,9 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 	public String execute(){
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
 		
-		
+		if(lb!=null&&lb==0){
+			lb=null;
+		}
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		
