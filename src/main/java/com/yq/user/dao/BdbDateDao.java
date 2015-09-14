@@ -44,4 +44,17 @@ public class BdbDateDao {
 		parameter.setString(zuser);
 		return this.jdbc.getListPage(sql, Bdbdate.class, parameter, pageSize, pageIndex);
 	}
+	
+	/**
+	 * 分页查询码
+	 * @param zuser
+	 * @param pageSize
+	 * @param pageIndex
+	 * @return
+	 */
+	public IPage<Bdbdate> getALLPageList(int pageSize,int pageIndex){
+		String sql = "select * from "+table+" order by id desc";
+		return this.jdbc.getListPage(sql, Bdbdate.class, null, pageSize, pageIndex);
+	}
+	
 }

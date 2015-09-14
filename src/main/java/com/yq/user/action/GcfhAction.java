@@ -28,7 +28,7 @@ public class GcfhAction extends ALDAdminPageActionSupport<Gcfh> {
 		
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
 		
-		IPage<Gcfh> page = logService.getGcfhListPage(super.getUserName(),lb, super.getToPage(), 30);
+		IPage<Gcfh> page = logService.getGcfhListPage(super.getUserName(),lb, super.getToPage(), 15);
 		
 		super.initPage(page);
 		

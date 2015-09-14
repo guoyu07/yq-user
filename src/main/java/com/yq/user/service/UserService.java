@@ -1,6 +1,7 @@
 package com.yq.user.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,6 +14,8 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
+import com.sr178.module.sms.util.SubMailSendUtils;
 import com.yq.common.ProblemCode;
 import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateStyle;
@@ -125,6 +128,7 @@ public class UserService {
     }
     
     
+    private static final String INIT_SMS_CODE="000000";
     
 	/**
 	 * 登录
@@ -192,8 +196,40 @@ public class UserService {
 		}
 		return null;
 	}
-	
-    
+    /**
+     * 管理员登录
+     * @param sessionId
+     * @param id
+     * @param pa
+     * @param ip
+     * @return
+     */
+    public Gcuser loginByManager(String sessionId,String id,String pa,String ip){
+    	Gcuser gcUser = gcuserDao.getUser(id);
+    	if(gcUser!=null && gcUser.getPassword().equals(pa)){
+			userSession.put(sessionId, gcUser.getUsername());
+//			gcuserDao.updateLoginTime(id);
+//			this.addUserDateIpLog(id, "登录", ip);
+			return gcUser;
+		}
+		return null;
+    }
+	/**
+	 * 同名账号切换
+	 * @param loginUserName
+	 * @param sessionId
+	 */
+    public void relogin(String loginUserName,String sessionId,String ip){
+    	String userName = userSession.remove(sessionId);
+    	Gcuser beforUser = gcuserDao.getUser(userName);
+    	Gcuser afterUser = gcuserDao.getUser(loginUserName);
+    	if(!beforUser.getUserid().equals(afterUser.getUserid())||!beforUser.getName().equals(afterUser.getName())){
+    		throw new ServiceException(3000, "权限不足");
+    	}
+    	userSession.put(sessionId, loginUserName);
+		gcuserDao.updateLoginTime(loginUserName);
+		this.addUserDateIpLog(loginUserName, "登录", ip);
+    }
     /**
      * 登出
      * @param sessionId
@@ -713,7 +749,7 @@ public class UserService {
 			int zysjb = sgxt.getSjb();
 			
 			
-			cupUser(bduser,1,zysjb);//不知道他在干嘛
+			cupUser(bduser,bduser,1,zysjb);//不知道他在干嘛
 			
 			
 			List<ZuoMingxi> zList = zuoMingxiDao.getDownList(bduser);
@@ -809,26 +845,26 @@ public class UserService {
 		}
 	}
 	
-	private void cupUser(String userName,int count,int sjb){
+	private void cupUser(String userName,String constantUp,int count,int sjb){
 		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
 		if(sgxtBd!=null){
 			if(userName.equals(sgxtBd.getAuid())){
 				ZuoMingxi zuoMingxi = new ZuoMingxi();
 				zuoMingxi.setTjuser(sgxtBd.getUsername());
 				zuoMingxi.setSjb(sjb);
-				zuoMingxi.setDown(userName);
+				zuoMingxi.setDown(constantUp);
 				zuoMingxi.setCount(count);
 				zuoMingxiDao.add(zuoMingxi);
 			}else{
 				YouMingxi youMingxi = new YouMingxi();
 				youMingxi.setCount(count);
-				youMingxi.setDown(userName);
+				youMingxi.setDown(constantUp);
 				youMingxi.setTjuser(sgxtBd.getUsername());
 				youMingxi.setSjb(sjb);
 				youMingXiDao.add(youMingxi);
 			}
 			count = count+1;
-			cupUser(sgxtBd.getUsername(),count,sjb);
+			cupUser(sgxtBd.getUsername(),constantUp,count,sjb);
 		}
 	}
 	
@@ -869,6 +905,8 @@ public class UserService {
 			return result;
 		}
 	}
+	
+	
 	
 	/**
 	 * 更新金币
@@ -951,6 +989,45 @@ public class UserService {
 		this.updateSybdb(toUser, amount, "收到-服务中心"+fromUser.substring(0,2)+"***");
 		
 		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
+		
+	}
+	
+	/**
+	 * 报单币转账
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	@Transactional
+	public void trasferBdbByAdmin(String fromUser,String toUser,int amount){
+		Gcuser from = gcuserDao.getUser(fromUser);
+		
+		if(from==null){
+			throw new ServiceException(5, "转出用户不存在！");
+		}
+		
+		if(fromUser.equals(toUser)){
+			throw new ServiceException(1, "不能转给自己！");
+		}
+		
+		if(amount<=0){
+			throw new ServiceException(2, "转账金额不能小于0");
+		}
+		
+		if(from.getSybdb()<amount){
+			throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		}
+		Gcuser to = gcuserDao.getUser(toUser);
+		if(to==null){
+			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
+		}
+		
+		//减被转者的报单币
+		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser)){
+			throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		}
+		
+		this.updateSybdb(toUser, amount, "收到-"+fromUser);
 		
 	}
 	/**
@@ -1036,8 +1113,8 @@ public class UserService {
 		
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
-		gpjy.setMcsl(jfNum);
-		gpjy.setSysl(gcuser.getJyg()-jfNum);
+		gpjy.setMcsl(Double.valueOf(jfNum));
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()-jfNum));
 		gpjy.setBz("竞猜投注-"+ARRAY_DESC[type-1]);
 		gpjy.setKjqi(epkjdate.getKid());
 		gpjy.setCgdate(new Date());
@@ -1460,8 +1537,8 @@ public class UserService {
 		
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
-		gpjy.setMcsl(txpay.getPaynum());
-		gpjy.setSysl(gcuser.getJyg()-txpay.getPaynum());
+		gpjy.setMcsl(Double.valueOf(txpay.getPaynum()));
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()-txpay.getPaynum()));
 		gpjy.setBz("冻结-认购一币-"+txpay.getPaynum()+"诚信金-"+txpay.getPayusername());
 		gpjy.setCgdate(new Date());
 		gpjy.setJy(1);
@@ -1849,8 +1926,8 @@ public class UserService {
 		user = gcuserDao.getUser(userName);
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
-		gpjy.setMcsl(cost);
-		gpjy.setSysl(user.getJyg());
+		gpjy.setMcsl(Double.valueOf(cost));
+		gpjy.setSysl(Double.valueOf(user.getJyg()));
 		gpjy.setBz("抢购-"+jfcp.getCpmq());
 		gpjy.setCgdate(new Date());
 		gpjy.setJy(1);
@@ -1878,7 +1955,7 @@ public class UserService {
 			
 			Gpjy gpjy2 = new Gpjy();
 			gpjy.setUsername(userName);
-			gpjy.setSysl(user.getJyg());
+			gpjy.setSysl(Double.valueOf(user.getJyg()));
 			gpjy.setBz("抢购成功-"+jfcp.getCpmq());
 			gpjy.setCgdate(new Date());
 			gpjy.setJy(1);
@@ -1927,11 +2004,11 @@ public class UserService {
 		
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
-		gpjy.setMysl(buyNum);
-		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setMysl(Double.valueOf(buyNum));
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(fcxt.getJygj());
 		gpjy.setBz("买入挂牌中");
-		gpjy.setJypay(needJb);
+		gpjy.setJypay(Double.valueOf(needJb));
 		gpjy.setJyid(id);
 		gpjy.setAbdate(new Date());
 		gpjyDao.add(gpjy);
@@ -1987,11 +2064,11 @@ public class UserService {
 	}
 	
 	public IPage<Gpjy> getMrPageList(String userName,int pageIndex,int pageSize){
-		return gpjyDao.getMrPage(userName, pageIndex, pageSize);
+		return gpjyDao.getMrPage(pageIndex, pageSize);
 	}
 	
 	public IPage<Gpjy> getMcPageList(String userName,int pageIndex,int pageSize){
-		return gpjyDao.getMcPage(userName, pageIndex, pageSize);
+		return gpjyDao.getMcPage(pageIndex, pageSize);
 	}
 	/**
 	 * 卖出积分
@@ -2016,11 +2093,11 @@ public class UserService {
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
-		gpjy.setMcsl(saleNum);
-		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setMcsl(Double.valueOf(saleNum));
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(price);
 		gpjy.setBz("卖出挂牌中");
-		gpjy.setJypay(needJb);
+		gpjy.setJypay(Double.valueOf(needJb));
 		gpjy.setAbdate(new Date());
 		gpjyDao.add(gpjy);
 	}
@@ -2125,7 +2202,7 @@ public class UserService {
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
 		gpjy.setMysl(mcsl);
-		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setBz("撒单成功");
 		gpjy.setCgdate(new Date());
 		gpjy.setJy(1);
@@ -2174,11 +2251,11 @@ public class UserService {
 			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
 		}
 
-		if (!gcuserDao.reduceOnlyJB(userName, (int) gpjy1.getJypay())) {
+		if (!gcuserDao.reduceOnlyJB(userName, gpjy1.getJypay().intValue())) {
 			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
 		}
 
-		if (!gcuserDao.updateJyg(userName, -(int) gpjy1.getMcsl())) {
+		if (!gcuserDao.updateJyg(userName, - gpjy1.getMcsl().intValue())) {
 			throw new ServiceException(3000, "未知错误");
 		}
 
@@ -2190,7 +2267,7 @@ public class UserService {
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
 		gpjy.setMysl(gpjy1.getMcsl());
-		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(gpjy1.getPay());
 		gpjy.setJypay(gpjy1.getJypay());
 		gpjy.setBz("买入成功");
@@ -2203,7 +2280,7 @@ public class UserService {
 
 		Datepay datePay1 = new Datepay();
 		datePay1.setUsername(userName);
-		datePay1.setDbjc((int) gpjy1.getJypay());
+		datePay1.setDbjc(gpjy1.getJypay().intValue());
 		datePay1.setPay(gcuser.getPay());
 		datePay1.setJydb(gcuser.getJydb());
 		datePay1.setRegid("买入" + gpjy1.getUsername() + "-积分" + gpjy1.getMcsl() + "-单价" + mcdj);
@@ -2232,7 +2309,7 @@ public class UserService {
 		datePay2.setAbdate(new Date());
 		logService.addDatePay(datePay2);
 
-		fcxtDao.update(2, (int) gpjy1.getMcsl());
+		fcxtDao.update(2,gpjy1.getMcsl().intValue());
 		 
 	}
 	/**
@@ -2256,7 +2333,7 @@ public class UserService {
 					"您好，本次交易积分数量大于您剩余交易积分数量 " + gcuser.getJyg() + " ，暂时不能交易，本次交易需要 " + gpjy1.getMysl() + " 积分，谢谢！");
 		}
 
-		if (!gcuserDao.updateJyg(userName, (int) gpjy1.getMysl())) {
+		if (!gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue())) {
 			throw new ServiceException(1,
 					"您好，本次交易积分数量大于您剩余交易积分数量 " + gcuser.getJyg() + " ，暂时不能交易，本次交易需要 " + gpjy1.getMysl() + " 积分，谢谢！");
 		}
@@ -2264,7 +2341,7 @@ public class UserService {
 		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
 		gcuserDao.addOnlyJB(userName, mc30);
 
-		gcuserDao.updateJyg(gpjy1.getUsername(), -(int) gpjy1.getMysl());
+		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg())) {
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
@@ -2274,7 +2351,7 @@ public class UserService {
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
 		gpjy.setMysl(gpjy1.getMysl());
-		gpjy.setSysl(gcuser.getJyg());
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(gpjy1.getPay());
 		gpjy.setJypay(gpjy1.getJypay());
 		gpjy.setAbdate(gpjy1.getAbdate());
@@ -2297,9 +2374,120 @@ public class UserService {
 		logService.addDatePay(datePay1);
 		logService.updateRegId(gpjy1.getJyid(), DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS)
 				+ "支出成功到" + gpjy1.getDfuser() + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
-		fcxtDao.update(2, (int) gpjy1.getMysl());
+		fcxtDao.update(2, gpjy1.getMysl().intValue());
 			 
 	}
 	
+//    private String shpa;
+//	
+//	private int sfpay;
+//	
+//	private String pay10;
+//	//需要支付的一币数目
+//	private int ybpay;
+//	//支付的用户名
+//	private String user;
+//	//密码
+//	private String pa01;
+//    //用户二级密码	
+//	private String pa02;
+//	//手机校验码
+//	private String sfcode;
 	
+	@Transactional
+	public void transferYbToShop(String userName,String shpa,int sfpay,String pay10,int ybpay,String user,String pa01,String pa02,String sfcode){
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(gcuser.getJb()!=5){
+//			super.setErroCodeNum(1);//alert('非商户用户名，请联系管理员！');
+//			return SUCCESS;
+			throw new ServiceException(1, "");
+		}
+		
+		if(Strings.isNullOrEmpty(shpa)||!shpa.equals(gcuser.getPassword3())){
+//			super.setErroCodeNum(2);//alert('输入的商户二级密码不正确，请检查输入是否正确！');
+//			return SUCCESS;
+			throw new ServiceException(2, "");
+		}
+		
+		if(ybpay<=0){
+//			super.setErroCodeNum(3);//alert('订单信息有误，请重新提交！');
+//			return SUCCESS;
+			throw new ServiceException(3, "");
+		}
+		
+		Gcuser beReduceUser = gcuserDao.getUser(user);
+		if(beReduceUser==null){
+//			super.setErroCodeNum(4);//alert('输入的用户名不存在，请检查输入是否正确！');
+//			return SUCCESS;
+			throw new ServiceException(4, "");
+		}
+		
+		if(Strings.isNullOrEmpty(pa01)||!MD5Security.md5_16(pa01).equals(beReduceUser.getPassword())){
+//			super.setErroCodeNum(5);//alert('输入的登录密码不正确，请检查输入是否正确！');
+//			return SUCCESS;
+			throw new ServiceException(5, "");
+		}
+		
+		if(Strings.isNullOrEmpty(pa02)||!pa02.equals(beReduceUser.getPassword3())){
+//			super.setErroCodeNum(6);//alert('输入的二级密码不正确，请检查输入是否正确！');
+//			return SUCCESS;
+			throw new ServiceException(6, "");
+		}
+		
+		if(beReduceUser.getPay()<ybpay){
+//			super.setErroCodeNum(7);//alert('您的一币余额不足，请检查输入是否正确！');
+//			return SUCCESS;
+			throw new ServiceException(7, "");
+		}
+		
+		if(!beReduceUser.getVipsq().equals(sfcode)){
+//			super.setErroCodeNum(8);//alert('您好，手机验证码不正确，请重新输入！');
+//			return SUCCESS;
+			throw new ServiceException(8, "");
+		}
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		//减一币
+		if(!this.changeYb(user, -ybpay,gcuser.getName(),12,null)){
+//			super.setErroCodeNum(7);//alert('您的一币余额不足，请检查输入是否正确！');
+//			return SUCCESS;
+			throw new ServiceException(7, "");
+		}
+		//加一币
+		if(!this.changeYb(gcuser.getUsername(), ybpay,gcuser.getName()+"-"+beReduceUser.getName(),5,null)){
+//			super.setErroCodeNum(9);//alert('未知错误');
+//			return SUCCESS;
+			throw new ServiceException(9, "");
+		}
+	}
+	/**
+	 * 发送短信验证马
+	 */
+	private static final char[] chars = new char[]{'0','1','2','3','4','5','6','7','8','9'};
+	public void sendSmsMsg(String userName){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Map<String,String> param = new HashMap<String,String>();
+		String randomString = RandomStringUtils.random(6, chars);
+		param.put("code", randomString);
+		if(gcuserDao.updateSmsCode(userName, randomString)){
+			SubMailSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param);
+			LogSystem.info("发送验证码为:"+randomString);
+		}else{
+			throw new ServiceException(3000, "发送短信发生错误");
+		}
+	}
+	/**
+	 * 查询所有玩家分页列表
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Gcuser> getUserPageList(int pageIndex,int pageSize){
+		return gcuserDao.getPageList(pageIndex, pageSize);
+	}
+	
+	public IPage<Sgxt> getSgxtPageList(int pageIndex,int pageSize){
+		return sgxtDao.getPageList(pageIndex, pageSize);
+	}
 }

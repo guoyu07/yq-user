@@ -15,36 +15,17 @@
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <script language="JavaScript"> 
- function checkdate()  {  
+ function checkdate(){  
   if (Form.jzpay.value=="") {      alert("请填写您要转账的一币!");      return false;    } 
   if (Form.jzpay.value<0) {      alert("转账的一币必须大于0!");      return false;    } 
   if (Form.jzpay.value>${gcuser.pay})    {   alert("您的转账一币不能超过您剩余的一币 ${gcuser.pay}");      return false;    } 
   if (Form.jzuser.value=="") {      alert("请填写您要转入的用户名!");      return false;    }
-  if (Form.jzuser.value==${userName}) {      alert("不能转给自己!");      return false;    }
+  if (Form.jzuser.value=='${userName}') {      alert("不能转给自己!");      return false;    }
   if (Form.adgl.value=="") {      alert("请写入操作密码!");      return false;    }
   if (Form.dbz.value=="" && document.getElementById("C1").checked) { alert("请写入商城订单号，必须为数字!"); return false;  }
-  if (!chkinteger(Form.jzpay.value)){
-	alert('转账一币只能为整字!');
-	document.Form.jzpay.focus;
-	return (false);
  }
- function chkinteger(checkStr) {
-var checkOK = "0123456789";
-var allValid = true;
-for (i=0; i<checkStr.length; i++) {
-ch = checkStr.charAt(i);
-if (checkOK.indexOf(ch) == -1) {
-allValid = false;
-break;
-}
-if ((ch == '+' || ch == '-') && i>0) {
-allValid = false;
-break;
-}
-}
-return (allValid);
-}
-   return true;  }  
+
+ 
 function dbz_show(){
 	if (document.getElementById("C1").checked)
 		document.getElementById("dbz").style.display="";
@@ -81,7 +62,7 @@ function dbz_show(){
 							<p><label class="c-r">输入用户名：</label><input type="text" name="jzuser" size="15" maxlength="10"></p>
 							<p><label>转账金额：</label><input style="width:100px;" type="text" name="jzpay" size="15"></p>
 							<p><label>操作密码：</label><input type="password" name="pa3" size="15"></p>
-							<p><input type="checkbox" name="C1" id="C1" onclick="dbz_show()" value="1"><label>退款订单号：</label><input type="text"  onKeyUp="value=value.replace(/[^\d]/g,'')" name="dbz" id="dbz" size="20"></p>
+							<p><label><input type="checkbox" name="C1" id="C1" onclick="dbz_show()" value="1" style="width:auto; vertical-align: middle;border:none;"> 退款订单号：</label><input type="text"  onKeyUp="value=value.replace(/[^\d]/g,'')" name="dbz" id="dbz" size="20"></p>
 							<p><label></label><button class="but1" type=submit value="确 定 转 账" name=submit2  onClick="return confirm('提示：您确定了吗？')">确 定 转 账</button></p>
 					</form>
 					</div>
@@ -91,4 +72,4 @@ function dbz_show(){
 	</div>
 </body>
 </html>
-<script language="JavaScript">dbz_show();</script>
+<script language="JavaScript">dbz_show()</script>

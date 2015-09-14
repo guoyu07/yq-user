@@ -7,17 +7,17 @@ import java.util.Date;
 
 
 public class Mtfhtj{
-	private int tjid;
+	private Integer tjid;
 	private Date fhdate;
 	private int newd;
 	private double zfh;
 	private double mqfh;
 	private double tjzj;
-	public void setTjid(int tjid){
-	this.tjid=tjid;
-	}
-	public int getTjid(){
+	public Integer getTjid() {
 		return tjid;
+	}
+	public void setTjid(Integer tjid) {
+		this.tjid = tjid;
 	}
 	public void setFhdate(Date fhdate){
 	this.fhdate=fhdate;

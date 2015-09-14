@@ -34,13 +34,23 @@ public class GpjyDao {
 		return this.jdbc.get(sql, Gpjy.class, null);
 	}
 	
-	public IPage<Gpjy> getMcPage(String userName,int pageIndex,int pageSize){
+	public IPage<Gpjy> getMcPage(int pageIndex,int pageSize){
 		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay,id";
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
 	
-	public IPage<Gpjy> getMrPage(String userName,int pageIndex,int pageSize){
+	public IPage<Gpjy> getAdminMcPage(int pageIndex,int pageSize){
+		String sql="select * from "+table+" where mcsl>0 order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
+	}
+	
+	public IPage<Gpjy> getMrPage(int pageIndex,int pageSize){
 		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay,id";
+		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
+	}
+	
+	public IPage<Gpjy> getAdminMrPage(int pageIndex,int pageSize){
+		String sql="select * from "+table+" where mysl>0 order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
 	
@@ -116,4 +126,51 @@ public class GpjyDao {
 		parameter.setInt(id);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	public IPage<Gpjy> getPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" order by id desc";
+		return jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
+	}
+	
+	public boolean update(String userName,int amount ,String dfuser){
+		String sql = "update "+table+" set mysl=mysl+?,sysl=sysl+?,jypay=jypay+? where username=? and dfuser=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(amount).withInt(amount).withInt(amount).withString(userName).withString(dfuser))>0;
+	}
+	
+	public Gpjy get(String userName,String dfuser){
+		String sql = "select * from "+table+" where username=? and dfuser=? limit 1";
+		return jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withString(userName).withString(dfuser));
+	}
+	
+	public Double getSumMcsl(){
+		String sql = "select sum(mcsl) as ljmc from gpjy" ;
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumMcslByDate(String startTime,String endTime){
+		String sql = "select sum(mcsl) as ljmc from gpjy where abdate between ? and ?" ;
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(startTime);
+		parameter.setString(endTime);
+		return jdbc.getDouble(sql, parameter);
+	}
+	
+	public Double getSumMysl(){
+		String sql = "select sum(mysl) as ljmc from gpjy" ;
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumMyslByDate(String startTime,String endTime){
+		String sql = "select sum(mysl) as ljmc from gpjy where abdate between ? and ?" ;
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(startTime);
+		parameter.setString(endTime);
+		return jdbc.getDouble(sql, parameter);
+	}
+	
+	public IPage<Gpjy> getSearchResultPageDetailsList(String field,String value,int pageIndex,int pageSize){
+		String sql="select * from "+table+" where "+field+" = ? order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(value), pageSize, pageIndex);
+	}
+	
 }

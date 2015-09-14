@@ -17,6 +17,16 @@ public class GcuserDao {
 	private static String table = "gcuser";
 	
 	
+	public boolean delete(String userName){
+		String sql = "delete from "+table+" where username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withString(userName))>0;
+	}
+	
+	public IPage<Gcuser> getPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" order by id desc";
+		return this.jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
+	}
+	
 	public Gcuser getUser(String userName){
 		String sql = "select * from "+table+" where username=? limit 1";
 		SqlParameter paramter = new SqlParameter();
@@ -130,6 +140,33 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean updateUserByAdmin(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password){
+		String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,call=?,email=?,qq=?,email=?,userid=?,payok=?,jcname=?,jcuserid=?";
+		boolean isChangePassword = false;
+		if(password!=null&&!password.equals("")){
+			sql = sql+ ",password=?";
+			isChangePassword = true;
+		}
+		sql = sql + " where username=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(password3);
+		parameter.setString(card);
+		parameter.setString(bank);
+		parameter.setString(name);
+		parameter.setString(call);
+		parameter.setString(email);
+		parameter.setString(qq);
+		parameter.setString(userid);
+		parameter.setInt(payok);
+		parameter.setString(jcname);
+		parameter.setString(jcuserid);
+		if(isChangePassword){
+			parameter.setString(password);
+		}
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
 	public boolean updateUser(String userName,String jcName,String jcUserId){
 		String sql = "update "+table+" set jcname=? ,  jcuserid=?  where username=?";
 		SqlParameter parameter = new SqlParameter();
@@ -232,6 +269,35 @@ public class GcuserDao {
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean addYbByBackCount(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay+?,vippay=vippay+?,cbpay=cbpay+?,fhpay=fhpay+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}	
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean addOnlyYb(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setString(username);
 		return this.jdbc.update(sql, parameter)>0;
@@ -424,5 +490,99 @@ public class GcuserDao {
 		parameter.setString(userName);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	public boolean updateSmsCode(String userName,String code){
+		String sql = "update "+table+" set vipsq=? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(code);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;	
+	}
+	
+	public IPage<Gcuser> searchPage(String param,int pageIndex,int pageSize){
+		String sql = "select * from "+table+" where username = ? or name = ? or `call` = ? or qq = ? or userid = ?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(param);
+		parameter.setString(param);
+		parameter.setString(param);
+		parameter.setString(param);
+		parameter.setString(param);
+		return this.jdbc.getListPage(sql, Gcuser.class,parameter, pageSize, pageIndex);
+	}
+	
+	public boolean updateCjtj(String userName,int amount){
+		String sql = "update "+table+" set cjtj=cjtj+?,gmdate=? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(amount);
+		parameter.setObject(new Date());
+		parameter.setString(userName);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean updateSyepLjbdbSybdb(String userName,int syep,int ljbdb,int sybdb){
+		String sql = "update "+table+" set syep=syep-?,ljbdb=ljbdb+?,sybdb=sybdb+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(syep);
+		parameter.setInt(ljbdb);
+		parameter.setInt(sybdb);
+		parameter.setString(userName);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean updateGwuid(String userName,int gwuid){
+		String sql = "update "+table+" set gwuid=?  where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(gwuid);
+		parameter.setString(userName);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
+	public Double getSumCbpay(){
+		String sql = "select sum(cbpay) from "+table+" where jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumPay(){
+		String sql = "select sum(pay) from "+table+" where jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumPayIdRange(){
+		String sql = "select sum(pay) from "+table+" where id<10586 and jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumTxpay(){
+		String sql = "select sum(txpay) from "+table+"";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumJydb(){
+		String sql = "select sum(jydb) from "+table+" where dbt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumJyg(){
+		String sql = "select sum(jyg) from "+table+" where jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumJygIdRange(){
+		String sql = "select sum(jyg) from "+table+" where id<10586 and jygt1<>2";
+		return jdbc.getDouble(sql, null);
+	}
+	
+	public Double getSumGdgc(){
+		String sql = "select sum(gdgc) from "+table+"";
+		return jdbc.getDouble(sql, null);
+	}	
+	public Double getSumGdgcIdRange(){
+		String sql = "select sum(gdgc) from "+table+" where id<10586";
+		return jdbc.getDouble(sql, null);
+	}	
+	public Double getSumLjfh(){
+		String sql = "select sum(ljfh) from "+table+"";
+		return jdbc.getDouble(sql, null);
+	}	
 	
 }

@@ -65,7 +65,7 @@
 						<span class="c-r">**</span>
 						<button>确 定 充 值</button>
 						</form>
-						<a href="#" class="c-g">激活金币卡</a>
+						<a href="/login2j?inputUrl=login6j.jsp" class="c-g">激活金币卡</a>
 						<p class="c-r">（注：每次充值最低100元，并以100元的整数递增，如200，300，400，同时需要加尾数）</p>
 					</div>
 					<div class="content-table">

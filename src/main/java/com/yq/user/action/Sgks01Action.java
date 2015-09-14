@@ -52,6 +52,10 @@ public class Sgks01Action extends ALDAdminActionSupport {
 			super.setErroCodeNum(1);
 		}
 		
+		if(Strings.isNullOrEmpty(myup)){
+			myup = super.getUserName();
+		}
+		
 		if(!Strings.isNullOrEmpty(myup)){
 			if(!gcuser.getUsername().equals(myup)){
 				ZuoMingxi zuoMingxi = userService.getZuoMingxi(gcuser.getUsername(), myup);

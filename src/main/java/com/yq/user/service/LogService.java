@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.manager.dao.JbkzjDao;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Datecj;
 import com.yq.user.bo.Dateip;
@@ -12,6 +13,7 @@ import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
 import com.yq.user.bo.Dldate;
 import com.yq.user.bo.Gcfh;
+import com.yq.user.bo.Jbkzj;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.DatecjDao;
@@ -32,6 +34,9 @@ public class LogService {
 	private DldateDao dldateDao;
 	@Autowired
 	private DatecjDao datecjDao;
+	@Autowired
+	private JbkzjDao jbkzjDao;
+	
 	/**
 	 * 获取一币奖励日志
 	 * @param username
@@ -42,6 +47,17 @@ public class LogService {
 	 */
 	public IPage<Datepay> getDatePayListPage(String username,Integer newbz,int pageIndex,int pageSize){
 		return datePayDao.getPage(username, newbz, pageIndex, pageSize);
+	}
+	/**
+	 * 获取一币奖励日志
+	 * @param username
+	 * @param newbz
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Datepay> getAdminDatePayListPage(Integer newbz,int pageIndex,int pageSize){
+		return datePayDao.getAdminPage(newbz, pageIndex, pageSize);
 	}
 	/**
 	 * 
@@ -163,4 +179,11 @@ public class LogService {
 		return datecjDao.getDatecjPageList(userName, pageIndex, pageSize);
 	}
 	
+	public IPage<Datecj> getAllDateCjPageList(int pageIndex,int pageSize){
+		return datecjDao.getAllDatecjPageList(pageIndex, pageSize);
+	}
+	
+	public IPage<Jbkzj> getAllJbkjzPageList(int pageIndex,int pageSize){
+		return jbkzjDao.getPage(pageIndex, pageSize);
+	}
 }

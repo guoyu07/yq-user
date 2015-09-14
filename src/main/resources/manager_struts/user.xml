@@ -25,16 +25,20 @@
 		</action>
 		
 		<action name="userlist" class="com.yq.user.action.UserListAction">
-			<result name="success">vip/userlist.jsp</result>
+			<!-- <result name="success">vip/userlist.jsp</result> -->
+			<result name="success">view/zhgl-tmzhlist.jsp</result>
 		</action>
-		
+		<action name="relogin" class="com.yq.user.action.ReLoginAction">
+			<result name="success" type="redirect">/manager</result>
+		</action>		
 		<action name="datepay" class="com.yq.user.action.DatePayAction">
 			<!-- <result name="success">vip/datepay.jsp</result> -->
 			<result name="success">view/yblc-details.jsp</result>
 		</action>		
 		
 		<action name="tgurl" class="com.yq.user.action.TgurlAction">
-		    <result name="success">vip/tgurl.jsp</result>
+		   <!--  <result name="success">vip/tgurl.jsp</result> -->
+		   <result name="success">view/grxx-rule.jsp</result>
 		</action>
 		
 		<action name="login2j" class="com.yq.user.action.Login2jAction">
@@ -56,13 +60,16 @@
 		</action>
 		
 		<action name="gcbf" class="com.yq.user.action.GcfhAction">
-		    <result name="p0">vip/gcbf.jsp</result>
-		    <result name="p1">vip/gcbftj.jsp</result>
+		   <!--  <result name="p0">vip/gcbf.jsp</result>
+		    <result name="p1">vip/gcbftj.jsp</result> -->
+		     <result name="p0">view/grxx-gcbf.jsp</result>
+		    <result name="p1">view/grxx-gcbftj.jsp</result>
 		</action>
 		
 		
 		<action name="ybsf" class="com.yq.user.action.YbsfAction">
-		    <result name="input">vip/ybsf.jsp</result>
+		   <!--  <result name="input">vip/ybsf.jsp</result> -->
+		    <result name="input">view/grxx-shopmanager.jsp</result>
 		    <result name="success" type="json"></result>
 		</action>
 		
@@ -71,7 +78,8 @@
 		</action>
 		
 		<action name="dldate" class="com.yq.user.action.LoginLogListAction">
-		    <result name="success">vgo/dldate.jsp</result>
+		    <!-- <result name="success">vgo/dldate.jsp</result>  -->
+		    <result name="success">view/grxx-loginlog.jsp</result>
 		</action>
 		<action name="ggck" class="com.yq.user.action.GgckAction">
 		    <!-- <result name="success">vgo/ggck.jsp</result> -->
@@ -95,28 +103,34 @@
 		</action>
 		
 		<action name="vipup" class="com.yq.user.action.VipUpAction">
-		   <result name="success">vip/vipup.jsp</result>
+		   <!-- <result name="success">vip/vipup.jsp</result> -->
+		   <result name="success">view/service.jsp</result>
 		</action>
 		
 		<action name="bdbdate" class="com.yq.user.action.DateBdbAction">
-		   <result name="success">vip/bdbdate.jsp</result>
+		   <!-- <result name="success">vip/bdbdate.jsp</result> -->
+		   <result name="success">view/yjcx-bdb-details.jsp</result>
 		</action>
 		
 		<action name="bdbzz" class="com.yq.user.action.BdbZzAction">
-		   <result name="success">vip/bdbjzpay.jsp</result>
+		   <!--  <result name="success">vip/bdbjzpay.jsp</result>-->
+		   <result name="success">view/yjcx-bdb-zz.jsp</result>
 		   <result name="bdbdate" type="redirect">bdbdate</result>
 		</action>
 		
 		<action name="tgdown" class="com.yq.user.action.TgdownAction">
-		   <result name="success">vip/tgdown.jsp</result>
+		  <!--  <result name="success">vip/tgdown.jsp</result>-->
+		  <result name="success">view/zhgl-kehu.jsp</result>
 		</action>
 		
 		<action name="regTheSame" class="com.yq.user.action.RegTheSameAction">
-		   <result name="success">vip/reg.jsp</result>
+		  <!--  <result name="success">vip/reg.jsp</result>--> 
+		  <result name="success">view/zhgl-regthesame.jsp</result>
 		</action>			
 		
 		<action name="tjz" class="com.yq.user.action.TjzAction">
-		   <result name="success">vip/tjz.jsp</result>
+		   <!-- <result name="success">vip/tjz.jsp</result> -->
+		   <result name="success">view/zhgl-tmzhgl.jsp</result>
 		</action>
 		
 		<action name="epjqks" class="com.yq.user.action.EpjqksAction">
@@ -296,6 +310,10 @@
 		<action name="wymc" class="com.yq.user.action.WymcAction">
 		    <result name="success">vip/wymc.jsp</result>
 		</action>
+		
+		<action name="sms" class="com.yq.user.action.SmsAction">
+		    <result name="success" type="json"></result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
@@ -306,9 +324,13 @@
 			  <param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
-		
+		<action name="adminlogin" class="com.yq.user.action.ManagerLogin">
+			<result name="success" type="redirect">
+			   /manager
+			</result>
+		</action>
 		<action name="reg" class="com.yq.user.action.RegAction">
-			<result name="input">reg.jsp</result>
+			<result name="input">reg1.jsp</result>
 		    <result name="success" type="json">
 		       <param name="includeProperties">erroCodeNum</param>
 		    </result>

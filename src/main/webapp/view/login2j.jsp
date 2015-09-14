@@ -42,14 +42,14 @@ function checkdate()  {
 			</div>
 			<div class="z-l">
 				<div class="content-box1" style="height:190px;">
-					<div class="content-title">
+					<!--<div class="content-title">
 						<span>让朋友扫描我的二维码，或下截二维码发送给朋友！</span>
-					</div>
-					<div class="content-form">				 
+					</div>-->
+					<!--<div class="content-form">				 
 						<p class="jjgz" align="center">
 <iframe name="I1" marginwidth="1" marginheight="1" height="100" border="0" frameborder="0" src="http://fuwu.zgyce.com/app/index.php?user=${userName}" align="center"></iframe>
                         </p>
-					</div>
+					</div>-->
 				</div>
 				<div class="content-box2 mt10"  style="height:310px;">
 					<form class="form form4" method="POST" action="" name="Form" id="Form" onSubmit="return false">

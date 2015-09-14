@@ -1,0 +1,287 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="admin" extends="adminInterceptor" namespace="/admin">
+	    <action name="adminmanager" class="com.yq.manager.action.AdminManagerAction">
+		    <result name="success">
+		       manager.jsp
+		    </result>
+		</action>
+		
+	    <action name="left" class="com.yq.manager.action.LeftAction">
+		    <result name="success">
+		        left.jsp
+		    </result>
+		</action>
+		
+		<action name="readme" class="com.yq.manager.action.ReadMeAction">
+		    <result name="success">
+		        readme.jsp
+		    </result>
+		</action>
+		
+		<action name="logout001" class="com.yq.manager.action.LogoutAction">
+		    <result name="success" type="redirect">
+		        /adminindex
+		    </result>
+		</action>
+		
+		<action name="userlist" class="com.yq.manager.action.UserListAction">
+		    <result name="success">
+		        userlist.jsp
+		    </result>
+		</action>
+		
+		<action name="chargeDetails" class="com.yq.manager.action.ChargeDetailsAction">
+		    <result name="success">
+		        chargedetails.jsp
+		    </result>
+		</action>
+		
+		<action name="goldcardmanager" class="com.yq.manager.action.GoldCardManagerAction">
+		    <result name="success">
+		        goldcardmanager.jsp
+		    </result>
+		</action>
+		
+		<action name="gcSendRecord" class="com.yq.manager.action.GoldCardSendRecordAction">
+		    <result name="success">
+		        gcSendRecord.jsp
+		    </result>
+		</action>		
+		
+		<action name="outday" class="com.yq.manager.action.OutDayAction">
+		    <result name="success">
+		        outday.jsp
+		    </result>
+		</action>	
+		
+		<action name="sgtjdate" class="com.yq.manager.action.SgtjdateAction">
+		    <result name="success">
+		        sgtjdate.jsp
+		    </result>
+		</action>
+		
+		<action name="bdbdate" class="com.yq.manager.action.BdbDateAction">
+		    <result name="success">
+		        bdbdate.jsp
+		    </result>
+		</action>
+		
+		
+		<action name="tradeManager" class="com.yq.manager.action.TradeMangerAction">
+		    <result name="success">
+		        tradeManager.jsp
+		    </result>
+		</action>
+		<action name="jymc" class="com.yq.manager.action.JymcAction">
+		    <result name="success">
+		        jymc.jsp
+		    </result>
+		</action>		
+		
+		<action name="jymy" class="com.yq.manager.action.JymyAction">
+		    <result name="success">
+		        jymy.jsp
+		    </result>
+		</action>			
+		<action name="ljsy" class="com.yq.manager.action.LjsyAction">
+		    <result name="success">
+		        ljsy.jsp
+		    </result>
+		</action>
+		
+		<action name="epjysc" class="com.yq.manager.action.EpjyscAction">
+		    <result name="success">
+		        epjysc.jsp
+		    </result>
+		</action>
+		
+		<action name="fhjl" class="com.yq.manager.action.FhjlAction">
+		    <result name="success">
+		        fhjl.jsp
+		    </result>
+		</action>	
+		<action name="jsfh" class="com.yq.manager.action.JsfhAction">
+		    <result name="success">
+		        jsfh.jsp
+		    </result>
+		</action>	
+		
+		<action name="sendfh" class="com.yq.manager.action.SendFhAction">
+		    <result name="success">
+		        jsfh.jsp
+		    </result>
+		</action>
+		
+		<action name="searchuser" class="com.yq.manager.action.SearchUserAction">
+		    <result name="input">
+		        searchuser.jsp
+		    </result>
+		   <result name="success">
+		        searchresult.jsp
+		    </result>
+		</action>	
+		
+		<action name="modifyaabuser" class="com.yq.manager.action.ModifyaabuserAction">
+		    <result name="input">
+		        modifyuser.jsp
+		    </result>
+		   <result name="success">
+		        modifyuser.jsp
+		    </result>
+		</action>
+		
+		<action name="usercj" class="com.yq.manager.action.UserCjAction">
+		    <result name="input">
+		        usercj.jsp
+		    </result>
+		   <result name="comfirm">
+		        usercj_confirm.jsp
+		    </result>
+		    <result name="success">
+		        usercj.jsp
+		    </result>
+		</action>
+		
+		<action name="bcgp" class="com.yq.manager.action.BcgpAction">
+		    <result name="input">
+		        bcgp.jsp
+		    </result>
+		   <result name="success">
+		        bcgp_result.jsp
+		    </result>
+		</action>
+		<action name="bcjf" class="com.yq.manager.action.BcjfAction">
+		    <result name="input">
+		        bcjf.jsp
+		    </result>
+		   <result name="success">
+		        bcjf_result.jsp
+		    </result>
+		</action>
+		<action name="bcjb" class="com.yq.manager.action.BcjbAction">
+		    <result name="input">
+		        bcjb.jsp
+		    </result>
+		   <result name="success">
+		        bcjb_result.jsp
+		    </result>
+		</action>		
+		
+		<action name="gngw" class="com.yq.manager.action.ChangeAreaAction">
+		   <result name="success">
+		        changearea.jsp
+		    </result>
+		</action>
+		
+       <action name="pmcj" class="com.yq.manager.action.PmcjAction">
+		    <result name="input">
+		        pmcj.jsp
+		    </result>
+		   <result name="comfirm">
+		        pmcj_confirm.jsp
+		    </result>
+		    <result name="success">
+		        pmcj.jsp
+		    </result>
+		</action>
+		
+		<action name="pmmlt" class="com.yq.manager.action.PmmltAction">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		
+		<action name="sdup" class="com.yq.manager.action.SdupAction">
+		    <result name="input">
+		        sdup.jsp
+		    </result>
+		</action>	
+		<action name="mlt" class="com.yq.manager.action.MltAction">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		<action name="bsreg" class="com.yq.manager.action.MltAction" method="bsReg">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		<action name="sgreg" class="com.yq.manager.action.SgRegAction">
+		    <result name="success">
+		        sgreg.jsp
+		    </result>
+		</action>
+		<action name="delusersave" class="com.yq.manager.action.DelUserAction">
+		    <result name="success">
+		        delusersave.jsp
+		    </result>
+		</action>
+		
+		<action name="transferRecord" class="com.yq.manager.action.TransferRecordAction">
+		    <result name="success">
+		        transferRecord.jsp
+		    </result>
+		</action>
+		<action name="datepay" class="com.yq.manager.action.AdminDatePayAction">
+		    <result name="success">
+		        datepay.jsp
+		    </result>
+		</action>
+		<action name="backcountinput" class="com.yq.manager.action.BackCountAction">
+		    <result name="success">
+		        backcount.jsp
+		    </result>
+		</action>	
+		<action name="backcount" class="com.yq.manager.action.BackCountAction" method="backCount">
+		    <result name="success">
+		        backcount.jsp
+		    </result>
+		</action>
+		
+		<action name="date" class="com.yq.manager.action.DateAction">
+		    <result name="success">
+		        date.jsp
+		    </result>
+		</action>	
+		<action name="gpjysc" class="com.yq.manager.action.GpjyscAction">
+		    <result name="success">
+		        gpjysc.jsp
+		    </result>
+		</action>
+		
+		<action name="gpjy" class="com.yq.manager.action.GpjyAction">
+		    <result name="success">
+		        gpjy.jsp
+		    </result>
+		</action>
+		
+		<action name="bdbjzpay" class="com.yq.manager.action.BdbjzpayAction">
+		    <result name="input">
+		        bdbjzpay.jsp
+		    </result>
+		    <result name="success">
+		        bdbjzpay.jsp
+		    </result>
+		</action>
+		
+		<action name="newsdate" class="com.yq.manager.action.NewsDateAction">
+		    <result name="success">
+		        newsdate.jsp
+		    </result>
+		</action>
+	</package>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="adminLogin" extends="myInterceptor" namespace="/">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="adminindex" class="com.yq.manager.action.AdminLoginAction">
+			<result name="success" >/admin/default.jsp</result>
+			<result name="redirect" type="redirect">/admin/adminmanager</result>
+		</action>
+	</package>
+
+</struts>
