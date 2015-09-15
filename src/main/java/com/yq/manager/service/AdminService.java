@@ -26,6 +26,7 @@ import com.yq.manager.dao.MtfhtjDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
+import com.yq.user.bo.Cpuser;
 import com.yq.user.bo.Datecj;
 import com.yq.user.bo.Dateip;
 import com.yq.user.bo.Datepay;
@@ -41,12 +42,14 @@ import com.yq.user.bo.Txpay;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
+import com.yq.user.dao.CpuserDao;
 import com.yq.user.dao.DatecjDao;
 import com.yq.user.dao.DateipDao;
 import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcfhDao;
 import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
+import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
@@ -91,6 +94,10 @@ public class AdminService {
 	private MtfhtjDao mtfhtjDao;
 	@Autowired
 	private DateipDao dateipDao;
+	@Autowired
+	private CpuserDao cpuserDao;
+	@Autowired
+	private JfcpDao jfcpDao;
 	
 	
 	private Map<String,String> adminUserMap = new HashMap<String,String>();
@@ -987,5 +994,23 @@ public class AdminService {
 		return dateipDao.getAllPageList(pageIndex, pageSize);
 	}
 	
-	
+	public IPage<Cpuser> getCpuserPageList(int pageIndex,int pageSize){
+		return cpuserDao.getPageList(pageIndex, pageSize);
+	}
+	/**
+	 * 产品恢复
+	 * @param cpId
+	 */
+	public void recoverGoods(int cpId){
+		if(!jfcpDao.recoverDqjf(cpId)){
+			throw new ServiceException(1, "还没抢购完成，暂时不可以恢复，");
+		}
+	}
+	/**
+	 * 发货录入
+	 * @param cgId
+	 */
+	public void fwDate(int cgId){
+		cpuserDao.updateFwdate(cgId);
+	}
 }

@@ -140,11 +140,11 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <div class=sec_menu style="width:158px; height:95px">
             <table cellpadding=0 cellspacing=0 align=center width=150 height="93">
               <tr> 
-                <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="cgcp.asp"><font color="#0000FF">抢购管理</font></a></font></td>
+                <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="cgcp"><font color="#0000FF">抢购管理</font></a></font></td>
               </tr>
-              <tr> 
+             <!--  <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="vip545.asp"><font color="#000000">设置交易股价</font></a></font></td>
-              </tr>
+              </tr> -->
               <tr> 
                 <td height=20>☉  <font color="#800000"><b><a target="BoardList" href="/vgo/adslist.asp"><font color="#000000">公告管理</font></a></b><font color="#000000"> | 
                 </font><b><a target="BoardList" href="/vgo/ggads.asp"><font color="#000000">添加公告</font></a></b></font></td>
@@ -158,6 +158,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
   </tr>
 </table>
 &nbsp;
+<!--  
 <table cellpadding=0 cellspacing=0 width=158 align=center>
 <tr>
     <td height=25 class=menu_title onmouseover=this.className='menu_title2'; onmouseout=this.className='menu_title'; background="images/admin_left_2.gif" id=menuTitle1 onclick="showsubmenu(11)"><span>邮件系统管理</span></td>
@@ -208,5 +209,5 @@ eval("submenu" + sid + ".style.display=\"none\";");
 	</td>
   </tr>
 </table>
-&nbsp; </table>
+&nbsp; --></table>
 <p><!-- <iframe name="I1" src="managequeren.asp">浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe> --></p>

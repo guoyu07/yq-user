@@ -273,6 +273,22 @@
 		        newsdate.jsp
 		    </result>
 		</action>
+		
+	   <action name="cgcp" class="com.yq.manager.action.BuyManagerAction">
+		    <result name="success">
+		        cpcg.jsp
+		    </result>
+		</action>
+	   <action name="hfcg" class="com.yq.manager.action.BuyManagerAction" method="recoverGoods">
+		    <result name="success">
+		        cpcg.jsp
+		    </result>
+		</action>	
+		<action name="fwdate" class="com.yq.manager.action.BuyManagerAction" method="fwdate">
+		    <result name="success">
+		        cpcg.jsp
+		    </result>
+		</action>	
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

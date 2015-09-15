@@ -67,4 +67,9 @@ public class JfcpDao {
 		parameter.setInt(cpbh);
 		return jdbc.update(sql, parameter)>0;
 	}
+	
+	public boolean recoverDqjf(int cpbh){
+		String sql = "update "+table+" set dqjf=zjfsl where dqjf=0";
+		return jdbc.update(sql,null)>0;
+	}
 }
