@@ -2,14 +2,15 @@ package com.yq.manager.service;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateUtils;
@@ -108,10 +109,11 @@ public class AdminService {
 	
 	
 	
-	private Map<String,String> adminUserMap = new HashMap<String,String>();
+  	private Cache<String,String> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
+
 	
 	public String getLoginAdminUserName(String sessionId){
-		return adminUserMap.get(sessionId);
+		return adminUserMap.getIfPresent(sessionId);
 	}
 	/**
 	 * 管理员登录
@@ -163,7 +165,7 @@ public class AdminService {
 	}
 	
 	public void logout(String sessionId){
-		adminUserMap.remove(sessionId);
+		adminUserMap.invalidate(sessionId);
 	}
 	
 	public IPage<Sgtj> getSgtjPageList(int pageIndex,int pageSize){

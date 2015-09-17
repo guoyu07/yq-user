@@ -4,13 +4,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.context.ServiceCacheFactory;
@@ -116,7 +118,10 @@ public class UserService {
     private FcxtDao fcxtDao;
 
     
-    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
+//    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
+    
+  //用户id与UserMapper的映射map
+  	private Cache<String,String> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(102400).build();
     
     public static final boolean IS_SEND_MSG_TEST= false;
     
@@ -126,7 +131,7 @@ public class UserService {
      * @return
      */
     public String isLogin(String sessionId){
-    	return userSession.get(sessionId);
+    	return userSession.getIfPresent(sessionId);
     }
     
     
@@ -222,7 +227,8 @@ public class UserService {
 	 * @param sessionId
 	 */
     public void relogin(String loginUserName,String sessionId,String ip){
-    	String userName = userSession.remove(sessionId);
+    	String userName = userSession.getIfPresent(sessionId);
+    	userSession.invalidate(sessionId);
     	Gcuser beforUser = gcuserDao.getUser(userName);
     	Gcuser afterUser = gcuserDao.getUser(loginUserName);
     	if(!beforUser.getUserid().equals(afterUser.getUserid())||!beforUser.getName().equals(afterUser.getName())){
@@ -238,8 +244,12 @@ public class UserService {
      * @return
      */
     public boolean logout(String sessionId){
-    	String userName = userSession.remove(sessionId);
-    	return dateipDao.updateLogout(userName);
+    	String userName = userSession.getIfPresent(sessionId);
+    	if(userName!=null){
+        	userSession.invalidate(sessionId);;
+        	return dateipDao.updateLogout(userName);
+    	}
+        return true;
     }
     
     
