@@ -14,11 +14,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 </style>
 </head>
 <body bgcolor="#E8F1FF" topmargin="5" leftmargin="5">
-<span style="font-size: 9pt">
 
-</body>
-</html>
-</span>
 <div align="center">
 <form name="form1" METHOD="POST" action="/admin/editnotice?noticeId=${dgag.id}&status=1">
     <div align="center">
@@ -38,7 +34,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
         <td align="right" width="10%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"> 
           <b><font size="2">公告标题：</font></b></td>
         <td width="89%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"> 
-          <input name="title" size="115" value="${dgag.ggbt}"></td>
+         <textarea rows="1" name="title" cols="110">${dgag.ggbt}</textarea>
       </tr>
       <tr> 
         <td align="right" width="10%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"> 
@@ -61,5 +57,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
     </table>
       </center>
     </div>
-</div>
 </form>
+</div>
+</body>
+</html>
