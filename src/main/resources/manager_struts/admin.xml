@@ -288,7 +288,43 @@
 		    <result name="success">
 		        cpcg.jsp
 		    </result>
-		</action>	
+		</action>
+		<action name="adslist" class="com.yq.manager.action.NoticeAction" method="showList">
+		    <result name="success">
+		        adslist.jsp
+		    </result>
+		</action>
+        <action name="showcontent" class="com.yq.manager.action.NoticeAction" method="showContent">
+		    <result name="success">
+		        showcontent.jsp
+		    </result>
+		</action>		
+		<action name="addnotice" class="com.yq.manager.action.NoticeAction" method="add">
+		    <result name="success">
+		        addnotice.jsp
+		    </result>
+		    <result name="redirect" type="redirect">
+		        adslist
+		    </result>
+		</action>
+		
+		<action name="editnotice" class="com.yq.manager.action.NoticeAction" method="edit">
+            <result name="success">
+		        editnotice.jsp
+		    </result>
+		    <result name="redirect" type="redirect">
+		        adslist
+		    </result>
+		</action>
+		<action name="doubleareacount" class="com.yq.manager.action.DoubleAreaCountAction">
+		    <result name="input">
+		        doubleareacount.jsp
+		    </result>
+		    <result name="success">
+		        doubleareacount.jsp
+		    </result>
+		</action>		
+						
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

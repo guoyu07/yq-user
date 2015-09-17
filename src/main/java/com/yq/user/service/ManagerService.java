@@ -1,8 +1,11 @@
 package com.yq.user.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.common.utils.DateUtils;
 import com.yq.user.bo.Dgag;
 import com.yq.user.bo.Epkjdate;
 import com.yq.user.bo.Fcxt;
@@ -108,4 +111,26 @@ public class ManagerService {
 	public boolean updateJfkjdateBz0(int dan,int shuang,int da,int xiao){
 		return jfkjdateDao.update(dan, shuang, da, xiao);
 	}
+	/**
+	 * 添加公告
+	 * @param title
+	 * @param content
+	 */
+	public void addNotice(String title,String content){
+		Dgag dgag = new Dgag();
+		dgag.setGgbt(title);
+		dgag.setGgny(content);
+		dgag.setGgdate(new Date());
+		dgagDao.add(dgag);
+	}
+	/**
+	 * 修改公告
+	 * @param title
+	 * @param content
+	 */
+	public boolean editNotice(int id,String title,String content,String ggdate){
+		Date ggdateO = DateUtils.StringToDate(ggdate);
+		return dgagDao.update(id, title, content, ggdateO);
+	}
+	
 }

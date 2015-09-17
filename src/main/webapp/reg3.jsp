@@ -1,5 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="common/taglib.jsp"%>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('没有这个推荐人账号，请重新写入！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('该姓名[${ggname}]及身份证号码[${gguserid}]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('注意：您填写的身份证号码不合法或错误，请检查后再试！！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('该姓名[${ggname}]及身份证号码[${gguserid}]禁止注册！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

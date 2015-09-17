@@ -1,5 +1,7 @@
 package com.yq.user.dao;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.Jdbc;
@@ -27,6 +29,15 @@ public class FcxtDao {
 		parameter.setInt(mcsl);
 		parameter.setInt(mcsl);
 		parameter.setInt(id);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean updateDoubleAreaCount(Date jsDate,String lastName,int id){
+		String sql = "update "+table+" set payadd=payadd+1,jsdate=?,lname=? where id=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.withObject(jsDate);
+		parameter.withString(lastName);
+		parameter.withInt(id);
 		return jdbc.update(sql, parameter)>0;
 	}
 	

@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 public class Sgtj{
-	private int sgid;
+	private Integer sgid;
 	private int zd;
 	private int nd;
 	private int aq;
@@ -25,11 +25,12 @@ public class Sgtj{
 	private double ljfhg;
 	private double ljzfh;
 	private String bz;
-	public void setSgid(int sgid){
-	this.sgid=sgid;
-	}
-	public int getSgid(){
+	
+	public Integer getSgid() {
 		return sgid;
+	}
+	public void setSgid(Integer sgid) {
+		this.sgid = sgid;
 	}
 	public void setZd(int zd){
 	this.zd=zd;

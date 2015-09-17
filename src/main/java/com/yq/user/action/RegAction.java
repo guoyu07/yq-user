@@ -52,6 +52,9 @@ public class RegAction extends ALDAdminActionSupport {
 		}else if(step==1){
 			return "input2";
 		}else if(step==2){
+			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+			int result = userService.checkNameAndIdCardAndUpUser(ggname, gguserid, upvip);
+			super.setErroCodeNum(result);
 			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 			provinceList = provinceDao.getProvinceList();
 			return "input3";

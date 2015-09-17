@@ -30,6 +30,7 @@ import com.yq.user.bo.Cpuser;
 import com.yq.user.bo.Datecj;
 import com.yq.user.bo.Dateip;
 import com.yq.user.bo.Datepay;
+import com.yq.user.bo.Dgag;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Fhdate;
 import com.yq.user.bo.Gcfh;
@@ -43,8 +44,10 @@ import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
+import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.DatecjDao;
 import com.yq.user.dao.DateipDao;
+import com.yq.user.dao.DgagDao;
 import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcfhDao;
 import com.yq.user.dao.GcuserDao;
@@ -98,6 +101,11 @@ public class AdminService {
 	private CpuserDao cpuserDao;
 	@Autowired
 	private JfcpDao jfcpDao;
+	@Autowired
+	private DgagDao dgagDao;
+	@Autowired
+	private DatePayDao datePayDao;
+	
 	
 	
 	private Map<String,String> adminUserMap = new HashMap<String,String>();
@@ -876,6 +884,149 @@ public class AdminService {
 	}
 	
 	/**
+	 * 执行双区计算
+	 */
+	@Transactional
+	public void doubelAreaCount(){
+		Fcxt fcxt = fcxtDao.get(2);
+		int mqbz = fcxt.getPayadd();
+//		int sqbz = fcxt.getPayadd()-1;
+		String lastname = fcxt.getLname();
+		if(System.currentTimeMillis()<fcxt.getJsdate().getTime()){
+			throw new ServiceException(1, "还没有到结算的日期（每星期二22点后）！");
+		}
+		IPage<Sgxt> page = null;
+		Collection<Sgxt> tempData = null;
+		int pageIndex = 0;
+		int pageSize = 100;
+		while(true){
+			page = sgxtDao.getDoubleAreaCountPageList(pageIndex, pageSize);
+			tempData = page.getData();
+			if(tempData!=null&&tempData.size()>0){
+				for(Sgxt sgxt:tempData){
+					dealDoubleAreaCount(sgxt,fcxt);
+				}
+				
+			}else{
+				break;
+			}
+			pageIndex++;
+		}
+		
+		Double rs_sgaq = sgxtDao.getSumField("aq");
+		Double rs_sgbq = sgxtDao.getSumField("bq");
+		Double rs_mq = datePayDao.getSumSyjz(mqbz);
+//		Sgtj sgtj = sgtjDao.get(sqbz);
+//		Date jsdate = sgtj.getJsdate();
+		Double rs_zd = sgxtDao.getSumField("sjb");
+		Sgxt sgxt = sgxtDao.get(lastname);
+		int lastid =sgxt.getId();
+		Double rs_nd = sgxtDao.getSumSjbById(lastid);
+		Double rs_cb = gcuserDao.getSumByField("cbpay");
+		Double rs_pa = gcuserDao.getSumByField("pay");
+		Double rs_tx = gcuserDao.getSumByField("txpay");
+		Double rs_db = gcuserDao.getSumByField("jydb");
+		Double rs_xt = gcuserDao.getSumByField("jyg");
+		Double rs_fhg = gcuserDao.getSumByField("gdgc");
+		Double rs_zfh = gcuserDao.getSumByField("ljfh");
+		Double rs_ztx = txPayDao.getSumpayNumNoCondition();
+		Sgtj sgtj2 = new Sgtj();
+		
+		sgtj2.setZd(rs_zd.intValue());
+		sgtj2.setNd(rs_nd.intValue());
+		sgtj2.setAq(rs_sgaq.intValue());
+		sgtj2.setBq(rs_sgbq.intValue());
+		sgtj2.setZpay(rs_mq.intValue());
+		sgtj2.setAbp(rs_mq.intValue()/50);
+		sgtj2.setLdpay((int)(rs_mq*0.1));
+		sgtj2.setJsdate(new Date());
+		sgtj2.setLjcb(rs_cb);
+		sgtj2.setLjpa(rs_pa);
+		sgtj2.setLjtx(rs_tx.intValue());
+		sgtj2.setLjztx(rs_ztx.intValue());
+		sgtj2.setLjdb(rs_db);
+		sgtj2.setLjyg(rs_xt);
+		sgtj2.setLjfhg(rs_fhg);
+		sgtj2.setLjzfh(rs_zfh);
+		sgtjDao.add(sgtj2);
+		Sgxt rs_last = sgxtDao.getLast();
+		Date jsDate = DateUtils.addDay(fcxt.getJsdate(), 7);
+		fcxtDao.updateDoubleAreaCount(jsDate, rs_last.getUsername(), 2);
+	}
+	
+	private void dealDoubleAreaCount(Sgxt sgxt,Fcxt fcxt){
+		int jsq = 0 ;
+		if(sgxt.getAq()==sgxt.getBq()){
+			jsq = sgxt.getBq();
+		}else if(sgxt.getAq()<sgxt.getBq()){
+			jsq = sgxt.getAq();
+		}else if(sgxt.getAq()>sgxt.getBq()){
+			jsq = sgxt.getBq();
+		}
+		if(jsq*50>sgxt.getFdpay()){
+			sgxtDao.updateDoubleCount(sgxt.getId(), sgxt.getFdpay(), sgxt.getFdpay()+sgxt.getCbpay(), 0, 0);
+		}else{
+			sgxtDao.updateDoubleCount(sgxt.getId(),jsq*50, jsq*50+sgxt.getCbpay(), sgxt.getAq()-jsq, sgxt.getBq()-jsq);
+		}
+		
+		Gcuser gcuser = gcuserDao.getUser(sgxt.getUsername());
+		if(gcuser!=null){
+			gcuserDao.addYbForDoubleAreaCount(gcuser.getUsername(), (int)sgxt.getPay());
+			Datepay datepay = new Datepay();
+			datepay.setUsername(sgxt.getUsername());
+			datepay.setRegid("游戏业务"+jsq+"平衡奖金");
+			datepay.setPay(gcuser.getPay()+(int)sgxt.getPay());
+			datepay.setSyjz((int)sgxt.getPay());
+			datepay.setJydb(gcuser.getJydb());
+			datepay.setBz(fcxt.getPayadd());
+			datepay.setNewbz(1);
+			logService.addDatePay(datepay);
+			
+			if(gcuser.getCxt()<3&&gcuser.getCxdate().getTime()>System.currentTimeMillis()){
+				gcuserDao.reduceYbForDoubleAreaCount(gcuser.getUsername(), (int)sgxt.getPay());
+				Datepay datepay2 = new Datepay();
+				datepay2.setUsername(sgxt.getUsername());
+				datepay2.setRegid("扣星期间不享受平衡奖金");
+				datepay2.setPay(gcuser.getPay());
+				datepay2.setJc((int)sgxt.getPay());
+				datepay2.setJydb(gcuser.getJydb());
+				datepay2.setBz(fcxt.getPayadd());
+				datepay2.setNewbz(1);
+				logService.addDatePay(datepay2);
+			}
+			
+			//给他的上级处理
+			Gcuser upUser = gcuserDao.getUser(gcuser.getUp());
+			if(upUser!=null&&upUser.getSjb()>0){
+				int addNum =  (int)(sgxt.getPay()*0.1);
+				gcuserDao.addYbForDoubleAreaCountJypay(upUser.getUsername(),addNum);
+				Datepay datepay3 = new Datepay();
+				datepay3.setUsername(upUser.getUsername());
+				datepay3.setRegid(gcuser.getUsername()+"游戏业务"+jsq+"辅导奖");
+				datepay3.setPay(upUser.getPay()+addNum);
+				datepay3.setSyjz(addNum);
+				datepay3.setJydb(upUser.getJydb());
+				datepay3.setNewbz(8);
+				logService.addDatePay(datepay3);
+				
+				if(upUser.getCxt()<2&&upUser.getCxdate().getTime()>System.currentTimeMillis()){
+					gcuserDao.reduceYbForDoubleAreaCountJypay(upUser.getUsername(),addNum);
+					Datepay datepay4 = new Datepay();
+					datepay4.setUsername(upUser.getUsername());
+					datepay4.setRegid("扣星期间不享受辅导奖金");
+					datepay4.setPay(upUser.getPay());
+					datepay4.setJc(addNum);
+					datepay4.setJydb(upUser.getJydb());
+					datepay4.setBz(fcxt.getPayadd());
+					datepay4.setNewbz(8);
+					logService.addDatePay(datepay4);
+				}
+			}
+			
+		}
+	}
+	
+	/**
 	 * 执行计算
 	 */
 	public void backCount(Date date){
@@ -1013,4 +1164,10 @@ public class AdminService {
 	public void fwDate(int cgId){
 		cpuserDao.updateFwdate(cgId);
 	}
+	
+	public IPage<Dgag> getNoticePageList(int pageIndex,int pageSize){
+		return dgagDao.getAllPage(pageIndex, pageSize);
+	}
+	
+	
 }

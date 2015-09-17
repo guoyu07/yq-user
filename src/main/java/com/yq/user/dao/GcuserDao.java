@@ -273,6 +273,82 @@ public class GcuserDao {
 		parameter.setString(username);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean addYbForDoubleAreaCount(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay+?,jjpay=jjpay+?,cbpay=cbpay+?,dlpay=dlpay+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean reduceYbForDoubleAreaCount(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay-?,jjpay= case when jjpay<? then 0 else jjpay-? end,dlpay= case when dlpay<? then 0 else dlpay-? end,cbpay= case when cbpay<? then 0 else cbpay-? end where username=? and pay-?>=0";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		parameter.setInt(changeNum);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean addYbForDoubleAreaCountJypay(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay+?,jypay=jypay+?,cbpay=cbpay+?,dlpay=dlpay+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean reduceYbForDoubleAreaCountJypay(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay-?,jjpay= case when jypay<? then 0 else jypay-? end,dlpay= case when dlpay<? then 0 else dlpay-? end,cbpay= case when cbpay<? then 0 else cbpay-? end where username=? and pay-?>=0";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		parameter.setInt(changeNum);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 	/**
 	 * 加一币
 	 * @param username
@@ -584,5 +660,10 @@ public class GcuserDao {
 		String sql = "select sum(ljfh) from "+table+"";
 		return jdbc.getDouble(sql, null);
 	}	
+	
+	public Double getSumByField(String fieldName){
+		String sql = "select sum("+fieldName+") from "+table+"";
+		return jdbc.getDouble(sql, null);
+	}
 	
 }

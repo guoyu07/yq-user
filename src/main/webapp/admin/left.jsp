@@ -146,11 +146,11 @@ eval("submenu" + sid + ".style.display=\"none\";");
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="vip545.asp"><font color="#000000">设置交易股价</font></a></font></td>
               </tr> -->
               <tr> 
-                <td height=20>☉  <font color="#800000"><b><a target="BoardList" href="/vgo/adslist.asp"><font color="#000000">公告管理</font></a></b><font color="#000000"> | 
-                </font><b><a target="BoardList" href="/vgo/ggads.asp"><font color="#000000">添加公告</font></a></b></font></td>
+                <td height=20>☉  <font color="#800000"><b><a target="BoardList" href="/admin/adslist"><font color="#000000">公告管理</font></a></b><font color="#000000"> | 
+                </font><b><a target="BoardList" href="/admin/addnotice"><font color="#000000">添加公告</font></a></b></font></td>
               </tr>
               <tr> 
-                <td height=20>☉  <font color="#FF0000"><a target="_self" href="jssqdate.asp"><font color="#000000">双区结算</font></a></font></td>
+                <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="doubleareacount"><font color="#000000">双区结算</font></a></font></td>
               </tr>
               </table>
 	  </div>

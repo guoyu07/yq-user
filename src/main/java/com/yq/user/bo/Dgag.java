@@ -7,17 +7,17 @@ import java.util.Date;
 
 
 public class Dgag{
-	private int id;
+	private Integer id;
 	private String ggbt;
 	private String ggny;
 	private Date ggdate;
 	private int check;
 	private String bz;
-	public void setId(int id){
-	this.id=id;
-	}
-	public int getId(){
+	public Integer getId() {
 		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public void setGgbt(String ggbt){
 	this.ggbt=ggbt;

@@ -54,6 +54,17 @@ public class SgxtDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean updateDoubleCount(int id,int pay,double cbpay,int aq,int bq){
+		String sql = "update "+table+" set pay=?,cbpay=?,aq=?,bq=? where id=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(pay);
+		parameter.setDouble(cbpay);
+		parameter.setInt(aq);
+		parameter.setInt(bq);
+		parameter.setInt(id);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
 	public boolean updateZfiled(String userName,String filedName,int filedValue,int dqzuo,int count){
 		String sql = "update "+table+" set "+filedName+"=?,dqzuo=?,count=? where username=?";
 		SqlParameter parameter = new SqlParameter();
@@ -100,6 +111,11 @@ public class SgxtDao {
 	
 	public IPage<Sgxt> getPageList(int pageIndex,int pageSize){
 		String sql = "select * from "+table+" order by id desc";
+		return jdbc.getListPage(sql, Sgxt.class, null, pageSize, pageIndex);
+	}
+	
+	public IPage<Sgxt> getDoubleAreaCountPageList(int pageIndex,int pageSize){
+		String sql = "select * from "+table+" where aq>0 and bq>0 order by id desc";
 		return jdbc.getListPage(sql, Sgxt.class, null, pageSize, pageIndex);
 	}
 	
@@ -154,5 +170,14 @@ public class SgxtDao {
 	 public void backCount(String timeTop){
 		 String sql = "update "+table+" set mqfh=mqfh+sjb*500*fhbl where bddate<? and xxnew=3 and mqfh<zfh and ((id>9000 and id<12000) or (id>11999 and id<14000) or id>15369) order by id";
 		 jdbc.update(sql, SqlParameter.Instance().withString(timeTop));
+	 }
+	 
+	 public Double getSumField(String fieldName){
+		 String sql = "SELECT sum("+fieldName+") FROM "+table;
+		 return jdbc.getDouble(sql, null);
+	 }
+	 public Double getSumSjbById(int lastId){
+		 String sql = "select sum(sjb) as ljnd from sgxt where id>?";
+		 return jdbc.getDouble(sql, SqlParameter.Instance().withInt(lastId));
 	 }
 }

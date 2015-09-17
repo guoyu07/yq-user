@@ -108,4 +108,9 @@ public class DatePayDao {
 		return jdbc.update(sql, SqlParameter.Instance().withString(regId).withInt(id))>0;
 	}
 	
+	public Double getSumSyjz(int bz){
+		String sql = "SELECT sum(syjz)  FROM "+table+" where bz = ?";
+		return jdbc.getDouble(sql, SqlParameter.Instance().withInt(bz));
+	}
+	
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('结算期间暂停开户，明天开放！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('还没有到结算时间（每星期二22点后）！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('选择报单金额错误，无法完成开户，请充值后再试！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('登录密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('二级密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>

@@ -118,7 +118,7 @@ public class UserService {
     
     Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
-    public static final boolean IS_SEND_MSG_TEST= true;
+    public static final boolean IS_SEND_MSG_TEST= false;
     
     /**
      * 查看是否登录了
@@ -242,6 +242,23 @@ public class UserService {
     	return dateipDao.updateLogout(userName);
     }
     
+    
+    public int checkNameAndIdCardAndUpUser(String ggname,String gguserid,String upvip){
+    	if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
+			return 2;//推荐人不存在
+		}
+		if(!IDCardUtils.IDCardValidate(gguserid).equals("")){
+			return 4;//身份证号码无效
+		}
+		if(isForbidNameOrID(ggname, gguserid)){
+			return 5;//禁用账号
+		}
+		List<Gcuser> list = getUserByIdCard(ggname, gguserid);
+		if(list!=null&&list.size()>0){
+			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！
+		}
+		return 0;
+    }
 	/**
 	 * 注册
 	 * @param gguser
