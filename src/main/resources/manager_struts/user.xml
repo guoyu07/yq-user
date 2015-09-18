@@ -168,10 +168,13 @@
 		   <result name="success">view/yblc-mallback.jsp</result>
 		</action>		
 		<action name="vipjzpay" class="com.yq.user.action.VipjzpayAction">
-		   <!-- <result name="success">vip/vipjzpay.jsp</result> -->
+		   <!--yblc-transferout-present.jsp <result name="success">vip/vipjzpay.jsp</result> -->
 		   <result name="success">view/yblc-transferout.jsp</result>
 		</action>
-		
+		<action name="ybPresent" class="com.yq.user.action.YbPresentAction">
+		   <!--yblc-transferout-present.jsp <result name="success">vip/vipjzpay.jsp</result> -->
+		   <result name="success">view/yblc-transferout-present.jsp</result>
+		</action>
 		<action name="epjysc" class="com.yq.user.action.EphyscAction">
 		   <!-- <result name="success">vip/epjysc.jsp</result> -->
 		   <result name="success">view/yblc-mark.jsp</result>

@@ -1060,6 +1060,50 @@ public class UserService {
 		this.updateSybdb(toUser, amount, "收到-"+fromUser);
 		
 	}
+	@Transactional
+	public void trasferYbForPresent(String fromUser,String toUser,String pa,String pa3,int amount){
+		Gcuser fUser = gcuserDao.getUser(fromUser);
+		Gcuser tUser = gcuserDao.getUser(toUser);
+		
+		if(fUser==null){
+			throw new ServiceException(5, "转出用户不存在！");
+		}
+		if(tUser==null){
+			throw new ServiceException(6, "转入用户不存在！");
+		}
+		if(!fUser.getPassword().equals(MD5Security.md5_16(pa))){
+			throw new ServiceException(1, "登录密码不正确！");
+		}
+		if(!fUser.getPassword3().equals(pa3)){
+			throw new ServiceException(2, "二级密码不正确！");
+		}
+		if(amount<=0){
+			throw new ServiceException(3, "捐助数量不能小于0");
+		}
+		if(amount<100){
+			throw new ServiceException(4, "捐助数量最低为100！");
+		}
+		
+		if(!this.changeYb(fromUser, -amount, "捐助", 14,null)){
+			throw new ServiceException(100, "Yb不足");
+		}
+		
+		if(!gcuserDao.addWhenOtherPersionBuyJbCard(toUser, amount)){
+			throw new ServiceException(7, "添加失败！");
+		}
+		
+		Datepay datePay = new Datepay();
+		datePay.setUsername(toUser);
+		datePay.setSyjz(amount);
+		datePay.setPay(tUser.getPay()+amount);
+		datePay.setJydb(tUser.getJydb());
+		datePay.setRegid("收到捐助-"+fromUser);
+		datePay.setNewbz(14);
+		datePay.setAbdate(new Date());
+		
+		logService.addDatePay(datePay);
+		
+	}
 	/**
 	 * yb转账
 	 * @param fromUser
@@ -1436,7 +1480,7 @@ public class UserService {
 		datePay.setAbdate(new Date());
 		logService.addDatePay(datePay);
 		
-		if(this.changeYb(toUser, amount, "收到服务中心"+toUser.substring(0, 2)+"***转入", 0, null)){
+		if(!this.changeYb(toUser, amount, "收到服务中心"+toUser.substring(0, 2)+"***转入", 0, null)){
 			throw new ServiceException(3000, "未知错误！");
 		}
 		

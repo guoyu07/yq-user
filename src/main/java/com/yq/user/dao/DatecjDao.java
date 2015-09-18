@@ -34,4 +34,19 @@ public class DatecjDao {
 		String sql = "select * from "+table+" order by id desc";
 		return jdbc.getListPage(sql, Datecj.class, null, pageSize, pageIndex);
 	}
+	
+	public IPage<Datecj> getDatecjPageListByCz(String cz,int pageIndex,int pageSize){
+		String sql = "select * from "+table+" where cz = ? order by id desc";
+		return jdbc.getListPage(sql, Datecj.class, SqlParameter.Instance().withString(cz), pageSize, pageIndex);
+	}
+	
+	public Double getSumDqcj(String cz){
+		String sql = "SELECT sum(dqcj) FROM datecj where cz = ?";
+		return jdbc.getDouble(sql, SqlParameter.Instance().withString(cz));
+	}
+	public Double getSumDqcj(String cz,String startTime,String endTime){
+		String sql = "SELECT sum(dqcj) FROM datecj where cz = ? and qldate between ? and ?";
+		return jdbc.getDouble(sql, SqlParameter.Instance().withString(cz).withString(startTime).withString(endTime));
+	}	
+	
 }

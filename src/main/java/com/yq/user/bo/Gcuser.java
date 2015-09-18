@@ -54,7 +54,7 @@ public class Gcuser{
 	private String password;
 	private String password3;
 	private String name;
-	private int dqu;
+	private Integer dqu;
 	private String add9dqu;
 	private String addsheng;
 	private String addshi;
@@ -371,11 +371,12 @@ public class Gcuser{
 	public String getName(){
 		return name;
 	}
-	public void setDqu(int dqu){
-	this.dqu=dqu;
-	}
-	public int getDqu(){
+	
+	public Integer getDqu() {
 		return dqu;
+	}
+	public void setDqu(Integer dqu) {
+		this.dqu = dqu;
 	}
 	public void setAdd9dqu(String add9dqu){
 	this.add9dqu=add9dqu;

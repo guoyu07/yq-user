@@ -1,0 +1,49 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="cs" extends="csInterceptor" namespace="/cs">
+	     <action name="csindex" class="com.yq.cservice.action.CsLoginAction">
+			<result name="success" >/cs/index.jsp</result>
+		</action>
+		
+	     <action name="chargeRecord" class="com.yq.cservice.action.ChargeRecordAction">
+			<result name="success" >/cs/chargeRecord.jsp</result>
+		</action>		
+	</package>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="cslogin" extends="myInterceptor" namespace="/">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="cslogin" class="com.yq.cservice.action.CsLoginAction">
+			<result name="success" >/cs/default.jsp</result>
+			<result name="redirect" type="redirect">/cs/csindex</result>
+		</action>
+	</package>
+
+
+   <package name="csInterceptor" extends="myInterceptor">
+		<interceptors>
+			<!-- 认证拦截器-->
+			<interceptor name="csInterceptor"
+				class="com.yq.common.interceptor.CsInterceptor" />
+			<interceptor-stack name="csStack">
+				<interceptor-ref name="csInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="csStack" />
+
+		<global-results>
+			<!-- 当anction抛出异常将被转向web的错误处理页面，拦截器是exceptionInterceptor -->
+			<result name="glober_error">
+				/error_manager.jsp
+			</result>
+			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
+			<result name="nologin" type="redirect">
+				/cslogin
+			</result>
+		</global-results>
+	</package>
+</struts>

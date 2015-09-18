@@ -53,4 +53,5 @@
 	</package>
 	<include file="manager_struts/user.xml" />
 	<include file="manager_struts/admin.xml" />
+	<include file="manager_struts/cs.xml" />
 </struts>
