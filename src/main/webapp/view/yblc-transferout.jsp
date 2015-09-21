@@ -76,6 +76,8 @@ return true;
 							<p><label>二级密码：</label><input type="password" name="pa3" size="20"></p>
 
 							<p><label></label><button class="but1" type=submit  name=submit2  onClick="return confirm('提示：您确定了吗？')">确 定 转 账</button></p>
+							
+							<p><a href="vipcjb">VIP充值管理（累计充值币：${gcuser.vipljcjb}）（已使用：${gcuser.vipsycjb}）（剩余：${gcuser.vipcjcjb}）</a></p>
 					</form>
 					</div>
 				</div>

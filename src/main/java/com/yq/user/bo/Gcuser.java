@@ -15,6 +15,15 @@ public class Gcuser{
 	private int sjb;
 	private int vip;
 	private String vipname;
+	private int vipljcjb;
+	private int vipsycjb;
+	private int vipcjcjb;
+	private String vipuser;
+	private String vipgh;
+	private String vipnh;
+	private String vipjh;
+	private String vipcft;
+	private String vipzfb;
 	private int cbgc;
 	private int jbpay;
 	private int cbpay;
@@ -655,5 +664,60 @@ public class Gcuser{
 		}
 		return 0;
 	}
+	public int getVipljcjb() {
+		return vipljcjb;
+	}
+	public void setVipljcjb(int vipljcjb) {
+		this.vipljcjb = vipljcjb;
+	}
+	public int getVipsycjb() {
+		return vipsycjb;
+	}
+	public void setVipsycjb(int vipsycjb) {
+		this.vipsycjb = vipsycjb;
+	}
+	public int getVipcjcjb() {
+		return vipcjcjb;
+	}
+	public void setVipcjcjb(int vipcjcjb) {
+		this.vipcjcjb = vipcjcjb;
+	}
+	public String getVipuser() {
+		return vipuser;
+	}
+	public void setVipuser(String vipuser) {
+		this.vipuser = vipuser;
+	}
+	public String getVipgh() {
+		return vipgh;
+	}
+	public void setVipgh(String vipgh) {
+		this.vipgh = vipgh;
+	}
+	public String getVipnh() {
+		return vipnh;
+	}
+	public void setVipnh(String vipnh) {
+		this.vipnh = vipnh;
+	}
+	public String getVipjh() {
+		return vipjh;
+	}
+	public void setVipjh(String vipjh) {
+		this.vipjh = vipjh;
+	}
+	public String getVipcft() {
+		return vipcft;
+	}
+	public void setVipcft(String vipcft) {
+		this.vipcft = vipcft;
+	}
+	public String getVipzfb() {
+		return vipzfb;
+	}
+	public void setVipzfb(String vipzfb) {
+		this.vipzfb = vipzfb;
+	}
+	
 }
 

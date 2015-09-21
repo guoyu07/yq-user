@@ -328,6 +328,14 @@
 		<action name="sms" class="com.yq.user.action.SmsAction">
 		    <result name="success" type="json"></result>
 		</action>
+		
+		<action name="vipcjb" class="com.yq.user.action.VipcjbAction">
+		     <result name="success">view/yblc-vipcjb.jsp</result>
+		</action>
+		
+		<action name="vipcj" class="com.yq.user.action.VipcjbAction" method="cj">
+		     <result name="success">view/yblc-vipcjb.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

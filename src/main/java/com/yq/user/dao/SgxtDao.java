@@ -1,5 +1,7 @@
 package com.yq.user.dao;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.Jdbc;
@@ -35,6 +37,9 @@ public class SgxtDao {
 	}
 	
 	public boolean add(Sgxt sgxt){
+		if(sgxt.getBddate()==null){
+			sgxt.setBddate(new Date());
+		}
 		return jdbc.insert(sgxt)>0;
 	}
 	

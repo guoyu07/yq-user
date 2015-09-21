@@ -409,7 +409,7 @@ public class GcuserDao {
 	}
 	
 	public boolean reduceSybdb(String userName,int changeNum){
-		String sql = "update "+table+" set sybdb=sybdb-? where username=? and sybdb-?>0 limit 1";
+		String sql = "update "+table+" set sybdb=sybdb-? where username=? and sybdb-?>=0 limit 1";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setInt(changeNum);
 		paramter.setString(userName);
@@ -418,7 +418,7 @@ public class GcuserDao {
 	}
 	
 	public boolean updateJB(String userName,int jydb){
-		String sql = "update "+table+" set jydb=jydb+?,gmdate=?,bddate=? where username=? and jydb+?>0 limit 1";
+		String sql = "update "+table+" set jydb=jydb+?,gmdate=?,bddate=? where username=? and jydb+?>=0 limit 1";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setInt(jydb);
 		paramter.setObject(new Date());
@@ -436,7 +436,7 @@ public class GcuserDao {
 		return this.jdbc.update(sql, paramter)>0;
 	}
 	public boolean reduceOnlyJB(String userName,int jydb){
-		String sql = "update "+table+" set jydb=jydb-? where username=? and jydb-?>0 limit 1";
+		String sql = "update "+table+" set jydb=jydb-? where username=? and jydb-?>=0 limit 1";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setInt(jydb);
 		paramter.setString(userName);
@@ -461,7 +461,7 @@ public class GcuserDao {
 	}
 	
 	public boolean updateJyg(String userName,int changejygNum){
-		String sql = "update "+table+" set jyg=jyg-?  where username=? and jyg-?>0  limit 1";
+		String sql = "update "+table+" set jyg=jyg-?  where username=? and jyg-?>=0  limit 1";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setInt(changejygNum);
 		paramter.setString(userName);
@@ -664,6 +664,11 @@ public class GcuserDao {
 	public Double getSumByField(String fieldName){
 		String sql = "select sum("+fieldName+") from "+table+"";
 		return jdbc.getDouble(sql, null);
+	}
+	
+	public boolean reduceVipcjcjb(String userName,int changeAmount){
+		String sql = "update "+table+" set vipcjcjb=vipcjcjb-?,vipsycjb=vipsycjb+? where username=? and vipcjcjb-?>=0 limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(changeAmount).withInt(changeAmount).withString(userName).withInt(changeAmount))>0;
 	}
 	
 }

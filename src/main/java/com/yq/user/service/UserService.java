@@ -15,6 +15,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.sms.util.SubMailSendUtils;
@@ -44,6 +45,7 @@ import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Txifok;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
@@ -64,6 +66,7 @@ import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
+import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
@@ -116,6 +119,8 @@ public class UserService {
     private JftzbDao jftzbDao;
     @Autowired
     private FcxtDao fcxtDao;
+    @Autowired
+    private VipcjglDao vipcjglDao;
 
     
 //    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
@@ -759,6 +764,7 @@ public class UserService {
 			sgxt.setXxnew(jsnew);
 			sgxt.setFdpay(fd);
 			sgxt.setCfd(cfd);
+			sgxt.setBddate(new Date());
 			sgxtDao.add(sgxt);
 			
 			//给接点人加钱
@@ -1584,11 +1590,9 @@ public class UserService {
 		if(userName.equals(txpay.getPayusername())){
 			throw new ServiceException(5, "您好，不能认购自己的一币，请选择其它用户，谢谢！");
 		}
-		if(gcuser.getJyg()<txpay.getPaynum()){
-			throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
-		}
-		
-
+//		if(gcuser.getJyg()<txpay.getPaynum()){
+//			throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
+//		}
 		return txpay;
 	}
 	
@@ -1607,22 +1611,22 @@ public class UserService {
 			throw new ServiceException(7, "该一币交易进行中或已经由它人交易成功了，不能重复，请选择其它交易！");
 		}
 		
-		if(!gcuserDao.updateJyg(userName, txpay.getPaynum())){
-			throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
-		}
-		
-		Gpjy gpjy = new Gpjy();
-		gpjy.setUsername(userName);
-		gpjy.setMcsl(Double.valueOf(txpay.getPaynum()));
-		gpjy.setSysl(Double.valueOf(gcuser.getJyg()-txpay.getPaynum()));
-		gpjy.setBz("冻结-认购一币-"+txpay.getPaynum()+"诚信金-"+txpay.getPayusername());
-		gpjy.setCgdate(new Date());
-		gpjy.setJy(1);
-		gpjy.setDfuser(payId+"");
-		gpjy.setNewjy(1);
-		gpjy.setAbdate(new Date());
-		
-		gpjyDao.add(gpjy);
+//		if(!gcuserDao.updateJyg(userName, txpay.getPaynum())){
+//			throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
+//		}
+//		
+//		Gpjy gpjy = new Gpjy();
+//		gpjy.setUsername(userName);
+//		gpjy.setMcsl(Double.valueOf(txpay.getPaynum()));
+//		gpjy.setSysl(Double.valueOf(gcuser.getJyg()-txpay.getPaynum()));
+//		gpjy.setBz("冻结-认购一币-"+txpay.getPaynum()+"诚信金-"+txpay.getPayusername());
+//		gpjy.setCgdate(new Date());
+//		gpjy.setJy(1);
+//		gpjy.setDfuser(payId+"");
+//		gpjy.setNewjy(1);
+//		gpjy.setAbdate(new Date());
+//		
+//		gpjyDao.add(gpjy);
 		
 		return txpay;
 	}
@@ -2568,5 +2572,58 @@ public class UserService {
 	
 	public IPage<Sgxt> getSgxtPageList(int pageIndex,int pageSize){
 		return sgxtDao.getPageList(pageIndex, pageSize);
+	}
+	
+	public IPage<Vipcjgl> getVipcjbPageList(String userName,int pageIndex,int pageSize){
+		return vipcjglDao.getPageList(pageIndex, pageSize, "order by cjid desc", new SqlParamBean("vipuser", userName));
+	}
+	/**
+	 * vip用户给下属充值
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 * @param password
+	 */
+	@Transactional
+	public void vipCj(String fromUserName,String toUserName,int amount,String password){
+		if(zuoMingxiDao.get(fromUserName, toUserName)==null&&youMingXiDao.get(fromUserName, toUserName)==null){
+			throw new ServiceException(1, "用户名输入错误或不属于自己团队的玩家，请检查后再试！");
+		}
+		if(!password.equals("vip2015th")){
+			throw new ServiceException(2, "充值密码不正确！");
+		}
+		Gcuser toUser = gcuserDao.getUser(toUserName);
+		if(toUser==null){
+			throw new ServiceException(3, "该用户名不存在，请检查输入是否正确！");
+		}
+		if(toUser.getGmdate().getTime()+2*60*1000>System.currentTimeMillis()){
+			throw new ServiceException(4, "两分钟内只能充值一次，请稍后再试！");
+		}
+		Gcuser fromUser = gcuserDao.getUser(fromUserName);
+		if(fromUser.getVipcjcjb()<amount){
+			throw new ServiceException(5, "您的充值币小于"+amount+"，无法完成充值，请联系管理员！！");
+		}
+		if(toUser.getPay()<9*amount){
+			throw new ServiceException(6, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
+		}
+		
+		if(!gcuserDao.reduceVipcjcjb(fromUserName, amount)){
+			throw new ServiceException(5, "您的充值币小于"+amount+"，无法完成充值，请联系管理员！！");
+		}
+		gcuserDao.updateCjtj(toUserName, amount);
+		
+		Vipcjgl vipcjgl = new Vipcjgl();
+		vipcjgl.setCjuser(toUserName);
+		vipcjgl.setCjjo(amount);
+		vipcjgl.setSycjb(fromUser.getVipcjcjb()-amount);
+		vipcjgl.setVipuser(fromUserName);
+		vipcjgl.setBz("充值");
+		vipcjgl.setCjdate(new Date());
+		vipcjglDao.add(vipcjgl);
+		
+		if(!this.changeYb(toUserName, -9*amount, "转为报单币v", 0, null)){
+			throw new ServiceException(6, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
+		}
+		this.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v");
 	}
 }

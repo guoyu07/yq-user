@@ -470,6 +470,7 @@ public class AdminService {
 		sgxt.setXxnew(3);
 		sgxt.setFhbl(0.005);
 		sgxt.setZfh(sjb*250);
+		sgxt.setBddate(new Date());
 		sgxtDao.add(sgxt);
 		
 		return result;

@@ -1,9 +1,7 @@
 package com.yq.user.action;
 
-import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
-import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -40,6 +38,9 @@ public class YbsfAction extends ALDAdminActionSupport {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		if(status==0){
+			if(gcuser.getJb()!=5){
+				super.setErroCodeNum(1);//alert('非商户用户名，请联系管理员！');
+			}
 			return INPUT;
 		}else{
 			userService.transferYbToShop(super.getUserName(), shpa, sfpay, pay10, ybpay, user, pa01, pa02, sfcode);
