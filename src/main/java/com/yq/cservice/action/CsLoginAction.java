@@ -15,6 +15,7 @@ public class CsLoginAction extends ALDAdminActionSupport {
 	private String csUserName;
 	private String passWord;
 	private int status;
+	private String dl;
 	public String execute(){
 		if(status==0){
 			return SUCCESS;
@@ -31,6 +32,15 @@ public class CsLoginAction extends ALDAdminActionSupport {
 		}
 		
 	}
+	
+	public String getDl() {
+		return dl;
+	}
+
+	public void setDl(String dl) {
+		this.dl = dl;
+	}
+
 	public String getCsUserName() {
 		return csUserName;
 	}

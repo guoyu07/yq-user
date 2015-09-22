@@ -57,6 +57,13 @@ public class FcxtDao {
 		return this.jdbc.get(sql, Fcxt.class, parameter);
 	}
 	
+	public Fcxt getCsAdminUser(String userName){
+		String sql = "SELECT * FROM "+table+" where ncjud=?  limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		return this.jdbc.get(sql, Fcxt.class, parameter);
+	}
+	
 	public Fcxt getFcxt(String czy){
 		String sql = "SELECT * FROM fcxt where cz01 = ? or cz02 = ? or cz03 = ? or cz04 = ? or cz05 = ? limit 1";
 		SqlParameter parameter = new SqlParameter();
@@ -65,6 +72,17 @@ public class FcxtDao {
 		parameter.setString(czy);
 		parameter.setString(czy);
 		parameter.setString(czy);
+		return this.jdbc.get(sql, Fcxt.class, parameter);
+	}
+	
+	public Fcxt getFcxtByDqu(int dqu){
+		String sql = "select * from fcxt where fsjygsl = ? or syjygsl = ? or jygsl = ?  or jy5w = ?  or payadd = ? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(dqu);
+		parameter.setInt(dqu);
+		parameter.setInt(dqu);
+		parameter.setInt(dqu);
+		parameter.setInt(dqu);
 		return this.jdbc.get(sql, Fcxt.class, parameter);
 	}
 }

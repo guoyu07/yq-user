@@ -60,6 +60,7 @@ import com.yq.user.dao.TxifokDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
 import com.yq.user.service.LogService;
+import com.yq.user.service.UserService;
 
 public class AdminService {
 	@Autowired
@@ -106,7 +107,8 @@ public class AdminService {
 	private DgagDao dgagDao;
 	@Autowired
 	private DatePayDao datePayDao;
-	
+	@Autowired
+	private UserService userService;
 	
 	
   	private Cache<String,String> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -1171,6 +1173,51 @@ public class AdminService {
 	public IPage<Dgag> getNoticePageList(int pageIndex,int pageSize){
 		return dgagDao.getAllPage(pageIndex, pageSize);
 	}
-	
-	
+	/**
+	 * 客服充值报单币
+	 * @param csUser
+	 * @param toUserName
+	 * @param amount
+	 * @param ip
+	 * @param cjfs
+	 */
+	public void chargeBdbByAdmin(String csUser,String toUserName,int amount,String ip,String cjfs){
+		Gcuser toUser = gcuserDao.getUser(toUserName);
+		if(toUser==null){
+			throw new ServiceException(1, "该用户名不存在，请检查输入是否正确！");
+		}
+		if(toUser.getGmdate().getTime()+2*60*1000>System.currentTimeMillis()){
+			throw new ServiceException(2, "两分钟内只能充值一次，请稍后再试！");
+		}
+		if(amount<5000){
+			if(toUser.getPay()<9*amount){
+				throw new ServiceException(3, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
+			}
+			gcuserDao.updateCjtj(toUserName, amount);
+			
+			if(!userService.changeYb(toUserName, -9*amount, "转为报单币v", 0, null)){
+				throw new ServiceException(3, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
+			}
+			userService.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v");
+
+		}else{
+			if(toUser.getSyep()<amount){
+				throw new ServiceException(4, "实行一半一币一半充值，本次充值"+amount+"可报单币小于"+amount+"，请先补充报单币！");
+			}
+			gcuserDao.updateCjtj(toUserName, amount);
+			if(!this.updateSybdbByManager(toUserName, amount, amount*2, amount*2, "充值"+amount+"与"+amount+"报单币生效")){
+				throw new ServiceException(4, "实行一半一币一半充值，本次充值"+amount+"可报单币小于"+amount+"，请先补充报单币！");
+			}
+		}
+		
+		Datecj datecj = new Datecj();
+		datecj.setCjuser(toUserName);
+		datecj.setDqcj(amount);
+		datecj.setLjcj(toUser.getCjtj()+amount);
+		datecj.setCjfs(cjfs);
+		datecj.setCz(csUser);
+		datecj.setIp(ip);
+		datecj.setQldate(new Date());
+		datecjDao.add(datecj);
+	}
 }

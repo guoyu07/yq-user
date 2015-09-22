@@ -47,7 +47,7 @@ return (true);
           <font size="2">用户名：</font></td>
         <td width="69%" height="51" style="border-right: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" valign="middle" bgcolor="#FFFFFF" bordercolor="#336699"> 
             <font size="2"> 
-            <input name="csUserName" size="20" style="float: left" value="" ></font></td>
+            <input name="csUserName" size="20" style="float: left" value="${dl}" ></font></td>
     			</tr>
 				<tr>
         <td width="142" height="39" style="border-left: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" align="right" bgcolor="#FFFFFF" bordercolor="#336699"> 

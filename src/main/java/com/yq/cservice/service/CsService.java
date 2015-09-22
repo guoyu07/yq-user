@@ -54,6 +54,22 @@ public class CsService {
 		return datecjDao.getDatecjPageListByCz(cz, pageIndex, pageSize);
 	}
 	/**
+	 * 获取客服信息
+	 * @param csName
+	 * @return
+	 */
+	public Fcxt getCsAdminUser(String csName){
+		return fcxtDao.getCsAdminUser(csName);
+	}
+	/**
+	 * dqu
+	 * @param dqu
+	 * @return
+	 */
+	public Fcxt getByDqu(int dqu){
+		return fcxtDao.getFcxtByDqu(dqu);
+	}
+	/**
 	 * 统计信息
 	 * @param cz
 	 * @return

@@ -596,12 +596,13 @@ public class GcuserDao {
 	}
 	
 	public boolean updateSyepLjbdbSybdb(String userName,int syep,int ljbdb,int sybdb){
-		String sql = "update "+table+" set syep=syep-?,ljbdb=ljbdb+?,sybdb=sybdb+? where username=? limit 1";
+		String sql = "update "+table+" set syep=syep-?,ljbdb=ljbdb+?,sybdb=sybdb+? where username=? and syep-?>=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(syep);
 		parameter.setInt(ljbdb);
 		parameter.setInt(sybdb);
 		parameter.setString(userName);
+		parameter.setInt(syep);
 		return jdbc.update(sql, parameter)>0;
 	}
 	

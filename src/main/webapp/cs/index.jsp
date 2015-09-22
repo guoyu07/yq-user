@@ -11,8 +11,8 @@
     </tr>
     <tr>
       <td height="48" align="center" bgcolor="#C3DAF9">
-		<form name="form" method="POST" action="search">
-		<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 9pt">&nbsp;<input type="text" name="searchUn" size="20"> <input type="submit" name="Submit" value="搜索">&nbsp;&nbsp;&nbsp; </span>
+		<form name="form" method="POST" action="searchUser">
+		<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 9pt">&nbsp;<input type="text" name="user" size="20"> <input type="submit" name="Submit" value="搜索">&nbsp;&nbsp;&nbsp; </span>
 		<b>&nbsp; <a href="/cslogin" style="text-decoration: none">返回登录</a></b></p>
 		</form></td>
     </tr>

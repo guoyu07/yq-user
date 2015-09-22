@@ -14,6 +14,7 @@ public class CjjlAction extends ALDAdminPageActionSupport<Datepay> {
 	
 	private String dl;
 	
+	
 	public String execute(){
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
 		super.initPage(logService.getDatePayChargeListPage(super.getUserName(), super.getToPage(), 30));

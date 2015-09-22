@@ -10,7 +10,21 @@
 		
 	     <action name="chargeRecord" class="com.yq.cservice.action.ChargeRecordAction">
 			<result name="success" >/cs/chargeRecord.jsp</result>
-		</action>		
+		</action>
+		
+	     <action name="searchUser" class="com.yq.cservice.action.SearchUserAction">
+			<result name="success" >/cs/searchUser.jsp</result>
+		</action>
+		
+		<action name="chargeBdb" class="com.yq.cservice.action.SearchUserAction" method="chargeBdb">
+			<result name="input1" >/cs/chargeBdb1.jsp</result>
+			<result name="input2" >/cs/chargeBdb2.jsp</result>
+			<result name="success" >/cs/chargeBdb2.jsp</result>
+		</action>
+		
+		<action name="bdbList" class="com.yq.cservice.action.SearchUserAction" method="dbdList">
+			<result name="success" >/cs/bdbList.jsp</result>
+		</action>						
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
