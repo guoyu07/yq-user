@@ -24,7 +24,13 @@
 		
 		<action name="bdbList" class="com.yq.cservice.action.SearchUserAction" method="dbdList">
 			<result name="success" >/cs/bdbList.jsp</result>
-		</action>						
+		</action>	
+		
+		<action name="chargeGw" class="com.yq.cservice.action.SearchUserAction" method="chargeGw">
+			<result name="input1" >/cs/chargeGw1.jsp</result>
+			<result name="input2" >/cs/chargeGw2.jsp</result>
+			<result name="success" >/cs/chargeGw2.jsp</result>
+		</action>					
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

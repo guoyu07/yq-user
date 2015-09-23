@@ -16,6 +16,10 @@ public class GcfhDao {
 	private static String table = "gcfh";
 	
 	
+	public boolean add(Gcfh t){
+		return jdbc.insert(t)>0;
+	}
+	
 	public IPage<Gcfh> getPageList(String username,int lb,int pageSize,int pageIndex){
 		String sql = "select * from "+table+" where userid = ? and lb=? order by id desc";
 		SqlParameter parameter = new SqlParameter();

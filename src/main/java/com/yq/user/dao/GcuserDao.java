@@ -595,6 +595,17 @@ public class GcuserDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean updateCjtjForGw(String userName,int amount){
+		String sql = "update "+table+" set cjtj=cjtj+?,jjsy=jjsy+?,ljsy=ljsy+?,gmdate=? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(amount);
+		parameter.setInt(amount);
+		parameter.setInt(amount);
+		parameter.setObject(new Date());
+		parameter.setString(userName);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
 	public boolean updateSyepLjbdbSybdb(String userName,int syep,int ljbdb,int sybdb){
 		String sql = "update "+table+" set syep=syep-?,ljbdb=ljbdb+?,sybdb=sybdb+? where username=? and syep-?>=0 limit 1";
 		SqlParameter parameter = new SqlParameter();

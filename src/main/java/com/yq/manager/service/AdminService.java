@@ -1220,4 +1220,40 @@ public class AdminService {
 		datecj.setQldate(new Date());
 		datecjDao.add(datecj);
 	}
+	/**
+	 * 充值奖金购物
+	 * @param csUser
+	 * @param toUserName
+	 * @param amount
+	 * @param ip
+	 * @param cjfs
+	 */
+	public void chargeGw(String csUser,String toUserName,int amount,String ip,String cjfs){
+		
+		Gcuser toUser = gcuserDao.getUser(toUserName);
+		if(toUser==null){
+			throw new ServiceException(1, "该用户名不存在，请检查输入是否正确！");
+		}
+		
+		gcuserDao.updateCjtjForGw(toUserName, amount);
+		
+		Gcfh gcfh = new Gcfh();
+		gcfh.setUserid(toUserName);
+		gcfh.setSyfh(amount);
+		gcfh.setLjfhtj(toUser.getJjsy()+amount);
+		gcfh.setBz("充值消费");
+		gcfh.setSf(1);
+		gcfh.setAbdate(new Date());
+		gcfhDao.add(gcfh);
+		
+		Datecj datecj = new Datecj();
+		datecj.setCjuser(toUserName);
+		datecj.setDqcj(amount);
+		datecj.setLjcj(toUser.getCjtj()+amount);
+		datecj.setCjfs(cjfs);
+		datecj.setCz(csUser);
+		datecj.setIp(ip);
+		datecj.setQldate(new Date());
+		datecjDao.add(datecj);
+	}
 }

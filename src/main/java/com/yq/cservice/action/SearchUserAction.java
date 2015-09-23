@@ -62,6 +62,26 @@ public class SearchUserAction extends ALDAdminPageActionSupport<Datecj> {
 		return SUCCESS;
 	}
 	
+	public String chargeGw(){
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+		gcuser = userService.getUserByUserName(user);
+		if(gcuser==null){
+			super.setErroCodeNum(1);//用户不存在
+		}
+		if(status==0){
+			return "input1";
+		}
+		if(status==1){
+			return "input2";
+		}
+		if(status==2){
+			AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+			adminService.chargeGw(super.getUserName(), user, cjpay, super.ip(), cjfs);
+			super.setErroCodeNum(2000);
+			return "input2";
+		}
+		return SUCCESS;
+	}
 	
 	public String dbdList(){
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);

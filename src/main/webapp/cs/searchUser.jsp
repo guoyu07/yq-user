@@ -58,7 +58,7 @@
                 <td align="center" style="border-bottom: 1px solid #C9D8AD" width="102" bgcolor="#D9E6FF"><div align="center"><font size="2">${gcuser.cjtj}</font></div></td>
                 <td align="center" style="border-bottom: 1px solid #C9D8AD" width="200" bgcolor="#D9E6FF"><font size="2">${gcuser.gmdate}</font></td>
                 <td align="center" style="border-bottom: 1px solid #C9D8AD" width="157" bgcolor="#D9E6FF"><b><a href="chargeBdb?user=${gcuser.username}" style="text-decoration: none">充值报单</a></b></td>
-                <td align="center" style="border-bottom: 1px solid #C9D8AD" width="147" bgcolor="#FFFFFF"><a href="gwcj01.asp?id=${gcuser.username}" style="text-decoration: none; font-weight: 700"><font color="#008000">充值购物</font></a></td>
+                <td align="center" style="border-bottom: 1px solid #C9D8AD" width="147" bgcolor="#FFFFFF"><a href="chargeGw?user=${gcuser.username}" style="text-decoration: none; font-weight: 700"><font color="#008000">充值购物</font></a></td>
 				</tr>
 		     </table>
 		   </c:if>
