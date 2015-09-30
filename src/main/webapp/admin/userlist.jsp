@@ -150,7 +150,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
               <tr bgcolor="#7bb5de"> 
                 <td style="border-bottom: 1px solid #C9D8AD" width="118" align="center" bgcolor="#D9E6FF"> 
                   <p align="center">
-					<a href=diyuser.asp?regid=${data.username}>${data.username}</td>
+					${data.username}</p></td>
                 <td style="border-bottom: 1px solid #C9D8AD" width="96" align="center" bgcolor="#D9E6FF"> 
                   <p align="center">${data.name}</td>
                 <td align="center" style="border-bottom: 1px solid #C9D8AD" width="105" bgcolor="#D9E6FF"> 
