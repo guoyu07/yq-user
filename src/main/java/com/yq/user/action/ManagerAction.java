@@ -53,16 +53,18 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 	public void setDq(String dq) {
 		this.dq = dq;
 	}
-	public boolean isHaveTxPayBuy() {
+	public boolean getIsHaveTxPayBuy() {
 		return isHaveTxPayBuy;
 	}
-	public void setHaveTxPayBuy(boolean isHaveTxPayBuy) {
+	public void setIsHaveTxPayBuy(boolean isHaveTxPayBuy) {
 		this.isHaveTxPayBuy = isHaveTxPayBuy;
 	}
-	public boolean isHaveTxPaySale() {
+	public boolean getIsHaveTxPaySale() {
 		return isHaveTxPaySale;
 	}
-	public void setHaveTxPaySale(boolean isHaveTxPaySale) {
+	public void setIsHaveTxPaySale(boolean isHaveTxPaySale) {
 		this.isHaveTxPaySale = isHaveTxPaySale;
 	}
+	
+	
 }

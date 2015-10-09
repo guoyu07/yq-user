@@ -95,8 +95,13 @@ public class TxPayDao {
     public boolean updateEpToHavePay(int payId,Date rgdate){
     	String sql = "update "+table+" set ep=2,rgdate=? where payid=? and ep=1 limit 1";
     	return this.jdbc.update(sql, SqlParameter.Instance().withObject(rgdate).withInt(payId))>0;
-
     }
+    
+    public boolean updateEpToHaveReceive(int payId,String ip){
+    	String sql = "update "+table+" set ep=0,rgdate=?,payonoff='已经转账',zftime=?,clip=? where payid=? and ep=2 limit 1";
+    	return this.jdbc.update(sql, SqlParameter.Instance().withObject(new Date()).withObject(new Date()).withString(ip).withInt(payId))>0;
+    }
+    
     public Txpay getByPayOnoff(String payonoff){
     	String sql = "select * from "+table+" where payonoff=? limit 1";
     	return this.jdbc.get(sql, Txpay.class, SqlParameter.Instance().withString(payonoff));

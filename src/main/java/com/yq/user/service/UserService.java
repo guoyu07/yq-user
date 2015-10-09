@@ -128,7 +128,7 @@ public class UserService {
   //用户id与UserMapper的映射map
   	private Cache<String,String> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(102400).build();
     
-    public static final boolean IS_SEND_MSG_TEST= false;
+    public static final boolean IS_SEND_MSG_TEST= true;
     
     /**
      * 查看是否登录了
@@ -1649,6 +1649,54 @@ public class UserService {
 			}
 		}
 	}
+	/**
+	 * 确认已收到钱
+	 * @param userName
+	 * @param payId
+	 * @param password3
+	 * @param smsCode
+	 */
+	@Transactional
+	public void sureIReceivedMoney(String userName,int payId,String password3,String smsCode,String ip){
+		Txpay txpay = txPayDao.getByPayid(payId);
+		if(!txpay.getPayusername().equals(userName)){
+			throw new ServiceException(1, "发布方出错，请检查输入是否正确！");
+		}
+		if(txpay.getEp()==0||txpay.getZftime()!=null){
+			throw new ServiceException(2, "交易已完成！");
+		}
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(!gcuser.getPassword3().equals(password3)){
+			throw new ServiceException(3, "二级密码输入错误，请检查输入是否正确！");
+		}
+		if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
+			throw new ServiceException(4, "手机验证码输入错误，请检查输入是否正确！");
+		}
+		//重置短信码
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		//更新订单状态
+		if(!txPayDao.updateEpToHaveReceive(payId, ip)){
+			throw new ServiceException(8888, "订单异常！");
+		}
+		//给买方加一币
+		gcuserDao.addYbForBuyInMark(txpay.getDfuser(), txpay.getPaynum());
+		
+		datePayDao.updateRegIdAndTxbzByQlid(payId, "-"+txpay.getDfuser()+"-"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS));
+		
+		
+		Gcuser dfuser = gcuserDao.getUser(txpay.getDfuser());
+		Datepay datepay = new Datepay();
+		datepay.setUsername(txpay.getDfuser());
+		datepay.setRegid("认购一币-"+txpay.getPayusername()+"-"+txpay.getPaynum());
+		datepay.setSyjz(txpay.getPaynum());
+		datepay.setPay(dfuser.getPay());
+		datepay.setJydb(dfuser.getJydb());
+		datepay.setNewbz(2);
+		datePayDao.addDatePay(datepay);
+		//更新所有同名账户状态为已支付状态
+		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
+	}
     /**
      * 购买金币卡
      * @param userName  用户名
@@ -2190,19 +2238,20 @@ public class UserService {
 	 */
 	public void checkSaleJf(String userName,double price,int saleNum,String passwrod3){
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		if(gcuser.getJyg()<50000&&DateUtils.getIntervalDays(gcuser.getBddate(), new Date())<100){
+		if(gcuser.getBddate()!=null&&gcuser.getJyg()<50000&&DateUtils.getIntervalDays(gcuser.getBddate(), new Date())<100){
 			throw new ServiceException(1,"未满100天的账户，积分暂时停止卖出交易，收益完成后自动开放！");
 		}
 		
 		Sgxt sgxt = sgxtDao.get(userName);
-		if(sgxt.getMqfh()>0&&sgxt.getMqfh()<sgxt.getZfh()&&sgxt.getXxnew()>0&&gcuser.getJyg()<50000){
-			throw new ServiceException(2,"游戏收益未完成，积分暂时停止卖出交易，收益完成后自动开放！");
+		if(sgxt!=null){
+			if(sgxt.getMqfh()>0&&sgxt.getMqfh()<sgxt.getZfh()&&sgxt.getXxnew()>0&&gcuser.getJyg()<50000){
+				throw new ServiceException(2,"游戏收益未完成，积分暂时停止卖出交易，收益完成后自动开放！");
+			}
+			
+			if(DateUtils.getIntervalDays(sgxt.getBddate(), new Date())==0){
+				throw new ServiceException(3,"请于开户后第二天再进行卖出操作，谢谢！");
+			}
 		}
-		
-		if(DateUtils.getIntervalDays(sgxt.getBddate(), new Date())==0){
-			throw new ServiceException(3,"请于开户后第二天再进行卖出操作，谢谢！");
-		}
-		
 		if(!passwrod3.equals("-1")&&!passwrod3.equals(gcuser.getPassword3())){
 			throw new ServiceException(4,"二级密码不正确");
 		}

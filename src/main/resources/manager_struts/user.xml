@@ -201,7 +201,10 @@
 		<action name="myepok" class="com.yq.user.action.MyepokAction">
 		   <result name="success">vip/myepok.jsp</result>
 		</action>
-		
+		<action name="mcepok" class="com.yq.user.action.McepokAction">
+		   <result name="input">vip/mcepok.jsp</result>
+		   <result name="success">vip/mcepok.jsp</result>
+		</action>		
 		<action name="jztojb" class="com.yq.user.action.JztobjAction">
 		   <!-- <result name="success">vip/jztojb.jsp</result> -->
 		   <result name="success">view/yblc-buy-goldcard1.jsp</result>

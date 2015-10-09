@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('请您联系您地区的VIP服务中心，谢谢！');location.replace('/vipup');</script></c:if>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

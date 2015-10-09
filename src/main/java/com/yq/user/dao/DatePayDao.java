@@ -1,5 +1,7 @@
 package com.yq.user.dao;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.Jdbc;
@@ -48,6 +50,9 @@ public class DatePayDao {
 	
 	
 	public boolean addDatePay(Datepay datepay){
+		if(datepay.getAbdate()==null){
+			datepay.setAbdate(new Date());
+		}
 		return this.jdbc.insert(datepay)>0;
 	}
 	
@@ -84,6 +89,11 @@ public class DatePayDao {
 	public boolean updateByQlid(int id){
 		String sql = "update "+table+" set regid=CONCAT(regid,'-已撤销'),txbz=0 where id=? and txbz=1";
 		return jdbc.update(sql, SqlParameter.Instance().withInt(id))>0;
+	}
+	
+	public boolean updateRegIdAndTxbzByQlid(int id,String regId){
+		String sql = "update "+table+" set regid=CONCAT(regid,?),txbz=0 where id=?";
+		return jdbc.update(sql, SqlParameter.Instance().withString(regId).withInt(id))>0;
 	}
 	
 	public boolean updateRegIdToCancel(int id,String regid){

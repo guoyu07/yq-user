@@ -3,6 +3,7 @@ package com.yq.user.action;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.ProblemCode;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Txpay;
 import com.yq.user.service.UserService;
 
@@ -34,8 +35,13 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 			Set rsTest=Nothing
 			%>
 		 */
-		
+		 
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
+		if(gcuser.getVip()==0){
+			super.setErroCodeNum(1);//alert('请您联系您地区的VIP服务中心，谢谢！');
+			return SUCCESS;
+		}
 		super.initPage(userService.getTxpayPage(super.getToPage(), 15));
 		return SUCCESS;
 	}

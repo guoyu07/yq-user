@@ -280,6 +280,21 @@ public class GcuserDao {
 	 * @param changeNum
 	 * @return
 	 */
+	public boolean addYbForBuyInMark(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay+?,rgpay=rgpay+?,cbpay=cbpay+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
 	public boolean addYbForDoubleAreaCount(String username,int changeNum){
 		String sql = "update "+table+" set pay=pay+?,jjpay=jjpay+?,cbpay=cbpay+?,dlpay=dlpay+? where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
