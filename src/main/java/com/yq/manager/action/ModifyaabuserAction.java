@@ -3,6 +3,7 @@ package com.yq.manager.action;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.manager.service.AdminService;
+import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -28,15 +29,20 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private String jcname;
 	private String jcuserid;
 	private String password;
+	private String pwdate;
+	
+	
+	private Fcxt fcxt;
 	
 	public String execute(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		fcxt = adminService.getAdminUser(super.getUserName());
 		if(status==0){
 			UserService userService = ServiceCacheFactory.getService(UserService.class);
 			gcuser = userService.getUserByUserName(userid);
 			return INPUT;
 		}
-		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password);
+		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,super.ip());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -129,5 +135,11 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	}
 	public void setPayok(Integer payok) {
 		this.payok = payok;
+	}
+	public Fcxt getFcxt() {
+		return fcxt;
+	}
+	public void setFcxt(Fcxt fcxt) {
+		this.fcxt = fcxt;
 	}
 }

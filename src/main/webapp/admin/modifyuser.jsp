@@ -30,9 +30,20 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<font color="#FF0000" size="3"><b>${gcuser.username}&nbsp;&nbsp; </b> </font>
 		<b><font size="3">推荐人：</font><font color="#000080" size="3">${gcuser.up}</font></b></td>
       </tr>
+      
+      
+      <tr> 
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">登录密码：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input name="password" size="20"></span></font><font style="font-size: 11pt"><font color="#FF0000">**不修改请留空</font> </font> </td>
+      </tr>
+      <tr> 
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">提现密码：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input name="password3" value="${gcuser.password3}" size="20"></span></font><font color="#FF0000" style="font-size: 11pt"> **必须填写</font><font style="font-size: 11pt"></font></td>
+      </tr>
+      
       <tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">姓 名：</font></td>
-        <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">${gcuser.name}</font> </td>
+        <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt"><input name="name" value="${gcuser.name}" size="20"></font> </td>
       </tr>
 		<tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">开户行：</font></td>
@@ -55,12 +66,15 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       </tr>
       <tr bgcolor="#ffffdd"> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font color="#FF0000" style="font-size: 11pt"><b>QQ：</b></font></td>
-        <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=12 name="QQ" value="${gcuser.qq}" size="30" style="background-color: #E1FFF3"></span></font><font style="font-size: 11pt"></font></td>
+        <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=12 name="qq" value="${gcuser.qq}" size="30" style="background-color: #E1FFF3"></span></font><font style="font-size: 11pt"></font></td>
       </tr>
-      <tr> 
+       <tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">电话号码：</font></td>
-        <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt">
-		<input type="text" maxlength=12 name="QQ1" value="${gcuser.call}" size="30" style="padding:0; background-color: #FFFFFF; color:#0000FF"></span></font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=12 name="call" value="${gcuser.call}" size="22" style="padding:0; background-color: #FFFFFF; color:#0000FF">&nbsp;<b>继承人：</b><input type="text" name="jcname" size="10" value="${gcuser.jcname}"></span></font></td>
+      </tr>
+      <tr>
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt" color="#FF0000">身份证号码：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=19 name="userid2" value="${gcuser.userid}" size="22" style="padding:0; background-color: #FFFFFF; color:#FF0000">&nbsp;<b>身份证：</b><input type="text" name="jcuserid" size="22" value="${gcuser.jcuserid}"></span></font></td>
       </tr>
       <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">地址：</font></td>
@@ -72,7 +86,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       </tr>
 		<tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">成为管理时间：</font></td>
-        <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=20 name="dldate" value="${gcuser.dldate}" size="30" readonly>&nbsp;</span><b><font style="font-size: 11pt">管理设置</font></b></font></td>
+        <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=20 name="dldate" value="${gcuser.dldate}" size="30" readonly>&nbsp;</span><c:if test="${fcxt.id==1||fcxt.id==2}"><b><font style="font-size: 11pt"><a target="_blank" href="dluser?uid=${gcuser.username}" style="text-decoration: none">管理设置</a></font></b></c:if></font></td>
       </tr>
 		<tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#C9D8AD"><font style="font-size: 11pt">最近登录时间：</font></td>
@@ -99,13 +113,28 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">已提现：</font></td>
         <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="txpay" value="${gcuser.txpay}" size="15"></span></font></td>
       </tr>
+      <tr>
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">提现限制：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="payok" value="${gcuser.payok}" size="15"> 机票限制：<input type="text" name="pwdate" size="12" value="${gcuser.pwdate}"></span></font></td>
+      </tr>
+		<tr>
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">诚信指数：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="cxt" value="${gcuser.cxt}" size="15"></span></font></td>
+      </tr>
+		<tr>
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">协议客户：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="txbl" value="${gcuser.txlb}" size="15">1为是，0为不是--------- <c:if test="${gcuser.sjb>0}"><b>双区会员：<font color="#FF0000">${gcuser.sjb}</font>单</b></span></font></c:if> </td>
+      </tr>
       <tr> 
        <td align="center" colspan="2" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF" height="22"> 
-       <div align="center"><font face="黑体"><b>
+       <div align="center">
+       <c:if test="${fcxt.id==1||fcxt.id==2}">
+       <font face="宋体"><span style="font-size: 11pt"><input type="submit" value="提 交 修 改" name="B1" style="font-weight: bold; font-size:12pt"></span></font></c:if>
+       <font face="黑体"><b>
 		<a style="text-decoration: none" target="_blank" href="/adminlogin?pa=${gcuser.password}&id=${gcuser.username}">
 		<font color="#FF00FF" size="3">登录</font></a></b><font size="3">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</font></font><font color="#FF0000" size="3">&nbsp;&nbsp; </font><a href="/admin/searchuser">
 		<font color="#FF0000" size="3">返回搜索</font></a><font color="#FF0000" size="3">&nbsp;&nbsp;&nbsp; </font>
-		<b><font size="3">&nbsp;&nbsp;&nbsp;</font><a href="usercj?id=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">充值</font></a></b></font></div>
+		<b><font size="3">&nbsp;&nbsp;&nbsp;</font><c:if test="${fcxt.id==1||fcxt.id==2}"><a href="usercj?id=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">充值</font></a></c:if></b></font></div>
         </td>
       </tr>
     </table>
@@ -113,13 +142,21 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
     </div>
 </div>
 </form></font>
-<p style="line-height: 100%; margin-top: 0; margin-bottom: 0">
-<iframe name="I1" width="100%" height="200" border="0" frameborder="0" src="bcgp?bcid=${userid}"></iframe>
-</p>
-<p style="line-height: 100%; margin-top: 0; margin-bottom: 0">
-<iframe name="I2" width="100%" height="200" border="0" frameborder="0" src="bcjb?bcid=${userid}">
-</iframe></p>
-<p style="line-height: 100%; margin-top: 0; margin-bottom: 0">
-<iframe name="I3" width="100%" height="200" border="0" frameborder="0" src="bcjf?bcid=${userid}">
-</iframe></p>
+<c:if test="${fcxt.id==1||fcxt.id==2}">
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td align="center"><iframe name="I4" width="100%" height="200" border="0" frameborder="0" src="jzbdb?jzid=${userid}"></iframe></td>
+		<td align="center"><iframe name="I6" width="100%" height="200" border="0" frameborder="0" src="vipcjb?sfid=${userid}"></iframe></td>
+	</tr>
+	<tr>
+		<td align="center"><iframe name="I7" width="100%" height="200" border="0" frameborder="0" src="bcjb?bcid=${userid}"></iframe></td>
+		<td align="center"><iframe name="I8" width="100%" height="200" border="0" frameborder="0" src="bcjf?bcid=${userid}"></iframe></td>
+	</tr>
+		<tr>
+		<td align="center"><iframe name="I9" width="100%" height="200" border="0" frameborder="0" src="epsf?uid=${userid}"></iframe></td>
+		<td align="center"><iframe name="I10" width="100%" height="200" border="0" frameborder="0" src="btpay?uid=${userid}"></iframe></td>
+		
+	</tr>
+</table>
+</c:if>
 

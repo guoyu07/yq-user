@@ -125,6 +125,11 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <tr>
 <td height=20>☉  <a href="/admin/newsdate" target="BoardList">会员登录日志</a></td> 
 </tr>
+<c:if test="${fcxt.id==1||fcxt.id==2}">
+<tr>
+<td height=20>☉  <a href="/admin/gaiuser" target="BoardList">用户信息修改日志</a></td> 
+</tr>
+</c:if>
 </table>
 </div>
 </td>

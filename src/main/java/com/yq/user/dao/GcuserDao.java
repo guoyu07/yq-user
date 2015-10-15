@@ -22,6 +22,14 @@ public class GcuserDao {
 		return jdbc.update(sql, SqlParameter.Instance().withString(userName))>0;
 	}
 	
+	public Gcuser getByAddress(String field,Object value,int jb){
+		String sql = "select * from "+table+" where "+field+"=? and jb=? limit 1";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setObject(value);
+		paramter.setInt(jb);
+		return this.jdbc.get(sql, Gcuser.class, paramter);
+	}
+	
 	public IPage<Gcuser> getPageList(int pageIndex,int pageSize){
 		String sql = "select * from "+table+" order by id desc";
 		return this.jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
@@ -140,12 +148,17 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
-	public boolean updateUserByAdmin(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password){
-		String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,call=?,email=?,qq=?,email=?,userid=?,payok=?,jcname=?,jcuserid=?";
+	public boolean updateUserByAdmin(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,Date pwdate){
+		String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,`call`=?,email=?,qq=?,userid=?,payok=?,jcname=?,jcuserid=?";
 		boolean isChangePassword = false;
+		boolean isChangePwdate = false;
 		if(password!=null&&!password.equals("")){
 			sql = sql+ ",password=?";
 			isChangePassword = true;
+		}
+		if(pwdate!=null){
+			sql = sql+ ",pwdate=?";
+			isChangePwdate = true;
 		}
 		sql = sql + " where username=?";
 		SqlParameter parameter = new SqlParameter();
@@ -162,6 +175,9 @@ public class GcuserDao {
 		parameter.setString(jcuserid);
 		if(isChangePassword){
 			parameter.setString(password);
+		}
+		if(isChangePwdate){
+			parameter.setObject(pwdate);
 		}
 		parameter.setString(userName);
 		return this.jdbc.update(sql, parameter)>0;
@@ -632,6 +648,15 @@ public class GcuserDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean addSyep(String userName,int syep){
+		String sql = "update "+table+" set syep=syep+?,ljep=ljep+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(syep);
+		parameter.setInt(syep);
+		parameter.setString(userName);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
 	public boolean updateGwuid(String userName,int gwuid){
 		String sql = "update "+table+" set gwuid=?  where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
@@ -698,4 +723,13 @@ public class GcuserDao {
 		return jdbc.update(sql, SqlParameter.Instance().withInt(changeAmount).withInt(changeAmount).withString(userName).withInt(changeAmount))>0;
 	}
 	
+	public boolean addVipcjcjb(String userName,int changeAmount){
+		String sql = "update "+table+" set vipcjcjb=vipcjcjb+?,vipljcjb=vipljcjb+? where username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(changeAmount).withInt(changeAmount).withString(userName))>0;
+	}
+	
+	public boolean updateAdminLevel(String userName,int jb,Date dldate,Date dqDate){
+		String sql = "update "+table+" set jb=?,dldate=?,dqdate=? where username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(jb).withObject(dldate).withObject(dqDate).withString(userName))>0;
+	}
 }

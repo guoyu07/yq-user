@@ -31,9 +31,7 @@
 						<h4>请您再次确认</h4>
 						<p>您要买入积分数量<strong>${txpay}</strong> 当前单价是：<strong>${jygj}</strong></p>
 						<p>即将从您的金币账户扣除<strong>${needJf}</strong> 金币</p>
-							
-							<p><a onClick="return confirm('提示：您确定了吗？')" href="/mysl?status=2&txpay=${txpay}"><button class="but1 but2">确 定 买 入</button></a></p>
-							<p><a onClick="return confirm('提示：您确定了吗？')" href="/mysl?status=2&txpay=${txpay}"><button class="but1 but2">确 定 </button></a></p>
+						<p><button class="but1 but2" onClick="bitch()">确 定 买 入</button></a></p>
 					</div>
 				</div>
 			</div>
@@ -41,3 +39,10 @@
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+    function bitch(){
+    	if(confirm('提示：您确定了吗？')){
+    		location.href="/mysl?status=2&txpay=${txpay}";
+    	}
+    }
+</script>

@@ -169,8 +169,42 @@
 		   <result name="success">
 		        bcjb_result.jsp
 		    </result>
+		</action>
+		<action name="jzbdb" class="com.yq.manager.action.JzbdbAction">
+		    <result name="input">
+		        jzbdb.jsp
+		    </result>
+		   <result name="success">
+		        jzbdb_result.jsp
+		    </result>
 		</action>		
+		<action name="vipcjb" class="com.yq.manager.action.VipcjbAction">
+		    <result name="input">
+		        vipcjb.jsp
+		    </result>
+		   <result name="success">
+		        vipcjb_result.jsp
+		    </result>
+		</action>	
 		
+		<action name="epsf" class="com.yq.manager.action.EpsfAction">
+		    <result name="input">
+		        epsf.jsp
+		    </result>
+		   <result name="success">
+		        epsf_result.jsp
+		    </result>
+		</action>	
+		
+		<action name="btpay" class="com.yq.manager.action.BtpayAction">
+		    <result name="input">
+		        btpay.jsp
+		    </result>
+		   <result name="success">
+		        btpay_result.jsp
+		    </result>
+		</action>			
+					
 		<action name="gngw" class="com.yq.manager.action.ChangeAreaAction">
 		   <result name="success">
 		        changearea.jsp
@@ -324,7 +358,40 @@
 		        doubleareacount.jsp
 		    </result>
 		</action>		
-						
+		
+		<action name="dluser" class="com.yq.manager.action.DluserAction">
+		    <result name="input">
+		        dluser.jsp
+		    </result>
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="csheng" class="com.yq.manager.action.DluserAction" method="changeShengAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="cshi" class="com.yq.manager.action.DluserAction" method="changeShiAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="carea" class="com.yq.manager.action.DluserAction" method="changeAreaAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>			
+		<action name="cbigarea" class="com.yq.manager.action.DluserAction" method="changeBigAreaAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="gaiuser" class="com.yq.manager.action.GaiuserAction">
+		    <result name="success">
+		        gaiuser.jsp
+		    </result>
+		</action>													
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

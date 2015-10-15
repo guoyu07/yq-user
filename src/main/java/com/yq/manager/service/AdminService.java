@@ -13,6 +13,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.exception.ServiceException;
+import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.manager.bo.BackCountBean;
@@ -40,7 +41,9 @@ import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.Sgtj;
 import com.yq.user.bo.Sgxt;
+import com.yq.user.bo.Tduser;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
@@ -55,8 +58,10 @@ import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.SgxtDao;
+import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
+import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
 import com.yq.user.service.LogService;
@@ -109,6 +114,10 @@ public class AdminService {
 	private DatePayDao datePayDao;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private VipcjglDao vipcjglDao;
+	@Autowired
+	private TduserDao tduserDao;
 	
 	
   	private Cache<String,String> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -326,8 +335,47 @@ public class AdminService {
 	 * @param password
 	 * @return
 	 */
-	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password){
-		return gcuserDao.updateUserByAdmin(userName,password3, card, bank, name, call, email, qq, userid, payok, jcname, jcuserid, password);
+	@Transactional
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,String ip){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Date date = null;
+		if(!Strings.isNullOrEmpty(pwdate)){
+			try {
+				date = DateUtils.StringToDate(pwdate, DateStyle.YYYY_MM_DD_HH_MM_SS);
+			} catch (Exception e) {
+				throw new ServiceException(1, "机票限制时间格式不对 请使用 如:'2015-10-12 21:10:00' ！");
+			}
+		}
+		String md5Password = null;
+		if(!Strings.isNullOrEmpty(password)){
+			md5Password = MD5Security.md5_16(password);
+		}
+		
+		String beforUserId = gcuser.getUserid()==null?"":gcuser.getUserid();
+		String nowUserId = userid==null?"":userid;
+		String beforName = gcuser.getName()==null?"":gcuser.getName();
+		String nowName = name==null?"":name;
+		
+		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date)){
+			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
+		}
+		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
+			//写身份证和名字修改日志
+			Tduser tduser = new Tduser();
+			tduser.setGainame(gcuser.getName());
+			tduser.setTdname(name);
+			tduser.setGaiuserid(gcuser.getUserid());
+			tduser.setTduserid(userid);
+			tduser.setTduser(userName);
+			tduser.setTdqq(qq);
+			tduser.setTdcall(call);
+			tduser.setGai(1);
+			tduserDao.add(tduser);
+		}
+		if(md5Password!=null){
+			dateipDao.addDateIpLog("admin", "修改密码sy-"+userName, ip);
+		}
+		return true;
 	}
 	/**
 	 * 给用户充值
@@ -1255,5 +1303,155 @@ public class AdminService {
 		datecj.setIp(ip);
 		datecj.setQldate(new Date());
 		datecjDao.add(datecj);
+	}
+	/**
+	 * 获取管理员账号信息
+	 * @param userName
+	 * @return
+	 */
+	public Fcxt getAdminUser(String userName){
+		return fcxtDao.getAdminUser(userName);
+	}
+	/**
+	 * 添加备用报单币
+	 * @param userName
+	 * @param addAmount
+	 */
+	public void addSyep(String userName,int addAmount){
+		if (gcuserDao.addSyep(userName, addAmount)) {
+			Gcuser gcuser = gcuserDao.getUser(userName);
+			Bdbdate bdbdate = new Bdbdate();
+			bdbdate.setZuser(userName);
+			bdbdate.setSy(addAmount);
+			bdbdate.setSybdb(gcuser.getSybdb());
+			bdbdate.setLjbdb(gcuser.getLjbdb());
+			bdbDateDao.add(bdbdate);
+		}else{
+			throw new ServiceException(1, "该用户名不存在，请检查输入是否正确！");
+		}
+	}
+	/**
+	 * vip充值
+	 * @param userName
+	 * @param addAmount
+	 */
+	public void addVipcjb(String userName,int addAmount){
+		if(addAmount<1000||addAmount%1000!=0){
+			throw new ServiceException(1, "充值必须是1000的倍整数如：2000，3000，4000，5000，6000，7000，8000，请检查输入是否正确！");
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser==null||gcuser.getVip()==0){
+			throw new ServiceException(2, "本功能只能VIP玩家开放！");
+		}
+		
+		if(gcuserDao.addVipcjcjb(userName, addAmount)){
+			Vipcjgl vipcjgl = new Vipcjgl();
+			vipcjgl.setCjuser("系统");
+			vipcjgl.setCjjo(addAmount);
+			vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
+			vipcjgl.setVipuser(userName);
+			vipcjgl.setBz("入账");
+			vipcjgl.setCjdate(new Date());
+			vipcjglDao.add(vipcjgl);
+		}
+	}
+	/**
+	 * 一币补贴
+	 * @param userName
+	 * @param addAmount
+	 */
+	public void addBtPay(String userName,int addAmount){
+		if(gcuserDao.addWhenOtherPersionBuyJbCard(userName, addAmount)){
+			Gcuser gcuser = gcuserDao.getUser(userName);
+			Datepay datePay = new Datepay();
+			datePay.setUsername(gcuser.getUsername());
+			datePay.setSyjz(addAmount);
+			datePay.setPay(gcuser.getPay());
+			datePay.setJydb(gcuser.getJydb());
+			datePay.setRegid("系统");
+			datePay.setNewbz(0);
+			datePay.setAbdate(new Date());
+			logService.addDatePay(datePay);
+		}
+	}
+	/**
+	 * 修改管理级别
+	 * @param userName
+	 * @param jb
+	 * @param dqDate
+	 */
+	public void changeDldate(String userName,int jb,String dlDate,String dqDate){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser.getDldate()!=null||gcuser.getDqdate()!=null){
+			Date dldate = DateUtils.StringToDate(dlDate, DateStyle.YYYY_MM_DD_HH_MM_SS);
+			Date dqdate = DateUtils.StringToDate(dqDate, DateStyle.YYYY_MM_DD_HH_MM_SS);
+			gcuserDao.updateAdminLevel(userName, jb,dldate,dqdate);
+		}else{
+			throw new ServiceException(1, "还不是正式管理不可以修改！");
+		}
+	}
+	/**
+	 * 设置省级管理
+	 * @param userName
+	 */
+	public void changeSheng(String userName){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		String sheng = gcuser.getAddsheng();
+		if(gcuserDao.getByAddress("addsheng", sheng, 2)!=null){
+			throw new ServiceException(2, "省级管理已被占用了！");
+		}
+		Date now = new Date();
+		gcuserDao.updateAdminLevel(userName, 2,now , DateUtils.addDay(now, 180));
+	}
+	/**
+	 * 设置市级管理
+	 * @param userName
+	 */
+	public void changeShi(String userName){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		String addshi = gcuser.getAddshi();
+		if(gcuserDao.getByAddress("addshi", addshi, 3)!=null){
+			throw new ServiceException(3, "市级管理已被占用了！");
+		}
+		Date now = new Date();
+		gcuserDao.updateAdminLevel(userName, 3,now , DateUtils.addDay(now, 90));
+	}
+	
+	/**
+	 * 设置区级管理
+	 * @param userName
+	 */
+	public void changeArea(String userName){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		String addqu = gcuser.getAddqu();
+		if(gcuserDao.getByAddress("addqu", addqu, 4)!=null){
+			throw new ServiceException(4, "区级管理已被占用了！");
+		}
+		Date now = new Date();
+		gcuserDao.updateAdminLevel(userName, 4,now , DateUtils.addDay(now, 60));
+	}
+	
+	/**
+	 * 设置区级管理
+	 * @param userName
+	 */
+	public void changeBigArea(String userName){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Integer dqu = gcuser.getDqu();
+		if(gcuserDao.getByAddress("dqu", dqu, 1)!=null){
+			throw new ServiceException(5, "大区级管理已被占用了！");
+		}
+		Date now = new Date();
+		gcuserDao.updateAdminLevel(userName, 1,now , DateUtils.addDay(now, 180));
+	}
+	/**
+	 * 查询用户修改记录
+	 * @param userName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Tduser> getTduserPage(String userName,int pageIndex,int pageSize){
+		return tduserDao.getPage(userName, pageIndex, pageSize);
 	}
 }

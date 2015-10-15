@@ -7,17 +7,20 @@ import java.util.Date;
 
 
 public class Tduser{
-	private int id;
+	private Integer id;
+	private String gainame;
 	private String tdname;
+	private String gaiuserid;
 	private String tduserid;
 	private String tduser;
 	private String tdcall;
 	private String tdqq;
-	private Date tddate;
-	public void setId(int id){
+	private int gai;
+	private Date tddate = new Date();
+	public void setId(Integer id){
 	this.id=id;
 	}
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
 	public void setTdname(String tdname){
@@ -55,6 +58,24 @@ public class Tduser{
 	}
 	public Date getTddate(){
 		return tddate;
+	}
+	public String getGainame() {
+		return gainame;
+	}
+	public void setGainame(String gainame) {
+		this.gainame = gainame;
+	}
+	public String getGaiuserid() {
+		return gaiuserid;
+	}
+	public void setGaiuserid(String gaiuserid) {
+		this.gaiuserid = gaiuserid;
+	}
+	public int getGai() {
+		return gai;
+	}
+	public void setGai(int gai) {
+		this.gai = gai;
 	}
 }
 
