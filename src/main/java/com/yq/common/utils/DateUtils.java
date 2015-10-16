@@ -647,6 +647,6 @@ public class DateUtils {
 	public static int getIntervalDays(Date date, Date otherDate) {
 		date = DateUtils.StringToDate(DateUtils.getDate(date));
 		long time = Math.abs(date.getTime() - otherDate.getTime());
-		return (int)time/(24 * 60 * 60 * 1000);
+		return Math.abs((int)(time/(24 * 60 * 60 * 1000)));
 	}
 }

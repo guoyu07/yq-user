@@ -25,13 +25,13 @@
 <script language="JavaScript">
  function checkdate()  { 
   
-	$("#btn").attr("disabled","disabled");
-	var data = $("#Form").serialize();
-	$.post("sms.asp", data, function(data) {
-		$("#btn").removeAttr("disabled");
-		if (data != "success") { alert("手机验证码发送失败"); return false; }
-		alert("手机验证码发送成功");
-	});
+		$("#btn").attr("disabled","disabled");
+		var data = $("#Form").serialize();
+		$.post("/sms", data, function(response) {
+			$("#btn").removeAttr("disabled");
+			if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+			alert("手机验证码发送成功");
+		});
 	return false;
 }  
 

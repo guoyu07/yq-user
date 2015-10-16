@@ -719,17 +719,18 @@ public class UserService {
 						   cfd=200	;			
 			}
 			
-			if(!idCardNum.equals(operatorUser.getVipsq())){
-				throw new ServiceException(16,"验证码错误，请检查输入是否正确！");
-//					super.setErroCodeNum(16);//alert('验证码错误，请检查输入是否正确！');history.go(-1);
-//					return SUCCESS;
-			}
-			
+
 			if(cjpay>9000){//使用报单币开户
 				if(!updateSybdb(userName, -cjpay, "给"+bduser+"开户"+cjpay)){
 					throw new ServiceException(6,"报单币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
 			}else{
+				if(idCardNum==null||!idCardNum.equals(operatorUser.getVipsq())){
+					throw new ServiceException(16,"验证码错误，请检查输入是否正确！");
+//						super.setErroCodeNum(16);//alert('验证码错误，请检查输入是否正确！');history.go(-1);
+//						return SUCCESS;
+				}
+				gcuserDao.updateSmsCode(operatorUser.getUsername(), INIT_SMS_CODE);
 				if(!this.changeYb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0,null)){
 					throw new ServiceException(7,"一币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
@@ -919,7 +920,7 @@ public class UserService {
 				Bdbdate bdbdate = new Bdbdate();
 				bdbdate.setZuser(userName);
 				bdbdate.setBz(desc);
-				bdbdate.setJc(changeNum);
+				bdbdate.setSy(changeNum);
 				bdbdate.setSybdb(gcuser.getSybdb());
 				bdbdate.setLjbdb(gcuser.getLjbdb());
 				bdbDateDao.add(bdbdate);
@@ -2238,7 +2239,7 @@ public class UserService {
 	 */
 	public void checkSaleJf(String userName,double price,int saleNum,String passwrod3){
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		if(gcuser.getBddate()!=null&&gcuser.getJyg()<50000&&DateUtils.getIntervalDays(gcuser.getBddate(), new Date())<100){
+		if(gcuser.getBddate()!=null&&gcuser.getJyg()<50000&&DateUtils.getIntervalDays( new Date(),gcuser.getBddate())<100){
 			throw new ServiceException(1,"未满100天的账户，积分暂时停止卖出交易，收益完成后自动开放！");
 		}
 		
@@ -2474,6 +2475,10 @@ public class UserService {
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg())) {
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
+		}
+		
+		if(gcuser.getBddate()!=null&&gcuser.getJyg()<50000&&DateUtils.getIntervalDays( new Date(),gcuser.getBddate())<100){
+			throw new ServiceException(3,"未满100天的账户，积分暂时停止卖出交易，收益完成后自动开放！");
 		}
 
 		gcuser = gcuserDao.getUser(userName);
