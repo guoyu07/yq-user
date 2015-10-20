@@ -768,12 +768,12 @@ public class UserService {
 			sgxt.setBddate(new Date());
 			sgxtDao.add(sgxt);
 			
-			//给接点人加钱
+			//操作人加10%的推荐钱
 			int upPay = (int)(0.1*cjpay);
-			gcuserDao.addOtherYb(up,upPay);
-			Gcuser upuser = gcuserDao.getUser(up);
+			gcuserDao.addOtherYb(userName,upPay);
+			Gcuser upuser = gcuserDao.getUser(userName);
 			Datepay datePay = new Datepay();
-			datePay.setUsername(up);
+			datePay.setUsername(userName);
 			datePay.setRegid("用户一"+bduser+"开户"+cjpay+"");
 			datePay.setSyjz(upPay);
 			datePay.setPay(upuser.getPay());
