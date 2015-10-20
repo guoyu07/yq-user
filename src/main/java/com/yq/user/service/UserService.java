@@ -720,7 +720,7 @@ public class UserService {
 			}
 			
 
-			if(cjpay>9000){//使用报单币开户
+			if(cjpay>=9000){//使用报单币开户
 				if(!updateSybdb(userName, -cjpay, "给"+bduser+"开户"+cjpay)){
 					throw new ServiceException(6,"报单币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
