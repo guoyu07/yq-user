@@ -824,11 +824,16 @@ public class UserService {
 			return;
 		}
 		if(sgxtBd.getAuid().equals(userName)){
-			sgxtDao.updateZaq(userName, sjb);
+			sgxtDao.updateZaq(sgxtBd.getUsername(), sjb);
 			int zyzj = 0;
 			if(sgxtBd.getDqzuo()<sgxtBd.getCfd()){
 				 zyzj = sgxtBd.getCfd()-sgxtBd.getDqzuo();
-				 sgxtDao.updateAq(userName, zyzj);
+				 int addAmount = sjb;
+				 if(addAmount>zyzj){
+					 addAmount = zyzj;
+				 }
+				 sgxtDao.updateAq(sgxtBd.getUsername(), addAmount);
+				 
 				 Bdbdate bdbdate = new Bdbdate();
 				 bdbdate.setZuser(sgxtBd.getUsername());
 				 bdbdate.setZaq(sgxtBd.getZaq());
@@ -853,9 +858,14 @@ public class UserService {
 			}
 			CalculateQ(sgxtBd.getUsername(),sjb,bduser);
 		}else if(sgxtBd.getBuid().equals(userName)){
-			sgxtDao.updateZbq(userName, sjb);
+			sgxtDao.updateZbq(sgxtBd.getUsername(), sjb);
 			if(sgxtBd.getDqyou()<sgxtBd.getCfd()){
 				int yyzj=sgxtBd.getCfd()-sgxtBd.getDqyou();
+				int addAmount = sjb;
+				if(sjb>yyzj){
+					addAmount = yyzj;
+				}
+				sgxtDao.updateBq(sgxtBd.getUsername(), addAmount);
 				 Bdbdate bdbdate = new Bdbdate();
 				 bdbdate.setZuser(sgxtBd.getUsername());
 				 bdbdate.setZaq(sgxtBd.getZaq());
