@@ -795,7 +795,7 @@ public class UserService {
 					int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
 					if(sjtjzb>0){
 						if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
-							sgxtDao.updateZfiled(userName, "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());
+							sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());
 						}
 					}
 				}
@@ -807,7 +807,7 @@ public class UserService {
 					int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
 					if(sjtjzb>0){
 						if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-							sgxtDao.updateZfiled(userName, "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
+							sgxtDao.updateZfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
 						}
 					}
 				}
@@ -834,6 +834,7 @@ public class UserService {
 				 }
 				 sgxtDao.updateAq(sgxtBd.getUsername(), addAmount);
 				 
+				 sgxtBd = sgxtDao.get(sgxtBd.getUsername());
 				 Bdbdate bdbdate = new Bdbdate();
 				 bdbdate.setZuser(sgxtBd.getUsername());
 				 bdbdate.setZaq(sgxtBd.getZaq());
@@ -843,10 +844,11 @@ public class UserService {
 				if(sjb>zyzj){
 					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(左边)层封顶超出-"+(sjb-zyzj));
 				}else{
-					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(左边)增加可结算-"+zyzj);
+					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(左边)增加可结算-"+sjb);
 				}
 				bdbDateDao.add(bdbdate);
 			}else{
+				 sgxtBd = sgxtDao.get(sgxtBd.getUsername());
 				 Bdbdate bdbdate = new Bdbdate();
 				 bdbdate.setZuser(sgxtBd.getUsername());
 				 bdbdate.setZaq(sgxtBd.getZaq());
@@ -866,6 +868,8 @@ public class UserService {
 					addAmount = yyzj;
 				}
 				sgxtDao.updateBq(sgxtBd.getUsername(), addAmount);
+				
+				 sgxtBd = sgxtDao.get(sgxtBd.getUsername());
 				 Bdbdate bdbdate = new Bdbdate();
 				 bdbdate.setZuser(sgxtBd.getUsername());
 				 bdbdate.setZaq(sgxtBd.getZaq());
@@ -875,10 +879,11 @@ public class UserService {
 				 if(sjb>yyzj){
 					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(右边)层封顶超出-"+(sjb-yyzj));
 				 }else{
-					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(右边)增加可结算-"+yyzj);
+					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(右边)增加可结算-"+sjb);
 				 }
 				 bdbDateDao.add(bdbdate);
 			}else{
+				 sgxtBd = sgxtDao.get(sgxtBd.getUsername());
 				 Bdbdate bdbdate = new Bdbdate();
 				 bdbdate.setZuser(sgxtBd.getUsername());
 				 bdbdate.setZaq(sgxtBd.getZaq());

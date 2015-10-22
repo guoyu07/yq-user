@@ -1234,7 +1234,7 @@ public class AdminService {
 		if(toUser==null){
 			throw new ServiceException(1, "该用户名不存在，请检查输入是否正确！");
 		}
-		if(toUser.getGmdate().getTime()+2*60*1000>System.currentTimeMillis()){
+		if(toUser.getGmdate()!=null&&toUser.getGmdate().getTime()+2*60*1000>System.currentTimeMillis()){
 			throw new ServiceException(2, "两分钟内只能充值一次，请稍后再试！");
 		}
 		if(amount<5000){
