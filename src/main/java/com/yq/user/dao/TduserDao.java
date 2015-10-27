@@ -33,4 +33,29 @@ public class TduserDao extends YqDaoBase<Tduser>{
     	}
     	return super.getJdbc().getListPage(sql, Tduser.class, parameter, pageSize, pageIndex);
     }
+    
+    public IPage<Tduser> getTduserPageList(String param,int pageIndex,int pageSize){
+    	String sql = "select * from "+super.getTable();
+    	sql = sql +" where tdname=? or  tduserid=? or tduser=? or tdcall=? or tdqq=?";
+    	SqlParameter parameter = new SqlParameter();
+		parameter.setString(param);
+		parameter.setString(param);
+		parameter.setString(param);
+		parameter.setString(param);
+		parameter.setString(param);
+		return super.getJdbc().getListPage(sql, Tduser.class, parameter, pageSize, pageIndex);
+    }
+    
+    public boolean update(Integer id,String tdname,String tduserid,String tduser,String tdcall,String tdqq){
+    	String sql = "update "+super.getTable();
+    	sql = sql +" set tdname=? ,  tduserid=? , tduser=? , tdcall=? , tdqq=? where id=?";
+    	SqlParameter parameter = new SqlParameter();
+		parameter.setString(tdname);
+		parameter.setString(tduserid);
+		parameter.setString(tduser);
+		parameter.setString(tdcall);
+		parameter.setString(tdqq);
+		parameter.setInt(id);
+		return super.getJdbc().update(sql, parameter)>0;
+    }
 }

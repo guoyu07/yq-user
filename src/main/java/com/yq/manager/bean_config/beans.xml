@@ -20,4 +20,8 @@
        <bean id="mqfhDao" class="com.yq.manager.dao.MqfhDao"></bean>
        <bean id="addShengDao" class="com.yq.manager.dao.AddShengDao"></bean>
        <bean id="mtfhtjDao" class="com.yq.manager.dao.MtfhtjDao"></bean>
+       
+       <bean id="backCountScheduler" class="com.yq.manager.scheduler.BackCountScheduler">
+          <property name="cronExpression" value="0 1 0 * * ?"></property>
+       </bean>
 </beans>

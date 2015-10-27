@@ -12,6 +12,7 @@ import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
@@ -1090,34 +1091,34 @@ public class AdminService {
 		if(!isCanBackCount()){
 			throw new ServiceException(1, "还没有到结算时间！");
 		}
-		String todayStr = DateUtils.getDate(date);
-		String todayStart = todayStr+" 00:00:00";
-		IPage<Sgxt> page = null;
-		Collection<Sgxt> tempData = null;
-		int pageIndex = 0;
-		while(true){
-			page = sgxtDao.backCountPage(todayStart, pageIndex, 100);
-			tempData = page.getData();
-			if(tempData!=null&&tempData.size()>0){
-				for(Sgxt sgxt:tempData){
-					int addAmount = (int)(sgxt.getFhbl()*sgxt.getSjb()*500);
-					if(gcuserDao.addYbByBackCount(sgxt.getUsername(),addAmount )){
-						Gcuser gcuser = gcuserDao.getUser(sgxt.getUsername());
-						Datepay datepay = new Datepay();
-						datepay.setUsername(sgxt.getUsername());
-						datepay.setRegid("游戏收益");
-						datepay.setSyjz(addAmount);
-						datepay.setPay(gcuser.getPay());
-						datepay.setJydb(gcuser.getJydb());
-						logService.addDatePay(datepay);
-					}
-				}
-			}else{
-				break;
-			}
-			pageIndex++;
-		}
-		sgxtDao.backCount(todayStart);
+//		String todayStr = DateUtils.getDate(date);
+//		String todayStart = todayStr+" 00:00:00";
+//		IPage<Sgxt> page = null;
+//		Collection<Sgxt> tempData = null;
+//		int pageIndex = 0;
+//		while(true){
+//			page = sgxtDao.backCountPage(todayStart, pageIndex, 100);
+//			tempData = page.getData();
+//			if(tempData!=null&&tempData.size()>0){
+//				for(Sgxt sgxt:tempData){
+//					int addAmount = (int)(sgxt.getFhbl()*sgxt.getSjb()*500);
+//					if(gcuserDao.addYbByBackCount(sgxt.getUsername(),addAmount )){
+//						Gcuser gcuser = gcuserDao.getUser(sgxt.getUsername());
+//						Datepay datepay = new Datepay();
+//						datepay.setUsername(sgxt.getUsername());
+//						datepay.setRegid("游戏收益");
+//						datepay.setSyjz(addAmount);
+//						datepay.setPay(gcuser.getPay());
+//						datepay.setJydb(gcuser.getJydb());
+//						logService.addDatePay(datepay);
+//					}
+//				}
+//			}else{
+//				break;
+//			}
+//			pageIndex++;
+//		}
+//		sgxtDao.backCount(todayStart);
 		
 		String yesterdayStr =  DateUtils.getDate(DateUtils.addDay(date, -1));
 		String yesterdayStart = yesterdayStr+" 00:00:00";
@@ -1558,4 +1559,60 @@ public class AdminService {
 	public void syusers(int payId,int op){
 		txpayDao.updateTxvip(payId, op);
 	}
+	/**
+	 * 查询tduser
+	 * @param tdId
+	 * @return
+	 */
+	public Tduser getTduser(Integer tdId){
+		if(null!=tdId){
+			return tduserDao.get(new SqlParamBean("id", tdId));
+		}
+		return null;
+	}
+	/**
+	 * 根据任意变量搜索记录
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param param
+	 * @return
+	 */
+	public IPage<Tduser> getTduserPageList(int pageIndex,int pageSize,String param){
+		return tduserDao.getTduserPageList(param, pageIndex, pageSize);
+	}
+	/**
+	 * 添加tduser
+	 * @param tdname
+	 * @param tduserid
+	 * @param tduser
+	 * @param tdcall
+	 * @param tdqq
+	 */
+	public void addTduser(String tdname,String tduserid,String tduser,String tdcall,String tdqq){
+		if(tduserDao.get(new SqlParamBean("tduserid", tduserid))!=null){
+			throw new ServiceException(1, "身份证号码["+tduserid+"]已经存在，不能重复！");
+		}
+		Tduser t = new Tduser();
+		t.setTdname(tdname);
+		t.setTduserid(tduserid);
+		t.setTduser(tduser);
+		t.setTdqq(tdqq);
+		t.setTdcall(tdcall);
+		tduserDao.add(t);
+	}
+	/**
+	 * 更新tduser
+	 * @param id
+	 * @param tdname
+	 * @param tduserid
+	 * @param tduser
+	 * @param tdcall
+	 * @param tdqq
+	 */
+	public void updateTduser(Integer id,String tdname,String tduserid,String tduser,String tdcall,String tdqq){
+		if(!tduserDao.update(id, tdname, tduserid, tduser, tdcall, tdqq)){
+			throw new ServiceException(2, "不存在该记录"+id);
+		}
+	}
+	
 }

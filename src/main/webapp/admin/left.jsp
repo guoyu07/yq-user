@@ -168,6 +168,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<tr>
 				<td height=20>☉  <a href="/admin/w10" target="BoardList">提现申请清单</a></td> 
 				</tr>
+				<tr>
+				<td height=20>☉  <a href="/admin/tduser" target="BoardList">历史退户记录</a></td> 
+				</tr>				
               </table>
 	  </div>
 	</td>

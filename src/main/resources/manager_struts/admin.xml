@@ -414,7 +414,33 @@
 		    <result name="success">
 		       w10.jsp
 		    </result>
-		</action>																		
+		</action>
+		<action name="tduser" class="com.yq.manager.action.TduserAction">
+		    <result name="success">
+		       tduser.jsp
+		    </result>
+		</action>
+		<action name="tduser-search" class="com.yq.manager.action.TduserAction" method="search">
+		    <result name="success">
+		       tduser.jsp
+		    </result>
+		</action>
+		<action name="tduser-edit" class="com.yq.manager.action.TduserAction" method="edit">
+		    <result name="success">
+		       tduser.jsp
+		    </result>
+		    <result name="redirect" type="redirect">
+		       tduser?cjpa=${cjpa}
+		    </result>		    
+		</action>
+		<action name="tduser-add" class="com.yq.manager.action.TduserAction" method="add">
+		    <result name="redirect" type="redirect">
+		       tduser?cjpa=${cjpa}
+		    </result>
+		    <result name="success">
+		       tduser.jsp
+		    </result>		    
+		</action>																								
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

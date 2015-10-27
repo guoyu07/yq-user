@@ -1,6 +1,5 @@
 package com.yq.manager.action;
 
-import java.util.Date;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
@@ -34,9 +33,9 @@ public class BackCountAction extends ALDAdminPageActionSupport<Mtfhtj> {
 	
 	
 	public String backCount(){
-		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.backCount(new Date());
-		super.setErroCodeNum(2000);
+//		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+//		adminService.backCount(new Date());
+//		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
 
