@@ -142,7 +142,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 </tr>
 <tr>
 <td style="display:" id='submenu3'>
-<div class=sec_menu style="width:158px; height:95px">
+<div class=sec_menu style="width:158px; height:200px">
             <table cellpadding=0 cellspacing=0 align=center width=150 height="93">
               <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="cgcp"><font color="#0000FF">抢购管理</font></a></font></td>
@@ -157,6 +157,17 @@ eval("submenu" + sid + ".style.display=\"none\";");
               <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="doubleareacount"><font color="#000000">双区结算</font></a></font></td>
               </tr>
+              <c:if test="${fcxt.id==1||fcxt.id==2}">
+				<tr>
+				<td height=20>☉  <a href="/admin/adminbduser" target="BoardList">双区玩家开户</a></td> 
+				</tr>
+			  </c:if>
+			  <tr>
+				<td height=20>☉  <a href="/admin/sqdayadd" target="BoardList">双区进单明细</a></td> 
+				</tr>
+				<tr>
+				<td height=20>☉  <a href="/admin/w10" target="BoardList">提现申请清单</a></td> 
+				</tr>
               </table>
 	  </div>
 	</td>

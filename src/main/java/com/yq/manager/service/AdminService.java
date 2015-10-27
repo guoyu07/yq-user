@@ -16,11 +16,13 @@ import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
+import com.yq.cservice.bean.SqDayAddBean;
 import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.bo.DateBean;
 import com.yq.manager.bo.GcfhBean;
 import com.yq.manager.bo.NewsDateBean;
 import com.yq.manager.bo.PmmltBean;
+import com.yq.manager.bo.W10Bean;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
@@ -118,6 +120,8 @@ public class AdminService {
 	private VipcjglDao vipcjglDao;
 	@Autowired
 	private TduserDao tduserDao;
+	@Autowired
+	private TxPayDao txpayDao;
 	
 	
   	private Cache<String,String> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -1445,6 +1449,47 @@ public class AdminService {
 		gcuserDao.updateAdminLevel(userName, 1,now , DateUtils.addDay(now, 180));
 	}
 	/**
+	 * 管理员绑定用户
+	 * @param bdUser
+	 * @param sjb
+	 */
+	@Transactional
+	public void adminBdUser(String bduser,int sjb){
+        Gcuser bdGUser = gcuserDao.getUser(bduser);
+        if(bdGUser==null||bdGUser.getSjb()==0){
+        	throw new ServiceException(1,"该会员不存在或已经是双区会员，不需要重复报单，请检查输入是否正确！");
+        }
+        Sgxt sgxt = sgxtDao.get(bduser);
+        if(sgxt==null){
+        	throw new ServiceException(2,"报单人不存在，请检查输入是否正确！");
+        }
+        
+        List<ZuoMingxi> zList = zuoMingxiDao.getDownList(bduser);
+		if(zList!=null&&!zList.isEmpty()){
+			for(ZuoMingxi zuoMingxi:zList){
+				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
+				if(sjtjzb>0){
+					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
+						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());
+					}
+				}
+			}
+		}
+		
+		List<YouMingxi> yList = youMingXiDao.getDownList(bduser);
+		if(yList!=null&&!yList.isEmpty()){
+			for(YouMingxi youMingxi:yList){
+				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
+				if(sjtjzb>0){
+					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
+						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
+					}
+				}
+			}
+		}
+		userService.CalculateQ(bduser, sjb, bduser);
+	}
+	/**
 	 * 查询用户修改记录
 	 * @param userName
 	 * @param pageIndex
@@ -1453,5 +1498,64 @@ public class AdminService {
 	 */
 	public IPage<Tduser> getTduserPage(String userName,int pageIndex,int pageSize){
 		return tduserDao.getPage(userName, pageIndex, pageSize);
+	}
+	/**
+	 * 获取每日对比
+	 * @param userName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param day
+	 * @return
+	 */
+	public IPage<Gcuser> getSqDayAddUsers(int pageIndex,int pageSize,Integer day){
+		String[] strArray = new String[2];
+		if(day!=null){
+			strArray =  getTime(day);
+		}
+		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, strArray[0], strArray[1]);
+	}
+	
+	private String[] getTime(int day){
+		String startTime = null;
+		String endTime = null;
+		String baseStr = null;
+		if(day==0){
+			baseStr = DateUtils.getDate(new Date());
+		}else{
+			baseStr = DateUtils.getDate(DateUtils.addDay(new Date(), -1));
+		}
+		startTime = baseStr +" 00:00:00";
+		endTime = baseStr +" 23:59:59";
+		return new String[]{startTime,endTime};
+	}
+	
+	public SqDayAddBean getSqDayAddBean(){
+		SqDayAddBean result = new SqDayAddBean();
+		String[] jt = getTime(0);
+		String[] zt = getTime(-1);
+		String[] qt = getTime(-2);
+		String[] dqt = getTime(-3);
+		result.setJt(gcuserDao.getSumSjbByTime(jt[0], jt[1]));
+		result.setZt(gcuserDao.getSumSjbByTime(zt[0], zt[1]));
+		result.setQt(gcuserDao.getSumSjbByTime(qt[0], qt[1]));
+		result.setDqt(gcuserDao.getSumSjbByTime(dqt[0], dqt[1]));
+		return result;
+	}
+	
+	public IPage<W10Bean> getTxpayPage(int pageIndex,int pageSize,String uid,String uname,String riqi){
+//	    String baseStr = DateUtils.DateToString(DateUtils.addDay(new Date(), 9),DateStyle.YYYY_MM_DD_HH_MM_SS);
+		String startTime = null;
+		String endTime = null;
+		if(!Strings.isNullOrEmpty(riqi)){
+//			Date date = DateUtils.StringToDate(riqi, DateStyle.YYYY_MM_DD_EN);
+//			String baseStr = DateUtils.DateToString(date,DateStyle.YYYY_MM_DD);
+			startTime = riqi+" 00:00:00";
+			endTime = riqi+" 23:59:59";
+		}
+		return txpayDao.getPageListW10(pageIndex, pageSize,uid,uname,startTime,endTime);
+	}
+	
+	public void syusers(int payId,int op){
+		txpayDao.updateTxvip(payId, op);
 	}
 }

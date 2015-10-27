@@ -9,6 +9,7 @@ import com.yq.common.utils.DateUtils;
 
 
 public class Gcuser{
+	private Integer id;
 	private String username;
 	private String up;
 	private int jb;
@@ -718,6 +719,11 @@ public class Gcuser{
 	public void setVipzfb(String vipzfb) {
 		this.vipzfb = vipzfb;
 	}
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }
 

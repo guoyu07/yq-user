@@ -4,9 +4,11 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.manager.bo.W10Bean;
 import com.yq.user.bo.Txpay;
 
 public class TxPayDao {
@@ -112,4 +114,27 @@ public class TxPayDao {
     	return jdbc.getDouble(sql, null);
     }
     
+    public IPage<W10Bean> getPageListW10(int pageIndex,int pageSize,String uid,String uname,String startTime,String endTime){
+    	//String sql="select * from "+table+" where payonoff = '尚未转账' txvip=2 and paytime>? order by payid" ;
+    	//SqlParameter.Instance().withObject(day)
+    	String sql = "select cc.*,(select sum(paynum) FROM txpay where payusername = cc.payusername and dfuser<>'撤销') as sum_pay_num "
+    			+ "from (select tx.*,tio.name as name from txpay as tx left join txifok tio  on tio.username=tx.payusername "
+    			+ "where tx.payonoff = '尚未转账' ";
+    	if(!Strings.isNullOrEmpty(uid)){
+    		sql = sql +" and tx.payusername='"+uid+"'";
+    	}
+    	if(!Strings.isNullOrEmpty(uname)){
+    		sql = sql +" and tx.payname='"+uname+"'";
+    	}
+    	if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+    		sql = sql +" and tx.paytime between '"+startTime+"' and '"+endTime+"'";
+    	}
+    	sql=sql+" order by payid desc)cc";
+    	return jdbc.getListPage(sql, W10Bean.class, null, pageSize, pageIndex);
+    }
+    
+    public boolean updateTxvip(int payId,int txvip){
+    	String sql = "update "+table+" set txvip=? where payid=? limit 1";
+    	return jdbc.update(sql,  SqlParameter.Instance().withInt(txvip).withInt(payId))>0;
+    }
 }

@@ -391,7 +391,30 @@
 		    <result name="success">
 		        gaiuser.jsp
 		    </result>
-		</action>													
+		</action>
+		<action name="adminbduser" class="com.yq.manager.action.AdminBdUserAction">
+		    <result name="input">
+		        adminBdUser.jsp
+		    </result>
+		    <result name="success">
+		        adminBdUser.jsp
+		    </result>
+		</action>
+		<action name="sqdayadd" class="com.yq.manager.action.SqdayAddAction">
+		    <result name="success">
+		        sqdayadd.jsp
+		    </result>
+		</action>
+		<action name="w10" class="com.yq.manager.action.W10Action">
+		    <result name="success">
+		        w10.jsp
+		    </result>
+		</action>	
+		<action name="syusers" class="com.yq.manager.action.W10Action" method="syusers">
+		    <result name="success">
+		       w10.jsp
+		    </result>
+		</action>																		
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

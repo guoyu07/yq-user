@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
@@ -731,5 +732,23 @@ public class GcuserDao {
 	public boolean updateAdminLevel(String userName,int jb,Date dldate,Date dqDate){
 		String sql = "update "+table+" set jb=?,dldate=?,dqdate=? where username=? limit 1";
 		return jdbc.update(sql, SqlParameter.Instance().withInt(jb).withObject(dldate).withObject(dqDate).withString(userName))>0;
+	}
+	
+	public IPage<Gcuser> getSqDayAddUserPages(int pageIndex,int pageSize,String startTime,String endTime){
+		String and = "";
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			and = " and bddate between '"+startTime+"' and '" +endTime+"'";
+		}
+		String sql = "select * from "+table+" where sjb>10"+and+" order by bddate desc";
+		return jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
+	}
+	
+	public int getSumSjbByTime(String startTime,String endTime){
+		String and = "";
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			and = " and bddate between '"+startTime+"' and '" +endTime+"'";
+		}
+		String sql = "select sum(sjb) from "+table+" where sjb>19"+and;
+		return jdbc.getInt(sql, null);
 	}
 }

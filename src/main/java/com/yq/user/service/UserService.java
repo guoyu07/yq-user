@@ -807,7 +807,7 @@ public class UserService {
 					int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
 					if(sjtjzb>0){
 						if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-							sgxtDao.updateZfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
+							sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
 						}
 					}
 				}
@@ -818,7 +818,7 @@ public class UserService {
 	}
 	
 	
-	private void CalculateQ(String userName,int sjb,String bduser){
+	public void CalculateQ(String userName,int sjb,String bduser){
 		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
 		if(sgxtBd==null){
 			return;

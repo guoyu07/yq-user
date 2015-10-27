@@ -80,6 +80,16 @@ public class SgxtDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean updateYfiled(String userName,String filedName,int filedValue,int dqyou,int count){
+		String sql = "update "+table+" set "+filedName+"=?,dqyou=?,count=? where username=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(filedValue);
+		parameter.setInt(dqyou);
+		parameter.setInt(count);
+		parameter.setString(userName);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
 	
 	public boolean updateZaq(String userName,int zaq){
 		String sql = "update "+table+" set zaq=zaq+? where username=?";
