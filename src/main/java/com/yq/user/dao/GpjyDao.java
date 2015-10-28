@@ -21,6 +21,9 @@ public class GpjyDao {
 	}
 	
 	public boolean add(Gpjy gpjy){
+		if(gpjy.getAbdate()==null){
+			gpjy.setAbdate(new Date());
+		}
 		return this.jdbc.insert(gpjy)>0;
 	}
 	

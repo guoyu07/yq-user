@@ -20,8 +20,16 @@
        <bean id="mqfhDao" class="com.yq.manager.dao.MqfhDao"></bean>
        <bean id="addShengDao" class="com.yq.manager.dao.AddShengDao"></bean>
        <bean id="mtfhtjDao" class="com.yq.manager.dao.MtfhtjDao"></bean>
-       
+       <!-- 每日凌晨过1分执行 -->
        <bean id="backCountScheduler" class="com.yq.manager.scheduler.BackCountScheduler">
           <property name="cronExpression" value="0 1 0 * * ?"></property>
+       </bean>
+       <!-- 每日 每隔3小时 整点执行 -->
+       <bean id="man123Scheduler" class="com.yq.manager.scheduler.Man123Scheduler">
+          <property name="cronExpression" value="0 0 0,3,6,9,12,15,18,21 * * ?"></property>
+       </bean>
+       <!-- 每日 每隔3小时 整点执行 -->
+       <bean id="manageQueRenScheduler" class="com.yq.manager.scheduler.ManageQueRenScheduler">
+          <property name="cronExpression" value="0 0 1,4,7,10,13,16,19,22 * * ?"></property>
        </bean>
 </beans>

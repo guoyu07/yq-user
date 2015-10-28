@@ -125,6 +125,7 @@ public class AdminService {
 	private TxPayDao txpayDao;
 	
 	
+	
   	private Cache<String,String> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
 
 	
@@ -1614,5 +1615,193 @@ public class AdminService {
 			throw new ServiceException(2, "不存在该记录"+id);
 		}
 	}
+	/**
+	 * 后台执行xxxx
+	 */
+	public void man123(){
+		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
+		gcuserDao.updateJygdateAndJygt1("<50000", 1, null, 0);
+		gcuserDao.updateAbdateAndDbtl(">30", 0, new Date(), 1);
+		gcuserDao.updateAbdateAndDbtl("<30", 1, null, 0);
+		fcxtDao.updateJy5w();
+		
+		Fcxt fcxt = fcxtDao.get(2);
+		double jyj = fcxt.getJygj()+0.2;
+		int pageIndex = 0;
+		int pageSize = 100;
+		Collection<Gcuser> tempList = null;
+		IPage<Gcuser> page = null;
+	    String endTime = DateUtils.DateToString(DateUtils.addDay(new Date(), -7),DateStyle.YYYY_MM_DD_HH_MM_SS);
+	    //第一遍循环
+	    while(true){
+			page= gcuserDao.getBatchUser(pageIndex, pageSize, endTime);
+	    	if(page!=null){
+	    		tempList = page.getData();
+	    		if(tempList!=null&&tempList.size()>0){
+	    			for(Gcuser gcuser:tempList){
+	    				String clname = gcuser.getUsername();
+	    				int dbjc = gcuser.getJydb()-30;
+	    				double jc30 = dbjc*0.3;
+	    				int hs30 = (int)jc30;
+	    				if(hs30>0){
+	    					gcuserDao.reduceOnlyJB(clname, hs30);
+		    				adddatepay(clname, hs30, gcuser.getJydb(), gcuser.getPay(), "超出"+dbjc+"系统回收30%");
+	    				}
+	    			}
+	    		}else{
+	    			break;
+	    		}
+	    	}else{
+	    		break;
+	    	}
+	    	pageIndex++;
+	    }
+	    
+	    
+	    pageIndex = 0;
+	    //第二遍循环
+	    while(true){
+			page= gcuserDao.getBatchUser(pageIndex, pageSize, endTime);
+	    	if(page!=null){
+	    		tempList = page.getData();
+	    		if(tempList!=null&&tempList.size()>0){
+	    			for(Gcuser gcuser:tempList){
+	    				String clname=gcuser.getUsername();
+	    				int jydball=gcuser.getJydb();
+	    				int jydbnumber=gcuser.getJydb()-30;
+	    				int	ForCount=(int)(jydbnumber/30);
+	    				int lasenumber=jydbnumber%30;
+	    				if(ForCount>0){
+	    					for(int j=1;j<=ForCount;j++){
+	    						int insertid = adddatepay(clname,30,jydball-j*30,gcuser.getPay(),"买入挂牌中(系统代)");
+	    						addGpjy(clname,30,(jydball-ForCount*30)*1d,insertid,jyj);
+	    					}
+	    				}
+	    				if(lasenumber>1){
+	    					 int insertid=adddatepay(clname,lasenumber,jydball-ForCount*30-lasenumber,gcuser.getPay(),"买入挂牌中(系统代)");
+	    					 addGpjy(clname,lasenumber,(jydball-ForCount*30-lasenumber)*1d,insertid,jyj);
+	    				}
+	    				gcuserDao.updateMan1234(clname, 30, null, 0);
+	    			}
+	    		}else{
+	    			break;
+	    		}
+	    	}else{
+	    		break;
+	    	}
+	    	pageIndex++;
+	    }
+	}
+	
+	private int adddatepay(String clname,int jo,int jydb,int pay,String regId){
+		Datepay datepay = new Datepay();
+		datepay.setUsername(clname);
+		datepay.setDbjc(jo);
+		datepay.setPay(pay);
+		datepay.setJydb(jydb);
+		datepay.setRegid(regId);
+		datePayDao.addDatePay(datepay);
+		return datePayDao.getLastInsertId();
+	}
+	
+	private void addGpjy(String clname,int mysl,double jyg,int jyid,double jyj){
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(clname);
+		gpjy.setMysl((int)(mysl/jyj+0.1)/1d);
+		gpjy.setSysl(jyg);
+		gpjy.setPay(jyj);
+		gpjy.setBz("买入挂牌中(系统代)");
+		gpjy.setJypay((int)(mysl+0.1)/1d);
+		gpjy.setJyid(jyid);
+		gpjyDao.add(gpjy);
+	}
+	
+	public void managequeren(){
+		int pageIndex = 0;
+		int pageSize = 100;
+		Collection<Gcuser> tempList = null;
+		IPage<Gcuser> page = null;
+	    String endTime = DateUtils.DateToString(DateUtils.addDay(new Date(), -7),DateStyle.YYYY_MM_DD_HH_MM_SS);
+	    //第一遍循环
+	    while(true){
+			page= gcuserDao.getManageQueren(pageIndex, pageSize, endTime);
+	    	if(page!=null){
+	    		tempList = page.getData();
+	    		if(tempList!=null&&tempList.size()>0){
+	    			for(Gcuser gcuser:tempList){
+	    				String clname = gcuser.getUsername();
+	    				double mcsl=gcuser.getJyg()-50000;
+	    				double mc30=mcsl*0.3;
+	    				int hs30=(int)(mc30/1);
+	    				if(hs30>0){
+	    					if(gcuserDao.updateJyg(clname, hs30)){
+	    						Gpjy gpjy = new Gpjy();
+		    					gpjy.setUsername(clname);
+		    					gpjy.setMcsl(hs30*1d);
+		    					gpjy.setSysl((gcuser.getJyg()-hs30)*1d);
+		    					gpjy.setBz("超出"+mcsl+"回收30%");
+		    					gpjy.setDfuser("系统管理员");
+		    					gpjy.setCgdate(new Date());
+		    					gpjy.setJy(1);
+		    					gpjyDao.add(gpjy);
+	    					}
+	    				}
+	    			}
+	    		}else{
+	    			break;
+	    		}
+	    	}else{
+	    		break;
+	    	}
+	    	pageIndex++;
+	    }
+	    
+	    pageIndex = 0;
+	    
+	    //第一遍循环
+	    while(true){
+			page= gcuserDao.getManageQueren(pageIndex, pageSize, endTime);
+	    	if(page!=null){
+	    		tempList = page.getData();
+	    		if(tempList!=null&&tempList.size()>0){
+	    			for(Gcuser gcuser:tempList){
+	    				String clname= gcuser.getUsername();
+	    				int jygall=gcuser.getJyg();
+						int  jygnumber=gcuser.getJyg()-50000;
+						int  ForCount=(int)(jygnumber/200);
+						int  lasenumber=jygnumber%200;
+						if(ForCount>0){
+							for(int j=1;j<=ForCount;j++){
+								addGpjyForManageQueren(clname, 200,jygall-j*200);
+							}
+						} 
+						if(lasenumber>0){
+							addGpjyForManageQueren(clname,lasenumber,jygall-ForCount*200-lasenumber);
+						}
+						gcuserDao.updateManageQueren(clname, 50000, null, 0);
+	    			}
+	    		}else{
+	    			break;
+	    		}
+	    	}else{
+	    		break;
+	    	}
+	    	pageIndex++;
+	    }
+	}
+	
+	private void addGpjyForManageQueren(String clname,double mcsl,double jyg){
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(clname);
+		gpjy.setMcsl(mcsl);
+		gpjy.setSysl(jyg);
+		gpjy.setPay(0.77);
+		gpjy.setJy(0);
+		gpjy.setBz("卖出挂牌中(系统代)");
+		gpjy.setJypay((int)(mcsl*0.77*1+0.1)*1d);
+		gpjy.setNewjy(3);
+		gpjyDao.add(gpjy);
+	}
+	
 	
 }

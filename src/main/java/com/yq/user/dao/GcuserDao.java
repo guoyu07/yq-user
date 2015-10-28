@@ -751,4 +751,42 @@ public class GcuserDao {
 		String sql = "select sum(sjb) from "+table+" where sjb>19"+and;
 		return jdbc.getInt(sql, null);
 	}
+	
+	public boolean updateJygdateAndJygt1(String jygStr,int jygt1Condition,Date jygdate,int jygt1Value){
+		String sql = "update "+table+" set jygdate=?,jygt1=? where jyg"+jygStr+" and jygt1=?";
+		return jdbc.update(sql, SqlParameter.Instance().withObject(jygdate).withInt(jygt1Value).withInt(jygt1Condition))>0;
+	}
+	
+	public boolean updateAbdateAndDbtl(String jydbStr,int dbt1Condition,Date dbdate,int dbt1Value){
+		String sql = "update "+table+" set dbdate=?,dbt1=? where jydb"+jydbStr+" and dbt1=?";
+		return jdbc.update(sql, SqlParameter.Instance().withObject(dbdate).withInt(dbt1Value).withInt(dbt1Condition))>0;
+	}
+	
+	public IPage<Gcuser> getBatchUser(int pageIndex,int pageSize,String endTime ){
+		String and = "";
+		if(!Strings.isNullOrEmpty(endTime)){
+			and = " and dbdate  < '"+endTime+"'";
+		}
+		String sql = "select * from "+table+" where jydb>30 and dbt1=1"+and+" order by dbdate desc";
+		return jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
+	}
+	
+	public IPage<Gcuser> getManageQueren(int pageIndex,int pageSize,String endTime){
+		String and = "";
+		if(!Strings.isNullOrEmpty(endTime)){
+			and = " and jygdate  < '"+endTime+"'";
+		}
+		String sql = "select * from "+table+" where jyg>50000 and jygt1=1"+and+" order by jygdate desc";
+		return jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
+	}
+	
+	public boolean updateMan1234(String userName,int jydb,Date dbdate,int dbt1){
+		String sql = "update "+table+" set jydb=?,dbdate=?,dbt1=? where username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(jydb).withObject(dbdate).withInt(dbt1).withString(userName))>0;
+	}
+	
+	public boolean updateManageQueren(String userName,int jyg,Date jygdate,int jygt1){
+		String sql = "update "+table+" set jyg=?,jygdate=?,jygt1=? where username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(jyg).withObject(jygdate).withInt(jygt1).withString(userName))>0;
+	}
 }

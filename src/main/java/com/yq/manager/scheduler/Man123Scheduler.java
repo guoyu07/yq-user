@@ -10,14 +10,14 @@ import com.sr178.game.framework.log.LogSystem;
 import com.sr178.game.framework.scheduler.SchedulerEntry;
 import com.yq.manager.service.AdminService;
 
-public class BackCountScheduler extends SchedulerEntry {
+public class Man123Scheduler extends SchedulerEntry {
 
 	@Override
 	public void executeJob(JobExecutionContext arg0) throws JobExecutionException {
-		LogSystem.info("开始执行BackCountScheduler"+new Date());
+		LogSystem.info("开始执行Man123Scheduler"+new Date());
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.backCount(new Date());
-		LogSystem.info("结束执行BackCountScheduler"+new Date());
+		adminService.man123();
+		LogSystem.info("结束执行执行Man123Scheduler"+new Date());
 	}
 
 }
