@@ -27,7 +27,7 @@
 						<span>充值记录明细</span>
 					</div>
 					<div class="a-recharge">
-					<form method="POST" align="center" name="Form" onSubmit="return checkdate()" action="vipgo?status=1">
+					<form method="POST" name="Form" onSubmit="return checkdate()" action="vipgo?status=1">
 						<strong>请选择您要充值的金额：</strong>
 						<select name="cjpay">
 							<option selected value="0">==请选择收到的充值金额==</option>
@@ -63,7 +63,7 @@
 							<option value="50000">5万</option>
 						</select>
 						<span class="c-r">**</span>
-						<button>确 定 充 值</button>
+						<button type="submit">确 定 充 值</button>
 						</form>
 						<a href="/login2j?inputUrl=login6j.jsp" class="c-g">激活金币卡</a>
 						<p class="c-r">（注：每次充值最低100元，并以100元的整数递增，如200，300，400，同时需要加尾数）</p>
