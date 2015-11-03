@@ -2695,6 +2695,164 @@ public class UserService {
 		}
 		this.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v");
 	}
+	/**
+	 * 获取一币支付订单信息
+	 * @param userName
+	 * @param regId
+	 * @return
+	 */
+	public Datepay getHgybOrder(String userName,String regId){
+		return datePayDao.getDatepayByUserNameAndRegid(userName, regId);
+	}
+	/**
+	 * yb支付
+	 * @param userName
+	 * @param ybsl
+	 * @param fee
+	 * @param gwuser
+	 * @param hgcode
+	 * @param pa3
+	 * @param gwno
+	 * @param gwid
+	 */
+	@Transactional
+	public void hgybOk(String userName,int ybsl,int fee,String gwuser,String hgcode,String pa3,String gwno,String gwid){
+		if(!userName.equals(gwuser)){
+			throw new ServiceException(1, "您好，该订单不是当前登录用户名提交，请重新登录，谢谢！");
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser.getPay()<ybsl||ybsl<=0){
+			throw new ServiceException(2, "一币不够！");
+		}
+		Datepay datepay = getHgybOrder(userName, "换购-"+gwno);
+		if(datepay!=null){
+			throw new ServiceException(3, "订单已处理 ！");
+		}
+		if(!gcuser.getPassword3().equals(pa3)){
+			throw new ServiceException(4, "您好，二级密码不正确，请重新输入！");
+		}
+		if(!hgcode.equals(gcuser.getVipsq())){
+			throw new ServiceException(5, "手机验证码不正确");
+		}
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		if(!this.changeYb(userName, -ybsl, "换购-"+gwno, 4, null)){
+			throw new ServiceException(2, "一币不够！");
+		}
+	}
+	/**
+	 * 商城回调
+	 * @param ybsl
+	 * @param fee
+	 * @param sjuser
+	 * @param gwno
+	 * @param gwid
+	 */
+	public void hgybSh(int ybsl,int fee,String sjuser,String gwno,String gwid){
+		ybsl = (int)(ybsl*0.98);
+		if(ybsl<=0){
+			throw new ServiceException(6, "订单信息有误，请重新提交！");
+		}
+		Gcuser gcuser = gcuserDao.getUser(sjuser);
+		if(gcuser==null){
+			throw new ServiceException(7, "商家用户名不存在，请检查后再试！");
+		}
+		this.changeYb(sjuser, ybsl, "商品交易-"+gwno, 5, null);
+	}
+	/**
+	 * 新商城支付通道
+	 * @param gwpay
+	 * @param pa01
+	 * @param pid
+	 * @param ybf
+	 * @param user
+	 * @param order
+	 * @param pa02
+	 */
+	public void ybpay(int gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
+		int ybsl = (int)(gwpay*1.02);
+		
+		if(ybsl<=0){
+			throw new ServiceException(2, "订单信息有误，请重新提交！");
+		}
+		String paylb;
+		if(pid==1){
+			 paylb="购物-"+order;
+		}	else{
+			   paylb="充值-"+order;
+		}
+		Gcuser gcuser = gcuserDao.getUser(user);
+		if(gcuser==null){
+			throw new ServiceException(3, "输入的用户名不存在，请检查输入是否正确！");
+		}
+		if(!MD5Security.md5_16(pa01).equals(gcuser.getPassword())){
+			throw new ServiceException(4, "输入的登录密码不正确，请检查输入是否正确！");
+		}
+		if(!gcuser.getPassword3().equals(pa02)){
+			throw new ServiceException(5, "输入的二级密码不正确，请检查输入是否正确！");
+		}
+		if(gcuser.getPay()<ybsl){
+			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
+		}
+		if(!hgcode.equals(gcuser.getVipsq())){
+			throw new ServiceException(7, "手机验证码不正确");
+		}
+		if(!this.changeYb(user, -ybsl, paylb, 10, null)){
+			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
+		}
+		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
+	}
 	
-
+	/**
+	 * 机票支付通道
+	 * @param gwpay
+	 * @param pa01
+	 * @param pid
+	 * @param ybf
+	 * @param user
+	 * @param order
+	 * @param pa02
+	 */
+	public int kypwe(int gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
+		int ybsl = (int)(gwpay*1.02);
+		if(ybsl<=0){
+			throw new ServiceException(2, "订单信息有误，请重新提交！");
+		}
+		String paylb;
+		if(pid==1){
+			 paylb="票务支付-"+order;
+		}	else{
+			   paylb="票务充值-"+order;
+		}
+		Gcuser gcuser = gcuserDao.getUser(user);
+		if(gcuser==null){
+			throw new ServiceException(3, "输入的用户名不存在，请检查输入是否正确！");
+		}
+		if(!MD5Security.md5_16(pa01).equals(gcuser.getPassword())){
+			throw new ServiceException(4, "输入的登录密码不正确，请检查输入是否正确！");
+		}
+		if(!gcuser.getPassword3().equals(pa02)){
+			throw new ServiceException(5, "输入的二级密码不正确，请检查输入是否正确！");
+		}
+		if(gcuser.getPay()<ybsl){
+			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
+		}
+		if(!hgcode.equals(gcuser.getVipsq())){
+			throw new ServiceException(7, "手机验证码不正确");
+		}
+		int day = 0;
+		if(gcuser.getPwdate()!=null&&gcuser.getPwdate().getTime()>new Date().getTime()){
+			day = DateUtils.getIntervalDays(gcuser.getPwdate(), new Date());
+			throw new ServiceException(8, "您好，测试期间同一姓名及证件号30天内仅提供一次消费（不论金额大小），请于"+day+"天后再来，谢谢！");
+		}
+		if(!this.changeYb(user, -ybsl, paylb, 11, null)){
+			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
+		}
+		Date date = gcuser.getPwdate();
+		if(date==null){
+            date = new Date();
+		}
+		gcuserDao.updatePwdate(gcuser.getUserid(), gcuser.getName(), DateUtils.addDay(date, 30));
+		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
+		return day;
+	}
 }

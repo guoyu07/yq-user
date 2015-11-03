@@ -339,6 +339,22 @@
 		<action name="vipcj" class="com.yq.user.action.VipcjbAction" method="cj">
 		     <result name="success">view/yblc-vipcjb.jsp</result>
 		</action>
+		
+		<action name="hgyb" class="com.yq.user.action.YbShopPayAction" method="hgyb">
+		     <result name="success">vip/hgyb.jsp</result>
+		</action>
+		<action name="hgybok" class="com.yq.user.action.YbShopPayAction" method="hgybok">
+		     <result name="success">vip/hgyb.jsp</result>
+		</action>	
+		<action name="hgybsh" class="com.yq.user.action.YbShopPayAction" method="hgybsh">
+		     <result name="success">vip/hgyb.jsp</result>
+		</action>
+		<action name="ybpay" class="com.yq.user.action.YbShopPayAction" method="ybpay">
+		     <result name="success">vip/ybpay.jsp</result>
+		</action>	
+		<action name="kypwe" class="com.yq.user.action.YbShopPayAction" method="kypwe">
+		     <result name="success">vip/kypwe.jsp</result>
+		</action>										
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

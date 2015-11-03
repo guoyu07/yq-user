@@ -789,4 +789,9 @@ public class GcuserDao {
 		String sql = "update "+table+" set jyg=?,jygdate=?,jygt1=? where username=? limit 1";
 		return jdbc.update(sql, SqlParameter.Instance().withInt(jyg).withObject(jygdate).withInt(jygt1).withString(userName))>0;
 	}
+	
+	public boolean updatePwdate(String idcardNum,String name,Date pwDate){
+		String sql = "update "+table+" set pwdate=? where userid=? and name=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withObject(pwDate).withString(idcardNum).withString(name))>0;
+	}
 }

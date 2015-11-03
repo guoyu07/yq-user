@@ -1,6 +1,13 @@
+<%@page import="com.yq.user.bo.Gcuser"%>
+<%@page import="com.sr178.game.framework.context.ServiceCacheFactory"%>
+<%@page import="com.yq.user.service.UserService"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
+	<%
+  UserService userServiceHead = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+  Gcuser gcuserHead = userServiceHead.getUserByUserName(userServiceHead.isLogin(request.getSession().getId()));
+%>
 <div class="header">
 	<div class="logo"><a href="#"><img src="/images/logo.jpg" /></a></div>
 	<div class="nav">
@@ -23,6 +30,8 @@
 					<a href="/regTheSame">添加同名帐户</a>
 					<a href="/tgdown">我的客户</a>
 					<a href="/tgurl">个人信息</a>
+					<a href="http://yb.zgyce.com/index.asp?vipid=<%=gcuserHead.getUsername() %>&vippa=<%=gcuserHead.getPassword()%>">一币换购商品</a>
+					<a href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=<%=gcuserHead.getUsername() %>">一币换购记录</a>
 					<a href="#" class="close">帐户管理</a>
 				</div>
 			</li>
