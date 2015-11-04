@@ -128,7 +128,7 @@ public class UserService {
   //用户id与UserMapper的映射map
   	private Cache<String,String> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(102400).build();
     
-    public static final boolean IS_SEND_MSG_TEST= true;
+    public static final boolean IS_SEND_MSG_TEST= false;
     
     /**
      * 查看是否登录了
