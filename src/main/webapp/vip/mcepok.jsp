@@ -15,6 +15,7 @@ function checkdate()  {
 	$.post("/sms", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		settime($("#btn"));
 		alert("手机验证码发送成功");
 	});
 	return false;
@@ -73,3 +74,6 @@ function checkdate1()  {
 		</table>
 	</div>
 </form>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

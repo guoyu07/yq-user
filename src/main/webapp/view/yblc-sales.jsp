@@ -52,6 +52,7 @@
 	$.post("/sms", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		settime($("#btn"));
 		alert("手机验证码发送成功");
 	});
 	return false;
@@ -108,7 +109,7 @@ function checkdate1()  {
 								</select></p>
 							<p><label>二级密码：</label><INPUT name="pa3" size=15 type=password></p>
 							<c:if test="${gcuser.ganew!=0}"><p><label>手机验证码：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><input type="text" name="ybcodeid" size="15"><input id="btn" type="button" onclick="checkdate()" value="获取验证码" name="B2"></span></c:if>
-							<p><label></label><button class="but1" type=submit  onClick="return confirm('提示：发布卖出的一币如低于500（含500）交易手续费为15%，高于500的则为10%，您确定了吗？')">发 布 卖 出</button></p>
+							<p><label></label><button class="but1" type="submit" id="btn"  onClick="return confirm('提示：发布卖出的一币如低于500（含500）交易手续费为15%，高于500的则为10%，您确定了吗？')">发 布 卖 出</button></p>
 					</form>
 					<div style=" float:left; padding:30px 0 0 30px; ">
 						<p>真实姓名：${gcuser.name}</p>
@@ -129,3 +130,6 @@ function checkdate1()  {
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

@@ -44,11 +44,12 @@ return (allValid);
   if (Form.txpay.value<100) {      alert("您的发布不能小于100一币!");      return false;    } 
   if (Form.pa3.value=="") {      alert("请输入二级密码密码!");      return false;    } 
 	
-	$("#btn").attr("disabled","disabled");
+   $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
-	$.post("sms.asp", data, function(data) {
+	$.post("/sms", data, function(response) {
 		$("#btn").removeAttr("disabled");
-		if (data != "success") { alert("手机验证码发送失败"); return false; }
+		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		settime($("#btn"));
 		alert("手机验证码发送成功");
 	});
 	return false;
@@ -165,3 +166,6 @@ function checkdate1()  {
 	<p align="left" style="line-height: 150%; margin-top: 0; margin-bottom: 0">　</font></div>
 </body>
 </html>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

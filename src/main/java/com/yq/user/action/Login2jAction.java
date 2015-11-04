@@ -44,7 +44,7 @@ public class Login2jAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(3);//alert('您好，一币商城的商家账户暂时不提供卖出功能，谢谢！');
 				}
 				
-				if(user.getCxt()<4 && user.getCxdate().getTime()>new Date().getTime()){
+				if(user.getCxt()<4 && (user.getCxdate()!=null&&user.getCxdate().getTime()>new Date().getTime())){
 					cxt = user.getCxt();
 					days = DateUtils.getIntervalDays(user.getCxdate(), new Date());
 					super.setErroCodeNum(4);//alert('您好，您的诚信星为"&rs_login("cxt")&"，离取消[限制发布]时间还有"&rs_login("cxdate")-date()&"天，谢谢！');

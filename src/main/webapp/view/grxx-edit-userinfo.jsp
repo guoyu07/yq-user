@@ -43,6 +43,7 @@ function sendMsg(){
 	$.post("/sms", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		settime($("#btn"));
 		alert("手机验证码发送成功");
 	});
 }
@@ -196,7 +197,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
                     </select></span></p>
 							<p><label>验证二级密码：</label><input type="password" name="secondPassword" size="20" /></p>
 							<p><label>验证身份证号码：</label><input type="text" name="idCard" size="20" maxlength="19" /><span class="tispsfz">${gcuser.userid}</span></p>
-							<p><label>手机验证码：</label><input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"><input class="btns" type="button" onclick="sendMsg()" value="获取验证码" name="B2" /></p>
+							<p><label>手机验证码：</label><input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"><input class="btns" id="btn" type="button" onclick="sendMsg()" value="获取验证码" name="B2" /></p>
 							<p style="color: red;">只需修改一个用户名，其它同名账户统一更新！</p>
 							<p><label></label><button class="but1" type="submit" value="提交修改" name="B1" onClick="checkdate1();">提 交 修 改</button></p>
 					</form>
@@ -212,3 +213,6 @@ function AmendCity(ProvinceID,CityID,AreaID)
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

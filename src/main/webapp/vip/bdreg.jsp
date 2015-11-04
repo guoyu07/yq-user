@@ -30,6 +30,7 @@
 		$.post("/sms", data, function(response) {
 			$("#btn").removeAttr("disabled");
 			if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+			settime($("#btn"));
 			alert("手机验证码发送成功");
 		});
 	return false;
@@ -86,3 +87,6 @@ function checkdate1()  {
 <p align="center"><b><font color="#FF0000">重要提示：</font></b>确认无误后，系统进入核算中...期间请停止其它操作，更不要关闭本页！</p>
 <p align="center"> </p>
 </div>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

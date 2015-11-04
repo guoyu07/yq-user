@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/images/jquery.min.js"></script>
 </head>
 <script language="JavaScript"> 
 function CheckIfEnglish( str )
@@ -32,8 +33,16 @@ function checkdate()  {
   if (Form.newSecondPassword1.value != Form.newSecondPassword2.value) {      alert("两次输入新二级密码不同！"); Form.newSecondPassword2.focus();     return false;    } 
   if (Form.qq.value=="") {      alert("请输入QQ！");Form.qq.focus();      return false;    }  
   if (Form.idCard.value=="") {      alert("请填入您的身份证号码！");  Form.idCard.focus();      return false;    }
-
-	return false;
+  
+    $("#btn").attr("disabled","disabled");
+	var data = $("#Form").serialize();
+	$.post("/sms", data, function(response) {
+		$("#btn").removeAttr("disabled");
+		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		settime($("#btn"));
+		alert("手机验证码发送成功");
+	});
+	return true;
 }  
 function checkdate1()  {  
   if (Form.smsCode.value=="") {   alert("请先点击获取验证码，然后再填入您的手机收到的验证码");  Form.smsCode.focus();   return false;    }
@@ -42,7 +51,7 @@ function checkdate1()  {
   $.post("updateuser?status=1", data, function(response) {
 		if(response.erroCodeNum==0){//注册成功
 			alert('更新资料成功，请重新登录！');
-		    location.replace('../index.jsp?id='+Form.userName.value);
+		    location.replace('../index.jsp?id='+Form.uuu.value);
 		}else if(response.erroCodeNum==1){
 			alert('用户不存在');
 			return;
@@ -132,6 +141,8 @@ function checkdate1()  {
 		</tr>
 		</table>
 	<p><font color="#FF00FF">如需更改手机号码请联系客服修改，只需要修改您第一个注册的账户！</font></p>
-	<p><font color="#FF00FF">然后在这里提交成功后，您所有同姓名账户下的手机号码及资料同时更新！</font><p><b>
-	<font color="#FF00FF"><a href="../index_no.asp">无法获取到验证码请点此重新登录</a></font></b></div>
+	<p><font color="#FF00FF">然后在这里提交成功后，您所有同姓名账户下的手机号码及资料同时更新！</font></p></div>
 </form>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

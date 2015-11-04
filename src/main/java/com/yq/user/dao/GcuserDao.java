@@ -123,7 +123,7 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean updateUser(String name,String idCard,String password,String password3,int ganew,String qq,String call){
-		String sql = "update "+table+" set password=? , password3=? , ganew=? , qq=? ,`call`=? where name=? and userid=?";
+		String sql = "update "+table+" set password=? , password3=? , ganew=? , qq=? ,`call`=?,name=? where userid=?";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(password);
 		parameter.setString(password3);

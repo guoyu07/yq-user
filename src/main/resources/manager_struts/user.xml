@@ -369,6 +369,9 @@
 			<result name="success" type="redirect">
 			   /manager
 			</result>
+			<result name="upuser" type="redirect">
+			   /updateuser
+			</result>
 		</action>
 		<action name="reg" class="com.yq.user.action.RegAction">
 			<result name="input1">reg1.jsp</result>

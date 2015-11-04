@@ -24,6 +24,7 @@ function checkdate()  {
 	$.post("/sms", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		settime($("#btn"));
 		alert("手机验证码发送成功");
 	});
 	return false;
@@ -87,3 +88,6 @@ function checkdate1()  {
 	<p align="center">　
 	<p align="center"><b><font size="5" face="楷体_GB2312" color="#0000FF"><a href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=${gwuser}" style="text-decoration: none"><font color="#0000FF">返回换购记录列表</font></a></font></b></div>
 </form>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

@@ -24,9 +24,11 @@ public class VipUpAction extends ALDAdminActionSupport {
 		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
 		
 		gcuserup = userService.getUserByUserName(gcuser.getVipname());
-		
-		 upuname = gcuserup.getUsername().substring(0, 2);
-		
+		if(gcuserup!=null){
+			upuname = gcuserup.getUsername().substring(0, 2);
+		}else{
+			upuname = "**";
+		}
 		return SUCCESS;
 	}
 	public Gcuser getGcuserup() {

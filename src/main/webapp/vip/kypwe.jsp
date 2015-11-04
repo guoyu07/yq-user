@@ -27,6 +27,7 @@ function checkdate()  {
 	$.post("/sms", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		settime($("#btn"));
 		alert("手机验证码发送成功");
 	});
 	return false;
@@ -89,3 +90,6 @@ function checkdate1()  {
 	<p>请不要使用它人账户进行操作，一经发现3倍罚款！</p>
 	</div>
 </form>
+<script type="text/javascript">
+btnStatus($("#btn"));
+</script>

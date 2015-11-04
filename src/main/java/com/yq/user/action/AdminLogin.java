@@ -52,10 +52,10 @@ public class AdminLogin extends ALDAdminActionSupport {
 			super.setErroDescrip("登录失败，用户名或密码错误");
 			return SUCCESS;
 		} else {
-//			if(au.getGanew()!=0){
-//				super.setErroCodeNum(4);//重定向去修改用户信息
-//				return SUCCESS;
-//			}
+			if(au.getGanew()!=0){
+				super.setErroCodeNum(4);//重定向去修改用户信息
+				return SUCCESS;
+			}
 			return SUCCESS;
 		}
 	}
