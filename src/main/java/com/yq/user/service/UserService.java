@@ -17,7 +17,6 @@ import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.sms.util.SubMailSendUtils;
 import com.yq.common.ProblemCode;
 import com.yq.common.exception.ServiceException;
@@ -128,7 +127,6 @@ public class UserService {
   //用户id与UserMapper的映射map
   	private Cache<String,String> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(102400).build();
     
-    public static final boolean IS_SEND_MSG_TEST= false;
     
     /**
      * 查看是否登录了
@@ -2620,11 +2618,7 @@ public class UserService {
 		String randomString = RandomStringUtils.random(6, chars);
 		param.put("code", randomString);
 		if(gcuserDao.updateSmsCode(userName, randomString)){
-			if(!IS_SEND_MSG_TEST){
 				SubMailSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param);
-			}else{
-				LogSystem.info("测试阶段，不真正发送验证码:code="+randomString);
-			}
 		}else{
 			throw new ServiceException(3000, "发送短信发生错误");
 		}
