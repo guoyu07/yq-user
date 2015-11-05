@@ -9,7 +9,11 @@
 		       manager.jsp
 		    </result>
 		</action>
-		
+		<action name="resetUserDownInfo" class="com.yq.manager.action.ResetZYDetailsAction">
+		    <result name="success">
+		      readme.jsp
+		    </result>
+		</action>
 	    <action name="left" class="com.yq.manager.action.LeftAction">
 		    <result name="success">
 		        left.jsp

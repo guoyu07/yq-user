@@ -18,8 +18,8 @@ public class Sgxt{
 	private double zfh;
 	private int fdpay;
 	private int cfd;
-	private int dqzuo;
-	private int dqyou;
+	private Integer dqzuo;
+	private Integer dqyou;
 	private int count;
 	private int zaq;
 	private int zbq;
@@ -63,6 +63,12 @@ public class Sgxt{
 	private Integer z16;
 	private Integer y16;
 	private String bz;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -123,16 +129,16 @@ public class Sgxt{
 	public void setCfd(int cfd) {
 		this.cfd = cfd;
 	}
-	public int getDqzuo() {
+	public Integer getDqzuo() {
 		return dqzuo;
 	}
-	public void setDqzuo(int dqzuo) {
+	public void setDqzuo(Integer dqzuo) {
 		this.dqzuo = dqzuo;
 	}
-	public int getDqyou() {
+	public Integer getDqyou() {
 		return dqyou;
 	}
-	public void setDqyou(int dqyou) {
+	public void setDqyou(Integer dqyou) {
 		this.dqyou = dqyou;
 	}
 	public int getCount() {
@@ -393,11 +399,6 @@ public class Sgxt{
 	public void setBz(String bz) {
 		this.bz = bz;
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 }
 

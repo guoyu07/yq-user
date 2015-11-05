@@ -195,4 +195,9 @@ public class SgxtDao {
 		 String sql = "select sum(sjb) as ljnd from sgxt where id>?";
 		 return jdbc.getDouble(sql, SqlParameter.Instance().withInt(lastId));
 	 }
+	 
+	 public IPage<Sgxt> getSgxtUserNameAndSjb(int pageIndex,int pageSize){
+		 String sql = "select username,sjb from sgxt order by id";
+		 return jdbc.getListPage(sql, Sgxt.class, null, pageSize, pageIndex);
+	 }
 }

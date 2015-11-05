@@ -33,6 +33,9 @@ public class YouMingXiDao {
     	return jdbc.insert(youMingxi)>0;
     }
     
+    public void batchInsert(List<YouMingxi> list){
+    	jdbc.insert(list);
+    }
     
     public List<YouMingxi> getDownList(String down){
     	String sql = "select * from "+table+" where down = ?";
@@ -57,6 +60,11 @@ public class YouMingXiDao {
     	parameter.setString(down);
     	parameter.setInt(count);
     	return jdbc.update(sql, parameter)>0;
+    }
+    
+    public void deleteAll(){
+    	String sql = "delete from "+table;
+    	jdbc.update(sql, null);
     }
     
 }

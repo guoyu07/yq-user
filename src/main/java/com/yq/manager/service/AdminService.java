@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
@@ -1803,5 +1805,84 @@ public class AdminService {
 		gpjyDao.add(gpjy);
 	}
 	
+	private List<YouMingxi> yList = Lists.newArrayList();
+	private List<ZuoMingxi> zList = Lists.newArrayList();
+	public void resetUserDownInfo(){
+		LogSystem.info("开启重置z y明细表功能---");
+		int pageIndex = 0;
+		final int pageSize = 500;
+		IPage<Sgxt> page = null;
+		Collection<Sgxt> tempList = null;
+		
+		yList = Lists.newArrayList();
+		zList = Lists.newArrayList();
+		//删除2张表
+		youMingXiDao.deleteAll();
+		zuoMingxiDao.deleteAll();
+		while(true){
+			long startTime = System.currentTimeMillis();
+			long programeEndTime = System.currentTimeMillis();
+			page = sgxtDao.getPageList(pageIndex, pageSize);
+			if(page!=null){
+				tempList = page.getData();
+				if(tempList!=null&&tempList.size()>0){
+					for(Sgxt sgxt:tempList){
+						cupUserForReset(sgxt.getUsername(),sgxt.getUsername(),1,sgxt.getSjb());
+					}
+					programeEndTime = System.currentTimeMillis();
+				}else{
+					break;
+				}
+			}else{
+				break;
+			}
+			executeInsertSql();
+			long endTime = System.currentTimeMillis();
+			LogSystem.info("第("+(pageIndex+1)+")页数据处理完毕，一共("+page.getTotalPage()+"),总耗时"+(endTime-startTime)+"毫秒！===="+(endTime-startTime)/1000+"秒，其中递归循环耗时"+(programeEndTime-startTime)/1000+"秒，插入数据耗时="+(endTime-programeEndTime)/1000+"秒！");
+			pageIndex++;
+		}
+		
+		LogSystem.info("完成-----------重置z y明细表功能---完成-");
+	}
+	
+	private void cupUserForReset(String my,String constUp,int count,int sjb){
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(my);
+		if(sgxtBd!=null){
+			if(my.equals(sgxtBd.getAuid())){
+				ZuoMingxi zuoMingxi = new ZuoMingxi();
+				zuoMingxi.setTjuser(sgxtBd.getUsername());
+				zuoMingxi.setSjb(sjb);
+				zuoMingxi.setDown(constUp);
+				zuoMingxi.setCount(count);
+				zList.add(zuoMingxi);
+			}else{
+				YouMingxi youMingxi = new YouMingxi();
+				youMingxi.setCount(count);
+				youMingxi.setDown(constUp);
+				youMingxi.setTjuser(sgxtBd.getUsername());
+				youMingxi.setSjb(sjb);
+				yList.add(youMingxi);
+			}
+			count = count+1;
+			cupUserForReset(sgxtBd.getUsername(),constUp,count,sjb);
+		}
+	}
+	
+	private void executeInsertSql(){
+		if(yList.size()>0){
+			youMingXiDao.batchInsert(yList);
+			LogSystem.info("youMingxi表中插入数据("+yList.size()+")条");
+		}else{
+			LogSystem.info("zList无数据！不执行插入操作");
+		}
+		if(zList.size()>0){
+			zuoMingxiDao.batchInsert(zList);
+			LogSystem.info("zuoMingxi表中插入数据("+zList.size()+")条");
+		}else{
+			LogSystem.info("yList无数据！不执行插入操作");
+		}
+		yList = Lists.newArrayList();
+		zList = Lists.newArrayList();
+	}
 	
 }
