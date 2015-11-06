@@ -11,9 +11,15 @@
 		</action>
 		<action name="resetUserDownInfo" class="com.yq.manager.action.ResetZYDetailsAction">
 		    <result name="success">
-		      readme.jsp
+		      scontent.jsp
 		    </result>
 		</action>
+		<action name="resetZaqAndZbq" class="com.yq.manager.action.ResetZaqAndZbqAction">
+		    <result name="success">
+		      scontent.jsp
+		    </result>
+		</action>		
+		
 	    <action name="left" class="com.yq.manager.action.LeftAction">
 		    <result name="success">
 		        left.jsp

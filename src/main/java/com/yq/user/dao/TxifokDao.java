@@ -1,5 +1,7 @@
 package com.yq.user.dao;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.Jdbc;
@@ -13,6 +15,9 @@ public class TxifokDao {
 	private static String table = "txifok";
 
     public boolean add(Txifok txifok){
+    	if(txifok.getTxdate()==null){
+    		txifok.setTxdate(new Date());
+    	}
     	return jdbc.insert(txifok)>0;
     }
     

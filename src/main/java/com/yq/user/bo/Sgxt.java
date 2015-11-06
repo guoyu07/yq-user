@@ -10,6 +10,7 @@ public class Sgxt{
 	private Integer id;
 	private String username;
 	private int vip;
+	private String vipuser;
 	private int sjb;
 	private int xxnew;
 	private double down;
@@ -399,6 +400,11 @@ public class Sgxt{
 	public void setBz(String bz) {
 		this.bz = bz;
 	}
-	
+	public String getVipuser() {
+		return vipuser;
+	}
+	public void setVipuser(String vipuser) {
+		this.vipuser = vipuser;
+	}
 }
 

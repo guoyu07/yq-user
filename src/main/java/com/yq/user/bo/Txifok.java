@@ -1,6 +1,8 @@
 package com.yq.user.bo;
 
-   /**
+import java.util.Date;
+
+/**
     * txifok 实体类
     */ 
 
@@ -13,6 +15,7 @@ public class Txifok{
 	private String name;
 	private String call;
 	private String bz;
+	private Date txdate;
 	public void setId(int id){
 	this.id=id;
 	}
@@ -54,6 +57,12 @@ public class Txifok{
 	}
 	public String getBz(){
 		return bz;
+	}
+	public Date getTxdate() {
+		return txdate;
+	}
+	public void setTxdate(Date txdate) {
+		this.txdate = txdate;
 	}
 }
 

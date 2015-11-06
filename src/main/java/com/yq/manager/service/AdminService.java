@@ -1808,6 +1808,7 @@ public class AdminService {
 	private List<YouMingxi> yList = Lists.newArrayList();
 	private List<ZuoMingxi> zList = Lists.newArrayList();
 	public void resetUserDownInfo(){
+		long allStartTime = System.currentTimeMillis();
 		LogSystem.info("开启重置z y明细表功能---");
 		int pageIndex = 0;
 		final int pageSize = 500;
@@ -1842,7 +1843,7 @@ public class AdminService {
 			pageIndex++;
 		}
 		
-		LogSystem.info("完成-----------重置z y明细表功能---完成-");
+		LogSystem.info("完成-----------重置z y明细表功能---完成--总计耗时"+(System.currentTimeMillis()-allStartTime)/1000+"秒！~");
 	}
 	
 	private void cupUserForReset(String my,String constUp,int count,int sjb){
@@ -1883,6 +1884,40 @@ public class AdminService {
 		}
 		yList = Lists.newArrayList();
 		zList = Lists.newArrayList();
+	}
+	
+	public void resetZaqAndZbq(){
+		long allStartTime = System.currentTimeMillis();
+		LogSystem.info("开启重置zaq zbq表功能---"+new Date());
+		int pageIndex = 0;
+		final int pageSize = 500;
+		IPage<Sgxt> page = null;
+		Collection<Sgxt> tempList = null;
+		//重置数据
+		sgxtDao.resetZaqAndZbq();
+		while(true){
+			long startTime = System.currentTimeMillis();
+			long programeEndTime = System.currentTimeMillis();
+			page = sgxtDao.getPageList(pageIndex, pageSize);
+			if(page!=null){
+				tempList = page.getData();
+				if(tempList!=null&&tempList.size()>0){
+					for(Sgxt sgxt:tempList){
+						CalculateQ(sgxt.getUsername(), sgxt.getSjb());
+					}
+					programeEndTime = System.currentTimeMillis();
+				}else{
+					break;
+				}
+			}else{
+				break;
+			}
+			long endTime = System.currentTimeMillis();
+			LogSystem.info("第("+(pageIndex+1)+")页数据处理完毕，一共("+page.getTotalPage()+"),总耗时"+(endTime-startTime)+"毫秒！===="+(endTime-startTime)/1000+"秒，其中递归循环耗时"+(programeEndTime-startTime)/1000+"秒，插入数据耗时="+(endTime-programeEndTime)/1000+"秒！");
+			pageIndex++;
+		}
+		
+		LogSystem.info("完成-----------重置zaq zbq表功能---完成-总计耗时"+(System.currentTimeMillis()-allStartTime)/1000+"秒！~");
 	}
 	
 }

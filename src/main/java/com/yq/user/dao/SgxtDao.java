@@ -200,4 +200,9 @@ public class SgxtDao {
 		 String sql = "select username,sjb from sgxt order by id";
 		 return jdbc.getListPage(sql, Sgxt.class, null, pageSize, pageIndex);
 	 }
+	 
+	 public void resetZaqAndZbq(){
+		 String sql = "update "+table+" set zaq=0,zbq=0";
+		 jdbc.update(sql, null);
+	 }
 }
