@@ -6,6 +6,7 @@ package com.yq.user.bo;
 
 
 public class YouMingxi{
+	private Integer id;
 	private String tjuser;
 	private String down;
 	private int sjb;
@@ -33,6 +34,15 @@ public class YouMingxi{
 	}
 	public int getCount(){
 		return count;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String insertStr(){
+		return "("+id+", '"+tjuser+"', '"+down+"', "+sjb+", "+count+")";
 	}
 }
 

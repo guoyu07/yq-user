@@ -1,5 +1,6 @@
 package com.yq.manager.service;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.exception.ServiceException;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
+import com.yq.common.utils.FileCreatUtil;
 import com.yq.common.utils.MD5Security;
 import com.yq.cservice.bean.SqDayAddBean;
 import com.yq.manager.bo.BackCountBean;
@@ -1807,6 +1809,8 @@ public class AdminService {
 	
 	private List<YouMingxi> yList = Lists.newArrayList();
 	private List<ZuoMingxi> zList = Lists.newArrayList();
+	private final String Y_FILE_NAME = "E://temp//youmingxi.sql";
+	private final String Z_FILE_NAME = "E://temp//zuomingxi.sql";
 	public void resetUserDownInfo(){
 		long allStartTime = System.currentTimeMillis();
 		LogSystem.info("开启重置z y明细表功能---");
@@ -1817,6 +1821,9 @@ public class AdminService {
 		
 		yList = Lists.newArrayList();
 		zList = Lists.newArrayList();
+		
+		FileCreatUtil.creatNewFile(Y_FILE_NAME);
+		FileCreatUtil.creatNewFile(Z_FILE_NAME);
 		//删除2张表
 		youMingXiDao.deleteAll();
 		zuoMingxiDao.deleteAll();
@@ -1869,15 +1876,45 @@ public class AdminService {
 		}
 	}
 	
+	private final String preYouMingXI = "INSERT INTO `you_mingxi` VALUES ";
+	private final String preZuoMingXI = "INSERT INTO `zuo_mingxi` VALUES ";
+
 	private void executeInsertSql(){
 		if(yList.size()>0){
-			youMingXiDao.batchInsert(yList);
+			StringBuffer yBuffer = new StringBuffer();
+			yBuffer.append(preYouMingXI);
+			int y=0;
+			for(YouMingxi youMingxi:yList){
+				if(y==0){
+					yBuffer.append(youMingxi.insertStr());
+				}else{
+					yBuffer.append(","+youMingxi.insertStr());
+				}
+				y++;
+			}
+			yBuffer.append(";\r\n");
+			//youMingXiDao.batchInsert(yList);
+			FileCreatUtil.appendFile(Y_FILE_NAME, yBuffer.toString());
 			LogSystem.info("youMingxi表中插入数据("+yList.size()+")条");
 		}else{
 			LogSystem.info("zList无数据！不执行插入操作");
 		}
 		if(zList.size()>0){
-			zuoMingxiDao.batchInsert(zList);
+			StringBuffer zBuffer = new StringBuffer();
+			zBuffer.append(preZuoMingXI);
+			int z=0;
+			for(ZuoMingxi zuoMingxi:zList){
+				if(z==0){
+					zBuffer.append(zuoMingxi.insertStr());
+				}else{
+					zBuffer.append(","+zuoMingxi.insertStr());
+				}
+				z++;
+			}
+			zBuffer.append(";\r\n");
+			//youMingXiDao.batchInsert(yList);
+			FileCreatUtil.appendFile(Z_FILE_NAME, zBuffer.toString());
+			//zuoMingxiDao.batchInsert(zList);
 			LogSystem.info("zuoMingxi表中插入数据("+zList.size()+")条");
 		}else{
 			LogSystem.info("yList无数据！不执行插入操作");

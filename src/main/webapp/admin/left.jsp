@@ -120,11 +120,11 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <td height=20>☉  <a href="/admin/date" target="BoardList"><font color="#FF0000">数据报表</font></a></td> 
 </tr>
 <tr>
-<td height=20>☉  <a href="/admin/bdbjzpay" target="BoardList">报单币转账</a></td> 
-</tr>
-<tr>
 <td height=20>☉  <a href="/admin/newsdate" target="BoardList">会员登录日志</a></td> 
 </tr>
+<tr>
+<td height=20>☉  <a href="/admin/tduser" target="BoardList">历史退户记录</a></td> 
+</tr>		
 <c:if test="${fcxt.id==1||fcxt.id==2}">
 <tr>
 <td height=20>☉  <a href="/admin/gaiuser" target="BoardList">用户信息修改日志</a></td> 
@@ -136,6 +136,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 </tr>
 </table>
 &nbsp;
+<c:if test="${fcxt.id==1||fcxt.id==2}">
 <table cellpadding=0 cellspacing=0 width=158 align=center>
 <tr>
         <td height=25 class=menu_title onmouseover=this.className='menu_title2'; onmouseout=this.className='menu_title'; background="images/admin_left_4.gif" id=menuTitle1 onclick="showsubmenu(3)"><span>附加管理</span></td>
@@ -157,25 +158,25 @@ eval("submenu" + sid + ".style.display=\"none\";");
               <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="doubleareacount"><font color="#000000">双区结算</font></a></font></td>
               </tr>
-              <c:if test="${fcxt.id==1||fcxt.id==2}">
+              
 				<tr>
 				<td height=20>☉  <a href="/admin/adminbduser" target="BoardList">双区玩家开户</a></td> 
 				</tr>
-			  </c:if>
+			  <tr>
+				<td height=20>☉  <a href="/admin/bdbjzpay" target="BoardList">报单币转账</a></td> 
+				</tr>
 			  <tr>
 				<td height=20>☉  <a href="/admin/sqdayadd" target="BoardList">双区进单明细</a></td> 
 				</tr>
 				<tr>
 				<td height=20>☉  <a href="/admin/w10" target="BoardList">提现申请清单</a></td> 
 				</tr>
-				<tr>
-				<td height=20>☉  <a href="/admin/tduser" target="BoardList">历史退户记录</a></td> 
-				</tr>				
               </table>
 	  </div>
 	</td>
   </tr>
 </table>
+</c:if>
 &nbsp;
 <!--  
 <table cellpadding=0 cellspacing=0 width=158 align=center>
