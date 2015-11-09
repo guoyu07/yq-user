@@ -325,3 +325,40 @@ a:hover{ color:#272a3d;}
 .founbox4 p .newbut{ margin-top: 200px; }
 .founbox4 p span{ color: red; font-size: 60px; padding: 0 20px; }
 
+
+
+.fwzxbox{ padding: 10px 0; }
+.fwzxtop{ background: #e8c479; padding: 10px; }
+.fwzxc{ overflow: hidden; line-height: 25px; }
+.fwzxc-l{ float: left; width: 260px; padding: 10px; }
+.fwzxc-l p{ font-size: 18px; }
+.fwzxc-r{ float: left; width:460px;  padding: 10px 0  10px  0;  }
+.fwzxbottom{ background: #e8c479; padding: 10px; line-height: 24px; }
+.fwzxbottom span{ color: #0078ff; }
+.fwzxbottom strong{ font-size: 20px; padding-bottom: 5px;  display: block; font-weight: lighter; }
+.formtj{ padding:30px 0 118px 0; }
+
+.shopt1{ width: 380px; }
+.shopt1 .st1p{ background: #799de8; text-align: center; color: #FFF; }
+.shopt1 .st1pbottom{ background: #e8c479; padding: 3px;    font-size: 13px; line-height: 32px; }
+.tablen1{ width: 380px; text-align: center;  background: #e8c479; }
+.tablen1 th{ text-align: center; }
+.tablen1 td{ background: #FFF; }
+
+.stts{ display: inline-block; width: 40px; height: 16px; line-height: 16px; background: #e88178; }
+.stts1{ background: #dce878;}
+.stts2{ background: #78e7e8;}
+
+.qbox{ background: #FFF; overflow: hidden; margin-bottom: 35px; }
+.qbox p{ width: 50%; border-left:1px solid #ccc; margin-left: -1px; float: left; text-align: center; font-size: 16px; height: 55px;  }
+.qbox strong{ display: block; color: red; font-size: 18px; text-align: center; }
+.shopri{ width: 330px; margin-left: 30px; float:left; }
+.st1p{ background: #6e7a97; color: #FFF; text-align: center; }
+.srt2 .tablen1{ width: 330px; }
+.srt2 .tablen1 th{ background: #6fbec2; }
+.srt2 .tablen1 td{ padding-bottom: 1px; }
+.yuan{ display: inline-block; width: 17px;  height: 17px; line-height: 17px; border-radius: 50%; background: #b9b9b9; }
+.r{ color: red; }
+.intxt{ border-radius: 8px; margin-bottom: 1px; padding: 0 5px; height: 20px; width: 100px; border: 1px solid #989898; }
+.intub{ width: 33px; border:none; float: right; margin-left: 5px; height: 20px; background: #999; cursor: pointer; background: url(../images/cz.png) no-repeat 0 0; }
+

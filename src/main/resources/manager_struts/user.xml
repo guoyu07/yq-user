@@ -94,13 +94,15 @@
 		</action>
 		
 		<action name="sgks01" class="com.yq.user.action.Sgks01Action">
-		    <result name="success">vip/sgks01.jsp</result>
+		    <result name="success">view/yjcx-game.jsp</result>
 		</action>
 		<action name="sgreg" class="com.yq.user.action.SgRegAction">
-		    <result name="success">vip/sgreg.jsp</result>
+		    <!-- <result name="success">vip/sgreg.jsp</result> -->
+		    <result name="success">view/yjcx-choose-empty.jsp</result>
 		</action>			
 		<action name="bdreg" class="com.yq.user.action.BdRegAction">
-		    <result name="success">vip/bdreg.jsp</result>
+		    <!-- <result name="success">vip/bdreg.jsp</result> -->
+		    <result name="success">view/yjcx-choose-empty-sure.jsp</result>
 		    <result name="sgks01" type="redirect">sgks01?myup=${up}&amp;lb=1</result>
 		</action>
 		
@@ -224,7 +226,7 @@
 		</action>
 		
 		<action name="bank" class="com.yq.user.action.BankAction">
-		    <result name="success">vgo/bank.jsp</result>
+		    <result name="success">view/zhgl-bank.jsp</result>
 		</action>	
 		<action name="cjjl" class="com.yq.user.action.CjjlAction">
 		    <result name="success">vip/cjjl.jsp</result>

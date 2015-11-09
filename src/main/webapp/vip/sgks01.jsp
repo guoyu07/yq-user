@@ -84,8 +84,8 @@
 			<td width="143" bgcolor="#E3E3E3"><font size="2" face="宋体">
 			<c:if test="${!empty sgxt.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxt.auid}" style="text-decoration: none">${sgxt.auid}（${sgxta.sjb}）</a></c:if>
 			<c:if test="${empty sgxt.auid}"><a href="sgreg?bd=${bdid}&myup=${myup}" style="text-decoration: none">选择空位</a></c:if></font></td>
-			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxta.zaq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxta.zaq}</font></b><font size="2"></c:if></font></font></td>
-			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxta.zbq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxta.zbq}</font></b><font size="2"></c:if></font></font></td>
+			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxta.zaq!=''}">${sgxta.zaq}</c:if></font></font></td>
+			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxta.zbq!=''}">${sgxta.zbq}</c:if></font></font></td>
 			<td align="center" bgcolor="#FFF2BF"><b>一</b></td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.z1}</td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.y1}</td>
@@ -97,8 +97,8 @@
 			<c:if test="${!empty sgxt.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxt.buid}" style="text-decoration: none">${sgxt.buid}（${sgxtb.sjb}）</a></c:if>
 			<c:if test="${empty sgxt.buid}"><a href="sgreg?bd=${bdid}&myup=${myup}" style="text-decoration: none">选择空位</a></c:if></font></td>
 			
-			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxtb.zaq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtb.zaq}</font></b><font size="2"></c:if></font></font></td>
-			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxtb.zbq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtb.zbq}</font></b><font size="2"></c:if></font></font></td>
+			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxtb.zaq!=''}">${sgxtb.zaq}</c:if></font></font></td>
+			<td width="72" bgcolor="#E3E3E3"><font face="宋体" size="2"><c:if test="${sgxtb.zbq!=''}">${sgxtb.zbq}</c:if></font></font></td>
 			
 			
 			<td align="center" bgcolor="#FFF2BF"><b>二</b></td>
@@ -115,8 +115,8 @@
 			    <c:if test="${empty sgxta.username}">无接点人</c:if>
 			</c:if></font></td>
 			
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtaa.zaq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtaa.zaq}</font></b><font size="2"></c:if></font></font></td>
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtaa.zbq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtaa.zbq}</font></b><font size="2"></c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtaa.zaq!=''}">${sgxtaa.zaq}</c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtaa.zbq!=''}">${sgxtaa.zbq}</c:if></font></font></td>
 			
 			
 			<td align="center" bgcolor="#FFF2BF"><b>三</b></td>
@@ -134,8 +134,8 @@
 				<c:if test="${empty sgxta.username}">无接点人</c:if>
 			</c:if>
 			</font></td>
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtab.zaq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtab.zaq}</font></b><font size="2"></c:if></font></font></td>
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtab.zbq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtab.zbq}</font></b><font size="2"></c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtab.zaq!=''}">${sgxtab.zaq}</c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtab.zbq!=''}">${sgxtab.zbq}</c:if></font></font></td>
 			<td align="center" bgcolor="#FFF2BF"><b>四</b></td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.z4}</td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.y4}</td>
@@ -150,8 +150,8 @@
 			   <c:if test="${empty sgxtb.username}">无接点人</c:if>
 			 </c:if></font></td>
 			</font></td>
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtba.zaq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtba.zaq}</font></b><font size="2"></c:if></font></font></td>
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtba.zbq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtba.zbq}</font></b><font size="2"></c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtba.zaq!=''}">${sgxtba.zaq}</c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtba.zbq!=''}">${sgxtba.zbq}</c:if></font></font></td>
 			<td align="center" bgcolor="#FFF2BF"><b>五</b></td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.z5}</td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.y5}</td>
@@ -167,8 +167,8 @@
 			</c:if></font></td>
 			</font></td>
 						
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtbb.zaq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtbb.zaq}</font></b><font size="2"></c:if></font></font></td>
-			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtbb.zbq!=''}"></font><font face="宋体"><b><font size="2" color="#FF0000">${sgxtbb.zbq}</font></b><font size="2"></c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtbb.zaq!=''}">${sgxtbb.zaq}</c:if></font></font></td>
+			<td width="72" bgcolor="#FFFFE1"><font face="宋体" size="2"><c:if test="${sgxtbb.zbq!=''}">${sgxtbb.zbq}</c:if></font></font></td>
 			
 			
 			<td align="center" bgcolor="#FFF2BF"><b>六</b></td>

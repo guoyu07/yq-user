@@ -47,7 +47,7 @@ function openwindow(url) {
 					<div class="i-gg">
 						根据您注册用户时选择的地区，本服务中心为您提供贴身的服务，以提高办事效率！
 	有任何事情请联系：${cz01}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a><br /><br />
-	各部门服务中心人员分工，一个人不能重复加上，更不能向每个人同一时段咨询同一个问题<a href="javascript:openwindow('/bank?dq=${dq}')" style="text-decoration: none">本服务中心已配备指定的客服人员，专用的收款账号名字为“${cz02}”--点击查看汇款账号</a>
+	各部门服务中心人员分工，一个人不能重复加上，更不能向每个人同一时段咨询同一个问题<a href="/bank?dq=${dq}" style="text-decoration: none">本服务中心已配备指定的客服人员，专用的收款账号名字为“${cz02}”--点击查看汇款账号</a>
 					</div>
 				</div>
 				<div class="content-box2 mt10">
