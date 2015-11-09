@@ -266,7 +266,7 @@ public class UserService {
 		if(isForbidNameOrID(ggname, gguserid)){
 			return 5;//禁用账号
 		}
-		List<Gcuser> list = getUserByIdCard(ggname, gguserid);
+		List<Gcuser> list = getUserByIdCard(gguserid);
 		if(list!=null&&list.size()>0){
 			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！
 		}
@@ -296,7 +296,7 @@ public class UserService {
 		if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
 			return 2;//推荐人不存在
 		}
-		List<Gcuser> list = getUserByIdCard(ggname, gguserid);
+		List<Gcuser> list = getUserByIdCard(gguserid);
 		if(list!=null&&list.size()>0){
 			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！
 		}
@@ -437,8 +437,8 @@ public class UserService {
 	 * @param idNum
 	 * @return
 	 */
-	public List<Gcuser> getUserByIdCard(String name,String idNum){
-		return gcuserDao.getUserByIdCard(name, idNum);
+	public List<Gcuser> getUserByIdCard(String idNum){
+		return gcuserDao.getUserByIdCard(idNum);
 	}
 	/**
 	 * 是否禁用账号

@@ -48,11 +48,10 @@ public class GcuserDao {
 	 * @param name
 	 * @return
 	 */
-	public List<Gcuser> getUserByIdCard(String name,String idNum){
-		String sql = "select * from "+table+" where userid=? or name=?";
+	public List<Gcuser> getUserByIdCard(String idNum){
+		String sql = "select * from "+table+" where userid=?";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setString(idNum);
-		paramter.setString(name);
 		return this.jdbc.getList(sql, Gcuser.class, paramter);
 	}
 	
