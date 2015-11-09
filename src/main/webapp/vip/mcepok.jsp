@@ -7,6 +7,7 @@
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('该笔交易圆满成功！');location.replace('epmcjl');</script></c:if>
 
 <script type="text/javascript" src="/images/jquery.min.js"></script>
+<script src="/scripts/sms.js"></script>
 <script language="JavaScript"> 
 function checkdate()  {
   if (Form.password3.value=="") {      alert("请填入您的二级密码!");  Form.password3.focus();      return false;    }

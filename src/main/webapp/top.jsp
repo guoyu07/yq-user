@@ -2,7 +2,7 @@
 		<div class="d-header">
 			<p class="dh-logo"><img src="/images/dlogo.jpg" title="中国一川（澳门）国际有限公司" /></p>
 			<p class="dh-title">用户管理中心</p>
-			<p class="dh-link"><a href="#">[<span>公司官网</span>]</a></p>
+			<p class="dh-link"><a href="http://www.zgyce.com">[<span>公司官网</span>]</a></p>
 			<p class="dh-links"><a href="">中文</a>|<a href="">English</a></p>
 		</div>
         <div class="d-nav">

@@ -4,6 +4,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
+	<script src="/scripts/sms.js"></script>
 	<%
   UserService userServiceHead = ServiceCacheFactory.getServiceCache().getService(UserService.class);
   Gcuser gcuserHead = userServiceHead.getUserByUserName(userServiceHead.isLogin(request.getSession().getId()));

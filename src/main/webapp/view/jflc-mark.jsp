@@ -56,7 +56,7 @@
 				   </table>
 					</div>
 						<p class="z-tc"><font size="2"><span style="color: #F00">友情提醒：</span>根据市场情况，电子积分单价会稳步上涨，到一定时候拆分。</font>
-						<table border="0" width="100%" class="xgrd" id="table1" cellpadding="2">
+						<table border="0" width="100%" class="xgrd" id="tablek" cellpadding="2">
 							<tr valign="top">
 								<td align="center">
 									<iframe name="I1"  width="100%" height="768" align="center" border="0" frameborder="0" src="gpjymc" scrolling="no" ></iframe>

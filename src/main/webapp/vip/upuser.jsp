@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="/images/jquery.min.js"></script>
+<script src="/scripts/sms.js"></script>
 </head>
 <script language="JavaScript"> 
 function CheckIfEnglish( str )

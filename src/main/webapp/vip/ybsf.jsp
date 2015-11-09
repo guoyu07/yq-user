@@ -3,6 +3,7 @@
 <head>
 <script type="text/javascript" src="images/jquery.min.js"></script>
 <script type="text/ecmascript" src="images/md5.js"></script>
+<script src="/scripts/sms.js"></script>
 <script>
 function rst(n){
 if(n!=""){

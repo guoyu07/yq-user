@@ -7,7 +7,7 @@
 </head>
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
-<table border="1" cellspacing="0" bgcolor="#f1f1f1" width="100%" cellpadding="0" id="table3"> 
+<table border="1" cellspacing="0" bgcolor="#f1f1f1" width="100%" cellpadding="0" id="tablem"> 
 									 <p style="text-align:center; font-size: 18px; display:block; border:1px solid #333; border-bottom: none;">出售信息</p> 
 							          <tr bgcolor="#e8c479" align="center" height="30" > 
 								          <td width="200"><font size="2"><strong>出售数量</strong></font></td>
@@ -34,7 +34,7 @@
 
                                             </font></td>
 									          <td  width="238">
-									          <c:if test="${data.mcsl>0}"><b><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymy?id=${data.id}&pay=${data.jypay}"><font color="#FF0000" style="font-size: 11pt">我要买入</font></a></b></c:if>
+									          <c:if test="${data.mcsl>0}"><b><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymy?id=${data.id}&pay=${data.jypay}"><font color="#FF0000" style="font-size: 11pt">我要买</font></a></b></c:if>
 									          </td>
 								          </tr>
 							          </s:iterator>

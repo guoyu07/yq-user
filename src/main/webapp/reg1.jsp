@@ -143,7 +143,7 @@
 
 				<form name="Form" method="post" action="reg?step=1">
 					<div class="fbox founbox1">
-						<p><label>用户名：</label><input type="text" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')"><span class="jc"><a href="#" onClick="checkReg();">检 测</a></span></p>
+						<p><label>用户名：</label><input type="text" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')"><a href="#" onClick="checkReg();"><span class="jc">检 测</span></a></p>
 						<p><label>一级密码：</label><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label>确认一级密码：</label><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label>二级密码：</label><input type="password" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
