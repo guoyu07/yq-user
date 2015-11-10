@@ -351,9 +351,6 @@
 		<action name="hgybsh" class="com.yq.user.action.YbShopPayAction" method="hgybsh">
 		     <result name="success">vip/hgyb.jsp</result>
 		</action>
-		<action name="ybpay" class="com.yq.user.action.YbShopPayAction" method="ybpay">
-		     <result name="success">vip/ybpay.jsp</result>
-		</action>	
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
@@ -385,6 +382,9 @@
 		<action name="kypwe" class="com.yq.user.action.YbShopPayAction" method="kypwe">
 		     <result name="success">vip/kypwe.jsp</result>
 		</action>	
+		<action name="ybpay" class="com.yq.user.action.YbShopPayAction" method="ybpay">
+		     <result name="success">vip/ybpay.jsp</result>
+		</action>			
 	</package>
 
 </struts>
