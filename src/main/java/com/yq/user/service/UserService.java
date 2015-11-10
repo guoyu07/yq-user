@@ -17,6 +17,7 @@ import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.sms.util.SubMailSendUtils;
 import com.yq.common.ProblemCode;
 import com.yq.common.exception.ServiceException;
@@ -2461,8 +2462,13 @@ public class UserService {
 	 * @param id
 	 */
 	@Transactional
-	public void mcJf(String userName,int id){
+	public void mcJf(String userName,int id,String pa3){
 		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(!gcuser.getPassword3().equals(pa3)){
+			throw new ServiceException(4,"二级密码不正确！");
+		}
+		
 		Gpjy gpjy1 = gpjyDao.getById(id);
 		double dqpay92 = (0.9 * gpjy1.getJypay());
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
@@ -2497,7 +2503,7 @@ public class UserService {
 		gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
-		gpjy.setMysl(gpjy1.getMysl());
+		gpjy.setMcsl(gpjy1.getMysl());
 		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(gpjy1.getPay());
 		gpjy.setJypay(gpjy1.getJypay());
@@ -2618,9 +2624,17 @@ public class UserService {
 		String randomString = RandomStringUtils.random(6, chars);
 		param.put("code", randomString);
 		if(gcuserDao.updateSmsCode(userName, randomString)){
-				SubMailSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param);
+			    try {
+			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param)){
+			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			    	}
+				} catch (Exception e) {
+					LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+				}
+				
 		}else{
-			throw new ServiceException(3000, "发送短信发生错误");
+			throw new ServiceException(3000, "发送短信发生错误,更新错误");
 		}
 	}
 	/**

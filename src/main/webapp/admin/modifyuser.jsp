@@ -36,6 +36,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">登录密码：</font></td>
         <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input name="password" size="20"></span></font><font style="font-size: 11pt"><font color="#FF0000">**不修改请留空</font> </font> </td>
       </tr>
+      <c:if test="${fcxt.id==1 || fcxt.id==2}">
             <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">验证码：</font></td>
         <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">${gcuser.vipsq}</font><font style="font-size: 11pt"></font> </td>
@@ -43,6 +44,31 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">提现密码：</font></td>
         <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input name="password3" value="${gcuser.password3}" size="20"></span></font><font color="#FF0000" style="font-size: 11pt"> **必须填写</font><font style="font-size: 11pt"></font></td>
+      </tr>
+      </c:if>
+                  <tr> 
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">之前送的报单币：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">${gcuser.syep}</font><font style="font-size: 11pt"></font> </td>
+      </tr>
+      
+                        <tr> 
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">服务中心转：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">${gcuser.vippay}</font><font style="font-size: 11pt"></font> </td>
+      </tr>
+      
+                        <tr> 
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">可开户报单币：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">${gcuser.sybdb}</font><font style="font-size: 11pt"></font> </td>
+      </tr>
+      
+                        <tr> 
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">金币：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">${gcuser.jydb}</font><font style="font-size: 11pt"></font> </td>
+      </tr>
+      
+                        <tr> 
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">积分：</font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">${gcuser.jyg}</font><font style="font-size: 11pt"></font> </td>
       </tr>
       
       <tr>
@@ -127,7 +153,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       </tr>
 		<tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">协议客户：</font></td>
-        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="txbl" value="${gcuser.txlb}" size="15">1为是，0为不是--------- <c:if test="${gcuser.sjb>0}"><b>双区会员：<font color="#FF0000">${gcuser.sjb}</font>单</b></span></font></c:if> </td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="txbl" value="${gcuser.txlb}" size="15">1为是，0为不是--------- <c:if test="${gcuser.sjb>0}"><b>双区会员：<font color="#FF0000">${gcuser.sjb}</font>单</b></span></font></c:if> <a target="_blank" href="http://yb.zgyce.com/admin/sj_zgyce.asp?login_name=${gcuser.username}" style="text-decoration: none">进入商家</a></td>
       </tr>
       <tr> 
        <td align="center" colspan="2" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF" height="22"> 

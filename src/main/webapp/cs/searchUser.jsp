@@ -45,7 +45,7 @@
                 <td width="179" align="center" height="33" bgcolor="#D9E6FF"><div align="center"><font face="Arial" size="2">注册时间</font></div></td>
                 <td width="102" align="center" height="33" bgcolor="#D9E6FF"><div align="center"><font face="Arial" size="2">累计充值</font></div></td>
                 <td width="200" align="center" height="33" bgcolor="#D9E6FF"><font face="Arial" size="2">最近充值时间</font></td>
-                <td width="299" align="center" height="33" bgcolor="#D9E6FF" colspan="2"><c:if test="${not empty gcuser}">${gcuser.password3}<b><a style="text-decoration: none" target="_blank" href="/adminlogin?pa=${gcuser.password}&id=${gcuser.username}"><font color="#FF00FF" size="3">登录</font></a></b></c:if></td>
+                <td width="299" align="center" height="33" bgcolor="#D9E6FF" colspan="2"><c:if test="${not empty gcuser}"><b><a style="text-decoration: none" target="_blank" href="/adminlogin?pa=${gcuser.password}&id=${gcuser.username}"><font color="#FF00FF" size="3">登录</font></a></b></c:if></td>
               </tr>
              
               <tr bgcolor="#7bb5de"> 

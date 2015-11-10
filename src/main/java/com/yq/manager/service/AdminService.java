@@ -1026,32 +1026,36 @@ public class AdminService {
 		}else if(sgxt.getAq()>sgxt.getBq()){
 			jsq = sgxt.getBq();
 		}
+		int sgxtPay = 0;
 		if(jsq*50>sgxt.getFdpay()){
 			sgxtDao.updateDoubleCount(sgxt.getId(), sgxt.getFdpay(), sgxt.getFdpay()+sgxt.getCbpay(), 0, 0);
+			sgxtPay = sgxt.getFdpay();
 		}else{
 			sgxtDao.updateDoubleCount(sgxt.getId(),jsq*50, jsq*50+sgxt.getCbpay(), sgxt.getAq()-jsq, sgxt.getBq()-jsq);
+			sgxtPay = jsq*50;
 		}
 		
 		Gcuser gcuser = gcuserDao.getUser(sgxt.getUsername());
+		
 		if(gcuser!=null){
-			gcuserDao.addYbForDoubleAreaCount(gcuser.getUsername(), (int)sgxt.getPay());
+			gcuserDao.addYbForDoubleAreaCount(gcuser.getUsername(), sgxtPay);
 			Datepay datepay = new Datepay();
 			datepay.setUsername(sgxt.getUsername());
 			datepay.setRegid("游戏业务"+jsq+"平衡奖金");
-			datepay.setPay(gcuser.getPay()+(int)sgxt.getPay());
-			datepay.setSyjz((int)sgxt.getPay());
+			datepay.setPay(gcuser.getPay()+sgxtPay);
+			datepay.setSyjz(sgxtPay);
 			datepay.setJydb(gcuser.getJydb());
 			datepay.setBz(fcxt.getPayadd());
 			datepay.setNewbz(1);
 			logService.addDatePay(datepay);
 			
 			if(gcuser.getCxt()<3&&gcuser.getCxdate().getTime()>System.currentTimeMillis()){
-				gcuserDao.reduceYbForDoubleAreaCount(gcuser.getUsername(), (int)sgxt.getPay());
+				gcuserDao.reduceYbForDoubleAreaCount(gcuser.getUsername(), sgxtPay);
 				Datepay datepay2 = new Datepay();
 				datepay2.setUsername(sgxt.getUsername());
 				datepay2.setRegid("扣星期间不享受平衡奖金");
 				datepay2.setPay(gcuser.getPay());
-				datepay2.setJc((int)sgxt.getPay());
+				datepay2.setJc(sgxtPay);
 				datepay2.setJydb(gcuser.getJydb());
 				datepay2.setBz(fcxt.getPayadd());
 				datepay2.setNewbz(1);
@@ -1061,7 +1065,7 @@ public class AdminService {
 			//给他的上级处理
 			Gcuser upUser = gcuserDao.getUser(gcuser.getUp());
 			if(upUser!=null&&upUser.getSjb()>0){
-				int addNum =  (int)(sgxt.getPay()*0.1);
+				int addNum =  (int)(sgxtPay*0.1);
 				gcuserDao.addYbForDoubleAreaCountJypay(upUser.getUsername(),addNum);
 				Datepay datepay3 = new Datepay();
 				datepay3.setUsername(upUser.getUsername());

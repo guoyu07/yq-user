@@ -87,7 +87,7 @@ return (allValid);
 							<p><label>卖出单价：</label><input type="text" name="jygj" size="10" maxlength="4"></p>
 							<p><label>卖出数量：</label><input type="text" name="txpay"><font style="font-size: 9pt" color="#FF0000"> ** 可卖出为：</font><font style="font-size: 9pt" color="#008000">${gcuser.jyg}</font></p>
 							<p><label>二级密码：</label><input type="password" name="pa3"></p>
-							<p><label></label><button class="but1 but2"  type=submit>确 定 买 入</button></p>
+							<p><label></label><button class="but1 but2"  type=submit>确 定 卖 出</button></p>
 						</form>
 						<p class="z-tc">提示：如写入卖出的单价过高，买家可能会不接受，容易导致出售不成功，请慎重发布！</p>
 					</div>

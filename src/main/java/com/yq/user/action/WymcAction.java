@@ -26,6 +26,8 @@ public class WymcAction extends ALDAdminActionSupport {
 	
 	private int mc30;
 	
+	private String pa3;
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gpjy = userService.getGpjyById(id);
@@ -41,7 +43,7 @@ public class WymcAction extends ALDAdminActionSupport {
 			super.setErroCodeNum(1);
 		}
 		if(status==1){
-			userService.mcJf(super.getUserName(), id);
+			userService.mcJf(super.getUserName(), id,pa3);
 			super.setErroCodeNum(2000);
 		}
 		return SUCCESS;
@@ -87,6 +89,12 @@ public class WymcAction extends ALDAdminActionSupport {
 	}
 	public void setMyjyg(int myjyg) {
 		this.myjyg = myjyg;
+	}
+	public String getPa3() {
+		return pa3;
+	}
+	public void setPa3(String pa3) {
+		this.pa3 = pa3;
 	}
 	
 }
