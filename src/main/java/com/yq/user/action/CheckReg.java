@@ -14,6 +14,7 @@ public class CheckReg extends ALDAdminActionSupport {
 	private String gguser;
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		gguser = gguser.toLowerCase();
 		Gcuser user = userService.getUserByUserName(gguser);
 		if(user!=null){
 			super.setErroCodeNum(SystemConstant.FAIL_CODE);

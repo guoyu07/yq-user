@@ -1049,7 +1049,7 @@ public class AdminService {
 			datepay.setNewbz(1);
 			logService.addDatePay(datepay);
 			
-			if(gcuser.getCxt()<3&&gcuser.getCxdate().getTime()>System.currentTimeMillis()){
+			if(gcuser.getCxt()<3&&(gcuser.getCxdate()!=null&&gcuser.getCxdate().getTime()>System.currentTimeMillis())){
 				gcuserDao.reduceYbForDoubleAreaCount(gcuser.getUsername(), sgxtPay);
 				Datepay datepay2 = new Datepay();
 				datepay2.setUsername(sgxt.getUsername());
@@ -1076,7 +1076,7 @@ public class AdminService {
 				datepay3.setNewbz(8);
 				logService.addDatePay(datepay3);
 				
-				if(upUser.getCxt()<2&&upUser.getCxdate().getTime()>System.currentTimeMillis()){
+				if(upUser.getCxt()<2&&(gcuser.getCxdate()!=null&&upUser.getCxdate().getTime()>System.currentTimeMillis())){
 					gcuserDao.reduceYbForDoubleAreaCountJypay(upUser.getUsername(),addNum);
 					Datepay datepay4 = new Datepay();
 					datepay4.setUsername(upUser.getUsername());

@@ -61,6 +61,7 @@ public class RegAction extends ALDAdminActionSupport {
 		}else{
 			//开启校验
 			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+			gguser = gguser.toLowerCase();
 			int result = userService.reg(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName);
 			//开始添加账号
 			super.setErroCodeNum(result);
@@ -175,5 +176,8 @@ public class RegAction extends ALDAdminActionSupport {
 	}
 	public void setStep(int step) {
 		this.step = step;
+	}
+	public static void main(String[] args) {
+		System.out.println("XXx".toLowerCase());
 	}
 }

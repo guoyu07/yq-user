@@ -195,7 +195,7 @@ public class UserService {
 			'response.redirect "manager.asp"
 			%>
     	 */
-    	
+    	userName = userName.toLowerCase();
 		Gcuser gcUser = gcuserDao.getUser(userName);
 		String md5pass = MD5Security.md5_16(pwd).toLowerCase();
 		//登录成功
