@@ -65,7 +65,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 		return SUCCESS;
 	}
 	
-	private int gwpay;
+	private double gwpay;
 	private String pa01;
 	private int pid;
 	private String ybf;
@@ -255,10 +255,10 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	public void setSjuser(String sjuser) {
 		this.sjuser = sjuser;
 	}
-	public int getGwpay() {
+	public double getGwpay() {
 		return gwpay;
 	}
-	public void setGwpay(int gwpay) {
+	public void setGwpay(double gwpay) {
 		this.gwpay = gwpay;
 	}
 	public String getPa01() {

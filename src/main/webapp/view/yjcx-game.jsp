@@ -97,8 +97,8 @@
 									</tr>
 									<tr>
 										<td><span class="stts stts1">2-3</span></td>
-										<td>			<c:if test="${!empty sgxta.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxta.auid}" style="text-decoration: none">${sgxta.auid}（${sgxtba.sjb}）</a></c:if>
-			<c:if test="${empty sgxta.auid}">
+										<td>			<c:if test="${!empty sgxtb.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxtb.auid}" style="text-decoration: none">${sgxtb.auid}（${sgxtba.sjb}）</a></c:if>
+			<c:if test="${empty sgxtb.auid}">
 			   <c:if test="${not empty sgxtb.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtb.username}" style="text-decoration: none">选择空位</a></c:if>
 			   <c:if test="${empty sgxtb.username}">无接点人</c:if>
 			 </c:if></td>

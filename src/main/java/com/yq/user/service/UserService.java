@@ -2762,7 +2762,7 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
-	public void ybpay(int gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
+	public void ybpay(double gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
 		int ybsl = (int)(gwpay*1.02);
 		
 		if(ybsl<=0){
@@ -2806,7 +2806,7 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
-	public int kypwe(int gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
+	public int kypwe(double gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
 		int ybsl = (int)(gwpay*1.02);
 		if(ybsl<=0){
 			throw new ServiceException(2, "订单信息有误，请重新提交！");

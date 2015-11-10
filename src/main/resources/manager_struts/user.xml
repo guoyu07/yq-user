@@ -354,9 +354,6 @@
 		<action name="ybpay" class="com.yq.user.action.YbShopPayAction" method="ybpay">
 		     <result name="success">vip/ybpay.jsp</result>
 		</action>	
-		<action name="kypwe" class="com.yq.user.action.YbShopPayAction" method="kypwe">
-		     <result name="success">vip/kypwe.jsp</result>
-		</action>										
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
@@ -385,6 +382,9 @@
 			<result name="success" type="json" />
 		</action>
 		
+		<action name="kypwe" class="com.yq.user.action.YbShopPayAction" method="kypwe">
+		     <result name="success">vip/kypwe.jsp</result>
+		</action>	
 	</package>
 
 </struts>
