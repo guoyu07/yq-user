@@ -973,7 +973,7 @@ public class AdminService {
 			}else{
 				break;
 			}
-			pageIndex++;
+//			pageIndex++;
 		}
 		
 		Double rs_sgaq = sgxtDao.getSumField("aq");
