@@ -1243,6 +1243,7 @@ public class AdminService {
 	 * @param ip
 	 * @param cjfs
 	 */
+	@Transactional
 	public void chargeBdbByAdmin(String csUser,String toUserName,int amount,String ip,String cjfs){
 		Gcuser toUser = gcuserDao.getUser(toUserName);
 		if(toUser==null){

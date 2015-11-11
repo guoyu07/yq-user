@@ -87,6 +87,10 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(6);//alert('您填入的身份证号码与您所登记的不相符！');
 					return SUCCESS;
 				}
+				if(!name.equals(guser.getName())){
+					super.setErroCodeNum(7);//alert('您填入的身份证号码与您所登记的不相符！');
+					return SUCCESS;
+				}
 				//开始更新资料操作
 				userService.updateUser(super.getUserName(),name, idCard, MD5Security.md5_16(newPassWord1), newSecondPassword1, 0, qq, guser.getCall(),ServletActionContext.getRequest().getRemoteAddr());
 				

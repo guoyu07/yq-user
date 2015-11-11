@@ -1,5 +1,6 @@
 package com.yq.user.action;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.user.bo.Datepay;
@@ -14,10 +15,14 @@ public class CjjlAction extends ALDAdminPageActionSupport<Datepay> {
 	
 	private String dl;
 	
-	
+	private String cj;
 	public String execute(){
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
-		super.initPage(logService.getDatePayChargeListPage(super.getUserName(), super.getToPage(), 30));
+		String lookUserName = super.getUserName();
+		if(!Strings.isNullOrEmpty(cj)){
+			lookUserName = cj;
+		}
+		super.initPage(logService.getDatePayChargeListPage(lookUserName, super.getToPage(), 30));
 		return SUCCESS;
 	}
 	
@@ -27,4 +32,12 @@ public class CjjlAction extends ALDAdminPageActionSupport<Datepay> {
 	public void setDl(String dl) {
 		this.dl = dl;
 	}
+	public String getCj() {
+		return cj;
+	}
+
+	public void setCj(String cj) {
+		this.cj = cj;
+	}
+	
 }

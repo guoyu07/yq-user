@@ -450,7 +450,10 @@
 		    <result name="success">
 		       tduser.jsp
 		    </result>		    
-		</action>																								
+		</action>
+		<action name="bdbList" class="com.yq.cservice.action.SearchUserAction" method="dbdList">
+			<result name="success" >/cs/bdbList.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

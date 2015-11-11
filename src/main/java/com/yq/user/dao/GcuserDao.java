@@ -122,15 +122,15 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean updateUser(String name,String idCard,String password,String password3,int ganew,String qq,String call){
-		String sql = "update "+table+" set password=? , password3=? , ganew=? , qq=? ,`call`=?,name=? where userid=?";
+		String sql = "update "+table+" set password=? , password3=? , ganew=? , qq=? ,`call`=? where userid=? and name=?";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(password);
 		parameter.setString(password3);
 		parameter.setInt(ganew);
 		parameter.setString(qq);
 		parameter.setString(call);
-		parameter.setString(name);
 		parameter.setString(idCard);
+		parameter.setString(name);
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	

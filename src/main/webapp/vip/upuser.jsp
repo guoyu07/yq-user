@@ -71,6 +71,9 @@ function checkdate1()  {
 		}else if(response.erroCodeNum==6){
 			alert('您填入的身份证号码与您所登记的不相符！');
 			return;
+		}else if(response.erroCodeNum==7){
+			alert('您填入的姓名与您所登记的不相符！');
+			return;
 		}else{
 			alert('发生了错误.['+response.erroCodeNum+']');
 			return;
@@ -90,10 +93,6 @@ function checkdate1()  {
 		<tr>
 			<td width="260" align="right">用户名：</td>
 			<td width="396" align="left"><input type="text" name="uuu" size="20" value="${user.username}" readonly></td>
-		</tr>
-		<tr>
-			<td width="260" align="right">姓名：</td>
-			<td width="396" align="left"><input type="text" name="name" size="20">${user.name}**</td>
 		</tr>
 		<tr>
 			<td width="260" align="right">原登录密码：</td>
@@ -128,8 +127,12 @@ function checkdate1()  {
 			<td width="396" align="left"><input type="text" name="qq" size="20" onKeyUp="value=value.replace(/[^\d]/g,'')" maxlength="12" ></td>
 		</tr>
 		<tr>
-			<td width="260" align="right">身份证号码：</td>
+			<td width="260" align="right">验证身份证号码：</td>
 			<td width="396" align="left"><font color="#0000FF"><input type="text" name="idCard" size="20" maxlength="19"></font>${user.userid}</td>
+		</tr>
+		<tr>
+			<td width="260" align="right">验证姓名：</td>
+			<td width="396" align="left"><input type="text" name="name" size="20">${user.name}**</td>
 		</tr>
 		<tr>
 			<td width="260" align="right">手机验证码：</td>
