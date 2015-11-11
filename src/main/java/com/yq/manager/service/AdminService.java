@@ -1928,6 +1928,29 @@ public class AdminService {
 		zList = Lists.newArrayList();
 	}
 	
+	public void executeSynNameSql(){
+		int pageIndex = 0;
+		final int pageSize = 1000;
+		IPage<Gcuser> page = null;
+		Collection<Gcuser> tempList = null;
+		final String FILEName = "E://temp//name_update.sql";
+		FileCreatUtil.creatNewFile(FILEName);
+		while(true){
+			page = gcuserDao.getPageList(pageIndex, pageSize);
+			tempList = page.getData();
+			StringBuffer buffer = new StringBuffer();
+			if(tempList!=null&&tempList.size()>0){
+				for(Gcuser gcuser:tempList){
+					buffer.append("update gcuser set name='"+gcuser.getName()+"' where id="+gcuser.getId()+" and username='"+gcuser.getUsername()+"';\r\n");
+				}
+				FileCreatUtil.appendFile(FILEName, buffer.toString());
+			}else{
+				break;
+			}
+			pageIndex++;
+		}
+	}
+	
 	public void resetZaqAndZbq(){
 		long allStartTime = System.currentTimeMillis();
 		LogSystem.info("开启重置zaq zbq表功能---"+new Date());
