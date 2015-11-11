@@ -64,7 +64,7 @@ function openwindow(url) {
 							</li>
 							</s:iterator>
 						</ul>
-						<p class="more"></p>
+						<p><aldtags:pageTag/></p>
 					</div>
 				</div>
 			</div>

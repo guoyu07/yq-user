@@ -17,6 +17,7 @@
               <td width="123" align="center" height="30" bgcolor="#FFE1FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" size="2" face="宋体"> <strong>用户名</strong></font></td>
               <td width="83" align="center" height="30" bgcolor="#FFE1FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" size="2" face="宋体"> <strong style="font-weight: 400">单数</strong></font></td>
               <td width="142" align="center" height="30" bgcolor="#FFE1FF"><font size="2">推荐人</font></td>
+              <td width="142" align="center" height="30" bgcolor="#FFE1FF"><font size="2">推荐人充值时间</font></td>
               <td width="142" align="center" height="30" bgcolor="#FFE1FF"><font size="2">姓名</font></td>
               <td width="304" align="center" height="30" bgcolor="#FFE1FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" size="2" face="宋体"> <strong style="font-weight: 400">地址</strong></font></td>
               <td width="164" align="center" height="30" bgcolor="#FFE1FF"><font size="2">手机</font></td>
@@ -29,6 +30,7 @@
                 <td width="123" align="center" bgcolor="#FAF8E6"><b><font size="2" color="#008000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font face="宋体">${data.username}</font></font></b></td>
                 <td valign="middle" width="83" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" size="2" face="宋体">${data.sjb/20}万</font></td>
                 <td align="center" width="142" bgcolor="#C0C0C0"><font size="2"><a target="_blank" href="bdbList?user=${data.up}">${data.up}</a></font></td>
+                <td valign="middle" align="center" width="142" bgcolor="#C0C0C0"><font size="2">${data.upgmdate}</font></td>
                 <td valign="middle" align="center" width="142"><font size="2">${data.name}</font></td>
                 <td valign="middle" align="center" width="304"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#0000FF" size="2" face="宋体">${data.addsheng}${data.addshi}${data.addqu}</font></td>
                 <td valign="middle" align="center" width="164"><font size="2">${data.call}</font></td>

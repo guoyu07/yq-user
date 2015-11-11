@@ -110,6 +110,8 @@ public class Gcuser{
 	private int txlb;
 	private int cbuser;
 	
+	private Date upgmdate;
+	
 	
 	public void setUsername(String username){
 	this.username=username;
@@ -725,5 +727,12 @@ public class Gcuser{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Date getUpgmdate() {
+		return upgmdate;
+	}
+	public void setUpgmdate(Date upgmdate) {
+		this.upgmdate = upgmdate;
+	}
+	
 }
 

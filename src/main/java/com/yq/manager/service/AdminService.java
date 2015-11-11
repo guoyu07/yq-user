@@ -1252,7 +1252,16 @@ public class AdminService {
 		if(toUser.getGmdate()!=null&&toUser.getGmdate().getTime()+2*60*1000>System.currentTimeMillis()){
 			throw new ServiceException(2, "两分钟内只能充值一次，请稍后再试！");
 		}
-		if(amount<5000){
+		
+		if((amount==5000&&toUser.getPay()<45000)||amount>5000){
+			if(toUser.getSyep()<amount){
+				throw new ServiceException(4, "实行一半一币一半充值，本次充值"+amount+"可报单币小于"+amount+"，请先补充报单币！");
+			}
+			gcuserDao.updateCjtj(toUserName, amount);
+			if(!this.updateSybdbByManager(toUserName, amount, amount*2, amount*2, "充值"+amount+"与"+amount+"报单币生效")){
+				throw new ServiceException(4, "实行一半一币一半充值，本次充值"+amount+"可报单币小于"+amount+"，请先补充报单币！");
+			}
+		}else{
 			if(toUser.getPay()<9*amount){
 				throw new ServiceException(3, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 			}
@@ -1262,15 +1271,6 @@ public class AdminService {
 				throw new ServiceException(3, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 			}
 			userService.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效");
-
-		}else{
-			if(toUser.getSyep()<amount){
-				throw new ServiceException(4, "实行一半一币一半充值，本次充值"+amount+"可报单币小于"+amount+"，请先补充报单币！");
-			}
-			gcuserDao.updateCjtj(toUserName, amount);
-			if(!this.updateSybdbByManager(toUserName, amount, amount*2, amount*2, "充值"+amount+"与"+amount+"报单币生效")){
-				throw new ServiceException(4, "实行一半一币一半充值，本次充值"+amount+"可报单币小于"+amount+"，请先补充报单币！");
-			}
 		}
 		
 		Datecj datecj = new Datecj();

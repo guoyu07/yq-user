@@ -736,9 +736,9 @@ public class GcuserDao {
 	public IPage<Gcuser> getSqDayAddUserPages(int pageIndex,int pageSize,String startTime,String endTime){
 		String and = "";
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
-			and = " and bddate between '"+startTime+"' and '" +endTime+"'";
+			and = " and g.bddate between '"+startTime+"' and '" +endTime+"'";
 		}
-		String sql = "select * from "+table+" where sjb>10"+and+" order by bddate desc";
+		String sql = "select g.*,gup.gmdate as upgmdate from "+table+" g left join gcuser gup on g.up=gup.username  where g.sjb>10"+and+" order by g.bddate desc";
 		return jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
 	}
 	

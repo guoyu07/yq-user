@@ -1378,7 +1378,8 @@ public class UserService {
 		txpay2.setPdid(11);
 		txpay2.setJyid(jypay);
 		txpay2.setVipname(gcuser.getVipname());
-		txpay2.setTxvip(gcuser.getTxlb());
+//		txpay2.setTxvip(gcuser.getTxlb());
+		txpay2.setTxvip(1);
 		txpay2.setTxip(ip);
 		txPayDao.add(txpay2);
 		
