@@ -14,14 +14,13 @@ public class SmsAction extends ALDAdminActionSupport{
 	private static final long serialVersionUID = 1L;
 	
     private String toUserName;
-	
-	
+    private int op;
 	public String execute(){
 		if(Strings.isNullOrEmpty(toUserName)){
 			toUserName = super.getUserName();
 		}
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		userService.sendSmsMsg(toUserName);
+		userService.sendSmsMsg(toUserName,op);
 		return SUCCESS;
 	}
 
@@ -35,4 +34,12 @@ public class SmsAction extends ALDAdminActionSupport{
 	public void setToUserName(String toUserName) {
 		this.toUserName = toUserName;
 	}
+
+	public int getOp() {
+		return op;
+	}
+	public void setOp(int op) {
+		this.op = op;
+	}
+	
 }

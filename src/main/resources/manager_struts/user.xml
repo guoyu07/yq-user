@@ -384,7 +384,11 @@
 		</action>	
 		<action name="hgybsh" class="com.yq.user.action.YbShopPayAction" method="hgybsh">
 		     <result name="success">vip/hgyb.jsp</result>
-		</action>		
+		</action>
+		
+		<action name="ybts" class="com.yq.user.action.ChangeStatsForShopAction">
+		    
+		</action>				
 	</package>
 
 </struts>

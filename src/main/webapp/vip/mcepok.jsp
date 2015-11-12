@@ -13,7 +13,7 @@ function checkdate()  {
   if (Form.password3.value=="") {      alert("请填入您的二级密码!");  Form.password3.focus();      return false;    }
 	$("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
-	$.post("/sms", data, function(response) {
+	$.post("/sms?op=4", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
 		settime($("#btn"));

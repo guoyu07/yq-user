@@ -1533,7 +1533,7 @@ public class AdminService {
 		if(day==0){
 			baseStr = DateUtils.getDate(new Date());
 		}else{
-			baseStr = DateUtils.getDate(DateUtils.addDay(new Date(), -1));
+			baseStr = DateUtils.getDate(DateUtils.addDay(new Date(), day));
 		}
 		startTime = baseStr +" 00:00:00";
 		endTime = baseStr +" 23:59:59";

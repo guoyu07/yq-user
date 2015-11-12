@@ -28,7 +28,9 @@
               <tr> 
                 <td height="35" width="79" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" size="2" face="宋体">${data.id}</font></td>
                 <td width="123" align="center" bgcolor="#FAF8E6"><b><font size="2" color="#008000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font face="宋体">${data.username}</font></font></b></td>
-                <td valign="middle" width="83" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" size="2" face="宋体">${data.sjb/20}万</font></td>
+                <fmt:parseNumber var="i" integerOnly="true" 
+                       type="number" value="${data.sjb*10000/20}" />
+                <td valign="middle" width="83" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" size="2" face="宋体">${i}</font></td>
                 <td align="center" width="142" bgcolor="#C0C0C0"><font size="2"><a target="_blank" href="bdbList?user=${data.up}">${data.up}</a></font></td>
                 <td valign="middle" align="center" width="142" bgcolor="#C0C0C0"><font size="2">${data.upgmdate}</font></td>
                 <td valign="middle" align="center" width="142"><font size="2">${data.name}</font></td>

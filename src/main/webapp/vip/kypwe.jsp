@@ -25,7 +25,7 @@ function checkdate()  {
   	
     $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
-	$.post("/sms", data, function(response) {
+	$.post("/sms?op=10", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
 		settime($("#btn"));

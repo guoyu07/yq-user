@@ -2642,6 +2642,33 @@ public class UserService {
 		}
 	}
 	/**
+	 * 短信模板2
+	 * @param userName
+	 * @param op
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名"};
+	public void sendSmsMsg(String userName,int op){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		Map<String,String> param = new HashMap<String,String>();
+		String randomString = RandomStringUtils.random(6, chars);
+		param.put("code", randomString);
+		param.put("userName", userName);
+		param.put("op", OP_STR.length>op?OP_STR[op]:"");
+		if(gcuserDao.updateSmsCode(userName, randomString)){
+			    try {
+			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
+			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			    	}
+				} catch (Exception e) {
+					LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+				}
+				
+		}else{
+			throw new ServiceException(3000, "发送短信发生错误,更新错误");
+		}
+	}
+	/**
 	 * 查询所有玩家分页列表
 	 * @param pageIndex
 	 * @param pageSize
@@ -2866,5 +2893,23 @@ public class UserService {
 		gcuserDao.updatePwdate(gcuser.getUserid(), gcuser.getName(), DateUtils.addDay(date, 30));
 		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
 		return day;
+	}
+	
+	public String ybts(String userName,String states){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser!=null){
+			int txlb = 0;
+			String result = "";
+			if(states.equals("0")){
+				txlb = 3;
+				result = "已审核成功";
+			}else if(states.equals("1")){
+				txlb = 0;
+				result = "未审核";
+			}
+			gcuserDao.updateTxlb(userName, txlb);
+			return result;
+		}
+		return "error,can not find username="+userName;
 	}
 }
