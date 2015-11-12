@@ -24,6 +24,7 @@ public class ChangeStatsForShopAction extends ALDAdminActionSupport implements S
 	private HttpServletResponse response; 
 	public String execute(){
 		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
         PrintWriter pw=null;
         try {  
