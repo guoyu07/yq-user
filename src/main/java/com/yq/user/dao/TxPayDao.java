@@ -48,7 +48,7 @@ public class TxPayDao {
     }
     
     public IPage<Txpay> getPageList(int pageIndex,int pageSize){
-    	String sql="select * from txpay where payonoff = '尚未转账' and ep=0 order by jyid asc" ;
+    	String sql="select * from txpay where payonoff = '尚未转账' and ep=0 and txvip=0 order by payid asc" ;
     	return jdbc.getListPage(sql, Txpay.class, null, pageSize, pageIndex);
     }
     
