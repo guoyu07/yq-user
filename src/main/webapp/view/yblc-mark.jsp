@@ -54,7 +54,7 @@
 							</s:iterator>
 						</table>
 						<div class="page">
-							<p><aldtags:pageTag />
+							<p>
 							 </p>
 						</div>
 					</div>
