@@ -38,15 +38,6 @@
 									          </td>
 								          </tr>
 							          </s:iterator>
-							          <tr>
-							          	<td colspan="5">
-							          	<div class="page">
-										<p><aldtags:pageTag/></p>
-											</div>
-										</td>
-							           </tr>
-										</td>
-										</tr> 
 									</table>
 <script>
 		 $("#table2 tr:odd, #table3 tr:odd").css("background","#bcbcbc");

@@ -68,14 +68,14 @@ public class TxPayDao {
     }
     
     public IPage<Txpay> getPageListSalesDetails(String userName,int pageIndex,int pageSize){
-    	String sql="select * from txpay where payusername= ? and txlb=0 order by payid desc" ;
+    	String sql="select * from txpay where payusername= ? and txlb=0 order by ep desc,payid desc" ;
     	SqlParameter sqlParameter = new SqlParameter();
     	sqlParameter.setString(userName);
     	return jdbc.getListPage(sql, Txpay.class, sqlParameter, pageSize, pageIndex);
     }
     
     public IPage<Txpay> getPageListBuyDetails(String userName,int pageIndex,int pageSize){
-    	String sql = "select * from txpay where dfuser = ? order by payid desc";
+    	String sql = "select * from txpay where dfuser = ? order by ep desc,payid desc";
     	return jdbc.getListPage(sql, Txpay.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
     }
     

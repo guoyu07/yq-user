@@ -48,9 +48,9 @@
 							<tr class="jg shop2">
 								<td>0.77</td>
 								<td><c:if test="${fcxt.zgj+0.03<1.0}">0${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if></td>
-								<td>0${fcxt.zdj}</td>
+								<td>${fcxt.zdj}</td>
 								<td><c:if test="${fcxt.jygj<1}">0${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></td>
-								<td><c:if test="${fcxt.zgj+0.03<1.0}">0${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if>/0 ${fcxt.zdj}</td>
+								<td><c:if test="${fcxt.zgj+0.03<1.0}">0${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if>/${fcxt.zdj}</td>
 							</tr>
 						</tbody>
 				   </table>
@@ -59,11 +59,11 @@
 						<table border="0" width="100%" class="xgrd" id="tablek" cellpadding="2">
 							<tr valign="top">
 								<td align="center">
-									<iframe name="I1"  width="100%" height="768" align="center" border="0" frameborder="0" src="gpjymc" scrolling="no" ></iframe>
+									<iframe name="I1"  width="100%" height="320" align="center" border="0" frameborder="0" src="gpjymc" scrolling="no" ></iframe>
 								</td>
 
 								<td align="center">
-									<iframe name="I2"  width="100%" height="768" align="center" border="0" frameborder="0" src="gpjymy" scrolling="no" ></iframe>
+									<iframe name="I2"  width="100%" height="320" align="center" border="0" frameborder="0" src="gpjymy" scrolling="no" ></iframe>
 								</td>
 							</tr>
 						</table>

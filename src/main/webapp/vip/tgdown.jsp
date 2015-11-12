@@ -32,7 +32,7 @@
           <td valign="middle" align="center" width="202"><font color="#000000" size="2">${data.regtime}</font></td>
           <td valign="middle" align="center" width="116"><b><font color="#FF0000" size="2">${data.cjtj}</font></b></td>
           <td valign="middle" align="center" width="217"><font color="#000000" size="2">${data.gmdate}</font></td>
-          <td valign="middle" align="center" width="148"><c:if test="${data.sjb==0}">否</c:if><c:if test="${data.sjb!=0}">单</c:if>
+          <td valign="middle" align="center" width="148"><c:if test="${data.sjb==0}">否</c:if><c:if test="${data.sjb!=0}">${data.sjb}单</c:if>
           <td valign="middle" align="center" width="228"><font size="2">${data.bddate}</font></td>
           </tr>
          </s:iterator>

@@ -46,7 +46,7 @@
 								<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
 								<td>${data.cjtj}</td>
 								<td><fmt:formatDate value="${data.gmdate}" type="both"/></td>
-								<td><c:if test="${data.sjb==0}">否</c:if><c:if test="${data.sjb!=0}">单</c:if></td>
+								<td><c:if test="${data.sjb==0}">否</c:if><c:if test="${data.sjb!=0}">${data.sjb}单</c:if></td>
 								<td><fmt:formatDate value="${data.bddate}" type="both"/></td>
 							</tr>
 						   </s:iterator>

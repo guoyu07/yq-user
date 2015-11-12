@@ -41,15 +41,6 @@
 								          </td>
 							          </tr>
 		</s:iterator> 
-							           <tr>
-							          	<td colspan="5">
-							          	<div class="page">
-										<p><aldtags:pageTag/> </p>
-											</div>
-										</td>
-							           </tr>
-										</td>
-										</tr>
 					    			</table> 
 								</div> 
 							</td>

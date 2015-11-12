@@ -291,6 +291,7 @@ public class UserService {
 	 * @return
 	 */
 	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName){
+		gguser = gguser.trim();
 		if(getUserByUserName(gguser)!=null){
 			return 1;//用户已存在
 		}
@@ -351,11 +352,13 @@ public class UserService {
 	 * @param oldUserName
 	 */
 	public void regTheSameUser(String newUserName,String oldUserName){
-		
+		newUserName = newUserName.trim();
 		if(gcuserDao.getUser(newUserName)!=null){
 			throw new ServiceException(1, "此用户名已有人使用！请更换！");
 		}
-		
+		if(Strings.isNullOrEmpty(newUserName)){
+			throw new ServiceException(1, "此用户名已有人使用！请更换！");
+		}
 		Gcuser oldUser = gcuserDao.getUser(oldUserName);
 		
 		Gcuser user = new Gcuser();
