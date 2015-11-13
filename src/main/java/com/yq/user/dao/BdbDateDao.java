@@ -1,6 +1,7 @@
 package com.yq.user.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +31,15 @@ public class BdbDateDao {
 			bdbdate.setBfdate(new Date());
 		}
 		return jdbc.insert(bdbdate)>0;
+	}
+	
+	public void batchInsert(List<Bdbdate> lists){
+		for(Bdbdate bdbdate:lists){
+			if(bdbdate.getBfdate()==null){
+				bdbdate.setBfdate(new Date());
+			}
+		}
+		jdbc.insert(lists);
 	}
 	/**
 	 * 分页查询码

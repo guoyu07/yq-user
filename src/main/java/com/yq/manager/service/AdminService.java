@@ -1498,7 +1498,9 @@ public class AdminService {
 				}
 			}
 		}
-		userService.CalculateQ(bduser, sjb, bduser);
+		List<Bdbdate> logList = Lists.newArrayList();
+		userService.CalculateQ(bduser, sjb, bduser,logList);
+		bdbDateDao.batchInsert(logList);
 	}
 	/**
 	 * 查询用户修改记录

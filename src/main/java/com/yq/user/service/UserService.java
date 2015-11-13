@@ -787,8 +787,15 @@ public class UserService {
 			
 			int zysjb = sgxt.getSjb();
 			
-			
-			cupUser(bduser,bduser,1,zysjb);//不知道他在干嘛
+			List<ZuoMingxi> zTList = Lists.newArrayList();
+			List<YouMingxi> yTList = Lists.newArrayList();
+			cupUser(bduser,bduser,1,zysjb,zTList,yTList);//不知道他在干嘛
+			if(zTList.size()>0){
+				zuoMingxiDao.batchInsert(zTList);
+			}
+			if(yTList.size()>0){
+				youMingXiDao.batchInsert(yTList);
+			}
 			
 			
 			List<ZuoMingxi> zList = zuoMingxiDao.getDownList(bduser);
@@ -814,19 +821,22 @@ public class UserService {
 					}
 				}
 			}
-			CalculateQ(bduser,sjb,bduser);
+			List<Bdbdate> logList = Lists.newArrayList();
+			CalculateQ(bduser,sjb,bduser,logList);
+			bdbDateDao.batchInsert(logList);
 		}
 		return call;
 	}
 	
 	
-	public void CalculateQ(String userName,int sjb,String bduser){
+	public void CalculateQ(String userName,int sjb,String bduser,List<Bdbdate> logList){
 		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
 		if(sgxtBd==null){
 			return;
 		}
 		if(sgxtBd.getAuid().equals(userName)){
 			sgxtDao.updateZaq(sgxtBd.getUsername(), sjb);
+			ZuoMingxi zuo = zuoMingxiDao.get(sgxtBd.getUsername(), bduser);
 			int zyzj = 0;
 			if(sgxtBd.getDqzuo()<sgxtBd.getCfd()){
 				 zyzj = sgxtBd.getCfd()-sgxtBd.getDqzuo();
@@ -844,11 +854,12 @@ public class UserService {
 				 bdbdate.setAq(sgxtBd.getAq());
 				 bdbdate.setBq(sgxtBd.getBq());
 				if(sjb>zyzj){
-					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(左边)层封顶超出-"+(sjb-zyzj));
+					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+zuo.getCount()+"层(左边)层封顶超出-"+(sjb-zyzj));
 				}else{
-					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(左边)增加可结算-"+sjb);
+					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+zuo.getCount()+"层(左边)增加可结算-"+sjb);
 				}
-				bdbDateDao.add(bdbdate);
+//				bdbDateDao.add(bdbdate);
+				logList.add(bdbdate);
 			}else{
 				 sgxtBd = sgxtDao.get(sgxtBd.getUsername());
 				 Bdbdate bdbdate = new Bdbdate();
@@ -857,12 +868,14 @@ public class UserService {
 				 bdbdate.setZbq(sgxtBd.getZbq());
 				 bdbdate.setAq(sgxtBd.getAq());
 				 bdbdate.setBq(sgxtBd.getBq());
-				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(左边)已层封顶-无效单");
-				 bdbDateDao.add(bdbdate);
+				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+zuo.getCount()+"层(左边)已层封顶-无效单");
+//				 bdbDateDao.add(bdbdate);
+				 logList.add(bdbdate);
 			}
-			CalculateQ(sgxtBd.getUsername(),sjb,bduser);
+			CalculateQ(sgxtBd.getUsername(),sjb,bduser,logList);
 		}else if(sgxtBd.getBuid().equals(userName)){
 			sgxtDao.updateZbq(sgxtBd.getUsername(), sjb);
+			YouMingxi you = youMingXiDao.get(sgxtBd.getUsername(), bduser);
 			if(sgxtBd.getDqyou()<sgxtBd.getCfd()){
 				int yyzj=sgxtBd.getCfd()-sgxtBd.getDqyou();
 				int addAmount = sjb;
@@ -879,11 +892,12 @@ public class UserService {
 				 bdbdate.setAq(sgxtBd.getAq());
 				 bdbdate.setBq(sgxtBd.getBq());
 				 if(sjb>yyzj){
-					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(右边)层封顶超出-"+(sjb-yyzj));
+					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+you.getCount()+"层(右边)层封顶超出-"+(sjb-yyzj));
 				 }else{
-					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(右边)增加可结算-"+sjb);
+					 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+you.getCount()+"层(右边)增加可结算-"+sjb);
 				 }
-				 bdbDateDao.add(bdbdate);
+//				 bdbDateDao.add(bdbdate);
+				 logList.add(bdbdate);
 			}else{
 				 sgxtBd = sgxtDao.get(sgxtBd.getUsername());
 				 Bdbdate bdbdate = new Bdbdate();
@@ -892,14 +906,15 @@ public class UserService {
 				 bdbdate.setZbq(sgxtBd.getZbq());
 				 bdbdate.setAq(sgxtBd.getAq());
 				 bdbdate.setBq(sgxtBd.getBq());
-				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+sgxtBd.getCount()+"层(右边)已层封顶-无效单");
-				 bdbDateDao.add(bdbdate);
+				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+you.getCount()+"层(右边)已层封顶-无效单");
+//				 bdbDateDao.add(bdbdate);
+				 logList.add(bdbdate);
 			}
-			CalculateQ(sgxtBd.getUsername(),sjb,bduser);
+			CalculateQ(sgxtBd.getUsername(),sjb,bduser,logList);
 		}
 	}
 	
-	private void cupUser(String userName,String constantUp,int count,int sjb){
+	private void cupUser(String userName,String constantUp,int count,int sjb,List<ZuoMingxi> zList,List<YouMingxi> yList){
 		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
 		if(sgxtBd!=null){
 			if(userName.equals(sgxtBd.getAuid())){
@@ -908,17 +923,19 @@ public class UserService {
 				zuoMingxi.setSjb(sjb);
 				zuoMingxi.setDown(constantUp);
 				zuoMingxi.setCount(count);
-				zuoMingxiDao.add(zuoMingxi);
+				//zuoMingxiDao.add(zuoMingxi);
+				zList.add(zuoMingxi);
 			}else{
 				YouMingxi youMingxi = new YouMingxi();
 				youMingxi.setCount(count);
 				youMingxi.setDown(constantUp);
 				youMingxi.setTjuser(sgxtBd.getUsername());
 				youMingxi.setSjb(sjb);
-				youMingXiDao.add(youMingxi);
+//				youMingXiDao.add(youMingxi);
+				yList.add(youMingxi);
 			}
 			count = count+1;
-			cupUser(sgxtBd.getUsername(),constantUp,count,sjb);
+			cupUser(sgxtBd.getUsername(),constantUp,count,sjb,zList,yList);
 		}
 	}
 	

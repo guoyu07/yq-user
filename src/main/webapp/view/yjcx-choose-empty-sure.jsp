@@ -15,13 +15,17 @@
 <c:if test="${erroCodeNum==13}"><script language=javascript>alert('只能给自己的直接推荐的人开户！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==14}"><script language=javascript>alert('接点人不存在，没法放置，请检查是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==15}"><script language=javascript>alert('接点人位置已被占用，请重新选择！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==16}"><script language=javascript>alert('验证码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==16}"><script language=javascript>alert('验证码错误，请检查输入是否正确！');history.go(-2);</script></c:if>
  <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
 	<title>中国一川（澳门）国际有限公司</title>
 	<link rel="stylesheet" href="/css/common.css" />
+	<style type="text/css">
+	.zzbg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:2;top:0;left:0;opacity:0.7;}
+	.zzcontent{display:none;width:500px;height:50px;position:fixed;top:50%;margin-top:-150px;background:#fff;z-index:3;left:50%;margin-left:-250px;}
+</style>
 	<script type="text/javascript" src="images/jquery.min.js"></script>
 <script language="JavaScript">
  function checkdate()  { 
@@ -44,6 +48,10 @@ function checkdate1()  {
 </script>
 </head>
 <body>
+<div class="zzbg"></div>
+<div class="zzcontent">
+<h2 align="center">系统已进入核算中...期间请停止其它操作，更不要关闭本页！</h2>
+</div>
 	<div class="mainbox mw1024">
 		
 		<%@ include file="/view/head.jsp"%>
@@ -61,7 +69,7 @@ function checkdate1()  {
 					</div>
 					<div class="form_tj">
 						<a style="font-size: 16px; color: #ff6600; float:right;" href="javascript:history.back();">返回上一页</a>
-						<form class="form form3 formtj"  method="POST" action="bdreg?status=1" name="Form" id="Form">
+						<form class="form form3 formtj"  method="POST" action="bdreg?status=1" name="Form" id="Form" onSubmit="return showZz()">
 						<input type="hidden" name="targetdate" size="8">
 	                    <input type="hidden" name="xmlmode" size="8">
 	                    <input type="hidden" name="cjpay" size="10" value="${cjpay}" readonly><input type="hidden" name="remark" size="8" value="3" readonly><input type="hidden" name="user" size="10" value="${userName}" readonly>
@@ -88,4 +96,10 @@ function checkdate1()  {
 </html>
 <script type="text/javascript">
 btnStatus($("#btn"));
+
+function showZz(){
+    $('.zzbg').fadeIn(200);
+    $('.zzcontent').fadeIn(400);
+    return true;
+}
 </script>
