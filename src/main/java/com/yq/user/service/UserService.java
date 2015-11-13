@@ -2486,7 +2486,7 @@ public class UserService {
 	public void mcJf(String userName,int id,String pa3){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
-		if(!gcuser.getPassword3().equals(pa3)){
+		if(!gcuser.getName().equals("公司")&&!gcuser.getPassword3().equals(pa3)){
 			throw new ServiceException(4,"二级密码不正确！");
 		}
 		
