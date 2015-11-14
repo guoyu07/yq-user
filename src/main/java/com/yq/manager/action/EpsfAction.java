@@ -26,6 +26,12 @@ public class EpsfAction extends ALDAdminActionSupport {
 			gcuser = userService.getUserByUserName(uid);
 			return INPUT;
 		}
+		
+		if(sfpay<=0){
+			
+			return INPUT;
+		}
+		
 		userService.changeYb(uid, -sfpay, sflb, 0, null);
 		gcuser = userService.getUserByUserName(uid);
 		return SUCCESS;

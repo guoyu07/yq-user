@@ -9,8 +9,20 @@
 <body>
 <script language="JavaScript"> 
  function checkdate()  {  
-  if (form.sflb.value==0) {    alert("请选择支出类别");      return false;    }
+  if(form.sfpay.value<=0){alert("消费金额必须大于0！");      return false;}
+  if (form.sflb.value=='') {    alert("请选择支出类别！");      return false;    }
 return true;  }  
+ 
+ function choose(str){
+	 if(str=='-1'){//自定义
+		 form.sflb.style.display = "inline";
+		 form.sflbchooes.style.display = "none";
+	 }
+	 if(str=='0'){
+		 form.sflb.value='';
+	 }
+	 
+ }
 </script>
 <form method="POST" action="epsf?status=1&uid=${uid}" name="form" onSubmit="return checkdate()">
 	<div align="center">
@@ -23,7 +35,7 @@ return true;  }
 			</tr>
 			<tr>
 				<td align="right" width="83"><b><font size="2">消费额：</font></b></td>
-				<td><input type="text" name="sfpay" size="8"><b><font color="#FF00FF" size="2"><select size="1" name="sflb">
+				<td><input type="text" name="sfpay" size="8" ><b><font color="#FF00FF" size="2"><select size="1" name="sflbchooes" id="sflbchooes" onChange="choose(document.getElementById('sflbchooes').options[document.getElementById('sflbchooes').selectedIndex].value);">
 				<option selected value="0">请选择</option>
 				<option value="报单支出">报单</option>
 				<option value="消费支出">消费</option>
@@ -35,7 +47,9 @@ return true;  }
 				<option value="报纸费">报纸费</option>
 				<option value="提车手续费">提车手续费</option>
 				<option value="爱心捐助">爱心捐助</option>
-				</select></font></b></td>
+				<option value="培训餐费">培训餐费</option>
+				<option value="-1">自定义</option>
+				</select></font></b><input type="text" name="sflb" size="8" /></td>
 			</tr>
 		</table>
 	</div>
@@ -43,3 +57,6 @@ return true;  }
 </form>
 </body>
 </html>
+<script language="JavaScript"> 
+form.sflb.style.display = "none";
+</script>

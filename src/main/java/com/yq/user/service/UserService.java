@@ -837,9 +837,10 @@ public class UserService {
 		if(sgxtBd.getAuid().equals(userName)){
 			sgxtDao.updateZaq(sgxtBd.getUsername(), sjb);
 			ZuoMingxi zuo = zuoMingxiDao.get(sgxtBd.getUsername(), bduser);
+			int dqzuo = zuoMingxiDao.getSumSjb(sgxtBd.getUsername(), zuo.getCount())-sjb;
 			int zyzj = 0;
-			if(sgxtBd.getDqzuo()<sgxtBd.getCfd()){
-				 zyzj = sgxtBd.getCfd()-sgxtBd.getDqzuo();
+			if(dqzuo<sgxtBd.getCfd()){
+				 zyzj = sgxtBd.getCfd()-dqzuo;
 				 int addAmount = sjb;
 				 if(addAmount>zyzj){
 					 addAmount = zyzj;
@@ -868,7 +869,7 @@ public class UserService {
 				 bdbdate.setZbq(sgxtBd.getZbq());
 				 bdbdate.setAq(sgxtBd.getAq());
 				 bdbdate.setBq(sgxtBd.getBq());
-				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+zuo.getCount()+"层(左边)已层封顶-无效单");
+				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+zuo.getCount()+"层(左边已有"+dqzuo+")已层封顶-无效单");
 //				 bdbDateDao.add(bdbdate);
 				 logList.add(bdbdate);
 			}
@@ -876,8 +877,9 @@ public class UserService {
 		}else if(sgxtBd.getBuid().equals(userName)){
 			sgxtDao.updateZbq(sgxtBd.getUsername(), sjb);
 			YouMingxi you = youMingXiDao.get(sgxtBd.getUsername(), bduser);
-			if(sgxtBd.getDqyou()<sgxtBd.getCfd()){
-				int yyzj=sgxtBd.getCfd()-sgxtBd.getDqyou();
+			int dqyou = youMingXiDao.getSumSjb(sgxtBd.getUsername(), you.getCount())-sjb;
+			if(dqyou<sgxtBd.getCfd()){
+				int yyzj=sgxtBd.getCfd()-dqyou;
 				int addAmount = sjb;
 				if(sjb>yyzj){
 					addAmount = yyzj;
@@ -906,7 +908,7 @@ public class UserService {
 				 bdbdate.setZbq(sgxtBd.getZbq());
 				 bdbdate.setAq(sgxtBd.getAq());
 				 bdbdate.setBq(sgxtBd.getBq());
-				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+you.getCount()+"层(右边)已层封顶-无效单");
+				 bdbdate.setBz("新单"+bduser+"("+sjb+")在第"+you.getCount()+"层(右边已有"+dqyou+")已层封顶-无效单");
 //				 bdbDateDao.add(bdbdate);
 				 logList.add(bdbdate);
 			}

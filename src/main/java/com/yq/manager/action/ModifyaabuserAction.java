@@ -142,4 +142,11 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	public void setFcxt(Fcxt fcxt) {
 		this.fcxt = fcxt;
 	}
+	public String getPwdate() {
+		return pwdate;
+	}
+	public void setPwdate(String pwdate) {
+		this.pwdate = pwdate;
+	}
+	
 }
