@@ -17,11 +17,13 @@ return true;  }
 	 if(str=='-1'){//自定义
 		 form.sflb.style.display = "inline";
 		 form.sflbchooes.style.display = "none";
+	 }else{
+		 if(str=='0'){
+			 form.sflb.value='';
+		 }else{
+			 form.sflb.value=str;
+		 }
 	 }
-	 if(str=='0'){
-		 form.sflb.value='';
-	 }
-	 
  }
 </script>
 <form method="POST" action="epsf?status=1&uid=${uid}" name="form" onSubmit="return checkdate()">

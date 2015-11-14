@@ -223,6 +223,25 @@ public class GcuserDao {
 		parameter.setInt(changeNum);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	/**
+	 * 减一币（可以为负数）
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean reduceYbCanFu(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay-?,vippay= case when vippay<? then 0 else vippay-? end,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+? where username=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 	/**
 	 * 减一币
 	 * @param username

@@ -534,6 +534,53 @@ public class UserService {
 		return true;
 	}
 	
+	/**
+	 * 非安全的方法 可以为负数
+	 * @param username
+	 * @param changeNum
+	 * @param desc
+	 * @param newzBz
+	 * @param kjqi
+	 * @return
+	 */
+	public boolean changeYbCanFu(String username,int changeNum,String desc,int newzBz,Integer kjqi){
+		boolean result = false;
+		if(changeNum<0){
+			result = gcuserDao.reduceYbCanFu(username, changeNum*-1);
+			if(result){
+				Gcuser gcuser = gcuserDao.getUser(username);
+				Datepay datePay = new Datepay();
+				datePay.setUsername(username);
+				datePay.setJc(changeNum*-1);
+				datePay.setPay(gcuser.getPay());
+				datePay.setJydb(gcuser.getJydb());
+				datePay.setRegid(desc);
+				datePay.setNewbz(newzBz);
+				if(kjqi!=null){
+					datePay.setKjqi(kjqi);
+				}
+				datePay.setAbdate(new Date());
+				logService.addDatePay(datePay);
+			}
+			return result;
+		}else if(changeNum>0){
+			result = gcuserDao.addYb(username, changeNum);
+			if(result){
+				Gcuser gcuser = gcuserDao.getUser(username);
+				Datepay datePay = new Datepay();
+				datePay.setUsername(gcuser.getUsername());
+				datePay.setSyjz(changeNum);
+				datePay.setPay(gcuser.getPay());
+				datePay.setJydb(gcuser.getJydb());
+				datePay.setRegid(desc);
+				datePay.setNewbz(newzBz);
+				datePay.setAbdate(new Date());
+				logService.addDatePay(datePay);
+			}
+			return result;
+		}
+		return true;
+	}
 	
 	public ZuoMingxi getZuoMingxi(String tjuser,String down){
 		return zuoMingxiDao.get(tjuser, down);
