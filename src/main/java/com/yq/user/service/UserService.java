@@ -326,6 +326,7 @@ public class UserService {
 		user.setAddsheng(provinceName);
 		user.setAddshi(cityName);
 		user.setAddqu(areaName);
+		user.setCxt(5);//信用初始为5
 		user.setRegtime(new Date());
 		
 		if(province!=null){

@@ -107,6 +107,7 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean addUser(Gcuser user){
+		user.setCxt(5);
 		return this.jdbc.insert(user)>0;
 	}
 	

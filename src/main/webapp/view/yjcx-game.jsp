@@ -106,7 +106,7 @@
 										<td><span class="r"><c:if test="${sgxtba.zbq!=''}">${sgxtba.zbq}</c:if></span></td>
 									</tr>
 									<tr>
-										<td><span class="stts stts2">2-4</span></td>
+										<td><span class="stts stts1">2-4</span></td>
 										<td><c:if test="${!empty sgxtb.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxtb.buid}" style="text-decoration: none">${sgxtb.buid}（${sgxtbb.sjb}）</a></c:if>
 			<c:if test="${empty sgxtb.buid}">
 			   <c:if test="${not empty sgxtb.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtb.username}" style="text-decoration: none">选择空位</a></c:if>

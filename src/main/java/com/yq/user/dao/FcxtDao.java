@@ -94,7 +94,7 @@ public class FcxtDao {
 	}
 	
 	public boolean updateJy5w(){
-		String sql = "update "+table+" set jy5w=jy5w-6000000,dqgj=dqgj+0.01,jygj=jygj+0.01,zgj=zgj+0.01 where id =2 and jy5w>=6000000";
+		String sql = "update "+table+" set jy5w=jy5w-8000000,dqgj=dqgj+0.01,jygj=jygj+0.01,zgj=zgj+0.01 where id =2 and jy5w>=8000000";
 		return jdbc.update(sql, null)>0;
 	}
 }
