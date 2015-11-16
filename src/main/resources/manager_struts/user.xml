@@ -385,7 +385,9 @@
 		<action name="hgybsh" class="com.yq.user.action.YbShopPayAction" method="hgybsh">
 		     <result name="success">vip/hgyb.jsp</result>
 		</action>
-		
+		<action name="sms2" class="com.yq.user.action.SmsAction">
+		    <result name="success" type="json"></result>
+		</action>
 		<action name="ybts" class="com.yq.user.action.ChangeStatsForShopAction">
 		    
 		</action>				

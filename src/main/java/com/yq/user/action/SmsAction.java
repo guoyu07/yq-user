@@ -20,7 +20,11 @@ public class SmsAction extends ALDAdminActionSupport{
 			toUserName = super.getUserName();
 		}
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		userService.sendSmsMsg(toUserName,op);
+		try {
+			userService.sendSmsMsg(toUserName,op);
+		} catch (Exception e) {
+			 super.setErroCodeNum(3000);
+		}
 		return SUCCESS;
 	}
 
