@@ -810,7 +810,7 @@ public class GcuserDao {
 	}
 	
 	public boolean updatePwdate(String idcardNum,String name,Date pwDate){
-		String sql = "update "+table+" set pwdate=? where userid=? and name=? limit 1";
+		String sql = "update "+table+" set pwdate=? where userid=? and name=?";
 		return jdbc.update(sql, SqlParameter.Instance().withObject(pwDate).withString(idcardNum).withString(name))>0;
 	}
 	

@@ -645,8 +645,10 @@ public class DateUtils {
 	 * @return 相差天数
 	 */
 	public static int getIntervalDays(Date date, Date otherDate) {
-		date = DateUtils.StringToDate(DateUtils.getDate(date));
-		long time = Math.abs(date.getTime() - otherDate.getTime());
-		return Math.abs((int)(time/(24 * 60 * 60 * 1000)));
+		long t1 = date.getTime();
+		long t2 = otherDate.getTime();
+		double diff = Math.abs(t2 - t1);
+		diff = diff / (24 * 60 * 60 * 1000);
+		return (int) diff;
 	}
 }

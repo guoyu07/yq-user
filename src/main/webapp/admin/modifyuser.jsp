@@ -172,7 +172,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
     </div>
 </div>
 </form></font>
-<c:if test="${fcxt.id==1||fcxt.id==2}">
+<c:if test="${fcxt.id==1">
 <table border="1" width="100%" id="table1">
 	<tr>
 		<td align="center"><iframe name="I4" width="100%" height="200" border="0" frameborder="0" src="jzbdb?jzid=${userid}"></iframe></td>

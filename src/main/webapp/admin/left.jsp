@@ -139,7 +139,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 </tr>
 </table>
 &nbsp;
-<c:if test="${fcxt.id==1||fcxt.id==2}">
+<c:if test="${fcxt.id==1}">
 <table cellpadding=0 cellspacing=0 width=158 align=center>
 <tr>
         <td height=25 class=menu_title onmouseover=this.className='menu_title2'; onmouseout=this.className='menu_title'; background="images/admin_left_4.gif" id=menuTitle1 onclick="showsubmenu(3)"><span>附加管理</span></td>

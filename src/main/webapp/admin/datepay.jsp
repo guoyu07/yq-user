@@ -29,6 +29,7 @@
 					<option <c:if test="${beizhu==10}">selected</c:if> value="10">购物支出</option>
 					<option <c:if test="${beizhu==11}">selected</c:if> value="11">票务支出</option>
 					<option <c:if test="${beizhu==12}">selected</c:if> value="12">一币支付</option>
+					<option <c:if test="${beizhu==13}">selected</c:if> value="13">不同名转账</option>
 					</select></td>
 					<td><input type="submit" value="提交" name="B1"></td>
 				</tr>

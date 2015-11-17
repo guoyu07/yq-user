@@ -3006,7 +3006,7 @@ public class UserService {
 		}
 		if(callRemoteCharge(call,amount,ip,userName)){
 //			if(1==1){
-			this.changeYbCanFu(userName, -yb, "话费"+call, 7, null);
+			this.changeYbCanFu(userName, -yb, "话费-"+call, 7, null);
 			fcxtDao.updatePayAdd();
 			gcuserDao.updateUserHfCz(gcuser.getName(), gcuser.getUserid(), DateUtils.addDay(new Date(), 30));
 		}else{
