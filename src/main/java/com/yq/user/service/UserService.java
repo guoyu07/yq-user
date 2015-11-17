@@ -70,6 +70,8 @@ import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
+import com.yq.user.utils.Ref;
+import com.yq.user.utils._99douInterface;
 
 public class UserService {
 	
@@ -139,7 +141,7 @@ public class UserService {
     }
     
     
-    private static final String INIT_SMS_CODE="000000";
+    private static final String INIT_SMS_CODE="00000000";
     
 	/**
 	 * 登录
@@ -2190,13 +2192,10 @@ public class UserService {
 	 * @param buyNum
 	 */
 	public void buyJf(String userName,int buyNum){
-		
-		if(gpjyDao.get()!=null){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
 			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
 		}
-		
-		Gcuser gcuser = gcuserDao.getUser(userName);
-		
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
@@ -2978,5 +2977,66 @@ public class UserService {
 			return result;
 		}
 		return "error,can not find username="+userName;
+	}
+	
+	@Transactional
+	public void telCharge(String userName,String call,String pa3,String smdCode,String ip){
+		int amount = 100;
+		int yb = 110;
+		Fcxt fcxt = fcxtDao.get(12);
+		if(fcxt!=null&&fcxt.getPayadd()<1){
+			throw new ServiceException(1, "您好，今天的名额已用完，请于明天再试，谢谢！");
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser!=null){
+			if(gcuser.getHfcjdate()!=null&&gcuser.getHfcjdate().getTime()>System.currentTimeMillis()){
+				throw new ServiceException(2, "您好，测试期间同一姓名及证件号30天内仅提供一次充值，请于"+DateUtils.getIntervalDays(gcuser.getHfcjdate(), new Date())+"天后再来，谢谢！");
+			}
+			if(gcuser.getPay()<yb){
+				throw new ServiceException(3,"您好，一币不足110，暂时不能充值，谢谢！");
+			}
+			if(!gcuser.getPassword3().equals(pa3)){
+				throw new ServiceException(4,"您好，您输入的二级密码不正确，请重新输入！");
+			}
+			if(!smdCode.equals(gcuser.getVipsq())){
+				throw new ServiceException(5,"您好，您输入的手机验证码不正确，请重新输入！");
+			}
+		}else{
+			throw new ServiceException(3000, "用户不存在！");
+		}
+		if(callRemoteCharge(call,amount,ip,userName)){
+//			if(1==1){
+			this.changeYbCanFu(userName, -yb, "话费"+call, 7, null);
+			fcxtDao.updatePayAdd();
+			gcuserDao.updateUserHfCz(gcuser.getName(), gcuser.getUserid(), DateUtils.addDay(new Date(), 30));
+		}else{
+			throw new ServiceException(100, "充话费失败！稍后再试");
+		}
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+	}
+	
+	public boolean callRemoteCharge(String call,int amount,String ip,String userName){
+		LogSystem.info("用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】");
+		_99douInterface _99dou = new _99douInterface();
+		String out_trade_id = userName+"-"+DateUtils.DateToString(new Date(),DateStyle.YY_MM_EN);
+		String account = call;
+		String account_info = "";
+		int quantity=1;
+		String value = amount+"";
+		String client_ip = ip;
+		int expired_mini = 5;
+		Ref<String> msg = new Ref<String>();
+		int result = -1;
+        try {
+        	result =_99dou.Huafei(out_trade_id, account, account_info, quantity, value, client_ip, expired_mini, msg);
+		} catch (Exception e) {
+			LogSystem.error(e, "");
+			throw new ServiceException(100, "充值话费失败！稍后再试");
+		}
+        LogSystem.info("话费充值返回 :"+result+" 消息:"+msg);
+        if(result==0){//成功
+        	return true;
+        }
+        return false;
 	}
 }

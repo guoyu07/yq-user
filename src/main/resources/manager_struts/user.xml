@@ -348,6 +348,10 @@
 		<action name="hgybok" class="com.yq.user.action.YbShopPayAction" method="hgybok">
 		     <result name="success">vip/hgyb.jsp</result>
 		</action>	
+		
+		<action name="hfcz" class="com.yq.user.action.TelPayAction">
+		     <result name="success">view/xfgl-mobilecharge.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

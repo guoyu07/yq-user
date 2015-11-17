@@ -20,7 +20,7 @@
 							         <s:iterator var="data" value="dataList">
 								          <tr align="center" height="25"> 
 									          <td width="200"><b><font style="font-weight: lighter;" size="2">${data.mcsl}</font></b></td>
-									          <td width="160"><b><font color="#FF0000" size="2"><c:if test="${data.pay<1}">0${data.pay}</c:if><c:if test="${data.pay>=1}">${data.pay}</c:if></font></b></td>
+									          <td width="160"><b><font color="#FF0000" size="2"><c:if test="${data.pay<1}">${data.pay}</c:if><c:if test="${data.pay>=1}">${data.pay}</c:if></font></b></td>
 									          <td width="200"><font size="2" color="#614039">${data.jypay}</font></td>
 									          <td  width="180"><font size="2">
                                              <c:choose>

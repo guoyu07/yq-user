@@ -41,6 +41,11 @@ public class FcxtDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean updatePayAdd(){
+		String sql = "update "+table+" set payadd=payadd-1 where id=12 limit 1";
+		return jdbc.update(sql, null)>0;
+	}
+	
 	public Fcxt getByUserNameAndPassword(String userName,String password){
 		String sql = "SELECT * FROM "+table+" where adminusername=? and password=? limit 1";
 		SqlParameter parameter = new SqlParameter();
@@ -94,7 +99,7 @@ public class FcxtDao {
 	}
 	
 	public boolean updateJy5w(){
-		String sql = "update "+table+" set jy5w=jy5w-8000000,dqgj=dqgj+0.01,jygj=jygj+0.01,zgj=zgj+0.01 where id =2 and jy5w>=8000000";
+		String sql = "update "+table+" set jy5w=jy5w-10000000,dqgj=dqgj+0.01,jygj=jygj+0.01,zgj=zgj+0.01 where id =2 and jy5w>=10000000";
 		return jdbc.update(sql, null)>0;
 	}
 }

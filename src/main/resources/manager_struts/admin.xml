@@ -454,6 +454,11 @@
 		<action name="bdbList" class="com.yq.cservice.action.SearchUserAction" method="dbdList">
 			<result name="success" >/cs/bdbList.jsp</result>
 		</action>
+		<action name="telpayhander" class="com.yq.manager.action.TelPayByHandAction">
+		    <result name="success">
+		      telpayhandler.jsp
+		    </result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

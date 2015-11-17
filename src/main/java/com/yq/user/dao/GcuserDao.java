@@ -818,4 +818,14 @@ public class GcuserDao {
 		String sql = "update "+table+" set txlb=? where username=? limit 1";
 		return jdbc.update(sql, SqlParameter.Instance().withInt(txlb).withString(userName))>0;
 	}
+	
+	public boolean updateUserHfCz(String name,String idCard,Date date){
+		String sql = "update "+table+" set hfcjdate=?  where userid=? and name=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(date); 
+		parameter.setString(idCard);
+		parameter.setString(name);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
 }

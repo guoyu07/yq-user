@@ -73,6 +73,8 @@ import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
 import com.yq.user.service.LogService;
 import com.yq.user.service.UserService;
+import com.yq.user.utils.Ref;
+import com.yq.user.utils._99douInterface;
 
 public class AdminService {
 	@Autowired
@@ -1987,4 +1989,28 @@ public class AdminService {
 		LogSystem.info("完成-----------重置zaq zbq表功能---完成-总计耗时"+(System.currentTimeMillis()-allStartTime)/1000+"秒！~");
 	}
 	
+	public boolean callRemoteCharge(String call,int amount,String ip,String userName){
+		LogSystem.info("手动--用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】");
+		_99douInterface _99dou = new _99douInterface();
+		String out_trade_id = userName+"-"+DateUtils.DateToString(new Date(),DateStyle.YYYY_MM_DD_HH_MM_SS_EN);
+		String account = call;
+		String account_info = "";
+		int quantity=1;
+		String value = amount+"";
+		String client_ip = ip;
+		int expired_mini = 5;
+		Ref<String> msg = new Ref<String>();
+		int result = -1;
+        try {
+        	result =_99dou.Huafei(out_trade_id, account, account_info, quantity, value, client_ip, expired_mini, msg);
+		} catch (Exception e) {
+			LogSystem.error(e, "");
+			throw new ServiceException(100, "充值话费失败！稍后再试");
+		}
+        LogSystem.info("话费充值返回 :"+result+" 消息:"+msg);
+        if(result==0){//成功
+        	return true;
+        }
+        return false;
+	}
 }

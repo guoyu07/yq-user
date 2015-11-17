@@ -37,6 +37,7 @@
 			<li><a href="#">消费管理</a>
 				<div class="ej">
 					<span class="close"></span>
+					<a href="/hfcz">话费充值(100)</a>
 					<a target="_blank" href="http://www.kypwe.com">科赡票务</a>
 					<a target="_blank" href="http://www.zgybe.com">一币新商城</a>
 					<a target="_blank" href="http://yb.zgyce.com/index.asp?vipid=<%=gcuserHead.getUsername() %>&vippa=<%=gcuserHead.getPassword()%>">一币换购商品</a>
