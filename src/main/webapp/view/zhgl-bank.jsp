@@ -47,7 +47,7 @@
 				<div class="content-box2">
 					<div class="fwzxbox">
 						<div class="fwzxtop">根据您注册用户时选择的地区，本服务中心为您提供贴身的服务，以提高办事效率！<br />
-							有任何事情请联系：<span style="color: #0078ff;">${cz01}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a><span><br />
+							有任何事情请联系：<span style="color: #0078ff;">${gcuserup.qq}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a><span><br />
 							<span style="color: #ff0000">各部门服务中心人员分工，一个人不能重复加上，更不能向每个人同一时段咨询同一个问题</span>
 						</div>
 						<div class="fwzxc">
@@ -58,13 +58,23 @@
 						晚上：19点30分-10点30分<br />
 						</div>
 						<div class="fwzxc-r">
-						本服务中心${cz01}专用收款账号如下：<br />
-						开户名：<span style="color: #ff0000">${cz02}--${cms}</span><br />
-						工商银行：${ghbank}<br />
-						建设银行：${jsbank}<br />
-						中国银行：${zgbank}<br />
-						财付通：${cftbank}<br />
-						开户行：${khbank}<br />
+						本服务中心${gcuserup.vipuser}专用收款账号如下：<br />
+						开户名：<span style="color: #ff0000">${gcuserup.vipuser}</span><br />
+						<c:if test="${not empty gcuserup.vipgh}">
+						  工商银行:${gcuserup.vipgh}<br />
+						</c:if>
+						<c:if test="${not empty gcuserup.vipnh}">
+						  农业银行:${gcuserup.vipnh}<br />
+						</c:if>		
+						<c:if test="${not empty gcuserup.vipjh}">
+						 建设银行:${gcuserup.vipjh}<br />
+						</c:if>
+						<c:if test="${not empty gcuserup.vipcft}">
+						 财付通:${gcuserup.vipcft}<br />
+						</c:if>		
+						<c:if test="${not empty gcuserup.vipzfb}">
+						支付宝:${gcuserup.vipzfb}<br />
+						</c:if>											
 						<span style="color: #ff0000">汇款一定要加尾数，以便查账；如：1000.22  5000.12</span><br />
 						</div>
 						</div>
@@ -73,7 +83,7 @@
 						<strong>注意：</strong>
 						本服务中心指定账号不可以复制给其它地区人员，每次汇款前请按上面公布的为准，以免担误大家宝贵的时间！<br />
 						<span>打款成功后按以下格式提交给客服：</span><br />
-						<span>汇至户名${cz02}（XX银行）、时间、金额（金额一定要加尾数）、需要充值的用户名：XXXXXX</span><br />
+						<span>汇至户名${gcuserup.vipuser}（XX银行）、时间、金额（金额一定要加尾数）、需要充值的用户名：XXXXXX</span><br />
 						充值后可自行操作报单开户，以免担误时间，还有恳请大家不要重复联系客服，以免重复处理了，感谢大家的
 						配合！<br />
 						请大家尽量提前充值，尽量不要都挤压在晚上8点至10点，所有充值事宜要在晚上10点30分前办理<br />

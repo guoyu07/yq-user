@@ -52,8 +52,8 @@ public class MD5Security {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		System.out.println("admin1  =="+MD5Security.md5_16("kjuio398ak"));
-		System.out.println("admin2(原来的admin)  =="+MD5Security.md5_16("qyilkt35kl"));
+		System.out.println("admin1  =="+MD5Security.md5_16("kiy78akiu1"));
+		System.out.println("admin2(原来的admin)  =="+MD5Security.md5_16("jklq8io1k2"));
 		System.out.println("admin3  =="+MD5Security.md5_16("kjuo38ea"));
 		System.out.println("admin4  =="+MD5Security.md5_16("jkoi43ia"));
 		System.out.println("admin5  =="+MD5Security.md5_16("ykoj50un"));

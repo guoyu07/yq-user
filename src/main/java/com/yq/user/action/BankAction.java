@@ -15,10 +15,12 @@ public class BankAction extends ALDAdminActionSupport {
 	
 	private Gcuser gcuser;
 
+	private Gcuser gcuserup;
 	public String execute(){
 		
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuserup = userService.getUserByUserName(gcuser.getVipname());
 		return SUCCESS;
 	}
 
@@ -29,4 +31,13 @@ public class BankAction extends ALDAdminActionSupport {
 	public void setGcuser(Gcuser gcuser) {
 		this.gcuser = gcuser;
 	}
+
+	public Gcuser getGcuserup() {
+		return gcuserup;
+	}
+
+	public void setGcuserup(Gcuser gcuserup) {
+		this.gcuserup = gcuserup;
+	}
+	
 }

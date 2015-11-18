@@ -81,7 +81,9 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	 * 新商城支付通道
 	 * @return
 	 */
+	private String url;
 	public String ybpay(){
+		
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		ybsl = (int)(gwpay*1.02);
 		fee =  (int)(gwpay*0.02);
@@ -100,6 +102,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			}
 		}else{
 			userService.ybpay(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode);
+			sn=MD5Security.md5_16(order+"$@@$"+gwpay);
 			if(pid==1){
 				super.setErroCodeNum(2000);
 			}else if(pid==2){
@@ -303,4 +306,15 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	public void setSn(String sn) {
 		this.sn = sn;
 	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 }

@@ -22,10 +22,13 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 	//<script language=javascript>alert('您的一币卖出已有他人收购并给您付款，请你尽快查收并及时确认，如有问题联系客服！');location.replace('../vip/epmcjl.asp');</script>
 	private boolean isHaveTxPaySale;
 	
+	private Gcuser gcuserup;
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		Gcuser gcuserb = userService.getUserByUserName(super.getUserName());
+		
+		gcuserup = userService.getUserByUserName(gcuserb.getVipname());
 		
 		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
 		IPage<Dgag> page =managerService.getDgagPageList(super.getToPage(), 5);
@@ -46,6 +49,12 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 		}
 		
 		return SUCCESS;
+	}
+	public Gcuser getGcuserup() {
+		return gcuserup;
+	}
+	public void setGcuserup(Gcuser gcuserup) {
+		this.gcuserup = gcuserup;
 	}
 	public String getDq() {
 		return dq;
