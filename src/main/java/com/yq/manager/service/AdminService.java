@@ -51,6 +51,7 @@ import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Tduser;
 import com.yq.user.bo.Txpay;
 import com.yq.user.bo.Vipcjgl;
+import com.yq.user.bo.Vipxtgc;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.dao.BdbDateDao;
@@ -69,6 +70,7 @@ import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
 import com.yq.user.dao.VipcjglDao;
+import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
 import com.yq.user.service.LogService;
@@ -129,6 +131,8 @@ public class AdminService {
 	private TduserDao tduserDao;
 	@Autowired
 	private TxPayDao txpayDao;
+	@Autowired
+	private VipxtgcDao vipxtgcDao;
 	
 	
 	
@@ -2012,5 +2016,18 @@ public class AdminService {
         	return true;
         }
         return false;
+	}
+	
+	public IPage<Vipxtgc> getVipxtgcPageList(String userName,String startDate,String endDate,int pageIndex,int pageSize){
+		return vipxtgcDao.getPage(userName, startDate, endDate, pageIndex, pageSize);
+	}
+	
+	public List<String>  getAllVipName(){
+		List<Gcuser> list = gcuserDao.getAllVip();
+		List<String> result = Lists.newArrayList();
+		for(Gcuser gcuser:list){
+			result.add(gcuser.getUsername());
+		}
+		return result;
 	}
 }

@@ -459,6 +459,12 @@
 		      telpayhandler.jsp
 		    </result>
 		</action>
+		
+		<action name="viptrasferdetail" class="com.yq.manager.action.VipTransferDetailsAction">
+		    <result name="success">
+		      viptrasferdetail.jsp
+		    </result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

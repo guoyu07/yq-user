@@ -624,7 +624,7 @@ public class UserService {
 	 * @return
 	 */
     @Transactional
-	public String bdReg(String userName,String up,String bduser,int cjpay,String pa1j,String pa2j,String idCardNum,int status){
+	public synchronized String bdReg(String userName,String up,String bduser,int cjpay,String pa1j,String pa2j,String idCardNum,int status){
 		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
 		Fcxt fcxt = managerService.getFcxtById(2);
 		if(fcxt!=null){
@@ -1234,7 +1234,7 @@ public class UserService {
 			if(user==null){
 				throw new ServiceException(4, "用户不存在");
 			}
-			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().equals(user.getUserid())){
+			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase())){
 				throw new ServiceException(5, "非同名用户,不能转");
 			}
 			if(user.getPay()>0&&!fromUser.equals(toUser)){
@@ -1415,6 +1415,9 @@ public class UserService {
 		if(!gcuserDao.saleYb(userName, saleNum)){
 			throw new ServiceException(2,"您好，您发布的一币数量不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
+		
+		gcuser = gcuserDao.getUser(userName);
+		
 		Datepay datePay = new Datepay();
 		datePay.setUsername(userName);
 		datePay.setJc(saleNum);
@@ -1429,10 +1432,11 @@ public class UserService {
 		int datePayId = logService.getLasterInsertId();
 		
 		Txpay txpay = txPayDao.get();
+		int jypay = 1;
+		if(txpay!=null){
+			jypay = txpay.getPayid()+1;
+		}
 		
-		int jypay = txpay.getPayid()+1;
-		
-		gcuser = gcuserDao.getUser(userName);
 		
 		Txpay txpay2 = new Txpay();
 		txpay2.setPayusername(userName);
@@ -1508,7 +1512,7 @@ public class UserService {
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser, 6, null)){
+		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser, 13, null)){
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
@@ -1770,7 +1774,7 @@ public class UserService {
 		//给买方加一币
 		gcuserDao.addYbForBuyInMark(txpay.getDfuser(), txpay.getPaynum());
 		
-		datePayDao.updateRegIdAndTxbzByQlid(payId, "-"+txpay.getDfuser()+"-"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS));
+		datePayDao.updateRegIdAndTxbzByQlid(txpay.getQlid(), "-"+txpay.getDfuser()+"-"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS));
 		
 		
 		Gcuser dfuser = gcuserDao.getUser(txpay.getDfuser());

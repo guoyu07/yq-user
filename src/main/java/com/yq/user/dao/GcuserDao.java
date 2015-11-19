@@ -828,4 +828,9 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
+	public List<Gcuser> getAllVip(){
+		String sql = "select username from "+table+" where vip<>0";
+		return jdbc.getList(sql, Gcuser.class);
+	}
+	
 }

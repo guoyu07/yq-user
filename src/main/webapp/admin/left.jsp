@@ -66,7 +66,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
                 <td height=20>☉  <a href="/admin/goldcardmanager" target="BoardList"><font color="#000000">金币卡--管理</font></a></td>
               </tr>
               <tr> 
-                <td height=20>☉  <a href="/admin/gcSendRecord" target="BoardList"><font color="#000000">金币卡--转赠记录</font></a></td>
+                <td height=20>☉  <a href="/admin/viptrasferdetail" target="BoardList"><font color="#000000">VIP转账明细</font></a></td>
               </tr>
               <tr> 
                 <td height=20>☉   <a target="BoardList" href="/admin/outday"><font color="#000000">双区系统报表</font></a></td>

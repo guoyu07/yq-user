@@ -7,6 +7,7 @@ import java.util.Date;
 
 
 public class Vipxtgc{
+	private Integer vipid;
 	private String vipname;
 	private Date vipdate;
 	private int jcyb;
@@ -34,6 +35,12 @@ public class Vipxtgc{
 	}
 	public int getJcbdb(){
 		return jcbdb;
+	}
+	public Integer getVipid() {
+		return vipid;
+	}
+	public void setVipid(Integer vipid) {
+		this.vipid = vipid;
 	}
 }
 
