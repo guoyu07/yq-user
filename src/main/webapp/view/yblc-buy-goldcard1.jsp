@@ -1,6 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('注意：您的一币小于15，请充值！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('注意：您的一币不够本次购卡，请充值！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('二级密码不正确，请重新输入！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('电子卡发放及业绩更新成功！');location.href='datepay'</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -44,7 +46,7 @@
 								<option value="50">500金币（750一币/张）</option>
 								<option value="100">1000金币（1500一币/张）</option>
 								</select></p>
-							<p><label></label><button class="but1" type=submit>发 布 卖 出</button></p>
+							<p><label></label><button class="but1" type=submit>购 买</button></p>
 					</form>
 					<p >提示：您的一币剩余<b>${pay}</b></p>
 					<p >按<b>15-一币-买10金币</b>的比例，成功后显示相应金币卡,再到<b>积分理财</b>下<b>我要充值</b>-激活或复制赠送即可！</p>

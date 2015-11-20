@@ -15,10 +15,10 @@ public class GpjyDao {
 	
 	private static String table = "gpjy";
 	
-	public boolean update(){
-		String sql = "update "+table+" set jy=0 where now()>dqdate+0.0006 and jy=2";
-		return this.jdbc.update(sql, null)>0;
-	}
+//	public boolean update(){
+//		String sql = "update "+table+" set jy=0 where now()>dqdate+0.0006 and jy=2";
+//		return this.jdbc.update(sql, null)>0;
+//	}
 	
 	public boolean add(Gpjy gpjy){
 		if(gpjy.getAbdate()==null){
@@ -143,6 +143,11 @@ public class GpjyDao {
 	public Gpjy get(String userName,String dfuser){
 		String sql = "select * from "+table+" where username=? and dfuser=? limit 1";
 		return jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withString(userName).withString(dfuser));
+	}
+	
+	public boolean updateGpjy(String userName,String dfuser,String bz,String toDfuser,Date cgdate){
+		String sql = "update table set bz=?,dfuser=?,cgdate=?,newjy=0 where username=? and dfuser=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withString(bz).withString(toDfuser).withObject(cgdate).withString(userName).withString(dfuser))>0;
 	}
 	
 	public Double getSumMcsl(){

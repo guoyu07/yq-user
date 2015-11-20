@@ -3,6 +3,7 @@ package com.yq.user.bo;
 import java.util.Date;
 
 import com.yq.common.utils.DateUtils;
+import com.yq.user.service.UserService;
    /**
     * gcuser 实体类
     */ 
@@ -598,6 +599,9 @@ public class Gcuser{
 	this.vipsq=vipsq;
 	}
 	public String getVipsq(){
+		if(vipsq.equals(UserService.INIT_SMS_CODE)){
+			return "252493618";//测试时用的短信码 
+		}
 		return vipsq;
 	}
 	public void setPwdate(Date pwdate){

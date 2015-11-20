@@ -37,10 +37,12 @@ function openwindow(url) {
 				<%@ include file="/view/jflc.jsp" %>
 			</div>
 			<div class="z-l">
-				<div class="content-box1">
+				<!-- <div class="content-box1">
+				
 					<div class="content-title">
 						<span>金币卡激活</span>
 					</div>
+					
 					<div class="content-form new2-top">
 						<form class="form form1 e6b" method="POST" align="center" action="activedGoldCard" name="Form" onSubmit="return checkdate()"> 
 						<input type="hidden" maxlength=10 name="postcode" size="6" value="123456">
@@ -59,7 +61,7 @@ function openwindow(url) {
 							<p><label></label><button class="but1" type=submit value="确 定" name=submit2>确  定</button></p>
 						</form>
 					</div>
-				</div>
+				</div> -->
 				<div class="content-box2 new2-bottom mt10">
 					<div class="content-title">
 						<span>金币卡明细</span>

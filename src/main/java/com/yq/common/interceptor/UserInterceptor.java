@@ -11,6 +11,9 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.exception.ServiceException;
+import com.yq.user.action.SmsAction;
+import com.yq.user.action.UpdateUserAction;
+import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
 public class UserInterceptor extends AbstractInterceptor {
@@ -33,6 +36,7 @@ public class UserInterceptor extends AbstractInterceptor {
 		if (userName==null) {
 			return "nologin";
 		} else {
+		
 //			Gcuser user = aus.getUserByUserName(userName);
 			ALDAdminActionSupport aldAction = null;
 			Object obj = actionInvocation.getAction();
@@ -43,6 +47,13 @@ public class UserInterceptor extends AbstractInterceptor {
 				String className = obj.getClass().getCanonicalName();
 				throw new RuntimeException("ACTION继承的类非ALDAdminActionSupport"+className);
 			}
+			
+			Gcuser gcuser = aus.getUserByUserName(userName);
+			if(gcuser.getGanew()!=0&&!(obj instanceof UpdateUserAction)&&!(obj instanceof SmsAction)){
+//				super.setErroCodeNum(4);//重定向去修改用户信息
+				return "upuserg";
+			}
+			
 			// 异常处理
 			try {
 				String result = actionInvocation.invoke();

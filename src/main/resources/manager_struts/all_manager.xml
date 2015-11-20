@@ -24,6 +24,10 @@
 			<result name="nologin" type="redirect">
 				/index.jsp
 			</result>
+			<!-- 更新资料界面 -->
+			<result name="upuserg" type="redirect">
+			   /updateuser
+			</result>
 		</global-results>
 	</package>
 	

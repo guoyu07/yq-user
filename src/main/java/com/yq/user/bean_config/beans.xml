@@ -58,4 +58,9 @@
        <bean id="managerService" class="com.yq.user.service.ManagerService"></bean>
        <!-- 日志类管理 -->
        <bean id="logService" class="com.yq.user.service.LogService"></bean>
+       
+       <!-- 每日 每隔3小时 整点执行 -->
+       <bean id="checkCxtScheduler" class="com.yq.user.scheduler.CxtCheckScheduler">
+          <property name="cronExpression" value="0 0 2,5,8,11,14,17,20,23 * * ?"></property>
+       </bean>
 </beans>

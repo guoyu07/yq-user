@@ -23,6 +23,8 @@ public class JztobjAction extends ALDAdminActionSupport {
 	//4
 	private int mj;
 	
+	private String pa3;
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
@@ -40,12 +42,23 @@ public class JztobjAction extends ALDAdminActionSupport {
 			return "suc3";
 		}
 		if(status==3){
-			userService.buyJb(super.getUserName(), mj, gmsl);
+			userService.buyJb(super.getUserName(), mj, gmsl,pa3);
 			super.setErroCodeNum(2000);
 			return "suc4";
 		}
 		return SUCCESS;
 	}
+
+	
+	public String getPa3() {
+		return pa3;
+	}
+
+
+	public void setPa3(String pa3) {
+		this.pa3 = pa3;
+	}
+
 
 	public int getPay() {
 		return pay;

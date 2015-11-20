@@ -1,6 +1,7 @@
 package com.yq.user.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -8,6 +9,8 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.common.utils.DateStyle;
+import com.yq.common.utils.DateUtils;
 import com.yq.manager.bo.W10Bean;
 import com.yq.user.bo.Txpay;
 
@@ -136,5 +139,27 @@ public class TxPayDao {
     public boolean updateTxvip(int payId,int txvip){
     	String sql = "update "+table+" set txvip=? where payid=? limit 1";
     	return jdbc.update(sql,  SqlParameter.Instance().withInt(txvip).withInt(payId))>0;
+    }
+    
+    public List<Txpay> getAllNoGiveMoneyRecord(){
+    	String date = DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+    	String sql = "select * from "+table+" where ep=1 and rgdate<? and payonoff='尚未转账' and dfuser<>''";
+    	return this.jdbc.getList(sql, Txpay.class, SqlParameter.Instance().withString(date));
+    }
+    
+    public List<Txpay> getAllNoSureReceiveMoneyRecord(){
+    	String date = DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+    	String sql = "select * from "+table+" where ep=2 and rgdate<? and payonoff='尚未转账' and dfuser<>'' and (clip is null or clip ='')";
+    	return this.jdbc.getList(sql, Txpay.class, SqlParameter.Instance().withString(date));
+    }
+    
+    public boolean updateClip(int payId){
+    	String sql = "update "+table+" set clip='已扣' where payid=? limit 1";
+    	return this.jdbc.update(sql, SqlParameter.Instance().withInt(payId))>0;
+    }
+    
+    public boolean resetOrder(int payId){
+    	String sql = "update "+table+" set ep=0,rgdate=null,dfuser='',kjygid=0 where payid=? limit 1";
+    	return this.jdbc.update(sql, SqlParameter.Instance().withInt(payId))>0;
     }
 }

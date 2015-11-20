@@ -141,7 +141,7 @@ public class UserService {
     }
     
     
-    private static final String INIT_SMS_CODE="00000000";
+    public static final String INIT_SMS_CODE="00000000";
     
 	/**
 	 * 登录
@@ -1699,7 +1699,7 @@ public class UserService {
 		}
 		
 		
-		if(!txPayDao.updateEpToBeSalesPre(payId,new Date(),userName,txpay.getPaynum())){
+		if(!txPayDao.updateEpToBeSalesPre(payId,DateUtils.addHour(new Date(), 2),userName,txpay.getPaynum())){
 			throw new ServiceException(7, "该一币交易进行中或已经由它人交易成功了，不能重复，请选择其它交易！");
 		}
 		
@@ -1800,7 +1800,7 @@ public class UserService {
 	private static final String[] descs = new String[]{"商家一","商家二","商家三"};
 	
 	@Transactional
-	public void buyJb(String userName,int mz,int gmsl){
+	public void buyJb(String userName,int mz,int gmsl,String pa3){
 		//需要的一币数量
 		double needYbCountDouble = (double)mz*(double)gmsl*1.5;
 		int needYbCount = (int)needYbCountDouble;
@@ -1808,6 +1808,10 @@ public class UserService {
 		int jbCount = mz*gmsl;
 		
 		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(!pa3.equals(gcuser.getPassword3())){
+			throw new ServiceException(3, "二级密码不正确！");
+		}
 		
 		if(gcuser.getPay()<needYbCount){
 			throw new ServiceException(2, "注意：您的一币不够本次发卡，请充值！");
@@ -2303,6 +2307,9 @@ public class UserService {
 		}
 		if(!gcuserDao.increaseStopjyg(userName,20)){
 			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
+		}
+		if(saleNum>1000){
+			throw new ServiceException(11,"积分单笔卖出数量不能超过1000！");
 		}
 		
 		int needJb = (int)(Math.ceil(price*saleNum));
@@ -3042,5 +3049,73 @@ public class UserService {
         	return true;
         }
         return false;
+	}
+	//诚信检查
+	public void checkCxt(){
+		List<Txpay> listNoGiveMoney = txPayDao.getAllNoGiveMoneyRecord();
+		if(listNoGiveMoney!=null&&listNoGiveMoney.size()>0){
+			for(Txpay txpay:listNoGiveMoney){
+//				Gpjy gpjy = gpjyDao.get(txpay.getDfuser(), txpay.getPayid()+"");
+//				if(gpjy!=null){
+				try {
+					Gcuser user = gcuserDao.getUser(txpay.getDfuser());
+					int addCxdateDay = getAddCxdateDay(user.getCxt());
+					gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
+					txPayDao.resetOrder(txpay.getPayid());
+					
+					Datepay datePay = new Datepay();
+					datePay.setUsername(user.getUsername());
+					datePay.setPay(user.getPay());
+					datePay.setJydb(user.getJydb());
+					datePay.setRegid("超时未付款-并扣一诚信星-余"+(user.getCxt()-1)+"-"+txpay.getPayid()+"-"+txpay.getPayusername());
+					datePay.setNewbz(20);
+					datePay.setAbdate(new Date());
+					logService.addDatePay(datePay);
+//					gpjyDao.updateGpjy(txpay.getDfuser(), txpay.getPayid()+"", "超时未付款-并扣一诚信星-余"+(user.getCxt()-1), gpjy.getDfuser()+"-"+txpay.getPayusername(), new Date());
+				} catch (Exception e) {
+					LogSystem.error(e, "发生错误");
+				}
+//				}
+			}
+		}
+		
+		List<Txpay> listNoSureReceiveMoney = txPayDao.getAllNoSureReceiveMoneyRecord();
+		if(listNoSureReceiveMoney!=null&&listNoSureReceiveMoney.size()>0){
+			for(Txpay txpay:listNoSureReceiveMoney){
+				try {
+					Gcuser user = gcuserDao.getUser(txpay.getPayusername());
+					int addCxdateDay = getAddCxdateDay(user.getCxt());
+					gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
+					txPayDao.updateClip(txpay.getPayid());
+					Datepay datePay = new Datepay();
+					datePay.setUsername(user.getUsername());
+					datePay.setPay(user.getPay());
+					datePay.setJydb(user.getJydb());
+					datePay.setRegid("确认收款超时-并扣一诚信星-余"+(user.getCxt()-1)+"-"+txpay.getPayid()+"-"+txpay.getDfuser());
+					datePay.setNewbz(20);
+					datePay.setAbdate(new Date());
+					logService.addDatePay(datePay);
+					
+				} catch (Exception e) {
+					LogSystem.error(e, "发生错误");
+				}
+			}
+		}
+		
+		
+	}
+	
+	private int getAddCxdateDay(int cxt){
+		int addCxdate = 0;
+		if(cxt-1==3){
+			addCxdate=7;
+		}else if(cxt-1==2){
+			addCxdate=14;
+		}else if(cxt-1==1){
+			addCxdate = 21;
+		}else if(cxt-1<1){
+			addCxdate = 60;
+		}
+		return addCxdate;
 	}
 }

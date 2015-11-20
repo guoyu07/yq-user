@@ -9,6 +9,8 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.common.utils.DateStyle;
+import com.yq.common.utils.DateUtils;
 import com.yq.user.bo.Gcuser;
 
 public class GcuserDao {
@@ -833,4 +835,8 @@ public class GcuserDao {
 		return jdbc.getList(sql, Gcuser.class);
 	}
 	
+	public boolean updateCxtAndCxtDate(String userName,int cxtReduceNum,int cxdateAddDay){
+		String sql = "update "+table+" set cxdate=DATE_ADD('"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS)+"', INTERVAL "+cxdateAddDay+" DAY),cxt=cxt-? where username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(cxtReduceNum).withString(userName))>0;
+	}
 }

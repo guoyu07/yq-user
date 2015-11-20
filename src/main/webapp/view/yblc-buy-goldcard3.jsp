@@ -10,8 +10,15 @@
 	<link rel="stylesheet" href="/css/common.css" />
 	<script language="JavaScript"> 
  function checkdate()  {  
-  if (Form.gmmj.value==0) {      alert("请选择你要购买的金币卡面值!");      return false;    } 
-  return true;  }  
+
+  if (Form.pa3.value=="") {      alert("请输入二级密码!");      return false;    } 
+  
+	 if(!confirm('提示：您确定了吗？ ')){
+		 return false;
+	 }
+  
+  return true;  
+  }  
  </script>
 </head>
 <body>
@@ -44,7 +51,10 @@
 							<c:if test="${mj==500}">500金币（750一币/张）</c:if>
 							<c:if test="${mj==1000}">1000金币（1500一币/张）</c:if></b></p>
 					 <p>需要<b>${gmsl*mj*1.5}</b>一币，现金=<b>${gmsl*mj/10}张</b>面值10金币的卡累计金币${gmsl*mj}个</p>
-					 <p><a onClick="return confirm('提示：您确定了吗？ ')" href="jztojb?status=3&mj=${mj}&gmsl=${gmsl}">确定从我的一币-扣除</a></p>		
+					 <p><form action="jztojb?status=3&mj=${mj}&gmsl=${gmsl}" method="post" onSubmit="return checkdate();" name="Form" id="Form">
+					 二级密码：<input type="password" name="pa3" />
+					 <button type="submit" >确定从我的一币-扣除</button>
+					 </form></p>		
 					</div>
 				</div>
 			</div>
