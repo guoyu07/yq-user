@@ -40,7 +40,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
             <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">验证码：</font></td>
         <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">
-        <c:if test="${gcuser.vipsq=='252493618'}">无</c:if><c:if test="${gcuser.vipsq!='252493618'}">${gcuser.vipsq}</c:if>
+        <c:if test="${gcuser.vipsq=='252493618'}">无</c:if><c:if test="${gcuser.vipsq!='252493618'}">${gcuser.vipsq}</c:if>----所属vip服务中心：${gcuser.vipname}
         </font><font style="font-size: 11pt"></font> </td>
       </tr>
       <tr> 

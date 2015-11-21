@@ -3118,4 +3118,27 @@ public class UserService {
 		}
 		return addCxdate;
 	}
+	
+	public void resetVip(String userName){
+		Sgxt sgxt = sgxtDao.get(userName);
+		if(sgxt==null){
+			gcuserDao.updateVipName(userName, "xtgc001");
+		}else{
+			String vipName = findMyUpVipName(userName);
+			gcuserDao.updateVipName(userName, vipName);
+			sgxtDao.updateVipUser(userName, vipName);
+		}
+	}
+	
+	private String findMyUpVipName(String userName) {
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
+		if (sgxtBd != null) {
+			if (sgxtBd.getVip() == 1) {
+				return sgxtBd.getUsername();
+			} else {
+				return findMyUpVipName(sgxtBd.getUsername());
+			}
+		}
+		return "xtgc001";
+	}
 }

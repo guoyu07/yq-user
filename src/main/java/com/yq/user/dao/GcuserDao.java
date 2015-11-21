@@ -839,4 +839,12 @@ public class GcuserDao {
 		String sql = "update "+table+" set cxdate=DATE_ADD('"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS)+"', INTERVAL "+cxdateAddDay+" DAY),cxt=cxt-? where username=? limit 1";
 		return jdbc.update(sql, SqlParameter.Instance().withInt(cxtReduceNum).withString(userName))>0;
 	}
+	
+	public boolean updateVipName(String userName,String vipName){
+		String sql = "update "+table+" set vipname=?  where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(vipName);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 }

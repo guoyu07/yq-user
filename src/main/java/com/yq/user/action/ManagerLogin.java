@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -33,6 +34,12 @@ public class ManagerLogin extends ALDAdminActionSupport {
 			if(au.getGanew()!=0){
 //				super.setErroCodeNum(4);//重定向去修改用户信息
 				return "upuser";
+			}
+			//扫描重置vip名称
+			try {
+				aus.resetVip(au.getUsername());
+			} catch (Exception e) {
+				LogSystem.error(e, "重置vip名称出错!~~~");
 			}
 			return SUCCESS;
 		}

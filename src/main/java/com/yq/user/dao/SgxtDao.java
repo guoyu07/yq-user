@@ -205,4 +205,12 @@ public class SgxtDao {
 		 String sql = "update "+table+" set zaq=0,zbq=0";
 		 jdbc.update(sql, null);
 	 }
+	 
+	 public boolean updateVipUser(String userName,String vipUser){
+		 String sql = "update "+table+" set vipuser=? where username=? limit 1";
+	    	SqlParameter parameter = new SqlParameter();
+	    	parameter.setString(vipUser);
+	    	parameter.setString(userName);
+	    	return jdbc.update(sql, parameter)>0;
+	 }
 }
