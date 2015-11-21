@@ -39,7 +39,9 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       <c:if test="${fcxt.id==1 || fcxt.id==2}">
             <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">验证码：</font></td>
-        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">${gcuser.vipsq}</font><font style="font-size: 11pt"></font> </td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体">
+        <c:if test="${gcuser.vipsq=='252493618'}">无</c:if><c:if test="${gcuser.vipsq!='252493618'}">${gcuser.vipsq}</c:if>
+        </font><font style="font-size: 11pt"></font> </td>
       </tr>
       <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">提现密码：</font></td>

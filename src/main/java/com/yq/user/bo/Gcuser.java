@@ -599,7 +599,7 @@ public class Gcuser{
 	this.vipsq=vipsq;
 	}
 	public String getVipsq(){
-		if(vipsq.equals(UserService.INIT_SMS_CODE)){
+		if(vipsq==null||vipsq.equals(UserService.INIT_SMS_CODE)){
 			return "252493618";//测试时用的短信码 
 		}
 		return vipsq;
