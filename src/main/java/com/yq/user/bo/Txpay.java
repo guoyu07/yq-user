@@ -34,6 +34,7 @@ public class Txpay{
 	private String clip;
 	private int txlb;
 	private int txvip;
+	private int tp;
 	public void setPayid(int payid){
 	this.payid=payid;
 	}
@@ -196,7 +197,6 @@ public class Txpay{
 	public int getTxvip(){
 		return txvip;
 	}
-	
 	public String getSimplePayid(){
 		String str = String.valueOf(payid);
 		if(payid<100){
@@ -205,6 +205,12 @@ public class Txpay{
 			int lenght = str.length();
 			return str.substring(lenght-2, lenght);
 		}
+	}
+	public int getTp() {
+		return tp;
+	}
+	public void setTp(int tp) {
+		this.tp = tp;
 	}
 }
 

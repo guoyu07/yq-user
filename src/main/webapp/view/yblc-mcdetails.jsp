@@ -42,7 +42,7 @@
 								<td>${data.payusername}</td>
 								<td>${data.paynum9}元</td>
 								<td><fmt:formatDate value="${data.paytime}" type="both"/></td>
-								<td> <c:if test="${not empty data.zftime}">交易成功--对方--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/></c:if>
+								<td> <c:if test="${not empty data.zftime}">交易成功<c:if test="${data.tp==1}">（系统）</c:if> --对方--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/></c:if>
 								 <c:if test="${empty data.zftime}">
              <c:if test="${data.ep==1}">${data.dfuser}--已下单，等待${data.dfuser}付款中...</c:if>
              <c:if test="${data.ep==2}">${data.dfuser}--已向您付款-${data.paynum9}元，等待您在<b><font color="#0000FF"><fmt:formatDate value="${data.rgdate}" type="both"/></font></b>前确认。。。</c:if>

@@ -259,11 +259,11 @@ public class UserService {
     }
     
     
-    public int checkNameAndIdCardAndUpUser(String ggname,String gguserid,String upvip){
+    public int checkNameAndIdCardAndUpUser(String ggname,String gguserid,String upvip,int lan){
     	if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
 			return 2;//推荐人不存在
 		}
-		if(!IDCardUtils.IDCardValidate(gguserid).equals("")){
+		if(lan==0&&!IDCardUtils.IDCardValidate(gguserid).equals("")){
 			return 4;//身份证号码无效
 		}
 		if(isForbidNameOrID(ggname, gguserid)){
@@ -292,7 +292,7 @@ public class UserService {
 	 * @param areaName
 	 * @return
 	 */
-	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName){
+	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan){
 		gguser = gguser.trim();
 		if(getUserByUserName(gguser)!=null){
 			return 1;//用户已存在
@@ -304,7 +304,7 @@ public class UserService {
 		if(list!=null&&list.size()>0){
 			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！
 		}
-		if(!IDCardUtils.IDCardValidate(gguserid).equals("")){
+		if(lan==0&&!IDCardUtils.IDCardValidate(gguserid).equals("")){
 			return 4;//身份证号码无效
 		}
 		if(isForbidNameOrID(ggname, gguserid)){
@@ -330,6 +330,10 @@ public class UserService {
 		user.setAddqu(areaName);
 		user.setCxt(5);//信用初始为5
 		user.setRegtime(new Date());
+		
+		if(lan!=0){
+			user.setGwuid(1);
+		}
 		
 		if(province!=null){
 			user.setAddqu(province.getAreaNum());
@@ -1789,6 +1793,36 @@ public class UserService {
 		//更新所有同名账户状态为已支付状态
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
 	}
+	
+	@Transactional
+	public void sureIReceivedMoneyBySystem(int payId){
+		Txpay txpay = txPayDao.getByPayid(payId);
+		if(txpay.getEp()==0||txpay.getZftime()!=null){
+			throw new ServiceException(2, "交易已完成！");
+		}
+		//更新订单状态
+		if(!txPayDao.updateEpToHaveReceiveBySytstem(payId, "system")){
+			throw new ServiceException(8888, "订单异常！");
+		}
+		//给买方加一币
+		gcuserDao.addYbForBuyInMark(txpay.getDfuser(), txpay.getPaynum());
+		
+		datePayDao.updateRegIdAndTxbzByQlid(txpay.getQlid(), "-"+txpay.getDfuser()+"-"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS));
+		
+		
+		Gcuser dfuser = gcuserDao.getUser(txpay.getDfuser());
+		Datepay datepay = new Datepay();
+		datepay.setUsername(txpay.getDfuser());
+		datepay.setRegid("认购一币-"+txpay.getPayusername()+"-"+txpay.getPaynum());
+		datepay.setSyjz(txpay.getPaynum());
+		datepay.setPay(dfuser.getPay());
+		datepay.setJydb(dfuser.getJydb());
+		datepay.setNewbz(2);
+		datePayDao.addDatePay(datepay);
+		//更新所有同名账户状态为已支付状态
+		Gcuser gcuser = gcuserDao.getUser(txpay.getPayusername());
+		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
+	}
     /**
      * 购买金币卡
      * @param userName  用户名
@@ -3095,7 +3129,8 @@ public class UserService {
 					datePay.setNewbz(20);
 					datePay.setAbdate(new Date());
 					logService.addDatePay(datePay);
-					
+					//系统自己确认
+					this.sureIReceivedMoneyBySystem(txpay.getPayid());
 				} catch (Exception e) {
 					LogSystem.error(e, "发生错误");
 				}

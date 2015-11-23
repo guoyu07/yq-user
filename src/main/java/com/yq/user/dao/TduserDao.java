@@ -11,7 +11,7 @@ import com.yq.user.bo.Tduser;
 public class TduserDao extends YqDaoBase<Tduser>{
     
     public Tduser get(String tdName,String tdUserId){
-    	String sql = "select * from "+super.getTable()+" where tdname=? or tduserid=?";
+    	String sql = "select * from "+super.getTable()+" where tdname=? or tduserid=? limit 1";
     	SqlParameter parameter = new SqlParameter();
     	parameter.setString(tdName);
     	parameter.setString(tdUserId);

@@ -205,7 +205,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 					</ul>
 				</div>
 
-				<form  name="Form" method="post" action="reg?step=3">
+				<form  name="Form" method="post" action="reg?step=3&lan=${lan}">
 					<input type="hidden" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')" value="${gguser}">
 					<input type="hidden" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa1}">
 					<input type="hidden" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa2}">

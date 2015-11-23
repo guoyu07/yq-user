@@ -44,6 +44,8 @@ public class RegAction extends ALDAdminActionSupport {
  	
  	private int step;
  	
+ 	private int lan;
+ 	
  	
  	private String tag;
 	public String execute() {
@@ -53,7 +55,7 @@ public class RegAction extends ALDAdminActionSupport {
 			return "input2";
 		}else if(step==2){
 			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-			int result = userService.checkNameAndIdCardAndUpUser(ggname, gguserid, upvip);
+			int result = userService.checkNameAndIdCardAndUpUser(ggname, gguserid, upvip,lan);
 			super.setErroCodeNum(result);
 			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 			provinceList = provinceDao.getProvinceList();
@@ -62,7 +64,7 @@ public class RegAction extends ALDAdminActionSupport {
 			//开启校验
 			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 			gguser = gguser.toLowerCase();
-			int result = userService.reg(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName);
+			int result = userService.reg(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName,lan);
 			//开始添加账号
 			super.setErroCodeNum(result);
 			return SUCCESS;
@@ -179,5 +181,11 @@ public class RegAction extends ALDAdminActionSupport {
 	}
 	public static void main(String[] args) {
 		System.out.println("XXx".toLowerCase());
+	}
+	public int getLan() {
+		return lan;
+	}
+	public void setLan(int lan) {
+		this.lan = lan;
 	}
 }

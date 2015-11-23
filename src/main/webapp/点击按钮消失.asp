@@ -1,2 +1,0 @@
-<p><input type="submit" value="开通" name="B1" onClick="{if(confirm('确定开通该会员吗?')){this.style.visibility='hidden';return true;}return false;}"></p>
-<input type="submit" name="action" value="删除" onclick="{if(confirm('删除后将无法恢复，您确定要删除选定的信息吗？')){this.document.form1.submit();return true;}return false;}">

@@ -58,11 +58,15 @@
 
 	function checkdate1() {
 		  if (Form.ggname.value=="") {      alert("请输入您的真实姓名!");  Form.ggname.focus();    return false;    } 
+		  <c:if test="${lan==0}">
 		  if (Form.ggname.value.length<2) {      alert("真实名字至少为2个汉字!");   Form.ggname.focus();     return false;    } 
 		  if (Form.ggname.value.length>8) {      alert("真实名字至多为4个汉字!");   Form.ggname.focus();     return false;    }
+		  </c:if>
 		  if (Form.gguserid.value=="") {      alert("请填入您的身份证号码!");  Form.gguserid.focus();      return false;    }
+		  <c:if test="${lan==0}">
 		  if (Form.gguserid.value.length<18) {      alert("身份证号码至少为18位数!"); Form.gguserid.focus();     return false;    } 
 		  if (Form.gguserid.value.length>18) {      alert("身份证号码至多为18位数!"); Form.gguserid.focus();     return false;    }    
+		  </c:if>
 		  if (Form.ggcall.value=="") {      alert("请填入您的手机号码!");  Form.ggcall.focus();      return false;    }
 		  if (Form.ggcall.value.length<11) {      alert("手机号码至少为11位数!"); Form.ggcall.focus();     return false;    } 
 		  if (Form.ggcall.value.length>11) {      alert("手机号码至多为11位数!"); Form.ggcall.focus();     return false;    }
@@ -97,14 +101,14 @@
 					</ul>
 				</div>
 
-				<form name="Form" method="post" action="reg?step=2">
+				<form name="Form" method="post" action="reg?step=2&lan=${lan}">
 					<div class="fbox founbox2">
 					    <input type="hidden" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')" value="${gguser}">
 					    <input type="hidden" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa1}">
 					    <input type="hidden" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa2}">
 					    <input type="hidden" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa3}">
-						<p><label>姓名：</label><input type="text" name="ggname" size="20" maxlength="4" onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"><span>确保真实才可以得到奖励</span></p>
-						<p><label>身份证号码：</label><input type="text" name="gguserid" size="20" maxlength="18"><span>海外身份证请联系客服</span></p>
+						<p><label>姓名：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}">onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if>><span>确保真实才可以得到奖励</span></p>
+						<p><label>身份证号码：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span>海外身份证请联系客服</span></c:if><c:if test="${lan==1}"><span>海外玩家注册专用，国内玩家勿用 </span></c:if></p>
 						<p><label>手机号码：</label><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"></p>
 						<p><label>QQ：</label><input type="text" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10"></p>
 						<p><label>推荐人：</label><input type="text" onKeyUp="value=value.replace(/[\W]/g,'')" name="upvip" size="20" value="${tag}"></p>
