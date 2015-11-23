@@ -783,6 +783,11 @@ public class GcuserDao {
 		return jdbc.update(sql, SqlParameter.Instance().withObject(dbdate).withInt(dbt1Value).withInt(dbt1Condition))>0;
 	}
 	
+	public boolean updateAbdateAndDbtlByUserName(String userName,String jydbStr,int dbt1Condition,Date dbdate,int dbt1Value){
+		String sql = "update "+table+" set dbdate=?,dbt1=? where jydb"+jydbStr+" and dbt1=? and username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withObject(dbdate).withInt(dbt1Value).withInt(dbt1Condition).withString(userName))>0;
+	}
+	
 	public IPage<Gcuser> getBatchUser(int pageIndex,int pageSize,String endTime ){
 		String and = "";
 		if(!Strings.isNullOrEmpty(endTime)){

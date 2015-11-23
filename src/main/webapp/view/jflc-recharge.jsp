@@ -77,6 +77,7 @@
 								<th>充值时间</th>
 								<th>充值方式</th>
 								<th>愿购买者</th>
+								<th>操作员</th>
 								<th>IP地址</th>
 							</tr>
 							<s:iterator var="data" value="dataList">
@@ -87,6 +88,7 @@
 								<td><fmt:formatDate value="${data.qldate}" type="both"/></td>
 								<td>${data.cjfs}</td>
 								<td>${data.bz}</td>
+								<td>${data.cz}</td>
 								<td>${data.ip}</td>
 							</tr>
 							</s:iterator>

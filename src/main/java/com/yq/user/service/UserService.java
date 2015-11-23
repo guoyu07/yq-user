@@ -3130,7 +3130,7 @@ public class UserService {
 					datePay.setAbdate(new Date());
 					logService.addDatePay(datePay);
 					//系统自己确认
-					this.sureIReceivedMoneyBySystem(txpay.getPayid());
+//					this.sureIReceivedMoneyBySystem(txpay.getPayid());
 				} catch (Exception e) {
 					LogSystem.error(e, "发生错误");
 				}
