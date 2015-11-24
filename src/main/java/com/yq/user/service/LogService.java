@@ -1,6 +1,7 @@
 package com.yq.user.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -58,6 +59,32 @@ public class LogService {
 	 */
 	public IPage<Datepay> getAdminDatePayListPage(Integer newbz,int pageIndex,int pageSize){
 		return datePayDao.getAdminPage(newbz, pageIndex, pageSize);
+	}
+	/**
+	 * 
+	 * @param username
+	 * @param startDate
+	 * @param endDate
+	 * @param newbz
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Datepay> getAdminDatePayListPageByUserNameAndDate(String username,String startDate,String endDate,Integer newbz,int pageIndex,int pageSize){
+		return datePayDao.getPageByUserNameAndDate(username, startDate, endDate, newbz, pageIndex, pageSize);
+	}
+	/**
+	 * 
+	 * @param username
+	 * @param startDate
+	 * @param endDate
+	 * @param newbz
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Datepay> getAdminDatePayLisByUserNameAndDate(String username,String startDate,String endDate,Integer newbz){
+		return datePayDao.getListByUserNameAndDate(username, startDate, endDate, newbz);
 	}
 	/**
 	 * 

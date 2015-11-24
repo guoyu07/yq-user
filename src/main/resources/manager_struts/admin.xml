@@ -79,8 +79,13 @@
 		        bdbdate.jsp
 		    </result>
 		</action>
-		
-		
+			<action name="bdbdate2" class="com.yq.manager.action.BdbDateAction" method="bdbdateByDateAndUserName">
+		    <result name="success">
+		        bdbdate2.jsp
+		    </result>
+		</action>	
+		<action name="outexcel" class="com.yq.manager.action.BdbDateAction" method="outExcel">
+		</action>	
 		<action name="tradeManager" class="com.yq.manager.action.TradeMangerAction">
 		    <result name="success">
 		        tradeManager.jsp
@@ -275,6 +280,14 @@
 		        datepay.jsp
 		    </result>
 		</action>
+		<action name="datepay2" class="com.yq.manager.action.AdminDatePayAction" method="datepayByDateAndUserName">
+		    <result name="success">
+		        datepay2.jsp
+		    </result>
+		</action>		
+		<action name="outdpexcel" class="com.yq.manager.action.AdminDatePayAction" method="outDpExcel">
+		</action>
+		
 		<action name="backcountinput" class="com.yq.manager.action.BackCountAction">
 		    <result name="success">
 		        backcount.jsp

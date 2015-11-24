@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
@@ -65,6 +66,39 @@ public class BdbDateDao {
 	public IPage<Bdbdate> getALLPageList(int pageSize,int pageIndex){
 		String sql = "select * from "+table+" order by id desc";
 		return this.jdbc.getListPage(sql, Bdbdate.class, null, pageSize, pageIndex);
+	}
+	
+	/**
+	 * 分页查询码
+	 * @param zuser
+	 * @param pageSize
+	 * @param pageIndex
+	 * @return
+	 */
+	public IPage<Bdbdate> getPageListByUserNameAndDate(String zuser,String startDate,String endDate,int pageSize,int pageIndex){
+		String sql = "select * from "+table+" where zuser = ?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(zuser);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and bfdate between ? and ?";
+			parameter.setString(startDate);
+			parameter.setString(endDate);
+		}
+        sql = sql +" order by id desc";
+		return this.jdbc.getListPage(sql, Bdbdate.class, parameter, pageSize, pageIndex);
+	}
+	
+	public List<Bdbdate>  getListByUserNameAndDate(String zuser,String startDate,String endDate){
+		String sql = "select * from "+table+" where zuser = ?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(zuser);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and bfdate between ? and ?";
+			parameter.setString(startDate);
+			parameter.setString(endDate);
+		}
+        sql = sql +" order by id desc";
+		return this.jdbc.getList(sql, Bdbdate.class, parameter);
 	}
 	
 }

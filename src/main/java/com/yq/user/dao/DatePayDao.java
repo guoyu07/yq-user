@@ -1,9 +1,11 @@
 package com.yq.user.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
@@ -46,6 +48,44 @@ public class DatePayDao {
 		}
 		sql = sql +" order by id desc";
 		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
+	}
+	
+	public IPage<Datepay> getPageByUserNameAndDate(String username,String startDate,String endDate,Integer newbz,int pageIndex,int pageSize){
+		String sql = "select * from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(username);
+		
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		
+		if(newbz!=null){
+			sql = sql +" and newbz = ?";
+			sqlParameter.setInt(newbz);
+		}
+		sql = sql +" order by id desc";
+		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, pageIndex);
+	}
+	
+	public List<Datepay> getListByUserNameAndDate(String username,String startDate,String endDate,Integer newbz){
+		String sql = "select * from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(username);
+		
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		
+		if(newbz!=null){
+			sql = sql +" and newbz = ?";
+			sqlParameter.setInt(newbz);
+		}
+		sql = sql +" order by id desc";
+		return this.jdbc.getList(sql, Datepay.class, sqlParameter);
 	}
 	
 	

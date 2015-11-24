@@ -199,10 +199,17 @@ public class AdminService {
 		return sgtjDao.getPageList(pageIndex, pageSize);
 	}
 	
+	public IPage<Bdbdate> getBdbdatePageListByUserNameAndDate(String zuser,String startDate,String endDate,int pageIndex,int pageSize){
+		return bdbDateDao.getPageListByUserNameAndDate(zuser, startDate, endDate, pageSize, pageIndex);
+	}
+	
+	public List<Bdbdate> getBdbdateListByUserNameAndDate(String zuser,String startDate,String endDate){
+		return bdbDateDao.getListByUserNameAndDate(zuser, startDate, endDate);
+	}
+	
 	public IPage<Bdbdate> getBdbdatePageList(int pageIndex,int pageSize){
 		return bdbDateDao.getALLPageList(pageSize, pageIndex);
 	}
-	
 	public IPage<Gpjy> getGpjyPageList(int pageIndex,int pageSize){
 		return gpjyDao.getPageList(pageIndex, pageSize);
 	}
@@ -1662,7 +1669,7 @@ public class AdminService {
 	    				int hs30 = (int)jc30;
 	    				if(hs30>0){
 	    					gcuserDao.reduceOnlyJB(clname, hs30);
-		    				adddatepay(clname, hs30, gcuser.getJydb(), gcuser.getPay(), "超出"+dbjc+"系统回收30%");
+		    				adddatepay(clname, hs30, gcuser.getJydb()-hs30, gcuser.getPay(), "超出"+dbjc+"系统回收30%");
 	    				}
 	    			}
 	    		}else{
