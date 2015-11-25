@@ -3,6 +3,7 @@ package com.yq.manager.action;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.manager.service.AdminService;
+import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 
 public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
@@ -16,11 +17,15 @@ public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
 	
 	private String user;
 	
+	private Fcxt fcxt;
+	
 	public String execute(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		fcxt = adminService.getAdminUser(super.getUserName());
+		
 		if(status==0){
 			return INPUT;
 		}
-		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		super.initPage(adminService.searchUser(user,super.getToPage(),300));
 		return SUCCESS;
 	}
@@ -39,6 +44,14 @@ public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public Fcxt getFcxt() {
+		return fcxt;
+	}
+
+	public void setFcxt(Fcxt fcxt) {
+		this.fcxt = fcxt;
 	}
 	
 	

@@ -166,7 +166,9 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<a style="text-decoration: none" target="_blank" href="/adminlogin?pa=${gcuser.password}&id=${gcuser.username}">
 		<font color="#FF00FF" size="3">登录</font></a></b><font size="3">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</font></font><font color="#FF0000" size="3">&nbsp;&nbsp; </font><a href="/admin/searchuser">
 		<font color="#FF0000" size="3">返回搜索</font></a><font color="#FF0000" size="3">&nbsp;&nbsp;&nbsp; </font>
-		<b><font size="3">&nbsp;&nbsp;&nbsp;</font><c:if test="${fcxt.id==1||fcxt.id==2}"><a href="usercj?id=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">充值</font></a></c:if></b></font></div>
+		<b><font size="3">&nbsp;&nbsp;&nbsp;</font><c:if test="${fcxt.id==1||fcxt.id==2}"><a href="usercj?id=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">充值</font></a>
+		</c:if></b></font></div>
+		
         </td>
       </tr>
     </table>

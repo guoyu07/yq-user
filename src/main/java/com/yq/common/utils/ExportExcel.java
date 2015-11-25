@@ -117,9 +117,9 @@ public class ExportExcel<T>
 		HSSFComment comment = patriarch.createComment(new HSSFClientAnchor(0,
 				0, 0, 0, (short) 4, 2, (short) 6, 5));
 		// 设置注释内容
-		comment.setString(new HSSFRichTextString("可以在POI中添加注释！"));
+		comment.setString(new HSSFRichTextString("注释"));
 		// 设置注释作者，当鼠标移动到单元格上是可以在状态栏中看到该内容.
-		comment.setAuthor("leno");
+		comment.setAuthor("mc");
 
 		// 产生表格标题行
 		HSSFRow row = sheet.createRow(0);

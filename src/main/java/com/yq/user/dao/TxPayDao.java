@@ -167,4 +167,9 @@ public class TxPayDao {
     	String sql = "update "+table+" set ep=0,rgdate=null,dfuser='',kjygid=0 where payid=? limit 1";
     	return this.jdbc.update(sql, SqlParameter.Instance().withInt(payId))>0;
     }
+    
+    public int getUserSumPayNum(String userName){
+    	String sql = "select sum(paynum) from txpay where payusername =?";
+    	return this.jdbc.getInt(sql, SqlParameter.Instance().withString(userName));
+    }
 }

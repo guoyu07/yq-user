@@ -12,6 +12,7 @@ import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.GcuserForExcel;
 
 public class GcuserDao {
 	@Autowired
@@ -764,6 +765,15 @@ public class GcuserDao {
 		return jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
 	}
 	
+	public List<GcuserForExcel> getSqDayAddUserList(String startTime,String endTime){
+		String and = "";
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			and = " and g.bddate between '"+startTime+"' and '" +endTime+"'";
+		}
+		String sql = "select g.*,gup.gmdate as upgmdate from "+table+" g left join gcuser gup on g.up=gup.username  where g.sjb>10"+and+" order by g.bddate desc";
+		return jdbc.getList(sql, GcuserForExcel.class, null);
+	}
+	
 	public int getSumSjbByTime(String startTime,String endTime){
 		String and = "";
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
@@ -849,6 +859,15 @@ public class GcuserDao {
 		String sql = "update "+table+" set vipname=?  where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(vipName);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean updateFhpayAndVippay(String userName,int fhpay,int vippay){
+		String sql = "update "+table+" set fhpay=?,vippay=?  where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(fhpay);
+		parameter.setInt(vippay);
 		parameter.setString(userName);
 		return this.jdbc.update(sql, parameter)>0;
 	}

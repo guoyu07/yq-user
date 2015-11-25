@@ -3,7 +3,7 @@
 <title>各地区！-双区进单明细</title>
 
 <p style="margin-top: 0; margin-bottom: 0"><font size="2">
-<a href="?day=0" style="text-decoration: none">今天：<font color="#FF00FF">${bean.jt/20}</font></a>&nbsp;<a href="?day=-1" style="text-decoration: none">昨天：</a></font><font size="2" color="#0000FF"><a href="?day=-1" style="text-decoration: none"><font color="#008000">${bean.zt/20}</font></a>&nbsp;</font><font size="2"><a href="?day=-2" style="text-decoration: none">前天：<font color="#FF0000">${bean.qt/20}</font></a><a href="?day=-3" style="text-decoration: none">&nbsp;大前天：<font color="#000080">${bean.dqt/20}</font></a><a href="sqdayadd" style="text-decoration: none">&nbsp;全部</a></p>
+<a href="?day=0" style="text-decoration: none">今天：<font color="#FF00FF">${bean.jt/20}</font></a>&nbsp;<a href="?day=-1" style="text-decoration: none">昨天：</a></font><font size="2" color="#0000FF"><a href="?day=-1" style="text-decoration: none"><font color="#008000">${bean.zt/20}</font></a>&nbsp;</font><font size="2"><a href="?day=-2" style="text-decoration: none">前天：<font color="#FF0000">${bean.qt/20}</font></a><a href="?day=-3" style="text-decoration: none">&nbsp;大前天：<font color="#000080">${bean.dqt/20}</font></a><a href="sqdayadd" style="text-decoration: none">&nbsp;全部</a>&nbsp;【<a href="sqdayaddexcel?day=-1" target="_blank" style="text-decoration: none">导出昨天excel</a>】&nbsp;【<a href="sqdayaddexcel?day=-2" target="_blank" style="text-decoration: none">导出前天excel</a>】</p>
 <table border="0" cellspacing="0" width="100%" cellpadding="0" height="70">
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="70" bgcolor="#D7FFE3">

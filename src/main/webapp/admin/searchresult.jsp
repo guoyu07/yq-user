@@ -50,12 +50,13 @@
 		<c:if test="${data.gwuid==0}"><a onClick="return confirm('提示：您确定了吗？')" href="gngw?diyid=${data.username}&sjid=1" style="text-decoration: none">设为海外玩家</a></c:if>
 		<c:if test="${data.gwuid!=0}"><a onClick="return confirm('提示：您确定了吗？')" href="gngw?diyid=${data.username}&sjid=0" style="text-decoration: none">设为国内玩家</a></c:if>
 		</td>
-		<td align="center" width="189"><a href="pmcj?id=${data.username}" style="text-decoration: none"><b><font color="#000000">特别功能不要点</font></b></a></td>
+		<!-- <td align="center" width="189"><a href="pmcj?id=${data.username}" style="text-decoration: none"><b><font color="#000000">特别功能不要点</font></b></a></td>
 		<td align="center" width="88"><a href="usercj?id=${data.username}" style="text-decoration: none">充值</a></td>
-		<td align="center" width="143"><a href="bsreg?my=${data.username}" style="text-decoration: none">补选位置</a></td>
-		<td align="center" width="78">
-		<c:if test="${data.jb<=0 && data.sjb<=0 && data.pay<=0 && data.jyg<=0}"><a href="delusersave?del=${data.username}" style="text-decoration: none"><font color="#FF0000">删除</font></a></c:if>
-		</td>
+		<td align="center" width="143"><a href="bsreg?my=${data.username}" style="text-decoration: none">补选位置</a></td> -->
+		<c:if test="${data.jb<=0 && data.sjb<=0 && data.pay<=0 && data.jyg<=0}"><td align="center" width="78">
+		<a href="delusersave?del=${data.username}" style="text-decoration: none"><font color="#FF0000">删除</font></a>
+		</td></c:if>
+		<c:if test="${fcxt.id==1||fcxt.id==2}"><td><a href="editYbSale?user=${data.username}" style="text-decoration: none">修改卖出一币</a></td></c:if>
 			</tr>
 		</s:iterator>
 	</table>

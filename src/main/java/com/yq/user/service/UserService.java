@@ -1582,7 +1582,7 @@ public class UserService {
 		datePay.setAbdate(new Date());
 		logService.addDatePay(datePay);
 		
-		if(!this.changeYb(toUser, amount, "收到服务中心"+toUser.substring(0, 2)+"***转入", 0, null)){
+		if(!this.changeYb(toUser, amount, "收到服务中心"+fromUser.substring(0, 2)+"***转入", 0, null)){
 			throw new ServiceException(3000, "未知错误！");
 		}
 		

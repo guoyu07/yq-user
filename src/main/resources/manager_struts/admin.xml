@@ -428,6 +428,8 @@
 		        sqdayadd.jsp
 		    </result>
 		</action>
+		<action name="sqdayaddexcel" class="com.yq.manager.action.SqdayAddAction" method="outExcel">
+		</action>		
 		<action name="w10" class="com.yq.manager.action.W10Action">
 		    <result name="success">
 		        w10.jsp
@@ -478,6 +480,11 @@
 		      viptrasferdetail.jsp
 		    </result>
 		</action>
+		<action name="editYbSale" class="com.yq.manager.action.EditYbSaleAction">
+		    <result name="success">
+		      editybsale.jsp
+		    </result>
+		</action>		
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

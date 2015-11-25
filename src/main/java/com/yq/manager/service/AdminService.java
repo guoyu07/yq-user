@@ -1,6 +1,5 @@
 package com.yq.manager.service;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +43,7 @@ import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Fhdate;
 import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.GcuserForExcel;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.Sgtj;
@@ -1541,6 +1541,14 @@ public class AdminService {
 		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, strArray[0], strArray[1]);
 	}
 	
+	public List<GcuserForExcel> getSqdayAddUsersForExcel(Integer day){
+		String[] strArray = new String[2];
+		if(day!=null){
+			strArray =  getTime(day);
+		}
+		return gcuserDao.getSqDayAddUserList(strArray[0], strArray[1]);
+	}
+	
 	private String[] getTime(int day){
 		String startTime = null;
 		String endTime = null;
@@ -2036,5 +2044,14 @@ public class AdminService {
 			result.add(gcuser.getUsername());
 		}
 		return result;
+	}
+	
+	public void editYbSale(String userName,String opPass,int fhpay,int vippay){
+		if(!opPass.equals("yc201503yc")){
+			throw new ServiceException(1, "操作密码错误！");
+		}
+		if(!gcuserDao.updateFhpayAndVippay(userName, fhpay, vippay)){
+			throw new ServiceException(2, "用户不存在！");
+		}
 	}
 }
