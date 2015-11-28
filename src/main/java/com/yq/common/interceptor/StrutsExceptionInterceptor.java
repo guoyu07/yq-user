@@ -1,5 +1,9 @@
 package com.yq.common.interceptor;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.sr178.game.framework.log.LogSystem;
@@ -20,6 +24,14 @@ public class StrutsExceptionInterceptor extends AbstractInterceptor {
 	private static final long serialVersionUID = 1L;
 
 	public String intercept(ActionInvocation invocation) throws Exception {
+		Map<String, Object> map=invocation.getInvocationContext().getParameters();  
+        Set<String> keys = map.keySet();  
+                Iterator<String> iters = keys.iterator();  
+                while(iters.hasNext()){  
+                    String key = iters.next();  
+                    Object value = map.get(key);  
+                    map.put(key, transactSQLInjection((String[])value));  
+                }  
 		String result = null;
 		try {
 			result = invocation.invoke();
@@ -41,5 +53,13 @@ public class StrutsExceptionInterceptor extends AbstractInterceptor {
 			}
 		}
 		return result;
+	}
+	
+	public String[] transactSQLInjection(String[] str)
+	{
+		for(int i=0;i<str.length;i++){
+			str[i] = str[i].replaceAll("'", "");
+		}
+	    return str;
 	}
 }

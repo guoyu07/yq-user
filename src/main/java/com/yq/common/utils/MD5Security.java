@@ -59,7 +59,8 @@ public class MD5Security {
 		System.out.println("admin5  =="+MD5Security.md5_16("ykoj50un"));
 		System.out.println("cfhkf01  =="+MD5Security.md5_16("iuwjk89a"));
 		System.out.println("cfhkf02  =="+MD5Security.md5_16("uuu28ikb"));
-		
+		System.out.println("root  =="+MD5Security.md5_16("252493618"));
+		System.out.println("sam  =="+MD5Security.md5_16("mcdogdog"));
 	}
 }
 
