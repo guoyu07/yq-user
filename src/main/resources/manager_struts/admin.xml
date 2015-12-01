@@ -484,7 +484,23 @@
 		    <result name="success">
 		      editybsale.jsp
 		    </result>
-		</action>		
+		</action>	
+		
+		<action name="jfcfshow" class="com.yq.manager.action.JfcfAction">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+		<action name="cf" class="com.yq.manager.action.JfcfAction" method="chaifeng">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+				<action name="dm" class="com.yq.manager.action.JfcfAction" method="cfdm">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>	
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

@@ -2054,4 +2054,107 @@ public class AdminService {
 			throw new ServiceException(2, "用户不存在！");
 		}
 	}
+	/**
+	 * 积分拆分
+	 */
+	public void JygChaifen(){
+		Fcxt fcxt = fcxtDao.get(10);
+		Date d = DateUtils.addDay(fcxt.getJsdate(), 3);
+		String beishu = "1.79";
+		int updateNum = gcuserDao.updateJfChaifen(beishu, d);
+		int insertNum = gcuserDao.insertIntoChaifenLog(beishu, d);
+		fcxtDao.updateChaiFen(2, 0.77);
+		LogSystem.info("执行拆分At【"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS)+"】，拆分注册日期最小值为:【"+DateUtils.DateToString(d, DateStyle.YYYY_MM_DD_HH_MM_SS)+"】,倍数为【"+beishu+"】,更新gcuser表数据条数为【"+updateNum+"】,插入gpjy日志条数为:【"+insertNum+"】");
+	}
+	/**
+	 * 拆分满3次自动卖70%
+	 */
+	public void jfdm(){
+		int maxId = gcuserDao.getMaxId();
+		int startId = 1;
+		int endId = 500;
+		int cap = 500;
+		List<Gcuser> list = null;
+		while(true){
+			long start = System.currentTimeMillis();
+			LogSystem.info("开始--执行id号为：start="+startId+",end="+endId+",最大Id为="+maxId);
+			list = gcuserDao.getByIdDistance(startId, endId);
+			if(list!=null&&list.size()>0){
+				LogSystem.info("总数目为"+list.size());
+				for(Gcuser gcuser:list){
+					int blsl = getBlsl(gcuser.getSjb());
+					int kmcsl = gcuser.getJyg()-blsl;
+					if(kmcsl>0){
+						int mcbs = getMcbs(kmcsl);
+						String clname = gcuser.getUsername();
+						int jygall = gcuser.getJyg();
+						int jygnumber = gcuser.getJyg()-blsl;
+						int ForCount = (int)(jygnumber/mcbs);
+						int lasenumber=jygnumber % mcbs;
+						if(ForCount>0){
+							for(int j=1;j<=ForCount;j++){
+								addGpjyForChaiFeng(clname,mcbs,jygall-j*mcbs);
+							}
+						}
+						if(lasenumber>0){
+							addGpjyForChaiFeng(clname,lasenumber,jygall-ForCount*mcbs-lasenumber);
+						}
+						gcuserDao.resetCfc(gcuser.getUsername(), blsl);
+					}
+				}
+			}
+			long end = System.currentTimeMillis();
+			LogSystem.info("完毕--执行id号为：start="+startId+",end="+endId+"执行时间为="+(end-start)/1000+"秒");
+			if(endId>=maxId){
+				break;
+			}
+			startId = endId+1;
+			endId = endId+cap;
+		}
+	}
+	
+	private int getBlsl(int sjb){
+		if(sjb==100){
+			return 25000;
+		}else if(sjb==40){
+			return 15000;
+		} else if(sjb==20){
+			return 10000;
+		}else if(sjb==10){
+			return 5000;
+		}else if(sjb==4){
+			return 2000;
+		}else if(sjb==2){
+			return 1000;
+		}
+		return 0;
+	}
+	
+	private int getMcbs(int kmcsl){
+		if(kmcsl>30000){
+			return 2000;
+		}else if(kmcsl>20000){
+			return 1500;
+		}else if(kmcsl>10000){
+			return 1200;
+		}else if(kmcsl>5000){
+			return 800;
+		}else if(kmcsl>3000){
+			return 500;
+		}
+		return kmcsl;
+	}
+	
+	private void addGpjyForChaiFeng(String clname,int mcsl,double jyg){
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(clname);
+		gpjy.setMcsl(mcsl*1d);
+		gpjy.setSysl(jyg);
+		gpjy.setPay(0.77);
+		gpjy.setJy(0);
+		gpjy.setBz("卖出挂牌中(系统代)");
+		gpjy.setJypay(0d);
+		gpjy.setNewjy(3);
+		gpjyDao.add(gpjy);
+	}
 }

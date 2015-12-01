@@ -32,6 +32,16 @@ public class FcxtDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean updateChaiFen(int id,double ration){
+		String sql = "update "+table+" set jygj=?,zgj=?,zdj=? where id=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setDouble(ration);
+		parameter.setDouble(ration);
+		parameter.setDouble(ration);
+		parameter.setInt(id);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
 	public boolean updateDoubleAreaCount(Date jsDate,String lastName,int id){
 		String sql = "update "+table+" set payadd=payadd+1,jsdate=?,lname=? where id=? limit 1";
 		SqlParameter parameter = new SqlParameter();

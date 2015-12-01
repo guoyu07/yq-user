@@ -47,7 +47,7 @@
 								<td>${data.mysl}</td>
 								<td>${data.sysl}</td>
 								<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
-								<td><c:if test="${data.pay<1}">0${data.pay}</c:if><c:if test="${data.pay>=1}">${data.pay}</c:if></td>
+								<td><c:if test="${data.pay<1}">${data.pay}</c:if><c:if test="${data.pay>=1}">${data.pay}</c:if></td>
 								<td>${data.jypay}</td>
 								<td>${data.bz}</td>
 								<td>${data.dfuser}</td>

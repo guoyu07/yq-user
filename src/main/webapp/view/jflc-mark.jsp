@@ -28,7 +28,7 @@
 				<table border="0" cellspacing="0" width="100%" cellpadding="0" height="80">
 				    <tr>
 				      <td height="25">
-				      	<p style="font-size:16px;" class="z-tc">当前交易价是 <span class="c-r"><c:if test="${fcxt.jygj<1.0}">0${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1.0}">${fcxt.jygj}</c:if></span></p>
+				      	<p style="font-size:16px;" class="z-tc">当前交易价是 <span class="c-r"><c:if test="${fcxt.jygj<1.0}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1.0}">${fcxt.jygj}</c:if></span></p>
 				      </td> 
 				    </tr>
 				   <tr>
@@ -47,10 +47,10 @@
 							</tr>
 							<tr class="jg shop2">
 								<td>0.77</td>
-								<td><c:if test="${fcxt.zgj+0.03<1.0}">0${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if></td>
+								<td><c:if test="${fcxt.zgj+0.03<1.0}">${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if></td>
 								<td>${fcxt.zdj}</td>
-								<td><c:if test="${fcxt.jygj<1}">0${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></td>
-								<td><c:if test="${fcxt.zgj+0.03<1.0}">0${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if>/${fcxt.zdj}</td>
+								<td><c:if test="${fcxt.jygj<1}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></td>
+								<td><c:if test="${fcxt.zgj+0.03<1.0}">${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if>/${fcxt.zdj}</td>
 							</tr>
 						</tbody>
 				   </table>

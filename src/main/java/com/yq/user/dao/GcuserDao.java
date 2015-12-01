@@ -871,4 +871,44 @@ public class GcuserDao {
 		parameter.setString(userName);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	public int updateJfChaifen(String beishu,Date date){
+		String sql = "update "+table+" set jyg=floor(jyg*"+beishu+"),cfa=cfa+1,cfb=cfb+"+beishu+",cfc=cfc+1 where regtime>? and jyg>0";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(date);
+		System.out.println(sql);
+//		return 0;
+		return this.jdbc.update(sql, parameter);
+	}
+	
+	public int insertIntoChaifenLog(String beishu,Date date){
+		String sql = "insert into gpjy select null,0,0,username,floor(jyg-jyg/"+beishu+"),0,jyg,0,0,null,'拆分"+beishu+"倍',now(),1,null,null,0 from gcuser where regtime>? and jyg>0";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(date);
+		System.out.println(sql);
+//		return 0;
+		return this.jdbc.update(sql, parameter);
+	}
+	
+	public List<Gcuser> getByIdDistance(int startId,int endId){
+		String sql = "select id,username,jyg,sjb from "+table+" where cfc=3 and jygt1=0 and id>=? and id<=? order by id asc";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(startId);
+		parameter.setInt(endId);
+		return this.jdbc.getList(sql, Gcuser.class,parameter);
+	} 
+	
+	public boolean resetCfc(String userName,int jyg){
+		String sql = "update "+table+" set jyg=?,cfc=0,jygdate=null where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(jyg);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public int getMaxId(){
+		String sql = "select max(id) from gcuser";
+		return this.jdbc.getInt(sql, null);
+	}
+	
 }

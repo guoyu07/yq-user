@@ -43,5 +43,7 @@ public class AdminServiceTest extends DaoTest {
 		
 //		userService.bdReg("xtgc002", "zyl666a4", "dogdog7788", 10000, "123456", "222222", "252493618", 1);
 		
+//		adminService.jfdm();
+		
 	}
 }
