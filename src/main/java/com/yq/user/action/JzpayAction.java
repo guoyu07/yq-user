@@ -24,11 +24,13 @@ public class JzpayAction extends ALDAdminActionSupport {
 	
 	private String dbz;//订单号
 	
+	private String yy;
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		if(status==1){
-			userService.mallBack(super.getUserName(), jzuser, pa3, jzpay, dbz);
+			userService.mallBack(super.getUserName(), jzuser, pa3, jzpay, dbz,yy);
 			super.setErroCodeNum(2000);
 		}
 		
@@ -70,5 +72,10 @@ public class JzpayAction extends ALDAdminActionSupport {
 	public void setDbz(String dbz) {
 		this.dbz = dbz;
 	}
-	
+	public String getYy() {
+		return yy;
+	}
+	public void setYy(String yy) {
+		this.yy = yy;
+	}
 }

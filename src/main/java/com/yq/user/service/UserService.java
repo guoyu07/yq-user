@@ -1238,7 +1238,7 @@ public class UserService {
 			if(user==null){
 				throw new ServiceException(4, "用户不存在");
 			}
-			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase())){
+			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().trim().toLowerCase().equals(user.getUserid().trim().toLowerCase())){
 				throw new ServiceException(5, "非同名用户,不能转,from name=["+user.getName()+"]，userid=["+user.getUserid().toLowerCase()+"],to name=["+gcuser.getName()+"],userId=["+gcuser.getUserid().toLowerCase()+"],名字判断=["+(gcuser.getName().equals(user.getName()))+"],身份证判断=["+(gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase()))+"]");
 			}
 			if(user.getPay()>0&&!fromUser.equals(toUser)){
@@ -1475,11 +1475,14 @@ public class UserService {
 	 */
 	
 	@Transactional
-	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId){
+	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy){
 		
 		if(!password3.equals("yc201503yc")){
 			throw new ServiceException(1, "操作密码不正确！");
 		}
+		
+		if(yy==null)yy="";
+		
 		String regId=null;
 		String sct = "";
 		if(!Strings.isNullOrEmpty(orderId)){
@@ -1491,9 +1494,9 @@ public class UserService {
 			}
 		}else{
 			if(fromUser.equals("300fhk")){
-				regId = "收到-300***";
+				regId = "收到-300***"+"-"+yy;
 			}else{
-				regId = "收到-"+fromUser;
+				regId = "收到-"+fromUser+"-"+yy;
 			}
 		}
         Gcuser toGcUser = gcuserDao.getUser(toUser);
@@ -1516,7 +1519,7 @@ public class UserService {
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser, 13, null)){
+		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser+"-"+yy, 13, null)){
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
@@ -1723,7 +1726,8 @@ public class UserService {
 //		gpjy.setAbdate(new Date());
 //		
 //		gpjyDao.add(gpjy);
-		
+		//发送短信
+		sendYbSaleSmsMsg(txpay.getPayusername(), 0);
 		return txpay;
 	}
 	
@@ -1744,6 +1748,8 @@ public class UserService {
 				throw new ServiceException(1, "认购方出错，请检查输入是否正确！");
 			}
 		}
+		//发送短信通知
+		sendYbSaleSmsMsg(txpay.getPayusername(), 1);
 	}
 	/**
 	 * 确认已收到钱
@@ -2752,6 +2758,19 @@ public class UserService {
 			throw new ServiceException(3000, "发送短信发生错误,更新错误");
 		}
 	}
+	
+	private static final String[] smsCode = new String[]{"WKkt32","BlQ9X","R630D1"};
+	public void sendYbSaleSmsMsg(String userName,int code){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+			    try {
+			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), smsCode[code], new HashMap<String,String>())){
+			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			    	}
+				} catch (Exception e) {
+					LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+				}
+	}
 	/**
 	 * 短信模板2
 	 * @param userName
@@ -3108,6 +3127,7 @@ public class UserService {
 					datePay.setNewbz(20);
 					datePay.setAbdate(new Date());
 					logService.addDatePay(datePay);
+					sendYbSaleSmsMsg(txpay.getPayusername(), 2);
 //					gpjyDao.updateGpjy(txpay.getDfuser(), txpay.getPayid()+"", "超时未付款-并扣一诚信星-余"+(user.getCxt()-1), gpjy.getDfuser()+"-"+txpay.getPayusername(), new Date());
 				} catch (Exception e) {
 					LogSystem.error(e, "发生错误");
