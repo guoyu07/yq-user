@@ -1239,7 +1239,7 @@ public class UserService {
 				throw new ServiceException(4, "用户不存在");
 			}
 			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase())){
-				throw new ServiceException(5, "非同名用户,不能转");
+				throw new ServiceException(5, "非同名用户,不能转,from name=["+user.getName()+"]，userid=["+user.getUserid().toLowerCase()+"],to name=["+gcuser.getName()+"],userId=["+gcuser.getUserid().toLowerCase()+"],名字判断=["+(gcuser.getName().equals(user.getName()))+"],身份证判断=["+(gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase()))+"]");
 			}
 			if(user.getPay()>0&&!fromUser.equals(toUser)){
 				trasferYb(fromUser,toUser,user.getPay());

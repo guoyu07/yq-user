@@ -963,7 +963,7 @@ public class AdminService {
 	 * 执行双区计算
 	 */
 	@Transactional
-	public void doubelAreaCount(){
+	public synchronized void doubelAreaCount(){
 		Fcxt fcxt = fcxtDao.get(2);
 		int mqbz = fcxt.getPayadd();
 //		int sqbz = fcxt.getPayadd()-1;
