@@ -1695,7 +1695,6 @@ public class UserService {
 		return txpay;
 	}
 	
-	@Transactional
 	public Txpay buyYb(String userName,int payId,String password3){
 		Txpay txpay = buyYbPre(userName,payId);
 		
@@ -1727,7 +1726,12 @@ public class UserService {
 //		
 //		gpjyDao.add(gpjy);
 		//发送短信
-		sendYbSaleSmsMsg(txpay.getPayusername(), 0);
+		try {
+			sendYbSaleSmsMsg(txpay.getPayusername(), 0);
+		} catch (Exception e) {
+			LogSystem.error(e, "");
+		}
+		
 		return txpay;
 	}
 	

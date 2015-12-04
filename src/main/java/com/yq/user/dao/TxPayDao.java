@@ -93,7 +93,7 @@ public class TxPayDao {
     }
     
     public boolean updateEpToBeSalesPre(int payId,Date rgdate,String userName,int payNum){
-    	String sql = "update "+table+" set ep=1,rgdate=?,dfuser=?,kjygid=? where payid=? and ep=0  and kjygid=0 limit 1";
+    	String sql = "update "+table+" set ep=1,rgdate=?,dfuser=?,kjygid=? where payid=? and ep=0 and kjygid=0 limit 1";
     	return this.jdbc.update(sql, SqlParameter.Instance().withObject(rgdate).withString(userName).withInt(payNum).withInt(payId))>0;
     }
     
