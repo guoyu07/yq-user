@@ -1820,8 +1820,8 @@ public class UserService {
 		datepay.setNewbz(2);
 		datePayDao.addDatePay(datepay);
 		//更新所有同名账户状态为已支付状态
-		Gcuser gcuser = gcuserDao.getUser(txpay.getPayusername());
-		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
+//		Gcuser gcuser = gcuserDao.getUser(txpay.getPayusername());
+//		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
 	}
     /**
      * 购买金币卡
@@ -3093,6 +3093,9 @@ public class UserService {
 //				if(gpjy!=null){
 				try {
 					Gcuser user = gcuserDao.getUser(txpay.getDfuser());
+					if(user==null){
+						continue;
+					}
 					int addCxdateDay = getAddCxdateDay(user.getCxt());
 					gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
 					txPayDao.resetOrder(txpay.getPayid());
@@ -3112,12 +3115,15 @@ public class UserService {
 //				}
 			}
 		}
-		
+		//2日后没有确认的  扣星
 		List<Txpay> listNoSureReceiveMoney = txPayDao.getAllNoSureReceiveMoneyRecord();
 		if(listNoSureReceiveMoney!=null&&listNoSureReceiveMoney.size()>0){
 			for(Txpay txpay:listNoSureReceiveMoney){
 				try {
 					Gcuser user = gcuserDao.getUser(txpay.getPayusername());
+					if(user==null){
+						continue;
+					}
 					int addCxdateDay = getAddCxdateDay(user.getCxt());
 					gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
 					txPayDao.updateClip(txpay.getPayid());
@@ -3129,6 +3135,17 @@ public class UserService {
 					datePay.setNewbz(20);
 					datePay.setAbdate(new Date());
 					logService.addDatePay(datePay);
+				} catch (Exception e) {
+					LogSystem.error(e, "发生错误");
+				}
+			}
+		}
+		
+		//5日后 没有确认就 自动确认
+		List<Txpay> listNoSureReceiveMoneyAfter5Days = txPayDao.getAllNoSureReceiveMoneyRecordAfter5Days();
+		if(listNoSureReceiveMoneyAfter5Days!=null&&listNoSureReceiveMoneyAfter5Days.size()>0){
+			for(Txpay txpay:listNoSureReceiveMoneyAfter5Days){
+				try {
 					//系统自己确认
 					this.sureIReceivedMoneyBySystem(txpay.getPayid());
 				} catch (Exception e) {

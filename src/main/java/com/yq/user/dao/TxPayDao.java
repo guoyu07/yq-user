@@ -158,6 +158,12 @@ public class TxPayDao {
     	return this.jdbc.getList(sql, Txpay.class, SqlParameter.Instance().withString(date));
     }
     
+    public List<Txpay> getAllNoSureReceiveMoneyRecordAfter5Days(){
+    	String date = DateUtils.DateToString(DateUtils.addDay(new Date(), -3), DateStyle.YYYY_MM_DD_HH_MM_SS);
+    	String sql = "select * from "+table+" where ep=2 and rgdate<? and payonoff='尚未转账' and dfuser<>'' and clip ='已扣'";
+    	return this.jdbc.getList(sql, Txpay.class, SqlParameter.Instance().withString(date));
+    }
+    
     public boolean updateClip(int payId){
     	String sql = "update "+table+" set clip='已扣' where payid=? limit 1";
     	return this.jdbc.update(sql, SqlParameter.Instance().withInt(payId))>0;
