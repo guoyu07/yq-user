@@ -1,5 +1,6 @@
 package com.yq.manager.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -1541,12 +1542,33 @@ public class AdminService {
 		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, strArray[0], strArray[1]);
 	}
 	
+	public IPage<Gcuser> getSqDayAddUsersByTime(int pageIndex,int pageSize,String startTime,String endTime){
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime +" 00:00:00";
+			endTime = endTime+" 23:59:59";
+		}else{
+			return null;
+		}
+		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, startTime, endTime);
+	}
+	
 	public List<GcuserForExcel> getSqdayAddUsersForExcel(Integer day){
 		String[] strArray = new String[2];
 		if(day!=null){
 			strArray =  getTime(day);
 		}
 		return gcuserDao.getSqDayAddUserList(strArray[0], strArray[1]);
+	}
+	
+	public List<GcuserForExcel> getSqdayAddUsersForExcelByTime(String startTime,String endTime){
+		
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime +" 00:00:00";
+			endTime = endTime+" 23:59:59";
+		}else{
+			return new ArrayList<GcuserForExcel>(0);
+		}
+		return gcuserDao.getSqDayAddUserList(startTime, endTime);
 	}
 	
 	private String[] getTime(int day){

@@ -69,6 +69,9 @@
 						<c:if test="${not empty gcuserup.vipjh}">
 						 建设银行:${gcuserup.vipjh}<br />
 						</c:if>
+						<c:if test="${not empty gcuserup.vipzh}">
+						  <p>中国银行:${gcuserup.vipzh}</p>
+						</c:if>	
 						<c:if test="${not empty gcuserup.vipcft}">
 						 财付通:${gcuserup.vipcft}<br />
 						</c:if>		

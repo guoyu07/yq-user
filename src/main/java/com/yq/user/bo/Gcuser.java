@@ -26,6 +26,7 @@ public class Gcuser{
 	private String vipjh;
 	private String vipcft;
 	private String vipzfb;
+	private String vipzh;
 	private int cbgc;
 	private int jbpay;
 	private int cbpay;
@@ -736,6 +737,12 @@ public class Gcuser{
 	}
 	public void setUpgmdate(Date upgmdate) {
 		this.upgmdate = upgmdate;
+	}
+	public String getVipzh() {
+		return vipzh;
+	}
+	public void setVipzh(String vipzh) {
+		this.vipzh = vipzh;
 	}
 	
 }

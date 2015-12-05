@@ -58,7 +58,7 @@ function openwindow(url) {
 						<h3>您选择充值<b>${cjpay}</b>元</h3>
 						<p>（注：每次充值最低100元，并以100元的整数递增，如200，300，400，同时需要加尾数）
 (充值成功后显示在可用一币里，可自由购买金币卡、消费或升级开通双区业务)</p>
-						<p><a href="javascript:openwindow('/bank?dq=${gcuser.dqu}')">点这里查看汇款账号</a></p>
+						<p><a href="/bank?dq=${gcuser.dqu}">点这里查看汇款账号</a></p>
 					</div>
 				</div>
 			</div>

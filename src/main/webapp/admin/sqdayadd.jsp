@@ -1,9 +1,22 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <title>各地区！-双区进单明细</title>
+<script type="text/javascript" src="/scripts/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="/scripts/jquery.datetimepicker.css"/>
+<script src="/scripts/jquery.datetimepicker.js"></script>
+ <script type="text/javascript">
+ function exportExcel(){
+	 var url="sqdayaddexceltime?startDate="+Form.startDate.value+"&endDate="+Form.endDate.value;
+	 window.open(url,'new','toolbar=no,scrollbars=yes,width=800,height=850');
+ }
+ </script>
 
 <p style="margin-top: 0; margin-bottom: 0"><font size="2">
-<a href="?day=0" style="text-decoration: none">今天：<font color="#FF00FF">${bean.jt/20}</font></a>&nbsp;<a href="?day=-1" style="text-decoration: none">昨天：</a></font><font size="2" color="#0000FF"><a href="?day=-1" style="text-decoration: none"><font color="#008000">${bean.zt/20}</font></a>&nbsp;</font><font size="2"><a href="?day=-2" style="text-decoration: none">前天：<font color="#FF0000">${bean.qt/20}</font></a><a href="?day=-3" style="text-decoration: none">&nbsp;大前天：<font color="#000080">${bean.dqt/20}</font></a><a href="sqdayadd" style="text-decoration: none">&nbsp;全部</a>&nbsp;【<a href="sqdayaddexcel?day=-1" target="_blank" style="text-decoration: none">导出昨天excel</a>】&nbsp;【<a href="sqdayaddexcel?day=-2" target="_blank" style="text-decoration: none">导出前天excel</a>】</p>
+<a href="?day=0" style="text-decoration: none">今天：<font color="#FF00FF">${bean.jt/20}</font></a>&nbsp;<a href="sqdayadd?day=-1" style="text-decoration: none">昨天：</a></font><font size="2" color="#0000FF"><a href="sqdayadd?day=-1" style="text-decoration: none"><font color="#008000">${bean.zt/20}</font></a>&nbsp;</font><font size="2"><a href="sqdayadd?day=-2" style="text-decoration: none">前天：<font color="#FF0000">${bean.qt/20}</font></a><a href="?day=-3" style="text-decoration: none">&nbsp;大前天：<font color="#000080">${bean.dqt/20}</font></a><a href="sqdayadd" style="text-decoration: none">&nbsp;全部</a>&nbsp;【<a href="sqdayaddexcel?day=-1" target="_blank" style="text-decoration: none">导出昨天excel</a>】&nbsp;【<a href="sqdayaddexcel?day=-2" target="_blank" style="text-decoration: none">导出前天excel</a>】</p>
+<p> <form method="post" action="searchByTime" name="Form" id="Form">
+		 	开始日期:<input name="startDate" id="startDate" type="text" value="${startDate}"/>结束日期:<input name="endDate" id="endDate" type="text" value="${endDate}"/>
+	<input type="submit" value="查询"/><input type="button" onClick="exportExcel()" value="导出excel"/></form></p>
+
 <table border="0" cellspacing="0" width="100%" cellpadding="0" height="70">
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="70" bgcolor="#D7FFE3">
@@ -41,7 +54,7 @@
               </tr>
               </s:iterator>
             </table> 
-</div><font face="宋体" size="2"> <aldtags:pageTag para1="day" value1="${day}"/>
+</div><font face="宋体" size="2"> <aldtags:pageTag para1="day" value1="${day}" para2="startDate" value2="${startDate}"  para3="endDate"  value3="${endDate}"/>
 </font> 
 </tr> 
 </table> 
@@ -57,3 +70,24 @@
 </font>
 </font>
 </html>
+<script type="text/javascript">
+		$('#startDate').datetimepicker({
+			yearOffset : 0,
+			lang : 'ch',
+			timepicker : false,
+			format : 'Y-m-d',
+			formatDate : 'Y-m-d',
+		//		minDate:'1970/01/01', // yesterday is minimum date
+		//		maxDate:'+1970/01/02' // and tommorow is maximum date calendar
+		});
+		
+		$('#endDate').datetimepicker({
+			yearOffset : 0,
+			lang : 'ch',
+			timepicker : false,
+			format : 'Y-m-d',
+			formatDate : 'Y-m-d',
+		//		minDate:'1970/01/01', // yesterday is minimum date
+		//		maxDate:'+1970/01/02' // and tommorow is maximum date calendar
+		});
+	</script>

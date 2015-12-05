@@ -40,12 +40,15 @@
 						<c:if test="${not empty gcuserup.vipjh}">
 						  <p>建设银行:${gcuserup.vipjh}</p>
 						</c:if>
+						<c:if test="${not empty gcuserup.vipzh}">
+						  <p>中国银行:${gcuserup.vipzh}</p>
+						</c:if>	
 						<c:if test="${not empty gcuserup.vipcft}">
 						  <p>财付通:${gcuserup.vipcft}</p>
 						</c:if>		
 						<c:if test="${not empty gcuserup.vipzfb}">
 						  <p>支付宝:${gcuserup.vipzfb}</p>
-						</c:if>																		
+						</c:if>				
 						<p>开户行所在地：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}支行</p>
 						    有关业务问题可咨询，如您无法在一币市场进行收购一币的操作或您想省去在收一币中（打款，<br />
 						等对方确认）的中间环节，就可以联系本团队服务中心快速购买

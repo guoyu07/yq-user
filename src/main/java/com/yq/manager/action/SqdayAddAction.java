@@ -45,6 +45,45 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 		download(descDirectoryPath, response);
 		return null;
 	}
+	
+	private String startDate;
+	private String endDate;
+	public String outExcelTime(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String path = ServletActionContext.getServletContext().getRealPath("/");
+		String descDirectoryPath = path + "/temp/"+startDate+"-"+endDate+"新开户数据.xls";
+		
+		String[] headers =
+		{ "id", "用户名", "单数", "推荐人", "推荐人充值时间","姓名","省", "市", "区", "手机", "QQ","升级时间" };
+		List<GcuserForExcel> data = ServiceCacheFactory.getService(AdminService.class).getSqdayAddUsersForExcelByTime(startDate,endDate);
+		writeExcel(descDirectoryPath,startDate+"-"+endDate+"新开户数据", headers, data, "yyyy-MM-dd hh:mm:ss");
+		download(descDirectoryPath, response);
+		return null;
+	}
+	
+	public String searchByTime(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		super.initPage(adminService.getSqDayAddUsersByTime( super.getToPage(), 50, startDate, endDate));
+		bean = adminService.getSqDayAddBean();
+		return SUCCESS;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
 	public Integer getDay() {
 		return day;
 	}
