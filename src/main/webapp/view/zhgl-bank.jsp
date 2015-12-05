@@ -77,7 +77,8 @@
 						</c:if>		
 						<c:if test="${not empty gcuserup.vipzfb}">
 						支付宝:${gcuserup.vipzfb}<br />
-						</c:if>											
+						</c:if>
+						<p>开户行所在地：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}支行</p>											
 						<span style="color: #ff0000">汇款一定要加尾数，以便查账；如：1000.22  5000.12</span><br />
 						</div>
 						</div>
