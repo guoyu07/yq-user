@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.user.bo.Dgag;
 import com.yq.user.bo.Epkjdate;
@@ -129,7 +130,7 @@ public class ManagerService {
 	 * @param content
 	 */
 	public boolean editNotice(int id,String title,String content,String ggdate){
-		Date ggdateO = DateUtils.StringToDate(ggdate);
+		Date ggdateO = DateUtils.StringToDate(ggdate,DateStyle.YYYY_MM_DD_HH_MM_SS);
 		return dgagDao.update(id, title, content, ggdateO);
 	}
 	
