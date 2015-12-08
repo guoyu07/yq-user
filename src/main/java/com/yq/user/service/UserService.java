@@ -2243,6 +2243,7 @@ public class UserService {
 	 * @param userName
 	 * @param buyNum
 	 */
+	@Transactional
 	public void buyJf(String userName,int buyNum){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
