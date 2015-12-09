@@ -209,7 +209,11 @@ public class ExportExcel<T>
 					else
 					{
 						// 其它数据类型都当作字符串简单处理
-						textValue = value.toString();
+						if(value==null){
+							textValue="";
+						}else{
+							textValue = value.toString();
+						}
 					}
 					// 如果不是图片数据，就利用正则表达式判断textValue是否全部由数字组成
 					if (textValue != null)

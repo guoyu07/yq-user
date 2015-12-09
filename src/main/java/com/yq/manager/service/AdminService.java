@@ -1539,17 +1539,17 @@ public class AdminService {
 		if(day!=null){
 			strArray =  getTime(day);
 		}
-		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, strArray[0], strArray[1]);
+		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, strArray[0], strArray[1],null);
 	}
 	
-	public IPage<Gcuser> getSqDayAddUsersByTime(int pageIndex,int pageSize,String startTime,String endTime){
+	public IPage<Gcuser> getSqDayAddUsersByTime(int pageIndex,int pageSize,String startTime,String endTime,String sheng){
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
 			startTime = startTime +" 00:00:00";
 			endTime = endTime+" 23:59:59";
 		}else{
 			return null;
 		}
-		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, startTime, endTime);
+		return gcuserDao.getSqDayAddUserPages(pageIndex, pageSize, startTime, endTime,sheng);
 	}
 	
 	public List<GcuserForExcel> getSqdayAddUsersForExcel(Integer day){
@@ -1557,10 +1557,10 @@ public class AdminService {
 		if(day!=null){
 			strArray =  getTime(day);
 		}
-		return gcuserDao.getSqDayAddUserList(strArray[0], strArray[1]);
+		return gcuserDao.getSqDayAddUserList(strArray[0], strArray[1],null);
 	}
 	
-	public List<GcuserForExcel> getSqdayAddUsersForExcelByTime(String startTime,String endTime){
+	public List<GcuserForExcel> getSqdayAddUsersForExcelByTime(String startTime,String endTime,String sheng){
 		
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
 			startTime = startTime +" 00:00:00";
@@ -1568,7 +1568,7 @@ public class AdminService {
 		}else{
 			return new ArrayList<GcuserForExcel>(0);
 		}
-		return gcuserDao.getSqDayAddUserList(startTime, endTime);
+		return gcuserDao.getSqDayAddUserList(startTime, endTime,sheng);
 	}
 	
 	private String[] getTime(int day){

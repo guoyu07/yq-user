@@ -756,19 +756,25 @@ public class GcuserDao {
 		return jdbc.update(sql, SqlParameter.Instance().withInt(jb).withObject(dldate).withObject(dqDate).withString(userName))>0;
 	}
 	
-	public IPage<Gcuser> getSqDayAddUserPages(int pageIndex,int pageSize,String startTime,String endTime){
+	public IPage<Gcuser> getSqDayAddUserPages(int pageIndex,int pageSize,String startTime,String endTime,String sheng){
 		String and = "";
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
 			and = " and g.bddate between '"+startTime+"' and '" +endTime+"'";
+		}
+		if(!Strings.isNullOrEmpty(sheng)){
+			and = " and g.addsheng='"+sheng+"'";
 		}
 		String sql = "select g.*,gup.gmdate as upgmdate from "+table+" g left join gcuser gup on g.up=gup.username  where g.sjb>10"+and+" order by g.bddate desc";
 		return jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
 	}
 	
-	public List<GcuserForExcel> getSqDayAddUserList(String startTime,String endTime){
+	public List<GcuserForExcel> getSqDayAddUserList(String startTime,String endTime,String sheng){
 		String and = "";
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
 			and = " and g.bddate between '"+startTime+"' and '" +endTime+"'";
+		}
+		if(!Strings.isNullOrEmpty(sheng)){
+			and = " and g.addsheng='"+sheng+"'";
 		}
 		String sql = "select g.*,gup.gmdate as upgmdate from "+table+" g left join gcuser gup on g.up=gup.username  where g.sjb>10"+and+" order by g.bddate desc";
 		return jdbc.getList(sql, GcuserForExcel.class, null);
