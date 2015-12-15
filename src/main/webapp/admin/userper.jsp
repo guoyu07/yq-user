@@ -31,6 +31,7 @@
           <input type="submit" name="Submit" value="搜索"></form>
       </td>
   </tr> 
+  
   </table>
   <c:if test="${not empty bean}">
             <table border="1" cellspacing="0" width="100%" style="border-collapse: collapse" cellpadding="0" height="62">
