@@ -174,6 +174,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<tr>
 				<td height=20>☉  <a href="/admin/telpayhander" target="BoardList">手动充话费</a></td> 
 				</tr>
+				<tr>
+				<td height=20>☉  <a href="/admin/userper" target="BoardList">用户业绩查询</a></td> 
+				</tr>
               </table>
 	  </div>
 	</td>

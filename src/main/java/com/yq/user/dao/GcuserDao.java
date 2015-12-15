@@ -917,4 +917,13 @@ public class GcuserDao {
 		return this.jdbc.getInt(sql, null);
 	}
 	
+	public int getUserSigleSumSjbByTime(String userName,String name,String startDate,String endDate){
+		String sql = "select sum(sg.sjb) from gcuser g right join sgxt sg on g.username=sg.username where g.up=? and g.userid<>? and sg.sjb>=20 and sg.bddate between ? and ?";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setString(userName);
+		paramter.setString(name);
+		paramter.setString(startDate);
+		paramter.setString(endDate);
+		return this.jdbc.getInt(sql, paramter);
+	}
 }

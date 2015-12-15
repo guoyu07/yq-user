@@ -22,6 +22,8 @@ import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.FileCreatUtil;
 import com.yq.common.utils.MD5Security;
 import com.yq.cservice.bean.SqDayAddBean;
+import com.yq.manager.bean.Performance;
+import com.yq.manager.bean.UserPerformanceSearch;
 import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.bo.DateBean;
 import com.yq.manager.bo.GcfhBean;
@@ -1676,7 +1678,7 @@ public class AdminService {
 		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
 		gcuserDao.updateJygdateAndJygt1("<50000", 1, null, 0);
 		gcuserDao.updateAbdateAndDbtl(">30", 0, new Date(), 1);
-		gcuserDao.updateAbdateAndDbtl("<30", 1, null, 0);
+		gcuserDao.updateAbdateAndDbtl("<=30", 1, null, 0);
 		fcxtDao.updateJy5w();
 		
 		Fcxt fcxt = fcxtDao.get(2);
@@ -2178,5 +2180,122 @@ public class AdminService {
 		gpjy.setJypay(0d);
 		gpjy.setNewjy(3);
 		gpjyDao.add(gpjy);
+	}
+	/**
+	 * 个人业绩查询  及注册的时候选的推荐人 业绩总和
+	 * @param userName
+	 * @param startYear
+	 * @param endYear
+	 * @return
+	 */
+	private int getUserThisYearSiglePerformance(String userName,String startTime,String endTime){
+		startTime = startTime + " 00:00:00";
+		endTime = endTime + " 23:59:59";
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		return gcuserDao.getUserSigleSumSjbByTime(userName,gcuser.getUserid(), startTime, endTime);
+	}
+	/**
+	 * 个人总业绩查询
+	 * @param userName
+	 * @param startYear
+	 * @param endYear
+	 * @return
+	 */
+	private int getUserThisYearAllPerformance(String userName,String startTime,String endTime){
+		startTime = startTime + " 00:00:00";
+		endTime = endTime + " 23:59:59";
+		int zAll = zuoMingxiDao.getZUserAllPerformanceByTime(userName, startTime, endTime);
+		int yAll = youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime);
+		return zAll+yAll;
+	}
+	/**
+	 * 是否5层全满
+	 * @param userName
+	 * @return
+	 */
+	private boolean isFiveStepFull(String userName){
+		for(int i=1;i<=5;i++){
+			if(zuoMingxiDao.getDownCountByStep(userName,i)<Math.pow(2, i)/2||youMingXiDao.getDownCountByStep(userName,i)<Math.pow(2, i)/2){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * 获取用户业绩信息
+	 * @param userName
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public UserPerformanceSearch getUserPerformanceSearch(String userName,String startTime,String endTime){
+		UserPerformanceSearch result = new UserPerformanceSearch();
+		result.setSiglePerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
+		result.setAllPerformance(getUserThisYearAllPerformance(userName, startTime, endTime));
+		result.setIsFiveFull(isFiveStepFull(userName));
+		result.setPerformance(getUserFiveStepPerformance(userName));
+		return result;
+	}
+	
+	/**
+	 * 获取用户前5层 二叉树
+	 * @param userName
+	 * @return
+	 */
+	public Performance getUserFiveStepPerformance(String userName){
+		Performance performance = generatorCommonPerformance(userName);
+		generatorDownMap(performance,1,5);
+		return performance;
+	}
+	
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	private Performance generatorCommonPerformance(String userName){
+		Sgxt sgxt = sgxtDao.get(userName);
+		if(sgxt!=null){
+			Performance performance = new Performance();
+			performance.setUserName(userName);
+			performance.setBdbdate(sgxt.getBddate());
+			performance.setSjb(sgxt.getSjb());
+			performance.setZaq(sgxt.getZaq());
+			performance.setZbq(sgxt.getZbq());
+			return performance;
+		}else{
+			return null;
+		}
+	}
+	/**
+	 * 
+	 * @param performance
+	 * @param count
+	 * @param max
+	 */
+	private void generatorDownMap(Performance performance,int count,int max){
+		if(performance==null||count>max){
+			return;
+		}
+		Sgxt sgxt = sgxtDao.get(performance.getUserName());
+		if(!Strings.isNullOrEmpty(sgxt.getAuid())){
+			Performance left = generatorCommonPerformance(sgxt.getAuid());
+			if(left!=null){
+				performance.setLeft(left);
+				left.setParent(performance);
+				generatorDownMap(left,count+1,max);
+			}
+		}
+		
+		if(!Strings.isNullOrEmpty(sgxt.getBuid())){
+			Performance right = generatorCommonPerformance(sgxt.getBuid());
+			if(right!=null){
+				performance.setRight(right);
+				right.setParent(performance);
+				generatorDownMap(right,count+1,max);
+			}
+			
+		}
 	}
 }

@@ -508,6 +508,12 @@
 		        jfcf.jsp
 		    </result>
 		</action>	
+		
+		<action name="userper" class="com.yq.manager.action.PerformanceSearchAction">
+		    <result name="success">
+		      userper.jsp
+		    </result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

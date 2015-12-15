@@ -84,7 +84,9 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<option>财付通</option>
 		<option>工商银行</option>
 		<option>建设银行</option>
-		<option>农业银行</option></select>-------------
+		<option>农业银行</option>
+		<option>中国银行</option>
+		</select>-------------
 		<c:if test="${gcuser.sjb>0}"><b>双区会员：<font color="#FF0000">${gcuser.sjb}</font>单</b></span></font></c:if>
 		</td>
       </tr>

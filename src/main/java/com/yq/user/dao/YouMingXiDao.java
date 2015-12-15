@@ -67,5 +67,20 @@ public class YouMingXiDao {
     	jdbc.update(sql, null);
     }
     
+    public int getYUserAllPerformanceByTime(String userName,String startTime,String endTime){
+    	String sql = "select sum(ym.sjb) from "+table+" ym left join sgxt sg on ym.down=sg.username where ym.tjuser = ? and sg.bddate between ? and ?";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setString(userName);
+		paramter.setString(startTime);
+		paramter.setString(endTime);
+		return this.jdbc.getInt(sql, paramter);
+	}
     
+    public int getDownCountByStep(String tjuser,int count){
+    	String sql = "select count(*) from "+table+" where tjuser=? and count =?";
+    	SqlParameter parameter = new SqlParameter();
+    	parameter.setString(tjuser);
+    	parameter.setInt(count);
+    	return jdbc.getInt(sql,  parameter);
+    }
 }
