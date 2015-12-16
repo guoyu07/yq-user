@@ -50,7 +50,7 @@
 	</div>
 </div>
 <div id="adleft" style="width:255px;height:538px;padding:0px;font:14px/20px arial;background-color:red; text-align:center;position:absolute;left:0;top:0px;background:url('/image/guanggao2.png') no-repeat;"><div style=";position:absolute; bottom:0;left:0; text-align:center;" onmouseover="this.style.cursor='pointer'"><img src="/image/huitiao2.png" onClick="closeadleft();" style="position:absolute;bottom:0" /></div></div>
-<div id="adright" style="width:262px;height:363px;padding:0px;font:14px/20px arial;text-align:center;position:absolute;right:0; top:0px;background:url('/image/guanggao1.png') no-repeat;" onmouseover="this.style.cursor='pointer'" onclick="document.location='http://baoming.zgyce.com/baoming/bm/index';"><div style="position:absolute; bottom:0;left:0; text-align:center;" onClick="event.cancelBubble = true"><img src="/image/huitiao.png" style="position:absolute;bottom:0" onClick="closeadright();"/></div></div>
+<div id="adright" style="display:none;width:262px;height:363px;padding:0px;font:14px/20px arial;text-align:center;position:absolute;right:0; top:0px;background:url('/image/guanggao1.png') no-repeat;" onmouseover="this.style.cursor='pointer'" onclick="document.location='http://baoming.zgyce.com/baoming/bm/index';"><div style="position:absolute; bottom:0;left:0; text-align:center;" onClick="event.cancelBubble = true"><img src="/image/huitiao.png" style="position:absolute;bottom:0" onClick="closeadright();"/></div></div>
 <script>
 function closeadleft(){
 	document.getElementById("adleft").style.display='none';

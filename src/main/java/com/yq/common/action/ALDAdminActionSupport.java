@@ -28,6 +28,8 @@ public class ALDAdminActionSupport extends ActionSupport {
 	/**  */
 	private static final long serialVersionUID = 1L;
 	
+	private String tokenId;
+	
 	private String userName;
 	/** 错误码 */
 	private int erroCodeNum;
@@ -109,5 +111,13 @@ public class ALDAdminActionSupport extends ActionSupport {
         } catch (IOException ex) {  
             ex.printStackTrace();  
         }  
-    }  
+    }
+
+	public String getTokenId() {
+		return tokenId;
+	}
+
+	public void setTokenId(String tokenId) {
+		this.tokenId = tokenId;
+	}  
 }

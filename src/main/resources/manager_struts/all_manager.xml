@@ -55,7 +55,9 @@
 			</result>
 		</global-results>
 	</package>
+	
 	<include file="manager_struts/user.xml" />
 	<include file="manager_struts/admin.xml" />
 	<include file="manager_struts/cs.xml" />
+	<include file="manager_struts/app.xml" />
 </struts>

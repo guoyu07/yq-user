@@ -50,6 +50,8 @@ public class StrutsExceptionInterceptor extends AbstractInterceptor {
 					aldAction.setErroCodeNum(8888);
 					return "glober_error";
 				}
+			}else{
+				throw e;
 			}
 		}
 		return result;
