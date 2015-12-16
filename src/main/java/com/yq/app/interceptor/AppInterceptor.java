@@ -3,7 +3,6 @@ package com.yq.app.interceptor;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -13,12 +12,7 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.app.action.AppBaseActionSupport;
 import com.yq.app.service.AppService;
-import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.exception.ServiceException;
-import com.yq.user.action.SmsAction;
-import com.yq.user.action.UpdateUserAction;
-import com.yq.user.bo.Gcuser;
-import com.yq.user.service.UserService;
 
 public class AppInterceptor extends AbstractInterceptor {
 
