@@ -2298,4 +2298,57 @@ public class AdminService {
 			
 		}
 	}
+	/**
+	 * 每月月底分红
+	 */
+	public void shareMoney(){
+		Fcxt fcxt = fcxtDao.get(10);
+		Date date = DateUtils.addDay(fcxt.getJsdate(), 2);
+		
+		long allStartTime = System.currentTimeMillis();
+		LogSystem.info("开始执行分红程序---"+new Date());
+		
+		String dyRation = "0.12";
+		String xyRation = "0.01";
+		String cmRation = "0.005";
+		
+		LogSystem.info("开始执行分红程序第一阶段，注册日期大于---"+DateUtils.DateToString(date, DateStyle.YYYY_MM_DD_HH_MM_SS_CN)+"的会员用户"+new Date());
+		executeDyRegTimeShareMoney(dyRation, date);
+		LogSystem.info("结束执行分红程序第一阶段，注册日期大于---"+DateUtils.DateToString(date, DateStyle.YYYY_MM_DD_HH_MM_SS_CN)+"的会员用户"+new Date());
+		
+		LogSystem.info("开始执行分红程序第二阶段，注册日期小于---"+DateUtils.DateToString(date, DateStyle.YYYY_MM_DD_HH_MM_SS_CN)+"的会员用户"+new Date());
+		executeXyRegTimeShareMoney(xyRation, date);
+		LogSystem.info("结束执行分红程序第二阶段，注册日期小于---"+DateUtils.DateToString(date, DateStyle.YYYY_MM_DD_HH_MM_SS_CN)+"的会员用户"+new Date());
+		
+		
+		LogSystem.info("开始执行分红程序第三阶段，普通会员用户"+new Date());
+		executeCommonRegTimeShareMoney(cmRation);
+		LogSystem.info("结束执行分红程序第三阶段，普通会员用户"+new Date());
+		
+		long allEndTime = System.currentTimeMillis();
+		
+		LogSystem.info("全体执行结束，耗时"+(allEndTime-allStartTime)/1000+"秒");
+	}
+	@Transactional
+	public void executeDyRegTimeShareMoney(String ration,Date date){
+		int uNum = gcuserDao.updateMemberSharePayDyDate(date, ration);
+		int insertGcfhNum = gcuserDao.insertMemberShareGcfhLogDyDate(date, ration);
+		int insertDatepayNum = gcuserDao.insertMemberShareDatepayLogDyDate(date, ration);
+		LogSystem.info("更新数据条数["+uNum+"],gcfh插入日志条数["+insertGcfhNum+"],datepay插入日志条数["+insertDatepayNum+"]");
+	}
+	@Transactional
+	public void executeXyRegTimeShareMoney(String ration,Date date){
+		int uNum = gcuserDao.updateMemberSharePayXyDate(date, ration);
+		int insertGcfhNum = gcuserDao.insertMemberShareGcfhLogXyDate(date, ration);
+		int insertDatepayNum = gcuserDao.insertMemberShareDatepayLogXyDate(date, ration);
+		LogSystem.info("更新数据条数["+uNum+"],gcfh插入日志条数["+insertGcfhNum+"],datepay插入日志条数["+insertDatepayNum+"]");
+	}
+	@Transactional
+	public void executeCommonRegTimeShareMoney(String ration){
+		int uNum =gcuserDao.updateCommonSharePay(ration);
+		int insertGcfhNum = gcuserDao.insertCommonShareGcfhLogXyDate(ration);
+		int insertDatepayNum = gcuserDao.insertCommonShareDatepayLogXyDate(ration);
+		LogSystem.info("更新数据条数["+uNum+"],gcfh插入日志条数["+insertGcfhNum+"],datepay插入日志条数["+insertDatepayNum+"]");
+	}
+	
 }

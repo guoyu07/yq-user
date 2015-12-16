@@ -36,4 +36,8 @@
        <bean id="doubleAreaCountScheduler" class="com.yq.manager.scheduler.DoubleAreaScheduler">
           <property name="cronExpression" value="0 10 22 * * ?"></property>
        </bean>
+       <!-- 每月1号凌晨0点5份执行    -->
+       <bean id="shareMoneyScheduler" class="com.yq.manager.scheduler.ShareMoneyScheduler">
+          <property name="cronExpression" value=" 0 5 0 1 * ?"></property>
+       </bean>
 </beans>

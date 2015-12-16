@@ -926,4 +926,63 @@ public class GcuserDao {
 		paramter.setString(endDate);
 		return this.jdbc.getInt(sql, paramter);
 	}
+	
+	public IPage<Gcuser> getShareUser(int pageIndex,int pageSize,String sjbxd,String timexd,Date regTime){
+		String sql = "select * from "+table+" where  gdgc>0 and sjb"+sjbxd+"0 and regtime "+timexd+" ? order by id";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setObject(regTime);
+		return jdbc.getListPage(sql, Gcuser.class, paramter, pageSize, pageIndex);
+	}
+	
+	public int updateMemberSharePayDyDate(Date regTime,String ration){
+		String sql = "update "+table+" set pay=pay+gdgc*"+ration+",ljfh=ljfh+gdgc*"+ration+",cbpay=cbpay+gdgc*"+ration+" where gdgc>0 and sjb>0 and regtime>?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(regTime);
+		return this.jdbc.update(sql, parameter);
+	}
+	public int insertMemberShareGcfhLogDyDate(Date regTime,String ration){
+		String sql = "insert into gcfh select null,u.username,0,u.gdgc,0,"+ration+",u.gdgc*"+ration+",u.ljfh,now(),'月分红-每点"+ration+"',1,0 from gcuser u where gdgc>0 and sjb>0 and regtime>?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(regTime);
+		return this.jdbc.update(sql, parameter);
+	}
+	public int insertMemberShareDatepayLogDyDate(Date regTime,String ration){
+		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0 from gcuser u where gdgc>0 and sjb>0 and regtime>?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(regTime);
+		return this.jdbc.update(sql, parameter);
+	}
+	
+	public int updateMemberSharePayXyDate(Date regTime,String ration){
+		String sql = "update "+table+" set pay=pay+gdgc*"+ration+",ljfh=ljfh+gdgc*"+ration+",cbpay=cbpay+gdgc*"+ration+" where gdgc>0 and sjb>0 and regtime<?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(regTime);
+		return this.jdbc.update(sql, parameter);
+	}
+	public int insertMemberShareGcfhLogXyDate(Date regTime,String ration){
+		String sql = "insert into gcfh select null,u.username,0,u.gdgc,0,"+ration+",u.gdgc*"+ration+",u.ljfh,now(),'月分红-每点"+ration+"',1,0 from gcuser u where gdgc>0 and sjb>0 and regtime<?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(regTime);
+		return this.jdbc.update(sql, parameter);
+	}
+	public int insertMemberShareDatepayLogXyDate(Date regTime,String ration){
+		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0 from gcuser u where gdgc>0 and sjb>0 and regtime<?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setObject(regTime);
+		return this.jdbc.update(sql, parameter);
+	}
+	
+	public int updateCommonSharePay(String ration){
+		String sql = "update "+table+" set pay=pay+gdgc*"+ration+",ljfh=ljfh+gdgc*"+ration+",cbpay=cbpay+gdgc*"+ration+" where gdgc>0 and sjb=0";
+		return this.jdbc.update(sql, null);
+	}
+	public int insertCommonShareGcfhLogXyDate(String ration){
+		String sql = "insert into gcfh select null,u.username,0,u.gdgc,0,"+ration+",u.gdgc*"+ration+",u.ljfh,now(),'月分红-每点"+ration+"',1,0 from gcuser u where u.gdgc>0 and u.sjb=0";
+		return this.jdbc.update(sql, null);
+	}
+	public int insertCommonShareDatepayLogXyDate(String ration){
+		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0 from gcuser u where u.gdgc>0 and u.sjb=0";
+		return this.jdbc.update(sql, null);
+	}
+	
 }
