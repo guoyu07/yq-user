@@ -2081,14 +2081,15 @@ public class AdminService {
 	/**
 	 * 积分拆分
 	 */
+	private final String beishu = "1.8";//拆分倍数
+	private final double dijia = 0.78;//底价
 	public void JygChaifen(){
 		Fcxt fcxt = fcxtDao.get(10);
 		Date d = DateUtils.addDay(fcxt.getJsdate(), 3);
-		String beishu = "1.79";
 		int updateNum = gcuserDao.updateJfChaifen(beishu, d);
 		int insertNum = gcuserDao.insertIntoChaifenLog(beishu, d);
-		fcxtDao.updateChaiFen(2, 0.77);
-		LogSystem.info("执行拆分At【"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS)+"】，拆分注册日期最小值为:【"+DateUtils.DateToString(d, DateStyle.YYYY_MM_DD_HH_MM_SS)+"】,倍数为【"+beishu+"】,更新gcuser表数据条数为【"+updateNum+"】,插入gpjy日志条数为:【"+insertNum+"】");
+		fcxtDao.updateChaiFen(2, dijia);
+		LogSystem.info("执行拆分At【"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS)+"】，拆分注册日期最小值为:【"+DateUtils.DateToString(d, DateStyle.YYYY_MM_DD_HH_MM_SS)+"】,倍数为【"+beishu+"】,底价为【"+dijia+"】,更新gcuser表数据条数为【"+updateNum+"】,插入gpjy日志条数为:【"+insertNum+"】");
 	}
 	/**
 	 * 拆分满3次自动卖70%
@@ -2137,6 +2138,18 @@ public class AdminService {
 		}
 	}
 	
+	private void addGpjyForChaiFeng(String clname,int mcsl,double jyg){
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(clname);
+		gpjy.setMcsl(mcsl*1d);
+		gpjy.setSysl(jyg);
+		gpjy.setPay(dijia);
+		gpjy.setJy(0);
+		gpjy.setBz("卖出挂牌中(系统代)");
+		gpjy.setJypay((int)(mcsl*dijia+0.1)/1d);
+		gpjy.setNewjy(3);
+		gpjyDao.add(gpjy);
+	}
 	private int getBlsl(int sjb){
 		if(sjb==100){
 			return 25000;
@@ -2167,19 +2180,6 @@ public class AdminService {
 			return 500;
 		}
 		return kmcsl;
-	}
-	
-	private void addGpjyForChaiFeng(String clname,int mcsl,double jyg){
-		Gpjy gpjy = new Gpjy();
-		gpjy.setUsername(clname);
-		gpjy.setMcsl(mcsl*1d);
-		gpjy.setSysl(jyg);
-		gpjy.setPay(0.77);
-		gpjy.setJy(0);
-		gpjy.setBz("卖出挂牌中(系统代)");
-		gpjy.setJypay(0d);
-		gpjy.setNewjy(3);
-		gpjyDao.add(gpjy);
 	}
 	/**
 	 * 个人业绩查询  及注册的时候选的推荐人 业绩总和
