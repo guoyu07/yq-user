@@ -25,6 +25,7 @@ import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
+import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Cpuser;
 import com.yq.user.bo.Datecj;
@@ -2175,6 +2176,7 @@ public class UserService {
 	
 	@Transactional
 	public int jfQg(String userName,int goodsId){
+		checkJfIsOpen();
 		Gcuser user = gcuserDao.getUser(userName);
 		int cost = 1;
 		int buyNum = 1;
@@ -2245,6 +2247,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void buyJf(String userName,int buyNum){
+		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
 			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
@@ -2289,6 +2292,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void cancelBuyJf(String userName,int orderId,String pa3){
+		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		if(!pa3.equals(gcuser.getPassword3())){
@@ -2329,12 +2333,12 @@ public class UserService {
 		return gpjyDao.getUserPageDetailsList(userName, pageIndex, pageSize);
 	}
 	
-	public IPage<Gpjy> getMrPageList(String userName,int pageIndex,int pageSize){
-		return gpjyDao.getMrPage(pageIndex, pageSize);
+	public List<Gpjy> getMrPageList(int pageSize){
+		return gpjyDao.getMrPage(pageSize);
 	}
 	
-	public IPage<Gpjy> getMcPageList(String userName,int pageIndex,int pageSize){
-		return gpjyDao.getMcPage(pageIndex, pageSize);
+	public List<Gpjy> getMcPageList(int pageSize){
+		return gpjyDao.getMcPageList(pageSize);
 	}
 	/**
 	 * 卖出积分
@@ -2346,14 +2350,14 @@ public class UserService {
 	@Transactional
 	public void saleJf(String userName,double price,int saleNum,String passwrod3){
 		checkSaleJf(userName,price,saleNum,passwrod3);
-		
+		checkJfIsOpen();
 		if(!gcuserDao.updateJyg(userName, saleNum)){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
-		if(!gcuserDao.increaseStopjyg(userName,20)){
-			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
-		}
-		if(saleNum>1000){
+//		if(!gcuserDao.increaseStopjyg(userName,20)){
+//			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
+//		}
+		if(saleNum>3000){
 			throw new ServiceException(11,"积分单笔卖出数量不能超过1000！");
 		}
 		
@@ -2398,8 +2402,8 @@ public class UserService {
 		}
 		
 		Fcxt fcxt = managerService.getFcxtById(2);
-		if(price<0.77){
-			throw new ServiceException(5,"卖出单价不能小于 0.77 ！");
+		if(price<fcxt.getZdj()){
+			throw new ServiceException(5,"卖出单价不能小于"+fcxt.getZdj()+" ！");
 		}
 		if(price > fcxt.getJygj()+0.03){
 			throw new ServiceException(6,"卖出单价不能大于 "+(fcxt.getJygj()+0.03)+" 哦！");
@@ -2408,18 +2412,24 @@ public class UserService {
 		if(saleNum<=0){
 			throw new ServiceException(7,"您好，您卖出数量不能小于零，谢谢！");
 		}
-		if(gcuser.getStopjyg()>19){
-			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
-		}
+//		if(gcuser.getStopjyg()>19){
+//			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
+//		}
 		
 		if(saleNum>gcuser.getJyg()){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量 "+gcuser.getJyg()+" ，谢谢！");
 		}
 		
-		if(gcuser.getJygt1()==0){
-			if(gpjyDao.get()!=null){
-				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
-			}
+//		if(gcuser.getJygt1()==0){
+//			if(gpjyDao.get()!=null){
+//				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+//			}
+//		}
+	}
+	
+	private void checkJfIsOpen(){
+		if(AdminService.isClose){
+			throw new ServiceException(1860,"系统已关闭！请稍后再操作！");
 		}
 	}
 	/**
@@ -2431,7 +2441,7 @@ public class UserService {
 	@Transactional
 	public void cancelSale(String userName,int orderId,String pa3){
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		
+		checkJfIsOpen();
 		if(!pa3.equals(gcuser.getPassword3())){
 			throw new ServiceException(1,"二级密码不正确");
 		}
@@ -2487,6 +2497,7 @@ public class UserService {
 	 * @param price
 	 */
 	public void editGpjy(String userName,int id,double price,String pa3){
+		checkJfIsOpen();
 	    Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		if(!pa3.equals(gcuser.getPassword3())){
@@ -2514,6 +2525,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void mrJf(String userName,int id){
+		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy1 = gpjyDao.getById(id);
 
@@ -2589,6 +2601,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void mcJf(String userName,int id,String pa3){
+		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		if(!gcuser.getName().equals("公司")&&!gcuser.getPassword3().equals(pa3)){
@@ -2652,7 +2665,7 @@ public class UserService {
 		datePay1.setAbdate(new Date());
 		logService.addDatePay(datePay1);
 		logService.updateRegId(gpjy1.getJyid(), DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS)
-				+ "支出成功到" + gpjy1.getDfuser() + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
+				+ "支出成功到" + userName + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
 		fcxtDao.update(2, gpjy1.getMysl().intValue());
 			 
 	}

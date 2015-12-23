@@ -119,5 +119,13 @@ public class Gpjy{
 	public void setNewjy(int newjy) {
 		this.newjy = newjy;
 	}
+	@Override
+	public String toString() {
+		return "Gpjy [id=" + id + ", jyid=" + jyid + ", kjqi=" + kjqi + ", username=" + username + ", mysl=" + mysl
+				+ ", mcsl=" + mcsl + ", sysl=" + sysl + ", pay=" + pay + ", jypay=" + jypay + ", abdate=" + abdate
+				+ ", bz=" + bz + ", cgdate=" + cgdate + ", jy=" + jy + ", dfuser=" + dfuser + ", dqdate=" + dqdate
+				+ ", newjy=" + newjy + "]";
+	}
+	
 }
 

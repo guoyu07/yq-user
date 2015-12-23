@@ -4,7 +4,7 @@
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('游戏收益未完成，积分暂时停止卖出交易，收益完成后自动开放！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('请于开户后第二天再进行卖出操作，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('二级密码不正确');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('卖出单价不能小于 0.77 ！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('卖出单价不能小于 ${fcxt.zdj} ！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('卖出单价不能大于${fcxt.jygj+0.03}  哦！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('您好，您卖出数量不能小于零，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！');history.go(-1);</script></c:if>
@@ -20,7 +20,7 @@
 <script language="JavaScript">
  function checkdate()  {  
   if (Form.jygj.value=="") {      alert("请输入需要卖出的单价!");  Form.jygj.focus();    return false;    } 
-  if (Form.jygj.value<0.77) {      alert("卖出单价不能小于 0.77 !");  Form.jygj.focus();    return false;    }
+  if (Form.jygj.value<${fcxt.zdj}) {      alert("卖出单价不能小于 ${fcxt.zdj} !");  Form.jygj.focus();    return false;    }
   if (Form.jygj.value>${fcxt.jygj}) {      alert("卖出单价不能大于 ${fcxt.jygj} 哦!");  Form.jygj.focus();    return false;    } 
     if (!chkinteger1(Form.jygj.value)){
 	alert('卖出单价只能为数字!');
@@ -56,7 +56,7 @@ break;
 return (allValid);
 }
   if (Form.txpay.value<10) {      alert("卖出数量不能小于10积分!");      return false;    }
-  if (Form.txpay.value>1000) {      alert("单笔卖出数量不能大于1000积分!");      return false;    }
+  if (Form.txpay.value>3000) {      alert("单笔卖出数量不能大于3000积分!");      return false;    }
   if (Form.txpay.value>${gcuser.jyg}) {      alert("你的卖出数量不能大于你剩余的数量 ${gcuser.jyg} 哦!");      return false;    } 
   if (Form.pa3.value=="") {      alert("请输入二级密码密码!");   Form.pa3.focus();   return false;    } 
   return true;  }  
@@ -82,7 +82,7 @@ return (allValid);
 						<span>发布积分卖出</span>
 					</div>
 					<div class="content-form">
-						<p>您当前的积分剩余：:<strong>${gcuser.jyg}</strong>，当前的交易价为：<strong><c:if test="${fcxt.jygj<1}">0${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></strong></p>
+						<p>您当前的积分剩余：:<strong>${gcuser.jyg}</strong>，当前的交易价为：<strong><c:if test="${fcxt.jygj<1}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></strong></p>
 						<form class="form form1 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="mcsl?status=1">
 							<p><label>用户名：</label>${userName}</p>
 							<p><label>卖出单价：</label><input type="text" name="jygj" size="10" maxlength="4"></p>

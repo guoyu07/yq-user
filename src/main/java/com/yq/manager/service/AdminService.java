@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,8 +141,9 @@ public class AdminService {
 	
 	
   	private Cache<String,String> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
-
-	
+  	
+    public static boolean isClose = false;
+    
 	public String getLoginAdminUserName(String sessionId){
 		return adminUserMap.getIfPresent(sessionId);
 	}
@@ -1813,7 +1815,7 @@ public class AdminService {
 	    }
 	    
 	    pageIndex = 0;
-	    
+	    Fcxt fcxt = fcxtDao.get(2);
 	    //第一遍循环
 	    while(true){
 			page= gcuserDao.getManageQueren(pageIndex, pageSize, endTime);
@@ -1828,11 +1830,11 @@ public class AdminService {
 						int  lasenumber=jygnumber%200;
 						if(ForCount>0){
 							for(int j=1;j<=ForCount;j++){
-								addGpjyForManageQueren(clname, 200,jygall-j*200);
+								addGpjyForManageQueren(clname, 200,jygall-j*200,fcxt.getZdj());
 							}
 						} 
 						if(lasenumber>0){
-							addGpjyForManageQueren(clname,lasenumber,jygall-ForCount*200-lasenumber);
+							addGpjyForManageQueren(clname,lasenumber,jygall-ForCount*200-lasenumber,fcxt.getZdj());
 						}
 						gcuserDao.updateManageQueren(clname, 50000, null, 0);
 	    			}
@@ -1846,15 +1848,15 @@ public class AdminService {
 	    }
 	}
 	
-	private void addGpjyForManageQueren(String clname,double mcsl,double jyg){
+	private void addGpjyForManageQueren(String clname,double mcsl,double jyg,double jg){
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(clname);
 		gpjy.setMcsl(mcsl);
 		gpjy.setSysl(jyg);
-		gpjy.setPay(0.77);
+		gpjy.setPay(jg);
 		gpjy.setJy(0);
 		gpjy.setBz("卖出挂牌中(系统代)");
-		gpjy.setJypay((int)(mcsl*0.77*1+0.1)*1d);
+		gpjy.setJypay((int)(mcsl*jg*1+0.1)*1d);
 		gpjy.setNewjy(3);
 		gpjyDao.add(gpjy);
 	}
@@ -2078,12 +2080,62 @@ public class AdminService {
 			throw new ServiceException(2, "用户不存在！");
 		}
 	}
+	
+	private String[] arrayRandomName = new String[]{"sineg","siwnrw","aneing","064300","uie168","shs888","8515mycq","abc888888a","742ymjc","kuang888","niw168"};
+	
+	private String getRadomUserName(){
+		int random = new Random().nextInt(arrayRandomName.length);
+		return arrayRandomName[random];
+	}
+	
+	
+	
+	/**
+	 * 批量处理积分买入
+	 */
+	public synchronized void dealJfMrOrderForChaiFen(){
+		LogSystem.info("开始成交所有求购积分的信息");
+		final int pageSize = 500;
+		List<Gpjy> page = null;
+		while(true){
+			page = userService.getMrPageList(pageSize);
+			if(page!=null&&page.size()>0){
+				LogSystem.info("处理第一页，有数量 ="+page.size()+",共[]页");
+				long sigleStartTime = System.currentTimeMillis();
+				for(Gpjy gpjy:page){
+					try {
+						mcJfForSystem(getRadomUserName(), gpjy);
+					} catch (Exception e) {
+						LogSystem.error(e, "[这条记录出错了]---gpgy="+gpjy);
+					}
+				}
+				long sigleEndTime = System.currentTimeMillis();
+				LogSystem.info("处理完毕，有数量 ="+page.size()+",时长="+(sigleEndTime-sigleStartTime)/1000+"秒");
+			}else{
+				break;
+			}
+		}
+		LogSystem.info("成交所有积分求购信息结束");
+	}
+	
+	private void mcJfForSystem(String userName,Gpjy gpjy1){
+        Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
+		if (!gpjyDao.updateBuySuccess(gpjy1.getId(), userName, "买入成功",(int)(dfuser.getJyg()+gpjy1.getMysl()))) {
+			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
+		}
+		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
+		String mydj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
+		logService.updateRegId(gpjy1.getJyid(), DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS)
+				+ "支出成功到" + userName + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
+//		fcxtDao.update(2, gpjy1.getMysl().intValue());
+	}
+	
 	/**
 	 * 积分拆分
 	 */
 	private final String beishu = "1.8";//拆分倍数
 	private final double dijia = 0.78;//底价
-	public void JygChaifen(){
+	public synchronized void JygChaifen(){
 		Fcxt fcxt = fcxtDao.get(10);
 		Date d = DateUtils.addDay(fcxt.getJsdate(), 3);
 		int updateNum = gcuserDao.updateJfChaifen(beishu, d);
@@ -2094,7 +2146,7 @@ public class AdminService {
 	/**
 	 * 拆分满3次自动卖70%
 	 */
-	public void jfdm(){
+	public synchronized void jfdm(){
 		int maxId = gcuserDao.getMaxId();
 		int startId = 1;
 		int endId = 500;
@@ -2189,8 +2241,10 @@ public class AdminService {
 	 * @return
 	 */
 	private int getUserThisYearSiglePerformance(String userName,String startTime,String endTime){
-		startTime = startTime + " 00:00:00";
-		endTime = endTime + " 23:59:59";
+		if(startTime!=null&&endTime!=null){
+			startTime = startTime + " 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		return gcuserDao.getUserSigleSumSjbByTime(userName,gcuser.getUserid(), startTime, endTime);
 	}
@@ -2201,13 +2255,12 @@ public class AdminService {
 	 * @param endYear
 	 * @return
 	 */
-	private int getUserThisYearAllPerformance(String userName,String startTime,String endTime){
-		startTime = startTime + " 00:00:00";
-		endTime = endTime + " 23:59:59";
-		int zAll = zuoMingxiDao.getZUserAllPerformanceByTime(userName, startTime, endTime);
-		int yAll = youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime);
-		return zAll+yAll;
-	}
+//	private int getUserThisYearAllPerformance(String userName,String startTime,String endTime){
+//		
+//		int zAll = zuoMingxiDao.getZUserAllPerformanceByTime(userName, startTime, endTime);
+//		int yAll = youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime);
+//		return zAll+yAll;
+//	}
 	/**
 	 * 是否5层全满
 	 * @param userName
@@ -2231,8 +2284,17 @@ public class AdminService {
 	 */
 	public UserPerformanceSearch getUserPerformanceSearch(String userName,String startTime,String endTime){
 		UserPerformanceSearch result = new UserPerformanceSearch();
-		result.setSiglePerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
-		result.setAllPerformance(getUserThisYearAllPerformance(userName, startTime, endTime));
+		result.setSigleAllPerformance(getUserThisYearSiglePerformance(userName, null, null));
+		result.setSigleTimeAllPerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
+		startTime = startTime + " 00:00:00";
+		endTime = endTime + " 23:59:59";
+		result.setFiveLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, null, null,5));
+		result.setFiveLeftTimePerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, startTime, endTime,5));
+		result.setFiveRightPerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, null, null,5));
+		result.setFiveRightTimePerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime,5));
+		result.setSgxt(sgxtDao.get(userName));
+		result.setAllTimeLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, startTime, endTime,0));
+		result.setAllTimeRightPerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime,0));
 		result.setIsFiveFull(isFiveStepFull(userName));
 		result.setPerformance(getUserFiveStepPerformance(userName));
 		return result;
@@ -2350,5 +2412,77 @@ public class AdminService {
 		int insertDatepayNum = gcuserDao.insertCommonShareDatepayLogXyDate(ration);
 		LogSystem.info("更新数据条数["+uNum+"],gcfh插入日志条数["+insertGcfhNum+"],datepay插入日志条数["+insertDatepayNum+"]");
 	}
+	
+	@Transactional
+	public synchronized void insertPosition(String userName,String zOry,String insertUser,int sjb){
+		Sgxt sgxt = sgxtDao.get(userName);
+		if(sgxt==null){
+			throw new ServiceException(1, "被挂载用户不存在");
+		}
+		String  beReplaceUser = null;
+		if(zOry.equals("z")){
+			if(Strings.isNullOrEmpty(sgxt.getAuid())){
+				throw new ServiceException(2, "被替代的用户左边不存在用户，请执行正常挂载流程");
+			}
+			beReplaceUser = sgxt.getAuid();
+		}else if(zOry.equals("y")){
+			if(Strings.isNullOrEmpty(sgxt.getBuid())){
+				throw new ServiceException(3, "被替代的用户右边不存在用户，请执行正常挂载流程");
+			}
+			beReplaceUser = sgxt.getBuid();
+		}else{
+			throw new ServiceException(4, "只能填写z或者y,当前填的为"+zOry);
+		}
+		
+		Gcuser gcuser = gcuserDao.getUser(insertUser);
+		Sgxt sgxtBeReplace = sgxtDao.get(beReplaceUser);
+		if(gcuser==null||sgxtBeReplace==null){
+			throw new ServiceException(5, "插入用户不存在，请先注册新用户"+insertUser);
+		}
+		Sgxt insertUserSgx = sgxtDao.get(insertUser);
+		if(insertUserSgx!=null){
+			throw new ServiceException(6, "用户已开户，不能执行替换操作"+insertUser);
+		}
+		
+		
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("DROP TABLE IF EXISTS `sgxt1`;CREATE TABLE `sgxt1` LIKE `sgxt`;");//新建临时表，用户存放被替代位置的那条记录
+		stringBuffer.append("insert into sgxt1 select * from sgxt where username='"+beReplaceUser+"';");//复制被替换用户信息至临时表
+		stringBuffer.append("update sgxt1 set id=(select max(id)+1 from sgxt),username='"+insertUser+"',sjb="+sjb+" where username='"+beReplaceUser+"';");//更新成要插入的用户
+		stringBuffer.append("insert into sgxt select * from sgxt1 where username='"+insertUser+"';");//生成一条插入用户的记录
+		
+		stringBuffer.append("update zuo_mingxi set down='"+insertUser+"',sjb="+sjb+" where down='"+beReplaceUser+"';");//复制被替代用户的左边下部分层级关系至新用户
+		stringBuffer.append("update you_mingxi set down='"+insertUser+"',sjb="+sjb+" where down='"+beReplaceUser+"';");//复制被替代用户的右边下部分层级关系至新用户
+		stringBuffer.append("update zuo_mingxi set tjuser='"+insertUser+"' where tjuser='"+beReplaceUser+"';");//复制被替代用户的左边上部分层级关系至新用户
+		stringBuffer.append("update you_mingxi set tjuser='"+insertUser+"' where tjuser='"+beReplaceUser+"';");//复制被替代用户的右边上部分层级关系至新用户
+		//开始构件替代与被替代用户之间的关系
+		if(zOry.equals("z")){
+			stringBuffer.append("update sgxt set auid='"+insertUser+"' where username='"+userName+"';");//设置新用户的位置
+			stringBuffer.append("insert into zuo_mingxi values(null,'"+insertUser+"','"+beReplaceUser+"',"+sgxtBeReplace.getSjb()+",1);");
+		}else{
+			stringBuffer.append("update sgxt set buid='"+insertUser+"' where username='"+userName+"';");//设置新用户的位置
+			stringBuffer.append("insert into you_mingxi values(null,'"+insertUser+"','"+beReplaceUser+"',"+sgxtBeReplace.getSjb()+",1);");
+		}
+		
+		stringBuffer.append("update sgxt set auid='"+beReplaceUser+"',buid=null where username='"+insertUser+"';");//设置旧用户位置
+		
+		stringBuffer.append("insert into zuo_mingxi select null,z.tjuser,'"+beReplaceUser+"',"+sgxtBeReplace.getSjb()+",z.count+1 from zuo_mingxi z where down='"+insertUser+"';");//设置新用户的左边为被替代的用户
+		stringBuffer.append("insert into you_mingxi select null,z.tjuser,'"+beReplaceUser+"',"+sgxtBeReplace.getSjb()+",z.count+1 from you_mingxi z where down='"+insertUser+"';");//设置新用户的左边为被替代的用户
+		stringBuffer.append("insert into zuo_mingxi select null,'"+beReplaceUser+"',z.down,z.sjb,z.count+1 from zuo_mingxi z where tjuser='"+insertUser+"';");//复制旧用户的新的左边下部份层级关系
+		stringBuffer.append("insert into you_mingxi select null,'"+beReplaceUser+"',z.down,z.sjb,z.count+1 from you_mingxi z where tjuser='"+insertUser+"';");//复制旧用户的新的右边下部分层级关系
+		//给新插入用户的上层的zaq或zbq
+		stringBuffer.append("update sgxt set zaq=zaq+"+sjb+" where username in(select tjuser from zuo_mingxi where down='"+insertUser+"');");
+		stringBuffer.append("update sgxt set zbq=zbq+"+sjb+" where username in(select tjuser from you_mingxi where down='"+insertUser+"');");
+		stringBuffer.append("update sgxt set zaq=zaq+"+sgxtBeReplace.getSjb()+" where username ='"+insertUser+"';");//自身要加上新挂入的替代对象
+		LogSystem.info("插入日志 执行如下sql"+stringBuffer.toString());
+		String[] sqlArray = stringBuffer.toString().split(";");
+		for(int i=0;i<sqlArray.length;i++){
+			int result = sgxtDao.executeSql(sqlArray[i]);
+			LogSystem.info("执行sql【"+sqlArray[i]+"】完成，影响条数"+result);
+		}
+//		sgxtDao.executeSql(stringBuffer.toString());
+		gcuserDao.updateSjb(insertUser, sjb);
+	}
+	
 	
 }

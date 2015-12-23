@@ -492,8 +492,17 @@
 		      editybsale.jsp
 		    </result>
 		</action>	
-		
 		<action name="jfcfshow" class="com.yq.manager.action.JfcfAction">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+		<action name="closeMm" class="com.yq.manager.action.JfcfAction" method="closeMrMcJf">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+		<action name="djm" class="com.yq.manager.action.JfcfAction" method="dealJfMr">
 		    <result name="success">
 		        jfcf.jsp
 		    </result>
@@ -512,6 +521,12 @@
 		<action name="userper" class="com.yq.manager.action.PerformanceSearchAction">
 		    <result name="success">
 		      userper.jsp
+		    </result>
+		</action>
+		
+		<action name="insertuser" class="com.yq.manager.action.InsertPositionAction">
+		    <result name="success">
+		      insertuser.jsp
 		    </result>
 		</action>
 	</package>

@@ -36,22 +36,72 @@
   <c:if test="${not empty bean}">
             <table border="1" cellspacing="0" width="100%" style="border-collapse: collapse" cellpadding="0" height="62">
               <tr bgcolor="#7bb5de"> 
-                <td width="144" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>用户名</strong></font></td>
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>用户名</strong></font></td>
                 <td>${user}</td>
                 <td></td>
               </tr>
               <tr bgcolor="#7bb5de"> 
-                <td width="144" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>个人业绩</strong></font></td>
-                <td bgcolor='<c:if test="${bean.siglePerformance*500>=500000}">green</c:if><c:if test="${bean.siglePerformance*500<500000}">red</c:if>' >${bean.siglePerformance}单=${bean.siglePerformance*500}元</td>
-                <td>(此处数据为上级为${user}，并且不是${user}的同名账号的开户时间在${startTime}至${endTime}用户的单数之和)</td>
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>个人总业绩</strong></font></td>
+                <td bgcolor='<c:if test="${bean.sigleAllPerformance*500>=500000}">green</c:if><c:if test="${bean.sigleAllPerformance*500<500000}">red</c:if>' >${bean.sigleAllPerformance}单=${bean.sigleAllPerformance*500}元</td>
+                <td>(用户个人总业绩)</td>
               </tr>
               <tr bgcolor="#7bb5de"> 
-                <td width="144" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>总业绩</strong></font></td>
-                <td  bgcolor='<c:if test="${bean.allPerformance*500>=620000}">green</c:if><c:if test="${bean.allPerformance*500<620000}">red</c:if>' >${bean.allPerformance}单=${bean.allPerformance*500}元</td>
-                <td>(此处数据为${user}下级的开户时间在${startTime}至${endTime}用户的单数之和)</td>
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>【${startTime}至${endTime}】个人总业绩</strong></font></td>
+                <td>${bean.sigleTimeAllPerformance}单=${bean.sigleTimeAllPerformance*500}元</td>
+                <td>(【${startTime}至${endTime}】时间段的个人总业绩)</td>
               </tr>
               <tr bgcolor="#7bb5de"> 
-                <td width="144" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>是否5层全满</strong></font></td>
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>5层内左总</strong></font></td>
+                <td>${bean.fiveLeftPerformance}单=${bean.fiveLeftPerformance*500}元</td>
+                <td>(前5层左边总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>5层内右总</strong></font></td>
+                <td>${bean.fiveRightPerformance}单=${bean.fiveRightPerformance*500}元</td>
+                <td>(前5层右边总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>【${startTime}至${endTime}】5层内左总</strong></font></td>
+                <td>${bean.fiveLeftTimePerformance}单=${bean.fiveLeftTimePerformance*500}元</td>
+                <td>(【${startTime}至${endTime}】前5层左边总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>【${startTime}至${endTime}】5层内右总</strong></font></td>
+                <td>${bean.fiveRightTimePerformance}单=${bean.fiveRightTimePerformance*500}元</td>
+                <td>(【${startTime}至${endTime}】前5层右边总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>总业绩</strong></font></td>
+                <td>${bean.sgxt.zaq+bean.sgxt.zbq}单=${(bean.sgxt.zaq+bean.sgxt.zbq)*500}元</td>
+                <td>(总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>总业绩-左区</strong></font></td>
+                <td>${bean.sgxt.zaq}单=${bean.sgxt.zaq*500}元</td>
+                <td>(左区总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>总业绩-右区</strong></font></td>
+                <td>${bean.sgxt.zbq}单=${bean.sgxt.zbq*500}元</td>
+                <td>(右区总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>【${startTime}至${endTime}】总业绩</strong></font></td>
+                <td  bgcolor='<c:if test="${bean.allTimePerformance*500>=620000}">green</c:if><c:if test="${bean.allTimePerformance*500<620000}">red</c:if>' >${bean.allTimePerformance}单=${bean.allTimePerformance*500}元</td>
+                <td>(此处数据为${user},在【${startTime}至${endTime}】的总业绩)</td>
+              </tr>
+               <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>【${startTime}至${endTime}】总业绩左区</strong></font></td>
+                <td >${bean.allTimeLeftPerformance}单=${bean.allTimeLeftPerformance*500}元</td>
+                <td>(此处数据为${user},在【${startTime}至${endTime}】的左区总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>【${startTime}至${endTime}】总业绩右区</strong></font></td>
+                <td >${bean.allTimeRightPerformance}单=${bean.allTimeRightPerformance*500}元</td>
+                <td>(此处数据为${user},在【${startTime}至${endTime}】的右区总业绩)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>是否5层全满</strong></font></td>
                 <td bgcolor='<c:if test="${bean.isFiveFull==true}">green</c:if><c:if test="${bean.isFiveFull==false}">red</c:if>'><c:if test="${bean.isFiveFull==true}">是</c:if><c:if test="${bean.isFiveFull==false}">否</c:if></td>
                 <td></td>
               </tr>

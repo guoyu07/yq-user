@@ -44,6 +44,11 @@ public class StrutsExceptionInterceptor extends AbstractInterceptor {
 					ServiceException exception = (ServiceException)e;
 					aldAction.setErroCodeNum(exception.getCode());
 					LogSystem.info(exception.getMessage());
+					
+					if(exception.getCode()==1860){
+						return "glober_alert";
+					}
+					
 					return "success";
 				}else{
 					LogSystem.error(e, "");

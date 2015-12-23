@@ -46,7 +46,7 @@
 								<td rowspan="2" bgcolor="#FFFFFF"><a class="a-mrmc" href="/mysl"><img src="images/mr.png" /></a></td>
 							</tr>
 							<tr class="jg shop2">
-								<td>0.77</td>
+								<td>${fcxt.zdj}</td>
 								<td><c:if test="${fcxt.zgj+0.03<1.0}">${fcxt.zgj+0.03}</c:if><c:if test="${fcxt.zgj+0.03>=1.0}">${fcxt.zgj+0.03}</c:if></td>
 								<td>${fcxt.zdj}</td>
 								<td><c:if test="${fcxt.jygj<1}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></td>

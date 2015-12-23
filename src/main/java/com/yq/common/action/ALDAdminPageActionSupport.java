@@ -72,4 +72,9 @@ public class ALDAdminPageActionSupport<T> extends ALDAdminActionSupport {
 	public List<T> getDataList() {
 		return dataList;
 	}
+
+	public void setDataList(List<T> dataList) {
+		this.dataList = dataList;
+	}
+	
 }

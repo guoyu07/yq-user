@@ -177,6 +177,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<tr>
 				<td height=20>☉  <a href="/admin/userper" target="BoardList">用户业绩查询</a></td> 
 				</tr>
+				<tr>
+				<td height=20>☉  <a href="/admin/insertuser" target="BoardList">挂载用户</a></td> 
+				</tr>
               </table>
 	  </div>
 	</td>

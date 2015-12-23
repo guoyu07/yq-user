@@ -1,6 +1,7 @@
 package com.yq.user.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,15 +42,19 @@ public class GpjyDao {
 		String sql="select * from "+table+" where jy=0 and mcsl>0 order by id";
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
+	public List<Gpjy> getMcPageList(int pageSize){
+		String sql="select * from "+table+" where jy=0 and mcsl>0 order by id limit "+pageSize;
+		return this.jdbc.getList(sql, Gpjy.class, null);
+	}
 	
 	public IPage<Gpjy> getAdminMcPage(int pageIndex,int pageSize){
 		String sql="select * from "+table+" where mcsl>0 order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
 	
-	public IPage<Gpjy> getMrPage(int pageIndex,int pageSize){
-		String sql="select * from "+table+" where jy=0 and mysl>0 order by id";
-		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
+	public List<Gpjy> getMrPage(int pageSize){
+		String sql="select * from "+table+" where jy=0 and mysl>0 order by id limit "+pageSize;
+		return this.jdbc.getList(sql, Gpjy.class, null);
 	}
 	
 	public IPage<Gpjy> getAdminMrPage(int pageIndex,int pageSize){

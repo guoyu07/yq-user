@@ -213,4 +213,8 @@ public class SgxtDao {
 	    	parameter.setString(userName);
 	    	return jdbc.update(sql, parameter)>0;
 	 }
+	 
+	 public int executeSql(String sql){
+		return jdbc.update(sql, null);
+	 }
 }

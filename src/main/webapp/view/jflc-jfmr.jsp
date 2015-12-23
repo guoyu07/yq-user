@@ -61,7 +61,7 @@
 						<span>发布积分买入</span>
 					</div>
 					<div class="content-form">
-						<p>您当前的金币剩余:<strong>${jydb}</strong> 当前的交易价为：<strong><c:if test="${jygj<1}">0${jygj}</c:if><c:if test="${jygj>=1}">${jygj}</c:if></strong></p>
+						<p>您当前的金币剩余:<strong>${jydb}</strong> 当前的交易价为：<strong><c:if test="${jygj<1}">${jygj}</c:if><c:if test="${jygj>=1}">${jygj}</c:if></strong></p>
 						<form class="form form1 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/mysl?status=1">
 							<p><label>用户名：</label>${userName}</p>
 							<p><label>买入数量：</label><input type="text" name="txpay"><font style="font-size: 9pt" color="#FF0000">** 最大可买入</font><font style="font-size: 9pt" color="#008000">${zdjyg}</font><font style="font-size: 9pt" color="#FF0000">个积分</font></p>

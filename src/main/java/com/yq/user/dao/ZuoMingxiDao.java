@@ -69,12 +69,18 @@ public class ZuoMingxiDao {
     	jdbc.update(sql, null);
     }
     
-    public int getZUserAllPerformanceByTime(String userName,String startTime,String endTime){
-    	String sql = "select sum(zm.sjb) from "+table+" zm left join sgxt sg on zm.down=sg.username where zm.tjuser = ? and sg.bddate between ? and ?";
-		SqlParameter paramter = new SqlParameter();
+    public int getZUserAllPerformanceByTime(String userName,String startTime,String endTime,int count){
+    	String sql = "select sum(zm.sjb) from "+table+" zm left join sgxt sg on zm.down=sg.username where zm.tjuser = ?";
+    	SqlParameter paramter = new SqlParameter();
 		paramter.setString(userName);
-		paramter.setString(startTime);
-		paramter.setString(endTime);
+    	if(startTime!=null&&endTime!=null){
+    		sql = sql +" and sg.bddate between ? and ?";
+    		paramter.setString(startTime);
+    		paramter.setString(endTime);
+    	}
+    	if(count!=0){
+    		sql = sql + " and zm.count<="+count;
+    	}
 		return this.jdbc.getInt(sql, paramter);
 	}
     
