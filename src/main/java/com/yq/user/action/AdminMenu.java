@@ -8,7 +8,6 @@ import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.dao.FcxtDao;
-import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.service.UserService;
 

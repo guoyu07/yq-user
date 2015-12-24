@@ -147,5 +147,33 @@ public class BabyInfo{
 	public Date getCreatedTime(){
 		return createdTime;
 	}
+	public BabyInfo(String userName, String name, String babyName, int babyAge, String babySex, String dadyName,
+			int dadyAge, String dadyCall, String momName, int momAge, String momCall, String address, String details,
+			int status, String editName, Date editTime, String deleteName, String recoverName, Date createdTime) {
+		super();
+		this.userName = userName;
+		this.name = name;
+		this.babyName = babyName;
+		this.babyAge = babyAge;
+		this.babySex = babySex;
+		this.dadyName = dadyName;
+		this.dadyAge = dadyAge;
+		this.dadyCall = dadyCall;
+		this.momName = momName;
+		this.momAge = momAge;
+		this.momCall = momCall;
+		this.address = address;
+		this.details = details;
+		this.status = status;
+		this.editName = editName;
+		this.editTime = editTime;
+		this.deleteName = deleteName;
+		this.recoverName = recoverName;
+		this.createdTime = createdTime;
+	}
+	public BabyInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
 

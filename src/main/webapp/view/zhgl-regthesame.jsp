@@ -105,7 +105,7 @@ return true;  }
 							<p><label>一级密码：</label>与当前登录账户相同</p>
 							<p><label>二级密码：</label>与当前登录账户相同</p>
 							<p><label>姓名：</label>${gcuser.name}</p>
-							<p><label>推荐人：</label>${gcuser.up}</p>
+							<p><label>推荐人：</label>${gcuser.username}</p>
 							<p><label>协议及声明：</label>
 								<select size="1" name="sfz">
 								<option selected value="0">==请选择是否同意协议及声明==</option>

@@ -352,6 +352,12 @@
 		<action name="hfcz" class="com.yq.user.action.TelPayAction">
 		     <result name="success">view/xfgl-mobilecharge.jsp</result>
 		</action>
+		
+		<action name="baby" class="com.yq.user.action.BabyAction">
+		     <result name="success">view/xfgl-baby.jsp</result>
+		     <result name="input">view/xfgl-baby.jsp</result>
+		</action>
+		
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

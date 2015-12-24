@@ -134,6 +134,7 @@ a:hover{ color:#272a3d;}
 /* 表单样式 */
 .content-form{ font-size: 15px; }
 .content-box1, .content-box2{ width: 740px; padding:0 20px 5px 25px;   background: #FFF;}
+.content-box3{ width: 950px; padding:0 20px 5px 25px;   background: #FFF;}
 .form{ padding:5px 0; }
 .form p{ padding: 3px 0;}
 .form label{ width: 130px; text-align: right; display: inline-block;}
@@ -159,6 +160,7 @@ a:hover{ color:#272a3d;}
 
 /* 文字内容页面 */
 .content-txt{ height: 473px; overflow-y:auto; overflow-x:hidden; }
+.content-txt2{ height: 800px;}
 .service{ padding: 30px 0 0 75px; line-height: 24px; color: #666;}
 .notice{ }
 .notice .title{ font-size: 24px; color:#c20f36; font-weight: lighter; text-align: center; }

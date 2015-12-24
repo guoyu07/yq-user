@@ -26,6 +26,7 @@ import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.manager.service.AdminService;
+import com.yq.user.bo.BabyInfo;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Cpuser;
 import com.yq.user.bo.Datecj;
@@ -49,6 +50,7 @@ import com.yq.user.bo.Txpay;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
+import com.yq.user.dao.BabyInfoDao;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
 import com.yq.user.dao.DatePayDao;
@@ -124,7 +126,8 @@ public class UserService {
     private FcxtDao fcxtDao;
     @Autowired
     private VipcjglDao vipcjglDao;
-
+    @Autowired
+    private BabyInfoDao babyInfoDao;
     
 //    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -3230,5 +3233,113 @@ public class UserService {
 			}
 		}
 		return "xtgc001";
+	}
+	
+	@Transactional
+	public void addBabyInfo(String userName,String babyName, int babyAge, String babySex, String dadyName,
+			int dadyAge, String dadyCall, String momName, int momAge, String momCall, String address, String details,String pa3,String smsCode){
+		if(Strings.isNullOrEmpty(babyName)||Strings.isNullOrEmpty(babySex)||Strings.isNullOrEmpty(dadyName)||Strings.isNullOrEmpty(dadyCall)||Strings.isNullOrEmpty(momName)||Strings.isNullOrEmpty(momCall)||Strings.isNullOrEmpty(address)||Strings.isNullOrEmpty(details)){
+			throw new ServiceException(4, "参数不完整！");
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(!gcuser.getPassword3().equals(pa3)){
+			throw new ServiceException(2, "二级密码不正确");
+		}
+		if(!gcuser.getVipsq().equals(smsCode)){
+			throw new ServiceException(3, "手机验证码不正确");
+		}
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		if(!this.changeYb(userName, -23800, "口才训练营报名", 0, null)){
+			throw new ServiceException(1, "一币不足");
+		}
+		BabyInfo babyInfo = new BabyInfo(userName, gcuser.getName(), babyName, babyAge, babySex, dadyName, dadyAge, dadyCall, momName, momAge, momCall, address, details, 0, "", null, "", "", new Date());
+		if(!babyInfoDao.add(babyInfo)){
+			throw new ServiceException(3000, "数据库插入数据失败");
+		}
+	}
+	
+	public IPage<BabyInfo> getBabyInfoPage(String param,Integer status,String startTime,String endTime,int pageIndex,int pageSize){
+		return babyInfoDao.getPage(param, status,pageIndex, pageSize, startTime, endTime);
+	}
+	
+	public List<BabyInfo> getBabyInfoList(String param,Integer status,String startTime,String endTime){
+		return babyInfoDao.getList(param, status, startTime, endTime);
+	}
+	
+	public BabyInfo getOneBabyInfo(int id){
+		return babyInfoDao.getBabyInfo(id);
+	}
+	/**
+	 * 删除
+	 * @param id
+	 * @param deleteName
+	 * @return
+	 */
+	public boolean deleteBabyInfo(int id,String deleteName){
+		BabyInfo baby =  babyInfoDao.getBabyInfo(id);
+		if(baby!=null&&baby.getStatus()==0){
+			baby.setStatus(1);
+			baby.setDeleteName(deleteName);
+			baby.setEditTime(new Date());
+			return babyInfoDao.update(baby);
+		}
+		return false;
+	}
+	/**
+	 * 恢复
+	 * @param id
+	 * @param recoverName
+	 * @return
+	 */
+	public boolean recoverBabyInfo(int id,String recoverName){
+		BabyInfo baby =  babyInfoDao.getBabyInfo(id);
+		if(baby!=null&&baby.getStatus()==1){
+			baby.setStatus(0);
+			baby.setRecoverName(recoverName);
+			baby.setEditTime(new Date());
+			return babyInfoDao.update(baby);
+		}
+		return false;
+	}
+	/**
+	 * 更新信息
+	 * @param id
+	 * @param editName
+	 * @param babyName
+	 * @param babyAge
+	 * @param babySex
+	 * @param dadyName
+	 * @param dadyAge
+	 * @param dadyCall
+	 * @param momName
+	 * @param momAge
+	 * @param momCall
+	 * @param address
+	 * @param details
+	 * @return
+	 */
+	public boolean updateBabyInfo(int id,String editName,String babyName, int babyAge, String babySex, String dadyName,
+			int dadyAge, String dadyCall, String momName, int momAge, String momCall, String address, String details){
+		if(Strings.isNullOrEmpty(babyName)||Strings.isNullOrEmpty(babySex)||Strings.isNullOrEmpty(dadyName)||Strings.isNullOrEmpty(dadyCall)||Strings.isNullOrEmpty(momName)||Strings.isNullOrEmpty(momCall)||Strings.isNullOrEmpty(address)||Strings.isNullOrEmpty(details)){
+			throw new ServiceException(1, "参数不完整！");
+		}
+		BabyInfo baby =  babyInfoDao.getBabyInfo(id);
+		if(baby!=null){
+			baby.setEditName(editName);
+			baby.setEditTime(new Date());
+			baby.setBabyName(babyName);
+			baby.setBabyAge(babyAge);
+			baby.setBabySex(babySex);
+			baby.setDadyName(dadyName);
+			baby.setDadyAge(dadyAge);
+			baby.setDadyCall(dadyCall);
+			baby.setMomAge(momAge);
+			baby.setMomCall(momCall);
+			baby.setMomName(momName);
+			baby.setAddress(address);
+			baby.setDetails(details);
+			return babyInfoDao.update(baby);
+		}
+		return false;
 	}
 }

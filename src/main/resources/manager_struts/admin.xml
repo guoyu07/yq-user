@@ -538,6 +538,32 @@
 			<result name="success" >/admin/default.jsp</result>
 			<result name="redirect" type="redirect">/admin/adminmanager</result>
 		</action>
+		
+		<action name="babyList" class="com.yq.user.action.BabyAction" method="babyList">
+		    <result name="success">
+		      /admin/babyinfolist.jsp
+		    </result>
+		</action>
+		<action name="outBabyExcel" class="com.yq.user.action.BabyAction" method="outExcel">
+		    <result name="success">
+		      /admin/babyinfolist.jsp
+		    </result>
+		</action>
+        <action name="editBaby" class="com.yq.user.action.BabyAction" method="edit">
+		    <result name="success">
+		      /admin/editbabyinfo.jsp
+		    </result>
+		</action>
+		<action name="delBaby" class="com.yq.user.action.BabyAction" method="delete">
+		    <result name="success">
+		      /admin/editbabyinfo.jsp
+		    </result>
+		</action>
+		<action name="recBaby" class="com.yq.user.action.BabyAction" method="recover">
+		    <result name="success">
+		      /admin/editbabyinfo.jsp
+		    </result>
+		</action>
 	</package>
 
 </struts>

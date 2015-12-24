@@ -16,5 +16,6 @@ Gcuser gcuserJflc = userServiceJflc.getUserByUserName(userServiceJflc.isLogin(re
 					<li><a target="_blank" href="http://www.zgybe.com">一币新商城</a></li>
 					<li><a target="_blank" href="http://yb.zgyce.com/index.asp?vipid=<%=gcuserJflc.getUsername() %>&vippa=<%=gcuserJflc.getPassword()%>">一币换购商品</a></li>
 					<li><a target="_blank" href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=<%=gcuserJflc.getUsername() %>">一币换购记录</a></li>
+			        <li><a href="/baby">口才训练营报名</a></li>
 			        </ul>
 				</div>
