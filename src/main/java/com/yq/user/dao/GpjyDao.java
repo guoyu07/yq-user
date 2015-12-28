@@ -43,7 +43,7 @@ public class GpjyDao {
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
 	public List<Gpjy> getMcPageList(int pageSize){
-		String sql="select * from "+table+" where jy=0 and mcsl>0 order by id limit "+pageSize;
+		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay asc limit "+pageSize;
 		return this.jdbc.getList(sql, Gpjy.class, null);
 	}
 	
@@ -53,7 +53,7 @@ public class GpjyDao {
 	}
 	
 	public List<Gpjy> getMrPage(int pageSize){
-		String sql="select * from "+table+" where jy=0 and mysl>0 order by id limit "+pageSize;
+		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
 		return this.jdbc.getList(sql, Gpjy.class, null);
 	}
 	

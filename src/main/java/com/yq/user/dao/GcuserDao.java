@@ -897,7 +897,7 @@ public class GcuserDao {
 	}
 	
 	public List<Gcuser> getByIdDistance(int startId,int endId){
-		String sql = "select id,username,jyg,sjb from "+table+" where cfc=3 and jygt1=0 and id>=? and id<=? order by id asc";
+		String sql = "select id,username,jyg,sjb from "+table+" where cfc=3 and jygt1<>2 and id>=? and id<=? order by id asc";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(startId);
 		parameter.setInt(endId);
