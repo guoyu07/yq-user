@@ -57,7 +57,7 @@
 			<div class="z-l" >
 				<div class="content-box1" >
 					<div class="content-title">
-						<span>未来领袖青少年口才训练营报名（需要消耗23800一币）</span>
+						<span>未来领袖青少年口才训练营报名（需要消费23800一币）</span>
 					</div>
 					<div class="content-txt">
 						<form class="form form3" style="height:463px;" action="?st=1" method="post" onSubmit="return checkdate1()" name="Form" id="Form">

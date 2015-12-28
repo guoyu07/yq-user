@@ -33,6 +33,7 @@ public class Login2jAction extends ALDAdminActionSupport {
 			Gcuser user = userService.getUserByUserName(super.getUserName());
 			if(Strings.isNullOrEmpty(password3)||!user.getPassword3().equals(password3)){
 				super.setErroCodeNum(1);
+				return SUCCESS;
 			}
 			
 			if("login3j.jsp".equals(inputUrl)){
