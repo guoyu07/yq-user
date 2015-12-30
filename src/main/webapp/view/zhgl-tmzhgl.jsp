@@ -6,6 +6,7 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('选中了不存在的用户');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('非同名用户,不能转');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您至少选择一个需要转账的用户名，谢谢！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('非双区用户不能使用该功能！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已成功批量转账！');location.href='tjz'</script></c:if>
 <c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户一币发生了改变');history.go(-1);</script></c:if>
 <!DOCTYPE html>

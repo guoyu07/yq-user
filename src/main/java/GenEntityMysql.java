@@ -10,6 +10,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.Map;
+
+import com.sr178.common.jdbc.BeanToSQL;
+import com.sr178.common.jdbc.util.SqlUtil;
+import com.yq.user.bo.Datepay;
 
 public class GenEntityMysql {
 	
@@ -227,12 +233,37 @@ public class GenEntityMysql {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String[] tableNames = new String[]{"baby_info"};//表名
-		for(int i=0;i<tableNames.length;i++){
-			new GenEntityMysql(tableNames[i]);
+//		String[] tableNames = new String[]{"baby_info"};//表名
+//		for(int i=0;i<tableNames.length;i++){
+//			new GenEntityMysql(tableNames[i]);
+//		}
+		generatorInsertSql();
+		
+	}
+	
+	
+	public static void generatorInsertSql(){
+		Datepay datePay = new Datepay();
+		datePay.setUsername("zp8888a");
+		datePay.setSyjz(2000);
+		datePay.setPay(2503);
+		datePay.setJydb(0);
+		datePay.setRegid("撤销卖出");
+		datePay.setNewbz(3);
+		datePay.setTxbz(1); 
+		datePay.setAbdate(new Date());
+		BeanToSQL beanSql = SqlUtil.createBeanSql(datePay);
+		System.out.println(beanSql.getSql());
+		 Map<Integer, Object> params = beanSql.getParams().getParams();
+		for(int i=1;i<=params.size();i++){
+			Object o = params.get(i);
+			if(o instanceof String){
+				
+			}
+//			String sql = beanSql.getSql().replace("?", );
 		}
 		
-		
+// 		return this.update(beanSql.getSql(), beanSql.getParams());
 	}
 
 }

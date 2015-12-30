@@ -1237,6 +1237,10 @@ public class UserService {
 			throw new ServiceException(3, "操作错误，请检查输入是否正确！");
 		}
 		
+		if(gcuser.getSjb()==0){
+			throw new ServiceException(7, "非双区用户不能进行该操作！");
+		}
+		
 		for(String fromUser: fromUsers){
 			Gcuser user = gcuserDao.getUser(fromUser);
 			if(user==null){
