@@ -12,7 +12,15 @@
 				position:absolute;
 				display:none;
 			}
-		</style>
+.box{position:absolute;width:100%;left:50%;height:auto;z-index:100;background-color:#fff;border:1px #ddd solid;padding:30px;}
+.box h2{height:25px;font-size:14px;background-color:#aaa;position:relative;padding-left:10px;line-height:25px;color:#fff;}
+.box h2 a{position:absolute;right:5px;font-size:12px;color:#fff;}
+.box .list{padding:10px;}
+.box .list li{height:24px;line-height:24px;}
+.box .list li span{margin:0 5px 0 0;font-family:"宋体";font-size:12px;font-weight:400;color:#ddd;}
+.showbtn {font:bold 24px '微软雅黑';}
+#bg{background-color:#666;position:absolute;z-index:99;left:0;top:0;display:none;width:100%;height:100%;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+</style>
 <script type="text/javascript" src="/scripts/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="/scripts/jquery.datetimepicker.css"/>
 <script src="/scripts/jquery.datetimepicker.js"></script>
@@ -32,6 +40,11 @@
       </td>
   </tr> 
   
+  <tr align="center">
+      <td width="100%" height="26" background="/meme/images/admin_bg_1.gif"> 
+           <p class="showbtn"><a href='userperlist'>查看2015年度获奖用户名单</a></p>
+      </td>
+  </tr> 
   </table>
   <c:if test="${not empty bean}">
             <table border="1" cellspacing="0" width="100%" style="border-collapse: collapse" cellpadding="0" height="62">
@@ -110,6 +123,12 @@
 </div> 
 <div id="sample">
   <div id="myDiagram" style="background-color: white; border: solid 1px black; width: 100%; height: 600px"></div>
+</div>
+
+<center>
+<div id="bg"></div>
+<div class="box" style="display:none">
+    <h2>正在执行查询，请不要关闭界面！需要时间1-2分钟左右！</h2>
 </div>
 </body> 
 </html>
@@ -205,4 +224,25 @@
     // here's the family data
      ${bean.performance.htmlScript}
   }
+</script>
+<script type="text/javascript">
+$(function () {
+    $(".showbtn").click(function () {
+        $("#bg").css({
+            display: "block", height: $(document).height()
+        });
+        var $box = $('.box');
+        $box.css({
+            //设置弹出层距离左边的位置
+            left: ($("body").width() - $box.width()) / 2 - 20 + "px",
+            //设置弹出层距离上面的位置
+            top: ($(window).height() - $box.height()) / 2 + $(window).scrollTop() + "px",
+            display: "block"
+        });
+    });
+    //点击关闭按钮的时候，遮罩层关闭
+    //$(".close").click(function () {
+    //    $("#bg,.box").css("display", "none");
+    //});
+});
 </script>

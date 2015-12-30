@@ -233,11 +233,11 @@ public class GenEntityMysql {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		String[] tableNames = new String[]{"baby_info"};//表名
-//		for(int i=0;i<tableNames.length;i++){
-//			new GenEntityMysql(tableNames[i]);
-//		}
-		generatorInsertSql();
+		String[] tableNames = new String[]{"user_performance"};//表名
+		for(int i=0;i<tableNames.length;i++){
+			new GenEntityMysql(tableNames[i]);
+		}
+//		generatorInsertSql();
 		
 	}
 	

@@ -36,6 +36,7 @@ import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
 import com.yq.manager.dao.MtfhtjDao;
 import com.yq.manager.dao.SgtjDao;
+import com.yq.user.bean.TopReward;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Cpuser;
@@ -54,6 +55,7 @@ import com.yq.user.bo.Sgtj;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Tduser;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.UserPerformance;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.Vipxtgc;
 import com.yq.user.bo.YouMingxi;
@@ -73,6 +75,7 @@ import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
+import com.yq.user.dao.UserPerformanceDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
@@ -137,6 +140,8 @@ public class AdminService {
 	private TxPayDao txpayDao;
 	@Autowired
 	private VipxtgcDao vipxtgcDao;
+	@Autowired
+	private UserPerformanceDao userPerformanceDao;
 	
 	
 	
@@ -2485,4 +2490,77 @@ public class AdminService {
 	}
 	
 	
+//	public void generatorTopReward(Date date){
+//		LogSystem.info("开始采集年度获奖数据日期="+DateUtils.getDate(date));
+//		long startTimes = System.currentTimeMillis();
+//		List<UserPerformance> searchs = Lists.newArrayList();
+//		int year = DateUtils.getYear(date);
+//		String startTime = year+"-01-01 00:00:00";
+//		String endTimeStr = DateUtils.getDate(date);
+//		String endTime = endTimeStr+" 23:59:59";
+//		List<TopReward> list = gcuserDao.getUserTopReward(startTime);
+//		if(list!=null&&list.size()>0){
+//			for(TopReward tr:list){
+//				searchs.add(getUserPerformanceBO(tr.getUp(),startTime, endTime));
+//			}
+//		}
+//		if(searchs.size()>0){
+//			userPerformanceDao.insert(searchs);
+//		}
+//		long endTimes = System.currentTimeMillis();
+//		LogSystem.info("采集年度获奖数据结束，日期="+DateUtils.getDate(date)+",采集数据条数"+searchs.size()+",用去时间为="+(endTimes-startTimes)/1000+"秒！");
+//	}
+	
+	
+	
+	public List<UserPerformance> getUserPerformancePage(){
+//		return userPerformanceDao.getListPage(time, pageIndex, pageSize);
+		Date end = DateUtils.StringToDate("2016-01-02 00:00:00", DateStyle.YYYY_MM_DD_HH_MM_SS);
+		String d = DateUtils.getDate(new Date());
+		if(new Date().getTime()>end.getTime()){
+			d = "2016-01-01";
+		}
+		List<UserPerformance> searchs = userPerformanceDao.getListPage(d);
+		
+		
+		if(searchs!=null&&searchs.size()>0){
+			return searchs;
+		}
+		String startTime = "2015-01-01 00:00:00";
+		String endTime =  "2015-12-31 23:59:59";
+		List<TopReward> list = gcuserDao.getUserTopReward(startTime);
+		if(list!=null&&list.size()>0){
+			for(TopReward tr:list){
+				UserPerformance t = getUserPerformanceBO(tr.getUp(),startTime, endTime);
+				if(t!=null){
+					searchs.add(t);
+				}
+			}
+			userPerformanceDao.removeAll();
+			userPerformanceDao.insert(searchs);
+		}
+		return searchs;
+	}
+	
+	public UserPerformance getUserPerformanceBO(String userName,String startTime,String endTime){
+		UserPerformance result = new UserPerformance();
+		result.setSigleAllPerformance(getUserThisYearSiglePerformance(userName, null, null));
+		result.setSigleTimeAllPerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
+//		startTime = startTime + " 00:00:00";
+//		endTime = endTime + " 23:59:59";
+		result.setFiveLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, null, null,5));
+		result.setFiveLeftTimePerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, startTime, endTime,5));
+		result.setFiveRightPerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, null, null,5));
+		result.setFiveRightTimePerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime,5));
+		Sgxt sgxt = sgxtDao.get(userName);
+		result.setZaq(sgxt.getZaq());
+		result.setZbq(sgxt.getZbq());
+		result.setAllTimeLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, startTime, endTime,0));
+		result.setAllTimeRightPerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime,0));
+		boolean isfivefull = isFiveStepFull(userName);
+		result.setFu(isfivefull?1:0);
+		result.setAddTime(new Date());
+		result.setUserName(userName);
+		return result;
+	}
 }

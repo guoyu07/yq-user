@@ -1,11 +1,18 @@
 package com.yq.manager.action;
 
+import java.util.Date;
+import java.util.List;
+
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.common.utils.DateUtils;
 import com.yq.manager.bean.UserPerformanceSearch;
 import com.yq.manager.service.AdminService;
+import com.yq.user.bo.UserPerformance;
 
-public class PerformanceSearchAction extends ALDAdminActionSupport {
+public class PerformanceSearchAction extends ALDAdminPageActionSupport<UserPerformance> {
 	/**
 	 * 
 	 */
@@ -26,7 +33,22 @@ public class PerformanceSearchAction extends ALDAdminActionSupport {
         bean = adminService.getUserPerformanceSearch(user, startTime, endTime);
 		return SUCCESS;
 	}
+	//2015年获奖可能获奖用户名单
+	private List<UserPerformance> listTemp;
+	public String list(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		listTemp = adminService .getUserPerformancePage();		
+		return SUCCESS;
+	}
 	
+	public List<UserPerformance> getListTemp() {
+		return listTemp;
+	}
+
+	public void setListTemp(List<UserPerformance> listTemp) {
+		this.listTemp = listTemp;
+	}
+
 	public UserPerformanceSearch getBean() {
 		return bean;
 	}

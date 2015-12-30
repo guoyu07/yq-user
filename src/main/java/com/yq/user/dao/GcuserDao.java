@@ -11,6 +11,7 @@ import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
+import com.yq.user.bean.TopReward;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
 
@@ -988,4 +989,10 @@ public class GcuserDao {
 		return this.jdbc.update(sql, null);
 	}
 	
+	public List<TopReward> getUserTopReward(String date){
+		String sql = "select g.up as up,sum(g.sjb) as num from gcuser g left join gcuser gc on g.up=gc.username where g.regtime>? and g.userid<>gc.userid and g.sjb>=20 group by g.up having num>1000";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(date);
+		return this.jdbc.getList(sql, TopReward.class,parameter);
+	}
 }

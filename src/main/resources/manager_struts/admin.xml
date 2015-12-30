@@ -523,6 +523,11 @@
 		      userper.jsp
 		    </result>
 		</action>
+		<action name="userperlist" class="com.yq.manager.action.PerformanceSearchAction" method="list">
+		    <result name="success">
+		      userperlist.jsp
+		    </result>
+		</action>
 		
 		<action name="insertuser" class="com.yq.manager.action.InsertPositionAction">
 		    <result name="success">

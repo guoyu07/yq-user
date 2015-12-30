@@ -20,6 +20,7 @@
        <bean id="mqfhDao" class="com.yq.manager.dao.MqfhDao"></bean>
        <bean id="addShengDao" class="com.yq.manager.dao.AddShengDao"></bean>
        <bean id="mtfhtjDao" class="com.yq.manager.dao.MtfhtjDao"></bean>
+       <bean id="userPerformanceDao" class="com.yq.user.dao.UserPerformanceDao"></bean>
        <!-- 每日凌晨过1分执行 -->
        <bean id="backCountScheduler" class="com.yq.manager.scheduler.BackCountScheduler">
           <property name="cronExpression" value="0 1 0 * * ?"></property>
@@ -39,5 +40,9 @@
        <!-- 每月1号凌晨0点5份执行    -->
        <bean id="shareMoneyScheduler" class="com.yq.manager.scheduler.ShareMoneyScheduler">
           <property name="cronExpression" value=" 0 5 0 1 * ?"></property>
+       </bean>
+       <!-- 每日凌晨过5分执行 -->
+       <bean id="userPerformanceScheduler" class="com.yq.manager.scheduler.UserPerformanceScheduler">
+          <property name="cronExpression" value="0 5 0 * * ?"></property>
        </bean>
 </beans>
