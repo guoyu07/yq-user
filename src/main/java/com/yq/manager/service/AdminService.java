@@ -1682,8 +1682,6 @@ public class AdminService {
 	 * 后台执行xxxx
 	 */
 	public void man123(){
-		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
-		gcuserDao.updateJygdateAndJygt1("<50000", 1, null, 0);
 		gcuserDao.updateAbdateAndDbtl(">30", 0, new Date(), 1);
 		gcuserDao.updateAbdateAndDbtl("<=30", 1, null, 0);
 		fcxtDao.updateJy5w();
@@ -1780,35 +1778,46 @@ public class AdminService {
 	}
 	
 	public void managequeren(){
+		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
+		gcuserDao.updateJygdateAndJygt1("<50000", 1, null, 0);
 		int pageIndex = 0;
 		int pageSize = 100;
 		Collection<Gcuser> tempList = null;
 		IPage<Gcuser> page = null;
 	    String endTime = DateUtils.DateToString(DateUtils.addDay(new Date(), -7),DateStyle.YYYY_MM_DD_HH_MM_SS);
 	    //第一遍循环
+	    LogSystem.info("开始进行30%的扣除~！");
+	    int dmSize = 0;
+	    int loseSize = 0;
 	    while(true){
 			page= gcuserDao.getManageQueren(pageIndex, pageSize, endTime);
 	    	if(page!=null){
 	    		tempList = page.getData();
 	    		if(tempList!=null&&tempList.size()>0){
 	    			for(Gcuser gcuser:tempList){
-	    				String clname = gcuser.getUsername();
-	    				double mcsl=gcuser.getJyg()-50000;
-	    				double mc30=mcsl*0.3;
-	    				int hs30=(int)(mc30/1);
-	    				if(hs30>0){
-	    					if(gcuserDao.updateJyg(clname, hs30)){
-	    						Gpjy gpjy = new Gpjy();
-		    					gpjy.setUsername(clname);
-		    					gpjy.setMcsl(hs30*1d);
-		    					gpjy.setSysl((gcuser.getJyg()-hs30)*1d);
-		    					gpjy.setBz("超出"+mcsl+"回收30%");
-		    					gpjy.setDfuser("系统管理员");
-		    					gpjy.setCgdate(new Date());
-		    					gpjy.setJy(1);
-		    					gpjyDao.add(gpjy);
-	    					}
-	    				}
+						try {
+							String clname = gcuser.getUsername();
+							double mcsl = gcuser.getJyg() - 50000;
+							double mc30 = mcsl * 0.3;
+							int hs30 = (int) (mc30 / 1);
+							if (hs30 > 0) {
+								dmSize++;
+								if (gcuserDao.updateJyg(clname, hs30)) {
+									Gpjy gpjy = new Gpjy();
+									gpjy.setUsername(clname);
+									gpjy.setMcsl(hs30 * 1d);
+									gpjy.setSysl((gcuser.getJyg() - hs30) * 1d);
+									gpjy.setBz("超出" + mcsl + "回收30%");
+									gpjy.setDfuser("系统管理员");
+									gpjy.setCgdate(new Date());
+									gpjy.setJy(1);
+									gpjyDao.add(gpjy);
+								}
+							}
+						} catch (Exception e) {
+							loseSize++;
+							LogSystem.error(e, "userName="+gcuser.getUsername()+",处理回收30%的时候出错！");
+						}
 	    			}
 	    		}else{
 	    			break;
@@ -1818,39 +1827,51 @@ public class AdminService {
 	    	}
 	    	pageIndex++;
 	    }
+	    LogSystem.info("30%的扣除结束！一共处理用户个数="+dmSize+",其中处理失败用户数为"+loseSize);
+	    
 	    
 	    pageIndex = 0;
 	    Fcxt fcxt = fcxtDao.get(2);
+	    LogSystem.info("开始进行积分的代卖~！");
+	     dmSize= 0;
+	     loseSize = 0;
 	    //第一遍循环
 	    while(true){
 			page= gcuserDao.getManageQueren(pageIndex, pageSize, endTime);
 	    	if(page!=null){
 	    		tempList = page.getData();
 	    		if(tempList!=null&&tempList.size()>0){
-	    			for(Gcuser gcuser:tempList){
-	    				String clname= gcuser.getUsername();
-	    				int jygall=gcuser.getJyg();
-						int  jygnumber=gcuser.getJyg()-50000;
-						int  ForCount=(int)(jygnumber/200);
-						int  lasenumber=jygnumber%200;
-						if(ForCount>0){
-							for(int j=1;j<=ForCount;j++){
-								addGpjyForManageQueren(clname, 200,jygall-j*200,fcxt.getZdj());
+					for (Gcuser gcuser : tempList) {
+						try {
+							dmSize++;
+							String clname = gcuser.getUsername();
+							int jygall = gcuser.getJyg();
+							int jygnumber = gcuser.getJyg() - 50000;
+							int ForCount = (int) (jygnumber / 200);
+							int lasenumber = jygnumber % 200;
+							if (ForCount > 0) {
+								for (int j = 1; j <= ForCount; j++) {
+									addGpjyForManageQueren(clname, 200, jygall - j * 200, fcxt.getZdj());
+								}
 							}
-						} 
-						if(lasenumber>0){
-							addGpjyForManageQueren(clname,lasenumber,jygall-ForCount*200-lasenumber,fcxt.getZdj());
+							if (lasenumber > 0) {
+								addGpjyForManageQueren(clname, lasenumber, jygall - ForCount * 200 - lasenumber,
+										fcxt.getZdj());
+							}
+							gcuserDao.updateManageQueren(clname, 50000, null, 0);
+						} catch (Exception e) {
+							loseSize++;
+							LogSystem.error(e, "userName="+gcuser.getUsername()+",处理代卖的时候出错！");
 						}
-						gcuserDao.updateManageQueren(clname, 50000, null, 0);
-	    			}
+					}
 	    		}else{
 	    			break;
 	    		}
 	    	}else{
 	    		break;
 	    	}
-	    	pageIndex++;
 	    }
+	    LogSystem.info("积分代卖结束！处理人数为="+dmSize+",其中处理失败用户数为"+loseSize);
 	}
 	
 	private void addGpjyForManageQueren(String clname,double mcsl,double jyg,double jg){
@@ -2039,6 +2060,50 @@ public class AdminService {
 		LogSystem.info("完成-----------重置zaq zbq表功能---完成-总计耗时"+(System.currentTimeMillis()-allStartTime)/1000+"秒！~");
 	}
 	
+	public void resetUserZaqAndZbq(String userName){
+		long allStartTime = System.currentTimeMillis();
+		LogSystem.info("开启重置zaq zbq表功能---["+userName+"]"+new Date());
+		//重置数据
+		if(sgxtDao.resetZaqAndZbq(userName)){
+			Sgxt sgxt = sgxtDao.get(userName);
+			if (sgxt != null) {
+				if (!Strings.isNullOrEmpty(sgxt.getAuid())) {
+					CalculateUserLeftZaq(userName, sgxt.getAuid());
+				}
+				if (!Strings.isNullOrEmpty(sgxt.getBuid())) {
+					CalculateUserRightZbq(userName, sgxt.getBuid());
+				}
+			}
+		}
+		LogSystem.info("完成-----------重置zaq zbq表功能---完成-总计耗时["+userName+"]"+(System.currentTimeMillis()-allStartTime)/1000+"秒！~");
+	}
+	
+	private void CalculateUserLeftZaq(String constantUserName,String auid){
+		Sgxt sgxt = sgxtDao.get(auid);
+		if(sgxt!=null){
+			sgxtDao.updateZaq(constantUserName, sgxt.getSjb());
+			if(!Strings.isNullOrEmpty(sgxt.getAuid())){
+				CalculateUserLeftZaq(constantUserName, sgxt.getAuid());
+			}
+			if(!Strings.isNullOrEmpty(sgxt.getBuid())){
+				CalculateUserLeftZaq(constantUserName, sgxt.getBuid());
+			}
+		}
+	}
+	
+	private void CalculateUserRightZbq(String constantUserName,String buid){
+		Sgxt sgxt = sgxtDao.get(buid);
+		if(sgxt!=null){
+			sgxtDao.updateZbq(constantUserName, sgxt.getSjb());
+			if(!Strings.isNullOrEmpty(sgxt.getAuid())){
+				CalculateUserRightZbq(constantUserName, sgxt.getAuid());
+			}
+			if(!Strings.isNullOrEmpty(sgxt.getBuid())){
+				CalculateUserRightZbq(constantUserName, sgxt.getBuid());
+			}
+		}
+	}
+	
 	public boolean callRemoteCharge(String call,int amount,String ip,String userName){
 		LogSystem.info("手动--用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】");
 		_99douInterface _99dou = new _99douInterface();
@@ -2130,7 +2195,9 @@ public class AdminService {
 		}
 		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
 		String mydj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
-		logService.updateRegId(gpjy1.getJyid(), DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS)
+		String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+		String dStr = d==null?"":d;
+		logService.updateRegId(gpjy1.getJyid(),dStr 
 				+ "支出成功到" + userName + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
 //		fcxtDao.update(2, gpjy1.getMysl().intValue());
 	}

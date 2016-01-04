@@ -2671,8 +2671,9 @@ public class UserService {
 		datePay1.setRegid("卖出" + gpjy1.getMysl() + "积分单价" + mydj + "到" + gpjy1.getUsername());
 		datePay1.setAbdate(new Date());
 		logService.addDatePay(datePay1);
-		logService.updateRegId(gpjy1.getJyid(), DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS)
-				+ "支出成功到" + userName + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
+		String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+		String dStr = d==null?"":d;
+		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
 		fcxtDao.update(2, gpjy1.getMysl().intValue());
 			 
 	}

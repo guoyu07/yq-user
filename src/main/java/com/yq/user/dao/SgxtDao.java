@@ -206,6 +206,11 @@ public class SgxtDao {
 		 jdbc.update(sql, null);
 	 }
 	 
+	 public boolean resetZaqAndZbq(String userName){
+		 String sql = "update "+table+" set zaq=0,zbq=0 where username='"+userName+"' limit 1";
+		 return jdbc.update(sql, null)>0;
+	 }
+	 
 	 public boolean updateVipUser(String userName,String vipUser){
 		 String sql = "update "+table+" set vipuser=? where username=? limit 1";
 	    	SqlParameter parameter = new SqlParameter();

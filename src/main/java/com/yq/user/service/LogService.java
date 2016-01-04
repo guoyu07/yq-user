@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.manager.dao.JbkzjDao;
 import com.yq.user.bo.Bdbdate;
@@ -206,8 +207,20 @@ public class LogService {
 		return datecjDao.getDatecjPageList(userName, pageIndex, pageSize);
 	}
 	
-	public IPage<Datecj> getAllDateCjPageList(int pageIndex,int pageSize){
-		return datecjDao.getAllDatecjPageList(pageIndex, pageSize);
+	public IPage<Datecj> getAllDateCjPageList(String startTime,String endTime,int pageIndex,int pageSize){
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return datecjDao.getAllDatecjPageList(startTime,endTime,pageIndex, pageSize);
+	}
+	
+	public List<Datecj> getDateCjList(String startTime,String endTime){
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return datecjDao.getAllDatecjList(startTime,endTime);
 	}
 	
 	public IPage<Jbkzj> getAllJbkjzPageList(int pageIndex,int pageSize){

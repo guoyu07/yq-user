@@ -49,7 +49,11 @@
 		        chargedetails.jsp
 		    </result>
 		</action>
-		
+		<action name="outdpexcelcharge" class="com.yq.manager.action.ChargeDetailsAction" method="outDateCjExcel">
+		    <result name="success">
+		        chargedetails.jsp
+		    </result>
+		</action>
 		<action name="goldcardmanager" class="com.yq.manager.action.GoldCardManagerAction">
 		    <result name="success">
 		        goldcardmanager.jsp

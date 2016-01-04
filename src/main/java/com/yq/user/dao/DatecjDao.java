@@ -1,7 +1,10 @@
 package com.yq.user.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
@@ -30,9 +33,28 @@ public class DatecjDao {
 		return jdbc.getListPage(sql, Datecj.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
 	}
 	
-	public IPage<Datecj> getAllDatecjPageList(int pageIndex,int pageSize){
-		String sql = "select * from "+table+" order by id desc";
-		return jdbc.getListPage(sql, Datecj.class, null, pageSize, pageIndex);
+	public IPage<Datecj> getAllDatecjPageList(String startTime,String endTime,int pageIndex,int pageSize){
+		String sql = "select * from "+table;
+		SqlParameter parameter = SqlParameter.Instance();
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			sql = sql+" where qldate between ? and ? ";
+			parameter.withString(startTime);
+			parameter.withString(endTime);
+		}
+		sql = sql + " order by id desc";
+		return jdbc.getListPage(sql, Datecj.class, parameter, pageSize, pageIndex);
+	}
+	
+	public List<Datecj> getAllDatecjList(String startTime,String endTime){
+		String sql = "select * from "+table;
+		SqlParameter parameter = SqlParameter.Instance();
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			sql = sql+" where qldate between ? and ? ";
+			parameter.withString(startTime);
+			parameter.withString(endTime);
+		}
+		sql = sql + " order by id desc";
+		return jdbc.getList(sql, Datecj.class, parameter);
 	}
 	
 	public IPage<Datecj> getDatecjPageListByCz(String cz,int pageIndex,int pageSize){
