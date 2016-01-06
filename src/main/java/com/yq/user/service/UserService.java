@@ -2853,7 +2853,7 @@ public class UserService {
 		if(zuoMingxiDao.get(fromUserName, toUserName)==null&&youMingXiDao.get(fromUserName, toUserName)==null){
 			throw new ServiceException(1, "用户名输入错误或不属于自己团队的玩家，请检查后再试！");
 		}
-		if(!password.equals("vip2015th")){
+		if(!password.equals("zjl888vip")){
 			throw new ServiceException(2, "充值密码不正确！");
 		}
 		Gcuser toUser = gcuserDao.getUser(toUserName);
