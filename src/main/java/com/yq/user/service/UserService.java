@@ -2312,9 +2312,11 @@ public class UserService {
 			throw new ServiceException(3000,"非法操作");
 		}
 		
-		if(!gpjyDao.delete(orderId)){
+		if(!gpjyDao.delete(orderId,gpjy1.getId())){
 			throw new ServiceException(2,"该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
+		
+		gpjyDao.deleteIndex(gpjy1.getId());
 		
 		datePayDao.updateRegIdToCancel(orderId,"已撤销");
 		Datepay datepay = datePayDao.getById(orderId);
@@ -2484,6 +2486,8 @@ public class UserService {
 			throw new ServiceException(3000,"更新失败");
 		}
 		
+		gpjyDao.deleteIndex(orderId);
+		
 		gcuser = gcuserDao.getUser(userName);
 		
 		Gpjy gpjy = new Gpjy();
@@ -2524,6 +2528,7 @@ public class UserService {
 		if(!gpjyDao.updatePayAndJyPay(id, price,(int)(Math.ceil(price*gpjy1.getMcsl())))){
 			throw new ServiceException(3,"该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
+		gpjyDao.updateIndexPay(id, price);
 	}
 	/**
 	 * 买入积分
@@ -2551,6 +2556,8 @@ public class UserService {
 		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
+		
+		gpjyDao.deleteIndex(id);
 
 		gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy = new Gpjy();
@@ -2641,6 +2648,7 @@ public class UserService {
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg())) {
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
+		gpjyDao.deleteIndex(id);
 		
 		if(gcuser.getBddate()!=null&&gcuser.getJyg()<50000&&DateUtils.getIntervalDays( new Date(),gcuser.getBddate())<100){
 			throw new ServiceException(3,"未满100天的账户，积分暂时停止卖出交易，收益完成后自动开放！");

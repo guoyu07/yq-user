@@ -9,6 +9,8 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.GpjyIndexMc;
+import com.yq.user.bo.GpjyIndexMr;
 
 public class GpjyDao {
 	@Autowired
@@ -60,13 +62,15 @@ public class GpjyDao {
 	
 	
 	private void initMcCache(int pageSize){
-		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay asc limit "+pageSize;
+//		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay asc limit "+pageSize;
+		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mc order by pay asc limit "+pageSize+")t )";
 		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
 		mcCache = list;
 	}
 	
 	private void initMrCache(int pageSize){
-		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
+//		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
+		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mr order by pay asc limit "+pageSize+")t )";
 		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
 		mrCache = list;
 	}
@@ -75,18 +79,53 @@ public class GpjyDao {
 		if(gpjy.getAbdate()==null){
 			gpjy.setAbdate(new Date());
 		}
-		if(gpjy.getMcsl()!=null&&gpjy.getMcsl()>0&&gpjy.getJy()==0){
-			if(mcCache!=null&&mcCache.size()<10){
-				mcCache = null;
+		
+		boolean result = this.jdbc.insert(gpjy)>0;
+		if(result){
+			int id = getLastInsertId();
+			if(gpjy.getMcsl()!=null&&gpjy.getMcsl()>0&&gpjy.getJy()==0){
+				if(mcCache!=null&&mcCache.size()<10){
+					mcCache = null;
+				}
+				//添加卖出市场索引
+				GpjyIndexMc mc = new GpjyIndexMc();
+				mc.setId(id);
+				mc.setPay(gpjy.getPay());
+				mc.setMcsl(gpjy.getMcsl());
+				mc.setCreatedTime(new Date());
+				jdbc.insert(mc);
+			}
+			if(gpjy.getMysl()!=null&&gpjy.getMysl()>0&&gpjy.getJy()==0){
+				if(mrCache!=null&&mrCache.size()<10){
+					mrCache = null;
+				}
+				//添加买入市场索引
+				GpjyIndexMr my = new GpjyIndexMr();
+				my.setId(id);
+				my.setPay(gpjy.getPay());
+				my.setMysl(gpjy.getMysl());
+				my.setCreatedTime(new Date());
+				jdbc.insert(my);
 			}
 		}
-		if(gpjy.getMysl()!=null&&gpjy.getMysl()>0&&gpjy.getJy()==0){
-			if(mrCache!=null&&mrCache.size()<10){
-				mrCache = null;
-			}
-		}
-		return this.jdbc.insert(gpjy)>0;
+		
+		return result;
 	}
+	
+	public void deleteIndex(int id){
+		String sqlMc = "delete from gpjy_index_mc where id="+id;
+		jdbc.update(sqlMc, null);
+		String sqlMr = "delete from gpjy_index_mr where id="+id;
+		jdbc.update(sqlMr, null);
+	}
+	
+	public void updateIndexPay(int id,double pay){
+		String sqlMc = "update gpjy_index_mc set pay=? where id="+id;
+		String sqlMr = "update gpjy_index_mr set pay=? where id="+id;
+		jdbc.update(sqlMc, SqlParameter.Instance().withDouble(pay));
+		jdbc.update(sqlMr, SqlParameter.Instance().withDouble(pay));
+	}
+	
 	
 	public IPage<Gpjy> getPageList(String userName,int pageIndex,int pageSize){
 		String sql = "select * from gpjy where username = ? and kjqi>0 order by id desc" ;
@@ -94,7 +133,9 @@ public class GpjyDao {
 	}
 	
 	public Gpjy get(){
-		String sql="select * from "+table+" where jy=0 and mcsl>0 limit 1";
+		
+//		String sql="select * from "+table+" where jy=0 and mcsl>0 limit 1";
+		String sql = "select * from gpjy_index_mc limit 1";
 		return this.jdbc.get(sql, Gpjy.class, null);
 	}
 	
@@ -224,13 +265,13 @@ public class GpjyDao {
 		return result;
 	}
 	
-	public boolean delete(int id){
+	public boolean delete(int id,int indexId){
 		String sql = "delete from "+table+" where jyid =? and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(id);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
 		if(result){
-			cleanCache(id);
+			cleanCache(indexId);
 		}
 		return result;
 	}
@@ -285,5 +326,8 @@ public class GpjyDao {
 		String sql="select * from "+table+" where "+field+" = ? order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(value), pageSize, pageIndex);
 	}
-	
+	public int getLastInsertId(){
+		String sql = "SELECT LAST_INSERT_ID()";
+		return this.jdbc.getInt(sql, null);
+	}
 }

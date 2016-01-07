@@ -2193,6 +2193,9 @@ public class AdminService {
 		if (!gpjyDao.updateBuySuccess(gpjy1.getId(), userName, "买入成功",(int)(dfuser.getJyg()+gpjy1.getMysl()))) {
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
+		
+		gpjyDao.deleteIndex(gpjy1.getId());
+		
 		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
 		String mydj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
 		String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
