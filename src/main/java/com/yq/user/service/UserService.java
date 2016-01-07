@@ -1439,9 +1439,9 @@ public class UserService {
 		datePay.setNewbz(3);
 		datePay.setTxbz(1); 
 		datePay.setAbdate(new Date());
-		logService.addDatePay(datePay);
+		int datePayId = logService.addDatePay(datePay);
 		
-		int datePayId = logService.getLasterInsertId();
+//		int datePayId = logService.getLasterInsertId();
 		
 		Txpay txpay = txPayDao.get();
 		int jypay = 1;
@@ -2274,9 +2274,9 @@ public class UserService {
 		datePay.setPay(gcuser.getPay());
 		datePay.setJydb(gcuser.getJydb()-needJb);
 		datePay.setAbdate(new Date());
-		logService.addDatePay(datePay);
+		int id = logService.addDatePay(datePay);
 		
-		int id = logService.getLasterInsertId();
+//		int id = logService.getLasterInsertId();
 		
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);

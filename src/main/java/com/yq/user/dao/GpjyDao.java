@@ -80,9 +80,8 @@ public class GpjyDao {
 			gpjy.setAbdate(new Date());
 		}
 		
-		boolean result = this.jdbc.insert(gpjy)>0;
-		if(result){
-			int id = getLastInsertId();
+		int id = this.jdbc.insertBackKeys(gpjy);
+		
 			if(gpjy.getMcsl()!=null&&gpjy.getMcsl()>0&&gpjy.getJy()==0){
 				if(mcCache!=null&&mcCache.size()<10){
 					mcCache = null;
@@ -106,10 +105,9 @@ public class GpjyDao {
 				my.setMysl(gpjy.getMysl());
 				my.setCreatedTime(new Date());
 				jdbc.insert(my);
-			}
 		}
 		
-		return result;
+		return true;
 	}
 	
 	public void deleteIndex(int id){
@@ -326,8 +324,5 @@ public class GpjyDao {
 		String sql="select * from "+table+" where "+field+" = ? order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(value), pageSize, pageIndex);
 	}
-	public int getLastInsertId(){
-		String sql = "SELECT LAST_INSERT_ID()";
-		return this.jdbc.getInt(sql, null);
-	}
+
 }

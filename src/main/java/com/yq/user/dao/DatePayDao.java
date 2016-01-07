@@ -89,11 +89,11 @@ public class DatePayDao {
 	}
 	
 	
-	public boolean addDatePay(Datepay datepay){
+	public int addDatePay(Datepay datepay){
 		if(datepay.getAbdate()==null){
 			datepay.setAbdate(new Date());
 		}
-		return this.jdbc.insert(datepay)>0;
+		return this.jdbc.insertBackKeys(datepay);
 	}
 	
 	public Datepay getDatepayByUserNameAndRegid(String userName,String regId){
@@ -148,10 +148,10 @@ public class DatePayDao {
 		return this.jdbc.getListPage(sql, DatepayMore.class, sqlParameter, pageSize, pageIndex);
 	}
 	
-	public int getLastInsertId(){
-		String sql = "SELECT LAST_INSERT_ID()";
-		return this.jdbc.getInt(sql, null);
-	}
+//	public int getLastInsertId(){
+//		String sql = "SELECT LAST_INSERT_ID()";
+//		return this.jdbc.getInt(sql, null);
+//	}
 	
 	public boolean updateRegidByQlid(int id,String regId){
 		String sql = "update "+table+" set regid=? where id=? limit 1";

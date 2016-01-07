@@ -1761,8 +1761,7 @@ public class AdminService {
 		datepay.setPay(pay);
 		datepay.setJydb(jydb);
 		datepay.setRegid(regId);
-		datePayDao.addDatePay(datepay);
-		return datePayDao.getLastInsertId();
+		return datePayDao.addDatePay(datepay);
 	}
 	
 	private void addGpjy(String clname,int mysl,double jyg,int jyid,double jyj){

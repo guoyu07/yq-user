@@ -134,7 +134,7 @@ public class LogService {
 	 * @param datepay
 	 * @return
 	 */
-	public boolean addDatePay(Datepay datepay){
+	public int addDatePay(Datepay datepay){
 		return datePayDao.addDatePay(datepay);
 	}
 	
@@ -199,9 +199,9 @@ public class LogService {
 		return dldateDao.add(dldate);
 	}
 	
-	public int getLasterInsertId(){
-		return datePayDao.getLastInsertId();
-	}
+//	public int getLasterInsertId(){
+//		return datePayDao.getLastInsertId();
+//	}
 	
 	public IPage<Datecj> getDateCjPageList(String userName,int pageIndex,int pageSize){
 		return datecjDao.getDatecjPageList(userName, pageIndex, pageSize);
