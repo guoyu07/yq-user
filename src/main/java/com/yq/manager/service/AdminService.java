@@ -1778,7 +1778,7 @@ public class AdminService {
 	
 	public void managequeren(){
 		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
-		gcuserDao.updateJygdateAndJygt1("<50000", 1, null, 0);
+		gcuserDao.updateJygdateAndJygt1("<=50000", 1, null, 0);
 		int pageIndex = 0;
 		int pageSize = 100;
 		Collection<Gcuser> tempList = null;
@@ -2215,6 +2215,10 @@ public class AdminService {
 		int updateNum = gcuserDao.updateJfChaifen(beishu, d);
 		int insertNum = gcuserDao.insertIntoChaifenLog(beishu, d);
 		fcxtDao.updateChaiFen(2, dijia);
+		
+		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
+		gcuserDao.updateJygdateAndJygt1("<=50000", 1, null, 0);
+		
 		LogSystem.info("执行拆分At【"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS)+"】，拆分注册日期最小值为:【"+DateUtils.DateToString(d, DateStyle.YYYY_MM_DD_HH_MM_SS)+"】,倍数为【"+beishu+"】,底价为【"+dijia+"】,更新gcuser表数据条数为【"+updateNum+"】,插入gpjy日志条数为:【"+insertNum+"】");
 	}
 	/**
@@ -2262,6 +2266,9 @@ public class AdminService {
 			startId = endId+1;
 			endId = endId+cap;
 		}
+		
+		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
+		gcuserDao.updateJygdateAndJygt1("<=50000", 1, null, 0);
 	}
 	
 	private void addGpjyForChaiFeng(String clname,int mcsl,double jyg){

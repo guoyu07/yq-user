@@ -480,7 +480,13 @@ public class GcuserDao {
 		paramter.setObject(new Date());
 		paramter.setString(userName);
 		paramter.setInt(jydb);
-		return this.jdbc.update(sql, paramter)>0;
+		boolean result = this.jdbc.update(sql, paramter)>0;
+		
+		if(result){
+			resetJydbLimit(userName);
+		}
+		
+		return result;
 	}
 
 	public boolean addOnlyJB(String userName,int jydb){
@@ -488,7 +494,13 @@ public class GcuserDao {
 		SqlParameter paramter = new SqlParameter();
 		paramter.setInt(jydb);
 		paramter.setString(userName);
-		return this.jdbc.update(sql, paramter)>0;
+		boolean result = this.jdbc.update(sql, paramter)>0;
+		
+		if(result){
+			resetJydbLimit(userName);
+		}
+		
+		return result;
 	}
 	public boolean reduceOnlyJB(String userName,int jydb){
 		String sql = "update "+table+" set jydb=jydb-? where username=? and jydb-?>=0 limit 1";
@@ -496,7 +508,13 @@ public class GcuserDao {
 		paramter.setInt(jydb);
 		paramter.setString(userName);
 		paramter.setInt(jydb);
-		return this.jdbc.update(sql, paramter)>0;
+		boolean result = this.jdbc.update(sql, paramter)>0;
+		
+		if(result){
+			resetJydbLimit(userName);
+		}
+		
+		return result;
 	}	
 	public boolean updateSjb(String userName,int sjb){
 		String sql = "update "+table+" set sjb=?  where username=? limit 1";
@@ -521,7 +539,14 @@ public class GcuserDao {
 		paramter.setInt(changejygNum);
 		paramter.setString(userName);
 		paramter.setInt(changejygNum);
-		return this.jdbc.update(sql, paramter)>0;
+		boolean result =  this.jdbc.update(sql, paramter)>0;
+		
+		if(result){
+			this.updateJygdateAndJygt1ByUserName(userName,">50000", 0, new Date(), 1);
+			this.updateJygdateAndJygt1ByUserName(userName,"<=50000", 1, null, 0);
+		}
+		
+		return result;
 	}
 	
 	public boolean updateGmdate(String userName,Date gmdate){
@@ -795,6 +820,11 @@ public class GcuserDao {
 		return jdbc.update(sql, SqlParameter.Instance().withObject(jygdate).withInt(jygt1Value).withInt(jygt1Condition))>0;
 	}
 	
+	public boolean updateJygdateAndJygt1ByUserName(String userName,String jygStr,int jygt1Condition,Date jygdate,int jygt1Value){
+		String sql = "update "+table+" set jygdate=?,jygt1=? where jyg"+jygStr+" and jygt1=? and username=? limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withObject(jygdate).withInt(jygt1Value).withInt(jygt1Condition).withString(userName))>0;
+	}
+	
 	public boolean updateAbdateAndDbtl(String jydbStr,int dbt1Condition,Date dbdate,int dbt1Value){
 		String sql = "update "+table+" set dbdate=?,dbt1=? where jydb"+jydbStr+" and dbt1=?";
 		return jdbc.update(sql, SqlParameter.Instance().withObject(dbdate).withInt(dbt1Value).withInt(dbt1Condition))>0;
@@ -955,6 +985,11 @@ public class GcuserDao {
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(regTime);
 		return this.jdbc.update(sql, parameter);
+	}
+	
+	private void resetJydbLimit(String userName){
+		updateAbdateAndDbtlByUserName(userName,">30", 0, new Date(), 1);
+		updateAbdateAndDbtlByUserName(userName,"<=30", 1, null, 0);
 	}
 	
 	public int updateMemberSharePayXyDate(Date regTime,String ration){
