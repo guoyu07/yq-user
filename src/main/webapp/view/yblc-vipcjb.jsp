@@ -17,7 +17,7 @@
  function checkdate()  {  
   if (form.cjuser.value=="") {    alert("请输入要充值的用户名!");  form.cjuser.focus();  return false;    }
   if (form.cjpay.value==0) {    alert("请选择充值金额!");  form.cjpay.focus();  return false;    }
-  if (form.cjpay.value>"${gcuser.vipcjcjb}") {    alert("您的余额不足!");  form.cjpay.focus();  return false;    }
+  if (form.cjpay.value>${gcuser.vipcjcjb}) {    alert("您的余额不足!");  form.cjpay.focus();  return false;    }
   if (form.cjpass.value=="") {    alert("请输入您的充值密码!");  form.cjpass.focus();  return false;    }
   if(confirm("温馨提示：请认真核对后再充值,一经充值不可以恢复,您确定了吗？")){
    $("#B1").hide();
