@@ -2256,9 +2256,9 @@ public class UserService {
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
-			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
-		}
+//		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
+//			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+//		}
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));

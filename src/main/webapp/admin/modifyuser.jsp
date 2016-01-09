@@ -178,21 +178,21 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
     </div>
 </div>
 </form></font>
-<c:if test="${fcxt.id==1}">
+
 <table border="1" width="100%" id="table1">
 	<tr>
-		<td align="center"><iframe name="I4" width="100%" height="200" border="0" frameborder="0" src="jzbdb?jzid=${userid}"></iframe></td>
-		<td align="center"><iframe name="I6" width="100%" height="200" border="0" frameborder="0" src="vipcjb?sfid=${userid}"></iframe></td>
+		<td align="center"><c:if test="${fcxt.id==1}"><iframe name="I4" width="100%" height="200" border="0" frameborder="0" src="jzbdb?jzid=${userid}"></iframe></c:if></td>
+		<td align="center"><c:if test="${fcxt.id==1||fcxt.id==2||fcxt.id==3}"><iframe name="I6" width="100%" height="200" border="0" frameborder="0" src="vipcjb?sfid=${userid}"></iframe></c:if></td>
 	</tr>
 	<tr>
-		<td align="center"><iframe name="I7" width="100%" height="200" border="0" frameborder="0" src="bcjb?bcid=${userid}"></iframe></td>
-		<td align="center"><iframe name="I8" width="100%" height="200" border="0" frameborder="0" src="bcjf?bcid=${userid}"></iframe></td>
+		<td align="center"><c:if test="${fcxt.id==1}"><iframe name="I7" width="100%" height="200" border="0" frameborder="0" src="bcjb?bcid=${userid}"></iframe></c:if></td>
+		<td align="center"><c:if test="${fcxt.id==1}"><iframe name="I8" width="100%" height="200" border="0" frameborder="0" src="bcjf?bcid=${userid}"></iframe></c:if></td>
 	</tr>
 		<tr>
-		<td align="center"><iframe name="I9" width="100%" height="200" border="0" frameborder="0" src="epsf?uid=${userid}"></iframe></td>
-		<td align="center"><iframe name="I10" width="100%" height="200" border="0" frameborder="0" src="btpay?uid=${userid}"></iframe></td>
+		<td align="center"><c:if test="${fcxt.id==1}"><iframe name="I9" width="100%" height="200" border="0" frameborder="0" src="epsf?uid=${userid}"></iframe></c:if></td>
+		<td align="center"><c:if test="${fcxt.id==1}"><iframe name="I10" width="100%" height="200" border="0" frameborder="0" src="btpay?uid=${userid}"></iframe></c:if></td>
 		
 	</tr>
 </table>
-</c:if>
+
 
