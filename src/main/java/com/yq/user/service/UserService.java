@@ -69,6 +69,7 @@ import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
+import com.yq.user.dao.UserDailyGainLogDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
@@ -128,6 +129,8 @@ public class UserService {
     private VipcjglDao vipcjglDao;
     @Autowired
     private BabyInfoDao babyInfoDao;
+    @Autowired
+    private UserDailyGainLogDao userDailyGainLogDao;
     
 //    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -3015,6 +3018,7 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
+	@Transactional
 	public int kypwe(double gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
 		int ybsl = (int)(gwpay*1.02);
 		if(ybsl<=0){
@@ -3043,18 +3047,29 @@ public class UserService {
 			throw new ServiceException(7, "手机验证码不正确");
 		}
 		int day = 0;
-		if(gcuser.getPwdate()!=null&&gcuser.getPwdate().getTime()>new Date().getTime()){
-			day = DateUtils.getIntervalDays(gcuser.getPwdate(), new Date());
-			throw new ServiceException(8, "您好，测试期间同一姓名及证件号30天内仅提供一次消费（不论金额大小），请于"+day+"天后再来，谢谢！");
+//		if(gcuser.getPwdate()!=null&&gcuser.getPwdate().getTime()>new Date().getTime()){
+//			day = DateUtils.getIntervalDays(gcuser.getPwdate(), new Date());
+//			throw new ServiceException(8, "您好，测试期间同一姓名及证件号30天内仅提供一次消费（不论金额大小），请于"+day+"天后再来，谢谢！");
+//		}
+		
+		int year = DateUtils.getYear(new Date());
+		int month = DateUtils.getMonth(new Date())+1;
+		
+		String date = year+"-"+month+"-01";
+		int amount = userDailyGainLogDao.getUserDailyGain(user, 1, date);
+		if(amount+ybsl>10000){
+			throw new ServiceException(8, "您好，每月机票消费不能超过1w，请下月再购买！");
 		}
+		
 		if(!this.changeYb(user, -ybsl, paylb, 11, null)){
 			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 		}
-		Date date = gcuser.getPwdate();
-		if(date==null){
-            date = new Date();
-		}
-		gcuserDao.updatePwdate(gcuser.getUserid(), gcuser.getName(), DateUtils.addDay(date, 30));
+//		Date date = gcuser.getPwdate();
+//		if(date==null){
+//            date = new Date();
+//		}
+//		gcuserDao.updatePwdate(gcuser.getUserid(), gcuser.getName(), DateUtils.addDay(date, 30));
+		userDailyGainLogDao.addUserDailyGain(user, 1, ybsl, date);
 		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
 		return day;
 	}

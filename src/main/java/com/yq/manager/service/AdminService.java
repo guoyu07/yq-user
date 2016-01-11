@@ -55,6 +55,7 @@ import com.yq.user.bo.Sgtj;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Tduser;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.UserExtinfo;
 import com.yq.user.bo.UserPerformance;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.Vipxtgc;
@@ -75,6 +76,7 @@ import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
+import com.yq.user.dao.UserExtinfoDao;
 import com.yq.user.dao.UserPerformanceDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
@@ -142,6 +144,8 @@ public class AdminService {
 	private VipxtgcDao vipxtgcDao;
 	@Autowired
 	private UserPerformanceDao userPerformanceDao;
+	@Autowired
+	private UserExtinfoDao userExtinfoDao;
 	
 	
 	
@@ -2638,5 +2642,16 @@ public class AdminService {
 		result.setAddTime(new Date());
 		result.setUserName(userName);
 		return result;
+	}
+	
+	
+	public void setVerifile(String userName,int verify){
+		if(verify==0){//取消
+			userExtinfoDao.updateUserExtinfo(userName, verify);
+		}else{//设置成免审核
+			if(!userExtinfoDao.updateUserExtinfo(userName, verify)){
+				userExtinfoDao.add(new UserExtinfo(userName,verify));
+			}
+		}
 	}
 }

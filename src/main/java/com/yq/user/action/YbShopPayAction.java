@@ -1,11 +1,9 @@
 package com.yq.user.action;
 
-import java.util.Date;
 
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
-import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
@@ -136,9 +134,9 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			}
 		}else{
 			Gcuser gcuser = userService.getUserByUserName(user);
-			if(gcuser.getPwdate()!=null){
-				day = DateUtils.getIntervalDays(gcuser.getPwdate(), new Date());
-			}
+//			if(gcuser.getPwdate()!=null){
+//				day = DateUtils.getIntervalDays(gcuser.getPwdate(), new Date());
+//			}
 			userService.kypwe(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode);
 			sn=MD5Security.md5_16(order+"$#85546875#@$#%"+gwpay);
 			if(pid==1){

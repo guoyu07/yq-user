@@ -7,7 +7,7 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('输入的二级密码不正确，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您的一币余额不足，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('手机验证码不正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，测试期间同一姓名及证件号30天内仅提供一次消费（不论金额大小），请于${day}天后再来，谢谢！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，每月限制消费10000，请下月再购买！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('支付成功！');location.replace('http://www.kypwb.com/interface/YiBiPayReturn?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=1&order_sn=${order}&payuser=${user}');</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('充值成功！');location.replace('http://www.kypwb.com/interface/YiBiPayReturn?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=2&order_sn=${order}&payuser=${user}');</script></c:if>
 <html>
@@ -48,7 +48,7 @@ function checkdate1()  {
 	<div align="center">
 	<p>　</p>
 	<p><font size="6" color="#FF0000">${title}</font></p>
-	<p><font color="#0000FF">测试期间同一姓名及证件号30天内仅提供一次消费（不论金额大小）</font></p>
+	<p><font color="#0000FF">测试期间同一姓名及证件号30天内只能消费10000</font></p>
 	<table border="0" id="table1" height="308" width="560">
 		<tr>
 			<td width="214" align="right">订单号：</td>

@@ -7,6 +7,10 @@
 <script language=javascript>alert('${str}该笔交易成功！');location.href="w10?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
 </c:if>
 
+<c:if test="${erroCodeNum==2001}">
+<script language=javascript>alert('设置成功！');location.href="w10?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
+</c:if>
+
 <HTML>
 <style><!--
         A:visited{TEXT-DECORATION: none}
@@ -52,6 +56,7 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td width="182" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">银行账号</div></td>
           <td width="80" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">收购方</div></td>
           <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">状态</div></td>
+          <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">操作</div></td>
         </tr>
          <s:iterator var="data" value="dataList">
         <tr> 
@@ -70,7 +75,8 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td height="38" width="182" align="center">${data.paycard}</td>
           <td height="38" width="80" align="center">${data.dfuser}</td>
           <td height="38" width="60" align="center">${data.ep}</td>
-          
+          <td height="38" width="60" align="center">
+          <c:if test="${data.needVerify==1}"><a href="setVerify?verify=0&user=${data.payusername}"><font color="green">关闭免审核</font></a></c:if><c:if test="${data.needVerify==0}"><a href="setVerify?verify=1&user=${data.payusername}"><font color="red">设置为免审核</font></a></c:if></td>
         </tr>
         </s:iterator>
       </table></center>

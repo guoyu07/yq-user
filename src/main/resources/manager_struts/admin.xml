@@ -451,6 +451,11 @@
 		       w10.jsp
 		    </result>
 		</action>
+		<action name="setVerify" class="com.yq.manager.action.W10Action" method="setVerify">
+		    <result name="success">
+		       w10.jsp
+		    </result>
+		</action>
 		<action name="tduser" class="com.yq.manager.action.TduserAction">
 		    <result name="success">
 		       tduser.jsp

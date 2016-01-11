@@ -36,6 +36,8 @@ public class W10Bean {
 	private String name;
 	
 	private Integer sumPayNum;
+	
+	private int needVerify;
 
 	public int getPayid() {
 		return payid;
@@ -264,8 +266,13 @@ public class W10Bean {
 	public Integer getSumPayNum() {
 		return sumPayNum;
 	}
-
 	public void setSumPayNum(Integer sumPayNum) {
 		this.sumPayNum = sumPayNum;
+	}
+	public int getNeedVerify() {
+		return needVerify;
+	}
+	public void setNeedVerify(int needVerify) {
+		this.needVerify = needVerify;
 	}
 }

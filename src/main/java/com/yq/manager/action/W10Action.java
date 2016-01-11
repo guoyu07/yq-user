@@ -29,6 +29,16 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
+	
+	private String user;
+	private int verify;
+	public String setVerify(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		adminService.setVerifile(user, verify);
+		super.setErroCodeNum(2001);
+		return SUCCESS;
+	}
+	
 	public int getPayid() {
 		return payid;
 	}
@@ -65,4 +75,21 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	public void setRiqi(String riqi) {
 		this.riqi = riqi;
 	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public int getVerify() {
+		return verify;
+	}
+
+	public void setVerify(int verify) {
+		this.verify = verify;
+	}
+	
 }
