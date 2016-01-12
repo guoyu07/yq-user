@@ -25,5 +25,9 @@ public class UserExtinfoDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	 public UserExtinfo get(String userName){
+			String sql = "select * from "+table+" where user_name=? limit 1";
+			return jdbc.get(sql, UserExtinfo.class,SqlParameter.Instance().withString(userName));
+	 }
 	
 }

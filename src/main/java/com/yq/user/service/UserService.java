@@ -47,6 +47,7 @@ import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Txifok;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.UserExtinfo;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
@@ -70,6 +71,7 @@ import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
 import com.yq.user.dao.UserDailyGainLogDao;
+import com.yq.user.dao.UserExtinfoDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
@@ -131,6 +133,8 @@ public class UserService {
     private BabyInfoDao babyInfoDao;
     @Autowired
     private UserDailyGainLogDao userDailyGainLogDao;
+	@Autowired
+	private UserExtinfoDao userExtinfoDao;
     
 //    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
@@ -1471,6 +1475,16 @@ public class UserService {
 		txpay2.setVipname(gcuser.getVipname());
 //		txpay2.setTxvip(gcuser.getTxlb());
 		txpay2.setTxvip(1);
+		//比对原始姓名与当前提款的姓名
+		Txifok txifOk = txifokDao.get(userName);
+		if(txifOk!=null&&!Strings.isNullOrEmpty(txifOk.getName())&&txifOk.getName().equals(txpay2.getPayname())){
+			UserExtinfo userExtinfo = userExtinfoDao.get(userName);
+			//是否生审核过的
+			if(userExtinfo!=null&&userExtinfo.getNeedVerify()==1){
+				txpay2.setTxvip(0);
+			}
+		}
+		
 		txpay2.setTxip(ip);
 		txPayDao.add(txpay2);
 		

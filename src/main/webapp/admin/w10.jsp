@@ -25,6 +25,7 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
         	<script type="text/javascript" src="/scripts/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="/scripts/jquery.datetimepicker.css"/>
 <script src="/scripts/jquery.datetimepicker.js"></script>
+
 <HEAD>
 <body bgcolor="#DDECFE" topmargin="5" leftmargin="5">
 <title>全部提现记录</title>
@@ -76,7 +77,7 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td height="38" width="80" align="center">${data.dfuser}</td>
           <td height="38" width="60" align="center">${data.ep}</td>
           <td height="38" width="60" align="center">
-          <c:if test="${data.needVerify==1}"><a href="setVerify?verify=0&user=${data.payusername}"><font color="green">关闭免审核</font></a></c:if><c:if test="${data.needVerify==0}"><a href="setVerify?verify=1&user=${data.payusername}"><font color="red">设置为免审核</font></a></c:if></td>
+          <c:if test="${data.needVerify==1}"><a href="setVerify?verify=0&user=${data.payusername}" ><font color="green">关闭免审核</font></a></c:if><c:if test="${data.needVerify==0&&data.name==data.payname}"><a href="setVerify?verify=1&user=${data.payusername}" ><font color="red">设置为免审核</font></a></c:if></td>
         </tr>
         </s:iterator>
       </table></center>

@@ -25,4 +25,10 @@ public class TxifokDao {
 		String sql = "delete from "+table+" where username=? limit 1";
 		return jdbc.update(sql, SqlParameter.Instance().withString(userName))>0;
     }
+    
+    
+    public Txifok get(String userName){
+		String sql = "select * from "+table+" where username=? limit 1";
+		return jdbc.get(sql, Txifok.class,SqlParameter.Instance().withString(userName));
+    }
 }
