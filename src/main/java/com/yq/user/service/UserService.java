@@ -2885,7 +2885,7 @@ public class UserService {
 		if(toUser==null){
 			throw new ServiceException(3, "该用户名不存在，请检查输入是否正确！");
 		}
-		if(toUser.getGmdate().getTime()+2*60*1000>System.currentTimeMillis()){
+		if(toUser.getGmdate()!=null&&toUser.getGmdate().getTime()+2*60*1000>System.currentTimeMillis()){
 			throw new ServiceException(4, "两分钟内只能充值一次，请稍后再试！");
 		}
 		Gcuser fromUser = gcuserDao.getUser(fromUserName);
