@@ -308,6 +308,9 @@ public class UserService {
 		if(getUserByUserName(gguser)!=null){
 			return 1;//用户已存在
 		}
+		if(Strings.isNullOrEmpty(gguser)||Strings.isNullOrEmpty(ggpa3)){
+			return 1;//用户已存在
+		}
 		if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
 			return 2;//推荐人不存在
 		}
