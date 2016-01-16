@@ -305,10 +305,14 @@ public class UserService {
 	 */
 	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan){
 		gguser = gguser.trim();
+		ggname = ggname.trim();
 		if(getUserByUserName(gguser)!=null){
 			return 1;//用户已存在
 		}
-		if(Strings.isNullOrEmpty(gguser)||Strings.isNullOrEmpty(ggpa3)){
+		if (Strings.isNullOrEmpty(gguser)|| Strings.isNullOrEmpty(ggname)
+				|| Strings.isNullOrEmpty(gguserid) || Strings.isNullOrEmpty(ggpa1) || Strings.isNullOrEmpty(ggpa3)
+				|| Strings.isNullOrEmpty(ggbank) || Strings.isNullOrEmpty(ggcard) || Strings.isNullOrEmpty(ggcall)
+				|| Strings.isNullOrEmpty(ggqq)) {
 			return 1;//用户已存在
 		}
 		if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
