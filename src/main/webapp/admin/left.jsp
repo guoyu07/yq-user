@@ -153,11 +153,11 @@ eval("submenu" + sid + ".style.display=\"none\";");
               </tr>
              <!--  <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="vip545.asp"><font color="#000000">设置交易股价</font></a></font></td>
-              </tr> -->
+              </tr> 
               <tr> 
                 <td height=20>☉  <font color="#800000"><b><a target="BoardList" href="/admin/adslist"><font color="#000000">公告管理</font></a></b><font color="#000000"> | 
                 </font><b><a target="BoardList" href="/admin/addnotice"><font color="#000000">添加公告</font></a></b></font></td>
-              </tr>
+              </tr>-->
               <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="doubleareacount"><font color="#000000">双区结算</font></a></font></td>
               </tr>
@@ -177,9 +177,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<tr>
 				<td height=20>☉  <a href="/admin/userper" target="BoardList">用户业绩查询</a></td> 
 				</tr>
-				<tr>
+				 <!--<tr>
 				<td height=20>☉  <a href="/admin/insertuser" target="BoardList">挂载用户</a></td> 
-				</tr>
+				</tr>-->
               </table>
 	  </div>
 	</td>

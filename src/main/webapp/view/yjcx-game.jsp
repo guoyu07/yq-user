@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('升级双区玩家成功！');</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('用户名输入错误或不属于自己团队的玩家，请检查后再试！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
+<c:if test="${erroCodeNum==1}"><script language="javascript">alert('升级双区玩家成功！');</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language="javascript">alert('用户名输入错误或不属于自己团队的玩家，请检查后再试！');history.go(-1);</script></c:if>
 <head>
 	<meta charset="UTF-8">
 	<title>中国一川（澳门）国际有限公司</title>

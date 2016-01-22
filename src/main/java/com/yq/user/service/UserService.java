@@ -756,41 +756,49 @@ public class UserService {
 			int sjb=0;
 			int fd=0;
 			int cfd=0;
+			String msg = cjpay+"元";
 			if(cjpay==500){
 				   zjjb=200;
 						   sjb=1;
 						   fd=2000;
 						   cfd=20;
+						   msg = msg+"(伍佰圆整)";	   
 			}else if(cjpay==1000){
 				   zjjb=450;
 						   sjb=2;
 						   fd=4000;
-						   cfd=40		;		
+						   cfd=40		;
+						   msg = msg+"(壹仟圆整)";	
 			}else if(cjpay==2000){
 				   zjjb=960;
 						   sjb=4;
 						   fd=8000;
-						   cfd=60	;			
+						   cfd=60	;	
+						   msg = msg+"(贰仟圆整)";
 			}else if(cjpay==5000){
 				   zjjb=2500;
 						   sjb=10;
 						   fd=20000;
-						   cfd=80;				
+						   cfd=80;		
+						   msg = msg+"(伍仟圆整)";
 			}else if(cjpay==10000){
 				   zjjb=5000;
 						   sjb=20;
 						   fd=40000;
-						   cfd=100	;			
+						   cfd=100	;
+						   msg = msg+"(壹万圆整)";
 			}else if(cjpay==20000){
 				   zjjb=11000;
 						   sjb=40;
 						   fd=80000;
-						   cfd=150	;			
+						   cfd=150	;
+						   msg = msg+"(贰万圆整)";
 			}else if(cjpay==50000){
 				   zjjb=30000;
 						   sjb=100;
 						   fd=200000;
-						   cfd=200	;			
+						   cfd=200	;	
+						   msg = msg+"(伍万圆整)";
 			}
 			
 
@@ -896,6 +904,8 @@ public class UserService {
 			List<Bdbdate> logList = Lists.newArrayList();
 			CalculateQ(bduser,sjb,bduser,logList);
 			bdbDateDao.batchInsert(logList);
+			//发送通知短信
+			this.sendBdSmsMsg(bduser, msg);
 		}
 		return call;
 	}
@@ -2816,7 +2826,7 @@ public class UserService {
 			throw new ServiceException(3000, "发送短信发生错误,更新错误");
 		}
 	}
-	
+	                                                       
 	private static final String[] smsCode = new String[]{"WKkt32","BlQ9X","R630D1"};
 	public void sendYbSaleSmsMsg(String userName,int code){
 		Gcuser gcuser = gcuserDao.getUser(userName);
@@ -2829,6 +2839,37 @@ public class UserService {
 					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
 				}
 	}
+	/**
+	 * 开户后进行短信通知
+	 * @param userName
+	 * @param numStr
+	 */
+	public void sendBdSmsMsg(String userName,String numStr){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser==null){
+			LogSystem.warn("发送短信时用户找不到,="+userName);
+			return;
+		}
+		String name = "";
+		if(!Strings.isNullOrEmpty(gcuser.getName())){
+			name = gcuser.getName().substring(0, 1);
+		}
+		String date = DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_EN);
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("name", name);
+		param.put("numStr", numStr);
+		param.put("userName", userName);
+		param.put("date", date);
+			    try {
+			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), "sUb981",param)){
+			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			    	}
+				} catch (Exception e) {
+					LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+				}
+	}
+	
 	/**
 	 * 短信模板2
 	 * @param userName

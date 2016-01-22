@@ -13,8 +13,8 @@
 	<div class="logo"><a href="#"><img src="/images/logo.jpg" /></a></div>
 	<div class="nav">
 		<ul>
-			<li><a href="/manager">首页</a></li>
-			<li><a href="#">财富中心</a>
+			<li><a href="/manager"><img src="/images/sy.png" /></a></li>
+			<li><a href="#"><img src="/images/cfzx.png" vertical-align="center"/></a>
 				<div class="ej">
 					<span class="close"></span>
 					<a href="/vipgo">积分理财</a>
@@ -24,7 +24,7 @@
 					<a href="#" class="close">财富中心</a>
 				</div>
 			</li>
-			<li><a href="#">账户管理</a>
+			<li><a href="#"><img src="/images/zhgl.png" /></a>
 				<div class="ej">
 					<span class="close"></span>
 					<a href="/tjz">同名帐户管理</a>
@@ -34,7 +34,7 @@
 					<a href="#" class="close">帐户管理</a>
 				</div>
 			</li>
-			<li><a href="#">消费管理</a>
+			<li><a href="#"><img src="/images/xfgl.png" /></a>
 				<div class="ej">
 					<span class="close"></span>
 					<a href="/hfcz">话费充值(100)</a>
@@ -46,7 +46,7 @@
 					<a href="#" class="close">消费管理</a>
 				</div>
 			</li>
-			<li><a href="/vipup">客服中心</a></li>
+			<li><a href="/vipup"><img src="/images/kfzx.png" /></a></li>
 		</ul>
 	</div>
 </div>

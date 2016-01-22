@@ -50,7 +50,7 @@ function openwindow(url) {
 	各部门服务中心人员分工，一个人不能重复加上，更不能向每个人同一时段咨询同一个问题<a href="/bank?dq=${dq}" style="text-decoration: none">本服务中心已配备指定的客服人员，专用的收款账号名字为“${gcuserup.vipuser}”--点击查看汇款账号</a>
 					</div>
 				</div>
-				<div class="content-box2 mt10">
+				<div class="content-boxindexnews mt10">
 					<div class="content-title">
 						<span>管理员公告</span>
 					</div>
@@ -58,7 +58,7 @@ function openwindow(url) {
 						<ul>
 						<s:iterator var="data" value="dataList">
 							<li>
-								<a href="/ggck?ck=${data.id}" class="ck">查看</a>
+								<a href="/ggck?ck=${data.id}" class="ck"><img src="/images/ck.png" /></a>
 								<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
 								<p><a href="/ggck?ck=${data.id}">${data.ggbt}</a></p>
 							</li>

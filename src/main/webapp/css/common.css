@@ -79,12 +79,12 @@ a:hover{ color:#272a3d;}
 .center{ padding:25px 0 25px 10px; color:#000;}
 .leftbox{ width:200px; margin-right: 20px; }
 
-.user{ color:#2b2b2b; height: 150px; font-size: 14px; font-weight: bold; margin-bottom: 10px; background: #fff;}
+.user{ color:#2b2b2b; height: 150px; font-size: 14px; font-weight: bold; margin-bottom: 10px; background:#fff url(../images/jinbi1.png) no-repeat bottom center;}
 .user p{ padding: 2px 0 0 15px;}
 
-.system{ padding: 5px 10px; height: 350px; background: #FFF; color:#000;}
+.system{ padding: 5px 10px; height: 350px; background-color: #FFF; color:#000;background:#fff url(../images/jinbi2.png) no-repeat bottom center;}
 .system li{ padding: 5px 0 0 5px;}
-.system h3{ text-indent: 15px; margin-bottom: 5px; font-weight: lighter; background:#e88178; height: 20px; line-height: 20px; color: #FFF; font-size:19px; }
+.system h3{ text-indent: 15px; margin-bottom: 5px; font-weight: lighter; background:#fdc50b; height: 20px; line-height: 20px; color: #FFF; font-size:19px; }
 .system a{ color:#666;}
 
 .content{ width:785px; background:#FFF; }
@@ -99,18 +99,18 @@ a:hover{ color:#272a3d;}
 .content-table table{ width: 100%; text-align: center;  color:#000;  font-size: 12px;  }
 .content-table tr{ background: #e3e3e3; border-left:1px solid #989898; border-right:1px solid #989898;}
 .content-table tr, .content-table td, .content-table th{ border-left:1px solid #989898; border-right:1px solid #989898;}
-.content-table th{ background: #e88178; text-align: center; font-size: 16px; border-top:1px solid #989898;　}
+.content-table th{ background: #fdc50b; text-align: center; font-size: 16px; border-top:1px solid #989898;　}
 .content-table td{ font-weight:bold; height: 22px; line-height: 22px;}
 
-.nav li .ej{ display: none; background: #e56363; position: absolute; top:5px; left:0; width: 170px;}
+.nav li .ej{ display: none; background: #fdc50b; position: absolute; top:5px; left:0; width: 170px;}
 .nav li .ej a{ height: 40px; line-height: 40px; font-size: 17px; }
-.nav li .ej a:hover{ background: #e87572; color:#FFF; height: 150px; line-height: 150px;}
+.nav li .ej a:hover{ background: #fdc50b; color:#FFF; height: 150px; line-height: 150px;}
 .nav li .ej span.close{ cursor: pointer; height: 100px; display:block; background: url(../images/close.jpg) no-repeat center 40px; }
 
 .page{ background:#d8d8d8; color:#000; border:1px solid #989898; text-align: center; }
 .page a{ color:#000;}
 .page input, .page button{ width:40px; height: 18px; margin-top: 2px; margin-right: 4px; border:1px solid #acacac; }
-.page button{ background: #e88178; border:none; color: #FFF; font-weight: bold; margin:0; }
+.page button{ background: #fdc50b; border:none; color: #FFF; font-weight: bold; margin:0; }
 
 
 /* 我的客户 */
@@ -133,7 +133,8 @@ a:hover{ color:#272a3d;}
 
 /* 表单样式 */
 .content-form{ font-size: 15px; }
-.content-box1, .content-box2{ width: 740px; padding:0 20px 5px 25px;   background: #FFF;}
+.content-box1, .content-box2{ width: 740px; padding:0 20px 5px 25px;background:#fff;}
+.content-boxindexnews{ width: 740px; padding:0 20px 5px 25px;background:#fff url(../images/jinbi3.png) no-repeat right center;}
 .content-box3{ width: 950px; padding:0 20px 5px 25px;   background: #FFF;}
 .form{ padding:5px 0; }
 .form p{ padding: 3px 0;}
@@ -214,7 +215,6 @@ a:hover{ color:#272a3d;}
 .d-nav li{ float:left; width: 16.66%; }
 .d-nav li a{ padding: 0 31px; color: #1b0608; font-size: 24px; height: 70px; line-height: 70px; text-align: center; display: inline-block; }
 .d-nav li a:hover{ color:#FFF;   background: url(../images/opa.png) repeat 0 0;  }
-
 .clickTop{ height: 20px; text-align: center;  }
 .clickTop span{ width: 155px; height: 20px; cursor: pointer; display: inline-block;  background: url(../images/denglu_017.png) repeat 0 0; }
 .clickTop span.hover{  background: url(../images/denglu_07.png) repeat 0 0; }
@@ -347,7 +347,7 @@ a:hover{ color:#272a3d;}
 .tablen1 th{ text-align: center; }
 .tablen1 td{ background: #FFF; }
 
-.stts{ display: inline-block; width: 40px; height: 16px; line-height: 16px; background: #e88178; }
+.stts{ display: inline-block; width: 40px; height: 16px; line-height: 16px; background: #fdc50b; }
 .stts1{ background: #dce878;}
 .stts2{ background: #78e7e8;}
 

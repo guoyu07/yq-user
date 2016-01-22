@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<title>用户服务中心-财务师收款账号</title>
 <c:if test="${gcuser.dqu=='0' || gcuser.dqu=='2' || gcuser.dqu=='7' || gcuser.dqu=='8'}">
 <c:set var="qq" value="613697151"></c:set>
 <c:set var="cz01" value="中国一川【①号】客服QQ：613697151"></c:set>
