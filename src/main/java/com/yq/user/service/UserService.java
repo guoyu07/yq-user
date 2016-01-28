@@ -2290,9 +2290,9 @@ public class UserService {
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
-//		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
-//			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
-//		}
+		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
+			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+		}
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
@@ -2463,11 +2463,11 @@ public class UserService {
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量 "+gcuser.getJyg()+" ，谢谢！");
 		}
 		
-//		if(gcuser.getJygt1()==0){
-//			if(gpjyDao.get()!=null){
-//				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
-//			}
-//		}
+		if(gcuser.getJygt1()==0){
+			if(gpjyDao.get()!=null){
+				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+			}
+		}
 	}
 	
 	private void checkJfIsOpen(){

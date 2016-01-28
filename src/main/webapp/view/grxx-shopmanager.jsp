@@ -40,7 +40,11 @@ function Check()
 }
 
 function checkdate()  {
-  	
+	 if (Form.shpa.value=="") {      alert("请填入商户二级密码!");  Form.shpa.focus();      return false;    }
+	  if (Form.sfpay.value=="") {     alert("请填入消费金额!");  Form.sfpay.focus();      return false;    }
+	  if (Form.user.value=="") {     alert("请填入您的用户名!");  Form.user.focus();      return false;    }
+	  if (Form.pa01.value=="") {      alert("请填入您的登录密码!");  Form.pa01.focus();      return false;    }
+	  if (Form.pa02.value=="") {      alert("请填入您的二级密码!");  Form.pa02.focus();      return false;    }
 	$("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
 	$.post("/sms?op=11&toUserName="+Form.user.value, data, function(response) {
@@ -123,10 +127,10 @@ function checkdate1()  {
 							<p><label>消费金额：</label><input style="width:100px;" type="text" name="sfpay" onKeyUp="value=value.replace(/[^\d]/g,'');rst(this.value)" size="20"></p>
                             <p><label>服务费(2%)：</label><input id="pay10" type="text" name="pay10" size="20" readonly><input type="hidden" name="remark" size="5" value="12" readonly></p>
                             <p><label>合计一币：</label><input id="ybpay" type="text" name="ybpay" size="15" readonly></p>
-                            <p><label>用户名：</label><input type="text" name="user" size="20"><input type="button" onClick="Check()" value="检测一币余额" name="B3"></p>
+                            <p><label>用户名：</label><input type="text" name="user" size="20"><input type="button" onClick="Check()" value="检测一币余额" name="B3" style="cursor: pointer"></p>
                             <p><label>登录密码：</label><input type="password" name="pa01" size="20"></p>
                             <p><label>二级密码：</label><input type="password" name="pa02" size="20" maxlength="20"></p>
-                            <p><label>手机验证码：</label><input name="sfcode" size="10"><input id="btn" type="button" onClick="checkdate()" value="获取验证码" name="B2"></p>
+                            <p><label>手机验证码：</label><input name="sfcode" size="10"><input id="btn" type="button" onClick="checkdate()" value="获取验证码" name="B2" style="cursor: pointer"></p>
 							<p><label></label><button class="but1" type=submit  name=submit2  onClick="return confirm('提示：您确定支付了吗？')">确定支付</button></p>
 					</form>
 					</div>
