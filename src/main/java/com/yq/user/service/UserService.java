@@ -254,6 +254,12 @@ public class UserService {
     	userSession.put(sessionId, loginUserName);
 		gcuserDao.updateLoginTime(loginUserName);
 		this.addUserDateIpLog(loginUserName, "登录", ip);
+		//扫描重置vip名称
+		try {
+			resetVip(loginUserName);
+		} catch (Exception e) {
+			LogSystem.error(e, "重置vip名称出错!~~~");
+		}
     }
     /**
      * 登出
