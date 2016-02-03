@@ -137,6 +137,7 @@ public class GpjyDao {
 		return this.jdbc.get(sql, Gpjy.class, null);
 	}
 	
+	
 //	public IPage<Gpjy> getMcPage(int pageIndex,int pageSize){
 //		String sql="select * from "+table+" where jy=0 and mcsl>0 order by id";
 //		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);

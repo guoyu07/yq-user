@@ -2296,9 +2296,18 @@ public class UserService {
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
-			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+		
+		List<Gpjy> list = this.getMcPageList(10);
+		if(list!=null&&list.size()>0){
+			for(Gpjy gpjy:list){
+				if(gcuser.getJydb()*1.0d>=gpjy.getJypay()){
+					throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+				}
+			}
 		}
+//		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
+//			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+//		}
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
@@ -2470,9 +2479,17 @@ public class UserService {
 		}
 		
 		if(gcuser.getJygt1()==0){
-			if(gpjyDao.get()!=null){
-				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+			List<Gpjy> list = this.getMrPageList(10);
+			if(list!=null&&list.size()>0){
+				for(Gpjy gpjy:list){
+					if(gcuser.getJyg()*1.0d>=gpjy.getMysl()){
+						throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+					}
+				}
 			}
+//			if(gpjyDao.get()!=null){
+//				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+//			}
 		}
 	}
 	
