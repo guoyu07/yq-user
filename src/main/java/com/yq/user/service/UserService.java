@@ -1824,7 +1824,7 @@ public class UserService {
 		if(!gcuser.getPassword3().equals(password3)){
 			throw new ServiceException(3, "二级密码输入错误，请检查输入是否正确！");
 		}
-		if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
+		if(!gcuser.getVipsq().equals(smsCode)){
 			throw new ServiceException(4, "手机验证码输入错误，请检查输入是否正确！");
 		}
 		//重置短信码
