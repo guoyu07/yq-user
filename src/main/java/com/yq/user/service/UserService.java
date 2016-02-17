@@ -1606,8 +1606,8 @@ public class UserService {
 			throw new ServiceException(5, "二级密码不正确");
 		}
 		
-		if(gcuser.getPay()<50000){
-			throw new ServiceException(6, "VIP玩家一币账户余额必须大于或等于50000！");
+		if(gcuser.getPay()<600000){
+			throw new ServiceException(6, "VIP玩家一币账户余额必须大于或等于600000！");
 		}
 		
 		if(gcuser.getPay()<amount){

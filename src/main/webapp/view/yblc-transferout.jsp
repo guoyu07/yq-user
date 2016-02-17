@@ -5,7 +5,7 @@
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('您好，不能转给自己，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('只能转给自己团队的并已进入双区的玩家！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('二级密码不正确');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('VIP玩家一币账户余额必须大于或等于50000！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('VIP玩家一币账户余额必须大于或等于60w！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('您好，您转账一币不能大于您剩余一币 ${gcuser.pay} ，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('转入的用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('datepay');</script></c:if>
