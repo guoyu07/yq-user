@@ -2558,7 +2558,8 @@ public class AdminService {
 		//给新插入用户的上层的zaq或zbq
 		stringBuffer.append("update sgxt set zaq=zaq+"+sjb+" where username in(select tjuser from zuo_mingxi where down='"+insertUser+"');");
 		stringBuffer.append("update sgxt set zbq=zbq+"+sjb+" where username in(select tjuser from you_mingxi where down='"+insertUser+"');");
-		stringBuffer.append("update sgxt set zaq=zaq+"+sgxtBeReplace.getSjb()+" where username ='"+insertUser+"';");//自身要加上新挂入的替代对象
+		stringBuffer.append("update sgxt set zaq="+(sgxtBeReplace.getZaq()+sgxtBeReplace.getZbq()+sgxtBeReplace.getSjb())+" where username ='"+insertUser+"';");//自身要加上新挂入的替代对象
+		stringBuffer.append("update sgxt set zbq=0,bq=0 where username ='"+insertUser+"';");//自身的右总 和右结余要清零  因为还没有右边的用户
 		LogSystem.info("插入日志 执行如下sql"+stringBuffer.toString());
 		String[] sqlArray = stringBuffer.toString().split(";");
 		for(int i=0;i<sqlArray.length;i++){
