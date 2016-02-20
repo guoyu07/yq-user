@@ -165,7 +165,7 @@
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>	
-        <action name="jzpay" class="com.yq.user.action.JzpayAction">
+        <action name="glpay" class="com.yq.user.action.JzpayAction">
 		   <!-- <result name="success">vip/vipjzpay.jsp</result> -->
 		   <result name="success">view/yblc-mallback.jsp</result>
 		</action>		

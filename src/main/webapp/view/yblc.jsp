@@ -10,7 +10,7 @@ Gcuser yblcGcuser = userServiceyblc.getUserByUserName(userServiceyblc.isLogin(re
 					<h3>一币理财</h3>
 					<ul>
 						<%if(yblcGcuser.getUsername().equals("300fhk")){
-							%><%="<li><a href=\"/jzpay\">商城退款</a></li>"%>
+							%><%="<li><a href=\"/glpay\">商城退款</a></li>"%>
 						<%}%>
 						<li><a href="/datepay">一币明细</a></li>
 						<li><a href="/login2j?inputUrl=login3j.jsp">一币卖出</a><%if(yblcGcuser.getVip()==2){%><%="--<b><a  href='vipjzpay'>转出</a></b>"%><%}%></li>
