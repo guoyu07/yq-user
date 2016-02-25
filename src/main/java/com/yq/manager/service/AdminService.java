@@ -1,6 +1,7 @@
 package com.yq.manager.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -967,9 +968,21 @@ public class AdminService {
 		String todayStart = todayStr+" 00:00:00";
 		String todayEnd = todayStr+" 23:59:59";
 		backCountBean.setRs_nd(sgxtDao.getSumSjbByTime(todayStart, todayEnd));
-		backCountBean.setRs_cb(sgxtDao.getSumZfh());
-		backCountBean.setRs_mq(sgxtDao.getSumMqfh());
+//		backCountBean.setRs_cb(sgxtDao.getSumZfh());
+//		backCountBean.setRs_mq(sgxtDao.getSumMqfh());
 		backCountBean.setRs_zd(sgxtDao.getSumSjb());
+		String monthStr = DateUtils.DateToString(new Date(),DateStyle.YYYY_MM);
+		String startMonthStr = monthStr+"-01 00:00:00";
+		String endMonthStr = monthStr+"-31 23:59:59";
+		backCountBean.setRs_month(sgxtDao.getSumSjbByTime(startMonthStr, endMonthStr));
+		
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.MONTH, c.get(Calendar.MONTH)-1);
+		String upMonthStr = DateUtils.DateToString(c.getTime(),DateStyle.YYYY_MM);
+		String startUpMonthStr = upMonthStr+"-01 00:00:00";
+		String endUpMonthStr = upMonthStr+"-31 23:59:59";
+		backCountBean.setRs_up_month(sgxtDao.getSumSjbByTime(startUpMonthStr, endUpMonthStr));
+		
 		return backCountBean;
 	}
 	

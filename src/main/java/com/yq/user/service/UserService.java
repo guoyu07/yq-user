@@ -2885,11 +2885,12 @@ public class UserService {
 		param.put("date", date);
 			    try {
 			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), "sUb981",param)){
-			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+//			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			    		LogSystem.warn("发送短信发生错误,更新错误"+userName+",call="+gcuser.getCall());
 			    	}
 				} catch (Exception e) {
 					LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
-					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+//					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
 				}
 	}
 	
