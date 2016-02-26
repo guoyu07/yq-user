@@ -653,6 +653,8 @@ public class UserService {
 	 */
     @Transactional
 	public synchronized String bdReg(String userName,String up,String bduser,int cjpay,String pa1j,String pa2j,String idCardNum,int status){
+    	up = up.trim();
+    	bduser = bduser.trim();
 		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
 		Fcxt fcxt = managerService.getFcxtById(2);
 		if(fcxt!=null){
