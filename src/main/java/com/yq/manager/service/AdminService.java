@@ -1905,8 +1905,8 @@ public class AdminService {
 	
 	private List<YouMingxi> yList = Lists.newArrayList();
 	private List<ZuoMingxi> zList = Lists.newArrayList();
-	private final String Y_FILE_NAME = "E://temp//youmingxi.sql";
-	private final String Z_FILE_NAME = "E://temp//zuomingxi.sql";
+	private final String Y_FILE_NAME = "D://temp//youmingxi.sql";
+	private final String Z_FILE_NAME = "D://temp//zuomingxi.sql";
 	public void resetUserDownInfo(){
 		long allStartTime = System.currentTimeMillis();
 		LogSystem.info("开启重置z y明细表功能---");

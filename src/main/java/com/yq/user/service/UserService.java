@@ -360,7 +360,7 @@ public class UserService {
 		}
 		
 		if(province!=null){
-			user.setAddqu(province.getAreaNum());
+			user.setDqu(Integer.valueOf(province.getAreaNum()));
 			user.setAdd9dqu(province.getAreaName());
 		}
 		if(!gcuserDao.addUser(user)){
@@ -663,6 +663,9 @@ public class UserService {
 				throw new ServiceException(1,"结算期间暂停开户，明天开放！");
 //				super.setErroCodeNum(1);//alert('结算期间暂停开户，明天开放！');;history.go(-1);
 //				return SUCCESS;
+			}
+			if(!Strings.isNullOrEmpty(fcxt.getCz05())&&fcxt.getCz05().equals("1")){
+				throw new ServiceException(100,"报单功能暂时关闭！");
 			}
 		}
 		if(cjpay<1000){

@@ -54,7 +54,7 @@ public class AdminServiceTest extends DaoTest {
 //		adminService.resetUserZaqAndZbq("fxj881");
 //		adminService.managequeren();
 //		adminService.resetZaqAndZbq();
-		adminService.resetUserDownInfo();
+//		adminService.resetUserDownInfo();
 		
 	}
 }

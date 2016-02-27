@@ -1,6 +1,7 @@
 package com.yq.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.service.UserService;
 
@@ -29,8 +30,11 @@ public class BdRegAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		long startTime = System.currentTimeMillis();
+    	LogSystem.info("action中开始"+super.getUserName()+"--开始执行开户操作，节点"+up+",绑定用户--》"+bduser+",开户金额"+cjpay);
 		call = userService.bdReg(super.getUserName(), up, bduser, cjpay, pa1j, pa2j, ceid, status);
-		
+		long end = System.currentTimeMillis();
+		LogSystem.info("action中结束"+super.getUserName()+"--开始执行开户操作，节点"+up+",绑定用户--》"+bduser+",开户金额"+cjpay+",结束，耗时=["+(end-startTime)/1000+"s]");
 		if(status==0){
 			return SUCCESS;
 		}else{
