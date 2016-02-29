@@ -26,7 +26,7 @@ public class VipTransferDetailsAction extends ALDAdminPageActionSupport<Vipxtgc>
 		listVipName = adminService.getAllVipName();
 		return SUCCESS;
 	}
-
+	
 	public String getVipName() {
 		return vipName;
 	}

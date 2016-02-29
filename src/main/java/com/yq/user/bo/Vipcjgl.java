@@ -4,11 +4,17 @@ import java.util.Date;
 
 public class Vipcjgl {
 	private Integer cjid;
+	//充值用户
 	private String cjuser;
+	//充值金额
 	private int cjjo;
+	//充值时间
 	private Date cjdate;
+	//操作者
 	private String vipuser;
+	//剩余充值币
 	private int sycjb;
+	//备注
 	private String bz;
 	public Integer getCjid() {
 		return cjid;

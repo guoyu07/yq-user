@@ -34,9 +34,9 @@
      <td width="111" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000" face="宋体" size="2"> <strong>用户名</strong></font></b></td>
      <td width="136" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000" face="宋体" size="2">支出一币币</font></b></td>
      <td width="161" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#0000FF" face="宋体" size="2">实收90%</font></b></td>
-     <td width="163" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000" face="宋体" size="2">支出报单币</font></b></td>
-     <td width="172" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#0000FF" face="宋体" size="2">实收90%</font></td>
-     <td width="172" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#0000FF" face="宋体" size="2">明细查看</font></td>
+     <td width="72" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000" face="宋体" size="2">支出报单币</font></b></td>
+     <td width="72" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#0000FF" face="宋体" size="2">实收90%</font></td>
+     <td width="372" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#0000FF" face="宋体" size="2">明细查看</font></td>
             </tr>
               <s:iterator var="data" value="dataList">
              <tr> 
@@ -45,10 +45,12 @@
       <td valign="middle" width="111" align="center" bgcolor="#DFFFEF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" face="宋体" size="2">${data.vipname}</font></td><b>
       <td valign="middle" align="center" width="136" bgcolor="#DFFFEF"><font face="宋体" size="2">${data.jcyb}</font></td></b>
       <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.jcyb*0.9}</b></font></font></td><b>
-      <td valign="middle" align="center" width="163" bgcolor="#DFFFEF"><font face="宋体" size="2">${data.jcbdb}</font></td></b>
-      <td valign="middle" align="center" width="172" bgcolor="#DFFFEF"><font face="宋体" size="2" color="#FF0000"><b>${data.jcbdb*0.9}</b></font></td>
-       <td valign="middle" align="center" width="172" bgcolor="#DFFFEF">【<a href="bdbdate2?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">报单币明细</a>】
-       【<a href="datepay2?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">一币明细</a>】</td>
+      <td valign="middle" align="center" width="72" bgcolor="#DFFFEF"><font face="宋体" size="2">${data.jcbdb}</font></td></b>
+      <td valign="middle" align="center" width="72" bgcolor="#DFFFEF"><font face="宋体" size="2" color="#FF0000"><b>${data.jcbdb*0.9}</b></font></td>
+       <td valign="middle" align="center" width="372" bgcolor="#DFFFEF">【<a href="bdbdate2?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">报单币明细</a>】
+       【<a href="datepay2?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">一币明细</a>】
+  【<a href="vipcjbdetails?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">充值币明细</a>】     
+       </td>
               </tr>
               </s:iterator>
             </table> 

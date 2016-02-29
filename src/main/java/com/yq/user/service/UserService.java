@@ -2943,6 +2943,16 @@ public class UserService {
 	public IPage<Vipcjgl> getVipcjbPageList(String userName,int pageIndex,int pageSize){
 		return vipcjglDao.getPageList(pageIndex, pageSize, "order by cjid desc", new SqlParamBean("vipuser", userName));
 	}
+	
+
+	public IPage<Vipcjgl> getVipcjbPageList(String userName,int pageIndex,int pageSize,String startTime,String endTime){
+		return vipcjglDao.getVipcjglPageList(userName, startTime, endTime, pageSize, pageIndex);
+	}
+	
+	
+	public List<Vipcjgl> getVipcjbList(String userName,String startTime,String endTime){
+		return vipcjglDao.getVipcjglList(userName, startTime, endTime);
+	}
 	/**
 	 * vip用户给下属充值
 	 * @param fromUser

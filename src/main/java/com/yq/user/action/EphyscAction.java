@@ -1,6 +1,7 @@
 package com.yq.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.ProblemCode;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.user.bo.Gcuser;
@@ -43,6 +44,7 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 			return SUCCESS;
 		}
 		super.initPage(userService.getTxpayPage(0, 1));
+		LogSystem.warn("[进入市场]["+super.getUserName()+"]["+super.ip()+"]");
 		return SUCCESS;
 	}
 

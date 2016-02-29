@@ -543,6 +543,14 @@
 		      insertuser.jsp
 		    </result>
 		</action>
+		
+		<action name="vipcjbdetails" class="com.yq.manager.action.VipcjbDetailsAction">
+		   <result name="success">
+		      vipcjbdetails.jsp
+		    </result>
+		</action>
+		<action name="vipcjbdetailsoutexcel" class="com.yq.manager.action.VipcjbDetailsAction" method="outExcel">
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
