@@ -747,6 +747,10 @@ public class UserService {
 //			super.setErroCodeNum(13);//alert('只能给自己的直接推荐的人开户！');history.go(-1);
 //			return SUCCESS;	
         }
+//        Gcuser upUser =  gcuserDao.getUser(up);
+//        if(!up.equals(operatorUser.getUsername())&&!upUser.getUp().equals(operatorUser.getUsername())){
+//        	throw new ServiceException(13,"只能给自己的直接推荐的人开户！");
+//        }
         
 		Sgxt tuser = userService.getSgxt(up);
 		if(tuser==null){
@@ -759,6 +763,10 @@ public class UserService {
 //				super.setErroCodeNum(15);//alert('接点人位置已被占用，请重新选择！');history.go(-1);
 //				return SUCCESS;
 			}
+		}
+		
+		if(zuoMingxiDao.get(userName, up)==null&&youMingXiDao.get(userName, up)==null){
+			throw new ServiceException(17,"接点人必须在自己的团队下，请重新选择！");
 		}
 		
 		
