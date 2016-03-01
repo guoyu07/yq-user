@@ -764,11 +764,11 @@ public class UserService {
 //				return SUCCESS;
 			}
 		}
-		
-		if(zuoMingxiDao.get(userName, up)==null&&youMingXiDao.get(userName, up)==null){
-			throw new ServiceException(17,"接点人必须在自己的团队下，请重新选择！");
+		if(!userName.equals(up)){
+			if(zuoMingxiDao.get(userName, up)==null&&youMingXiDao.get(userName, up)==null){
+				throw new ServiceException(17,"接点人必须在自己的团队下，请重新选择！");
+			}
 		}
-		
 		
 		if(status!=0){//确认操作
 			int zjjb=0;
