@@ -1524,6 +1524,10 @@ public class UserService {
 		txpay2.setTxip(ip);
 		txPayDao.add(txpay2);
 		
+//		if(!gcuserDao.updatePayOkForUserName(userName, 1)){
+//			throw new ServiceException(7,"您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！");
+//		}
+		
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
 		
 		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);

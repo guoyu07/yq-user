@@ -524,6 +524,15 @@ public class GcuserDao {
 		return this.jdbc.update(sql, paramter)>0;
 	}
 	
+	public boolean updatePayOkForUserName(String userName,int payok){
+		String sql = "update "+table+" set payok=?  where username=? and payok<>?";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setInt(payok);
+		paramter.setString(userName);
+		paramter.setInt(payok);
+		return this.jdbc.update(sql, paramter)>0;
+	}
+	
 	public boolean updatePayOk(String name,String idCardNum,int payok){
 		String sql = "update "+table+" set payok=?  where name=? and userid=?";
 		SqlParameter paramter = new SqlParameter();
