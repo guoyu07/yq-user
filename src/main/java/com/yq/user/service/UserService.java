@@ -1204,6 +1204,25 @@ public class UserService {
 		this.updateSybdb(toUser, amount, "收到-"+fromUser);
 		
 	}
+	
+	/**
+	 * 报单币转账
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	@Transactional
+	public void addBdbByAdmin(String toUser,int amount){
+		if(amount<=0){
+			throw new ServiceException(2, "转账金额不能小于0");
+		}
+		Gcuser to = gcuserDao.getUser(toUser);
+		if(to==null){
+			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
+		}
+		this.updateSybdb(toUser, amount, "收到-系统");
+	}
+	
 	@Transactional
 	public void trasferYbForPresent(String fromUser,String toUser,String pa,String pa3,int amount){
 		Gcuser fUser = gcuserDao.getUser(fromUser);

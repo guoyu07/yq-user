@@ -83,9 +83,6 @@ eval("submenu" + sid + ".style.display=\"none\";");
               <tr> 
                 <td height=20>☉  <a target="BoardList" href="/admin/epjysc">EP-交易市场情况</a></td>
               </tr>
-              <tr>
-				<td height=20>☉  <a href="/admin/bdbjzpay" target="BoardList">报单币转账</a></td> 
-				</tr>
             </table>
 </div>
 </td>
@@ -176,6 +173,12 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				</tr>
 				<tr>
 				<td height=20>☉  <a href="/admin/userper" target="BoardList">用户业绩查询</a></td> 
+				</tr>
+				 <tr>
+				<td height=20>☉  <a href="/admin/bdbjzpay" target="BoardList">报单币转账</a></td> 
+				</tr>
+				<tr>
+				<td height=20>☉  <a href="/admin/searchfcxt" target="BoardList">积分交易调控</a></td> 
 				</tr>
 				 <!--<tr>
 				<td height=20>☉  <a href="/admin/insertuser" target="BoardList">挂载用户</a></td> 

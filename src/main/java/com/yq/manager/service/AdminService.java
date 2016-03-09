@@ -1701,9 +1701,17 @@ public class AdminService {
 	public void man123(){
 		gcuserDao.updateAbdateAndDbtl(">30", 0, new Date(), 1);
 		gcuserDao.updateAbdateAndDbtl("<=30", 1, null, 0);
-		fcxtDao.updateJy5w();
-		
 		Fcxt fcxt = fcxtDao.get(2);
+		int ration = 30000000;
+		try {
+			ration  = Integer.valueOf(fcxt.getCz04());
+		} catch (Exception e) {
+			LogSystem.warn("cz04转换出错！~~~");
+		}
+		
+		fcxtDao.updateJy5w(ration);
+		
+		
 		double jyj = fcxt.getJygj()+0.2;
 		int pageIndex = 0;
 		int pageSize = 100;
@@ -2667,5 +2675,17 @@ public class AdminService {
 				userExtinfoDao.add(new UserExtinfo(userName,verify));
 			}
 		}
+	}
+	
+	public Fcxt getFcxt(int id){
+		return fcxtDao.get(id);
+	}
+	
+	public void updateJy5wRation(int ration){
+		fcxtDao.updateJy5wRation(ration);
+	}
+	
+	public void updateCz04(int cz04){
+		fcxtDao.updateCz04(cz04+"");
 	}
 }

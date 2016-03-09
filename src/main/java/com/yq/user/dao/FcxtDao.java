@@ -108,8 +108,25 @@ public class FcxtDao {
 		return this.jdbc.get(sql, Fcxt.class, parameter);
 	}
 	
-	public boolean updateJy5w(){
-		String sql = "update "+table+" set jy5w=jy5w-30000000,dqgj=dqgj+0.01,jygj=jygj+0.01,zgj=zgj+0.01 where id =2 and jy5w>=30000000";
-		return jdbc.update(sql, null)>0;
+	public boolean updateJy5w(int value){
+		String sql = "update "+table+" set jy5w=jy5w-?,dqgj=dqgj+0.01,jygj=jygj+0.01,zgj=zgj+0.01 where id =2 and jy5w>=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(value);
+		parameter.setInt(value);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean updateJy5wRation(int value){
+		String sql = "update "+table+" set jy5w=?  where id =2 ";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(value);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean updateCz04(String value){
+		String sql = "update "+table+" set cz04=?  where id =2 ";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(value);
+		return jdbc.update(sql, parameter)>0;
 	}
 }

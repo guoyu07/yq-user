@@ -328,7 +328,14 @@
 		        bdbjzpay.jsp
 		    </result>
 		</action>
-		
+		<action name="bdbpay" class="com.yq.manager.action.BdbjzpayAction" method="bdbpay">
+		    <result name="input">
+		        bdbpay.jsp
+		    </result>
+		    <result name="success">
+		        bdbpay.jsp
+		    </result>
+		</action>
 		<action name="newsdate" class="com.yq.manager.action.NewsDateAction">
 		    <result name="success">
 		        newsdate.jsp
@@ -550,6 +557,24 @@
 		    </result>
 		</action>
 		<action name="vipcjbdetailsoutexcel" class="com.yq.manager.action.VipcjbDetailsAction" method="outExcel">
+		</action>
+		
+		<action name="searchfcxt" class="com.yq.manager.action.FcxtAction">
+		  <result name="success">
+		      searchfcxt.jsp
+		    </result>
+		</action>
+		
+		<action name="updateCz04" class="com.yq.manager.action.FcxtAction" method="updateRation">
+		   <result name="success" type="redirect">
+		      /admin/searchfcxt?erroCodeNum=2001
+		    </result>
+		</action>
+		
+		<action name="updateCurrentCharge" class="com.yq.manager.action.FcxtAction" method="updateCurrentCharge">
+		   <result name="success" type="redirect">
+		      /admin/searchfcxt?erroCodeNum=2002
+		    </result>
 		</action>
 	</package>
 

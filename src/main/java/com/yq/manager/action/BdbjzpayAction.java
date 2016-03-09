@@ -2,6 +2,7 @@ package com.yq.manager.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
 public class BdbjzpayAction extends ALDAdminActionSupport {
@@ -16,7 +17,8 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 	private String jcname;
 	private String syuser;
 	private int jzpay;
-	
+	private String uid;
+	private Gcuser gcuser;
 	
 	public String execute(){
 		if(status==0){
@@ -24,6 +26,18 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 		}
 		UserService userService  = ServiceCacheFactory.getService(UserService.class);
 		userService.trasferBdbByAdmin(jcname, syuser, jzpay);
+		super.setErroCodeNum(2000);
+		return SUCCESS;
+	}
+	
+	
+	public String bdbpay(){
+		UserService userService  = ServiceCacheFactory.getService(UserService.class);
+		if(status==0){
+			gcuser = userService.getUserByUserName(uid);
+			return INPUT;
+		}
+		userService.addBdbByAdmin(syuser, jzpay);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -68,4 +82,23 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 		this.jzpay = jzpay;
 	}
 
+
+	public String getUid() {
+		return uid;
+	}
+
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+
+	public Gcuser getGcuser() {
+		return gcuser;
+	}
+
+
+	public void setGcuser(Gcuser gcuser) {
+		this.gcuser = gcuser;
+	}
 }
