@@ -70,7 +70,7 @@ return (allValid);
     <TR class=content> 
       <TD colSpan=2 align=middle bgColor=#ffffff width="439" height="32"> 
               <p style="margin-top: 0; margin-bottom: 0"> 
-              <INPUT class=normalButton type=submit value="确 定 转 账" name=submit2 style="font-size: 11pt" onClick="return confirm('提示：您确定了吗？')" ></TD>
+              <INPUT class=normalButton type=hidden value="确 定 转 账" name=submit2 style="font-size: 11pt" onClick="return confirm('提示：您确定了吗？')" ></TD>
     </TR>
   </TBODY>
 </TABLE>
