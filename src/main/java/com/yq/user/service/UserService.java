@@ -312,6 +312,11 @@ public class UserService {
 	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan){
 		gguser = gguser.trim();
 		ggname = ggname.trim();
+		gguserid = gguserid.trim();
+		if(!Strings.isNullOrEmpty(upvip)){
+			upvip = upvip.trim();
+		}
+		
 		if(getUserByUserName(gguser)!=null){
 			return 1;//用户已存在
 		}
