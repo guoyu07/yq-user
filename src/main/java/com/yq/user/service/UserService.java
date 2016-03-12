@@ -2408,6 +2408,7 @@ public class UserService {
 		
 		gpjyDao.deleteIndex(gpjy1.getId());
 		
+		
 		datePayDao.updateRegIdToCancel(orderId,"已撤销");
 		Datepay datepay = datePayDao.getById(orderId);
 		//返还金币

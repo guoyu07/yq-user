@@ -28,35 +28,36 @@ public class GpjyDao {
 //	}
 	
 	private void cleanCache(Integer id){
-		if(id==null){
-			mcCache = null;
-			mrCache = null;
-		}
-		if(mcCache!=null){
-			boolean isClean = false;
-			for(Gpjy gpjy:mcCache){
-			    if(gpjy.getId().intValue()==id.intValue()){
-			    	isClean = true;
-			    	break;
-			    }	
-			}
-			if(isClean){
+			if (id == null) {
 				mcCache = null;
-			}
-		}
-		
-		if(mrCache!=null){
-			boolean isClean = false;
-			for(Gpjy gpjy:mrCache){
-			    if(gpjy.getId().intValue()==id.intValue()){
-			    	isClean = true;
-			    	break;
-			    }	
-			}
-			if(isClean){
 				mrCache = null;
+				return;
 			}
-		}
+			if (mcCache != null) {
+				boolean isClean = false;
+				for (Gpjy gpjy : mcCache) {
+					if (gpjy.getId().intValue() == id.intValue()) {
+						isClean = true;
+						break;
+					}
+				}
+				if (isClean) {
+					mcCache = null;
+				}
+			}
+
+			if (mrCache != null) {
+				boolean isClean = false;
+				for (Gpjy gpjy : mrCache) {
+					if (gpjy.getId().intValue() == id.intValue()) {
+						isClean = true;
+						break;
+					}
+				}
+				if (isClean) {
+					mrCache = null;
+				}
+			}
 	}
 	
 	
@@ -83,9 +84,6 @@ public class GpjyDao {
 		int id = this.jdbc.insertBackKeys(gpjy);
 		
 			if(gpjy.getMcsl()!=null&&gpjy.getMcsl()>0&&gpjy.getJy()==0){
-				if(mcCache!=null&&mcCache.size()<10){
-					mcCache = null;
-				}
 				//添加卖出市场索引
 				GpjyIndexMc mc = new GpjyIndexMc();
 				mc.setId(id);
@@ -93,11 +91,13 @@ public class GpjyDao {
 				mc.setMcsl(gpjy.getMcsl());
 				mc.setCreatedTime(new Date());
 				jdbc.insert(mc);
+				
+				if(mcCache!=null&&mcCache.size()<10){
+					mcCache = null;
+				}
+
 			}
 			if(gpjy.getMysl()!=null&&gpjy.getMysl()>0&&gpjy.getJy()==0){
-				if(mrCache!=null&&mrCache.size()<10){
-					mrCache = null;
-				}
 				//添加买入市场索引
 				GpjyIndexMr my = new GpjyIndexMr();
 				my.setId(id);
@@ -105,6 +105,10 @@ public class GpjyDao {
 				my.setMysl(gpjy.getMysl());
 				my.setCreatedTime(new Date());
 				jdbc.insert(my);
+				
+				if(mrCache!=null&&mrCache.size()<10){
+					mrCache = null;
+				}
 		}
 		
 		return true;
@@ -115,6 +119,8 @@ public class GpjyDao {
 		jdbc.update(sqlMc, null);
 		String sqlMr = "delete from gpjy_index_mr where id="+id;
 		jdbc.update(sqlMr, null);
+		
+		cleanCache(id);
 	}
 	
 	public void updateIndexPay(int id,double pay){
