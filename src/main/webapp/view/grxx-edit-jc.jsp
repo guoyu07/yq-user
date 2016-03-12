@@ -59,8 +59,8 @@
 					<div class="content-form">				 
 						<p style="color: red; padding-bottom: 40px;">继承人一经填写将不能自行修改，请谨慎填写！</p>
 						<form class="form" METHOD="post" action="" name="Form" id="Form" onSubmit="return false">
-							<p><label>继承人姓名：</label><input type="text" maxlength=32 name="jcname" value="${gcuser.jcname}" size="16" <c:if test="${gcuser.jcname!=''}">readonly</c:if> ></p>
-							<p><label>继承人身份证号码：</label><input type="text" maxlength=19 name="jcuserid" value="${gcuser.jcuserid}" size="22" <c:if test="${gcuser.jcuserid!=''}">readonly</c:if> ></p>
+							<p><label>继承人姓名：</label><input type="text" maxlength=32 name="jcname" value="${gcuser.jcname}" size="16" <c:if test="${not empty gcuser.jcname}">readonly</c:if> ></p>
+							<p><label>继承人身份证号码：</label><input type="text" maxlength=19 name="jcuserid" value="${gcuser.jcuserid}" size="22" <c:if test="${not empty gcuser.jcuserid}">readonly</c:if> ></p>
 							<p><label></label><button class="but1" onClick="checkdate();">确 定 增 加</button></p>
 					</form>
 					</div>
