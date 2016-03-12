@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.GpjyIndexMc;
 import com.yq.user.bo.GpjyIndexMr;
@@ -73,6 +74,11 @@ public class GpjyDao {
 //		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
 		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mr order by id asc limit "+pageSize+")t )";
 		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
+		
+		if(list!=null&&list.size()==0){
+			LogSystem.warn("dao中查询出的列表不为空，且数量为0！~~sql=["+sql+"]");
+		}
+		
 		mrCache = list;
 	}
 	

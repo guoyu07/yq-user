@@ -102,10 +102,8 @@ function checkdate1()  {
 								<option value="100">100</option>
 								<option value="200">200</option>
 								<option value="500">500</option>
-								<c:if test="${transferType==1}">
 								<option value="1000">1000</option>
 								<option value="2000">2000</option>
-								</c:if>
 								<option value="5000">5000</option>
 								</select></p>
 							<p><label>二级密码：</label><INPUT name="pa3" size=15 type=password></p>

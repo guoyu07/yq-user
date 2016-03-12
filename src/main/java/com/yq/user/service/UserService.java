@@ -140,6 +140,8 @@ public class UserService {
     
   //用户id与UserMapper的映射map
   	private Cache<String,String> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(102400).build();
+  	
+  	
     
     
     /**
@@ -2434,7 +2436,17 @@ public class UserService {
 	}
 	
 	public List<Gpjy> getMrPageList(int pageSize){
-		return gpjyDao.getMrPage(pageSize);
+		List<Gpjy> result =  gpjyDao.getMrPage(pageSize);
+		//DEBUG
+		if(result==null){
+			LogSystem.warn("求购信息的列表为null");
+		}
+		
+		if(result!=null&&result.size()==0){
+			LogSystem.warn("求购信息的列表不为Null,但其数量为0");
+		}
+		
+		return result;
 	}
 	
 	public List<Gpjy> getMcPageList(int pageSize){
