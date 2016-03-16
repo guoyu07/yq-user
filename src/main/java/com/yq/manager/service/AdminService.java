@@ -2403,6 +2403,8 @@ public class AdminService {
 		result.setAllTimeRightPerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime,0));
 		result.setIsFiveFull(isFiveStepFull(userName));
 		result.setPerformance(getUserFiveStepPerformance(userName));
+		Sgxt up = sgxtDao.getByAOrBuid(userName);
+		result.setUp(up);
 		return result;
 	}
 	

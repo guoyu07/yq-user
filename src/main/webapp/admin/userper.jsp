@@ -121,6 +121,13 @@
             </table>
 </c:if>
 </div> 
+<div>
+<c:if test="${not empty bean}">
+<div id="myup" style="background-color: white; border: solid 1px black; width: 100%; height: 50px">
+该用户的上级为:<a href="userper?user=${bean.up.username}&status=1">${bean.up.username}(${bean.up.sjb})</a>
+</div>
+</c:if>
+</div>
 <div id="sample">
   <div id="myDiagram" style="background-color: white; border: solid 1px black; width: 100%; height: 600px"></div>
 </div>

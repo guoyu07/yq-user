@@ -126,7 +126,7 @@ public class TxPayDao {
     	//String sql="select * from "+table+" where payonoff = '尚未转账' txvip=2 and paytime>? order by payid" ;
     	//SqlParameter.Instance().withObject(day)
     	String sql = "select cc.*,(select sum(paynum) FROM txpay where payusername = cc.payusername and dfuser<>'撤销') as sum_pay_num "
-    			+ "from (select tx.*,tio.name as name,IFNULL(ue.need_verify,0) as need_verify from txpay as tx left join (select * from txifok order by id desc)tio  on tio.username=tx.payusername left join user_extinfo ue on tx.payusername=ue.user_name "
+    			+ "from (select tx.*,tio.name as name,IFNULL(ue.need_verify,0) as need_verify from txpay as tx left join  txifok tio  on tio.username=tx.payusername left join user_extinfo ue on tx.payusername=ue.user_name "
     			+ " where tx.payonoff = '尚未转账' ";
     	if(!Strings.isNullOrEmpty(uid)){
     		sql = sql +" and tx.payusername='"+uid+"'";

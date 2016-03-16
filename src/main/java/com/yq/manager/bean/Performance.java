@@ -86,6 +86,7 @@ public class Performance {
 	private static final String MODEL = "{ key:\"#K#\", parent:\"#P#\", name:\"#N#\",gender:\"M\"},";
 	private static final String EMPTY = "{ key:\"#K#\", parent:\"#P#\", name:\"\",gender:\"F\"},";
 	private String getModelString(String key,String parent,String name){
+//		name = "<a href='userper?user="+name+"'>"+name+"</a>";
 		String result =  MODEL.replace("#K#", key);
 		result = result.replace("#P#", parent);
 		result = result.replace("#N#", name);

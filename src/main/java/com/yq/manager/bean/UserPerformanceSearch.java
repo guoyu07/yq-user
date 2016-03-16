@@ -26,6 +26,8 @@ public class UserPerformanceSearch {
 	//是否满5层
 	private boolean isFiveFull;
 	
+	private Sgxt up;
+	
 	public Performance getPerformance() {
 		return performance;
 	}
@@ -98,4 +100,11 @@ public class UserPerformanceSearch {
 	public int getAllTimePerformance(){
 		return allTimeLeftPerformance+allTimeRightPerformance;
 	}
+	public Sgxt getUp() {
+		return up;
+	}
+	public void setUp(Sgxt up) {
+		this.up = up;
+	}
+	
 }

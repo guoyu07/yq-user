@@ -1538,14 +1538,14 @@ public class UserService {
 //		txpay2.setTxvip(gcuser.getTxlb());
 		txpay2.setTxvip(1);
 		//比对原始姓名与当前提款的姓名
-		Txifok txifOk = txifokDao.get(userName);
-		if(txifOk!=null&&!Strings.isNullOrEmpty(txifOk.getName())&&txifOk.getName().equals(txpay2.getPayname())){
+//		Txifok txifOk = txifokDao.get(userName);
+//		if(txifOk!=null&&!Strings.isNullOrEmpty(txifOk.getName())&&txifOk.getName().equals(txpay2.getPayname())){
 			UserExtinfo userExtinfo = userExtinfoDao.get(userName);
 			//是否生审核过的
 			if(userExtinfo!=null&&userExtinfo.getNeedVerify()==1){
 				txpay2.setTxvip(0);
 			}
-		}
+//		}
 		
 		txpay2.setTxip(ip);
 		txPayDao.add(txpay2);

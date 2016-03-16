@@ -11,7 +11,7 @@
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="73">
 	<p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-	<b><span style="font-size: 11pt">历史记录按1倍算<font color="#FF00FF"><fmt:formatNumber value="${backCountBean.rs_zd*500}" pattern="0"/></font>&nbsp; 今天目前新<font color="#FF0000">${backCountBean.rs_nd*500}</font>个 ，本月（<font color="#FF0000">${backCountBean.rs_month}</font>）  ，上月（<font color="#FF0000">${backCountBean.rs_up_month}</font>）</span></b><span style="font-size: 11pt"></span></p>
+	<b><span style="font-size: 11pt">历史记录按1倍算<font color="#FF00FF"><fmt:formatNumber value="${backCountBean.rs_zd*500}" pattern="0"/></font>&nbsp; 今天目前新<font color="#FF0000"><fmt:formatNumber value="${backCountBean.rs_nd*500}" pattern="0"/></font>个 ，本月（<font color="#FF0000"><fmt:formatNumber value="${backCountBean.rs_month*500}" pattern="0"/></font>）  ，上月（<font color="#FF0000"><fmt:formatNumber value="${backCountBean.rs_up_month*500}" pattern="0"/></font>）</span></b><span style="font-size: 11pt"></span></p>
 	<div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="49">
             <tr>        
