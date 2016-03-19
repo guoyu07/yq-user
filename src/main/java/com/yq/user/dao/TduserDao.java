@@ -36,7 +36,7 @@ public class TduserDao extends YqDaoBase<Tduser>{
     
     public IPage<Tduser> getTduserPageList(String param,int pageIndex,int pageSize){
     	String sql = "select * from "+super.getTable();
-    	sql = sql +" where tdname=? or  tduserid=? or tduser=? or tdcall=? or tdqq=?";
+    	sql = sql +" where gai=0 and  (tdname=? or  tduserid=? or tduser=? or tdcall=? or tdqq=?)";
     	SqlParameter parameter = new SqlParameter();
 		parameter.setString(param);
 		parameter.setString(param);
