@@ -105,6 +105,7 @@ function checkdate1()  {
 								<option value="1000">1000</option>
 								<option value="2000">2000</option>
 								<option value="5000">5000</option>
+								<option value="10000">10000</option>
 								</select></p>
 							<p><label>二级密码：</label><INPUT name="pa3" size=15 type=password></p>
 							<c:if test="${gcuser.ganew!=0}"><p><label>手机验证码：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><input type="text" name="ybcodeid" size="15"><input id="btn" type="button" onclick="checkdate()" value="获取验证码" name="B2"></span></c:if>
