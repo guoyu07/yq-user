@@ -26,6 +26,7 @@ import com.yq.common.utils.MD5Security;
 import com.yq.cservice.bean.SqDayAddBean;
 import com.yq.manager.bean.Performance;
 import com.yq.manager.bean.UserPerformanceSearch;
+import com.yq.manager.bean.YbCjbBean;
 import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.bo.DateBean;
 import com.yq.manager.bo.GcfhBean;
@@ -2690,4 +2691,20 @@ public class AdminService {
 	public void updateCz04(int cz04){
 		fcxtDao.updateCz04(cz04+"");
 	}
+	
+	public YbCjbBean getStatBean(String userName,String startDate,String endDate){
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			startDate = startDate +" 00:00:00";
+			endDate = endDate+" 23:59:59";
+		}
+		YbCjbBean bean = new YbCjbBean();
+		bean.setInCjb(vipcjglDao.getSumVipSr(userName, startDate, endDate));
+		bean.setOutCjb(vipcjglDao.getSumVipZc(userName, startDate, endDate));
+		bean.setInYb(datePayDao.getSumSyjz(userName, startDate, endDate));
+		bean.setOutYb(datePayDao.getSumjc(userName, startDate, endDate));
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		bean.setNowYb(gcuser.getPay());
+		bean.setNowCjb(gcuser.getVipcjcjb());
+		return bean;
+	} 
 }

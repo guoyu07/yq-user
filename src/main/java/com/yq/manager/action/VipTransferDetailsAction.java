@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.manager.bean.YbCjbBean;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Vipxtgc;
 
@@ -26,6 +27,15 @@ public class VipTransferDetailsAction extends ALDAdminPageActionSupport<Vipxtgc>
 		listVipName = adminService.getAllVipName();
 		return SUCCESS;
 	}
+	
+	
+	private YbCjbBean bean;
+	public String stat(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		bean = adminService.getStatBean(vipName, null, null);
+		return SUCCESS;
+	}
+	
 	
 	public String getVipName() {
 		return vipName;
@@ -57,5 +67,12 @@ public class VipTransferDetailsAction extends ALDAdminPageActionSupport<Vipxtgc>
 
 	public void setListVipName(List<String> listVipName) {
 		this.listVipName = listVipName;
+	}
+
+	public YbCjbBean getBean() {
+		return bean;
+	}
+	public void setBean(YbCjbBean bean) {
+		this.bean = bean;
 	}
 }

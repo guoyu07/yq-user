@@ -50,6 +50,7 @@
        <td valign="middle" align="center" width="372" bgcolor="#DFFFEF">【<a href="bdbdate2?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">报单币明细</a>】
        【<a href="datepay2?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">一币明细</a>】
   【<a href="vipcjbdetails?zuser=${vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">充值币明细</a>】     
+    【<a href="ybcjbstat?vipName=${data.vipname}&startDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>&endDate1=<fmt:formatDate value="${data.vipdate}" type="both" pattern="yyyy-MM-dd"/>">一币充值币统计</a>】
        </td>
               </tr>
               </s:iterator>

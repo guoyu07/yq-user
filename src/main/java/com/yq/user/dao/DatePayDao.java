@@ -163,4 +163,28 @@ public class DatePayDao {
 		return jdbc.getDouble(sql, SqlParameter.Instance().withInt(bz));
 	}
 	
+	public Double getSumSyjz(String userName,String startDate,String endDate){
+		String sql = "select sum(syjz) from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		return jdbc.getDouble(sql, sqlParameter);
+	}
+	
+	public Double getSumjc(String userName,String startDate,String endDate){
+		String sql = "select sum(jc) from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		return jdbc.getDouble(sql, sqlParameter);
+	}
+	
 }

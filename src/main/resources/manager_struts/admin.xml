@@ -503,6 +503,11 @@
 		      viptrasferdetail.jsp
 		    </result>
 		</action>
+		<action name="ybcjbstat" class="com.yq.manager.action.VipTransferDetailsAction" method="stat">
+		    <result name="success">
+		      ybcjbstat.jsp
+		    </result>
+		</action>
 		<action name="editYbSale" class="com.yq.manager.action.EditYbSaleAction">
 		    <result name="success">
 		      editybsale.jsp
