@@ -28,7 +28,7 @@ public class GpjyDao {
 //		return this.jdbc.update(sql, null)>0;
 //	}
 	
-	private void cleanCache(Integer id){
+	public void cleanCache(Integer id){
 			if (id == null) {
 				mcCache = null;
 				mrCache = null;
