@@ -23,7 +23,6 @@ public class Datepay{
 	private int newbz;
 	private int txbz;
 	
-
 	
 	public void setUsername(String username){
 	this.username=username;

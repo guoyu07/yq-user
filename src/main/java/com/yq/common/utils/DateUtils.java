@@ -360,9 +360,9 @@ public class DateUtils {
 	 * @param dayAmount 增加数量。可为负数
 	 * @return 增加天数后的日期字符串
 	 */
-	public static String addDay(String date, int dayAmount) {
-		return addInteger(date, Calendar.DATE, dayAmount);
-	}
+//	public static String addDay(String date, int dayAmount) {
+//		return addInteger(date, Calendar.DATE, dayAmount);
+//	}
 
 	/**
 	 * 增加日期的天数。失败返回null。

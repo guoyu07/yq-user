@@ -1,0 +1,44 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+    <package name="cw" extends="cwInterceptor" namespace="/cw">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="cwindex" class="com.yq.cw.action.CwSearchVipLogAction" >
+		   <result name="success" >/cw/searchviplog.jsp</result>
+		</action>
+	</package>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="cwlogin" extends="myInterceptor" namespace="/">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="cwlogin" class="com.yq.cw.action.CwLoginAction">
+			<result name="success" >/cw/default.jsp</result>
+			<result name="redirect" type="redirect">/cw/cwindex</result>
+		</action>
+	</package>
+
+   <package name="cwInterceptor" extends="myInterceptor">
+		<interceptors>
+			<!-- 认证拦截器-->
+			<interceptor name="cwInterceptor"
+				class="com.yq.cw.interceptor.CwInterceptor" />
+			<interceptor-stack name="cwStack">
+				<interceptor-ref name="cwInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="cwStack" />
+			<global-results>
+			<!-- 当anction抛出异常将被转向web的错误处理页面，拦截器是exceptionInterceptor -->
+			<result name="glober_error">
+				/error_manager.jsp
+			</result>
+			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
+			<result name="nologin" type="redirect">
+				/cwlogin
+			</result>
+		</global-results>
+	</package>
+</struts>

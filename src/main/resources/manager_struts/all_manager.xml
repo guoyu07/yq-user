@@ -64,4 +64,5 @@
 	<include file="manager_struts/admin.xml" />
 	<include file="manager_struts/cs.xml" />
 	<include file="manager_struts/app.xml" />
+	<include file="manager_struts/cw.xml" />
 </struts>

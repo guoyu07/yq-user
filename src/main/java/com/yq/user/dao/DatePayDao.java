@@ -9,6 +9,7 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.cw.bean.DatepayCw;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
 
@@ -70,6 +71,24 @@ public class DatePayDao {
 	}
 	
 	public List<Datepay> getListByUserNameAndDate(String username,String startDate,String endDate,Integer newbz){
+		String sql = "select dp.* from "+table+" dp where dp.username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(username);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and dp.abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		if(newbz!=null){
+			sql = sql +" and dp.newbz = ?";
+			sqlParameter.setInt(newbz);
+		}
+		sql = sql +" order by dp.id desc";
+		return this.jdbc.getList(sql, Datepay.class, sqlParameter);
+	}
+	
+	
+	public List<DatepayCw> getListByVipUserNameAndDate(String username,String startDate,String endDate,Integer newbz){
 		String sql = "select * from "+table+" where username = ?";
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(username);
@@ -84,8 +103,8 @@ public class DatePayDao {
 			sql = sql +" and newbz = ?";
 			sqlParameter.setInt(newbz);
 		}
-		sql = sql +" order by id desc";
-		return this.jdbc.getList(sql, Datepay.class, sqlParameter);
+		sql = sql +" order by id asc";
+		return this.jdbc.getList(sql, DatepayCw.class, sqlParameter);
 	}
 	
 	
@@ -103,6 +122,7 @@ public class DatePayDao {
 		sqlParameter.setString(regId);
 		return jdbc.get(sql, Datepay.class, sqlParameter);
 	}
+	
 	
 	public IPage<Datepay> getPageBykjqi(String username,int pageIndex,int pageSize){
 		String sql = "select * from "+table+" where username = ? and kjqi>0 order by id desc";
@@ -162,7 +182,13 @@ public class DatePayDao {
 		String sql = "SELECT sum(syjz)  FROM "+table+" where bz = ?";
 		return jdbc.getDouble(sql, SqlParameter.Instance().withInt(bz));
 	}
-	
+	/**
+	 * 时间段内的收入和
+	 * @param userName
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
 	public Double getSumSyjz(String userName,String startDate,String endDate){
 		String sql = "select sum(syjz) from "+table+" where username = ?";
 		SqlParameter sqlParameter = new SqlParameter();
@@ -174,7 +200,13 @@ public class DatePayDao {
 		}
 		return jdbc.getDouble(sql, sqlParameter);
 	}
-	
+	/**
+	 * 时间段内的支出和
+	 * @param userName
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
 	public Double getSumjc(String userName,String startDate,String endDate){
 		String sql = "select sum(jc) from "+table+" where username = ?";
 		SqlParameter sqlParameter = new SqlParameter();
@@ -185,6 +217,65 @@ public class DatePayDao {
 			sqlParameter.setString(endDate);
 		}
 		return jdbc.getDouble(sql, sqlParameter);
+	}
+	
+	
+	/**
+	 * 时间段内的支出和
+	 * @param userName
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public Double getSumjcByCw(String userName,String startDate,String endDate){
+		String sql = "select sum(case when newbz=3 then (case when jc<1000 then jc*0.85 else jc*0.9 end) else jc end) from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		return jdbc.getDouble(sql, sqlParameter);
+	}
+	
+	
+	/**
+	 * 时间段内的收入和
+	 * @param userName
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public Double getSumSyjzByCw(String userName,String startDate,String endDate){
+		String sql = "select sum(case when newbz=2 then (case when syjz<1000 then syjz*0.85 else syjz*0.9 end) else syjz end) from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		return jdbc.getDouble(sql, sqlParameter);
+	}
+	
+	/**
+	 * 时间段内最后一条一币交易明细
+	 * @param userName
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public Datepay getDateLastDatePay(String userName,String startDate){
+		String sql = "select * from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		if(!Strings.isNullOrEmpty(startDate)){
+			sql = sql +" and abdate < ?";
+			sqlParameter.setString(startDate);
+		}
+		sql = sql +" order by id desc limit 1";
+		return jdbc.get(sql, Datepay.class, sqlParameter);
 	}
 	
 }

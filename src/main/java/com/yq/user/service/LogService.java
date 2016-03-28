@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.base.Strings;
 import com.sr178.common.jdbc.bean.IPage;
+import com.yq.cw.bean.DatepayCw;
 import com.yq.manager.dao.JbkzjDao;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Datecj;
@@ -86,6 +87,11 @@ public class LogService {
 	 */
 	public List<Datepay> getAdminDatePayLisByUserNameAndDate(String username,String startDate,String endDate,Integer newbz){
 		return datePayDao.getListByUserNameAndDate(username, startDate, endDate, newbz);
+	}
+	
+	
+	public List<DatepayCw> getCwDatePayLisByVipUserNameAndDate(String username,String startDate,String endDate,Integer newbz){
+		return datePayDao.getListByVipUserNameAndDate(username, startDate, endDate, newbz);
 	}
 	/**
 	 * 

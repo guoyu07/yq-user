@@ -71,8 +71,9 @@ function checkdate1()  {
 					</div>
 					<div class="form_tj">
 						<a style="font-size: 16px; color: #ff6600; float:right;" href="javascript:history.back();">返回上一页</a>
-						<form class="form form3 formtj"  method="POST" action="bdreg?status=1" name="Form" id="Form" onSubmit="return showZz()">
+						<form class="form form3 formtj"  method="POST" action="bdreg" name="Form" id="Form" onSubmit="return showZz()">
 						<input type="hidden" name="targetdate" size="8">
+						<input type="hidden" name="status" size="8" value="1" />
 	                    <input type="hidden" name="xmlmode" size="8">
 	                    <input type="hidden" name="cjpay" size="10" value="${cjpay}" readonly><input type="hidden" name="remark" size="8" value="3" readonly><input type="hidden" name="user" size="10" value="${userName}" readonly>
 							<p><label>选择接点人：</label><b style="color: #ff0000;"><input type="hidden" name="up" size="10" value="${up}" readonly>${up}</b></p>
