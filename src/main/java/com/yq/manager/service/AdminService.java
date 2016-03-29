@@ -1308,7 +1308,7 @@ public class AdminService {
 			}
 			gcuserDao.updateCjtj(toUserName, amount);
 			
-			if(!userService.changeYb(toUserName, -9*amount, "转为报单币", 0, null)){
+			if(!userService.changeYb(toUserName, -9*amount, "转为报单币", 0, null,0)){
 				throw new ServiceException(3, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 			}
 			userService.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效");

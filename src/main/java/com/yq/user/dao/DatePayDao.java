@@ -228,7 +228,7 @@ public class DatePayDao {
 	 * @return
 	 */
 	public Double getSumjcByCw(String userName,String startDate,String endDate){
-		String sql = "select sum(case when newbz=3 then (case when jc<1000 then jc*0.85 else jc*0.9 end) else jc end) from "+table+" where username = ?";
+		String sql = "select sum(jc*ration) from "+table+" where username = ?";
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(userName);
 		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
@@ -248,7 +248,7 @@ public class DatePayDao {
 	 * @return
 	 */
 	public Double getSumSyjzByCw(String userName,String startDate,String endDate){
-		String sql = "select sum(case when newbz=2 then (case when syjz<1000 then syjz*0.85 else syjz*0.9 end) else syjz end) from "+table+" where username = ?";
+		String sql = "select sum(syjz*ration) from "+table+" where username = ?";
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(userName);
 		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){

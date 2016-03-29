@@ -85,27 +85,27 @@ public class CwService {
 		List<DatepayCw> logs = logService.getCwDatePayLisByVipUserNameAndDate(userName, startDate, endDate, null);
 //		String yesterday = DateUtils.DateToString(start_1, DateStyle.YYYY_MM_DD);
 //		String yesterday_s = yesterday+" 00:00:00";
-		for(DatepayCw dc:logs){
-			if(dc.getNewbz()==2){
-				if(dc.getSyjz()<1000){
-					dc.setInPrice(0.85);
-				}else{
-					dc.setInPrice(0.9);
-				}
-				dc.setOutPrice(1d);
-			}else if(dc.getNewbz()==3){
-				if(dc.getJc()<1000){
-					dc.setOutPrice(0.85);
-				}else{
-					dc.setOutPrice(0.9);
-				}
-				dc.setInPrice(1d);
-			}else{
-				dc.setInPrice(1d);
-				dc.setOutPrice(1d);
-			}
+//		for(DatepayCw dc:logs){
+//			if(dc.getNewbz()==2){
+//				if(dc.getSyjz()<1000){
+//					dc.setInPrice(0.85);
+//				}else{
+//					dc.setInPrice(0.9);
+//				}
+//				dc.setOutPrice(1d);
+//			}else if(dc.getNewbz()==3){
+//				if(dc.getJc()<1000){
+//					dc.setOutPrice(0.85);
+//				}else{
+//					dc.setOutPrice(0.9);
+//				}
+//				dc.setInPrice(1d);
+//			}else{
+//				dc.setInPrice(1d);
+//				dc.setOutPrice(1d);
+//			}
 			
-		}
+//		}
 		Datepay datepay =  datePayDao.getDateLastDatePay(userName, startDate);
 		//期初结余
 		if(datepay!=null){

@@ -51,15 +51,23 @@
      <td width="72" align="center" height="26" bgcolor="#E8E8FF"><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#0000FF" face="宋体" size="2">结余</font></td>
             </tr>
               <s:iterator var="data" value="bean.logList">
+              <c:set var="inPrice" value="0"></c:set>
+              <c:set var="outPrice" value="0"></c:set>
+              <c:if test="${data.syjz>0}">
+                  <c:set var="inPrice" value="${data.ration}"></c:set>
+              </c:if>
+              <c:if test="${data.jc>0}">
+                  <c:set var="outPrice" value="${data.ration}"></c:set>
+              </c:if>
              <tr> 
       <td height="24" width="91" align="center" bgcolor="#DFFFEF"><b><font size="2" face="宋体">${data.abdate}</font></b></td>
       <td valign="middle" align="center" width="136" bgcolor="#DFFFEF"><font face="宋体" size="2">${data.regid}</font></td></b>
       <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.syjz}</b></font></font></td><b>
-      <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.inPrice}</b></font></font></td><b>
-      <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.syjz*data.inPrice}</b></font></font></td><b>
+      <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${inPrice}</b></font></font></td><b>
+      <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.syjz*inPrice}</b></font></font></td><b>
       <td valign="middle" align="center" width="72" bgcolor="#DFFFEF"><font face="宋体" size="2">${data.jc}</font></td></b>
-       <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.outPrice}</b></font></font></td><b>
-      <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.jc*data.outPrice}</b></font></font></td><b>
+       <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${outPrice}</b></font></font></td><b>
+      <td valign="middle" align="center" width="161" bgcolor="#DFFFEF"><font face="宋体" size="2"><font color="#FF0000"><b>${data.jc*outPrice}</b></font></font></td><b>
       <td valign="middle" align="center" width="72" bgcolor="#DFFFEF"><font face="宋体" size="2" color="#FF0000"><b>${data.pay}</b></font></td>
               </tr>
               </s:iterator>

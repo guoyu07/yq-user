@@ -533,7 +533,7 @@ public class UserService {
 	 * @param changeNum
 	 * @return
 	 */
-	public boolean changeYb(String username,int changeNum,String desc,int newzBz,Integer kjqi){
+	public boolean changeYb(String username,int changeNum,String desc,int newzBz,Integer kjqi,double ration){
 		boolean result = false;
 		if(changeNum<0){
 			result = gcuserDao.reduceYb(username, changeNum*-1);
@@ -549,6 +549,7 @@ public class UserService {
 				if(kjqi!=null){
 					datePay.setKjqi(kjqi);
 				}
+				datePay.setRation(ration);
 				datePay.setAbdate(new Date());
 				logService.addDatePay(datePay);
 			}
@@ -565,6 +566,7 @@ public class UserService {
 				datePay.setRegid(desc);
 				datePay.setNewbz(newzBz);
 				datePay.setAbdate(new Date());
+				datePay.setRation(ration);
 				logService.addDatePay(datePay);
 			}
 			return result;
@@ -660,6 +662,9 @@ public class UserService {
 	 */
     @Transactional
 	public synchronized String bdReg(String userName,String up,String bduser,int cjpay,String pa1j,String pa2j,String idCardNum,int status){
+    	if(Strings.isNullOrEmpty(up)||Strings.isNullOrEmpty(bduser)){
+    		return null;
+    	}
     	up = up.trim();
     	bduser = bduser.trim();
 		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
@@ -839,7 +844,7 @@ public class UserService {
 //						return SUCCESS;
 				}
 				gcuserDao.updateSmsCode(operatorUser.getUsername(), INIT_SMS_CODE);
-				if(!this.changeYb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0,null)){
+				if(!this.changeYb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0,null,0)){
 					throw new ServiceException(7,"一币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
 			}
@@ -1254,7 +1259,7 @@ public class UserService {
 			throw new ServiceException(4, "捐助数量最低为100！");
 		}
 		
-		if(!this.changeYb(fromUser, -amount, "捐助", 14,null)){
+		if(!this.changeYb(fromUser, -amount, "捐助", 14,null,0)){
 			throw new ServiceException(100, "Yb不足");
 		}
 		
@@ -1281,10 +1286,10 @@ public class UserService {
 	 * @param amount
 	 */
 	private void trasferYb(String fromUser,String toUser,int amount){
-		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 6,null)){
+		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 6,null,0)){
 			throw new ServiceException(100, "Yb不足");
 		}
-		this.changeYb(toUser, amount, "收到-"+fromUser, 6,null);
+		this.changeYb(toUser, amount, "收到-"+fromUser, 6,null,0);
 	}
 	
 	/**
@@ -1331,7 +1336,7 @@ public class UserService {
 			throw new ServiceException(1,"一币不足");
 		}
 		Epkjdate epkjdate = managerService.getEpkjdateBz0();
-		if(!this.changeYb(userName, -ybNum, "竞猜投注"+ARRAY_DESC[type-1], 0,epkjdate.getKid())){
+		if(!this.changeYb(userName, -ybNum, "竞猜投注"+ARRAY_DESC[type-1], 0,epkjdate.getKid(),0)){
 			throw new ServiceException(1,"一币不足");
 		}
 		//更新压注池子
@@ -1397,7 +1402,7 @@ public class UserService {
 		}
 		Jfcp jfcp =jfcpDao.get(goodsId);
 		
-		if(!this.changeYb(userName, -price*buyNum, "抢购-"+jfcp.getCpmq(), 0, null)){
+		if(!this.changeYb(userName, -price*buyNum, "抢购-"+jfcp.getCpmq(), 0, null,0)){
 			throw new ServiceException(1,"一币不足");
 		}
 		
@@ -1610,11 +1615,11 @@ public class UserService {
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser+"-"+yy, 13, null)){
+		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser+"-"+yy, 13, null,0.9)){
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		if(!this.changeYb(toUser, amount, regId, 6, null)){
+		if(!this.changeYb(toUser, amount, regId, 6, null,0.9)){
 			throw new ServiceException(3000, "未知错误！");
 		}
 	}
@@ -1674,9 +1679,12 @@ public class UserService {
 		datePay.setRegid("转给-"+toUser);
 		datePay.setNewbz(0);
 		datePay.setAbdate(new Date());
+		
+		datePay.setRation(0.95);
+		
 		logService.addDatePay(datePay);
 		
-		if(!this.changeYb(toUser, amount, "收到服务中心"+fromUser.substring(0, 2)+"***转入", 0, null)){
+		if(!this.changeYb(toUser, amount, "收到服务中心"+fromUser.substring(0, 2)+"***转入", 0, null,0.9)){
 			throw new ServiceException(3000, "未知错误！");
 		}
 		
@@ -1890,6 +1898,11 @@ public class UserService {
 		datepay.setPay(dfuser.getPay());
 		datepay.setJydb(dfuser.getJydb());
 		datepay.setNewbz(2);
+		if(txpay.getPaynum()<1000){
+			datepay.setRation(0.85);
+		}else{
+			datepay.setRation(0.9);
+		}
 		datePayDao.addDatePay(datepay);
 		//更新所有同名账户状态为已支付状态
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
@@ -1919,6 +1932,13 @@ public class UserService {
 		datepay.setPay(dfuser.getPay());
 		datepay.setJydb(dfuser.getJydb());
 		datepay.setNewbz(2);
+		
+		if(txpay.getPaynum()<1000){
+			datepay.setRation(0.85);
+		}else{
+			datepay.setRation(0.9);
+		}
+		
 		datePayDao.addDatePay(datepay);
 		//更新所有同名账户状态为已支付状态
 //		Gcuser gcuser = gcuserDao.getUser(txpay.getPayusername());
@@ -1958,7 +1978,7 @@ public class UserService {
 		String shi = gcuser.getAddshi();
 		String qu = gcuser.getAddqu();
 		
-		if(!this.changeYb(userName, -needYbCount, "一币余额购金币卡"+jbCount, 0, null)){
+		if(!this.changeYb(userName, -needYbCount, "一币余额购金币卡"+jbCount, 0, null,0)){
 			throw new ServiceException(2, "注意：您的一币不够本次发卡，请充值！");
 		}
 		//更新gmdate
@@ -2870,13 +2890,13 @@ public class UserService {
 		}
 		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
 		//减一币
-		if(!this.changeYb(user, -ybpay,gcuser.getName(),12,null)){
+		if(!this.changeYb(user, -ybpay,gcuser.getName(),12,null,0)){
 //			super.setErroCodeNum(7);//alert('您的一币余额不足，请检查输入是否正确！');
 //			return SUCCESS;
 			throw new ServiceException(7, "");
 		}
 		//加一币
-		if(!this.changeYb(gcuser.getUsername(), ybpay,gcuser.getName()+"-"+beReduceUser.getName(),5,null)){
+		if(!this.changeYb(gcuser.getUsername(), ybpay,gcuser.getName()+"-"+beReduceUser.getName(),5,null,0)){
 //			super.setErroCodeNum(9);//alert('未知错误');
 //			return SUCCESS;
 			throw new ServiceException(9, "");
@@ -3048,7 +3068,7 @@ public class UserService {
 		vipcjgl.setCjdate(new Date());
 		vipcjglDao.add(vipcjgl);
 		
-		if(!this.changeYb(toUserName, -9*amount, "转为报单币v", 0, null)){
+		if(!this.changeYb(toUserName, -9*amount, "转为报单币v", 0, null,0)){
 			throw new ServiceException(6, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 		}
 		this.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v");
@@ -3093,7 +3113,7 @@ public class UserService {
 			throw new ServiceException(5, "手机验证码不正确");
 		}
 		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
-		if(!this.changeYb(userName, -ybsl, "换购-"+gwno, 4, null)){
+		if(!this.changeYb(userName, -ybsl, "换购-"+gwno, 4, null,0)){
 			throw new ServiceException(2, "一币不够！");
 		}
 	}
@@ -3114,7 +3134,7 @@ public class UserService {
 		if(gcuser==null){
 			throw new ServiceException(7, "商家用户名不存在，请检查后再试！");
 		}
-		this.changeYb(sjuser, ybsl, "商品交易-"+gwno, 5, null);
+		this.changeYb(sjuser, ybsl, "商品交易-"+gwno, 5, null,0);
 	}
 	/**
 	 * 新商城支付通道
@@ -3154,7 +3174,7 @@ public class UserService {
 		if(!hgcode.equals(gcuser.getVipsq())){
 			throw new ServiceException(7, "手机验证码不正确");
 		}
-		if(!this.changeYb(user, -ybsl, paylb, 10, null)){
+		if(!this.changeYb(user, -ybsl, paylb, 10, null,0)){
 			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 		}
 		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
@@ -3213,7 +3233,7 @@ public class UserService {
 			throw new ServiceException(8, "您好，每月机票消费不能超过1w，请下月再购买！");
 		}
 		
-		if(!this.changeYb(user, -ybsl, paylb, 11, null)){
+		if(!this.changeYb(user, -ybsl, paylb, 11, null,0)){
 			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 		}
 //		Date date = gcuser.getPwdate();
@@ -3429,7 +3449,7 @@ public class UserService {
 			throw new ServiceException(3, "手机验证码不正确");
 		}
 		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
-		if(!this.changeYb(userName, -23800, "口才训练营报名", 0, null)){
+		if(!this.changeYb(userName, -23800, "口才训练营报名", 0, null,0)){
 			throw new ServiceException(1, "一币不足");
 		}
 		BabyInfo babyInfo = new BabyInfo(userName, gcuser.getName(), babyName, babyAge, babySex, dadyName, dadyAge, dadyCall, momName, momAge, momCall, address, details, 0, "", null, "", "", new Date());

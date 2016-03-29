@@ -22,6 +22,7 @@ public class Datepay{
 	private int bz;
 	private int newbz;
 	private int txbz;
+	private double ration;
 	
 	
 	public void setUsername(String username){
@@ -113,6 +114,12 @@ public class Datepay{
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public double getRation() {
+		return ration;
+	}
+	public void setRation(double ration) {
+		this.ration = ration;
 	}
 }
 
