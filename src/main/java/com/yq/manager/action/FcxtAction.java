@@ -2,10 +2,12 @@ package com.yq.manager.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.manager.bo.PointsChangeLog;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 
-public class FcxtAction extends ALDAdminActionSupport {
+public class FcxtAction extends ALDAdminPageActionSupport<PointsChangeLog> {
 
 	/**
 	 * 
@@ -19,6 +21,7 @@ public class FcxtAction extends ALDAdminActionSupport {
 	public String execute(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 			fcxt = adminService.getFcxt(2);
+		super.initPage(adminService.getPointChangeLogPage(super.getToPage(), 20));
 		return SUCCESS;
 	}
 	

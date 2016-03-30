@@ -107,9 +107,14 @@ public class CwService {
 			
 //		}
 		Datepay datepay =  datePayDao.getDateLastDatePay(userName, startDate);
+		
+		int dayLeave = 0;
+		int monthLeave = 0;
+		int yearLeave = 0;
 		//期初结余
 		if(datepay!=null){
 			result.setStartNum(datepay.getPay());
+			dayLeave = datepay.getPay();
 		}
 		//日志列表
 		result.setLogList(logs);
@@ -117,20 +122,29 @@ public class CwService {
 		StatBean dayStat = new StatBean();
 		dayStat.in = datePayDao.getSumSyjz(userName, startDate, endDate);
 		dayStat.out = datePayDao.getSumjc(userName, startDate, endDate);
-		dayStat.remaind = dayStat.in - dayStat.out;
+		dayStat.remaind = dayStat.in - dayStat.out+dayLeave;
+		
+		
 		
 		dayStat.inRmb = datePayDao.getSumSyjzByCw(userName, startDate, endDate);
 		dayStat.outRmb = datePayDao.getSumjcByCw(userName, startDate, endDate);
 		dayStat.remaindRmb = dayStat.inRmb - dayStat.outRmb;
 		result.setDayStat(dayStat);
 		//本月累积
+		
 		String monthStr = DateUtils.DateToString(start, DateStyle.YYYY_MM);
 		String monthStartDate = monthStr+"-01 00:00:00";
 		String monthEndDate = monthStr+"-31 23:59:59";
 		StatBean monthStat = new StatBean();
+		
+		Datepay datepayMonth =  datePayDao.getDateLastDatePay(userName, monthStartDate);
+		if(datepayMonth!=null){
+			monthLeave = datepayMonth.getPay();
+		}
+		
 		monthStat.in = datePayDao.getSumSyjz(userName, monthStartDate, monthEndDate);
 		monthStat.out = datePayDao.getSumjc(userName, monthStartDate, monthEndDate);
-		monthStat.remaind = monthStat.in - monthStat.out;
+		monthStat.remaind = monthStat.in - monthStat.out+monthLeave;
 		
 		monthStat.inRmb = datePayDao.getSumSyjzByCw(userName, monthStartDate, monthEndDate);
 		monthStat.outRmb = datePayDao.getSumjcByCw(userName, monthStartDate, monthEndDate);
@@ -142,9 +156,15 @@ public class CwService {
 		String yearStartDate = yearStr+"-01-01 00:00:00";
 		String yearEndDate = yearStr+"-12-31 23:59:59";
 		StatBean yearStat = new StatBean();
+		
+		Datepay datepayYear =  datePayDao.getDateLastDatePay(userName, yearStartDate);
+		if(datepayYear!=null){
+			yearLeave = datepayYear.getPay();
+		}
+		
 		yearStat.in = datePayDao.getSumSyjz(userName, yearStartDate, yearEndDate);
 		yearStat.out = datePayDao.getSumjc(userName, yearStartDate, yearEndDate);
-		yearStat.remaind = yearStat.in - yearStat.out;
+		yearStat.remaind = yearStat.in - yearStat.out+yearLeave;
 		
 		yearStat.inRmb = datePayDao.getSumSyjzByCw(userName, yearStartDate, yearEndDate);
 		yearStat.outRmb = datePayDao.getSumjcByCw(userName, yearStartDate, yearEndDate);

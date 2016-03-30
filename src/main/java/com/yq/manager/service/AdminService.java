@@ -32,11 +32,13 @@ import com.yq.manager.bo.DateBean;
 import com.yq.manager.bo.GcfhBean;
 import com.yq.manager.bo.NewsDateBean;
 import com.yq.manager.bo.PmmltBean;
+import com.yq.manager.bo.PointsChangeLog;
 import com.yq.manager.bo.W10Bean;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
 import com.yq.manager.dao.MtfhtjDao;
+import com.yq.manager.dao.PointsChangeLogDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.user.bean.TopReward;
 import com.yq.user.bo.Addsheng;
@@ -148,6 +150,8 @@ public class AdminService {
 	private UserPerformanceDao userPerformanceDao;
 	@Autowired
 	private UserExtinfoDao userExtinfoDao;
+	@Autowired
+	private PointsChangeLogDao pointsChangeLogDao;
 	
 	
 	
@@ -1700,8 +1704,7 @@ public class AdminService {
 	 * 后台执行xxxx
 	 */
 	public void man123(){
-		gcuserDao.updateAbdateAndDbtl(">30", 0, new Date(), 1);
-		gcuserDao.updateAbdateAndDbtl("<=30", 1, null, 0);
+
 		Fcxt fcxt = fcxtDao.get(2);
 		int ration = 30000000;
 		try {
@@ -1709,8 +1712,18 @@ public class AdminService {
 		} catch (Exception e) {
 			LogSystem.warn("cz04转换出错！~~~");
 		}
+		if(fcxtDao.updateJy5w(ration)){
+			PointsChangeLog changeLog = new PointsChangeLog();
+			changeLog.setCreatedTime(new Date());
+			changeLog.setOldPrice(fcxt.getJygj()+"");
+			changeLog.setNewPrice((fcxt.getJygj()+0.01)+"");
+			changeLog.setCurrentNum(fcxt.getJy5w()+"");
+			changeLog.setUpRation(ration+"");
+			pointsChangeLogDao.add(changeLog);
+		}
 		
-		fcxtDao.updateJy5w(ration);
+		gcuserDao.updateAbdateAndDbtl(">30", 0, new Date(), 1);
+		gcuserDao.updateAbdateAndDbtl("<=30", 1, null, 0);
 		
 		
 		double jyj = fcxt.getJygj()+0.2;
@@ -2707,4 +2720,8 @@ public class AdminService {
 		bean.setNowCjb(gcuser.getVipcjcjb());
 		return bean;
 	} 
+	
+	public IPage<PointsChangeLog> getPointChangeLogPage(int pageIndex,int pageSize){
+		return pointsChangeLogDao.getPageList(pageIndex, pageSize, "order by id desc");
+	}
 }

@@ -104,7 +104,7 @@ a:hover{ color:#272a3d;}
 
 .nav li .ej{ display: none; background: #d5af46; position: absolute; top:5px; left:0; width: 170px;}
 .nav li .ej a{ height: 40px; line-height: 40px; font-size: 17px; }
-.nav li .ej a:hover{ background: #d5af46; color:#FFF; height: 150px; line-height: 150px;}
+.nav li .ej a:hover{ background: #dcbc67; color:#FFF; height: 80px; line-height: 80px;}
 .nav li .ej span.close{ cursor: pointer; height: 100px; display:block; background: url(../images/close.jpg) no-repeat center 40px; }
 
 .page{ background:#d8d8d8; color:#000; border:1px solid #989898; text-align: center; }
