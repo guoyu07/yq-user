@@ -9,6 +9,7 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
+import com.yq.cw.bean.VipCjbLogBean;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.service.CwService;
 import com.yq.manager.service.AdminService;
@@ -54,6 +55,34 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 			CwService cwServuce = ServiceCacheFactory.getService(CwService.class);
 			bean = cwServuce.getVipSearchBean(searchUserName, startTime);
 		}
+		return SUCCESS;
+	}
+	
+	private VipCjbLogBean cjbBean;
+	public String vipcjbLog(){
+		if (super.getUserName().equals("cwadmin")) {
+			AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+			vipList = adminService.getAllVipName();
+		} else {
+			vipList = new ArrayList<String>();
+			vipList.add(super.getUserName());
+		}
+		
+		if (status == 1) {
+			if(Strings.isNullOrEmpty(startTime)){
+				startTime = DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD);
+			}
+			UserService userService = ServiceCacheFactory.getService(UserService.class);
+		    gcuser = userService.getUserByUserName(searchUserName);
+			Date start = DateUtils.StringToDate(startTime,DateStyle.YYYY_MM_DD);
+			Date preDate_ = DateUtils.addDay(start, -1);
+			Date nextDate_ = DateUtils.addDay(start, 1);
+			preDate = DateUtils.DateToString(preDate_, DateStyle.YYYY_MM_DD);
+			nextDate =  DateUtils.DateToString(nextDate_, DateStyle.YYYY_MM_DD);
+			CwService cwServuce = ServiceCacheFactory.getService(CwService.class);
+			cjbBean = cwServuce.getVipCjbBean(searchUserName, startTime);
+		}
+		
 		return SUCCESS;
 	}
 	public String getStartTime() {
@@ -103,5 +132,11 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 	}
 	public void setGcuser(Gcuser gcuser) {
 		this.gcuser = gcuser;
+	}
+	public VipCjbLogBean getCjbBean() {
+		return cjbBean;
+	}
+	public void setCjbBean(VipCjbLogBean cjbBean) {
+		this.cjbBean = cjbBean;
 	}
 }

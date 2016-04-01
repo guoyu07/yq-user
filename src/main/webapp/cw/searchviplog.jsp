@@ -10,6 +10,7 @@
 <div align="center">
 	<b>
   <table border="0" cellspacing="1" width="100%" cellpadding="0" height="75">
+  <tr><td colspan="7"><a href="cwindex">一币日志查询</a>|<a href="cjblog">充值币日志查询</a></td></tr>
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="73">
 	<p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">

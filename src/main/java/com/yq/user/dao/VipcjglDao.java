@@ -27,6 +27,27 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 		return super.getJdbc().getList(sql, Vipcjgl.class, sqlParameter);
 	}
 	
+	public List<Vipcjgl> getVipcjglListAsc(String userName,String startTime,String endTime){
+		String sql = "select * from "+super.getTable()+" where vipuser=? ";
+		SqlParameter sqlParameter = SqlParameter.Instance();
+		sqlParameter.withString(userName);
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			sql = sql +" and cjdate between ? and ?";
+			sqlParameter.setString(startTime);
+			sqlParameter.setString(endTime);
+		}
+		sql = sql +" order by cjid asc";
+		return super.getJdbc().getList(sql, Vipcjgl.class, sqlParameter);
+	}
+	
+	public Vipcjgl getOneBeforeTime(String userName,String endTime){
+		String sql = "select * from "+ super.getTable()+" where vipuser=? and  cjdate<? order by cjdate desc limit 1";
+		SqlParameter sqlParameter = SqlParameter.Instance();
+		sqlParameter.withString(userName);
+		sqlParameter.withString(endTime);
+		return super.getJdbc().get(sql, Vipcjgl.class, sqlParameter);
+	}
+	
 	
 	public IPage<Vipcjgl> getVipcjglPageList(String userName,String startTime,String endTime,int pageSize,int pageIndex){
 		String sql = "select * from "+super.getTable()+" where vipuser=?";
@@ -55,9 +76,8 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 	}
 	
 	public Double getSumVipSr(String userName,String startTime,String endTime){
-		String sql = "select sum(cjjo) from "+super.getTable()+" where ((vipuser=? and cjuser='系统') or (cjuser=?))";
+		String sql = "select sum(cjjo) from "+super.getTable()+" where vipuser=? and cjuser='系统'";
 		SqlParameter sqlParameter = SqlParameter.Instance();
-		sqlParameter.withString(userName);
 		sqlParameter.withString(userName);
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
 			sql = sql +" and cjdate between ? and ?";

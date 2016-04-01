@@ -8,6 +8,10 @@
 		<action name="cwindex" class="com.yq.cw.action.CwSearchVipLogAction" >
 		   <result name="success" >/cw/searchviplog.jsp</result>
 		</action>
+		
+		<action name="cjblog" class="com.yq.cw.action.CwSearchVipLogAction" method="vipcjbLog">
+		   <result name="success" >/cw/searchvipczblog.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

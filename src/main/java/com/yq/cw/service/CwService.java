@@ -13,13 +13,16 @@ import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.cw.bean.DatepayCw;
 import com.yq.cw.bean.StatBean;
+import com.yq.cw.bean.VipCjbLogBean;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.bo.CwUser;
 import com.yq.cw.dao.CwUserDao;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Vipcjgl;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.GcuserDao;
+import com.yq.user.dao.VipcjglDao;
 import com.yq.user.service.LogService;
 
 public class CwService {
@@ -34,6 +37,8 @@ public class CwService {
   	private LogService logService;
   	@Autowired
   	private DatePayDao datePayDao;
+  	@Autowired
+  	private VipcjglDao vipcjglDao;
   	
   	public String getLoginCwUserName(String sessionId){
 		return cwUserMap.getIfPresent(sessionId);
@@ -169,6 +174,67 @@ public class CwService {
 		yearStat.inRmb = datePayDao.getSumSyjzByCw(userName, yearStartDate, yearEndDate);
 		yearStat.outRmb = datePayDao.getSumjcByCw(userName, yearStartDate, yearEndDate);
 		yearStat.remaindRmb = yearStat.inRmb - yearStat.outRmb;
+		result.setYearStat(yearStat);
+		return result;
+	}
+	
+	public VipCjbLogBean getVipCjbBean(String userName,String startTime){
+		VipCjbLogBean result = new VipCjbLogBean();
+		Date start = DateUtils.StringToDate(startTime, DateStyle.YYYY_MM_DD);
+		String startDate = startTime+" 00:00:00";
+		String endDate = startTime+" 23:59:59";
+		List<Vipcjgl> logs = vipcjglDao.getVipcjglListAsc(userName, startDate, endDate);
+		Vipcjgl vipcjgl =  vipcjglDao.getOneBeforeTime(userName, startDate);
+		
+		int dayLeave = 0;
+		int monthLeave = 0;
+		int yearLeave = 0;
+		//期初结余
+		if(vipcjgl!=null){
+			result.setStartNum(vipcjgl.getSycjb());
+			dayLeave = vipcjgl.getSycjb();
+		}
+		//日志列表
+		result.setLogList(logs);
+		//今日累积
+		StatBean dayStat = new StatBean();
+		dayStat.in = vipcjglDao.getSumVipSr(userName, startDate, endDate);
+		dayStat.out = vipcjglDao.getSumVipZc(userName, startDate, endDate);
+		dayStat.remaind = dayStat.in - dayStat.out+dayLeave;
+		
+		result.setDayStat(dayStat);
+		//本月累积
+		
+		String monthStr = DateUtils.DateToString(start, DateStyle.YYYY_MM);
+		String monthStartDate = monthStr+"-01 00:00:00";
+		String monthEndDate = monthStr+"-31 23:59:59";
+		StatBean monthStat = new StatBean();
+		
+		Vipcjgl datepayMonth =  vipcjglDao.getOneBeforeTime(userName, monthStartDate);
+		if(datepayMonth!=null){
+			monthLeave = datepayMonth.getSycjb();
+		}
+		
+		monthStat.in = vipcjglDao.getSumVipSr(userName, monthStartDate, monthEndDate);
+		monthStat.out = vipcjglDao.getSumVipZc(userName, monthStartDate, monthEndDate);
+		monthStat.remaind = monthStat.in - monthStat.out+monthLeave;
+		
+		result.setMonthStat(monthStat);
+		//本年累积
+		String yearStr = DateUtils.getYear(start)+"";
+		String yearStartDate = yearStr+"-01-01 00:00:00";
+		String yearEndDate = yearStr+"-12-31 23:59:59";
+		StatBean yearStat = new StatBean();
+		
+		Vipcjgl datepayYear =  vipcjglDao.getOneBeforeTime(userName, yearStartDate);
+		if(datepayYear!=null){
+			yearLeave = datepayYear.getSycjb();
+		}
+		
+		yearStat.in = vipcjglDao.getSumVipSr(userName, yearStartDate, yearEndDate);
+		yearStat.out = vipcjglDao.getSumVipZc(userName, yearStartDate, yearEndDate);
+		yearStat.remaind = yearStat.in - yearStat.out+yearLeave;
+		
 		result.setYearStat(yearStat);
 		return result;
 	}
