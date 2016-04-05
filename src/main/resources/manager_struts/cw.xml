@@ -12,6 +12,16 @@
 		<action name="cjblog" class="com.yq.cw.action.CwSearchVipLogAction" method="vipcjbLog">
 		   <result name="success" >/cw/searchvipczblog.jsp</result>
 		</action>
+		
+		<action name="dcdata" class="com.yq.cw.action.VipOutExcelAction">
+		   <result name="success" >/cw/dcdata.jsp</result>
+		</action>
+		
+		<action name="outExcelForDatepay" class="com.yq.cw.action.VipOutExcelAction" method="outExcelForDatePay">
+		</action>
+		
+		<action name="outExcelForCjb" class="com.yq.cw.action.VipOutExcelAction" method="outExcelForVipCjb">
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

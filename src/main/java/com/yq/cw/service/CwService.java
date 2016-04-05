@@ -12,8 +12,10 @@ import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.cw.bean.DatepayCw;
+import com.yq.cw.bean.DatepayForDc;
 import com.yq.cw.bean.StatBean;
 import com.yq.cw.bean.VipCjbLogBean;
+import com.yq.cw.bean.VipCjglForDc;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.bo.CwUser;
 import com.yq.cw.dao.CwUserDao;
@@ -239,4 +241,12 @@ public class CwService {
 		return result;
 	}
 	
+	
+	public List<DatepayForDc> getCwDatePayLisByVipUserNameAndDateForDc(String username,String startDate,String endDate,Integer newbz){
+		return datePayDao.getListByVipUserNameAndDateForDc(username, startDate, endDate, newbz);
+	}
+	
+	public List<VipCjglForDc> getVipcjglListForDcAsc(String userName,String startTime,String endTime){
+		return vipcjglDao.getVipcjglListForDcAsc(userName, startTime, endTime);
+	}
 }

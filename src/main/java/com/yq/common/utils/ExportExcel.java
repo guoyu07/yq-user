@@ -141,10 +141,9 @@ public class ExportExcel<T>
 			T t = (T) it.next();
 			// 利用反射，根据javabean属性的先后顺序，动态调用getXxx()方法得到属性值
 			Field[] fields = t.getClass().getDeclaredFields();
+			int j = 0;
 			for (short i = 0; i < fields.length; i++)
 			{
-				HSSFCell cell = row.createCell(i);
-				cell.setCellStyle(style2);
 				Field field = fields[i];
 				String fieldName = field.getName();
 				String getMethodName = "get"
@@ -177,6 +176,8 @@ public class ExportExcel<T>
 					// long longValue = (Long) value;
 					// cell.setCellValue(longValue);
 					// }
+					HSSFCell cell = row.createCell(j++);
+					cell.setCellStyle(style2);
 					if (value instanceof Boolean)
 					{
 						boolean bValue = (Boolean) value;
@@ -242,7 +243,7 @@ public class ExportExcel<T>
 				}
 				catch (NoSuchMethodException e)
 				{
-					e.printStackTrace();
+//					e.printStackTrace();
 				}
 				catch (IllegalArgumentException e)
 				{

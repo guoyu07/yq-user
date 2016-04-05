@@ -10,6 +10,7 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.cw.bean.DatepayCw;
+import com.yq.cw.bean.DatepayForDc;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
 
@@ -105,6 +106,26 @@ public class DatePayDao {
 		}
 		sql = sql +" order by id asc";
 		return this.jdbc.getList(sql, DatepayCw.class, sqlParameter);
+	}
+	
+	
+	public List<DatepayForDc> getListByVipUserNameAndDateForDc(String username,String startDate,String endDate,Integer newbz){
+		String sql = "select * from "+table+" where username = ?";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(username);
+		
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		
+		if(newbz!=null){
+			sql = sql +" and newbz = ?";
+			sqlParameter.setInt(newbz);
+		}
+		sql = sql +" order by id asc";
+		return this.jdbc.getList(sql, DatepayForDc.class, sqlParameter);
 	}
 	
 	

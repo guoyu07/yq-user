@@ -63,6 +63,7 @@
               <td width="112" align="center" height="27" bgcolor="#FFE1FF"><font size="2" face="宋体">剩余金币</font></td>
               <td width="216" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" size="2" face="宋体">更新时间</font></td>
               <td width="247" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" size="2" face="宋体">备注</font></td>
+               <td width="247" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" size="2" face="宋体">折扣</font></td>
               </tr>
               <s:iterator var="data" value="dataList">
               <tr> 
@@ -77,6 +78,7 @@
               <td valign="middle" align="center" width="112"><font size="2" face="宋体">${data.jydb}</font></td>
               <td valign="middle" align="center" width="216"><font color="#000000" size="2" face="宋体">${data.abdate}</font></td>
               <td valign="middle" align="center" width="247"><font color="#000000" size="2" face="宋体">${data.regid}</font></td>
+               <td valign="middle" align="center" width="247"><font color="#000000" size="2" face="宋体">${data.ration}</font></td>
               </tr>
              </s:iterator>
             </table> 

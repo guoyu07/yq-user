@@ -61,7 +61,7 @@ public class AdminDatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		String path = ServletActionContext.getServletContext().getRealPath("/");
 		String descDirectoryPath = path + "/temp/"+zuser+"-yb.xls";
 		
-		String[] headers = { "id", "会员名", "一币收入", "一币支出", "金币收入","金币支出","zff","剩余一币", "剩余金币", "更新时间","备注","kjqi","bz","newbz","txbz"};
+		String[] headers = { "id", "会员名", "一币收入", "一币支出", "金币收入","金币支出","zff","剩余一币", "剩余金币", "更新时间","备注","kjqi","bz","newbz","txbz","折扣"};
 		List<Datepay> data = logService.getAdminDatePayLisByUserNameAndDate(zuser, queryStartDate, queryEndDatet,(beizhu==null||beizhu==0)?null:beizhu);
 		writeExcel(descDirectoryPath, "用户"+zuser+"的一币和金币明细", headers, data, "yyyy-MM-dd hh:mm:ss");
 		download(descDirectoryPath, response);
