@@ -1701,6 +1701,43 @@ public class AdminService {
 		}
 	}
 	/**
+	 * 退户
+	 * @param fromUser
+	 * @param toUser
+	 */
+	public void transferUserInfo(String fromUser,String toUser){
+		Gcuser from = gcuserDao.getUser(fromUser);
+		Gcuser to = gcuserDao.getUser(toUser);
+		
+		if(from==null){
+			throw new ServiceException(3, "被转用户不存在"+fromUser);
+		}
+		if(to==null){
+			throw new ServiceException(4, "接收用户不存在"+toUser);
+		}
+		
+		String tduserid = from.getUserid();
+		String tdname = from.getName();
+		
+		if(tduserDao.get(new SqlParamBean("tduserid", tduserid))!=null){
+			throw new ServiceException(5, "身份证号码["+tduserid+"]已经退户了，不能重复退户！");
+		}
+		
+		if(from.getUserid().equals(to.getUserid())||from.getName().equals(to.getName())){
+			throw new ServiceException(6, "已属于同一同名账号，无法退户，误操作？"+toUser);
+		}
+		
+		gcuserDao.updateUserInfoToOtherUser(tduserid, tdname, toUser);
+		
+		Tduser t = new Tduser();
+		t.setTdname(tdname);
+		t.setTduserid(tduserid);
+		t.setTduser(fromUser);
+		t.setTdqq(from.getQq());
+		t.setTdcall(from.getCall());
+		tduserDao.add(t);
+	}
+	/**
 	 * 后台执行xxxx
 	 */
 	public void man123(){
@@ -1943,8 +1980,8 @@ public class AdminService {
 		FileCreatUtil.creatNewFile(Y_FILE_NAME);
 		FileCreatUtil.creatNewFile(Z_FILE_NAME);
 		//删除2张表
-		youMingXiDao.deleteAll();
-		zuoMingxiDao.deleteAll();
+//		youMingXiDao.deleteAll();
+//		zuoMingxiDao.deleteAll();
 		while(true){
 			long startTime = System.currentTimeMillis();
 			long programeEndTime = System.currentTimeMillis();

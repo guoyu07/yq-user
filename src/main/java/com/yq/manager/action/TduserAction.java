@@ -64,7 +64,19 @@ public class TduserAction extends ALDAdminPageActionSupport<Tduser> {
 		super.setErroCodeNum(2001);
 		return SUCCESS;
 	}
+	
+	
+	private String fromUserName;
+	private String toUserName;
+	public String transferUser(){
+		checkPassword();
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		adminService.transferUserInfo(fromUserName, toUserName);
+		super.setErroCodeNum(2002);
+		return SUCCESS;
+	}
 
+	
 	
 	private void checkPassword(){
 		if(!cjpa.equals("yc2015td")){
@@ -158,5 +170,21 @@ public class TduserAction extends ALDAdminPageActionSupport<Tduser> {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public String getToUserName() {
+		return toUserName;
+	}
+
+	public void setToUserName(String toUserName) {
+		this.toUserName = toUserName;
 	}
 }

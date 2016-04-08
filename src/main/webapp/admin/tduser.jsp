@@ -5,6 +5,11 @@
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('不存在该记录${tdId}');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('添加成功');location.href="tduser?cjpa=${cjpa}";</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('修改成功');location.href="tduser?cjpa=${cjpa}";</script></c:if>
+<c:if test="${erroCodeNum==2002}"><script language=javascript>alert('用户转换成功');location.href="tduser?cjpa=${cjpa}";</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert("被转用户不存在${fromUserName}");history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('接收用户不存在${toUserName}');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('${toUserName}的身份证信息已退过户了，不能重复退户！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('${toUserName}和${fromUserName}已属于同一同名账号，无法退户，误操作？');history.go(-1);</script></c:if>
 <html>
 <title>历史退户记录</title>
 <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
@@ -54,6 +59,19 @@
 		</td>
 		</tr>
 </table>
+
+<form method="POST" action="tduser-transfer" name="form1">
+			<table border="1" width="100%" id="table2" cellspacing="1" style="border-collapse: collapse" height="55">
+			<tr><td align="center" width="278">退户转让</td></tr>
+				<tr>
+					<td align="left">退户用户名:<input type="text" name="fromUserName" size="20" >（<font color='red'>请填退户的用户下的任意一个同名用户的登录用户名</font>）<input type="hidden" name="cjpa" size="10" value="${cjpa}" readonly /></td>
+				</tr>
+				<tr>
+				<td align="left">接收用户名:<input type="text" name="toUserName" size="20" >（<font color='red'>退户用户的所有同名用户都会转到该用户名下，密码，姓名，身份证，地址，银行卡都会修改成为该用户的</font>）</td>
+				</tr>
+				<tr><td align="center" width="278"><input type="submit" value="账户退户" name="B4" onClick="return confirm('该过程不可逆，确定要如此做吗？');"></td></tr>
+			</table>
+		</form>
 <c:if test="${sst==1}">
 <DIV class=box>
 <DIV class=box_con style=" text-align:left">

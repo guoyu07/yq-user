@@ -416,6 +416,7 @@ public class UserService {
 		user.setRegtime(new Date());
 		user.setAddqu(oldUser.getAddqu());
 		user.setAdd9dqu(oldUser.getAdd9dqu());
+		user.setPayok(oldUser.getPayok());
 		
 		gcuserDao.addUser(user);
 		
@@ -1304,7 +1305,7 @@ public class UserService {
 		if(!gcuser.getPassword3().equals(password3)){
 			throw new ServiceException(1, "二级密码错误，请检查输入是否正确！");
 		}
-		if(gcuser.getPayok()==10){
+		if(gcuser.getPayok()!=0){
 			throw new ServiceException(2, "您好，您已申请的卖出尚未交易成功，暂时不能使用转账功能，谢谢！");
 		}
 		if(gcuser.getJygt1()==2 || gcuser.getDbt1()==2){
@@ -1483,7 +1484,7 @@ public class UserService {
 			throw new ServiceException(6,"您好，您发布的一币数量不能小于100，谢谢！");
 		}
 		
-		if(gcuser.getPayok()==1){
+		if(gcuser.getPayok()!=0){
 			throw new ServiceException(7,"您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！");
 		}
 		

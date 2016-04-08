@@ -489,6 +489,14 @@
 		       tduser.jsp
 		    </result>		    
 		</action>
+		<action name="tduser-transfer" class="com.yq.manager.action.TduserAction" method="transferUser">
+		    <result name="redirect" type="redirect">
+		       tduser?cjpa=${cjpa}
+		    </result>
+		    <result name="success">
+		       tduser.jsp
+		    </result>		    
+		</action>
 		<action name="bdbList" class="com.yq.cservice.action.SearchUserAction" method="dbdList">
 			<result name="success" >/cs/bdbList.jsp</result>
 		</action>

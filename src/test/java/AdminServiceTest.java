@@ -7,7 +7,7 @@ import com.yq.manager.service.AdminService;
 public class AdminServiceTest extends DaoTest {
 
 	public void testWay(){
-//		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 //		adminService.man123();
 //		adminService.resetZaqAndZbq();
 //		adminService.resetUserDownInfo();
@@ -53,8 +53,8 @@ public class AdminServiceTest extends DaoTest {
 //		adminService.generatorTopReward(new Date());
 //		adminService.resetUserZaqAndZbq("fxj881");
 //		adminService.managequeren();
-//		adminService.resetZaqAndZbq();
-//		adminService.resetUserDownInfo();
+		adminService.resetZaqAndZbq();
+		adminService.resetUserDownInfo();
 		
 	}
 }
