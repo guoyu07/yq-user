@@ -55,6 +55,7 @@ public class AdminServiceTest extends DaoTest {
 //		adminService.managequeren();
 //		adminService.resetZaqAndZbq();
 //		adminService.resetUserDownInfo();
+//		adminService.shareMoney();
 		
 	}
 }
