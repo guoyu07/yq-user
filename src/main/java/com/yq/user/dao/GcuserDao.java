@@ -1042,7 +1042,7 @@ public class GcuserDao {
 	
 	public boolean updateUserInfoToOtherUser(String tdUserid,String tdName,String toUserName){
 		String sql = "update gcuser g inner join gcuser gc set g.name=gc.name,g.password=gc.password,g.password3=gc.password3,g.userid=gc.userid,"
-				+ "g.card=gc.card,g.addsheng=gc.addsheng,g.addshi=gc.addshi,g.addqu=gc.addqu,g.qq=gc.qq,g.`call`=gc.`call`  "
+				+ "g.card=gc.card,g.addsheng=gc.addsheng,g.addshi=gc.addshi,g.addqu=gc.addqu,g.qq=gc.qq,g.`call`=gc.`call`,g.bank=gc.bank  "
 				+ "where g.userid=? and g.name=? and gc.username=?";
 		SqlParameter parameter = SqlParameter.Instance();
 		parameter.withString(tdUserid).withString(tdName).withString(toUserName);
