@@ -17,7 +17,7 @@
 <c:if test="${erroCodeNum==15}"><script language=javascript>alert('接点人位置已被占用，请重新选择！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==16}"><script language=javascript>alert('验证码错误，请检查输入是否正确！');history.go(-2);</script></c:if>
 <c:if test="${erroCodeNum==17}"><script language=javascript>alert('接点人必须在自己的团队下，请重新选择！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==100}"><script language=javascript>alert('为给家人们提供更好的服务，报单功能正在维护！预计2月27日上午8点完成！给您带来的不便请见谅！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('为给家人们提供更好的服务，报单功能正在维护！预计上午8点完成！给您带来的不便请见谅！');history.go(-1);</script></c:if>
  <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
