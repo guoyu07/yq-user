@@ -8,15 +8,17 @@
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您的一币余额不足，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('手机验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，每月限制消费10000，请下月再购买！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('支付成功！');location.replace('http://www.kypwb.com/interface/YiBiPayReturn?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=1&order_sn=${order}&payuser=${user}');</script></c:if>
-<c:if test="${erroCodeNum==2001}"><script language=javascript>alert('充值成功！');location.replace('http://www.kypwb.com/interface/YiBiPayReturn?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=2&order_sn=${order}&payuser=${user}');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('支付成功！');location.replace('http://www.kypwb.com/interface/YiBiPayReturn?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=<fmt:formatNumber type="number" value="${gwpay}" pattern="0.00" maxFractionDigits="2" minFractionDigits="2"/>&pid=1&order_sn=${order}&payuser=${user}');</script></c:if>
+<c:if test="${erroCodeNum==2001}"><script language=javascript>alert('充值成功！');location.replace('http://www.kypwb.com/interface/YiBiPayReturn?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=<fmt:formatNumber type="number" value="${gwpay}" pattern="0.00" maxFractionDigits="2" minFractionDigits="2"/>&pid=2&order_sn=${order}&payuser=${user}');</script></c:if>
 <html>
 <head>
 <title></title>
 <head>
+
 <script type="text/javascript" src="images/jquery.min.js"></script>
 <script type="text/ecmascript" src="images/md5.js"></script>
 <script src="/scripts/sms.js"></script>
+
 <script language="JavaScript"> 
 function checkdate()  {
   if (Form.user.value=="") {     alert("请填入您的用户名!");  Form.user.focus();      return false;    }
