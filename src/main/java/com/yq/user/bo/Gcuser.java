@@ -114,6 +114,8 @@ public class Gcuser{
 	
 	private Date upgmdate;
 	
+	private int scores;
+	
 	
 	public void setUsername(String username){
 	this.username=username;
@@ -743,6 +745,12 @@ public class Gcuser{
 	}
 	public void setVipzh(String vipzh) {
 		this.vipzh = vipzh;
+	}
+	public int getScores() {
+		return scores;
+	}
+	public void setScores(int scores) {
+		this.scores = scores;
 	}
 	
 }

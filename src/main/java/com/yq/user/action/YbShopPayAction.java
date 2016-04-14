@@ -3,6 +3,7 @@ package com.yq.user.action;
 
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Datepay;
@@ -74,6 +75,8 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	private String title;
 	private String sid;
 	private String sn;
+	private String btk;
+	private String sign;
 	
 	/**
 	 * 新商城支付通道
@@ -86,9 +89,32 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 		ybsl = (int)(gwpay*1.02);
 		fee =  (int)(gwpay*0.02);
 		String paylb;
+		int scores = 0;
 		if(pid==1){
 			 paylb="购物-"+order;
 			 title="来自一币商城的订单";
+			 if(UserService.isOpenScoresPay){
+				 if(!Strings.isNullOrEmpty(btk)){
+					 try {
+						 scores = Integer.valueOf(btk);
+					} catch (Exception e) {
+						LogSystem.error(e, "btk不是int型,btk=["+btk+"]");
+						scores = 0;
+					}
+				 }
+				 try {
+					 String signStr = new Double(gwpay).intValue()+"yc$shop@Sfie68"+btk;
+					 String mySign =  MD5Security.code(signStr,32).toLowerCase();
+					 if(!sign.equals(mySign)){
+						 LogSystem.warn("md5校验失败，收到的key=["+signStr+"],md5后的值为["+mySign+"],收到的sing=["+sign+"]");
+						 super.setErroCodeNum(8);
+						 return SUCCESS;
+					 }
+				} catch (Exception e) {
+					 LogSystem.error(e, "md5加密失败");
+				}
+			}
+			 
 		}	else{
 			   paylb="充值-"+order;
 			   title="来自一币商城的充值";
@@ -99,7 +125,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
 			}
 		}else{
-			userService.ybpay(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode);
+			userService.ybpay(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode,scores);
 			sn=MD5Security.md5_16(order+"$@@$"+gwpay);
 			if(pid==1){
 				super.setErroCodeNum(2000);
@@ -313,6 +339,26 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+
+	public String getBtk() {
+		return btk;
+	}
+
+
+	public void setBtk(String btk) {
+		this.btk = btk;
+	}
+
+
+	public String getSign() {
+		return sign;
+	}
+
+
+	public void setSign(String sign) {
+		this.sign = sign;
 	}
 	
 }

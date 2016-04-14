@@ -7,6 +7,8 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('输入的二级密码不正确，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您的一币余额不足，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('手机验证码不正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('参数校验失败！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('您的购物卷余额不足，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('支付成功！');location.replace('${url}?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=1&order_sn=${order}&&payuser=${user}');</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('充值成功！');location.replace('${url}?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=2&order_sn=${order}&&payuser=${user}');</script></c:if>
 <html>
@@ -63,6 +65,12 @@ function checkdate1()  {
 			<td width="214" align="right">合计一币：</td>
 			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${ybsl}<input type="hidden" name="ybpay" size="20" value="${ybsl}"></font></b></td>
 		</tr>
+		<c:if test="${pid==1&&not empty btk}">
+		<tr>
+			<td width="214" align="right">购物卷：</td>
+			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${btk}<input type="hidden" name="btk" size="20" value="${btk}"><input type="hidden" name="sign" size="20" value="${sign}"></font></b></td>
+		</tr>
+		</c:if>
 		<tr>
 			<td width="214" align="right">用户名：</td>
 			<td width="336" align="left" colspan="2"><b><font color="#0000FF"><input type="text" name="user" size="20"><input type="hidden" name="remark" size="5" value="8" readonly></font></b></td>

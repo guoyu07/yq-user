@@ -43,7 +43,7 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 			super.setErroCodeNum(1);//alert('请您联系您地区的VIP服务中心，谢谢！');
 			return SUCCESS;
 		}
-		super.initPage(userService.getTxpayPage(0, 1));
+		super.initPage(userService.getTxpayPage(0, 10));
 		LogSystem.warn("[进入市场]["+super.getUserName()+"]["+super.ip()+"]");
 		return SUCCESS;
 	}

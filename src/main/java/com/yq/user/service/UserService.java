@@ -156,6 +156,9 @@ public class UserService {
     
     public static final String INIT_SMS_CODE="00000000";
     
+    
+    public static final boolean isOpenScoresPay = false; 
+    
 	/**
 	 * 登录
 	 * @param sessionId
@@ -574,6 +577,19 @@ public class UserService {
 		}
 		return true;
 	}
+	/**
+	 * 修改购物卷
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean changeScores(String username,int changeNum){
+		if(changeNum>0){
+			return gcuserDao.addScore(username, changeNum);
+		}else{
+			return gcuserDao.reduceScore(username, Math.abs(changeNum));
+		}
+	}
 	
 	/**
 	 * 非安全的方法 可以为负数
@@ -788,6 +804,7 @@ public class UserService {
 			int sjb=0;
 			int fd=0;
 			int cfd=0;
+			int scores = 0;
 			String msg = cjpay+"元";
 			if(cjpay==500){
 				   zjjb=200;
@@ -819,18 +836,21 @@ public class UserService {
 						   fd=40000;
 						   cfd=100	;
 						   msg = msg+"(壹万圆整)";
+						   scores = 300;
 			}else if(cjpay==20000){
 				   zjjb=11000;
 						   sjb=40;
 						   fd=80000;
 						   cfd=150	;
 						   msg = msg+"(贰万圆整)";
+						   scores = 600;
 			}else if(cjpay==50000){
 				   zjjb=30000;
 						   sjb=100;
 						   fd=200000;
 						   cfd=200	;	
 						   msg = msg+"(伍万圆整)";
+						   scores = 1500;
 			}
 			
 
@@ -852,8 +872,11 @@ public class UserService {
 			//修改被绑定用户金币及单数
 			gcuserDao.updateSjb(bduser, sjb);
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
-			
-			
+			if(isOpenScoresPay){
+				if(scores>0){
+					this.changeScores(bduser, scores);
+				}
+			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
 				sgxtDao.updateAuid(tuser.getUsername(), bduser);
 			}else{
@@ -1556,9 +1579,6 @@ public class UserService {
 		txpay2.setTxip(ip);
 		txPayDao.add(txpay2);
 		
-//		if(!gcuserDao.updatePayOkForUserName(userName, 1)){
-//			throw new ServiceException(7,"您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！");
-//		}
 		
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
 		
@@ -3147,7 +3167,7 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
-	public void ybpay(double gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode){
+	public void ybpay(double gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores){
 		int ybsl = (int)(gwpay*1.02);
 		
 		if(ybsl<=0){
@@ -3175,6 +3195,13 @@ public class UserService {
 		if(!hgcode.equals(gcuser.getVipsq())){
 			throw new ServiceException(7, "手机验证码不正确");
 		}
+		
+		if(scores>0){
+			if(!this.changeScores(user, -scores)){
+				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
+			}
+		}
+		
 		if(!this.changeYb(user, -ybsl, paylb, 10, null,0)){
 			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 		}

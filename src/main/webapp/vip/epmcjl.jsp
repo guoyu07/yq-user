@@ -76,7 +76,7 @@ $(document).ready(function(){
     <div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0">
             <tr> 
-          <td width="104" align="center" height="23" bgcolor="#FBFAEC"><b>流水号</b></td>
+          <td width="104" align="center" height="23" bgcolor="#FBFAEC"><b>流水号1</b></td>
           <td width="136" align="center" height="23" bgcolor="#FBFAEC"><font face="Arial" color="#000000"><strong style="font-weight: 400">卖出方（自己）</strong></font></td>
           <td width="83" align="center" height="23" bgcolor="#FBFAEC"><font color="#FF0000">求现金额</font></td>
           <td width="133" align="center" height="23" bgcolor="#FBFAEC"><font color="#000000">发布时间</font></td>
@@ -85,7 +85,7 @@ $(document).ready(function(){
           </tr>
            <s:iterator var="data" value="dataList">
           <tr> 
-          <td height="28" width="104" align="center"><b>***${data.simplePayid}</b></td>
+          <td height="28" width="104" align="center"><b>${data.payid}</b></td>
           <td height="28" width="136" align="center"><p><font color="#000000">${data.payusername}</font></td>
           <td valign="middle" align="center" width="83"><font color="#FF0000">${data.paynum9}元</font></td>
           <td valign="middle" align="center" width="133"><font color="#000000">${data.paytime}</font></td>

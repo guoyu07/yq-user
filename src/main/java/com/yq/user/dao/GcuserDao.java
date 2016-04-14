@@ -254,7 +254,7 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean saleYb(String username,int changeNum){
-		String sql = "update "+table+" set pay=pay-?,mcpay=mcpay+?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+?,payok=1 where username=? and pay-?>=0 limit 1";
+		String sql = "update "+table+" set pay=pay-?,mcpay=mcpay+?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+?,payok=1 where username=? and pay-?>=0 and payok=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setInt(changeNum);
@@ -539,7 +539,8 @@ public class GcuserDao {
 		paramter.setInt(payok);
 		paramter.setString(name);
 		paramter.setString(idCardNum);
-		return this.jdbc.update(sql, paramter)>0;
+		int result = this.jdbc.update(sql, paramter);
+		return result>0;
 	}
 	
 	public boolean updateJyg(String userName,int changejygNum){
@@ -1048,4 +1049,34 @@ public class GcuserDao {
 		parameter.withString(tdUserid).withString(tdName).withString(toUserName);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	
+	/**
+	 * 减积分
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean reduceScore(String username,int changeNum){
+		String sql = "update "+table+" set scores=scores-? where username=? and scores-?>=0 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		parameter.setInt(changeNum);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	/**
+	 * 减积分
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean addScore(String username,int changeNum){
+		String sql = "update "+table+" set scores=scores+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
 }
