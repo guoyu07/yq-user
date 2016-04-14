@@ -159,7 +159,12 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
 			}
 		}else{
-			Gcuser gcuser = userService.getUserByUserName(user);
+			Datepay datepay = userService.getHgybOrder(super.getUserName(), paylb);
+			if(datepay!=null){
+				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
+				return SUCCESS;
+			}
+//			Gcuser gcuser = userService.getUserByUserName(user);
 //			if(gcuser.getPwdate()!=null){
 //				day = DateUtils.getIntervalDays(gcuser.getPwdate(), new Date());
 //			}
