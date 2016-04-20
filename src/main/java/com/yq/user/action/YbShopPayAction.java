@@ -112,6 +112,8 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 					 }
 				} catch (Exception e) {
 					 LogSystem.error(e, "md5加密失败");
+					 super.setErroCodeNum(8);
+					 return SUCCESS;
 				}
 			}
 			 
@@ -120,11 +122,16 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			   title="来自一币商城的充值";
 		}
 		if(Strings.isNullOrEmpty(ybf)){
-			Datepay datepay = userService.getHgybOrder(super.getUserName(), paylb);
+			Datepay datepay = userService.getHgybOrder(user, paylb);
 			if(datepay!=null){
 				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
 			}
 		}else{
+			Datepay datepay = userService.getHgybOrder(user, paylb);
+			if(datepay!=null){
+				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
+				return SUCCESS;
+			}
 			userService.ybpay(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode,scores);
 			sn=MD5Security.md5_16(order+"$@@$"+gwpay);
 			if(pid==1){
@@ -154,12 +161,12 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			   title="来自科宇票务的充值";
 		}
 		if(Strings.isNullOrEmpty(ybf)){
-			Datepay datepay = userService.getHgybOrder(super.getUserName(), paylb);
+			Datepay datepay = userService.getHgybOrder(user, paylb);
 			if(datepay!=null){
 				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
 			}
 		}else{
-			Datepay datepay = userService.getHgybOrder(super.getUserName(), paylb);
+			Datepay datepay = userService.getHgybOrder(user, paylb);
 			if(datepay!=null){
 				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
 				return SUCCESS;

@@ -54,6 +54,8 @@
        
        <bean id="babyInfoDao" class="com.yq.user.dao.BabyInfoDao"></bean>
        
+       <bean id="userScoresLogDao" class="com.yq.user.dao.UserScoresLogDao"></bean>
+       
        <bean id="userExtinfoDao" class="com.yq.user.dao.UserExtinfoDao"></bean>
        <bean id="userDailyGainLogDao" class="com.yq.user.dao.UserDailyGainLogDao"></bean>
        <!-- 用户数据service -->

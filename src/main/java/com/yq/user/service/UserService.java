@@ -48,6 +48,7 @@ import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Txifok;
 import com.yq.user.bo.Txpay;
 import com.yq.user.bo.UserExtinfo;
+import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
@@ -72,6 +73,7 @@ import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
 import com.yq.user.dao.UserDailyGainLogDao;
 import com.yq.user.dao.UserExtinfoDao;
+import com.yq.user.dao.UserScoresLogDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
@@ -135,7 +137,8 @@ public class UserService {
     private UserDailyGainLogDao userDailyGainLogDao;
 	@Autowired
 	private UserExtinfoDao userExtinfoDao;
-    
+	@Autowired
+	private UserScoresLogDao userScoresLogDao;
 //    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
   //用户id与UserMapper的映射map
@@ -583,11 +586,33 @@ public class UserService {
 	 * @param changeNum
 	 * @return
 	 */
-	public boolean changeScores(String username,int changeNum){
+	public boolean changeScores(String username,int changeNum,int changeType){
 		if(changeNum>0){
-			return gcuserDao.addScore(username, changeNum);
+			boolean result = gcuserDao.addScore(username, changeNum);
+			if(result){
+				UserScoresLog t = new UserScoresLog();
+				t.setChangeNum(changeNum);
+				t.setChangeType(changeType);
+				t.setCreatedTime(new Date());
+				Gcuser gcuser = gcuserDao.getUser(username);
+				t.setNowNum(gcuser.getScores());
+				t.setUserName(username);
+				userScoresLogDao.add(t);
+			}
+			return result;
 		}else{
-			return gcuserDao.reduceScore(username, Math.abs(changeNum));
+			boolean result = gcuserDao.reduceScore(username, Math.abs(changeNum));
+			if(result){
+				UserScoresLog t = new UserScoresLog();
+				t.setChangeNum(changeNum);
+				t.setChangeType(changeType);
+				t.setCreatedTime(new Date());
+				Gcuser gcuser = gcuserDao.getUser(username);
+				t.setNowNum(gcuser.getScores());
+				t.setUserName(username);
+				userScoresLogDao.add(t);
+			}
+			return result;
 		}
 	}
 	
@@ -874,7 +899,7 @@ public class UserService {
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
 			if(isOpenScoresPay){
 				if(scores>0){
-					this.changeScores(bduser, scores);
+					this.changeScores(bduser, scores,1001);
 				}
 			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
@@ -3197,7 +3222,7 @@ public class UserService {
 		}
 		
 		if(scores>0){
-			if(!this.changeScores(user, -scores)){
+			if(!this.changeScores(user, -scores,2001)){
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
 			}
 		}
@@ -3365,17 +3390,20 @@ public class UserService {
 						continue;
 					}
 					int addCxdateDay = getAddCxdateDay(user.getCxt());
-					gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
-					txPayDao.resetOrder(txpay.getPayid());
+					//vip不扣诚信
+					if(user.getVip()==0){
+						gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
+						Datepay datePay = new Datepay();
+						datePay.setUsername(user.getUsername());
+						datePay.setPay(user.getPay());
+						datePay.setJydb(user.getJydb());
+						datePay.setRegid("超时未付款-并扣一诚信星-余"+(user.getCxt()-1)+"-"+txpay.getPayid()+"-"+txpay.getPayusername());
+						datePay.setNewbz(20);
+						datePay.setAbdate(new Date());
+						logService.addDatePay(datePay);
+					}
 					
-					Datepay datePay = new Datepay();
-					datePay.setUsername(user.getUsername());
-					datePay.setPay(user.getPay());
-					datePay.setJydb(user.getJydb());
-					datePay.setRegid("超时未付款-并扣一诚信星-余"+(user.getCxt()-1)+"-"+txpay.getPayid()+"-"+txpay.getPayusername());
-					datePay.setNewbz(20);
-					datePay.setAbdate(new Date());
-					logService.addDatePay(datePay);
+					txPayDao.resetOrder(txpay.getPayid());
 					sendYbSaleSmsMsg(txpay.getPayusername(), 2);
 //					gpjyDao.updateGpjy(txpay.getDfuser(), txpay.getPayid()+"", "超时未付款-并扣一诚信星-余"+(user.getCxt()-1), gpjy.getDfuser()+"-"+txpay.getPayusername(), new Date());
 				} catch (Exception e) {
@@ -3394,16 +3422,22 @@ public class UserService {
 						continue;
 					}
 					int addCxdateDay = getAddCxdateDay(user.getCxt());
-					gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
+					//vip不扣诚信
+					if (user.getVip() == 0) {
+						gcuserDao.updateCxtAndCxtDate(user.getUsername(), 1, addCxdateDay);
+
+						Datepay datePay = new Datepay();
+						datePay.setUsername(user.getUsername());
+						datePay.setPay(user.getPay());
+						datePay.setJydb(user.getJydb());
+						datePay.setRegid("确认收款超时-并扣一诚信星-余" + (user.getCxt() - 1) + "-" + txpay.getPayid() + "-"
+								+ txpay.getDfuser());
+						datePay.setNewbz(20);
+						datePay.setAbdate(new Date());
+						logService.addDatePay(datePay);
+					}
 					txPayDao.updateClip(txpay.getPayid());
-					Datepay datePay = new Datepay();
-					datePay.setUsername(user.getUsername());
-					datePay.setPay(user.getPay());
-					datePay.setJydb(user.getJydb());
-					datePay.setRegid("确认收款超时-并扣一诚信星-余"+(user.getCxt()-1)+"-"+txpay.getPayid()+"-"+txpay.getDfuser());
-					datePay.setNewbz(20);
-					datePay.setAbdate(new Date());
-					logService.addDatePay(datePay);
+					
 				} catch (Exception e) {
 					LogSystem.error(e, "发生错误");
 				}
