@@ -18,6 +18,13 @@ public class TduserDao extends YqDaoBase<Tduser>{
     	return super.getJdbc().get(sql, Tduser.class, parameter);
     }
     
+    public Tduser getTdUserRecord(String tdUserId){
+    	String sql = "select * from "+super.getTable()+" where gai=0 and tduserid=? limit 1";
+    	SqlParameter parameter = new SqlParameter();
+    	parameter.setString(tdUserId);
+    	return super.getJdbc().get(sql, Tduser.class, parameter);
+    }
+    
     public IPage<Tduser> getPage(String userName,int pageIndex,int pageSize){
     	String sql = "select * from "+super.getTable();
     	SqlParameter parameter = new SqlParameter();

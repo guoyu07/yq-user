@@ -1719,7 +1719,7 @@ public class AdminService {
 		String tduserid = from.getUserid();
 		String tdname = from.getName();
 		
-		if(tduserDao.get(new SqlParamBean("tduserid", tduserid))!=null){
+		if(tduserDao.getTdUserRecord(tduserid)!=null){
 			throw new ServiceException(5, "身份证号码["+tduserid+"]已经退户了，不能重复退户！");
 		}
 		

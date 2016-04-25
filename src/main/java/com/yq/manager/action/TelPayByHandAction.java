@@ -19,7 +19,7 @@ public class TelPayByHandAction extends ALDAdminActionSupport {
 		if(status==0){
 			return SUCCESS;
 		}
-		if(!oppa.equals("qq285899aq")){
+		if(!oppa.equals("ychfgl")){
 			super.setErroCodeNum(1);
 			return SUCCESS;
 		}

@@ -1619,7 +1619,7 @@ public class UserService {
 	@Transactional
 	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy){
 		
-		if(!password3.equals("yc2016glzj")){
+		if(!password3.equals("gltk2016yc")){
 			throw new ServiceException(1, "操作密码不正确！");
 		}
 		
@@ -3082,7 +3082,7 @@ public class UserService {
 		if(zuoMingxiDao.get(fromUserName, toUserName)==null&&youMingXiDao.get(fromUserName, toUserName)==null){
 			throw new ServiceException(1, "用户名输入错误或不属于自己团队的玩家，请检查后再试！");
 		}
-		if(!password.equals("zjl888vip")){
+		if(!password.equals("vip2016cjxt")){
 			throw new ServiceException(2, "充值密码不正确！");
 		}
 		Gcuser toUser = gcuserDao.getUser(toUserName);
