@@ -752,6 +752,17 @@ public class Gcuser{
 	public void setScores(int scores) {
 		this.scores = scores;
 	}
+	/**
+	 * 是否限制提现
+	 * @return
+	 */
+	public boolean isLimitTx(){
+		if(this.getPayok()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 }
 

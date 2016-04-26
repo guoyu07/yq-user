@@ -37,7 +37,7 @@ public class Login2jAction extends ALDAdminActionSupport {
 			}
 			
 			if("login3j.jsp".equals(inputUrl)){
-				if(user.getPayok()==1 || user.getPayok()==2){
+				if(user.isLimitTx()){
 					super.setErroCodeNum(2);//alert('您好，您同一姓名账号或同一身份证号码账号已发布成功过，请耐心等待处理完成后再发布第二笔，如果认购方已向您付款，请先确认收款再发布第二笔，谢谢！');
 				}
 				

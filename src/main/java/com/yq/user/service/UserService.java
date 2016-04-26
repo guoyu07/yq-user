@@ -160,7 +160,7 @@ public class UserService {
     public static final String INIT_SMS_CODE="00000000";
     
     
-    public static final boolean isOpenScoresPay = false; 
+    public static final boolean isOpenScoresPay = true; 
     
 	/**
 	 * 登录
@@ -387,6 +387,7 @@ public class UserService {
 		txifok.setName(ggname);
 		txifok.setCall(ggcall);
 		txifokDao.add(txifok);
+		
 		return 0;
 	}
 	
@@ -1532,7 +1533,7 @@ public class UserService {
 			throw new ServiceException(6,"您好，您发布的一币数量不能小于100，谢谢！");
 		}
 		
-		if(gcuser.getPayok()==1 || gcuser.getPayok()==2){
+		if(gcuser.isLimitTx()){
 			throw new ServiceException(7,"您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！");
 		}
 		
@@ -3480,6 +3481,15 @@ public class UserService {
 			gcuserDao.updateVipName(userName, "xtgc001");
 		}else{
 			String vipName = findMyUpVipName(userName);
+			
+			if(vipName.equals("syf66669a")){//此vip账号下的所有账号都改成2
+				Gcuser gcuser = gcuserDao.getUser(userName);
+				Date date = DateUtils.StringToDate("2016-04-21",DateStyle.YYYY_MM_DD);
+				if(gcuser.getPayok()==0&&gcuser.getRegtime().getTime()>date.getTime()){
+					gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 2);
+				}
+			}
+			
 			gcuserDao.updateVipName(userName, vipName);
 			sgxtDao.updateVipUser(userName, vipName);
 		}

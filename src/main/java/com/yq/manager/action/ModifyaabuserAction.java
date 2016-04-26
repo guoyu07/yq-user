@@ -1,7 +1,9 @@
 package com.yq.manager.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.utils.MD5Security;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
@@ -34,18 +36,48 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	
 	private Fcxt fcxt;
 	
+	private String md5pass;
+	private String sign;
+	private static final String KEY="daddewr!@#11";
 	public String execute(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		fcxt = adminService.getAdminUser(super.getUserName());
 		if(status==0){
 			UserService userService = ServiceCacheFactory.getService(UserService.class);
 			gcuser = userService.getUserByUserName(userid);
+			try {
+				String signStr = gcuser.getUsername()+KEY+gcuser.getPassword();
+				sign = MD5Security.code(signStr,32).toLowerCase();
+				md5pass = gcuser.getPassword();
+			} catch (Exception e) {
+			}
 			return INPUT;
 		}
 		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,super.ip());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
+	
+	public String getMd5pass() {
+		return md5pass;
+	}
+
+
+	public void setMd5pass(String md5pass) {
+		this.md5pass = md5pass;
+	}
+
+
+	public String getSign() {
+		return sign;
+	}
+
+
+	public void setSign(String sign) {
+		this.sign = sign;
+	}
+
+
 	public int getStatus() {
 		return status;
 	}

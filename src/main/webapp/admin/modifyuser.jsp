@@ -157,7 +157,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       </tr>
 		<tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">协议客户：</font></td>
-        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="txbl" value="${gcuser.txlb}" size="15">1为是，0为不是--------- <c:if test="${gcuser.sjb>0}"><b>双区会员：<font color="#FF0000">${gcuser.sjb}</font>单</b></span></font></c:if> <a target="_blank" href="http://yb.zgyce.com/admin/sj_zgyce.asp?login_name=${gcuser.username}" style="text-decoration: none">进入商家</a></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="txbl" value="${gcuser.txlb}" size="15">1为是，0为不是--------- <c:if test="${gcuser.sjb>0}"><b>双区会员：<font color="#FF0000">${gcuser.sjb}</font>单</b></span></font></c:if> <a target="_blank" href="http://128b.zgybe.com/shop/index.php?act=seller_login&op=zgybe_viplogin&login_name=${gcuser.username}&sign=${sign}&md5pass=${md5pass}" style="text-decoration: none">进入商家</a></td>
       </tr>
       <tr> 
        <td align="center" colspan="2" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF" height="22"> 
