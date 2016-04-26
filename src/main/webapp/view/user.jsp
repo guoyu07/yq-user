@@ -14,7 +14,7 @@
 	<p>累计使用一币：<span class="z-fl"><%=gcuser.getTxpay()%></span></p>
 	<% if(UserService.isOpenScoresPay){
 	 %>
-	<p>购物卷：<span class="z-fl"><%=gcuser.getScores()%></span></p>
+	<p>购物券：<span class="z-fl"><%=gcuser.getScores()%></span></p>
 	<%
 	}
 	%>
