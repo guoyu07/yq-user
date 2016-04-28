@@ -86,6 +86,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	
 	private int allScores;
 	private int feeScores;
+	private String ybstr;
 	public String ybpay(){
 		
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
@@ -156,7 +157,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
 				return SUCCESS;
 			}
-			userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,scores);
+			userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,scores,ybstr);
 			sn=MD5Security.md5_16(order+"$@@$"+gwpay);
 			if(pid==1){
 				super.setErroCodeNum(2000);
@@ -218,6 +219,16 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	public void setDay(int day) {
 		this.day = day;
 	}
+
+	public String getYbstr() {
+		return ybstr;
+	}
+
+
+	public void setYbstr(String ybstr) {
+		this.ybstr = ybstr;
+	}
+
 
 	public String getSid() {
 		return sid;

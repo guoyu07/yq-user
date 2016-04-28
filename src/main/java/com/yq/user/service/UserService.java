@@ -14,6 +14,7 @@ import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
@@ -587,7 +588,7 @@ public class UserService {
 	 * @param changeNum
 	 * @return
 	 */
-	public boolean changeScores(String username,int changeNum,int changeType){
+	public boolean changeScores(String username,int changeNum,int changeType,double ration){
 		if(changeNum>0){
 			boolean result = gcuserDao.addScore(username, changeNum);
 			if(result){
@@ -598,6 +599,7 @@ public class UserService {
 				Gcuser gcuser = gcuserDao.getUser(username);
 				t.setNowNum(gcuser.getScores());
 				t.setUserName(username);
+				t.setRation(ration);
 				userScoresLogDao.add(t);
 			}
 			return result;
@@ -611,6 +613,7 @@ public class UserService {
 				Gcuser gcuser = gcuserDao.getUser(username);
 				t.setNowNum(gcuser.getScores());
 				t.setUserName(username);
+				t.setRation(ration);
 				userScoresLogDao.add(t);
 			}
 			return result;
@@ -900,7 +903,7 @@ public class UserService {
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
 			if(isOpenScoresPay){
 				if(scores>0){
-					this.changeScores(bduser, scores,1001);
+					this.changeScores(bduser, scores,1001,0);
 				}
 			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
@@ -3193,15 +3196,37 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
-	public void ybpay(int ybsl,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores){
+	private static final String GF_SHOPPER = "zxz888";
+	@Transactional
+	public void ybpay(int ybsl,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores,String ybstr){
+		
 		if(ybsl<=0&&scores<=0){
 			throw new ServiceException(2, "订单信息有误，请重新提交！");
 		}
+		
+		int beforShuiYb = ybsl-(int)(ybsl*0.02);
+		int beforShuiScores = scores - (int)(scores*0.02);
+		
 		String paylb;
+		Map<String,Integer> shopperYbAdd = Maps.newHashMap();
+		Map<String,Integer> shopperScoresAdd = Maps.newHashMap();
 		if(pid==1){
 			 paylb="购物-"+order;
-		}	else{
+			 String[] strArray = ybstr.split("\\|");
+			 for(String strtemp:strArray){
+				 String[] tempArray = strtemp.split(":");
+				 if(tempArray.length!=2){
+					 throw new ServiceException(2, "订单信息有误，请重新提交！");
+				 }
+				 if(tempArray[0].equals("-1")){
+					 shopperYbAdd.put(GF_SHOPPER, Integer.valueOf(tempArray[1]));
+				 }else{
+					 shopperYbAdd.put(tempArray[0], Integer.valueOf(tempArray[1]));
+				 }
+			 }
+		}else{
 			   paylb="充值-"+order;
+			   shopperYbAdd.put(GF_SHOPPER,beforShuiYb);
 		}
 		Gcuser gcuser = gcuserDao.getUser(user);
 		if(gcuser==null){
@@ -3220,7 +3245,7 @@ public class UserService {
 			throw new ServiceException(7, "手机验证码不正确");
 		}
 		if(scores>0){
-			if(!this.changeScores(user, -scores,2001)){
+			if(!this.changeScores(user, -scores,2001,0)){
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
 			}
 		}
@@ -3229,7 +3254,6 @@ public class UserService {
 				throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 			}
 		}
-		
 		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
 	}
 	

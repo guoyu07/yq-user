@@ -55,7 +55,7 @@ function checkdate1()  {
 			</tr>
 		<tr>
 			<td width="214" align="right">订单金额：</td>
-			<td width="336" align="left" colspan="2"><input type="hidden" name="gwpay" size="20" value="${gwpay}" readonly>${gwpay}<input type="hidden" name="sid" size="20" value="${sid}" readonly><input type="hidden" name="pid" size="20" value="${pid}" readonly></td>
+			<td width="336" align="left" colspan="2"><input type="hidden" name="ybstr" size="20" value="${ybstr}" readonly><input type="hidden" name="gwpay" size="20" value="${gwpay}" readonly>${gwpay}<input type="hidden" name="sid" size="20" value="${sid}" readonly><input type="hidden" name="pid" size="20" value="${pid}" readonly></td>
 		</tr>
 		<tr>
 			<td width="214" align="right">一币服务费(2%)：</td>

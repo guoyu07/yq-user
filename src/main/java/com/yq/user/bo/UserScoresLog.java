@@ -9,6 +9,7 @@ public class UserScoresLog {
 	private int changeNum;
 	private int nowNum;
 	private int changeType;
+	private double ration;
 	private Date createdTime;
 	
 	public Integer getId() {
@@ -46,5 +47,11 @@ public class UserScoresLog {
 	}
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+	}
+	public double getRation() {
+		return ration;
+	}
+	public void setRation(double ration) {
+		this.ration = ration;
 	}
 }
