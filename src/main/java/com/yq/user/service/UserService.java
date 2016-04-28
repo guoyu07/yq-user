@@ -3195,8 +3195,7 @@ public class UserService {
 	 */
 	public void ybpay(double gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores){
 		int ybsl = (int)(gwpay*1.02);
-		
-		if(ybsl<=0){
+		if(ybsl<=0&&scores<=0){
 			throw new ServiceException(2, "订单信息有误，请重新提交！");
 		}
 		String paylb;
@@ -3227,10 +3226,12 @@ public class UserService {
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
 			}
 		}
-		
-		if(!this.changeYb(user, -ybsl, paylb, 10, null,0)){
-			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
+		if(ybsl>0){
+			if(!this.changeYb(user, -ybsl, paylb, 10, null,0)){
+				throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
+			}
 		}
+		
 		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
 	}
 	

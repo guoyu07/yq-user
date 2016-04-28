@@ -86,6 +86,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	public String ybpay(){
 		
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
+		
 		ybsl = (int)(gwpay*1.02);
 		fee =  (int)(gwpay*0.02);
 		String paylb;
@@ -102,6 +103,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 						scores = 0;
 					}
 				 }
+				 
 				 try {
 					 String signStr = new Double(gwpay).intValue()+"yc$shop@Sfie68"+btk;
 					 String mySign =  MD5Security.code(signStr,32).toLowerCase();
@@ -115,6 +117,24 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 					 super.setErroCodeNum(8);
 					 return SUCCESS;
 				}
+				 if(!Strings.isNullOrEmpty(user)){
+					 if(gwpay<=0){//百分之百用折扣券支付  折扣券不够 则用一币替代
+					 Gcuser gcuser = userService.getUserByUserName(user);
+					  if(gcuser!=null){
+							if(gcuser.getScores()<=0){
+								 super.setErroCodeNum(9);
+								 return SUCCESS;
+							}
+							if(gcuser.getScores()<scores){
+								gwpay = scores - gcuser.getScores();
+								scores = gcuser.getScores();
+								ybsl = (int)(gwpay*1.02);
+								fee =  (int)(gwpay*0.02);
+							}
+						 }
+					    }
+				 }
+				 
 			}
 			 
 		}	else{

@@ -94,6 +94,7 @@ function checkdate1()  {
 		</tr>
 		</table>
 	<p>请不要使用它人账户进行操作，一经发现3倍罚款！</p>
+	<p>当全部用购物券支付时，如果购物券不足，则将扣除相对应的一币数量(服务费2%)！</p>
 	</div>
 </form>
 <script type="text/javascript">

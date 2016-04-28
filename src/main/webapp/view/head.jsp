@@ -1,3 +1,4 @@
+<%@page import="com.yq.common.utils.MD5Security"%>
 <%@page import="com.yq.user.bo.Gcuser"%>
 <%@page import="com.sr178.game.framework.context.ServiceCacheFactory"%>
 <%@page import="com.yq.user.service.UserService"%>
@@ -8,6 +9,9 @@
 	<%
   UserService userServiceHead = ServiceCacheFactory.getServiceCache().getService(UserService.class);
   Gcuser gcuserHead = userServiceHead.getUserByUserName(userServiceHead.isLogin(request.getSession().getId()));
+  String key="lladsfkk@331";
+  String time = new Date().getTime()+"";
+  String sign = MD5Security.code(gcuserHead.getUsername()+key+time, 32).toLowerCase();
 %>
 <div class="header">
 	<div class="logo"><a href="#"><img src="/images/logo.jpg" /></a></div>
@@ -39,7 +43,7 @@
 					<span class="close"></span>
 					<a href="/hfcz">话费充值(100)</a>
 					<a target="_blank" href="http://www.kypwe.com">科赡票务</a>
-					<a target="_blank" href="http://www.zgybe.com">一币新商城</a>
+					<a target="_blank" href="http://www.zgybe.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>">一币新商城</a>
 					<a href="/baby">口才训练营报名</a>
 					<a href="#" class="close">消费管理</a>
 				</div>
