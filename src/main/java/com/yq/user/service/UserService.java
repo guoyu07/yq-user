@@ -3193,8 +3193,7 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
-	public void ybpay(double gwpay,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores){
-		int ybsl = (int)(gwpay*1.02);
+	public void ybpay(int ybsl,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores){
 		if(ybsl<=0&&scores<=0){
 			throw new ServiceException(2, "订单信息有误，请重新提交！");
 		}
@@ -3220,7 +3219,6 @@ public class UserService {
 		if(!hgcode.equals(gcuser.getVipsq())){
 			throw new ServiceException(7, "手机验证码不正确");
 		}
-		
 		if(scores>0){
 			if(!this.changeScores(user, -scores,2001)){
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");

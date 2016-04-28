@@ -58,7 +58,7 @@ function checkdate1()  {
 			<td width="336" align="left" colspan="2"><input type="hidden" name="gwpay" size="20" value="${gwpay}" readonly>${gwpay}<input type="hidden" name="sid" size="20" value="${sid}" readonly><input type="hidden" name="pid" size="20" value="${pid}" readonly></td>
 		</tr>
 		<tr>
-			<td width="214" align="right">服务费(2%)：</td>
+			<td width="214" align="right">一币服务费(2%)：</td>
 			<td width="336" align="left" colspan="2">${fee}</td>
 		</tr>
 		<tr>
@@ -67,8 +67,12 @@ function checkdate1()  {
 		</tr>
 		<c:if test="${pid==1&&not empty btk}">
 		<tr>
-			<td width="214" align="right">购物卷：</td>
-			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${btk}<input type="hidden" name="btk" size="20" value="${btk}"><input type="hidden" name="sign" size="20" value="${sign}"></font></b></td>
+			<td width="214" align="right">购物券服务费(2%)：</td>
+			<td width="336" align="left" colspan="2">${feeScores}</td>
+		</tr>
+		<tr>
+			<td width="214" align="right">合计购物券：</td>
+			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${allScores}<input type="hidden" name="btk" size="20" value="${btk}"><input type="hidden" name="sign" size="20" value="${sign}"></font></b></td>
 		</tr>
 		</c:if>
 		<tr>
@@ -94,7 +98,7 @@ function checkdate1()  {
 		</tr>
 		</table>
 	<p>请不要使用它人账户进行操作，一经发现3倍罚款！</p>
-	<p>当全部用购物券支付时，如果购物券不足，则将扣除相对应的一币数量(服务费2%)！</p>
+	<p>当全部用购物券支付时，如果购物券不足，将扣除同等数量的一币！</p>
 	</div>
 </form>
 <script type="text/javascript">

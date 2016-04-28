@@ -83,6 +83,9 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	 * @return
 	 */
 	private String url;
+	
+	private int allScores;
+	private int feeScores;
 	public String ybpay(){
 		
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
@@ -98,6 +101,8 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				 if(!Strings.isNullOrEmpty(btk)){
 					 try {
 						 scores = Integer.valueOf(btk);
+						 allScores = (int)(scores*1.02);
+						 feeScores = (int)(scores*0.02);
 					} catch (Exception e) {
 						LogSystem.error(e, "btk不是int型,btk=["+btk+"]");
 						scores = 0;
@@ -125,11 +130,10 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 								 super.setErroCodeNum(9);
 								 return SUCCESS;
 							}
-							if(gcuser.getScores()<scores){
-								gwpay = scores - gcuser.getScores();
+							if(gcuser.getScores()<allScores){
+								ybsl = allScores - gcuser.getScores();
 								scores = gcuser.getScores();
-								ybsl = (int)(gwpay*1.02);
-								fee =  (int)(gwpay*0.02);
+								fee =  0;
 							}
 						 }
 					    }
@@ -152,7 +156,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
 				return SUCCESS;
 			}
-			userService.ybpay(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode,scores);
+			userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,scores);
 			sn=MD5Security.md5_16(order+"$@@$"+gwpay);
 			if(pid==1){
 				super.setErroCodeNum(2000);
@@ -386,6 +390,24 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 
 	public String getSign() {
 		return sign;
+	}
+	public int getAllScores() {
+		return allScores;
+	}
+
+
+	public void setAllScores(int allScores) {
+		this.allScores = allScores;
+	}
+
+
+	public int getFeeScores() {
+		return feeScores;
+	}
+
+
+	public void setFeeScores(int feeScores) {
+		this.feeScores = feeScores;
 	}
 
 
