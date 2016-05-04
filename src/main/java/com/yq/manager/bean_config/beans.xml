@@ -26,6 +26,8 @@
        
        <bean id="pointsChangeLogDao" class="com.yq.manager.dao.PointsChangeLogDao"></bean>
        
+        <bean id="userVipLogDao" class="com.yq.manager.dao.UserVipLogDao"></bean>
+       
        <!-- 每日凌晨过1分执行 -->
        <bean id="backCountScheduler" class="com.yq.manager.scheduler.BackCountScheduler">
           <property name="cronExpression" value="0 1 0 * * ?"></property>

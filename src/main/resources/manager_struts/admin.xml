@@ -589,6 +589,16 @@
 		      /admin/searchfcxt?erroCodeNum=2002
 		    </result>
 		</action>
+		
+		<action name="updateuservip" class="com.yq.manager.action.ModifyaabuserAction" method="updateUserVipInfo">
+		   <result name="input" >
+		      /admin/updateuservip.jsp
+		    </result>
+		    <result name="success" type="redirect">
+		      /admin/updateuservip?erroCodeNum=2002&amp;user=${user}
+		    </result>
+		    
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

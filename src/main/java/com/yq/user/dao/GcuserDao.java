@@ -153,8 +153,8 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
-	public boolean updateUserByAdmin(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,Date pwdate){
-		String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,`call`=?,email=?,qq=?,userid=?,payok=?,jcname=?,jcuserid=?";
+	public boolean updateUserByAdmin(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,Date pwdate,int cxt){
+		String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,`call`=?,email=?,qq=?,userid=?,payok=?,jcname=?,jcuserid=?,cxt=?";
 		boolean isChangePassword = false;
 		boolean isChangePwdate = false;
 		if(password!=null&&!password.equals("")){
@@ -178,6 +178,7 @@ public class GcuserDao {
 		parameter.setInt(payok);
 		parameter.setString(jcname);
 		parameter.setString(jcuserid);
+		parameter.setInt(cxt);
 		if(isChangePassword){
 			parameter.setString(password);
 		}
@@ -909,6 +910,31 @@ public class GcuserDao {
 		parameter.setString(userName);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
+	
+	public boolean updateVip(String userName,int vip){
+		String sql = "update "+table+" set vip=?  where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(vip);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	
+	public boolean updateVipInfo(String userName,String vipuser,String vipgh,String vipjh,String vipnh,String vipzh,String phone,String qq){
+		String sql = "update "+table+" set vipuser=?,vipgh=?,vipnh=?,vipzh=?,vipjh=?,`call`=?,qq=?  where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(vipuser);
+		parameter.setString(vipgh);
+		parameter.setString(vipnh);
+		parameter.setString(vipzh);
+		parameter.setString(vipjh);
+		parameter.setString(phone);
+		parameter.setString(qq);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
 	
 	public boolean updateFhpayAndVippay(String userName,int fhpay,int vippay){
 		String sql = "update "+table+" set fhpay=?,vippay=?  where username=? limit 1";

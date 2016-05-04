@@ -37,6 +37,7 @@
 								<th>可用金币</th>
 								<th>注册时间</th>
 								<th>开户时间</th>
+								<th>信誉星</th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>
@@ -48,6 +49,7 @@
 								<td>${data.jydb}</td>
 								<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
 								<td><fmt:formatDate value="${data.bddate}" type="both"/></td>
+								<td>${data.cxt}</td>
 							</tr>
 							</s:iterator>
 						</table>

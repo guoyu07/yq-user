@@ -32,7 +32,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private String jcuserid;
 	private String password;
 	private String pwdate;
-	
+	private int cxt;
 	
 	private Fcxt fcxt;
 	
@@ -53,11 +53,104 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 			}
 			return INPUT;
 		}
-		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,super.ip());
+		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
 	
+	 private String user;
+	 private int vipType ;//  0取消vip   2大vip  3小vip
+	 private String vipuser;
+	 private String vipgh;
+	 private String vipnh;
+	 private String vipzh;
+	 private String vipjh;
+	 private String phone;
+	 public String updateUserVipInfo(){
+		 AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		 
+		 if(status==0){
+			 UserService userService = ServiceCacheFactory.getService(UserService.class);
+				gcuser = userService.getUserByUserName(user);
+			 return INPUT;
+		 }
+		 
+		 adminService.updateUserVipInfo(super.getUserName(),user, vipType, vipuser, vipgh, vipnh, vipzh, vipjh, phone, qq,super.ip());
+		 return SUCCESS;
+	 }
+	
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public int getVipType() {
+		return vipType;
+	}
+
+	public void setVipType(int vipType) {
+		this.vipType = vipType;
+	}
+
+	public String getVipuser() {
+		return vipuser;
+	}
+
+	public void setVipuser(String vipuser) {
+		this.vipuser = vipuser;
+	}
+
+	public String getVipgh() {
+		return vipgh;
+	}
+
+	public void setVipgh(String vipgh) {
+		this.vipgh = vipgh;
+	}
+
+	public String getVipnh() {
+		return vipnh;
+	}
+
+	public void setVipnh(String vipnh) {
+		this.vipnh = vipnh;
+	}
+
+	public String getVipzh() {
+		return vipzh;
+	}
+
+	public void setVipzh(String vipzh) {
+		this.vipzh = vipzh;
+	}
+
+	public String getVipjh() {
+		return vipjh;
+	}
+
+	public void setVipjh(String vipjh) {
+		this.vipjh = vipjh;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getCxt() {
+		return cxt;
+	}
+
+	public void setCxt(int cxt) {
+		this.cxt = cxt;
+	}
+
 	public String getMd5pass() {
 		return md5pass;
 	}

@@ -219,6 +219,14 @@ public class SgxtDao {
 	    	return jdbc.update(sql, parameter)>0;
 	 }
 	 
+	 public boolean updateVip(String userName,int vip){
+		 String sql = "update "+table+" set vip=? where username=? limit 1";
+		 SqlParameter parameter = new SqlParameter();
+	     parameter.setInt(vip);
+	     parameter.setString(userName);
+	     return jdbc.update(sql, parameter)>0;
+	 }
+	 
 	 public int executeSql(String sql){
 		return jdbc.update(sql, null);
 	 }

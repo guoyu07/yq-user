@@ -63,6 +63,11 @@ function dbz_show(){
 							<p><label>转账金额：</label><input style="width:100px;" type="text" name="jzpay" size="15"></p>
 							<p><label>操作密码：</label><input type="password" name="pa3" size="15"></p>
 							<p><label>转账原由：</label><input type="text" name="yy" size="20"></p>
+							<p><label>选择折扣：</label>
+							<select name="ration">
+							   <option value="0.9" selected>0.9</option>
+							   <option value="0.95">0.95</option>
+							</select>
 							<p><label><input type="checkbox" name="C1" id="C1" onclick="dbz_show()" value="1" style="width:auto; vertical-align: middle;border:none;"> 退款订单号：</label><input type="text" name="dbz" id="dbz" size="20"></p>
 							<p><label></label><button class="but1" type=submit value="确 定 转 账" name=submit2  onClick="return confirm('提示：您确定了吗？')">确 定 转 账</button></p>
 					</form>

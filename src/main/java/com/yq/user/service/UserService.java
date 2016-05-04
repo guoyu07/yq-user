@@ -1621,7 +1621,7 @@ public class UserService {
 	 */
 	
 	@Transactional
-	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy){
+	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy,double ration){
 		
 		if(!password3.equals("gltk2016yc")){
 			throw new ServiceException(1, "操作密码不正确！");
@@ -1665,11 +1665,11 @@ public class UserService {
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser+"-"+yy, 13, null,0.9)){
+		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser+"-"+yy, 13, null,ration)){
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		if(!this.changeYb(toUser, amount, regId, 6, null,0.9)){
+		if(!this.changeYb(toUser, amount, regId, 6, null,ration)){
 			throw new ServiceException(3000, "未知错误！");
 		}
 	}
@@ -3208,25 +3208,25 @@ public class UserService {
 		int beforShuiScores = scores - (int)(scores*0.02);
 		
 		String paylb;
-		Map<String,Integer> shopperYbAdd = Maps.newHashMap();
-		Map<String,Integer> shopperScoresAdd = Maps.newHashMap();
+//		Map<String,Integer> shopperYbAdd = Maps.newHashMap();
+//		Map<String,Integer> shopperScoresAdd = Maps.newHashMap();
 		if(pid==1){
 			 paylb="购物-"+order;
-			 String[] strArray = ybstr.split("\\|");
-			 for(String strtemp:strArray){
-				 String[] tempArray = strtemp.split(":");
-				 if(tempArray.length!=2){
-					 throw new ServiceException(2, "订单信息有误，请重新提交！");
-				 }
-				 if(tempArray[0].equals("-1")){
-					 shopperYbAdd.put(GF_SHOPPER, Integer.valueOf(tempArray[1]));
-				 }else{
-					 shopperYbAdd.put(tempArray[0], Integer.valueOf(tempArray[1]));
-				 }
-			 }
+//			 String[] strArray = ybstr.split("\\|");
+//			 for(String strtemp:strArray){
+//				 String[] tempArray = strtemp.split(":");
+//				 if(tempArray.length!=2){
+//					 throw new ServiceException(2, "订单信息有误，请重新提交！");
+//				 }
+//				 if(tempArray[0].equals("-1")){
+//					 shopperYbAdd.put(GF_SHOPPER, Integer.valueOf(tempArray[1]));
+//				 }else{
+//					 shopperYbAdd.put(tempArray[0], Integer.valueOf(tempArray[1]));
+//				 }
+//			 }
 		}else{
 			   paylb="充值-"+order;
-			   shopperYbAdd.put(GF_SHOPPER,beforShuiYb);
+//			   shopperYbAdd.put(GF_SHOPPER,beforShuiYb);
 		}
 		Gcuser gcuser = gcuserDao.getUser(user);
 		if(gcuser==null){

@@ -33,6 +33,7 @@ import com.yq.manager.bo.GcfhBean;
 import com.yq.manager.bo.NewsDateBean;
 import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.bo.PointsChangeLog;
+import com.yq.manager.bo.UserVipLog;
 import com.yq.manager.bo.W10Bean;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
@@ -40,6 +41,7 @@ import com.yq.manager.dao.MqfhDao;
 import com.yq.manager.dao.MtfhtjDao;
 import com.yq.manager.dao.PointsChangeLogDao;
 import com.yq.manager.dao.SgtjDao;
+import com.yq.manager.dao.UserVipLogDao;
 import com.yq.user.bean.TopReward;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
@@ -152,6 +154,8 @@ public class AdminService {
 	private UserExtinfoDao userExtinfoDao;
 	@Autowired
 	private PointsChangeLogDao pointsChangeLogDao;
+	@Autowired
+	private UserVipLogDao userVipLogDao;
 	
 	
 	
@@ -379,7 +383,7 @@ public class AdminService {
 	 * @return
 	 */
 	@Transactional
-	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,String ip){
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Date date = null;
 		if(!Strings.isNullOrEmpty(pwdate)){
@@ -399,7 +403,7 @@ public class AdminService {
 		String beforName = gcuser.getName()==null?"":gcuser.getName();
 		String nowName = name==null?"":name;
 		
-		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date)){
+		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
 			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
 		}
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
@@ -1400,7 +1404,7 @@ public class AdminService {
 			throw new ServiceException(1, "充值必须是1000的倍整数如：2000，3000，4000，5000，6000，7000，8000，请检查输入是否正确！");
 		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		if(gcuser==null||gcuser.getVip()==0){
+		if(gcuser==null||!isCanUseVipCjb(gcuser)){
 			throw new ServiceException(2, "本功能只能VIP玩家开放！");
 		}
 		
@@ -1414,6 +1418,15 @@ public class AdminService {
 			vipcjgl.setCjdate(new Date());
 			vipcjglDao.add(vipcjgl);
 		}
+	}
+	
+	private boolean isCanUseVipCjb(Gcuser gcuser){
+		//是否能使用vip充值币相关功能，只有大vip才能使用相关功能
+			if(gcuser.getVip()==2){
+				return true;
+			}else{
+				return false;
+			}
 	}
 	/**
 	 * 一币补贴
@@ -2206,6 +2219,31 @@ public class AdminService {
 	
 	public IPage<Vipxtgc> getVipxtgcPageList(String userName,String startDate,String endDate,int pageIndex,int pageSize){
 		return vipxtgcDao.getPage(userName, startDate, endDate, pageIndex, pageSize);
+	}
+	/**
+	 * 设置用户为vip
+	 * @param userName
+	 * @param vipType   0取消vip   2大vip  3小vip
+	 * @param vipuser
+	 * @param vipgh
+	 * @param vipnh
+	 * @param vipzh
+	 * @param phone
+	 * @param qq
+	 */
+	@Transactional
+	public void updateUserVipInfo(String adminUserName,String userName,int vipType,String vipuser,String vipgh,String vipnh,String vipzh,String vipjh,String phone,String qq,String ip){
+		String commitParam = userName+":"+vipType+":"+vipuser+":"+vipgh+":"+vipnh+":"+vipjh+":"+vipzh+":"+phone+":"+qq;
+		 if(vipType==0){ // 取消vip
+			 gcuserDao.updateVip(userName, 0);
+			 sgxtDao.updateVip(userName, 0);
+			 userVipLogDao.add(new UserVipLog(userName, 2, adminUserName, ip, commitParam, new Date()));
+		 }else{   //修改vip信息
+			 gcuserDao.updateVip(userName, vipType);
+			 sgxtDao.updateVip(userName, 1);
+			 gcuserDao.updateVipInfo(userName, vipuser, vipgh, vipjh, vipnh, vipzh, phone, qq);
+			 userVipLogDao.add(new UserVipLog(userName, 1, adminUserName, ip, commitParam, new Date()));
+		 }
 	}
 	
 	public List<String>  getAllVipName(){

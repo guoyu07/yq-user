@@ -26,16 +26,30 @@ public class JzpayAction extends ALDAdminActionSupport {
 	
 	private String yy;
 	
+	private double ration;
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		if(status==1){
-			userService.mallBack(super.getUserName(), jzuser, pa3, jzpay, dbz,yy);
+			userService.mallBack(super.getUserName(), jzuser, pa3, jzpay, dbz,yy,ration);
 			super.setErroCodeNum(2000);
 		}
 		
 		return SUCCESS;
 	}
+	
+	
+	public double getRation() {
+		return ration;
+	}
+
+
+	public void setRation(double ration) {
+		this.ration = ration;
+	}
+
+
 	public Gcuser getGcuser() {
 		return gcuser;
 	}
