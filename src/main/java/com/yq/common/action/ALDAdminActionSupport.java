@@ -69,6 +69,7 @@ public class ALDAdminActionSupport extends ActionSupport {
 		ExportExcel<T> export = new ExportExcel<T>();
 		try
 		{
+			pattern = "yyyy-MM-dd HH:mm:ss";
 			File file = FileCreatUtil.creatNewFile(path);
 			OutputStream out = new FileOutputStream(file);
 			export.exportExcel(title,headers, data, out,pattern);

@@ -72,6 +72,7 @@ public class ExportExcel<T>
 	public void exportExcel(String title, String[] headers,
 			Collection<T> dataset, OutputStream out, String pattern)
 	{
+		
 		// 声明一个工作薄
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		// 生成一个表格
