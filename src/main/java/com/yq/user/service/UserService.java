@@ -3637,4 +3637,14 @@ public class UserService {
 		}
 		return false;
 	}
+	/**
+	 * 查询购物券日志
+	 * @param userName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<UserScoresLog> getUserScoresLogPage(String userName,int pageIndex,int pageSize){
+		return userScoresLogDao.getPageList(pageIndex, pageSize, "order by created_time desc", new SqlParamBean("user_name", userName));
+	}
 }
