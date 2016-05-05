@@ -901,11 +901,11 @@ public class UserService {
 			//修改被绑定用户金币及单数
 			gcuserDao.updateSjb(bduser, sjb);
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
-			if(isOpenScoresPay){
-				if(scores>0){
-					this.changeScores(bduser, scores,1001,0);
-				}
-			}
+//			if(isOpenScoresPay){
+//				if(scores>0){
+//					this.changeScores(bduser, scores,1001,0);
+//				}
+//			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
 				sgxtDao.updateAuid(tuser.getUsername(), bduser);
 			}else{
