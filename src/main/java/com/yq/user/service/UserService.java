@@ -46,6 +46,7 @@ import com.yq.user.bo.Jfcp;
 import com.yq.user.bo.Jfkjdate;
 import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
+import com.yq.user.bo.ShopBean;
 import com.yq.user.bo.Txifok;
 import com.yq.user.bo.Txpay;
 import com.yq.user.bo.UserExtinfo;
@@ -901,11 +902,11 @@ public class UserService {
 			//修改被绑定用户金币及单数
 			gcuserDao.updateSjb(bduser, sjb);
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
-//			if(isOpenScoresPay){
-//				if(scores>0){
-//					this.changeScores(bduser, scores,1001,0);
-//				}
-//			}
+			if(this.isOpenScores()){
+				if(scores>0){
+					this.changeScores(bduser, scores,1001,0);
+				}
+			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
 				sgxtDao.updateAuid(tuser.getUsername(), bduser);
 			}else{
@@ -3196,37 +3197,20 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
-	private static final String GF_SHOPPER = "zxz888";
 	@Transactional
-	public void ybpay(int ybsl,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores,String ybstr){
+	public String ybpay(int ybsl,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores,String ybstr){
 		
 		if(ybsl<=0&&scores<=0){
 			throw new ServiceException(2, "订单信息有误，请重新提交！");
 		}
 		
-		int beforShuiYb = ybsl-(int)(ybsl*0.02);
-		int beforShuiScores = scores - (int)(scores*0.02);
-		
 		String paylb;
-//		Map<String,Integer> shopperYbAdd = Maps.newHashMap();
-//		Map<String,Integer> shopperScoresAdd = Maps.newHashMap();
+		List<ShopBean> list = null;
 		if(pid==1){
 			 paylb="购物-"+order;
-//			 String[] strArray = ybstr.split("\\|");
-//			 for(String strtemp:strArray){
-//				 String[] tempArray = strtemp.split(":");
-//				 if(tempArray.length!=2){
-//					 throw new ServiceException(2, "订单信息有误，请重新提交！");
-//				 }
-//				 if(tempArray[0].equals("-1")){
-//					 shopperYbAdd.put(GF_SHOPPER, Integer.valueOf(tempArray[1]));
-//				 }else{
-//					 shopperYbAdd.put(tempArray[0], Integer.valueOf(tempArray[1]));
-//				 }
-//			 }
+             list = this.countPay(ybstr);
 		}else{
 			   paylb="充值-"+order;
-//			   shopperYbAdd.put(GF_SHOPPER,beforShuiYb);
 		}
 		Gcuser gcuser = gcuserDao.getUser(user);
 		if(gcuser==null){
@@ -3255,6 +3239,70 @@ public class UserService {
 			}
 		}
 		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
+		
+		//处理给商户加一币和购物卷
+		StringBuffer resultStr = new StringBuffer();
+		int tempScores = scores;
+		if(pid==1&&list!=null){//给商家加购物券或
+			for(ShopBean shopBean:list){
+				int i=0;
+				int addScores = 0;
+				int addYb = 0;
+                if(shopBean.getScoresValue()>0){
+					if(tempScores>=shopBean.getScoresValue()){//可分配的购物券大于等于需要减的购物卷
+						addScores = shopBean.getScoresValue();  //直接加相应数量的购物券
+						tempScores = tempScores - shopBean.getScoresValue();//可分配的购物券减少
+						addYb = shopBean.getYbValue();//加相应多的一币数量
+					}else{//可分配的购物券  小于需要加的购物券 
+						addScores = tempScores;//加完可分配的购物券
+						tempScores = 0;//可分配的购物券已用完
+						addYb = shopBean.getYbValue()+shopBean.getScoresValue()-tempScores;//需要加的一币等于  需要加的一币+购物券折算成的一币
+					}
+				}
+                
+                if(addScores>0){
+        			if(!this.changeScores(shopBean.getShopper(), addScores,1002,0)){
+        				throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
+        			}
+        		}
+        		if(addYb>0){
+        			if(!this.changeYb(shopBean.getShopper(), addYb, paylb, 101, null,0)){
+        				throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
+        			}
+        		}
+        		
+                if(i==0){
+                	resultStr.append(shopBean.getShopperOrder()+":"+addScores+":"+addYb);
+                }else{
+                	resultStr.append("|"+shopBean.getShopperOrder()+":"+addScores+":"+addYb);
+                }
+				i++;
+				
+			}
+		}
+		return resultStr.toString();
+	}
+	/**
+	 * 商城支付字符串
+	 * @param ybstr
+	 * @return
+	 */
+   public List<ShopBean> countPay(String ybstr){
+	   List<ShopBean>  result = Lists.newArrayList();
+	   String[] strArray = ybstr.split("\\|");
+		 for(String strtemp:strArray){
+			 String[] tempArray = strtemp.split(":");
+			 if(tempArray.length!=4){
+				 throw new ServiceException(100, "订单信息有误，请重新提交！");
+			 }
+			 ShopBean tempShopper = new ShopBean();
+			 tempShopper.setShopperOrder(tempArray[0]);
+			 tempShopper.setShopper(tempArray[1]);
+			 tempShopper.setScoresValue(Integer.valueOf(tempArray[2]));
+			 tempShopper.setYbValue(Integer.valueOf(tempArray[3]));
+			 result.add(tempShopper);
+		 }
+		 return result;
 	}
 	
 	/**
@@ -3636,5 +3684,13 @@ public class UserService {
 			return babyInfoDao.update(baby);
 		}
 		return false;
+	}
+	private static final long OPEN_TIME = DateUtils.StringToDate("2016-05-06 09:17:00", DateStyle.YYYY_MM_DD_HH_MM_SS).getTime();
+	public boolean isOpenScores(){
+		if(new Date().getTime()>OPEN_TIME){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

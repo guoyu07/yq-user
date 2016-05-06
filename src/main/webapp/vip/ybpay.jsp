@@ -9,7 +9,7 @@
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('手机验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('参数校验失败！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('您的购物卷余额不足，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('支付成功！');location.replace('${url}?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=1&order_sn=${order}&&payuser=${user}');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('支付成功！');location.replace('${url}?act=payment&resultstr=${resultstr}&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=1&order_sn=${order}&&payuser=${user}');</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('充值成功！');location.replace('${url}?act=payment&op=returnyibi&sn=${sn}&paycode=success&payamount=${gwpay}&pid=2&order_sn=${order}&&payuser=${user}');</script></c:if>
 <html>
 <head>
@@ -65,14 +65,14 @@ function checkdate1()  {
 			<td width="214" align="right">合计一币：</td>
 			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${ybsl}<input type="hidden" name="ybpay" size="20" value="${ybsl}"></font></b></td>
 		</tr>
-		<c:if test="${pid==1&&not empty btk}">
+		<c:if test="${pid==1">
 		<tr>
 			<td width="214" align="right">购物券服务费(2%)：</td>
 			<td width="336" align="left" colspan="2">${feeScores}</td>
 		</tr>
 		<tr>
 			<td width="214" align="right">合计购物券：</td>
-			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${allScores}<input type="hidden" name="btk" size="20" value="${btk}"><input type="hidden" name="sign" size="20" value="${sign}"></font></b></td>
+			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${allScores}<input type="hidden" name="ybstr" size="20" value="${ybstr}"><input type="hidden" name="sign" size="20" value="${sign}"></font></b></td>
 		</tr>
 		</c:if>
 		<tr>
@@ -98,7 +98,7 @@ function checkdate1()  {
 		</tr>
 		</table>
 	<p>请不要使用它人账户进行操作，一经发现3倍罚款！</p>
-	<p>当全部用购物券支付时，如果购物券不足，将扣除同等数量的一币！</p>
+	<p>如果购物券不足，将扣除同等数量的一币！</p>
 	</div>
 </form>
 <script type="text/javascript">

@@ -1,6 +1,8 @@
 package com.yq.user.action;
 
 
+import java.util.List;
+
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
@@ -8,6 +10,7 @@ import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.ShopBean;
 import com.yq.user.service.UserService;
 
 public class YbShopPayAction extends ALDAdminActionSupport {
@@ -87,31 +90,20 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	private int allScores;
 	private int feeScores;
 	private String ybstr;
+	private String resultstr;
 	public String ybpay(){
 		
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		
-		ybsl = (int)(gwpay*1.02);
-		fee =  (int)(gwpay*0.02);
 		String paylb;
-		int scores = 0;
+		
 		if(pid==1){
+			int scores = 0;
 			 paylb="购物-"+order;
 			 title="来自一币商城的订单";
 			 if(UserService.isOpenScoresPay){
-				 if(!Strings.isNullOrEmpty(btk)){
-					 try {
-						 scores = Integer.valueOf(btk);
-						 allScores = (int)(scores*1.02);
-						 feeScores = (int)(scores*0.02);
-					} catch (Exception e) {
-						LogSystem.error(e, "btk不是int型,btk=["+btk+"]");
-						scores = 0;
-					}
-				 }
-				 
 				 try {
-					 String signStr = new Double(gwpay).intValue()+"yc$shop@Sfie68"+btk;
+					 String signStr = order+"yc$shop@Sfie68"+ybstr;
 					 String mySign =  MD5Security.code(signStr,32).toLowerCase();
 					 if(!sign.equals(mySign)){
 						 LogSystem.warn("md5校验失败，收到的key=["+signStr+"],md5后的值为["+mySign+"],收到的sing=["+sign+"]");
@@ -123,50 +115,62 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 					 super.setErroCodeNum(8);
 					 return SUCCESS;
 				}
+				 
+				 List<ShopBean> list = userService.countPay(ybstr);
+				 int yb = 0;
+				 for(ShopBean shop:list){
+					 gwpay += shop.getYbValue();
+					 scores += shop.getScoresValue();
+				 }
+				 ybsl = (int)(gwpay*1.02);
+				 fee =  (int)(gwpay*0.02);
+				 allScores = (int)(scores*1.02);
+			     feeScores = (int)(scores*0.02);
+				 
 				 if(!Strings.isNullOrEmpty(user)){
-					 if(gwpay<=0){//百分之百用折扣券支付  折扣券不够 则用一币替代
 					 Gcuser gcuser = userService.getUserByUserName(user);
 					  if(gcuser!=null){
-							if(gcuser.getScores()<=0){
+							if(gcuser.getScores()<=0&&scores>0){
 								 super.setErroCodeNum(9);
 								 return SUCCESS;
 							}
 							if(gcuser.getScores()<allScores){
-								ybsl = allScores - gcuser.getScores();
-								scores = gcuser.getScores();
-								fee =  0;
+								ybsl += (allScores - gcuser.getScores());
+								allScores = gcuser.getScores();
 							}
 						 }
-					    }
 				 }
 				 
 			}
 			 
 		}	else{
+			   ybsl = (int)(gwpay*1.02);
+			   fee =  (int)(gwpay*0.02);
 			   paylb="充值-"+order;
 			   title="来自一币商城的充值";
 		}
-		if(Strings.isNullOrEmpty(ybf)){
-			Datepay datepay = userService.getHgybOrder(user, paylb);
-			if(datepay!=null){
-				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
-			}
-		}else{
-			Datepay datepay = userService.getHgybOrder(user, paylb);
-			if(datepay!=null){
-				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
-				return SUCCESS;
-			}
-			userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,scores,ybstr);
-			sn=MD5Security.md5_16(order+"$@@$"+gwpay);
+		
+		Datepay datepay = userService.getHgybOrder(user, paylb);
+		if(datepay!=null){
+			super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
+			return SUCCESS;
+		}
+		
+		if(!Strings.isNullOrEmpty(ybf)){
+			resultstr = userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,allScores,ybstr);
 			if(pid==1){
+				sn=MD5Security.md5_16(order+"$@@$"+resultstr);
+				LogSystem.info("返回的resultStr="+resultstr+"--sn="+sn+",order="+order);
 				super.setErroCodeNum(2000);
 			}else if(pid==2){
+				sn=MD5Security.md5_16(order+"$@@$"+gwpay);
 				super.setErroCodeNum(2001);
 			}
 		}
 		return SUCCESS;
 	}
+	
+	
 	
 	/**
 	 * 机票支付通道
@@ -212,6 +216,16 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	}
 	
 	
+	public String getResultstr() {
+		return resultstr;
+	}
+
+
+	public void setResultstr(String resultstr) {
+		this.resultstr = resultstr;
+	}
+
+
 	public int getDay() {
 		return day;
 	}
