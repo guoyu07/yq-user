@@ -589,7 +589,7 @@ public class UserService {
 	 * @param changeNum
 	 * @return
 	 */
-	public boolean changeScores(String username,int changeNum,int changeType,double ration){
+	public boolean changeScores(String username,int changeNum,int changeType,double ration,String fromUser,String param){
 		if(changeNum>0){
 			boolean result = gcuserDao.addScore(username, changeNum);
 			if(result){
@@ -601,6 +601,8 @@ public class UserService {
 				t.setNowNum(gcuser.getScores());
 				t.setUserName(username);
 				t.setRation(ration);
+				t.setFromUser(fromUser);
+				t.setParam(param);
 				userScoresLogDao.add(t);
 			}
 			return result;
@@ -615,6 +617,8 @@ public class UserService {
 				t.setNowNum(gcuser.getScores());
 				t.setUserName(username);
 				t.setRation(ration);
+				t.setFromUser(fromUser);
+				t.setParam(param);
 				userScoresLogDao.add(t);
 			}
 			return result;
@@ -904,7 +908,7 @@ public class UserService {
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
 			if(this.isOpenScores()){
 				if(scores>0){
-					this.changeScores(bduser, scores,1001,0);
+					this.changeScores(bduser, scores,1001,0,"0","");
 				}
 			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
@@ -3229,7 +3233,7 @@ public class UserService {
 			throw new ServiceException(7, "手机验证码不正确");
 		}
 		if(scores>0){
-			if(!this.changeScores(user, -scores,2001,0)){
+			if(!this.changeScores(user, -scores,2001,0,"0",order)){
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
 			}
 		}
@@ -3243,9 +3247,10 @@ public class UserService {
 		//处理给商户加一币和购物卷
 		StringBuffer resultStr = new StringBuffer();
 		int tempScores = scores;
+		int i=0;
 		if(pid==1&&list!=null){//给商家加购物券或
 			for(ShopBean shopBean:list){
-				int i=0;
+				
 				int addScores = 0;
 				int addYb = 0;
                 if(shopBean.getScoresValue()>0){
@@ -3255,13 +3260,17 @@ public class UserService {
 						addYb = shopBean.getYbValue();//加相应多的一币数量
 					}else{//可分配的购物券  小于需要加的购物券 
 						addScores = tempScores;//加完可分配的购物券
-						tempScores = 0;//可分配的购物券已用完
+						
 						addYb = shopBean.getYbValue()+shopBean.getScoresValue()-tempScores;//需要加的一币等于  需要加的一币+购物券折算成的一币
+						tempScores = 0;//可分配的购物券已用完
 					}
+				}else{
+					addYb = shopBean.getYbValue();
+					addScores = 0;
 				}
                 
                 if(addScores>0){
-        			if(!this.changeScores(shopBean.getShopper(), addScores,1002,0)){
+        			if(!this.changeScores(shopBean.getShopper(), addScores,1002,0,user,order)){
         				throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
         			}
         		}
@@ -3685,7 +3694,7 @@ public class UserService {
 		}
 		return false;
 	}
-	private static final long OPEN_TIME = DateUtils.StringToDate("2016-05-06 09:17:00", DateStyle.YYYY_MM_DD_HH_MM_SS).getTime();
+	private static final long OPEN_TIME = DateUtils.StringToDate("2016-05-07 09:17:00", DateStyle.YYYY_MM_DD_HH_MM_SS).getTime();
 	public boolean isOpenScores(){
 		if(new Date().getTime()>OPEN_TIME){
 			return true;

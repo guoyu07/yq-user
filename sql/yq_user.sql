@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-04-28 13:13:28
+Date: 2016-05-06 17:54:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -108,7 +108,7 @@ CREATE TABLE `bdbdate` (
   PRIMARY KEY (`id`),
   KEY `zuser` (`zuser`),
   KEY `bfdate` (`bfdate`)
-) ENGINE=InnoDB AUTO_INCREMENT=728186 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=728209 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for cbzyc
@@ -186,7 +186,7 @@ CREATE TABLE `dateip` (
   `dlip` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `dldate` (`dldate`)
-) ENGINE=InnoDB AUTO_INCREMENT=1126262 DEFAULT CHARSET=utf8 COMMENT='用户操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=1126272 DEFAULT CHARSET=utf8 COMMENT='用户操作日志表';
 
 -- ----------------------------
 -- Table structure for datepay
@@ -211,8 +211,9 @@ CREATE TABLE `datepay` (
   `ration` double(19,4) NOT NULL DEFAULT '0.0000',
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
-  KEY `newbz` (`newbz`)
-) ENGINE=InnoDB AUTO_INCREMENT=2750736 DEFAULT CHARSET=utf8;
+  KEY `newbz` (`newbz`),
+  KEY `abdate` (`abdate`)
+) ENGINE=InnoDB AUTO_INCREMENT=2750789 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for dgag
@@ -486,7 +487,7 @@ CREATE TABLE `gcuser` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE,
   KEY `idcard` (`userid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=66137 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=66139 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Table structure for gpjy
@@ -877,7 +878,7 @@ CREATE TABLE `sgxt` (
   UNIQUE KEY `username` (`username`) USING BTREE,
   KEY `auid` (`auid`),
   KEY `buid` (`buid`)
-) ENGINE=InnoDB AUTO_INCREMENT=25071 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25073 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for sgxt1
@@ -1151,7 +1152,7 @@ CREATE TABLE `txifok` (
   `txdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=37130 DEFAULT CHARSET=utf8 COMMENT='用户注册后 会向该表插入记录';
+) ENGINE=InnoDB AUTO_INCREMENT=37132 DEFAULT CHARSET=utf8 COMMENT='用户注册后 会向该表插入记录';
 
 -- ----------------------------
 -- Table structure for txpay
@@ -1247,14 +1248,31 @@ DROP TABLE IF EXISTS `user_scores_log`;
 CREATE TABLE `user_scores_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(32) NOT NULL,
+  `from_user` varchar(32) NOT NULL DEFAULT '0',
   `change_num` int(11) NOT NULL DEFAULT '0',
   `now_num` int(11) NOT NULL,
   `change_type` int(11) NOT NULL DEFAULT '0',
   `ration` double(19,4) NOT NULL DEFAULT '0.0000',
+  `param` varchar(256) DEFAULT NULL,
   `created_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for user_vip_log
+-- ----------------------------
+DROP TABLE IF EXISTS `user_vip_log`;
+CREATE TABLE `user_vip_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(32) NOT NULL COMMENT '被操作的用户',
+  `op_type` int(11) NOT NULL DEFAULT '0' COMMENT '操作类型1设置ip  2修改vip信息 3取消vip',
+  `op_user` varchar(32) NOT NULL COMMENT '操作的管理员',
+  `ip` varchar(64) NOT NULL COMMENT 'ip地址',
+  `commit_param` varchar(1024) DEFAULT NULL COMMENT '提交的参数',
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for vipcjgl
@@ -1270,7 +1288,7 @@ CREATE TABLE `vipcjgl` (
   `bz` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cjid`),
   KEY `vipuser` (`vipuser`)
-) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for vipxtgc
@@ -1299,7 +1317,7 @@ CREATE TABLE `you_mingxi` (
   PRIMARY KEY (`id`),
   KEY `tjuser` (`tjuser`),
   KEY `down` (`down`)
-) ENGINE=InnoDB AUTO_INCREMENT=791730 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=791737 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for zuo_mingxi
@@ -1314,7 +1332,7 @@ CREATE TABLE `zuo_mingxi` (
   PRIMARY KEY (`id`),
   KEY `tjuser` (`tjuser`),
   KEY `down` (`down`)
-) ENGINE=InnoDB AUTO_INCREMENT=1765762 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1765775 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Procedure structure for deleteSgxtUserForNoDown

@@ -98,6 +98,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 		String paylb;
 		
 		if(pid==1){
+			LogSystem.info("收到的客户端字符串"+ybstr);
 			int scores = 0;
 			 paylb="购物-"+order;
 			 title="来自一币商城的订单";
@@ -118,7 +119,8 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				 
 				 List<ShopBean> list = userService.countPay(ybstr);
 				 int yb = 0;
-				 for(ShopBean shop:list){
+				 gwpay = 0;
+				 for(ShopBean shop:list){ 
 					 gwpay += shop.getYbValue();
 					 scores += shop.getScoresValue();
 				 }
@@ -150,17 +152,21 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			   title="来自一币商城的充值";
 		}
 		
-		Datepay datepay = userService.getHgybOrder(user, paylb);
-		if(datepay!=null){
-			super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
-			return SUCCESS;
+		if(!Strings.isNullOrEmpty(user)){
+			Datepay datepay = userService.getHgybOrder(user, paylb);
+			if(datepay!=null){
+				super.setErroCodeNum(1);//alert('该订单号已支付完成，请不要重要操作！');
+				return SUCCESS;
+			}
 		}
+
 		
 		if(!Strings.isNullOrEmpty(ybf)){
 			resultstr = userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,allScores,ybstr);
 			if(pid==1){
 				sn=MD5Security.md5_16(order+"$@@$"+resultstr);
 				LogSystem.info("返回的resultStr="+resultstr+"--sn="+sn+",order="+order);
+				LogSystem.info(url+"?act=payment&resultstr="+resultstr+"&op=returnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=1&order_sn="+order+"&&payuser="+user);
 				super.setErroCodeNum(2000);
 			}else if(pid==2){
 				sn=MD5Security.md5_16(order+"$@@$"+gwpay);

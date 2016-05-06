@@ -6,10 +6,12 @@ public class UserScoresLog {
 
 	private Integer id;
 	private String userName;
+	private String fromUser="0";
 	private int changeNum;
 	private int nowNum;
 	private int changeType;
 	private double ration;
+	private String param;
 	private Date createdTime;
 	
 	public Integer getId() {
@@ -53,5 +55,17 @@ public class UserScoresLog {
 	}
 	public void setRation(double ration) {
 		this.ration = ration;
+	}
+	public String getFromUser() {
+		return fromUser;
+	}
+	public void setFromUser(String fromUser) {
+		this.fromUser = fromUser;
+	}
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
 	}
 }

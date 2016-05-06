@@ -55,7 +55,9 @@ function checkdate1()  {
 			</tr>
 		<tr>
 			<td width="214" align="right">订单金额：</td>
-			<td width="336" align="left" colspan="2"><input type="hidden" name="ybstr" size="20" value="${ybstr}" readonly><input type="hidden" name="gwpay" size="20" value="${gwpay}" readonly>${gwpay}<input type="hidden" name="sid" size="20" value="${sid}" readonly><input type="hidden" name="pid" size="20" value="${pid}" readonly></td>
+			<td width="336" align="left" colspan="2"><input type="hidden" name="ybstr" size="20" value="${ybstr}" readonly>
+			
+			<input type="hidden" name="gwpay" size="20" value="${gwpay}" readonly>${gwpay}<input type="hidden" name="sid" size="20" value="${sid}" readonly><input type="hidden" name="pid" size="20" value="${pid}" readonly></td>
 		</tr>
 		<tr>
 			<td width="214" align="right">一币服务费(2%)：</td>
@@ -65,14 +67,14 @@ function checkdate1()  {
 			<td width="214" align="right">合计一币：</td>
 			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${ybsl}<input type="hidden" name="ybpay" size="20" value="${ybsl}"></font></b></td>
 		</tr>
-		<c:if test="${pid==1">
+		<c:if test="${pid==1}">
 		<tr>
 			<td width="214" align="right">购物券服务费(2%)：</td>
 			<td width="336" align="left" colspan="2">${feeScores}</td>
 		</tr>
 		<tr>
 			<td width="214" align="right">合计购物券：</td>
-			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${allScores}<input type="hidden" name="ybstr" size="20" value="${ybstr}"><input type="hidden" name="sign" size="20" value="${sign}"></font></b></td>
+			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${allScores}<input type="hidden" name="sign" size="20" value="${sign}"></font></b></td>
 		</tr>
 		</c:if>
 		<tr>
