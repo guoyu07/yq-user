@@ -1,5 +1,7 @@
 package com.yq.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
@@ -79,6 +81,27 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		 return SUCCESS;
 	 }
 	
+	private String regTime;
+	private String result;
+	public String updateUserPayOk(){
+		if(status==0){
+			 return SUCCESS;
+		 }
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		result = adminService.updateUserPayOk(user, payok, regTime);
+		LogSystem.log("---批量修改用户payok,操作人=["+super.getUserName()+"],被操作人=["+user+"],regTime=["+regTime+"],payok=["+payok+"],result=["+result+"],执行时间=["+new Date()+"]");
+		super.setErroCodeNum(2000);
+		return SUCCESS;
+	}
+	
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 	public String getUser() {
 		return user;
 	}
@@ -272,6 +295,14 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	}
 	public void setPwdate(String pwdate) {
 		this.pwdate = pwdate;
+	}
+
+	public String getRegTime() {
+		return regTime;
+	}
+
+	public void setRegTime(String regTime) {
+		this.regTime = regTime;
 	}
 	
 }

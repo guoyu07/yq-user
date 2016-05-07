@@ -252,7 +252,7 @@
 		
 		
 		<action name="activedGoldCard" class="com.yq.user.action.ActivGoldCardAction">
-		    <result name="success">0625fhk/pdfhk0102/chklogin.jsp</result>
+		    <result name="success">vip/chklogin.jsp</result>
 		</action>		
 		
 		<action name="jfjqks" class="com.yq.user.action.JfjqksAction">

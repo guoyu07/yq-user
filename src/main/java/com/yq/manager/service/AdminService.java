@@ -2246,6 +2246,47 @@ public class AdminService {
 		 }
 	}
 	
+	/**
+	 * 一键修改某用户下的所有用户的payok值
+	 * @param userName
+	 * @param payok
+	 * @param regTime
+	 * @return
+	 */
+	public String updateUserPayOk(String userName,int payok,String regTime){
+		Date date = null;
+		if(regTime!=null){
+			date = DateUtils.StringToDate(regTime,DateStyle.YYYY_MM_DD);
+		}
+		StringBuffer result = new StringBuffer();
+		batchUpdateDownPayok(userName, result, date, payok);
+		return result.toString();
+	}
+	
+	private void batchUpdateDownPayok(String userName,StringBuffer stringBuffer,Date date,int payok){
+		Sgxt sgxt = sgxtDao.get(userName);
+		if(sgxt!=null){
+			if(!Strings.isNullOrEmpty(sgxt.getAuid())){
+				updateUserPayOk(sgxt.getAuid(), stringBuffer,date,payok);
+				batchUpdateDownPayok(sgxt.getAuid(), stringBuffer, date, payok);
+			}
+			if(!Strings.isNullOrEmpty(sgxt.getBuid())){
+				updateUserPayOk(sgxt.getBuid(), stringBuffer,date,payok);
+				batchUpdateDownPayok(sgxt.getBuid(), stringBuffer, date, payok);
+			}
+		}
+	}
+	
+	private void updateUserPayOk(String userName,StringBuffer stringBuffer,Date date,int payok){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(date==null||gcuser.getRegtime().getTime()>date.getTime()){
+			gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), payok);
+			stringBuffer.append("["+gcuser.getUsername()+"]");
+		}
+	}
+	
+	
+	
 	public List<String>  getAllVipName(){
 		List<Gcuser> list = gcuserDao.getAllVip();
 		List<String> result = Lists.newArrayList();

@@ -599,6 +599,12 @@
 		    </result>
 		    
 		</action>
+		
+		<action name="updateuserpayok" class="com.yq.manager.action.ModifyaabuserAction" method="updateUserPayOk">
+		    <result name="success">
+		      /admin/updateuserpayok.jsp
+		    </result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

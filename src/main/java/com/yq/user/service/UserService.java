@@ -3562,13 +3562,13 @@ public class UserService {
 		}else{
 			String vipName = findMyUpVipName(userName);
 			
-			if(vipName.equals("syf66669a")){//此vip账号下的所有账号都改成2
-				Gcuser gcuser = gcuserDao.getUser(userName);
-				Date date = DateUtils.StringToDate("2016-04-21",DateStyle.YYYY_MM_DD);
-				if(gcuser.getPayok()==0&&gcuser.getRegtime().getTime()>date.getTime()){
-					gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 2);
-				}
-			}
+//			if(vipName.equals("syf66669a")){//此vip账号下的所有账号都改成2
+//				Gcuser gcuser = gcuserDao.getUser(userName);
+//				Date date = DateUtils.StringToDate("2016-04-21",DateStyle.YYYY_MM_DD);
+//				if(gcuser.getPayok()==0&&gcuser.getRegtime().getTime()>date.getTime()){
+//					gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 2);
+//				}
+//			}
 			
 			gcuserDao.updateVipName(userName, vipName);
 			sgxtDao.updateVipUser(userName, vipName);

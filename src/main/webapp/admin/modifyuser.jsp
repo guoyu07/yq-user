@@ -170,8 +170,10 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<font color="#FF0000" size="3">返回搜索</font></a><font color="#FF0000" size="3">&nbsp;&nbsp;&nbsp; </font>
 		<b><font size="3">&nbsp;&nbsp;&nbsp;</font><c:if test="${fcxt.id==1||fcxt.id==2}"><a href="usercj?id=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">充值</font></a>
 		</c:if></b></font>
-		<font size="3">&nbsp;&nbsp;&nbsp;</font><c:if test="${fcxt.id==1||fcxt.id==2}"><a href="updateuservip?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">修改vip</font></a>
+		<font size="3">&nbsp;&nbsp;&nbsp;</font><c:if test="${fcxt.id==1||fcxt.id==2}"><a href="updateuservip?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改vip】</font></a>
 		</c:if></b></font>
+		<c:if test="${fcxt.id==1||fcxt.id==2}"><a href="updateuserpayok?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改团队下提现限制】</font></a>
+		</c:if>
 		
 		
 		</div>
