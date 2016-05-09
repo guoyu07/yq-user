@@ -23,10 +23,6 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 	  if (Form.vipuser.value=="") {      alert("请填入开户名!");      return false;    } 
 	  if (Form.phone.value=="") {      alert("请填入手机号码!");      return false;    }  
 	  if (Form.qq.value=="") {      alert("请填入qq!");      return false;    }  
-	  alert(Form.vipgh.value);
-	  alert(Form.vipnh.value);
-	  alert(Form.vipjh.value);
-	  alert(Form.vipzh.value);
 	  if(Form.vipgh.value==""&&Form.vipnh.value==""&&Form.vipjh.value==""&&Form.vipzh.value==""){
 		  alert("银行账号至少填写一个!");      return false; 
 	  }
@@ -86,6 +82,10 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       <tr bgcolor="#ffffdd"> 
         <td align="right" width="41%" height="33" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0">QQ：</td>
         <td width="57%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><input type="text" name="qq" size="20" value="${gcuser.qq}"></td>
+      </tr>
+            <tr bgcolor="#ffffdd"> 
+        <td align="right" width="41%" height="33" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0">操作密码：</td>
+        <td width="57%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><input type="password" name="oppass" size="20" value=""></td>
       </tr>
       <tr> 
       <td align="center" colspan="2" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF" height="33"><div align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><input type="submit" name="submit" width="34" height="20" alt="提交" size="20" value="提交" class="lkbtn"></div>

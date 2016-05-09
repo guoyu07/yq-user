@@ -2253,34 +2253,36 @@ public class AdminService {
 	 * @param regTime
 	 * @return
 	 */
-	public String updateUserPayOk(String userName,int payok,String regTime){
+	@Transactional
+	public String updateUserPayOk(String userName,Integer payok,String regTime,String password3End){
 		Date date = null;
 		if(regTime!=null){
 			date = DateUtils.StringToDate(regTime,DateStyle.YYYY_MM_DD);
 		}
 		StringBuffer result = new StringBuffer();
-		batchUpdateDownPayok(userName, result, date, payok);
+		batchUpdateDownPayok(userName, result, date, payok,password3End);
 		return result.toString();
 	}
 	
-	private void batchUpdateDownPayok(String userName,StringBuffer stringBuffer,Date date,int payok){
+	private void batchUpdateDownPayok(String userName,StringBuffer stringBuffer,Date date,Integer payok,String password3End){
 		Sgxt sgxt = sgxtDao.get(userName);
 		if(sgxt!=null){
 			if(!Strings.isNullOrEmpty(sgxt.getAuid())){
-				updateUserPayOk(sgxt.getAuid(), stringBuffer,date,payok);
-				batchUpdateDownPayok(sgxt.getAuid(), stringBuffer, date, payok);
+				updateUserPayOk(sgxt.getAuid(), stringBuffer,date,payok,password3End);
+				batchUpdateDownPayok(sgxt.getAuid(), stringBuffer, date, payok,password3End);
 			}
 			if(!Strings.isNullOrEmpty(sgxt.getBuid())){
-				updateUserPayOk(sgxt.getBuid(), stringBuffer,date,payok);
-				batchUpdateDownPayok(sgxt.getBuid(), stringBuffer, date, payok);
+				updateUserPayOk(sgxt.getBuid(), stringBuffer,date,payok,password3End);
+				batchUpdateDownPayok(sgxt.getBuid(), stringBuffer, date, payok,password3End);
 			}
 		}
 	}
 	
-	private void updateUserPayOk(String userName,StringBuffer stringBuffer,Date date,int payok){
+	private void updateUserPayOk(String userName,StringBuffer stringBuffer,Date date,Integer payok,String password3End){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(date==null||gcuser.getRegtime().getTime()>date.getTime()){
-			gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), payok);
+//			LogSystem.info("设置用户["+userName+"]pend="+password3End);
+			gcuserDao.updatePayOkAndPassword3End(gcuser.getName(), gcuser.getUserid(), payok,password3End);
 			stringBuffer.append("["+gcuser.getUsername()+"]");
 		}
 	}

@@ -68,6 +68,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	 private String vipzh;
 	 private String vipjh;
 	 private String phone;
+	 private String oppass;
 	 public String updateUserVipInfo(){
 		 AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		 
@@ -76,24 +77,50 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 				gcuser = userService.getUserByUserName(user);
 			 return INPUT;
 		 }
-		 
+		 if(!oppass.equals("2016opvipp")){
+				super.setErroCodeNum(1);
+				return SUCCESS;
+			}
 		 adminService.updateUserVipInfo(super.getUserName(),user, vipType, vipuser, vipgh, vipnh, vipzh, vipjh, phone, qq,super.ip());
+		 super.setErroCodeNum(2002);
 		 return SUCCESS;
 	 }
 	
 	private String regTime;
 	private String result;
+	private String pend;
+	
 	public String updateUserPayOk(){
 		if(status==0){
 			 return SUCCESS;
 		 }
+		if(!oppass.equals("2016opdownp")){
+			super.setErroCodeNum(1);
+			return SUCCESS;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		result = adminService.updateUserPayOk(user, payok, regTime);
-		LogSystem.log("---批量修改用户payok,操作人=["+super.getUserName()+"],被操作人=["+user+"],regTime=["+regTime+"],payok=["+payok+"],result=["+result+"],执行时间=["+new Date()+"]");
+		result = adminService.updateUserPayOk(user, payok, regTime,pend);
+		LogSystem.log("---批量修改用户payok及后缀,操作人=["+super.getUserName()+"],被操作人=["+user+"],regTime=["+regTime+"],pend=["+pend+"],payok=["+payok+"],result=["+result+"],执行时间=["+new Date()+"],ip="+super.ip());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
 	
+	public String getPend() {
+		return pend;
+	}
+
+	public void setPend(String pend) {
+		this.pend = pend;
+	}
+
+	public String getOppass() {
+		return oppass;
+	}
+
+	public void setOppass(String oppass) {
+		this.oppass = oppass;
+	}
+
 	public String getResult() {
 		return result;
 	}

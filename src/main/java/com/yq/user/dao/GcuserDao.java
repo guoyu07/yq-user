@@ -544,6 +544,26 @@ public class GcuserDao {
 		return result>0;
 	}
 	
+	public boolean updatePayOkAndPassword3End(String name,String idCardNum,Integer payok,String password3End){
+		String sql = "update "+table+" set ";
+		if(Strings.isNullOrEmpty(password3End)&&payok==null){
+			return false;
+		}
+		SqlParameter paramter = new SqlParameter();
+		if(!Strings.isNullOrEmpty(password3End)){
+			sql = sql +"password3=CONCAT(password3,'"+password3End+"')";
+		}
+		if(payok!=null){
+			sql = sql+",payok=?";
+			paramter.setInt(payok);
+		}
+		sql = sql+"  where name=? and userid=?";
+		paramter.setString(name);
+		paramter.setString(idCardNum);
+		int result = this.jdbc.update(sql, paramter);
+		return result>0;
+	}
+	
 	public boolean updateJyg(String userName,int changejygNum){
 		String sql = "update "+table+" set jyg=jyg-?  where username=? and jyg-?>=0  limit 1";
 		SqlParameter paramter = new SqlParameter();

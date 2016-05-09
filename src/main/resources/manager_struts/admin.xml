@@ -595,7 +595,7 @@
 		      /admin/updateuservip.jsp
 		    </result>
 		    <result name="success" type="redirect">
-		      /admin/updateuservip?erroCodeNum=2002&amp;user=${user}
+		      /admin/updateuservip?erroCodeNum=${erroCodeNum}&amp;user=${user}
 		    </result>
 		    
 		</action>
