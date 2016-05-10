@@ -918,6 +918,11 @@ public class GcuserDao {
 		return jdbc.getList(sql, Gcuser.class);
 	}
 	
+	public List<Gcuser> getCompanlyUser(){
+		String sql = "select username from "+table+" where jygt1=2 and name='公司'";
+		return jdbc.getList(sql, Gcuser.class);
+	}
+	
 	public boolean updateCxtAndCxtDate(String userName,int cxtReduceNum,int cxdateAddDay){
 		String sql = "update "+table+" set cxdate=DATE_ADD('"+DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS)+"', INTERVAL "+cxdateAddDay+" DAY),cxt=cxt-? where username=? limit 1";
 		return jdbc.update(sql, SqlParameter.Instance().withInt(cxtReduceNum).withString(userName))>0;

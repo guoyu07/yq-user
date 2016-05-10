@@ -176,6 +176,20 @@ public class GpjyDao {
 		}
 		return mrCache;
 	}
+	/**
+	 * 此方法不需要使用缓存  因为只在系统回购时调用
+	 * @param pageSize
+	 * @param date
+	 * @return
+	 */
+	public List<Gpjy> getMrPageForSystem(int pageSize,String date){
+		String sql="select * from "+table+" where jy=0 and mysl>0 and abdate<'"+date+"'  order by pay asc limit "+pageSize;
+		return this.jdbc.getList(sql, Gpjy.class, null);
+//		if(mrCache==null){
+//			initMrCache(pageSize);
+//		}
+//		return mrCache;
+	}
 	
 	public IPage<Gpjy> getAdminMrPage(int pageIndex,int pageSize){
 		String sql="select * from "+table+" where mysl>0 order by id desc";

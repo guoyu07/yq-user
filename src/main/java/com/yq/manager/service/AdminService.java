@@ -2307,11 +2307,11 @@ public class AdminService {
 		}
 	}
 	
-	private String[] arrayRandomName = new String[]{"sineg","siwnrw","aneing","064300","uie168","shs888","8515mycq","abc888888a","742ymjc","kuang888","niw168"};
+//	private String[] arrayRandomName = new String[]{"sineg","siwnrw","aneing","064300","uie168","shs888","8515mycq","abc888888a","742ymjc","kuang888","niw168"};
 	
-	private String getRadomUserName(){
-		int random = new Random().nextInt(arrayRandomName.length);
-		return arrayRandomName[random];
+	private String getRadomUserName(List<Gcuser> gcuser){
+		int random = new Random().nextInt(gcuser.size());
+		return gcuser.get(random).getUsername();
 	}
 	
 	
@@ -2323,14 +2323,15 @@ public class AdminService {
 		LogSystem.info("开始成交所有求购积分的信息");
 		final int pageSize = 500;
 		List<Gpjy> page = null;
+		List<Gcuser> listRandomUserName = gcuserDao.getCompanlyUser();
 		while(true){
-			page = userService.getMrPageList(pageSize);
+			page = gpjyDao.getMrPageForSystem(pageSize,"2016-04-28 00:00:00");
 			if(page!=null&&page.size()>0){
 				LogSystem.info("处理第一页，有数量 ="+page.size()+",共[]页");
 				long sigleStartTime = System.currentTimeMillis();
 				for(Gpjy gpjy:page){
 					try {
-						mcJfForSystem(getRadomUserName(), gpjy);
+						mcJfForSystem(getRadomUserName(listRandomUserName), gpjy);
 					} catch (Exception e) {
 						LogSystem.error(e, "[这条记录出错了]---gpgy="+gpjy);
 					}
