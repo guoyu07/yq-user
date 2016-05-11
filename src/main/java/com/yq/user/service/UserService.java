@@ -54,6 +54,7 @@ import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
+import com.yq.user.constant.ScoresChangeType;
 import com.yq.user.dao.BabyInfoDao;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
@@ -908,7 +909,7 @@ public class UserService {
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
 //			if(this.isOpenScores()){
 				if(scores>0){
-					this.changeScores(bduser, scores,1001,0,"0","");
+					this.changeScores(bduser, scores,ScoresChangeType.SYSTEM_GIVE,0,"0","");
 				}
 //			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
@@ -1525,6 +1526,8 @@ public class UserService {
 			throw new ServiceException(2,"您好，您发布的一币数量不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");	
 		}
 		
+		
+		
 		if(saleNum>gcuser.getPay()-gcuser.getVippay() && gcuser.getRegtime().getTime()>fcxt.getJsdate().getTime()){
 			throw new ServiceException(3,"您好，您有 "+gcuser.getVippay()+"-一币是[服务中心转入]或[游戏收益部分]，此额度不提供卖出，仅用于开户使用，谢谢！");
 		}
@@ -1543,6 +1546,11 @@ public class UserService {
 		
 		if(gcuser.isLimitTx()){
 			throw new ServiceException(7,"您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！");
+		}
+		
+		//商户账号不能卖出一币
+		if(gcuser.getJb()==6){
+			throw new ServiceException(8,"商户账号不能卖出一币！");
 		}
 		
 		
@@ -1677,6 +1685,61 @@ public class UserService {
 		if(!this.changeYb(toUser, amount, regId, 6, null,ration)){
 			throw new ServiceException(3000, "未知错误！");
 		}
+	}
+	
+	
+	/**
+	 * 商城退购物券
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	
+	@Transactional
+	public void mallBackScores(String fromUser,String toUser,String password3,int amount,String orderId,String yy){
+		if(!password3.equals("gltk2016ycscores")){
+			throw new ServiceException(1, "操作密码不正确！");
+		}
+		if(yy==null)yy="";
+        Gcuser toGcUser = gcuserDao.getUser(toUser);
+		if(toGcUser==null){
+			throw new ServiceException(3, "转入的用户名不存在，请检查输入是否正确！");
+		}
+		if(fromUser.equals(toUser)){
+			throw new ServiceException(4, "您好，不能转给自己，谢谢！");
+		}
+		
+        if(amount<0 || amount==0){
+        	throw new ServiceException(5,"您好，您转账积分不能小于零，谢谢！");
+        }
+        Gcuser gcuser = gcuserDao.getUser(fromUser);
+        
+        if(gcuser.getJb()!=6){
+        	throw new ServiceException(2, "转出的用户名不是新商城商家！");
+        }
+		
+		if(gcuser.getScores()<amount){
+			throw new ServiceException(6, "您好，您转账购物券不能大于您剩余的购物券 "+gcuser.getPay()+" ，谢谢！");
+		}
+		
+		if(!this.changeScores(fromUser, -amount, ScoresChangeType.MALL_BACK_REDUCE, 0d, toUser, yy+"-"+orderId)){
+			throw new ServiceException(6, "您好，您转账购物券不能大于您剩余购物券 "+gcuser.getPay()+" ，谢谢！");
+		}
+		if(!this.changeScores(toUser, amount, ScoresChangeType.MALL_BACK_ADD,0d, fromUser, yy+"-"+orderId)){
+			throw new ServiceException(3000, "未知错误！");
+		}
+	}
+	
+	/**
+	 * 设置为商户
+	 * @param user
+	 */
+	public boolean setToMaller(String user,int jb,String ip){
+		boolean result = gcuserDao.updateUserJb(user, jb);
+		
+		LogSystem.log("setToMaller==>user=【"+user+"】,jb=【"+jb+"】,time=["+new Date()+"],ip=["+ip+"],result=["+result+"]");
+		
+		return result;
 	}
 	/**
 	 * 转账一币至谁的名下
@@ -3233,7 +3296,7 @@ public class UserService {
 			throw new ServiceException(7, "手机验证码不正确");
 		}
 		if(scores>0){
-			if(!this.changeScores(user, -scores,2001,0,"0",order)){
+			if(!this.changeScores(user, -scores,ScoresChangeType.MALL_BUY,0,"0",order)){
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
 			}
 		}
@@ -3270,7 +3333,7 @@ public class UserService {
 				}
                 
                 if(addScores>0){
-        			if(!this.changeScores(shopBean.getShopper(), addScores,1002,0,user,order)){
+        			if(!this.changeScores(shopBean.getShopper(), addScores,ScoresChangeType.MALL_SALE,0,user,order)){
         				throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
         			}
         		}

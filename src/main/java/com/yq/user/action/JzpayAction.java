@@ -16,6 +16,8 @@ public class JzpayAction extends ALDAdminActionSupport {
 	
 	private int status;
 	
+	private String fromUser;
+	
 	private String jzuser;//接收用户名
 	
 	private int jzpay;//转入金额
@@ -27,6 +29,8 @@ public class JzpayAction extends ALDAdminActionSupport {
 	private String yy;
 	
 	private double ration;
+	
+	private int jb;
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -40,6 +44,57 @@ public class JzpayAction extends ALDAdminActionSupport {
 	}
 	
 	
+	public String backScores(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		if(!super.getUserName().equals("zxz888")){
+			super.setErroCodeNum(3001);
+			return SUCCESS;
+		}
+		if(status==1){
+			userService.mallBackScores(fromUser, jzuser, pa3, jzpay, dbz,yy);
+			super.setErroCodeNum(2000);
+		}
+		
+		return SUCCESS;
+	}
+	
+	
+	public String setForMall(){
+		if(!super.getUserName().equals("zxz888")){
+			super.setErroCodeNum(3001);
+			return SUCCESS;
+		}
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		if(!userService.setToMaller(fromUser,jb,super.ip())){
+			super.setErroCodeNum(1);
+		}
+		return SUCCESS;
+	}
+	
+	
+	public String getFromUser() {
+		return fromUser;
+	}
+	public int getErroCodeNum() {
+		return super.getErroCodeNum();
+	}
+
+	public void setFromUser(String fromUser) {
+		this.fromUser = fromUser;
+	}
+
+
+	public int getJb() {
+		return jb;
+	}
+
+
+	public void setJb(int jb) {
+		this.jb = jb;
+	}
+
+
 	public double getRation() {
 		return ration;
 	}

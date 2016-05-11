@@ -1,5 +1,6 @@
 package com.yq.user.action;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.user.bo.DatepayMore;
@@ -47,7 +48,7 @@ public class MyslAction extends ALDAdminPageActionSupport<DatepayMore> {
 			super.initPage(logService.getDatePayJfmrListPage(super.getUserName(), super.getToPage(), 15));
 		}
 		if(status==1){
-			if(!pa3.equals(gcuser.getPassword3())){
+			if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){
 				super.setErroCodeNum(1);
 			}
 			needJf = (int)(Math.ceil(jygj*txpay));

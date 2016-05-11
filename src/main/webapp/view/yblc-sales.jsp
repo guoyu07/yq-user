@@ -7,6 +7,7 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('您好，手机验证码不正确，请重新输入！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您好，您发布的一币数量不能小于100，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，商户账号不能卖出一币！');history.go(-1);</script></c:if>
 
 <c:if test="${erroCodeNum==-1}"><script language=javascript>alert('您的发布已经成功提交，发布成功后如有认购一币方向您下单后2小时内打到您的收款账号上！请您及时查收！');location.replace('epmcjl');</script></c:if>
 <!DOCTYPE html>
