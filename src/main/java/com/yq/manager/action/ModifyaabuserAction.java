@@ -2,6 +2,7 @@ package com.yq.manager.action;
 
 import java.util.Date;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
@@ -9,6 +10,7 @@ import com.yq.common.utils.MD5Security;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Sgxt;
 import com.yq.user.service.UserService;
 
 public class ModifyaabuserAction extends ALDAdminActionSupport {
@@ -94,7 +96,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		if(status==0){
 			 return SUCCESS;
 		 }
-		if(!oppass.equals("2016opdownp")){
+		if(Strings.isNullOrEmpty(oppass)||!oppass.equals("2016opdownp")){
 			super.setErroCodeNum(1);
 			return SUCCESS;
 		}
@@ -104,7 +106,59 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
-	
+ 
+	private Sgxt sgxt;
+	private int addAq;
+	private int addBq;
+	public String updateUserAqOrBq(){
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+		if(status==0){
+			 sgxt  = userService.getSgxt(user);
+			 return "updateaqorbq";
+		}
+		
+		if(!oppass.equals("2016opaqandbqp")){
+			super.setErroCodeNum(1);
+			return "updateaqorbq";
+		}
+		
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		adminService.updateUserAqOrBq(super.getUserName(), user, addAq, addBq, super.ip());
+		super.setErroCodeNum(2000);
+		sgxt  = userService.getSgxt(user);
+		return "updateaqorbq";
+	}
+
+	public Sgxt getSgxt() {
+		return sgxt;
+	}
+
+
+	public void setSgxt(Sgxt sgxt) {
+		this.sgxt = sgxt;
+	}
+
+
+	public int getAddAq() {
+		return addAq;
+	}
+
+
+	public void setAddAq(int addAq) {
+		this.addAq = addAq;
+	}
+
+
+	public int getAddBq() {
+		return addBq;
+	}
+
+
+	public void setAddBq(int addBq) {
+		this.addBq = addBq;
+	}
+
+
 	public String getPend() {
 		return pend;
 	}

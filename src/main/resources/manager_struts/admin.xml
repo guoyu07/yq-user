@@ -151,6 +151,10 @@
 		   <result name="success">
 		        modifyuser.jsp
 		    </result>
+		    <result name="updateaqorbq">
+		        updateaqorbq.jsp
+		    </result>
+		    
 		</action>
 		
 		<action name="usercj" class="com.yq.manager.action.UserCjAction">
@@ -603,6 +607,13 @@
 		<action name="updateuserpayok" class="com.yq.manager.action.ModifyaabuserAction" method="updateUserPayOk">
 		    <result name="success">
 		      /admin/updateuserpayok.jsp
+		    </result>
+		</action>
+		
+		
+		<action name="tools" class="com.yq.manager.action.ToolsAction">
+		    <result name="success" type="json">
+		      <param name="includeProperties">erroCodeNum</param>
 		    </result>
 		</action>
 	</package>

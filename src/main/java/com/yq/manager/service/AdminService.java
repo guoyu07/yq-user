@@ -2843,4 +2843,63 @@ public class AdminService {
 	public IPage<PointsChangeLog> getPointChangeLogPage(int pageIndex,int pageSize){
 		return pointsChangeLogDao.getPageList(pageIndex, pageSize, "order by id desc");
 	}
+	/**
+	 * 无日志添加用户上层的可结算区
+	 * @param userName
+	 * @param sjbCount
+	 * @return
+	 */
+	public void addAqOrBqForUserNoLog(String userName,int sjbCount,String desc){
+		String tag = "["+desc+"]要求处理的,添加用户["+userName+"]上层可计算区数量为["+sjbCount+"]"+"time=["+new Date()+"]==>";
+		//左区所有上级用户
+		List<ZuoMingxi> zList = zuoMingxiDao.getDownList(userName);
+		for(ZuoMingxi zm:zList){
+			//该用户当前层的总数量
+			int sumCountSjb = zuoMingxiDao.getSumSjb(zm.getTjuser(), zm.getCount());
+			Sgxt sg = sgxtDao.get(zm.getTjuser());
+			int canAdd = sg.getCfd()-sumCountSjb;
+			if(canAdd>0){
+				if(sgxtDao.updateAq(zm.getTjuser(), canAdd)){
+					LogSystem.log(tag+"给左区用户["+zm.getTjuser()+"]层为["+zm.getCount()+"]增加可结算数量"+canAdd+"成功。已加数量["+sumCountSjb+"],层封顶为"+sg.getCfd());
+				}else{
+					LogSystem.log(tag+"给左区用户["+zm.getTjuser()+"]层为["+zm.getCount()+"]增加可结算数量"+canAdd+"失败。已加数量["+sumCountSjb+"],层封顶为"+sg.getCfd());
+				}
+			}else{
+				LogSystem.log(tag+"左区用户["+zm.getTjuser()+"]层限制，该层["+zm.getCount()+"]已有["+sumCountSjb+"],封顶为["+sg.getCfd()+"]。不做添加");
+			}
+		}
+		//右区所有上级用户
+		List<YouMingxi> yList = youMingXiDao.getDownList(userName);
+		for(YouMingxi ym:yList){
+			int sumCountSjb = youMingXiDao.getSumSjb(ym.getTjuser(), ym.getCount());
+			Sgxt sg = sgxtDao.get(ym.getTjuser());
+			int canAdd = sg.getCfd()-sumCountSjb;
+			if(canAdd>0){
+				if(sgxtDao.updateAq(ym.getTjuser(), canAdd)){
+					LogSystem.log(tag+"给右区用户["+ym.getTjuser()+"]层为["+ym.getCount()+"]增加可结算数量"+canAdd+"成功。已加数量["+sumCountSjb+"],层封顶为"+sg.getCfd());
+				}else{
+					LogSystem.log(tag+"给右区用户["+ym.getTjuser()+"]层为["+ym.getCount()+"]增加可结算数量"+canAdd+"失败。已加数量["+sumCountSjb+"],层封顶为"+sg.getCfd());
+				}
+			}else{
+				LogSystem.log(tag+"右区用户["+ym.getTjuser()+"]层限制，该层["+ym.getCount()+"]已有["+sumCountSjb+"],封顶为["+sg.getCfd()+"]。不做添加");
+			}
+		}
+		LogSystem.log(tag+"处理结束");
+	}
+	/**
+	 * 更新用户
+	 * @param opUser
+	 * @param user
+	 * @param addAq
+	 * @param addBq
+	 * @param ip
+	 * @return
+	 */
+	public boolean updateUserAqOrBq(String opUser,String user,int addAq,int addBq,String ip){
+		String logTag = "["+opUser+"]修改用户AQ和BQ,IP=["+ip+"],date="+new Date()+"user=["+user+"],addAq=["+addAq+"],addBq=["+addBq+"]==>";
+		boolean result1 = sgxtDao.updateAq(user, addAq);
+		boolean result2 = sgxtDao.updateBq(user, addBq);
+		LogSystem.log(logTag+",aqResult=["+result1+"],bqResult=["+result2+"]");
+		return result1&result2; 
+	}
 }

@@ -3486,14 +3486,16 @@ public class UserService {
 		}else{
 			throw new ServiceException(3000, "用户不存在！");
 		}
-		if(callRemoteCharge(call,amount,ip,userName)){
-//			if(1==1){
-			this.changeYbCanFu(userName, -yb, "话费-"+call, 7, null);
-			fcxtDao.updatePayAdd();
-			gcuserDao.updateUserHfCz(gcuser.getName(), gcuser.getUserid(), DateUtils.addDay(new Date(), 30));
-		}else{
-			throw new ServiceException(100, "充话费失败！稍后再试");
+		
+		if(this.changeYb(userName, -yb, "话费-"+call, 7, null,0d)){
+			if(callRemoteCharge(call,amount,ip,userName)){
+				fcxtDao.updatePayAdd();
+				gcuserDao.updateUserHfCz(gcuser.getName(), gcuser.getUserid(), DateUtils.addDay(new Date(), 31));
+			}else{
+				throw new ServiceException(100, "充话费失败！稍后再试");
+			}
 		}
+	
 		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
 	}
 	
