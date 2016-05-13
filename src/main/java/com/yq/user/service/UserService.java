@@ -3314,6 +3314,11 @@ public class UserService {
 		if(pid==1&&list!=null){//给商家加购物券或
 			for(ShopBean shopBean:list){
 				
+				Gcuser shop = gcuserDao.getUser(shopBean.getShopper());
+				if(shop==null||shop.getJb()!=6){
+					throw new ServiceException(10, "商家不是商户--》"+shopBean.getShopper()); 
+				}
+				
 				int addScores = 0;
 				int addYb = 0;
                 if(shopBean.getScoresValue()>0){
@@ -3331,6 +3336,8 @@ public class UserService {
 					addYb = shopBean.getYbValue();
 					addScores = 0;
 				}
+                
+                
                 
                 if(addScores>0){
         			if(!this.changeScores(shopBean.getShopper(), addScores,ScoresChangeType.MALL_SALE,0,user,order)){
