@@ -2319,13 +2319,17 @@ public class AdminService {
 	/**
 	 * 批量处理积分买入
 	 */
-	public synchronized void dealJfMrOrderForChaiFen(){
-		LogSystem.info("开始成交所有求购积分的信息");
+	public synchronized void dealJfMrOrderForChaiFen(String date){
+		if(Strings.isNullOrEmpty(date)){
+			LogSystem.info("date为空，结束执行");
+			return;
+		}
+		LogSystem.info("开始成交所有求购积分的信息,date="+date);
 		final int pageSize = 500;
 		List<Gpjy> page = null;
 		List<Gcuser> listRandomUserName = gcuserDao.getCompanlyUser();
 		while(true){
-			page = gpjyDao.getMrPageForSystem(pageSize,"2016-04-28 00:00:00");
+			page = gpjyDao.getMrPageForSystem(pageSize,date);
 			if(page!=null&&page.size()>0){
 				LogSystem.info("处理第一页，有数量 ="+page.size()+",共[]页");
 				long sigleStartTime = System.currentTimeMillis();

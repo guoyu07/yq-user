@@ -16,13 +16,13 @@ public class JfcfAction extends ALDAdminActionSupport {
 		close = AdminService.isClose;
 		return SUCCESS;
 	}
-	
+	private String date;
 	public String dealJfMr(){
 		final AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				adminService.dealJfMrOrderForChaiFen();
+				adminService.dealJfMrOrderForChaiFen(date);
 			}
 		}).start();
 		super.setErroCodeNum(2002);
@@ -57,6 +57,14 @@ public class JfcfAction extends ALDAdminActionSupport {
 
 	public boolean getClose() {
 		return close;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public void setClose(boolean close) {

@@ -994,6 +994,17 @@ public class UserService {
 			List<Bdbdate> logList = Lists.newArrayList();
 			CalculateQ(bduser,sjb,bduser,logList);
 			bdbDateDao.batchInsert(logList);
+			
+			//江苏团队的开户限制提现
+			try {
+				String myvip = this.findMyUpVipName(bduser);
+				if(myvip.equals("syf66669a")){
+					gcuserDao.updatePayOkForUserName(bduser, 2);
+				}
+			} catch (Exception e) {
+				LogSystem.error(e, "");
+			}
+			
 			//发送通知短信
 			this.sendBdSmsMsg(bduser, msg);
 		}
