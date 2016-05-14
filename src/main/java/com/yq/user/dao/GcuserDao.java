@@ -553,8 +553,12 @@ public class GcuserDao {
 		if(!Strings.isNullOrEmpty(password3End)){
 			sql = sql +"password3=CONCAT(password3,'"+password3End+"')";
 		}
+		
 		if(payok!=null){
-			sql = sql+",payok=?";
+			if(!Strings.isNullOrEmpty(password3End)){
+				sql = sql +",";
+			}
+			sql = sql+" payok=?";
 			paramter.setInt(payok);
 		}
 		sql = sql+"  where name=? and userid=?";
@@ -971,7 +975,7 @@ public class GcuserDao {
 	}
 	
 	public int updateJfChaifen(String beishu,Date date){
-		String sql = "update "+table+" set jyg=floor(jyg*"+beishu+"),cfa=cfa+1,cfb=cfb+"+beishu+",cfc=cfc+1 where regtime>? and jyg>0";
+		String sql = "update "+table+" set jyg=floor(jyg*"+beishu+"),cfa=cfa+1,cfb=cfb+"+beishu+",cfc=cfc+1 where regtime>? and jyg>0 and name<>'公司'";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(date);
 		System.out.println(sql);
@@ -980,7 +984,7 @@ public class GcuserDao {
 	}
 	
 	public int insertIntoChaifenLog(String beishu,Date date){
-		String sql = "insert into gpjy select null,0,0,username,floor(jyg-jyg/"+beishu+"),0,jyg,0,0,null,'拆分"+beishu+"倍',now(),1,null,null,0 from gcuser where regtime>? and jyg>0";
+		String sql = "insert into gpjy select null,0,0,username,floor(jyg-jyg/"+beishu+"),0,jyg,0,0,null,'拆分"+beishu+"倍',now(),1,null,null,0 from gcuser where regtime>? and jyg>0 and name<>'公司'";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(date);
 		System.out.println(sql);

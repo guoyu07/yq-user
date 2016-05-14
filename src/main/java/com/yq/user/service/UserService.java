@@ -259,7 +259,7 @@ public class UserService {
     	userSession.invalidate(sessionId);
     	Gcuser beforUser = gcuserDao.getUser(userName);
     	Gcuser afterUser = gcuserDao.getUser(loginUserName);
-    	if(!beforUser.getUserid().equals(afterUser.getUserid())||!beforUser.getName().equals(afterUser.getName())){
+    	if(beforUser==null||afterUser==null||!beforUser.getUserid().equals(afterUser.getUserid())||!beforUser.getName().equals(afterUser.getName())){
     		throw new ServiceException(3000, "权限不足");
     	}
     	userSession.put(sessionId, loginUserName);
@@ -994,16 +994,6 @@ public class UserService {
 			List<Bdbdate> logList = Lists.newArrayList();
 			CalculateQ(bduser,sjb,bduser,logList);
 			bdbDateDao.batchInsert(logList);
-			
-			//江苏团队的开户限制提现
-			try {
-				String myvip = this.findMyUpVipName(bduser);
-				if(myvip.equals("syf66669a")){
-					gcuserDao.updatePayOkForUserName(bduser, 2);
-				}
-			} catch (Exception e) {
-				LogSystem.error(e, "");
-			}
 			
 			//发送通知短信
 			this.sendBdSmsMsg(bduser, msg);
@@ -2093,7 +2083,7 @@ public class UserService {
 		
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
-		if(!pa3.equals(gcuser.getPassword3())){
+		if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){
 			throw new ServiceException(3, "二级密码不正确！");
 		}
 		
@@ -3658,7 +3648,7 @@ public class UserService {
 		}
 	}
 	
-	private String findMyUpVipName(String userName) {
+	public String findMyUpVipName(String userName) {
 		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
 		if (sgxtBd != null) {
 			if (sgxtBd.getVip() == 1) {

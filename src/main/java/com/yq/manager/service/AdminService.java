@@ -2369,8 +2369,9 @@ public class AdminService {
 	/**
 	 * 积分拆分
 	 */
-	private final String beishu = "1.8";//拆分倍数
+	private final String beishu = "1.6";//拆分倍数
 	private final double dijia = 0.78;//底价
+	
 	public synchronized void JygChaifen(){
 		Fcxt fcxt = fcxtDao.get(10);
 		Date d = DateUtils.addDay(fcxt.getJsdate(), 3);
