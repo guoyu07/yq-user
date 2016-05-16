@@ -1772,11 +1772,17 @@ public class UserService {
 		if(!gcuser.getPassword3().equals(password3)){
 			throw new ServiceException(5, "二级密码不正确");
 		}
-		
-		if(gcuser.getPay()<600000){
-			throw new ServiceException(6, "VIP玩家一币账户余额必须大于或等于600000！");
+		if(gcuser.getVip()==2){
+			if(gcuser.getPay()<600000+amount){
+				throw new ServiceException(6, "VIP玩家一币账户余额必须大于或等于600000！");
+			}
+		}else if(gcuser.getVip()==3){
+			if(gcuser.getPay()<50000+amount){
+				throw new ServiceException(9, "小VIP玩家一币账户余额必须大于或等于50000！");
+			}
+		}else{
+			throw new ServiceException(10, "该功能vip才能使用！");
 		}
-		
 		if(gcuser.getPay()<amount){
 			throw new ServiceException(7, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
