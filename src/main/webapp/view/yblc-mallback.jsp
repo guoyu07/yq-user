@@ -67,6 +67,7 @@ function dbz_show(){
 							<select name="ration">
 							   <option value="0.9" selected>0.9</option>
 							   <option value="0.95">0.95</option>
+							   <option value="0">无折扣</option>
 							</select>
 							<p><label><input type="checkbox" name="C1" id="C1" onclick="dbz_show()" value="1" style="width:auto; vertical-align: middle;border:none;"> 退款订单号：</label><input type="text" name="dbz" id="dbz" size="20"></p>
 							<p><label></label><button class="but1" type=submit value="确 定 转 账" name=submit2  onClick="return confirm('提示：您确定了吗？')">确 定 转 账</button></p>

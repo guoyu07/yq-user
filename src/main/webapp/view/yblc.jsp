@@ -9,7 +9,7 @@ Gcuser yblcGcuser = userServiceyblc.getUserByUserName(userServiceyblc.isLogin(re
 <div class="system">
 					<h3>一币理财</h3>
 					<ul>
-						<%if(yblcGcuser.getUsername().equals("300fhk")){
+						<%if(yblcGcuser.getUsername().equals("300fhk")||yblcGcuser.getUsername().equals("zxz888")){
 							%><%="<li><a href=\"/glpay\">商城退款</a></li>"%>
 						<%}%>
 						<%if(yblcGcuser.getUsername().equals("zxz888")){
