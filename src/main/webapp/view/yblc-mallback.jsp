@@ -6,6 +6,7 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('您好，不能转给自己，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('您好，您转账一币不能小于零，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您好，您转账一币不能大于您剩余一币 ${gcuser.pay} ，谢谢！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('您好，权限不足！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('/datepay');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -59,7 +60,8 @@ function dbz_show(){
 						<p class="f-tk c-g">您的用户名是 <span class="c-r">${userName}</span></p>
 						<p class="z-b" style="padding-left:70px;">您的一币为：<b class="c-r">${gcuser.pay}</b></p>
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/glpay?status=1">
-							<p><label class="c-r">输入用户名：</label><input type="text" name="jzuser" size="15" maxlength="20"></p>
+						    <p><label class="c-r">转出用户名：</label><input type="text" name="fromUser" size="15" maxlength="20"></p>
+							<p><label class="c-r">转入用户名：</label><input type="text" name="jzuser" size="15" maxlength="20"></p>
 							<p><label>转账金额：</label><input style="width:100px;" type="text" name="jzpay" size="15"></p>
 							<p><label>操作密码：</label><input type="password" name="pa3" size="15"></p>
 							<p><label>转账原由：</label><input type="text" name="yy" size="20"></p>

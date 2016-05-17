@@ -15,6 +15,7 @@ public class Gcuser{
 	private String up;
 	private int jb;
 	private int sjb;
+	//0普通用户   2大vip  3小vip
 	private int vip;
 	private String vipname;
 	private int vipljcjb;
