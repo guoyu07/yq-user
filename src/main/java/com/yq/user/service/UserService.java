@@ -2777,6 +2777,12 @@ public class UserService {
 			throw new ServiceException(3000,"非法操作");
 		}
 		
+		Fcxt fcxt = managerService.getFcxtById(2);
+		
+		if(price<fcxt.getZdj()){
+			throw new ServiceException(4,"卖出单价不能小于"+fcxt.getZdj()+" ！");
+		}
+		
 		if(price>gpjy1.getPay()){
 			throw new ServiceException(2,"修改卖出单价不能大于原来的定价");
 		}

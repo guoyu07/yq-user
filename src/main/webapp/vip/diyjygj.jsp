@@ -3,6 +3,7 @@
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('二级密码不正确!');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('修改卖出单价不能大于原来的定价！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('价格不能低于最低价！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('修改卖出单价成功！');location.replace('/mcsl');</script></c:if>
 
 <head>
@@ -12,7 +13,7 @@
 <script language="JavaScript"> 
  function checkdate()  {  
   if (Form.jygj.value=="") {      alert("请输入需要卖出的单价!");      return false;    } 
-  if (Form.jygj.value<0.77) {      alert("卖出单价不能小于 0.77 !");      return false;    }
+  if (Form.jygj.value<0.78) {      alert("卖出单价不能小于 0.77 !");      return false;    }
   if (Form.jygj.value>${gpjy.pay}) {      alert("修改卖出单价不能大于 ${gpjy.pay} 哦!");      return false;    } 
     if (!chkinteger1(Form.jygj.value)){
 	alert('修改卖出单价只能为数字!');
