@@ -13,6 +13,7 @@ import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.manager.bo.W10Bean;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.TxpayIndex;
 
 public class TxPayDao {
 
@@ -21,11 +22,13 @@ public class TxPayDao {
     
     private final String table = "txpay";
     
-    public boolean add(Txpay txpay){
+    public int add(Txpay txpay){
+    	Date now = new Date();
     	if(txpay.getPaytime()==null){
-    		txpay.setPaytime(new Date());
+    		txpay.setPaytime(now);
     	}
-    	return jdbc.insert(txpay)>0;
+    	int payid = jdbc.insertBackKeys(txpay);
+    	return payid;
     }
     
     public Txpay getTxPayByDfuser(String dfuser,int ep){
@@ -50,9 +53,11 @@ public class TxPayDao {
     	return this.jdbc.get(sql, Txpay.class, null);
     }
     
-    public IPage<Txpay> getPageList(int pageIndex,int pageSize){
-    	String sql="select * from txpay where payonoff = '尚未转账' and ep=0 and txvip=0 order by payid asc" ;
-    	return jdbc.getListPage(sql, Txpay.class, null, pageSize, pageIndex);
+    public List<Txpay> getMarkList(int pageSize){
+//    	String sql="select * from txpay where payonoff = '尚未转账' and ep=0 and txvip=0 order by payid asc" ;
+//    	return jdbc.getListPage(sql, Txpay.class, null, pageSize, pageIndex);
+    	String sql = "select * from txpay where payid in (select t.payid from (select payid from txpay_index where ep=0 and txvip=0 order by payid asc limit "+pageSize+")t)";
+    	return jdbc.getList(sql, Txpay.class);
     }
     
     public double getSumPayNum(){
@@ -86,16 +91,38 @@ public class TxPayDao {
     	String sql = "select * from "+table+" where payid=? limit 1";
     	return this.jdbc.get(sql, Txpay.class, SqlParameter.Instance().withInt(payId));
     } 
-    
+    /**
+     * 取消一币卖出
+     * @param payId
+     * @param ep
+     * @param rgdate
+     * @param payonoff
+     * @param zftime
+     * @param dfuser
+     * @param clip
+     * @return
+     */
     public boolean updateByPayid(int payId,int ep,Date rgdate,String payonoff,Date zftime,String dfuser,String clip){
     	String sql = "update "+table+" set ep=?,rgdate=?,payonoff=?,zftime=?,dfuser=?,clip=? where payid=? limit 1";
-    	return this.jdbc.update(sql, SqlParameter.Instance().withInt(ep).withObject(rgdate).withString(payonoff).withObject(zftime).withString(dfuser).withString(clip).withInt(payId))>0;
+    	boolean result = this.jdbc.update(sql, SqlParameter.Instance().withInt(ep).withObject(rgdate).withString(payonoff).withObject(zftime).withString(dfuser).withString(clip).withInt(payId))>0;
+    	return result;
     }
     
+
+    /**
+     * 购买一币
+     * @param payId
+     * @param rgdate
+     * @param userName
+     * @param payNum
+     * @return
+     */
     public boolean updateEpToBeSalesPre(int payId,Date rgdate,String userName,int payNum){
     	String sql = "update "+table+" set ep=1,rgdate=?,dfuser=?,kjygid=? where payid=? and ep=0 and kjygid=0 and zftime is null limit 1";
-    	return this.jdbc.update(sql, SqlParameter.Instance().withObject(rgdate).withString(userName).withInt(payNum).withInt(payId))>0;
+    	boolean result = this.jdbc.update(sql, SqlParameter.Instance().withObject(rgdate).withString(userName).withInt(payNum).withInt(payId))>0;
+    	return result;
     }
+    
     
     public boolean updateEpToHavePay(int payId,Date rgdate){
     	String sql = "update "+table+" set ep=2,rgdate=? where payid=? and ep=1 limit 1";
@@ -177,5 +204,43 @@ public class TxPayDao {
     public int getUserSumPayNum(String userName){
     	String sql = "select sum(paynum) from txpay where payusername =?";
     	return this.jdbc.getInt(sql, SqlParameter.Instance().withString(userName));
+    }
+    /**
+     * 删除索引
+     * @param payId
+     * @return
+     */
+    public boolean deleteIndex(int payId){
+    	String indexSql = "delete from txpay_index  where payid=? limit 1";
+		return jdbc.update(indexSql, SqlParameter.Instance().withInt(payId))>0;
+    }
+    /**
+     * 更新索引的ep
+     * @param payId
+     * @param ep
+     * @return
+     */
+    public boolean updateIndexEp(int payId,int ep){
+    	String sql = "update txpay_index set ep=? where payid=? limit 1";
+    	return jdbc.update(sql, SqlParameter.Instance().withInt(ep).withInt(payId))>0;
+    }
+    
+    /**
+     * 更新索引的ep
+     * @param payId
+     * @param ep
+     * @return
+     */
+    public boolean updateIndexTxvip(int payId,int txvip){
+    	String sql = "update txpay_index set txvip=? where payid=? limit 1";
+    	return jdbc.update(sql, SqlParameter.Instance().withInt(txvip).withInt(payId))>0;
+    }
+    /**
+     * 添加索引
+     * @param index
+     * @return
+     */
+    public boolean addTxIndex(TxpayIndex index){
+            return jdbc.insert(index)>0;	
     }
 }

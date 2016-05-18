@@ -49,6 +49,7 @@ import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.ShopBean;
 import com.yq.user.bo.Txifok;
 import com.yq.user.bo.Txpay;
+import com.yq.user.bo.TxpayIndex;
 import com.yq.user.bo.UserExtinfo;
 import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.Vipcjgl;
@@ -1620,7 +1621,15 @@ public class UserService {
 //		}
 		
 		txpay2.setTxip(ip);
-		txPayDao.add(txpay2);
+		int payid = txPayDao.add(txpay2);
+		
+		//添加索引
+		TxpayIndex index = new TxpayIndex();
+		index.setPayid(payid);
+		index.setEp(txpay.getEp());
+		index.setTxvip(txpay.getTxvip());
+	    index.setCreatedTime(new Date());
+		txPayDao.addTxIndex(index);
 		
 		
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
@@ -1827,8 +1836,8 @@ public class UserService {
 	 * @param pageSize
 	 * @return
 	 */
-	public IPage<Txpay> getTxpayPage(int pageIndex,int pageSize){
-		return txPayDao.getPageList(pageIndex, pageSize);
+	public List<Txpay> getMarkList(int pageSize){
+		return txPayDao.getMarkList(pageSize);
 	}
 	/**
 	 * 一币卖出明细
@@ -1884,6 +1893,9 @@ public class UserService {
 			if(!txPayDao.updateByPayid(payid, 0, new Date(), "已经转账", new Date(), "撤销", ip)){
 				throw new ServiceException(3000, "未知错误");
 			}
+			//删除索引
+			txPayDao.deleteIndex(payid);
+			
 			if(!gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0)){
 				throw new ServiceException(3000, "未知错误");
 			}
@@ -1938,6 +1950,8 @@ public class UserService {
 			throw new ServiceException(7, "该一币交易进行中或已经由它人交易成功了，不能重复，请选择其它交易！");
 		}
 		
+		txPayDao.updateIndexEp(payId, 1);
+		
 //		if(!gcuserDao.updateJyg(userName, txpay.getPaynum())){
 //			throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
 //		}
@@ -1980,6 +1994,7 @@ public class UserService {
 			if(!txPayDao.updateEpToHavePay(payId, DateUtils.addDay(new Date(), 2))){
 				throw new ServiceException(1, "认购方出错，请检查输入是否正确！");
 			}
+			txPayDao.updateIndexEp(payId, 2);
 		}
 		//发送短信通知
 		sendYbSaleSmsMsg(txpay.getPayusername(), 1);
@@ -2014,6 +2029,8 @@ public class UserService {
 		if(!txPayDao.updateEpToHaveReceive(payId, ip)){
 			throw new ServiceException(8888, "订单异常！");
 		}
+		//删除索引
+		txPayDao.deleteIndex(payId);
 		//给买方加一币
 		gcuserDao.addYbForBuyInMark(txpay.getDfuser(), txpay.getPaynum());
 		
@@ -2048,6 +2065,8 @@ public class UserService {
 		if(!txPayDao.updateEpToHaveReceiveBySytstem(payId, "system")){
 			throw new ServiceException(8888, "订单异常！");
 		}
+		//删除索引
+		txPayDao.deleteIndex(payId);
 		//给买方加一币
 		gcuserDao.addYbForBuyInMark(txpay.getDfuser(), txpay.getPaynum());
 		
@@ -3575,6 +3594,7 @@ public class UserService {
 					}
 					
 					txPayDao.resetOrder(txpay.getPayid());
+					txPayDao.updateIndexEp(txpay.getPayid(), 0);
 					sendYbSaleSmsMsg(txpay.getPayusername(), 2);
 //					gpjyDao.updateGpjy(txpay.getDfuser(), txpay.getPayid()+"", "超时未付款-并扣一诚信星-余"+(user.getCxt()-1), gpjy.getDfuser()+"-"+txpay.getPayusername(), new Date());
 				} catch (Exception e) {

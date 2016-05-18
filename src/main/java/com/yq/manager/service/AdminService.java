@@ -1657,6 +1657,7 @@ public class AdminService {
 	
 	public void syusers(int payId,int op){
 		txpayDao.updateTxvip(payId, op);
+		txpayDao.updateIndexTxvip(payId, op);
 	}
 	/**
 	 * 查询tduser
