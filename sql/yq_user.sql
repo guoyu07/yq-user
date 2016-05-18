@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-05-14 11:50:44
+Date: 2016-05-18 16:02:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -186,7 +186,7 @@ CREATE TABLE `dateip` (
   `dlip` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `dldate` (`dldate`)
-) ENGINE=InnoDB AUTO_INCREMENT=1126288 DEFAULT CHARSET=utf8 COMMENT='用户操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=1126292 DEFAULT CHARSET=utf8 COMMENT='用户操作日志表';
 
 -- ----------------------------
 -- Table structure for datepay
@@ -213,7 +213,7 @@ CREATE TABLE `datepay` (
   KEY `username` (`username`),
   KEY `newbz` (`newbz`),
   KEY `abdate` (`abdate`)
-) ENGINE=InnoDB AUTO_INCREMENT=2750808 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2752222 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for dgag
@@ -515,7 +515,7 @@ CREATE TABLE `gpjy` (
   KEY `username` (`username`),
   KEY `jyid` (`jyid`),
   KEY `pay` (`pay`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3818548 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3819967 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for gpjy_index_mc
@@ -1191,7 +1191,19 @@ CREATE TABLE `txpay` (
   PRIMARY KEY (`payid`),
   KEY `dfuser` (`dfuser`) USING BTREE,
   KEY `payusername` (`payusername`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=65271 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65272 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for txpay_index
+-- ----------------------------
+DROP TABLE IF EXISTS `txpay_index`;
+CREATE TABLE `txpay_index` (
+  `payid` int(11) NOT NULL,
+  `ep` int(11) NOT NULL DEFAULT '0',
+  `txvip` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`payid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user_daily_gain_log
@@ -1273,7 +1285,7 @@ CREATE TABLE `user_vip_log` (
   `commit_param` varchar(1024) DEFAULT NULL COMMENT '提交的参数',
   `created_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for vipcjgl
@@ -1316,8 +1328,7 @@ CREATE TABLE `you_mingxi` (
   `sjb` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `tjuser` (`tjuser`),
-  KEY `down` (`down`)
+  KEY `tjuser,count,down` (`tjuser`,`down`,`count`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=791748 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1331,8 +1342,7 @@ CREATE TABLE `zuo_mingxi` (
   `sjb` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `tjuser` (`tjuser`),
-  KEY `down` (`down`)
+  KEY `tjuser,count,down` (`tjuser`,`down`,`count`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1765797 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
