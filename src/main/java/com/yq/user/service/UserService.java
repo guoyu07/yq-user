@@ -1765,6 +1765,11 @@ public class UserService {
 			if(zuoMingxiDao.get(fromUser, toUser)==null&&youMingXiDao.get(fromUser, toUser)==null){
 				throw new ServiceException(4, "只能转给自己团队的并已进入双区的玩家！");
 			}
+			
+			String vip = this.findMyUpVipName(toUser);
+			if(!vip.equals(fromUser)){
+				throw new ServiceException(11, "该玩家的上级vip不是您！您不能转给他！");
+			}
 		}
 		
 		Gcuser gcuser = gcuserDao.getUser(fromUser);
