@@ -11,6 +11,9 @@
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('VIP玩家一币账户余额必须大于或等于5w！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('非vip不能操作该功能！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('该玩家的上级vip不是您！您不能转给他！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==12}"><script language=javascript>alert('该玩家是大vip！您不能转给他！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==13}"><script language=javascript>alert('您只是小vip！不能转给您团队下的小vip！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==14}"><script language=javascript>alert('被转对象vip标识错误，请截图后联系管理员！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('datepay');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
