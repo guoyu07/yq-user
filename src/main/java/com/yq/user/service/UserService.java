@@ -1626,8 +1626,8 @@ public class UserService {
 		//添加索引
 		TxpayIndex index = new TxpayIndex();
 		index.setPayid(payid);
-		index.setEp(txpay.getEp());
-		index.setTxvip(txpay.getTxvip());
+		index.setEp(txpay2.getEp());
+		index.setTxvip(txpay2.getTxvip());
 	    index.setCreatedTime(new Date());
 		txPayDao.addTxIndex(index);
 		
@@ -1769,14 +1769,20 @@ public class UserService {
 		if(fromUser.equals(toUser)){
 			throw new ServiceException(3, "您好，不能转给自己，谢谢！");
 		}
+		Gcuser toGcUser = gcuserDao.getUser(toUser);
 		
-		if(!fromUser.equals("300fhk")){
+		if(toGcUser==null){
+			throw new ServiceException(8, "转入的用户名不存在，请检查输入是否正确！");
+		}
+		
+		if(!fromUser.equals("300fhk")&&!fromUser.equals("xtgc001")){
 			if(zuoMingxiDao.get(fromUser, toUser)==null&&youMingXiDao.get(fromUser, toUser)==null){
 				throw new ServiceException(4, "只能转给自己团队的并已进入双区的玩家！");
 			}
 			
 			String vip = this.findMyUpVipName(toUser);
-			if(!vip.equals(fromUser)){
+			//被转者如果为vip 可以转
+			if(toGcUser.getVip()!=0&&!vip.equals(fromUser)){
 				throw new ServiceException(11, "该玩家的上级vip不是您！您不能转给他！");
 			}
 		}
@@ -1801,11 +1807,7 @@ public class UserService {
 			throw new ServiceException(7, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		Gcuser toGcUser = gcuserDao.getUser(toUser);
-		
-		if(toGcUser==null){
-			throw new ServiceException(8, "转入的用户名不存在，请检查输入是否正确！");
-		}
+
 		
 		if(!gcuserDao.transferReduceYb(fromUser, amount)){
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");

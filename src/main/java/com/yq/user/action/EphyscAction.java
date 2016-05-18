@@ -44,7 +44,7 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 			return SUCCESS;
 		}
 		super.setDataList(userService.getMarkList(10));
-		LogSystem.warn("[进入市场]["+super.getUserName()+"]["+super.ip()+"]");
+		LogSystem.warn("[进入市场]["+super.getUserName()+"]["+super.ip()+"],数据数量有"+(super.getDataList()==null?0:super.getDataList().size()));
 		return SUCCESS;
 	}
 
