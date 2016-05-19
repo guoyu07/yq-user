@@ -6,6 +6,8 @@ import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.base.Strings;
+
 
 public class IDCardUtils {
 	 /*********************************** 身份证验证开始 ****************************************/
@@ -30,6 +32,9 @@ public class IDCardUtils {
      */
     @SuppressWarnings("rawtypes")
 	public static String IDCardValidate(String IDStr) {
+    	if(Strings.isNullOrEmpty(IDStr)){
+    		return "不能为空";
+    	}
     	IDStr = IDStr.toLowerCase();
         String errorInfo = "";// 记录错误信息
         String[] ValCodeArr = { "1", "0", "x", "9", "8", "7", "6", "5", "4",

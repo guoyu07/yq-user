@@ -69,4 +69,8 @@
        <bean id="checkCxtScheduler" class="com.yq.user.scheduler.CxtCheckScheduler">
           <property name="cronExpression" value="0 0 2,5,8,11,14,17,20,23 * * ?"></property>
        </bean>
+       <!-- 每日 1分钟执行一次重试发送-->
+       <bean id="sendCallBackScheduler" class="com.yq.user.scheduler.SendChargeMsgScheduler">
+          <property name="cronExpression" value="0 0/1 * * * ?"></property>
+       </bean>
 </beans>

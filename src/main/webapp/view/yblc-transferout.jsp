@@ -26,7 +26,6 @@
 function checkdate()  {  
 	  if (Form.jzpay.value=="") {      alert("请填写您要转账的一币!");      return false;    } 
 	  if (Form.jzpay.value<99) {      alert("转账的一币必须大于等于100!");      return false;    } 
-	  if (Form.jzpay.value>50000) {      alert("每次转账的一币不能超过50000!");      return false;    } 
 	  if (Form.jzpay.value>${gcuser.pay})    {   alert("您的转账一币不能超过您剩余的一币${gcuser.pay}");      return false;    } 
 	  if (Form.jzuser.value=="") {      alert("请填写您要转入的用户名!");      return false;    }
 	  if (Form.jzuser.value=="${gcuser.username}") {      alert("不能转给自己!");      return false;    }

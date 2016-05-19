@@ -8,9 +8,13 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.MD5Security;
+import com.yq.common.utils.UrlRequestUtils;
+import com.yq.common.utils.UrlRequestUtils.Mode;
+import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.ShopBean;
+import com.yq.user.scheduler.SendChargeMsgScheduler;
 import com.yq.user.service.UserService;
 
 public class YbShopPayAction extends ALDAdminActionSupport {
@@ -182,6 +186,8 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	 * @return
 	 */
 	private int day;
+	private static final String KYPW_URL = "http://www.kypwb.com/interface/YiBiPayReturnNotify?act=payment&op=returnyibi&paycode=success";
+	private static final String SUCCESS = "ok";
 	public String kypwe(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		ybsl = (int)(gwpay*1.02);
@@ -211,13 +217,38 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 //			}
 			userService.kypwe(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode);
 			sn=MD5Security.md5_16(order+"$#85546875#@$#%"+gwpay);
+			
 			if(pid==1){
 				super.setErroCodeNum(2000);
+				callBackToServer();
 			}else if(pid==2){
 				super.setErroCodeNum(2001);
+				callBackToServer();
 			}
 		}
 		return SUCCESS;
+	}
+	/**
+	 * 回调机票服务器
+	 */
+	private void callBackToServer() {
+		String callBackUrl = "";
+		try {
+			String payAmount = new java.text.DecimalFormat("#.00").format(gwpay);
+			callBackUrl = KYPW_URL + "&sn=" + sn + "&payamount=" + payAmount + "&order_sn=" + order + "&payuser="
+					+ user + "&pid=" + pid;
+			String result = UrlRequestUtils.execute(callBackUrl, null, Mode.GET);
+			LogSystem.log("机票支付回调请求地址:" + callBackUrl + ",result=" + result);
+			if (SUCCESS.equals(result)) {
+				LogSystem.info("成功！");
+			}else{
+				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS));
+			}
+		} catch (Exception e) {
+			LogSystem.error(e, "机票回调失败！");
+			//放到队列中进行处理
+			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS));
+		}
 	}
 	
 	

@@ -14,7 +14,6 @@ import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
@@ -143,7 +142,6 @@ public class UserService {
 	private UserExtinfoDao userExtinfoDao;
 	@Autowired
 	private UserScoresLogDao userScoresLogDao;
-//    Map<String,String> userSession = new ConcurrentHashMap<String,String>();
     
   //用户id与UserMapper的映射map
   	private Cache<String,String> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(102400).build();
@@ -1760,9 +1758,11 @@ public class UserService {
 	
 	@Transactional
 	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount){
-        if(amount<0 || amount==0 || amount >100000){
-        	throw new ServiceException(1,"您好，您转账一币不能小于零或超过100000，谢谢！");
-        }
+		if(!fromUser.equals("300fhk")&&!fromUser.equals("xtgc001")){//公司账号转不限制金额
+	        if(amount<0 || amount==0 || amount >50000){
+	        	throw new ServiceException(1,"您好，您转账一币不能小于零或超过50000，谢谢！");
+	        }
+		}
 		if(amount%100!=0){
 			throw new ServiceException(2,"转账必须是100的倍整数如：100，200，300，400，500，1000，5000，请检查输入是否正确！");
 		}
@@ -2713,6 +2713,9 @@ public class UserService {
 			if(DateUtils.getIntervalDays(sgxt.getBddate(), new Date())==0){
 				throw new ServiceException(3,"请于开户后第二天再进行卖出操作，谢谢！");
 			}
+		}
+		if(Strings.isNullOrEmpty(passwrod3)){
+			throw new ServiceException(4,"二级密码不正确");
 		}
 		if(!passwrod3.equals("-1")&&!passwrod3.equals(gcuser.getPassword3())){
 			throw new ServiceException(4,"二级密码不正确");
