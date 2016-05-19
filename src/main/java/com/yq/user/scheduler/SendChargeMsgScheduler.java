@@ -32,7 +32,7 @@ public class SendChargeMsgScheduler extends SchedulerEntry {
             		   callBackMsg.remove(entry.getKey());
             	   }else{
             		   entry.getValue().increaseRetryTimes();
-            		   if(entry.getValue().getRetryTimes()>2){
+            		   if(entry.getValue().getRetryTimes()>10){
             			   LogSystem.log("重试超过十次，丢弃==>"+entry.getValue());
             			   callBackMsg.remove(entry.getKey());
             		   }
