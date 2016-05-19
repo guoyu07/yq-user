@@ -187,7 +187,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	 */
 	private int day;
 	private static final String KYPW_URL = "http://www.kypwb.com/interface/YiBiPayReturnNotify?act=payment&op=returnyibi&paycode=success";
-	private static final String SUCCESS = "ok";
+	private static final String SUCCESS_TAG = "ok";
 	public String kypwe(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		ybsl = (int)(gwpay*1.02);
@@ -239,15 +239,15 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 					+ user + "&pid=" + pid;
 			String result = UrlRequestUtils.execute(callBackUrl, null, Mode.GET);
 			LogSystem.log("机票支付回调请求地址:" + callBackUrl + ",result=" + result);
-			if (SUCCESS.equals(result)) {
+			if (SUCCESS_TAG.equals(result)) {
 				LogSystem.info("成功！");
 			}else{
-				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS));
+				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS_TAG));
 			}
 		} catch (Exception e) {
 			LogSystem.error(e, "机票回调失败！");
 			//放到队列中进行处理
-			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS));
+			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS_TAG));
 		}
 	}
 	

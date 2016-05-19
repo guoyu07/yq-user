@@ -19,7 +19,6 @@
  function checkdate(){  
   if (Form.jzpay.value=="") {      alert("请填写您要转账的一币!");      return false;    } 
   if (Form.jzpay.value<0) {      alert("转账的一币必须大于0!");      return false;    } 
-  if (Form.jzpay.value>${gcuser.pay})    {   alert("您的转账一币不能超过您剩余的一币 ${gcuser.pay}");      return false;    } 
   if (Form.jzuser.value=="") {      alert("请填写您要转入的用户名!");      return false;    }
   if (Form.adgl.value=="") {      alert("请写入操作密码!");      return false;    }
   if (Form.dbz.value=="" && document.getElementById("C1").checked) { alert("请写入商城订单号，必须为数字!"); return false;  }

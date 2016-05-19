@@ -2642,15 +2642,14 @@ public class UserService {
 	
 	public List<Gpjy> getMrPageList(int pageSize){
 		List<Gpjy> result =  gpjyDao.getMrPage(pageSize);
-		//DEBUG
-		if(result==null){
-			LogSystem.warn("求购信息的列表为null");
-		}
-		
-		if(result!=null&&result.size()==0){
-			LogSystem.warn("求购信息的列表不为Null,但其数量为0");
-		}
-		
+//		//DEBUG
+//		if(result==null){
+//			LogSystem.warn("求购信息的列表为null");
+//		}
+//		
+//		if(result!=null&&result.size()==0){
+//			LogSystem.warn("求购信息的列表不为Null,但其数量为0");
+//		}
 		return result;
 	}
 	
