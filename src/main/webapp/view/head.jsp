@@ -6,7 +6,7 @@
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
 	<script src="/scripts/sms.js"></script>
-	<script src="http://s11.cnzz.com/z_stat.php?id=1259177711&web_id=1259177711" language="JavaScript"></script>
+	<span style="display:none"><script src="http://s11.cnzz.com/z_stat.php?id=1259177711&web_id=1259177711" language="JavaScript"></script></span>
 	<%
   UserService userServiceHead = ServiceCacheFactory.getServiceCache().getService(UserService.class);
   Gcuser gcuserHead = userServiceHead.getUserByUserName(userServiceHead.isLogin(request.getSession().getId()));

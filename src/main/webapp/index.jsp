@@ -122,6 +122,6 @@
 		</div>
 		</div>
 	</div>
-	<script src="http://s11.cnzz.com/z_stat.php?id=1259177711&web_id=1259177711" language="JavaScript"></script>
+<span style="display:none"><script src="http://s11.cnzz.com/z_stat.php?id=1259177711&web_id=1259177711" language="JavaScript"></script></span>
 </body>
 </html>
