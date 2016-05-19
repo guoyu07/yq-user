@@ -1,6 +1,5 @@
 package com.yq.cw.action;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import com.yq.common.utils.DateUtils;
 import com.yq.cw.bean.VipCjbLogBean;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.service.CwService;
-import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -33,14 +31,8 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 	private VipSearchLogBean bean;
 	
 	public String execute() {
-		if (super.getUserName().equals("cwadmin")) {
-			AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-			vipList = adminService.getAllVipName();
-		} else {
-			vipList = new ArrayList<String>();
-			vipList.add(super.getUserName());
-		}
-		
+		CwService cwService = ServiceCacheFactory.getService(CwService.class);
+		vipList = cwService.getMyDownVip(super.getUserName());
 		if (status == 1) {
 			if(Strings.isNullOrEmpty(startTime)){
 				startTime = DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD);
@@ -60,14 +52,8 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 	
 	private VipCjbLogBean cjbBean;
 	public String vipcjbLog(){
-		if (super.getUserName().equals("cwadmin")) {
-			AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-			vipList = adminService.getAllVipName();
-		} else {
-			vipList = new ArrayList<String>();
-			vipList.add(super.getUserName());
-		}
-		
+		CwService cwService = ServiceCacheFactory.getService(CwService.class);
+		vipList = cwService.getMyDownVip(super.getUserName());
 		if (status == 1) {
 			if(Strings.isNullOrEmpty(startTime)){
 				startTime = DateUtils.DateToString(new Date(), DateStyle.YYYY_MM_DD);

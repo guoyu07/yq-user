@@ -1839,21 +1839,25 @@ public class UserService {
 		
 
 		
-		if(!gcuserDao.transferReduceYb(fromUser, amount)){
+//		if(!gcuserDao.transferReduceYb(fromUser, amount)){
+//			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+//		}
+//		Datepay datePay = new Datepay();
+//		datePay.setUsername(fromUser);
+//		datePay.setJc(amount);
+//		datePay.setPay(gcuser.getPay()-amount);
+//		datePay.setJydb(gcuser.getJydb());
+//		datePay.setRegid("转给-"+toUser);
+//		datePay.setNewbz(0);
+//		datePay.setAbdate(new Date());
+//		
+//		datePay.setRation(0.95);
+//		
+//		logService.addDatePay(datePay);
+		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 0, null, 0.95)){
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
-		Datepay datePay = new Datepay();
-		datePay.setUsername(fromUser);
-		datePay.setJc(amount);
-		datePay.setPay(gcuser.getPay()-amount);
-		datePay.setJydb(gcuser.getJydb());
-		datePay.setRegid("转给-"+toUser);
-		datePay.setNewbz(0);
-		datePay.setAbdate(new Date());
 		
-		datePay.setRation(0.95);
-		
-		logService.addDatePay(datePay);
 		
 		if(!this.changeYb(toUser, amount, "收到服务中心"+fromUser.substring(0, 2)+"***转入", 0, null,0.9)){
 			throw new ServiceException(3000, "未知错误！");
@@ -3365,6 +3369,11 @@ public class UserService {
 			throw new ServiceException(7, "手机验证码不正确");
 		}
 		if(scores>0){
+			//判断是否重复处理订单
+			UserScoresLog log = userScoresLogDao.get(new SqlParamBean("user_name", user),new SqlParamBean("and", "param", order));
+			if(log!=null){
+				throw new ServiceException(1, "订单重复提交！order="+order+",username="+user);
+			}
 			if(!this.changeScores(user, -scores,ScoresChangeType.MALL_BUY,0,"0",order)){
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
 			}

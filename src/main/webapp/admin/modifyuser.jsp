@@ -149,7 +149,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
       </tr>
       <tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">提现限制：</font></td>
-        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="payok" value="${gcuser.payok}" size="15"> 机票限制：<input type="text" name="pwdate" size="12" value="${gcuser.pwdate}"></span></font></td>
+        <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=6 name="payok" value="${gcuser.payok}" size="15"><input type="checkbox" maxlength=6 name="updateAllDown" value="ok" />（勾选则更新其下所有同名账号的提现限制） 机票限制：<input type="text" name="pwdate" size="12" value="${gcuser.pwdate}"></span></font></td>
       </tr>
 		<tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">诚信指数：</font></td>

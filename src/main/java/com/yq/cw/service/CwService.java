@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.collect.Lists;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
@@ -19,6 +20,7 @@ import com.yq.cw.bean.VipCjglForDc;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.bo.CwUser;
 import com.yq.cw.dao.CwUserDao;
+import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Vipcjgl;
@@ -31,6 +33,7 @@ public class CwService {
 	
   	private Cache<String,String> cwUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
 
+  	private static final String ADMIN = "cwadmin";
   	@Autowired
   	private CwUserDao cwUserDao;
   	@Autowired
@@ -41,6 +44,8 @@ public class CwService {
   	private DatePayDao datePayDao;
   	@Autowired
   	private VipcjglDao vipcjglDao;
+  	@Autowired
+  	private AdminService adminService;
   	
   	public String getLoginCwUserName(String sessionId){
 		return cwUserMap.getIfPresent(sessionId);
@@ -248,5 +253,28 @@ public class CwService {
 	
 	public List<VipCjglForDc> getVipcjglListForDcAsc(String userName,String startTime,String endTime){
 		return vipcjglDao.getVipcjglListForDcAsc(userName, startTime, endTime);
+	}
+	/**
+	 * 获取某个用户下所有的vip
+	 * @param userName
+	 * @return
+	 */
+	public List<String> getMyDownVip(String userName){
+		List<String> vipList = Lists.newArrayList();
+		if (userName.equals(ADMIN)) {
+			vipList = adminService.getAllVipName();
+		} else {
+			Gcuser gcuser = gcuserDao.getUser(userName);
+			if(gcuser!=null){
+				vipList.add(userName);
+				if(gcuser.getVip()==2){//大vip 查询其下的小vip
+					List<Gcuser> result = gcuserDao.getAllDownVip(userName);
+					for(Gcuser gc :result){
+						vipList.add(gc.getUsername());
+					}
+				}
+			}
+		}
+		return vipList;
 	}
 }

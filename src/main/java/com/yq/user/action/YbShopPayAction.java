@@ -118,7 +118,6 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				}
 				 
 				 List<ShopBean> list = userService.countPay(ybstr);
-				 int yb = 0;
 				 gwpay = 0;
 				 for(ShopBean shop:list){ 
 					 gwpay += shop.getYbValue();

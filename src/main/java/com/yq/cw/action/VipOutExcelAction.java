@@ -28,14 +28,8 @@ public class VipOutExcelAction extends ALDAdminActionSupport{
 	private int tp;
 	
 	public String execute(){
-		if (super.getUserName().equals("cwadmin")) {
-			AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-			vipList = adminService.getAllVipName();
-		} else {
-			vipList = new ArrayList<String>();
-			vipList.add(super.getUserName());
-		}
-		
+		CwService cwService = ServiceCacheFactory.getService(CwService.class);
+		vipList = cwService.getMyDownVip(super.getUserName());
 		if(tp==1){
 			return outExcelForDatePay();
 		}
@@ -43,7 +37,6 @@ public class VipOutExcelAction extends ALDAdminActionSupport{
 		if(tp==2){
 			return outExcelForVipCjb();
 		}
-		
 		return SUCCESS;
 	}
 	

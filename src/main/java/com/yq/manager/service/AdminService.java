@@ -383,7 +383,7 @@ public class AdminService {
 	 * @return
 	 */
 	@Transactional
-	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip){
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Date date = null;
 		if(!Strings.isNullOrEmpty(pwdate)){
@@ -419,9 +419,16 @@ public class AdminService {
 			tduser.setGai(1);
 			tduserDao.add(tduser);
 		}
+		
 		if(md5Password!=null){
 			dateipDao.addDateIpLog("admin", "修改密码sy-"+userName, ip);
 		}
+		//更新其下所有同名用户的信息
+		if("ok".equals(updateDownPayOk)){
+			gcuserDao.updatePayOk(nowName, nowUserId, payok);
+			LogSystem.log("修改"+userName+",下所有同名账号的payok,name="+nowName+",nowUserId="+nowUserId+",payok="+payok);
+		}
+		
 		return true;
 	}
 	/**

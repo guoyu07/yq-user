@@ -39,6 +39,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private int cxt;
 	
 	private Fcxt fcxt;
+	private String updateAllDown;
 	
 	private String md5pass;
 	private String sign;
@@ -57,7 +58,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 			}
 			return INPUT;
 		}
-		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip());
+		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -143,6 +144,14 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		return addAq;
 	}
 
+
+	public String getUpdateAllDown() {
+		return updateAllDown;
+	}
+
+	public void setUpdateAllDown(String updateAllDown) {
+		this.updateAllDown = updateAllDown;
+	}
 
 	public void setAddAq(int addAq) {
 		this.addAq = addAq;

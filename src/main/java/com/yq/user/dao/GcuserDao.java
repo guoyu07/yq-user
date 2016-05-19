@@ -922,6 +922,15 @@ public class GcuserDao {
 		return jdbc.getList(sql, Gcuser.class);
 	}
 	
+	public List<Gcuser> getAllDownVip(String userName){
+		String leftSql = " select gc.username from zuo_mingxi zm left join gcuser gc on zm.down=gc.username where zm.tjuser=? and gc.vip<>0";
+		String rightSql = " select gc.username from you_mingxi zm left join gcuser gc on zm.down=gc.username where zm.tjuser=? and gc.vip<>0";
+		SqlParameter param = SqlParameter.Instance().withString(userName);
+		List<Gcuser> result = jdbc.getList(leftSql, Gcuser.class,param);
+		result.addAll(jdbc.getList(rightSql, Gcuser.class,param));
+		return result;
+	}
+	
 	public List<Gcuser> getCompanlyUser(){
 		String sql = "select username from "+table+" where jygt1=2 and name='公司'";
 		return jdbc.getList(sql, Gcuser.class);
