@@ -34,7 +34,7 @@
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
-	<package name="cslogin" extends="myInterceptor" namespace="/">
+	<package name="cslogin" extends="noLoginInterceptor" namespace="/">
 		<!-- 一个包下可以放这个模块下的所有action -->
 		<action name="cslogin" class="com.yq.cservice.action.CsLoginAction">
 			<result name="success" >/cs/default.jsp</result>

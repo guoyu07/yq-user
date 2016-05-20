@@ -619,7 +619,7 @@
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
-	<package name="adminLogin" extends="myInterceptor" namespace="/">
+	<package name="adminLogin" extends="noLoginInterceptor" namespace="/">
 		<!-- 一个包下可以放这个模块下的所有action -->
 		<action name="adminindex" class="com.yq.manager.action.AdminLoginAction">
 			<result name="success" >/admin/default.jsp</result>

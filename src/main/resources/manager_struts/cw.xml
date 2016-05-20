@@ -25,7 +25,7 @@
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
-	<package name="cwlogin" extends="myInterceptor" namespace="/">
+	<package name="cwlogin" extends="noLoginInterceptor" namespace="/">
 		<!-- 一个包下可以放这个模块下的所有action -->
 		<action name="cwlogin" class="com.yq.cw.action.CwLoginAction">
 			<result name="success" >/cw/default.jsp</result>
