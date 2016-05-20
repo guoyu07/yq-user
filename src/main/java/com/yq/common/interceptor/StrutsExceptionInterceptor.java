@@ -44,16 +44,15 @@ public class StrutsExceptionInterceptor extends AbstractInterceptor {
 					ServiceException exception = (ServiceException)e;
 					aldAction.setErroCodeNum(exception.getCode());
 					LogSystem.info(exception.getMessage());
-					
 					if(exception.getCode()==1860){
 						return "glober_alert";
 					}
-					
-					return "success";
+					throw e;
 				}else{
-					LogSystem.error(e, "");
-					aldAction.setErroCodeNum(8888);
-					return "glober_error";
+//					LogSystem.error(e, "");
+//					aldAction.setErroCodeNum(8888);
+//					return "glober_error";
+					throw e;
 				}
 			}else{
 				throw e;
@@ -66,6 +65,18 @@ public class StrutsExceptionInterceptor extends AbstractInterceptor {
 	{
 		for(int i=0;i<str.length;i++){
 			str[i] = str[i].replaceAll("'", "");
+			str[i] = str[i].replaceAll("SELECT", "");
+			str[i] = str[i].replaceAll("select", "");
+			str[i] = str[i].replaceAll("update", "");
+			str[i] = str[i].replaceAll("UPDATE", "");
+			str[i] = str[i].replaceAll("CASE", "");
+			str[i] = str[i].replaceAll("case", "");
+			str[i] = str[i].replaceAll("WHEN", "");
+			str[i] = str[i].replaceAll("when", "");
+			str[i] = str[i].replaceAll("drop", "");
+			str[i] = str[i].replaceAll("DROP", "");
+			str[i] = str[i].replaceAll("alert", "");
+			str[i] = str[i].replaceAll("ALERT", "");
 		}
 	    return str;
 	}

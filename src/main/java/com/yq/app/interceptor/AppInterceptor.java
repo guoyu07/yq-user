@@ -7,14 +7,14 @@ import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionInvocation;
-import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.app.action.AppBaseActionSupport;
 import com.yq.app.service.AppService;
 import com.yq.common.exception.ServiceException;
+import com.yq.common.interceptor.BaseInterceptor;
 
-public class AppInterceptor extends AbstractInterceptor {
+public class AppInterceptor extends BaseInterceptor {
 
 	/**
 	 * 
@@ -56,10 +56,10 @@ public class AppInterceptor extends AbstractInterceptor {
 					}else{
 						appAction.renderErrorResult(exception.getMessage());
 					}
-					LogSystem.info(exception.getMessage());
+					LogSystem.info("[userName]=["+userName+"]"+exception.getMessage());
 					return "json";
 				}else{
-					LogSystem.error(e, "");
+					LogSystem.error(e, "[userName]=["+userName+"]");
 					appAction.renderErrorResult("未知错误！");
 					return "json";
 				}
