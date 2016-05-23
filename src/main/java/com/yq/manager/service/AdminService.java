@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -1770,14 +1771,22 @@ public class AdminService {
 		} catch (Exception e) {
 			LogSystem.warn("cz04转换出错！~~~");
 		}
-		if(fcxtDao.updateJy5w(ration)){
-			PointsChangeLog changeLog = new PointsChangeLog();
-			changeLog.setCreatedTime(new Date());
-			changeLog.setOldPrice(fcxt.getJygj()+"");
-			changeLog.setNewPrice((fcxt.getJygj()+0.01)+"");
-			changeLog.setCurrentNum(fcxt.getJy5w()+"");
-			changeLog.setUpRation(ration+"");
-			pointsChangeLogDao.add(changeLog);
+		if (fcxtDao.updateJy5w(ration)) {
+			try {
+				PointsChangeLog changeLog = new PointsChangeLog();
+				changeLog.setCreatedTime(new Date());
+				String oldPrice = fcxt.getJygj() + "";
+				oldPrice = StringUtils.substring(oldPrice, 0, 5);
+				changeLog.setOldPrice(oldPrice);
+				String newPrice = (fcxt.getJygj() + 0.01) + "";
+				newPrice = StringUtils.substring(newPrice, 0, 5);
+				changeLog.setNewPrice(newPrice);
+				changeLog.setCurrentNum(fcxt.getJy5w() + "");
+				changeLog.setUpRation(ration + "");
+				pointsChangeLogDao.add(changeLog);
+			} catch (Exception e) {
+				LogSystem.error(e, "插入积分上涨日志报错！");
+			}
 		}
 		
 		gcuserDao.updateAbdateAndDbtl(">30", 0, new Date(), 1);
@@ -2914,5 +2923,9 @@ public class AdminService {
 		boolean result2 = sgxtDao.updateBq(user, addBq);
 		LogSystem.log(logTag+",aqResult=["+result1+"],bqResult=["+result2+"]");
 		return result1&result2; 
+	}
+	public static void main(String[] args) {
+		String str = "0.820000000000";
+		System.out.println(StringUtils.substring(str, 0, 5));
 	}
 }
