@@ -178,7 +178,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				callBackUrl = url + "?act=payment&op=asyncreturnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=2&order_sn="+order+"&&payuser="+user;
 				super.setErroCodeNum(2001);
 			}
-//			callBackToServerShop(callBackUrl);
+			callBackToServerShop(callBackUrl);
 		}
 		return SUCCESS;
 	}
@@ -239,7 +239,8 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 //				day = DateUtils.getIntervalDays(gcuser.getPwdate(), new Date());
 //			}
 			userService.kypwe(gwpay,pa01, pid, ybf, user, order,  pa02, hgcode);
-			sn=MD5Security.md5_16(order+"$#85546875#@$#%"+gwpay);
+			String payAmount = new java.text.DecimalFormat("#.00").format(gwpay);
+			sn=MD5Security.md5_16(order+"$#85546875#@$#%"+payAmount);
 			
 			if(pid==1){
 				super.setErroCodeNum(2000);
