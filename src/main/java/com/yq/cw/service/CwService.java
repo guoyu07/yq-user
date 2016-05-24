@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
@@ -23,9 +24,11 @@ import com.yq.cw.dao.CwUserDao;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.GcuserDao;
+import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.service.LogService;
 
@@ -46,6 +49,10 @@ public class CwService {
   	private VipcjglDao vipcjglDao;
   	@Autowired
   	private AdminService adminService;
+  	@Autowired
+  	private SgxtDao sgxtDao;
+  	
+  	private Cache<String,List<String>> downVipList = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
   	public String getLoginCwUserName(String sessionId){
 		return cwUserMap.getIfPresent(sessionId);
@@ -62,6 +69,8 @@ public class CwService {
 		CwUser cwUser = cwUserDao.getCwUser(userName);
 		if(cwUser!=null&&cwUser.getPassWord().equals(password)){
 			cwUserMap.put(sessionId, userName);
+			List<String> downList = getNowDownVipList(userName);
+			downVipList.put(userName, downList);
 			return true;
 		}else{
 			//普通vip登录
@@ -69,8 +78,11 @@ public class CwService {
 			Gcuser gcUser = gcuserDao.getUser(userName);
 			String md5pass = MD5Security.md5_16(password).toLowerCase();
 			//登录成功
-			if(gcUser!=null && gcUser.getPassword().equals(md5pass)&&gcUser.getVip()!=0){
+			if(gcUser!=null && gcUser.getPassword().equals(md5pass)&&gcUser.getVip()==2){//大vip才能登陆  小vip不能登陆
 				cwUserMap.put(sessionId, gcUser.getUsername());
+				//查询其下小vip列表
+				List<String> downList = getNowDownVipList(userName);
+				downVipList.put(userName, downList);
 				return true;
 			}
 			return false;
@@ -255,11 +267,19 @@ public class CwService {
 		return vipcjglDao.getVipcjglListForDcAsc(userName, startTime, endTime);
 	}
 	/**
-	 * 获取某个用户下所有的vip
+	 * 从缓存中获取
 	 * @param userName
 	 * @return
 	 */
 	public List<String> getMyDownVip(String userName){
+		return downVipList.getIfPresent(userName);
+	}
+	/**
+	 * 即时查询当前用户下的小vip列表
+	 * @param userName
+	 * @return
+	 */
+	private List<String> getNowDownVipList(String userName){
 		List<String> vipList = Lists.newArrayList();
 		if (userName.equals(ADMIN)) {
 			vipList = adminService.getAllVipName();
@@ -268,13 +288,38 @@ public class CwService {
 			if(gcuser!=null){
 				vipList.add(userName);
 				if(gcuser.getVip()==2){//大vip 查询其下的小vip
-					List<Gcuser> result = gcuserDao.getAllDownVip(userName);
-					for(Gcuser gc :result){
-						vipList.add(gc.getUsername());
-					}
+					generatorDownList(userName, vipList);
 				}
 			}
 		}
 		return vipList;
+	}
+	
+	public void generatorDownList(String userName,List<String> vipList){
+		Sgxt sgxt = sgxtDao.get(userName);
+		
+		if(!Strings.isNullOrEmpty(sgxt.getAuid())){
+			Gcuser gcuser = gcuserDao.getUser(sgxt.getAuid());
+			if(gcuser.getVip()==3){//小vip添加
+				vipList.add(sgxt.getAuid());
+			}else if(gcuser.getVip()==2){//大vip中断
+				return;
+			}
+			//继续往下找
+			generatorDownList(sgxt.getAuid(), vipList);
+		}
+		
+		if(!Strings.isNullOrEmpty(sgxt.getBuid())){
+			Gcuser gcuser = gcuserDao.getUser(sgxt.getBuid());
+			if(gcuser.getVip()==3){//小vip添加
+				vipList.add(sgxt.getBuid());
+			}else if(gcuser.getVip()==2){//大vip中断
+				return;
+			}
+			//继续往下找
+			generatorDownList(sgxt.getBuid(), vipList);
+		}
+		
+		
 	}
 }

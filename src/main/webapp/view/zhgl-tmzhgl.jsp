@@ -8,7 +8,8 @@
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您至少选择一个需要转账的用户名，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('非双区用户不能使用该功能！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已成功批量转账！');location.href='tjz'</script></c:if>
-<c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户一币发生了改变');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户一币发生了改变！请重试');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==101}"><script language=javascript>alert('被转用户购物券发生了改变！请重试');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -23,6 +24,14 @@ function CheckAll(form) {
  var e = form.elements[i];
  if (e.name != 'chkall') e.checked = form.chkall.checked;
  }
+ }
+ 
+ function cf(){
+	 if(form.tp.value==0){
+		 return confirm('一经转账的一币不再提供卖出，确定了吗?');
+	 }else{
+		 return confirm('确认批量转入购物券?');
+	 }
  }
 </script>
 <body>
@@ -49,10 +58,12 @@ function CheckAll(form) {
 					</div>
 					</c:if>
 					<c:if test="${not empty dataList}">
-					<form method="POST" action="tjz?status=1" name="form">
+					<form method="POST" action="tjz?status=1" name="form" id="form">
 					<div class="a-tableTop z-cb">
-						<p class="z-l"><input type='checkbox' name=chkall onclick='CheckAll(this.form)'>全选</p>
-						<p class="z-r">二级密码：<input type="password" name="pa2j" size="15"> <button type="submit" onClick="return confirm('一经转账的一币不再提供卖出，确定了吗?')">批量提交转至</button>当前登陆的用户名：<span class="c-r z-b">${userName}</span> </p>
+					<p class="z-r">转账类型：<select name="tp"><option value="0">一币</option><option value="1">购物券</option></select> 二级密码：<input type="password" name="pa2j" size="15"> <button type="submit" onClick="return cf()">批量提交转至</button> 当前登陆的用户名：<span class="c-r z-b">${userName}</span> </p>
+					</div>
+					<div class="a-tableTop z-cb">
+					<p class="z-l"><input type='checkbox' name=chkall onclick='CheckAll(this.form)'>全选</p>
 					</div>
 					<div class="content-table">
 						<table>
@@ -61,7 +72,8 @@ function CheckAll(form) {
 								<td><input type="checkbox" name="fromUsers" value="${data.username}"></td>
 								<td>${data.username}</td>
 								<td>${data.name}</td>
-								<td><input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}</td>
+								<td><input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}一币</td>
+								<td>${data.scores}购物券</td>
 							</tr>
 						</s:iterator>
 						</table>

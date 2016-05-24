@@ -1338,6 +1338,21 @@ public class UserService {
 		logService.addDatePay(datePay);
 		
 	}
+	
+	
+	
+	/**
+	 * 购物券转账
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	private void trasferScores(String fromUser,String toUser,int amount){
+		if(!this.changeScores(fromUser,-amount,ScoresChangeType.THE_SAME_USER_TRANSFER_REDUCE,0,toUser,"")){
+			throw new ServiceException(101, "购物券不足");
+		}
+		this.changeScores(toUser, amount, ScoresChangeType.THE_SAME_USER_TRANSFER,0,fromUser,"");
+	}
 	/**
 	 * yb转账
 	 * @param fromUser
@@ -1384,6 +1399,38 @@ public class UserService {
 			}
 			if(user.getPay()>0&&!fromUser.equals(toUser)){
 				trasferYb(fromUser,toUser,user.getPay());
+			}
+		}
+	}
+	
+	
+	@Transactional
+	public void batchTrasferScores(List<String> fromUsers,String toUser,String password3){
+		Gcuser gcuser = gcuserDao.getUser(toUser);
+		if(!gcuser.getPassword3().equals(password3)){
+			throw new ServiceException(1, "二级密码错误，请检查输入是否正确！");
+		}
+		if(gcuser.getPayok()==10){
+			throw new ServiceException(2, "您好，您已申请的卖出尚未交易成功，暂时不能使用转账功能，谢谢！");
+		}
+		if(gcuser.getJygt1()==2 || gcuser.getDbt1()==2){
+			throw new ServiceException(3, "操作错误，请检查输入是否正确！");
+		}
+		
+		if(gcuser.getSjb()==0){
+			throw new ServiceException(7, "非双区用户不能进行该操作！");
+		}
+		
+		for(String fromUser: fromUsers){
+			Gcuser user = gcuserDao.getUser(fromUser);
+			if(user==null){
+				throw new ServiceException(4, "用户不存在");
+			}
+			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().trim().toLowerCase().equals(user.getUserid().trim().toLowerCase())){
+				throw new ServiceException(5, "非同名用户,不能转,from name=["+user.getName()+"]，userid=["+user.getUserid().toLowerCase()+"],to name=["+gcuser.getName()+"],userId=["+gcuser.getUserid().toLowerCase()+"],名字判断=["+(gcuser.getName().equals(user.getName()))+"],身份证判断=["+(gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase()))+"]");
+			}
+			if(user.getScores()>0&&!fromUser.equals(toUser)){
+				trasferScores(fromUser,toUser,user.getScores());
 			}
 		}
 	}
@@ -3863,7 +3910,7 @@ public class UserService {
 	 * @return
 	 */
 	public IPage<UserScoresLog> getUserScoresLogPage(String userName,int pageIndex,int pageSize){
-		return userScoresLogDao.getPageList(pageIndex, pageSize, "order by created_time desc", new SqlParamBean("user_name", userName));
+		return userScoresLogDao.getPageList(pageIndex, pageSize, "order by id desc", new SqlParamBean("user_name", userName));
 	}
 	
 }

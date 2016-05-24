@@ -166,20 +166,43 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 		
 		if(!Strings.isNullOrEmpty(ybf)){
 			resultstr = userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,allScores,ybstr);
+			String callBackUrl = "";
 			if(pid==1){
 				sn=MD5Security.md5_16(order+"$@@$"+resultstr);
 				LogSystem.info("返回的resultStr="+resultstr+"--sn="+sn+",order="+order);
-				LogSystem.info(url+"?act=payment&resultstr="+resultstr+"&op=returnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=1&order_sn="+order+"&&payuser="+user);
+//				LogSystem.info(url+"?act=payment&resultstr="+resultstr+"&op=returnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=1&order_sn="+order+"&&payuser="+user);
+				callBackUrl = url+"?act=payment&resultstr="+resultstr+"&op=asyncreturnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=1&order_sn="+order+"&&payuser="+user;
 				super.setErroCodeNum(2000);
 			}else if(pid==2){
 				sn=MD5Security.md5_16(order+"$@@$"+gwpay);
+				callBackUrl = url + "?act=payment&op=asyncreturnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=2&order_sn="+order+"&&payuser="+user;
 				super.setErroCodeNum(2001);
 			}
+//			callBackToServerShop(callBackUrl);
 		}
 		return SUCCESS;
 	}
 	
-	
+	/**
+	 * 回调机票服务器
+	 */
+	private static final String SHOP_SUCCESS_TAG="success";
+	private void callBackToServerShop(String url) {
+		String callBackUrl = url;
+		try {
+			String result = UrlRequestUtils.execute(callBackUrl, null, Mode.GET);
+			LogSystem.log("商城回调请求地址:" + callBackUrl + ",result=" + result);
+			if (SHOP_SUCCESS_TAG.equals(result)) {
+				LogSystem.info("成功！");
+			}else{
+				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SHOP_SUCCESS_TAG));
+			}
+		} catch (Exception e) {
+			LogSystem.error(e, "商城回调失败！");
+			//放到队列中进行处理
+			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SHOP_SUCCESS_TAG));
+		}
+	}
 	
 	/**
 	 * 机票支付通道
@@ -220,10 +243,10 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			
 			if(pid==1){
 				super.setErroCodeNum(2000);
-				callBackToServer();
+				callBackToServerJP();
 			}else if(pid==2){
 				super.setErroCodeNum(2001);
-				callBackToServer();
+				callBackToServerJP();
 			}
 		}
 		return SUCCESS;
@@ -231,7 +254,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	/**
 	 * 回调机票服务器
 	 */
-	private void callBackToServer() {
+	private void callBackToServerJP() {
 		String callBackUrl = "";
 		try {
 			String payAmount = new java.text.DecimalFormat("#.00").format(gwpay);

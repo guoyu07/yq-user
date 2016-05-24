@@ -47,8 +47,10 @@
                                      <c:when test="${data.changeType==1001}">系统赠送</c:when>
                                      <c:when test="${data.changeType==1002}">商城增加-${data.param}</c:when>
                                      <c:when test="${data.changeType==1003}">商城退款-${data.param}</c:when>
+                                     <c:when test="${data.changeType==1004}">同名账户转账-${data.fromUser}</c:when>
                                      <c:when test="${data.changeType==2001}">商城消费-${data.param}</c:when>
                                      <c:when test="${data.changeType==2002}">商城退款-${data.param}</c:when>
+                                     <c:when test="${data.changeType==2003}">同名账户转账-${data.fromUser}</c:when>
                                      <c:otherwise>${data.changeType}</c:otherwise>
                                   </c:choose>
                                 </td>
