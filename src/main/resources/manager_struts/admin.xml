@@ -615,6 +615,9 @@
 		    <result name="success" type="json">
 		      <param name="includeProperties">erroCodeNum</param>
 		    </result>
+		    <result name="thesameuserinfo">
+		       /admin/thesameuserinfo.jsp
+		    </result>
 		</action>
 	</package>
 

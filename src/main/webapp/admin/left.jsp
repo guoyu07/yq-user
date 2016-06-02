@@ -180,6 +180,10 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<tr>
 				<td height=20>☉  <a href="/admin/searchfcxt" target="BoardList">积分交易调控</a></td> 
 				</tr>
+				
+				<tr>
+				<td height=20>☉  <a href="/admin/tools!theSameUserInfo" target="BoardList">同名账号信息查询</a></td> 
+				</tr>
 				 <!--<tr>
 				<td height=20>☉  <a href="/admin/insertuser" target="BoardList">挂载用户</a></td> 
 				</tr>-->

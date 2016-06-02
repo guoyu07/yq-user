@@ -27,6 +27,7 @@ import com.yq.common.utils.MD5Security;
 import com.yq.cservice.bean.SqDayAddBean;
 import com.yq.manager.bean.Performance;
 import com.yq.manager.bean.UserPerformanceSearch;
+import com.yq.manager.bean.UserStatBean;
 import com.yq.manager.bean.YbCjbBean;
 import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.bo.DateBean;
@@ -2923,6 +2924,27 @@ public class AdminService {
 		boolean result2 = sgxtDao.updateBq(user, addBq);
 		LogSystem.log(logTag+",aqResult=["+result1+"],bqResult=["+result2+"]");
 		return result1&result2; 
+	}
+	/*
+	 * 获取用户概览信息
+	 */
+	public List<UserStatBean> getUserStatBeanList(String idcardNum){
+		List<UserStatBean>  result = Lists.newArrayList();
+		List<Gcuser> userList = gcuserDao.getUserByIdCard(idcardNum);
+		for(Gcuser gcuser: userList){
+			Sgxt sgxt = sgxtDao.get(gcuser.getUsername());
+			Date activeTime = null;
+			if(sgxt!=null){
+				activeTime = sgxt.getBddate();
+			}
+			UserStatBean userStatBean = new UserStatBean(gcuser.getUsername(), gcuser.getName(), activeTime, gcuser.getSjb(), gcuser.getCjtj(), gcuser.getJyg(), gcuser.getPay());
+			double vipIn = datePayDao.getSumVipTranferInYb(gcuser.getUsername());
+			userStatBean.setIn(vipIn+gcuser.getRgpay());
+			double out = datePayDao.getSumJcNotIncludeTheSameIn(gcuser.getUsername());
+			userStatBean.setOut(out);
+			result.add(userStatBean);
+		}
+		return result;
 	}
 	public static void main(String[] args) {
 		String str = "0.820000000000";

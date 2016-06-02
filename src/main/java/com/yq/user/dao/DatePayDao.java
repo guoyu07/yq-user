@@ -299,4 +299,18 @@ public class DatePayDao {
 		return jdbc.get(sql, Datepay.class, sqlParameter);
 	}
 	
+	public Double getSumVipTranferInYb(String userName){
+		String sql = "select sum(syjz) from "+table+" where username=? and regid like '收到服务中心%'";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		return jdbc.getDouble(sql, sqlParameter);
+	}
+	
+	public Double getSumJcNotIncludeTheSameIn(String userName){
+		String sql = "select sum(jc) from "+table+" where username=? and newbz<>6";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		return jdbc.getDouble(sql, sqlParameter);
+	}
+	
 }
