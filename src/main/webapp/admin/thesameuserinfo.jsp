@@ -53,6 +53,7 @@
               <c:set var="allIn" value="0"></c:set>
               <c:set var="allOut" value="0"></c:set>
               <c:set var="allXj" value="0"></c:set>
+              <c:set var="allSjb" value="0"></c:set>
               <s:iterator var="data" value="list">
               <c:set var="allChargNum" value="${allChargNum+data.chargeNum}"></c:set>
               <c:set var="allJf" value="${allJf+data.jf}"></c:set>
@@ -60,6 +61,7 @@
               <c:set var="allIn" value="${allIn+data.in}"></c:set>
               <c:set var="allOut" value="${allOut+data.out}"></c:set>
               <c:set var="allXj" value="${allXj+data.xj}"></c:set>
+               <c:set var="allSjb" value="${allSjb+data.sjb}"></c:set>
               <tr> 
               <td height="31"  align="center"> <p><font color="#000000" size="2" face="宋体">${data.userName}</font></td>
               <td valign="middle" align="center"> <p><font color="#FF0000" size="2" face="宋体">${data.name}</font></td>
@@ -67,8 +69,8 @@
               <td valign="middle" align="center"><font color="#000000" size="2" face="宋体">${data.sjb}</font></td>
               <td valign="middle" align="center"><font color="#000000" size="2" face="宋体">${data.chargeNum}</font></td>
                <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${data.jf}</font></td>
-               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${data.in}</font></td>
-               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${data.out}</font></td>
+               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${data.in}" pattern="0"/></font></td>
+               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${data.out}" pattern="0"/></font></td>
                <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${data.yb}</font></td>
                <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${data.xj}</font></td>
               </tr>
@@ -77,13 +79,13 @@
               <td height="31" width="134" align="center"> <p><font color="#000000" size="2" face="宋体">合计</font></td>
               <td valign="middle" width="133" align="center"> <p><font color="#FF0000" size="2" face="宋体"></font></td>
               <td valign="middle" align="center"> <font color="#FF0000" size="2" face="宋体"></font></td>
-              <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"></font></td>
-              <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${allChargNum}</font></td>
-               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${allJf}</font></td>
-               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${allIn}</font></td>
-               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${allOut}</font></td>
-               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${allYb}</font></td>
-               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${allXj}</font></td>
+              <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体">${allSjb}</font></td>
+              <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${allChargNum}" pattern="0"/></font></td>
+               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${allJf}" pattern="0"/></font></td>
+               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${allIn}" pattern="0"/></font></td>
+               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${allOut}" pattern="0"/></font></td>
+               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${allYb}" pattern="0"/></font></td>
+               <td valign="middle" align="center" ><font color="#000000" size="2" face="宋体"><fmt:formatNumber value="${allXj}" pattern="0"/></font></td>
               </tr>
             </table> 
 </div>
