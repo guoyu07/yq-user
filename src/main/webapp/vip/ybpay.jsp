@@ -80,7 +80,7 @@ function checkdate1()  {
 		</c:if>
 		<tr>
 			<td width="214" align="right">用户名：</td>
-			<td width="336" align="left" colspan="2"><b><font color="#0000FF"><input type="text" name="user" size="20"><input type="hidden" name="remark" size="5" value="8" readonly></font></b></td>
+			<td width="336" align="left" colspan="2"><b><font color="#0000FF"><input type="text" name="user" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"><input type="hidden" name="remark" size="5" value="8" readonly></font></b></td>
 			</tr>
 		<tr>
 			<td width="214" align="right">登录密码：</td>
