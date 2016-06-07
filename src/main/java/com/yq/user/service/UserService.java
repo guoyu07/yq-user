@@ -51,6 +51,7 @@ import com.yq.user.bo.Txpay;
 import com.yq.user.bo.TxpayIndex;
 import com.yq.user.bo.UserExtinfo;
 import com.yq.user.bo.UserScoresLog;
+import com.yq.user.bo.UserScoresLogForExcel;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
@@ -3909,8 +3910,21 @@ public class UserService {
 	 * @param pageSize
 	 * @return
 	 */
-	public IPage<UserScoresLog> getUserScoresLogPage(String userName,int pageIndex,int pageSize){
-		return userScoresLogDao.getPageList(pageIndex, pageSize, "order by id desc", new SqlParamBean("user_name", userName));
+	public IPage<UserScoresLogForExcel> getUserScoresLogPage(String userName,int pageIndex,int pageSize,String startTime,String endTime){
+		
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return userScoresLogDao.getPageListByUserNameAndTime(userName, startTime, endTime, pageIndex, pageSize);
+	}
+	
+   public List<UserScoresLogForExcel> getUserScoresLogList(String userName,String startTime,String endTime){
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return userScoresLogDao.getListByUserNameAndTime(userName, startTime, endTime);
 	}
 	
 }

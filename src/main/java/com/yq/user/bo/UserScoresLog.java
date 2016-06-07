@@ -62,9 +62,11 @@ public class UserScoresLog {
 	public void setFromUser(String fromUser) {
 		this.fromUser = fromUser;
 	}
+	
 	public String getParam() {
 		return param;
 	}
+	
 	public void setParam(String param) {
 		this.param = param;
 	}
