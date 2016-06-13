@@ -62,7 +62,7 @@ public class MD5Security {
 		System.out.println("root  =="+MD5Security.md5_16("252493618"));
 		System.out.println("sam  =="+MD5Security.md5_16("mcdogdog"));
 		System.out.println("tomcat  =="+MD5Security.md5_16("tomcat"));
-		System.out.println("tomcat  =="+MD5Security.md5_16("111111"));
+		System.out.println("tomcat  =="+MD5Security.md5_16("www.abc123.com"));
 	}
 }
 

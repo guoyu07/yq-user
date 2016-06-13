@@ -82,7 +82,7 @@ return (allValid);
 						<span>发布积分卖出</span>
 					</div>
 					<div class="content-form">
-						<p>您当前的积分剩余：:<strong>${gcuser.jyg}</strong>，当前的交易价为：<strong><c:if test="${fcxt.jygj<1}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></strong></p>
+						<p>您当前的积分剩余：<strong>${gcuser.jyg}</strong>，当前的交易价为：<strong><c:if test="${fcxt.jygj<1}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></strong></p>
 						<form class="form form1 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="mcsl?status=1">
 							<p><label>用户名：</label>${userName}</p>
 							<p><label>卖出单价：</label><input type="text" name="jygj" size="10" maxlength="4"></p>
