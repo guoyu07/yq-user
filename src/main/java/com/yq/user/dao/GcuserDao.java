@@ -1121,6 +1121,14 @@ public class GcuserDao {
 		parameter.setString(userName);
 		return this.jdbc.update(sql, parameter)>0;
 	} 
+	
+	public boolean updateUserTxlb(String userName,int txlb){
+		String sql = "update "+table+" set txlb=? where username=?  limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(txlb);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	} 
 	/**
 	 * 减积分
 	 * @param username

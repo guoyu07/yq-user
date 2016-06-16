@@ -1007,7 +1007,7 @@ public class AdminService {
 	/**
 	 * 执行双区计算
 	 */
-	@Transactional
+	
 	public synchronized void doubelAreaCount(){
 		Fcxt fcxt = fcxtDao.get(2);
 		int mqbz = fcxt.getPayadd();
@@ -1075,6 +1075,7 @@ public class AdminService {
 		fcxtDao.updateDoubleAreaCount(jsDate, rs_last.getUsername(), 2);
 	}
 	
+	@Transactional
 	private void dealDoubleAreaCount(Sgxt sgxt,Fcxt fcxt){
 		int jsq = 0 ;
 		if(sgxt.getAq()==sgxt.getBq()){

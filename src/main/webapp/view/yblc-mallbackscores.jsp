@@ -24,14 +24,14 @@
   if (Form.dbz.value=="" && document.getElementById("C1").checked) { alert("请写入商城订单号，必须为数字!"); return false;  }
  }
 
- function setmaller(jb){  
+ function setmaller(txlb){  
 	  if (Form.fromUser.value=="") {      alert("请填写您设置的商户名!");      return false;    } 
 	  $("#btnn").attr("disabled","disabled");
 		//var data = $("#Form").serialize();
-		$.post("/maller?fromUser="+Form.fromUser.value+"&jb="+jb, null, function(response) {
+		$.post("/maller?fromUser="+Form.fromUser.value+"&txlb="+txlb, null, function(response) {
 			$("#btnn").removeAttr("disabled");
 			if (response.erroCodeNum!=0) { alert("设置失败"); return false; }
-			if(jb==6){
+			if(txlb==3){
 				alert("设置商户成功");
 			}else{
 				alert("取消商户成功！");
@@ -71,7 +71,7 @@ function dbz_show(){
 					</div>
 					<div class="content-form">				 
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/backscores?status=1">
-						    <p><label class="c-r">转出用户名：</label><input type="text" name="fromUser" size="15" maxlength="20"><button class="but1" type="button" value="设置成商户" name="btnn" id="btnn"  onClick="setmaller(6)">设置成商户</button><button class="but1" type="button" value="设置成商户" name="btnn" id="btnn"  onClick="setmaller(0)">取消商户</button></p>
+						    <p><label class="c-r">转出用户名：</label><input type="text" name="fromUser" size="15" maxlength="20"><button class="but1" type="button" value="设置成商户" name="btnn" id="btnn"  onClick="setmaller(3)">设置成商户</button><button class="but1" type="button" value="设置成商户" name="btnn" id="btnn"  onClick="setmaller(0)">取消商户</button></p>
 							<p><label class="c-r">转入用户名：</label><input type="text" name="jzuser" size="15" maxlength="20"></p>
 							<p><label>转账金额：</label><input style="width:100px;" type="text" name="jzpay" size="15"></p>
 							<p><label>操作密码：</label><input type="password" name="pa3" size="15"></p>

@@ -53,12 +53,12 @@ public class MD5Security {
 	
 	public static void main(String[] args) throws Exception {
 		System.out.println("admin1  =="+MD5Security.md5_16("adm15payxt"));
-		System.out.println("admin2(原来的admin)  =="+MD5Security.md5_16("xtzh200fu2"));
-		System.out.println("admin3  =="+MD5Security.md5_16("kf13gl14ya"));
+		System.out.println("admin2(原来的admin)  =="+MD5Security.md5_16("gcgl06ok"));
+		System.out.println("admin3  =="+MD5Security.md5_16("syyk365xc"));
 		System.out.println("admin4  =="+MD5Security.md5_16("jkoi43ia"));
 		System.out.println("admin5  =="+MD5Security.md5_16("ykoj50un"));
-		System.out.println("cfhkf01  =="+MD5Security.md5_16("hk23fh01"));
-		System.out.println("cfhkf02  =="+MD5Security.md5_16("hk36fh02"));
+		System.out.println("cfhkf01  =="+MD5Security.md5_16("jsz69aak"));
+		System.out.println("cfhkf02  =="+MD5Security.md5_16("zggl65sk"));
 		System.out.println("root  =="+MD5Security.md5_16("252493618"));
 		System.out.println("sam  =="+MD5Security.md5_16("mcdogdog"));
 		System.out.println("tomcat  =="+MD5Security.md5_16("tomcat"));

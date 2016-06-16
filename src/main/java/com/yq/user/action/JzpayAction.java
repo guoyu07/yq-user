@@ -30,7 +30,6 @@ public class JzpayAction extends ALDAdminActionSupport {
 	
 	private double ration;
 	
-	private int jb;
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -63,20 +62,30 @@ public class JzpayAction extends ALDAdminActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	private int txlb;
 	public String setForMall(){
 		if(!super.getUserName().equals("zxz888")){
 			super.setErroCodeNum(3001);
 			return SUCCESS;
 		}
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		if(!userService.setToMaller(fromUser,jb,super.ip())){
+		if(!userService.setToMaller(fromUser,txlb,super.ip())){
 			super.setErroCodeNum(1);
 		}
 		return SUCCESS;
 	}
 	
 	
+	public int getTxlb() {
+		return txlb;
+	}
+
+
+	public void setTxlb(int txlb) {
+		this.txlb = txlb;
+	}
+
+
 	public String getFromUser() {
 		return fromUser;
 	}
@@ -86,16 +95,6 @@ public class JzpayAction extends ALDAdminActionSupport {
 
 	public void setFromUser(String fromUser) {
 		this.fromUser = fromUser;
-	}
-
-
-	public int getJb() {
-		return jb;
-	}
-
-
-	public void setJb(int jb) {
-		this.jb = jb;
 	}
 
 

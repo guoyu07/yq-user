@@ -1597,7 +1597,7 @@ public class UserService {
 		}
 		
 		//商户账号不能卖出一币
-		if(gcuser.getJb()==6){
+		if(gcuser.getTxlb()==3){
 			throw new ServiceException(8,"商户账号不能卖出一币！");
 		}
 		
@@ -1770,7 +1770,7 @@ public class UserService {
         }
         Gcuser gcuser = gcuserDao.getUser(fromUser);
         
-        if(gcuser.getJb()!=6){
+        if(gcuser.getTxlb()!=3){
         	throw new ServiceException(2, "转出的用户名不是新商城商家！");
         }
 		
@@ -1790,11 +1790,9 @@ public class UserService {
 	 * 设置为商户
 	 * @param user
 	 */
-	public boolean setToMaller(String user,int jb,String ip){
-		boolean result = gcuserDao.updateUserJb(user, jb);
-		
-		LogSystem.log("setToMaller==>user=【"+user+"】,jb=【"+jb+"】,time=["+new Date()+"],ip=["+ip+"],result=["+result+"]");
-		
+	public boolean setToMaller(String user,int txlb,String ip){
+		boolean result = gcuserDao.updateUserTxlb(user, txlb);
+		LogSystem.log("setToMaller==>user=【"+user+"】,txlb=【"+txlb+"】,time=["+new Date()+"],ip=["+ip+"],result=["+result+"]");
 		return result;
 	}
 	/**
@@ -3443,7 +3441,7 @@ public class UserService {
 			for(ShopBean shopBean:list){
 				
 				Gcuser shop = gcuserDao.getUser(shopBean.getShopper());
-				if(shop==null||shop.getJb()!=6){
+				if(shop==null||shop.getTxlb()!=3){
 					throw new ServiceException(10, "商家不是商户--》"+shopBean.getShopper()); 
 				}
 				
