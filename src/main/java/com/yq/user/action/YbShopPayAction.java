@@ -105,7 +105,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			LogSystem.info("收到的客户端字符串"+ybstr);
 			int scores = 0;
 			 paylb="购物-"+order;
-			 title="来自一币商城的订单";
+			 title="来自幸福100的订单";
 			 if(UserService.isOpenScoresPay){
 				 try {
 					 String signStr = order+"yc$shop@Sfie68"+ybstr;
@@ -152,7 +152,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			   ybsl = (int)(gwpay*1.02);
 			   fee =  (int)(gwpay*0.02);
 			   paylb="充值-"+order;
-			   title="来自一币商城的充值";
+			   title="来自幸福100的充值";
 		}
 		
 		if(!Strings.isNullOrEmpty(user)){
