@@ -1,0 +1,677 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="admin" extends="adminInterceptor" namespace="/admin">
+	    <action name="adminmanager" class="com.yq.manager.action.AdminManagerAction">
+		    <result name="success">
+		       manager.jsp
+		    </result>
+		</action>
+		<action name="resetUserDownInfo" class="com.yq.manager.action.ResetZYDetailsAction">
+		    <result name="success">
+		      scontent.jsp
+		    </result>
+		</action>
+		<action name="resetZaqAndZbq" class="com.yq.manager.action.ResetZaqAndZbqAction">
+		    <result name="success">
+		      scontent.jsp
+		    </result>
+		</action>		
+		
+	    <action name="left" class="com.yq.manager.action.LeftAction">
+		    <result name="success">
+		        left.jsp
+		    </result>
+		</action>
+		
+		<action name="readme" class="com.yq.manager.action.ReadMeAction">
+		    <result name="success">
+		        readme.jsp
+		    </result>
+		</action>
+		
+		<action name="logout001" class="com.yq.manager.action.LogoutAction">
+		    <result name="success" type="redirect">
+		        /adminindex
+		    </result>
+		</action>
+		
+		<action name="userlist" class="com.yq.manager.action.UserListAction">
+		    <result name="success">
+		        userlist.jsp
+		    </result>
+		</action>
+		
+		<action name="chargeDetails" class="com.yq.manager.action.ChargeDetailsAction">
+		    <result name="success">
+		        chargedetails.jsp
+		    </result>
+		</action>
+		<action name="outdpexcelcharge" class="com.yq.manager.action.ChargeDetailsAction" method="outDateCjExcel">
+		    <result name="success">
+		        chargedetails.jsp
+		    </result>
+		</action>
+		<action name="goldcardmanager" class="com.yq.manager.action.GoldCardManagerAction">
+		    <result name="success">
+		        goldcardmanager.jsp
+		    </result>
+		</action>
+		
+		<action name="gcSendRecord" class="com.yq.manager.action.GoldCardSendRecordAction">
+		    <result name="success">
+		        gcSendRecord.jsp
+		    </result>
+		</action>		
+		
+		<action name="outday" class="com.yq.manager.action.OutDayAction">
+		    <result name="success">
+		        outday.jsp
+		    </result>
+		</action>	
+		
+		<action name="sgtjdate" class="com.yq.manager.action.SgtjdateAction">
+		    <result name="success">
+		        sgtjdate.jsp
+		    </result>
+		</action>
+		
+		<action name="bdbdate" class="com.yq.manager.action.BdbDateAction">
+		    <result name="success">
+		        bdbdate.jsp
+		    </result>
+		</action>
+			<action name="bdbdate2" class="com.yq.manager.action.BdbDateAction" method="bdbdateByDateAndUserName">
+		    <result name="success">
+		        bdbdate2.jsp
+		    </result>
+		</action>	
+		<action name="outexcel" class="com.yq.manager.action.BdbDateAction" method="outExcel">
+		</action>	
+		<action name="tradeManager" class="com.yq.manager.action.TradeMangerAction">
+		    <result name="success">
+		        tradeManager.jsp
+		    </result>
+		</action>
+		<action name="jymc" class="com.yq.manager.action.JymcAction">
+		    <result name="success">
+		        jymc.jsp
+		    </result>
+		</action>		
+		
+		<action name="jymy" class="com.yq.manager.action.JymyAction">
+		    <result name="success">
+		        jymy.jsp
+		    </result>
+		</action>			
+		<action name="ljsy" class="com.yq.manager.action.LjsyAction">
+		    <result name="success">
+		        ljsy.jsp
+		    </result>
+		</action>
+		
+		<action name="epjysc" class="com.yq.manager.action.EpjyscAction">
+		    <result name="success">
+		        epjysc.jsp
+		    </result>
+		</action>
+		
+		<action name="fhjl" class="com.yq.manager.action.FhjlAction">
+		    <result name="success">
+		        fhjl.jsp
+		    </result>
+		</action>	
+		<action name="jsfh" class="com.yq.manager.action.JsfhAction">
+		    <result name="success">
+		        jsfh.jsp
+		    </result>
+		</action>	
+		
+		<action name="sendfh" class="com.yq.manager.action.SendFhAction">
+		    <result name="success">
+		        jsfh.jsp
+		    </result>
+		</action>
+		
+		<action name="searchuser" class="com.yq.manager.action.SearchUserAction">
+		    <result name="input">
+		        searchuser.jsp
+		    </result>
+		   <result name="success">
+		        searchresult.jsp
+		    </result>
+		</action>	
+		
+		<action name="modifyaabuser" class="com.yq.manager.action.ModifyaabuserAction">
+		    <result name="input">
+		        modifyuser.jsp
+		    </result>
+		   <result name="success">
+		        modifyuser.jsp
+		    </result>
+		    <result name="updateaqorbq">
+		        updateaqorbq.jsp
+		    </result>
+		    
+		</action>
+		
+		<action name="usercj" class="com.yq.manager.action.UserCjAction">
+		    <result name="input">
+		        usercj.jsp
+		    </result>
+		   <result name="comfirm">
+		        usercj_confirm.jsp
+		    </result>
+		    <result name="success">
+		        usercj.jsp
+		    </result>
+		</action>
+		
+		<action name="bcgp" class="com.yq.manager.action.BcgpAction">
+		    <result name="input">
+		        bcgp.jsp
+		    </result>
+		   <result name="success">
+		        bcgp_result.jsp
+		    </result>
+		</action>
+		<action name="bcjf" class="com.yq.manager.action.BcjfAction">
+		    <result name="input">
+		        bcjf.jsp
+		    </result>
+		   <result name="success">
+		        bcjf_result.jsp
+		    </result>
+		</action>
+		<action name="bcjb" class="com.yq.manager.action.BcjbAction">
+		    <result name="input">
+		        bcjb.jsp
+		    </result>
+		   <result name="success">
+		        bcjb_result.jsp
+		    </result>
+		</action>
+		<action name="jzbdb" class="com.yq.manager.action.JzbdbAction">
+		    <result name="input">
+		        jzbdb.jsp
+		    </result>
+		   <result name="success">
+		        jzbdb_result.jsp
+		    </result>
+		</action>		
+		<action name="vipcjb" class="com.yq.manager.action.VipcjbAction">
+		    <result name="input">
+		        vipcjb.jsp
+		    </result>
+		   <result name="success">
+		        vipcjb_result.jsp
+		    </result>
+		</action>	
+		
+		<action name="epsf" class="com.yq.manager.action.EpsfAction">
+		    <result name="input">
+		        epsf.jsp
+		    </result>
+		   <result name="success">
+		        epsf_result.jsp
+		    </result>
+		</action>	
+		
+		<action name="btpay" class="com.yq.manager.action.BtpayAction">
+		    <result name="input">
+		        btpay.jsp
+		    </result>
+		   <result name="success">
+		        btpay_result.jsp
+		    </result>
+		</action>			
+					
+		<action name="gngw" class="com.yq.manager.action.ChangeAreaAction">
+		   <result name="success">
+		        changearea.jsp
+		    </result>
+		</action>
+		
+       <action name="pmcj" class="com.yq.manager.action.PmcjAction">
+		    <result name="input">
+		        pmcj.jsp
+		    </result>
+		   <result name="comfirm">
+		        pmcj_confirm.jsp
+		    </result>
+		    <result name="success">
+		        pmcj.jsp
+		    </result>
+		</action>
+		
+		<action name="pmmlt" class="com.yq.manager.action.PmmltAction">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		
+		<action name="sdup" class="com.yq.manager.action.SdupAction">
+		    <result name="input">
+		        sdup.jsp
+		    </result>
+		</action>	
+		<action name="mlt" class="com.yq.manager.action.MltAction">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		<action name="bsreg" class="com.yq.manager.action.MltAction" method="bsReg">
+		    <result name="success">
+		        pmmlt.jsp
+		    </result>
+		</action>
+		<action name="sgreg" class="com.yq.manager.action.SgRegAction">
+		    <result name="success">
+		        sgreg.jsp
+		    </result>
+		</action>
+		<action name="delusersave" class="com.yq.manager.action.DelUserAction">
+		    <result name="success">
+		        delusersave.jsp
+		    </result>
+		</action>
+		
+		<action name="transferRecord" class="com.yq.manager.action.TransferRecordAction">
+		    <result name="success">
+		        transferRecord.jsp
+		    </result>
+		</action>
+		<action name="datepay" class="com.yq.manager.action.AdminDatePayAction">
+		    <result name="success">
+		        datepay.jsp
+		    </result>
+		</action>
+		<action name="datepay2" class="com.yq.manager.action.AdminDatePayAction" method="datepayByDateAndUserName">
+		    <result name="success">
+		        datepay2.jsp
+		    </result>
+		</action>		
+		<action name="outdpexcel" class="com.yq.manager.action.AdminDatePayAction" method="outDpExcel">
+		</action>
+		
+		<action name="backcountinput" class="com.yq.manager.action.BackCountAction">
+		    <result name="success">
+		        backcount.jsp
+		    </result>
+		</action>	
+		<action name="backcount" class="com.yq.manager.action.BackCountAction" method="backCount">
+		    <result name="success">
+		        backcount.jsp
+		    </result>
+		</action>
+		
+		<action name="date" class="com.yq.manager.action.DateAction">
+		    <result name="success">
+		        date.jsp
+		    </result>
+		</action>	
+		<action name="gpjysc" class="com.yq.manager.action.GpjyscAction">
+		    <result name="success">
+		        gpjysc.jsp
+		    </result>
+		</action>
+		
+		<action name="gpjy" class="com.yq.manager.action.GpjyAction">
+		    <result name="success">
+		        gpjy.jsp
+		    </result>
+		</action>
+		
+		<action name="bdbjzpay" class="com.yq.manager.action.BdbjzpayAction">
+		    <result name="input">
+		        bdbjzpay.jsp
+		    </result>
+		    <result name="success">
+		        bdbjzpay.jsp
+		    </result>
+		</action>
+		<action name="bdbpay" class="com.yq.manager.action.BdbjzpayAction" method="bdbpay">
+		    <result name="input">
+		        bdbpay.jsp
+		    </result>
+		    <result name="success">
+		        bdbpay.jsp
+		    </result>
+		</action>
+		<action name="newsdate" class="com.yq.manager.action.NewsDateAction">
+		    <result name="success">
+		        newsdate.jsp
+		    </result>
+		</action>
+		
+	   <action name="cgcp" class="com.yq.manager.action.BuyManagerAction">
+		    <result name="success">
+		        cpcg.jsp
+		    </result>
+		</action>
+	   <action name="hfcg" class="com.yq.manager.action.BuyManagerAction" method="recoverGoods">
+		    <result name="success">
+		        cpcg.jsp
+		    </result>
+		</action>	
+		<action name="fwdate" class="com.yq.manager.action.BuyManagerAction" method="fwdate">
+		    <result name="success">
+		        cpcg.jsp
+		    </result>
+		</action>
+		<action name="adslist" class="com.yq.manager.action.NoticeAction" method="showList">
+		    <result name="success">
+		        adslist.jsp
+		    </result>
+		</action>
+        <action name="showcontent" class="com.yq.manager.action.NoticeAction" method="showContent">
+		    <result name="success">
+		        showcontent.jsp
+		    </result>
+		</action>		
+		<action name="addnotice" class="com.yq.manager.action.NoticeAction" method="add">
+		    <result name="success">
+		        addnotice.jsp
+		    </result>
+		    <result name="redirect" type="redirect">
+		        adslist
+		    </result>
+		</action>
+		
+		<action name="editnotice" class="com.yq.manager.action.NoticeAction" method="edit">
+            <result name="success">
+		        editnotice.jsp
+		    </result>
+		    <result name="redirect" type="redirect">
+		        adslist
+		    </result>
+		</action>
+		<action name="doubleareacount" class="com.yq.manager.action.DoubleAreaCountAction">
+		    <result name="input">
+		        doubleareacount.jsp
+		    </result>
+		    <result name="success">
+		        doubleareacount.jsp
+		    </result>
+		</action>		
+		
+		<action name="dluser" class="com.yq.manager.action.DluserAction">
+		    <result name="input">
+		        dluser.jsp
+		    </result>
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="csheng" class="com.yq.manager.action.DluserAction" method="changeShengAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="cshi" class="com.yq.manager.action.DluserAction" method="changeShiAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="carea" class="com.yq.manager.action.DluserAction" method="changeAreaAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>			
+		<action name="cbigarea" class="com.yq.manager.action.DluserAction" method="changeBigAreaAdmin">
+		    <result name="success">
+		        dluser.jsp
+		    </result>
+		</action>
+		<action name="gaiuser" class="com.yq.manager.action.GaiuserAction">
+		    <result name="success">
+		        gaiuser.jsp
+		    </result>
+		</action>
+		<action name="adminbduser" class="com.yq.manager.action.AdminBdUserAction">
+		    <result name="input">
+		        adminBdUser.jsp
+		    </result>
+		    <result name="success">
+		        adminBdUser.jsp
+		    </result>
+		</action>
+		<action name="sqdayadd" class="com.yq.manager.action.SqdayAddAction">
+		    <result name="success">
+		        sqdayadd.jsp
+		    </result>
+		</action>
+		<action name="searchByTime" class="com.yq.manager.action.SqdayAddAction" method="searchByTime">
+		    <result name="success">
+		        sqdayadd.jsp
+		    </result>
+		</action>
+		<action name="sqdayaddexcel" class="com.yq.manager.action.SqdayAddAction" method="outExcel">
+		</action>	
+		<action name="sqdayaddexceltime" class="com.yq.manager.action.SqdayAddAction" method="outExcelTime">
+		</action>	
+		<action name="w10" class="com.yq.manager.action.W10Action">
+		    <result name="success">
+		        w10.jsp
+		    </result>
+		</action>	
+		<action name="syusers" class="com.yq.manager.action.W10Action" method="syusers">
+		    <result name="success">
+		       w10.jsp
+		    </result>
+		</action>
+		<action name="setVerify" class="com.yq.manager.action.W10Action" method="setVerify">
+		    <result name="success">
+		       w10.jsp
+		    </result>
+		</action>
+		<action name="tduser" class="com.yq.manager.action.TduserAction">
+		    <result name="success">
+		       tduser.jsp
+		    </result>
+		</action>
+		<action name="tduser-search" class="com.yq.manager.action.TduserAction" method="search">
+		    <result name="success">
+		       tduser.jsp
+		    </result>
+		</action>
+		<action name="tduser-edit" class="com.yq.manager.action.TduserAction" method="edit">
+		    <result name="success">
+		       tduser.jsp
+		    </result>
+		    <result name="redirect" type="redirect">
+		       tduser?cjpa=${cjpa}
+		    </result>		    
+		</action>
+		<action name="tduser-add" class="com.yq.manager.action.TduserAction" method="add">
+		    <result name="redirect" type="redirect">
+		       tduser?cjpa=${cjpa}
+		    </result>
+		    <result name="success">
+		       tduser.jsp
+		    </result>		    
+		</action>
+		<action name="tduser-transfer" class="com.yq.manager.action.TduserAction" method="transferUser">
+		    <result name="redirect" type="redirect">
+		       tduser?cjpa=${cjpa}
+		    </result>
+		    <result name="success">
+		       tduser.jsp
+		    </result>		    
+		</action>
+		<action name="bdbList" class="com.yq.cservice.action.SearchUserAction" method="dbdList">
+			<result name="success" >/cs/bdbList.jsp</result>
+		</action>
+		<action name="telpayhander" class="com.yq.manager.action.TelPayByHandAction">
+		    <result name="success">
+		      telpayhandler.jsp
+		    </result>
+		</action>
+		
+		<action name="viptrasferdetail" class="com.yq.manager.action.VipTransferDetailsAction">
+		    <result name="success">
+		      viptrasferdetail.jsp
+		    </result>
+		</action>
+		<action name="ybcjbstat" class="com.yq.manager.action.VipTransferDetailsAction" method="stat">
+		    <result name="success">
+		      ybcjbstat.jsp
+		    </result>
+		</action>
+		<action name="editYbSale" class="com.yq.manager.action.EditYbSaleAction">
+		    <result name="success">
+		      editybsale.jsp
+		    </result>
+		</action>	
+		<action name="jfcfshow" class="com.yq.manager.action.JfcfAction">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+		<action name="closeMm" class="com.yq.manager.action.JfcfAction" method="closeMrMcJf">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+		<action name="djm" class="com.yq.manager.action.JfcfAction" method="dealJfMr">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+		<action name="cf" class="com.yq.manager.action.JfcfAction" method="chaifeng">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>
+				<action name="dm" class="com.yq.manager.action.JfcfAction" method="cfdm">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>	
+		
+		<action name="userper" class="com.yq.manager.action.PerformanceSearchAction">
+		    <result name="success">
+		      userper.jsp
+		    </result>
+		</action>
+		<action name="userperlist" class="com.yq.manager.action.PerformanceSearchAction" method="list">
+		    <result name="success">
+		      userperlist.jsp
+		    </result>
+		</action>
+		
+		<action name="insertuser" class="com.yq.manager.action.InsertPositionAction">
+		    <result name="success">
+		      insertuser.jsp
+		    </result>
+		</action>
+		
+		<action name="vipcjbdetails" class="com.yq.manager.action.VipcjbDetailsAction">
+		   <result name="success">
+		      vipcjbdetails.jsp
+		    </result>
+		</action>
+		<action name="vipcjbdetailsoutexcel" class="com.yq.manager.action.VipcjbDetailsAction" method="outExcel">
+		</action>
+		
+		<action name="searchfcxt" class="com.yq.manager.action.FcxtAction">
+		  <result name="success">
+		      searchfcxt.jsp
+		    </result>
+		</action>
+		
+		<action name="updateCz04" class="com.yq.manager.action.FcxtAction" method="updateRation">
+		   <result name="success" type="redirect">
+		      /admin/searchfcxt?erroCodeNum=2001
+		    </result>
+		</action>
+		
+		<action name="updateCurrentCharge" class="com.yq.manager.action.FcxtAction" method="updateCurrentCharge">
+		   <result name="success" type="redirect">
+		      /admin/searchfcxt?erroCodeNum=2002
+		    </result>
+		</action>
+		
+		<action name="updateuservip" class="com.yq.manager.action.ModifyaabuserAction" method="updateUserVipInfo">
+		   <result name="input" >
+		      /admin/updateuservip.jsp
+		    </result>
+		    <result name="success" type="redirect">
+		      /admin/updateuservip?erroCodeNum=${erroCodeNum}&amp;user=${user}
+		    </result>
+		    
+		</action>
+		
+		<action name="updateuserpayok" class="com.yq.manager.action.ModifyaabuserAction" method="updateUserPayOk">
+		    <result name="success">
+		      /admin/updateuserpayok.jsp
+		    </result>
+		</action>
+		
+		
+		<action name="tools" class="com.yq.manager.action.ToolsAction">
+		    <result name="success" type="json">
+		      <param name="includeProperties">erroCodeNum</param>
+		    </result>
+		</action>
+	</package>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="adminLogin" extends="noLoginInterceptor" namespace="/">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="adminindex" class="com.yq.manager.action.AdminLoginAction">
+			<result name="success" >/admin/default.jsp</result>
+			<result name="redirect" type="redirect">/admin/adminmanager</result>
+		</action>
+		
+		<action name="babyList" class="com.yq.user.action.BabyAction" method="babyList">
+		    <result name="success">
+		      /admin/babyinfolist.jsp
+		    </result>
+		</action>
+		<action name="outBabyExcel" class="com.yq.user.action.BabyAction" method="outExcel">
+		    <result name="success">
+		      /admin/babyinfolist.jsp
+		    </result>
+		</action>
+        <action name="editBaby" class="com.yq.user.action.BabyAction" method="edit">
+		    <result name="success">
+		      /admin/editbabyinfo.jsp
+		    </result>
+		</action>
+		<action name="delBaby" class="com.yq.user.action.BabyAction" method="delete">
+		    <result name="success">
+		      /admin/editbabyinfo.jsp
+		    </result>
+		</action>
+		<action name="recBaby" class="com.yq.user.action.BabyAction" method="recover">
+		    <result name="success">
+		      /admin/editbabyinfo.jsp
+		    </result>
+		</action>
+	</package>
+
+
+    <package name="adminInterceptor" extends="myInterceptor">
+
+		<interceptors>
+			<!-- 认证拦截器-->
+			<interceptor name="adminInterceptor"
+				class="com.yq.manager.interceptor.AdminInterceptor" />
+			<interceptor-stack name="managerStack">
+				<interceptor-ref name="adminInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="managerStack" />
+
+		<global-results>
+			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
+			<result name="nologin" type="redirect">
+				/adminindex
+			</result>
+		</global-results>
+	</package>
+</struts>

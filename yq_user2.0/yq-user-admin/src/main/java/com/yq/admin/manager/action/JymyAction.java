@@ -1,0 +1,22 @@
+package com.yq.admin.manager.action;
+
+import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.manager.service.AdminService;
+import com.yq.user.bo.Gpjy;
+
+public class JymyAction extends ALDAdminPageActionSupport<Gpjy> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public String execute(){
+		
+		super.initPage(ServiceCacheFactory.getService(AdminService.class).getAdminMyPageList(super.getToPage(), 30));
+		
+		return SUCCESS;
+	}
+
+}

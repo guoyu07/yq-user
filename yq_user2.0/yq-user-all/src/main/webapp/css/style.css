@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+/* = CSS重定义
+------------------------------------------------------------ */
+* { margin:0; padding:0; }
+html, body { height:100%; }
+body { font:12px '微软雅黑',Arial, Helvetica, sans-serif; background:#2aa0e3 url(http://vip.zgyce.com/images/bg.jpg) center 0px no-repeat;}
+select, input, button, textarea { font:12px Arial, Helvetica, sans-serif; }
+table { font-size:inherit; font:100%; }
+a { text-decoration:none; color:black; }
+ul, ol { list-style:none; }
+img { border:none; }
+
+/* = 清除浮动元素
+------------------------------------------------------------ */
+.clear { clear:both; display:block; overflow:hidden; visibility:hidden; width:0; height:0 }
+.clearfix:after { clear:both; content:' '; display:block; font-size:0; line-height:0; visibility:hidden; width:0; height:0 }
+* html .clearfix, *:first-child+html .clearfix { zoom:1 }
+
+
+
+.login_area { width:574px; height:350px; position:absolute; top:43%; left:50%; margin-left:-294px; margin-top:-135px; }
+.login{ background:url(../images/box_y.png) no-repeat; width:574px; height:249px; margin-top:20px; }
+.login .tit{ width:100%; height:62px;}
+.login .tit ul{ margin-left:100px; float:left; margin-left:96px; margin-top:10px; }
+.login .tit li{ float:left; width:auto !important; width:1%; white-space:nowrap;}
+.login .tit li a{ display:block; text-decoration:none; color:black; font-size:15px;text-transform:capitalize; padding-left:5px; background:url(../images/a_y.png) no-repeat; color:#fff;}
+.login .tit li a span{ display:block; height:21px; line-height:21px; padding-right:5px;background:url(../images/a_y.png) no-repeat top right;}
+.login .left{ float:left; width:170px; margin-top:-18px; }
+.login .left ul{ width:105px; margin-left:45px; margin-top:145px;}
+.login .left li{  }
+.login .left li a {font-size:13px;}
+.login .right{ float:left; width:390px; margin-left:5px; display:inline; margin-top:15px;}
+.login .right table{}
+.login .right td{  padding:5px 0;}
+.login .right .bt{ /*color:#2094e0;*/ color:#000; font-size:14px;}
+.login .right .text{ width:212px; height:18px; background:#fff; border:1px solid #CCC;}
+.login .right .text2{ float:left; width:140px; height:18px; background:#fff; border:1px solid #CCC;}
+.login .right .check{ float:left; margin-left:10px;}
+.login .right .xy{color:#000; padding-left:10px;}
+.login .right .submit{ text-align:center; line-height:27px; color:#fff; font-size:18px; font-family:"微软雅黑"; float:left; background: url(../images/submit_y.png) no-repeat; width:102px; height:27px; border:0; margin-left:50px; display:inline; cursor:pointer;}

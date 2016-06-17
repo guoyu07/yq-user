@@ -1,0 +1,65 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="cs" extends="csInterceptor" namespace="/cs">
+	     <action name="csindex" class="com.yq.admin.cservice.action.CsLoginAction">
+			<result name="success" >/cs/index.jsp</result>
+		</action>
+		
+	     <action name="chargeRecord" class="com.yq.admin.cservice.action.ChargeRecordAction">
+			<result name="success" >/cs/chargeRecord.jsp</result>
+		</action>
+		
+	     <action name="searchUser" class="com.yq.admin.cservice.action.SearchUserAction">
+			<result name="success" >/cs/searchUser.jsp</result>
+		</action>
+		
+		<action name="chargeBdb" class="com.yq.admin.cservice.action.SearchUserAction" method="chargeBdb">
+			<result name="input1" >/cs/chargeBdb1.jsp</result>
+			<result name="input2" >/cs/chargeBdb2.jsp</result>
+			<result name="success" >/cs/chargeBdb2.jsp</result>
+		</action>
+		
+		<action name="bdbList" class="com.yq.admin.cservice.action.SearchUserAction" method="dbdList">
+			<result name="success" >/cs/bdbList.jsp</result>
+		</action>	
+		
+		<action name="chargeGw" class="com.yq.admin.cservice.action.SearchUserAction" method="chargeGw">
+			<result name="input1" >/cs/chargeGw1.jsp</result>
+			<result name="input2" >/cs/chargeGw2.jsp</result>
+			<result name="success" >/cs/chargeGw2.jsp</result>
+		</action>					
+	</package>
+
+	<!-- 一个包可以就是一个模块 -->
+	<package name="cslogin" extends="noLoginInterceptor" namespace="/">
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="cslogin" class="com.yq.admin.cservice.action.CsLoginAction">
+			<result name="success" >/cs/default.jsp</result>
+			<result name="redirect" type="redirect">/cs/csindex</result>
+		</action>
+	</package>
+
+
+   <package name="csInterceptor" extends="someInterceptor">
+		<interceptors>
+			<!-- 认证拦截器-->
+			<interceptor name="csInterceptor"
+				class="com.yq.admin.cservice.interceptor.CsInterceptor" />
+			<interceptor-stack name="csStack">
+				<interceptor-ref name="csInterceptor" />
+				<interceptor-ref name="someStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="csStack" />
+
+		<global-results>
+			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
+			<result name="nologin" type="redirect">
+				/cslogin
+			</result>
+		</global-results>
+	</package>
+</struts>

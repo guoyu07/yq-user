@@ -1,0 +1,35 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+    <package name="app" extends="appInterceptor" namespace="/app">
+	
+		<!-- 一个包下可以放这个模块下的所有action -->
+		<action name="login" class="com.yq.app.action.AppNoAuthAction" method="login" />
+		
+		<action name="getUserInfo" class="com.yq.app.action.AppAction" method="getUserInfo" />
+	</package>
+
+
+
+   <package name="appInterceptor" extends="json-default">
+		<interceptors>
+			<!-- 认证拦截器-->
+			<interceptor name="appInterceptor"
+				class="com.yq.app.interceptor.AppInterceptor" />
+			<interceptor-stack name="appStack">
+				<interceptor-ref name="appInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="appStack" />
+
+		<global-results>
+			<result type="json" name="json">  
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->  
+                <param name="root">dataMap</param>  
+            </result>  
+		</global-results>
+	</package>
+</struts>

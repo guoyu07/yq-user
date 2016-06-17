@@ -1,0 +1,12 @@
+<!--#include file="../ct0618.asp"-->
+<%
+temusername=request("user")
+set rs=server.createobject("adodb.recordset")
+sql="select * from gcuser where username = '"&temusername&"'"
+rs.open sql,conn2,1,1
+if not rs.eof then
+response.write "<script>alert('用户名："&temusername&"，一币余额为："&rs("pay")&"');location.href='javascript:self.close()'</script>"
+else
+response.write "<script>alert('用户名："&temusername&"，不存在，请重新写入！');location.href='javascript:self.close()'</script>"
+end if
+%>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 	http://www.springframework.org/schema/aop 
+	 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     	http://www.springframework.org/schema/tx 
+     	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        
+       <bean id="adminService" class="com.yq.manager.service.AdminService"></bean>
+       
+       
+       <bean id="jbkzjDao" class="com.yq.manager.dao.JbkzjDao"></bean>
+       <bean id="sgtjDao" class="com.yq.manager.dao.SgtjDao"></bean>
+       
+       <bean id="fhdateDao" class="com.yq.manager.dao.FhdateDao"></bean>
+       <bean id="mqfhDao" class="com.yq.manager.dao.MqfhDao"></bean>
+       <bean id="addShengDao" class="com.yq.manager.dao.AddShengDao"></bean>
+       <bean id="mtfhtjDao" class="com.yq.manager.dao.MtfhtjDao"></bean>
+       
+       <bean id="userPerformanceDao" class="com.yq.user.dao.UserPerformanceDao"></bean>
+       
+       
+       <bean id="pointsChangeLogDao" class="com.yq.manager.dao.PointsChangeLogDao"></bean>
+       
+        <bean id="userVipLogDao" class="com.yq.manager.dao.UserVipLogDao"></bean>
+       
+       <!-- 每日凌晨过1分执行 -->
+       <bean id="backCountScheduler" class="com.yq.manager.scheduler.BackCountScheduler">
+          <property name="cronExpression" value="0 1 0 * * ?"></property>
+       </bean>
+       <!-- 每日 每隔3小时 整点执行 -->
+       <bean id="man123Scheduler" class="com.yq.manager.scheduler.Man123Scheduler">
+          <property name="cronExpression" value="0 0 0,3,6,9,12,15,18,21 * * ?"></property>
+       </bean>
+       <!-- 每日 每隔3小时 整点执行 -->
+       <bean id="manageQueRenScheduler" class="com.yq.manager.scheduler.ManageQueRenScheduler">
+          <property name="cronExpression" value="0 0 1,4,7,10,13,16,19,22 * * ?"></property>
+       </bean>
+       <!-- 每日晚上22点10分执行 -->
+       <bean id="doubleAreaCountScheduler" class="com.yq.manager.scheduler.DoubleAreaScheduler">
+          <property name="cronExpression" value="0 10 22 * * ?"></property>
+       </bean>
+       <!-- 每月1号凌晨0点5份执行    -->
+       <bean id="shareMoneyScheduler" class="com.yq.manager.scheduler.ShareMoneyScheduler">
+          <property name="cronExpression" value=" 0 5 0 1 * ?"></property>
+       </bean>
+       <!-- 每日凌晨过5分执行 -->
+       <bean id="userPerformanceScheduler" class="com.yq.manager.scheduler.UserPerformanceScheduler">
+          <property name="cronExpression" value="0 5 0 * * ?"></property>
+       </bean>
+</beans>
