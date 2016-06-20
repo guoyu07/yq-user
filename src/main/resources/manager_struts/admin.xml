@@ -465,7 +465,7 @@
 		</action>	
 		<action name="sqdayaddexceltime" class="com.yq.manager.action.SqdayAddAction" method="outExcelTime">
 		</action>	
-		<action name="w10" class="com.yq.manager.action.W10Action">
+		<action name="w200" class="com.yq.manager.action.W10Action">
 		    <result name="success">
 		        w10.jsp
 		    </result>
@@ -625,6 +625,23 @@
 		
 		
 		<action name="tools" class="com.yq.manager.action.ToolsAction">
+		    <result name="success" type="json">
+		      <param name="includeProperties">erroCodeNum</param>
+		    </result>
+		    <result name="thesameuserinfo">
+		       /admin/thesameuserinfo.jsp
+		    </result>
+		</action>
+		<action name="toolsthesameuserinfo" class="com.yq.manager.action.ToolsAction" method="theSameUserInfo">
+		    <result name="success" type="json">
+		      <param name="includeProperties">erroCodeNum</param>
+		    </result>
+		    <result name="thesameuserinfo">
+		       /admin/thesameuserinfo.jsp
+		    </result>
+		</action>
+		
+		<action name="toolstheSameUserInfoToExcel" class="com.yq.manager.action.ToolsAction" method="theSameUserInfoToExcel">
 		    <result name="success" type="json">
 		      <param name="includeProperties">erroCodeNum</param>
 		    </result>

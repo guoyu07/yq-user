@@ -2318,7 +2318,7 @@ public class AdminService {
 	}
 	
 	public void editYbSale(String userName,String opPass,int fhpay,int vippay){
-		if(!opPass.equals("yc201503yc")){
+		if(!opPass.equals("yc201scvs")){
 			throw new ServiceException(1, "操作密码错误！");
 		}
 		if(!gcuserDao.updateFhpayAndVippay(userName, fhpay, vippay)){

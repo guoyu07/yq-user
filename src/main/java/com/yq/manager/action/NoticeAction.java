@@ -19,6 +19,9 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 	 * @return
 	 */
 	public String showList(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		super.initPage(adminService.getNoticePageList(super.getToPage(), 20));
 		return SUCCESS;
@@ -27,6 +30,9 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 	private int noticeId;
 	private Dgag dgag;
 	public String showContent(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		ManagerService managerService = ServiceCacheFactory.getService(ManagerService.class);
 		dgag = managerService.getDgag(noticeId);
 		return SUCCESS;
@@ -35,6 +41,9 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 	private String title;
 	private String content;
 	public String add(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		if(status==0){
 			return SUCCESS;
 		}
@@ -51,6 +60,9 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 	
 	private String ggdate;
 	public String edit(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		if(status==0){
 			ManagerService managerService = ServiceCacheFactory.getService(ManagerService.class);
 			dgag = managerService.getDgag(noticeId);

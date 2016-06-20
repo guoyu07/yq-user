@@ -23,6 +23,9 @@ public class BcjbAction extends ALDAdminActionSupport {
 			gcuser =  userService.getUserByUserName(bcid);
 			return INPUT;
 		}
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addJb(bcid, bcjb);
 		gcuser =  userService.getUserByUserName(bcid);

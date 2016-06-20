@@ -16,10 +16,13 @@ public class TelPayByHandAction extends ALDAdminActionSupport {
 	private String user;
 	private String oppa;
 	public String execute(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		if(status==0){
 			return SUCCESS;
 		}
-		if(!oppa.equals("ychfgl")){
+		if(!oppa.equals("kush56ax")){
 			super.setErroCodeNum(1);
 			return SUCCESS;
 		}

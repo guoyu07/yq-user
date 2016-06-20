@@ -26,6 +26,9 @@ public class PerformanceSearchAction extends ALDAdminPageActionSupport<UserPerfo
 	private int status;
 	
 	public String execute(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		if(status==0){
 			return SUCCESS;
 		}
@@ -36,6 +39,9 @@ public class PerformanceSearchAction extends ALDAdminPageActionSupport<UserPerfo
 	//2015年获奖可能获奖用户名单
 	private List<UserPerformance> listTemp;
 	public String list(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		listTemp = adminService .getUserPerformancePage();		
 		return SUCCESS;

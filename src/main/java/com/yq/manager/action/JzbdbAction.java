@@ -23,6 +23,9 @@ public class JzbdbAction extends ALDAdminActionSupport {
 			gcuser =  userService.getUserByUserName(jzid);
 			return INPUT;
 		}
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addSyep(jzid, jzbdb);
 		gcuser =  userService.getUserByUserName(jzid);

@@ -80,7 +80,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 				gcuser = userService.getUserByUserName(user);
 			 return INPUT;
 		 }
-		 if(!oppass.equals("2016opvipp")){
+		 if(!oppass.equals("xms356as4x")){
 				super.setErroCodeNum(1);
 				return SUCCESS;
 			}
@@ -97,7 +97,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		if(status==0){
 			 return SUCCESS;
 		 }
-		if(Strings.isNullOrEmpty(oppass)||!oppass.equals("2016opdownp")){
+		if(Strings.isNullOrEmpty(oppass)||!oppass.equals("20sdjuh")){
 			super.setErroCodeNum(1);
 			return SUCCESS;
 		}
@@ -118,7 +118,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 			 return "updateaqorbq";
 		}
 		
-		if(!oppass.equals("2016opaqandbqp")){
+		if(!oppass.equals("yskjcc23212")){
 			super.setErroCodeNum(1);
 			return "updateaqorbq";
 		}

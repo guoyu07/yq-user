@@ -169,7 +169,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<td height=20>☉  <a href="/admin/sqdayadd" target="BoardList">双区进单明细</a></td> 
 				</tr>
 				<tr>
-				<td height=20>☉  <a href="/admin/w10" target="BoardList">提现申请清单</a></td> 
+				<td height=20>☉  <a href="/admin/w200" target="BoardList">提现申请清单</a></td> 
 				</tr>
 				<tr>
 				<td height=20>☉  <a href="/admin/telpayhander" target="BoardList">手动充话费</a></td> 
@@ -182,7 +182,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				</tr>
 				
 				<tr>
-				<td height=20>☉  <a href="/admin/tools!theSameUserInfo" target="BoardList">同名账号信息查询</a></td> 
+				<td height=20>☉  <a href="/admin/toolsthesameuserinfo" target="BoardList">同名账号信息查询</a></td> 
 				</tr>
 				 <!--<tr>
 				<td height=20>☉  <a href="/admin/insertuser" target="BoardList">挂载用户</a></td> 

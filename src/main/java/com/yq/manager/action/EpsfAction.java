@@ -26,7 +26,9 @@ public class EpsfAction extends ALDAdminActionSupport {
 			gcuser = userService.getUserByUserName(uid);
 			return INPUT;
 		}
-		
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		if(sfpay<=0){
 			
 			return INPUT;

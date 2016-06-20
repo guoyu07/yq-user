@@ -15,6 +15,9 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	private String uname;
 	private String riqi;
 	public String execute(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
         super.initPage(adminService.getTxpayPage(super.getToPage(), 20,uid,uname,riqi));
 		return SUCCESS;
@@ -24,6 +27,9 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	private int op;
 	private int page;
 	public String syusers(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.syusers(payid, op);
 		super.setErroCodeNum(2000);
@@ -33,6 +39,9 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	private String user;
 	private int verify;
 	public String setVerify(){
+		if(!super.getUserName().equals("admin1")){
+			return INPUT;
+		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.setVerifile(user, verify);
 		super.setErroCodeNum(2001);
