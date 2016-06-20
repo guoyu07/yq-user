@@ -157,6 +157,19 @@
 		    
 		</action>
 		
+		<action name="modifyaabuserupdateUserAqOrBq" class="com.yq.manager.action.ModifyaabuserAction" method="updateUserAqOrBq">
+		    <result name="input">
+		        modifyuser.jsp
+		    </result>
+		   <result name="success">
+		        modifyuser.jsp
+		    </result>
+		    <result name="updateaqorbq">
+		        updateaqorbq.jsp
+		    </result>
+		    
+		</action>
+		
 		<action name="usercj" class="com.yq.manager.action.UserCjAction">
 		    <result name="input">
 		        usercj.jsp
