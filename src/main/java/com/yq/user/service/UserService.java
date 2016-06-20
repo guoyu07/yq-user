@@ -1597,8 +1597,8 @@ public class UserService {
 		}
 		
 		//商户账号不能卖出一币
-		if(gcuser.getTxlb()==3){
-			throw new ServiceException(8,"商户账号不能卖出一币！");
+		if(gcuser.getTxlb()==3||gcuser.getJb()==5){
+			throw new ServiceException(8,"商户或商家账号不能卖出一币！");
 		}
 		
 		
