@@ -8,6 +8,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
 import com.yq.app.user.action.SmsAction;
 import com.yq.app.user.action.UpdateUserAction;
@@ -31,11 +32,13 @@ public class UserInterceptor extends AbstractInterceptor {
 		Session userSession = aus.getUserSession(sessionhttp.getId());
 		
 		if (userSession==null) {
+			LogSystem.info("session为空--sessionId="+sessionhttp.getId()+",-====>返回登陆界面!");
 			return "nologin";
 		} else {
 			String userName = userSession.getUserName();
 			
 			if(userName==null){
+				LogSystem.info("session的用户名空--sessionId="+sessionhttp.getId()+",-====>返回登陆界面!"+",session="+userSession.toString());
 				return "nologin";
 			}
 			ALDAdminActionSupport aldAction = null;

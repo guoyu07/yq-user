@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
+import com.sr178.module.utils.JedisUtils;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -36,7 +37,7 @@ public class AdminLogin extends ALDAdminActionSupport {
 				.getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
-		String rand = (String) sessionhttp.getAttribute("rand");
+		String rand = JedisUtils.get("user_rand_"+sessionhttp.getId());//(String) sessionhttp.getAttribute("rand");
 		if (rand == null) {
 			super.setErroCodeNum(1);
 			super.setErroDescrip("验证码过期！");

@@ -1,4 +1,8 @@
 
+<%@page import="org.apache.struts2.ServletActionContext"%>
+<%@page import="com.sr178.game.framework.log.LogSystem"%>
+<%@page import="com.sr178.module.utils.JedisUtils"%>
+<%@page import="redis.clients.jedis.Jedis"%>
 <%@   page   contentType="image/jpeg"   import="java.awt.*,java.awt.image.*,java.util.*,javax.imageio.*"   %>   
   <%!   
   Color   getRandColor(int   fc,int   bc){ 
@@ -59,9 +63,13 @@ try{
 
   g.drawString(rand,20*i+20,32);   
   }   
-    
-  
-  session.setAttribute("rand",sRand);   
+  HttpSession sessionhttp = ServletActionContext.getRequest()
+			.getSession();
+   String key = "user_rand_"+sessionhttp.getId();
+   LogSystem.info("random=+key="+key+",value="+sRand+",ip="+request.getRemoteAddr());
+  JedisUtils.setString(key, sRand);
+  JedisUtils.expireKey(key, 600);
+  //session.setAttribute("rand",sRand);   
 
   g.dispose();   
     
