@@ -39,6 +39,11 @@
 			<!-- <result name="success">vip/datepay.jsp</result> -->
 			<result name="success">view/yblc-userscoreslog.jsp</result>
 		</action>
+		 <action name="userscoreslogoutExcel" class="com.yq.user.action.UserScoresLogAction" method="outExcel">
+            <!-- <result name="success">vip/datepay.jsp</result> -->
+            <result name="success">view/yblc-userscoreslog.jsp</result>
+        </action>
+		
 		<action name="tgurl" class="com.yq.app.user.action.TgurlAction">
 		   <!--  <result name="success">vip/tgurl.jsp</result> -->
 		   <result name="success">view/grxx-rule.jsp</result>

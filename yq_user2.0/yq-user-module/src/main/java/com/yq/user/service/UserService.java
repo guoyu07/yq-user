@@ -1629,8 +1629,8 @@ public class UserService {
 		}
 		
 		//商户账号不能卖出一币
-		if(gcuser.getTxlb()==3){
-			throw new ServiceException(8,"商户账号不能卖出一币！");
+        if(gcuser.getTxlb()==3||gcuser.getJb()==5){
+            throw new ServiceException(8,"商户或商家账号不能卖出一币！");
 		}
 		
 		
@@ -1724,7 +1724,7 @@ public class UserService {
 	@Transactional
 	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy,double ration){
 		
-		if(!password3.equals("gltk2016yc")){
+        if(!password3.equals("gliy18th")){
 			throw new ServiceException(1, "操作密码不正确！");
 		}
 		
@@ -3307,7 +3307,7 @@ public class UserService {
 		if(zuoMingxiDao.get(fromUserName, toUserName)==null&&youMingXiDao.get(fromUserName, toUserName)==null){
 			throw new ServiceException(1, "用户名输入错误或不属于自己团队的玩家，请检查后再试！");
 		}
-		if(!password.equals("vip2016cjxt")){
+        if(!password.equals("xyhk655ss")){
 			throw new ServiceException(2, "充值密码不正确！");
 		}
 		Gcuser toUser = gcuserDao.getUser(toUserName);

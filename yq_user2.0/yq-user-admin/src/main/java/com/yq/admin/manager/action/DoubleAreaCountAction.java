@@ -17,6 +17,10 @@ public class DoubleAreaCountAction extends ALDAdminActionSupport {
 	private int status;
 	
 	public String execute(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
+
 		if(status==0){
 			ManagerService managerService = ServiceCacheFactory.getService(ManagerService.class);
 			Fcxt fcxt = managerService.getFcxtById(2);

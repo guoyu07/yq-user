@@ -4,11 +4,11 @@
 <c:if test="${erroCodeNum==2000}">
 <c:if test="${op==1}"><c:set var="str" value="暂停"></c:set></c:if>
 <c:if test="${op==0}"><c:set var="str" value="恢复"></c:set></c:if>
-<script language=javascript>alert('${str}该笔交易成功！');location.href="w10?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
+<script language=javascript>alert('${str}该笔交易成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
 </c:if>
 
 <c:if test="${erroCodeNum==2001}">
-<script language=javascript>alert('设置成功！');location.href="w10?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
+<script language=javascript>alert('设置成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
 </c:if>
 
 <HTML>

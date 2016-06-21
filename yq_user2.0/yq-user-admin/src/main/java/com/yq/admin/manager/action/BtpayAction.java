@@ -17,7 +17,10 @@ public class BtpayAction extends ALDAdminActionSupport {
 	private String uid;
 	private Gcuser gcuser;
 	private int btpay;
-	public String execute(){
+	public String executexxxxxx(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		if(status==0||btpay==0){
 			gcuser = userService.getUserByUserName(uid);

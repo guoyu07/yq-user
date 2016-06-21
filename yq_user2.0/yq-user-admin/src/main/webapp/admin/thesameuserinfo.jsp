@@ -9,7 +9,7 @@
 <script src="/scripts/jquery.datetimepicker.js"></script>
  <script type="text/javascript">
  function exportExcel(){
-	 var url="tools!theSameUserInfoToExcel?cardNum="+Form.cardNum.value;
+     var url="toolstheSameUserInfoToExcel?cardNum="+Form.cardNum.value;
 	 window.open(url,'new','toolbar=no,scrollbars=yes,width=800,height=850');
  }
  </script>

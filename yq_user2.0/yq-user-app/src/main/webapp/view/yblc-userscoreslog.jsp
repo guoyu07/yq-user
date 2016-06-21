@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="/scripts/jquery.datetimepicker.css"/> 
      <script type="text/javascript">
 		 function exportExcel(){
-			 var url="userscoreslog!outExcel?&startDate1="+Form.startDate1.value+"&endDate1="+Form.endDate1.value;
+             var url="userscoreslogoutExcel?&startDate1="+Form.startDate1.value+"&endDate1="+Form.endDate1.value;
 			 window.open(url,'new','toolbar=no,scrollbars=yes,width=800,height=850');
 		 }
 	</script>

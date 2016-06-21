@@ -174,7 +174,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<font size="3">&nbsp;&nbsp;&nbsp;</font><c:if test="${fcxt.id==1||fcxt.id==2}"><a href="updateuservip?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改vip】</font></a>
 		</c:if></b></font>
 		<c:if test="${fcxt.id==1||fcxt.id==2}"><a href="updateuserpayok?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改团队下提现限制】</font></a>
-		<a href="modifyaabuser!updateUserAqOrBq?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改用户可结算区】</font></a>
+        <a href="modifyaabuserupdateUserAqOrBq?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改用户可结算区】</font></a>
 		</c:if>
 		
 		

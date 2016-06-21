@@ -27,6 +27,10 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
     private List<Province> provinceList = Lists.newArrayList();
 	private Integer day;
 	public String execute(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
+
 		ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 		provinceList = provinceDao.getProvinceList();
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
@@ -36,6 +40,10 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	}
 	
 	public String outExcel(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
+
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String path = ServletActionContext.getServletContext().getRealPath("/");
 		String[] titleArray = new String[]{"前天","昨天","今天"};
@@ -56,6 +64,10 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	private String sheng;
 	
 	public String outExcelTime(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
+
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String path = ServletActionContext.getServletContext().getRealPath("/");
 		String descDirectoryPath = path + "/temp/"+startDate+"-"+endDate+"新开户数据.xls";
@@ -69,6 +81,10 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	}
 	
 	public String searchByTime(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
+
 		ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 		provinceList = provinceDao.getProvinceList();
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);

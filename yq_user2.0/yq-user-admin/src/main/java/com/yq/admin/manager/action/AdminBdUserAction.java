@@ -16,6 +16,9 @@ public class AdminBdUserAction extends ALDAdminActionSupport {
 	private int sjb;
 	
 	public String execute(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
 		if(status==0){
 			return INPUT;
 		}

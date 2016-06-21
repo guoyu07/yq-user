@@ -20,7 +20,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
  function checkdate()  {  
   return true;  }  
  </script>
-<form METHOD="POST" action="modifyaabuser!updateUserAqOrBq?status=1&user=${user}" onSubmit="return checkdate();" name="Form" id="Form">
+<form METHOD="POST" action="modifyaabuserupdateUserAqOrBq?status=1&user=${user}" onSubmit="return checkdate();" name="Form" id="Form">
     <div align="center">
       <center>
     <table border="1" width="100%" cellpadding="4" class=lowcolor cellspacing="0" style="border-collapse: collapse" bordercolor="#FFFFFF" height="123">

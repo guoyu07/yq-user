@@ -17,6 +17,9 @@ public class InsertPositionAction extends ALDAdminActionSupport {
 	private int status;
 	private int sjb;
 	public String execute(){
+        if(!super.getUserName().equals("admin1")){
+            return INPUT;
+        }
 		if(status==0){
 			return SUCCESS;
 		}
