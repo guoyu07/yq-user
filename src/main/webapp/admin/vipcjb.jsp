@@ -21,7 +21,7 @@ return true;  }
 				<td align="center" height="27"><p align="center">(累计：<font color="#FF0000">${gcuser.vipljcjb}</font>)(剩余：<font color="#FF0000">${gcuser.vipcjcjb}</font>)</td>
 			</tr>
 			<tr>
-				<td align="center"><b><font size="2">充值金额：</font></b><input type="text" name="cjb" size="8" onKeyUp="value=value.replace(/[^\d]/g,'')"></td>
+				<td align="center"><b><font size="2">充值金额：</font></b><input type="text" name="cjb" size="8" />（负数为减充值币）</td>
 			</tr>
 		</table>
 	</div>

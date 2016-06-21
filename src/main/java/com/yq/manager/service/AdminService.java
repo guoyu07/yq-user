@@ -1410,24 +1410,39 @@ public class AdminService {
 	 * @param addAmount
 	 */
 	public void addVipcjb(String userName,int addAmount){
-		if(addAmount<1000||addAmount%1000!=0){
-			throw new ServiceException(1, "充值必须是1000的倍整数如：2000，3000，4000，5000，6000，7000，8000，请检查输入是否正确！");
-		}
+//		if(addAmount<1000||addAmount%1000!=0){
+//			throw new ServiceException(1, "充值必须是1000的倍整数如：2000，3000，4000，5000，6000，7000，8000，请检查输入是否正确！");
+//		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser==null||!isCanUseVipCjb(gcuser)){
 			throw new ServiceException(2, "本功能只能VIP玩家开放！");
 		}
 		
-		if(gcuserDao.addVipcjcjb(userName, addAmount)){
-			Vipcjgl vipcjgl = new Vipcjgl();
-			vipcjgl.setCjuser("系统");
-			vipcjgl.setCjjo(addAmount);
-			vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
-			vipcjgl.setVipuser(userName);
-			vipcjgl.setBz("入账");
-			vipcjgl.setCjdate(new Date());
-			vipcjglDao.add(vipcjgl);
+		if(addAmount>0){
+			if(gcuserDao.addVipcjcjb(userName, addAmount)){
+				Vipcjgl vipcjgl = new Vipcjgl();
+				vipcjgl.setCjuser("系统");
+				vipcjgl.setCjjo(addAmount);
+				vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
+				vipcjgl.setVipuser(userName);
+				vipcjgl.setBz("入账");
+				vipcjgl.setCjdate(new Date());
+				vipcjglDao.add(vipcjgl);
+			}
+		}else{
+			if(gcuserDao.reduceVipcjcjb(userName, addAmount*-1)){
+				Vipcjgl vipcjgl = new Vipcjgl();
+				vipcjgl.setCjuser("系统");
+				vipcjgl.setCjjo(addAmount);
+				vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
+				vipcjgl.setVipuser(userName);
+				vipcjgl.setBz("扣除");
+				vipcjgl.setCjdate(new Date());
+				vipcjglDao.add(vipcjgl);
+			}
 		}
+		
+		
 	}
 	
 	private boolean isCanUseVipCjb(Gcuser gcuser){
