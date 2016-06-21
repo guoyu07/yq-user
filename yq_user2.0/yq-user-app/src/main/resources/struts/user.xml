@@ -39,7 +39,7 @@
 			<!-- <result name="success">vip/datepay.jsp</result> -->
 			<result name="success">view/yblc-userscoreslog.jsp</result>
 		</action>
-		 <action name="userscoreslogoutExcel" class="com.yq.user.action.UserScoresLogAction" method="outExcel">
+		 <action name="userscoreslogoutExcel" class="com.yq.app.user.action.UserScoresLogAction" method="outExcel">
             <!-- <result name="success">vip/datepay.jsp</result> -->
             <result name="success">view/yblc-userscoreslog.jsp</result>
         </action>
