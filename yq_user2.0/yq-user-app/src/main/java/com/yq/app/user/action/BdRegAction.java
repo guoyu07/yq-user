@@ -38,7 +38,7 @@ public class BdRegAction extends ALDAdminActionSupport {
 		try {
 			if(status!=0){
 			String myvip = userService.findMyUpVipName(bduser);
-			if(myvip.equals("syf66669a")){
+			if(myvip.equals("syf66669a")||myvip.equals("bjv168")){
 				GcuserDao gcuserDao = ServiceCacheFactory.getServiceCache().getService(GcuserDao.class);
 				gcuserDao.updatePayOkForUserName(bduser, 2);
 				LogSystem.info("bdReg---syf66669a-->旗下用户"+bduser+",限制提现成功！···");

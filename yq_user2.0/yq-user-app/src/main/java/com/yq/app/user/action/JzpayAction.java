@@ -34,7 +34,7 @@ public class JzpayAction extends ALDAdminActionSupport {
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
-		if(!super.getUserName().equals("300fhk")&&!super.getUserName().equals("zxz888")){
+        if(!super.getUserName().equals("300fhk")&&!super.getUserName().equals("zxz888")&&!super.getUserName().equals("bjcaltd")){
 			super.setErroCodeNum(7);
 			return SUCCESS;
 		}

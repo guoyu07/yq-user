@@ -44,7 +44,7 @@ public class SgxtDao {
 	}
 	
 	public boolean updateAuid(String userName,String auid){
-		String sql = "update "+table+" set auid=? where username=?";
+		String sql = "update "+table+" set auid=? where username=? and auid is null";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(auid);
 		parameter.setString(userName);
@@ -52,7 +52,7 @@ public class SgxtDao {
 	}
 	
 	public boolean updateBuid(String userName,String buid){
-		String sql = "update "+table+" set buid=? where username=?";
+		String sql = "update "+table+" set buid=? where username=? and buid is null";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(buid);
 		parameter.setString(userName);

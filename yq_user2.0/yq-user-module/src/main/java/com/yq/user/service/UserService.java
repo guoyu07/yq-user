@@ -945,9 +945,13 @@ public class UserService {
 				}
 //			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
-				sgxtDao.updateAuid(tuser.getUsername(), bduser);
+				if(!sgxtDao.updateAuid(tuser.getUsername(), bduser)){
+					throw new ServiceException(15,"接点人位置已被占用，请重新选择！");
+				}
 			}else{
-				sgxtDao.updateBuid(tuser.getUsername(), bduser);
+				if(sgxtDao.updateBuid(tuser.getUsername(), bduser)){
+					throw new ServiceException(15,"接点人位置已被占用，请重新选择！");
+				}
 			}
 			
 //			int jszfh=0;
@@ -3817,6 +3821,7 @@ public class UserService {
 		}
 		return "xtgc001";
 	}
+	
 	
 	@Transactional
 	public void addBabyInfo(String userName,String babyName, int babyAge, String babySex, String dadyName,
