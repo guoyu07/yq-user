@@ -58,7 +58,7 @@ function dbz_show(){
 						<p class="f-tk c-g">您的用户名是 <span class="c-r">${userName}</span></p>
 						<p class="z-b" style="padding-left:70px;">您的一币为：<b class="c-r">${gcuser.pay}</b></p>
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/glpay?status=1">
-						    <p><label class="c-r">转出用户名：</label><input type="text" name="fromUser" size="15" maxlength="20"></p>
+						    <p><label class="c-r">转出用户名：</label><input type="text" name="fromUser" size="15" maxlength="20" value="${userName}"></p>
 							<p><label class="c-r">转入用户名：</label><input type="text" name="jzuser" size="15" maxlength="20"></p>
 							<p><label>转账金额：</label><input style="width:100px;" type="text" name="jzpay" size="15"></p>
 							<p><label>操作密码：</label><input type="password" name="pa3" size="15"></p>
