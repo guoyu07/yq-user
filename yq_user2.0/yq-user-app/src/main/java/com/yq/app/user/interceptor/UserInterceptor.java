@@ -32,13 +32,11 @@ public class UserInterceptor extends AbstractInterceptor {
 		Session userSession = aus.getUserSession(sessionhttp.getId());
 		
 		if (userSession==null) {
-			LogSystem.info("session为空--sessionId="+sessionhttp.getId()+",-====>返回登陆界面!");
 			return "nologin";
 		} else {
 			String userName = userSession.getUserName();
 			
 			if(userName==null){
-				LogSystem.info("session的用户名空--sessionId="+sessionhttp.getId()+",-====>返回登陆界面!"+",session="+userSession.toString());
 				return "nologin";
 			}
 			ALDAdminActionSupport aldAction = null;

@@ -4,7 +4,7 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>中国一川（澳门）国际有限公司</title>
+	<title>会员中心</title>
 	<link rel="stylesheet" href="/css/common.css" />
 	<script type="text/javascript" src="/images/jquery.min.js"></script>
 	<script language="JavaScript"> 

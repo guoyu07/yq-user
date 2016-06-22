@@ -39,7 +39,7 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
 <div align="center">
   <center>
   <p align="left">
- <form name="form" method="POST" action="w10">
+ <form name="form" method="POST" action="w200">
 		<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 9pt">用户名：<input type="text" name="uid" size="20" value="${uid}"> 名字：<input type="text" name="uname" size="20" value="${uname}">日期：<input type="text" name="riqi" id="riqi" size="20" value="${riqi}"><input type="submit" name="Submit" value="搜索">&nbsp;&nbsp;&nbsp; </span>
 		</p>
 		</form></p>

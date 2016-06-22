@@ -156,7 +156,7 @@
 		    </result>
 		    
 		</action>
-		<action name="modifyaabuserupdateUserAqOrBq" class="com.yq.manager.action.ModifyaabuserAction" method="updateUserAqOrBq">
+		<action name="modifyaabuserupdateUserAqOrBq" class="com.yq.admin.manager.action.ModifyaabuserAction" method="updateUserAqOrBq">
             <result name="input">
                 modifyuser.jsp
             </result>
@@ -464,7 +464,7 @@
 		</action>	
 		<action name="sqdayaddexceltime" class="com.yq.admin.manager.action.SqdayAddAction" method="outExcelTime">
 		</action>	
-        <action name="w200" class="com.yq.manager.action.W10Action">
+        <action name="w200" class="com.yq.admin.manager.action.W10Action">
 		    <result name="success">
 		        w10.jsp
 		    </result>
@@ -632,7 +632,7 @@
 		    </result>
 		</action>
 		
-		        <action name="toolsthesameuserinfo" class="com.yq.manager.action.ToolsAction" method="theSameUserInfo">
+		        <action name="toolsthesameuserinfo" class="com.yq.admin.manager.action.ToolsAction" method="theSameUserInfo">
             <result name="success" type="json">
               <param name="includeProperties">erroCodeNum</param>
             </result>
@@ -641,7 +641,7 @@
             </result>
         </action>
         
-        <action name="toolstheSameUserInfoToExcel" class="com.yq.manager.action.ToolsAction" method="theSameUserInfoToExcel">
+        <action name="toolstheSameUserInfoToExcel" class="com.yq.admin.manager.action.ToolsAction" method="theSameUserInfoToExcel">
             <result name="success" type="json">
               <param name="includeProperties">erroCodeNum</param>
             </result>

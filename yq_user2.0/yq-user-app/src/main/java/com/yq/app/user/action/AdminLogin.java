@@ -37,7 +37,7 @@ public class AdminLogin extends ALDAdminActionSupport {
 				.getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
-		String rand = JedisUtils.get("user_rand_"+sessionhttp.getId());//(String) sessionhttp.getAttribute("rand");
+		String rand = (String) sessionhttp.getAttribute("rand");
 		if (rand == null) {
 			super.setErroCodeNum(1);
 			super.setErroDescrip("验证码过期！");

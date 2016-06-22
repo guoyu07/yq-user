@@ -159,14 +159,12 @@ public class UserService {
     }
     
     public void setSession(String sessionId,Session session){
-    	LogSystem.info("添加session="+sessionId);
     	String key = generatorCacheKey(sessionId);
     	JedisUtils.setObject(key, session);
     	JedisUtils.expireKey(key, SESSION_EXPERI_SECONDS);
     }
     
     public void delSession(String sessionId){
-    	LogSystem.info("删除session="+sessionId);
     	String key = generatorCacheKey(sessionId);
     	JedisUtils.delete(key);
     }

@@ -5,11 +5,11 @@
 </head>
 <c:if test="${gcuser.dqu=='0' || gcuser.dqu=='2' || gcuser.dqu=='7' || gcuser.dqu=='8'}">
 <c:set var="qq" value="613697151"></c:set>
-<c:set var="cz01" value="中国一川【①号】客服QQ：613697151"></c:set>
+<c:set var="cz01" value="本公司【①号】客服QQ：613697151"></c:set>
 </c:if>
 <c:if test="${gcuser.dqu=='1' || gcuser.dqu=='3' || gcuser.dqu=='4' || gcuser.dqu=='5' || gcuser.dqu=='6'}">
 <c:set var="qq" value="613697152"></c:set>
-<c:set var="cz01" value="中国一川【②号】客服QQ：613697152"></c:set>
+<c:set var="cz01" value="本公司【②号】客服QQ：613697152"></c:set>
 </c:if>
 <p align="center"><b><font size="7" color="#008000">积分抢购专区</font></b></p>
 <p align="center"><span style="font-size: 11pt">有任何事情请联系：<b><font color="#0000FF">${cz01}</font></b> </span><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a><b><font size="2" color="#FF0000">&nbsp;重要提示：抢购没有100%的抢中，请量力而行！</font></b></p>

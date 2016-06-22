@@ -4,7 +4,7 @@
 <html lang="en" class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>中国一川（澳门）国际有限公司--积分游戏、消费增值平台、员工内部薪酬结算、办公、游戏理财及娱乐休闲平台！</title>
+        <title>会员中心--积分游戏、消费增值平台、员工内部薪酬结算、办公、游戏理财及娱乐休闲平台！</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">

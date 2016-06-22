@@ -2,7 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:if test="${gcuser.dqu=='0' || gcuser.dqu=='2' || gcuser.dqu=='7' || gcuser.dqu=='8'}">
 <c:set var="qq" value="613697151"></c:set>
-<c:set var="cz01" value="中国一川【①号】客服QQ：613697151"></c:set>
+<c:set var="cz01" value="本公司【①号】客服QQ：613697151"></c:set>
 <c:set var="cz02" value="陈文娟"></c:set>
 <c:set var="ghbank" value="6212262002007387842"></c:set>
 <c:set var="nhbank" value=""></c:set>
@@ -14,7 +14,7 @@
 </c:if>
 <c:if test="${gcuser.dqu=='1' || gcuser.dqu=='3' || gcuser.dqu=='4' || gcuser.dqu=='5' || gcuser.dqu=='6'}">
 <c:set var="qq" value="613697152"></c:set>
-<c:set var="cz01" value="中国一川【②号】客服QQ：613697152"></c:set>
+<c:set var="cz01" value="本公司【②号】客服QQ：613697152"></c:set>
 <c:set var="cz02" value="陈文娟"></c:set>
 <c:set var="ghbank" value="6212262002007387842"></c:set>
 <c:set var="nhbank" value=""></c:set>
@@ -28,7 +28,7 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>中国一川（澳门）国际有限公司</title>
+	<title>会员中心</title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>

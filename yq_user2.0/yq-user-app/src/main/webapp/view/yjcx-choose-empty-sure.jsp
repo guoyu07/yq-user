@@ -22,7 +22,7 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>中国一川（澳门）国际有限公司</title>
+	<title>会员中心</title>
 	<link rel="stylesheet" href="/css/common.css" />
 	<style type="text/css">
 	.zzbg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:2;top:0;left:0;opacity:0.7;}

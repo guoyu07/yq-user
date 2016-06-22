@@ -63,14 +63,7 @@ try{
 
   g.drawString(rand,20*i+20,32);   
   }   
-  HttpSession sessionhttp = ServletActionContext.getRequest()
-			.getSession();
-   String key = "user_rand_"+sessionhttp.getId();
-   LogSystem.info("random=+key="+key+",value="+sRand+",ip="+request.getRemoteAddr());
-  JedisUtils.setString(key, sRand);
-  JedisUtils.expireKey(key, 600);
-  //session.setAttribute("rand",sRand);   
-
+  session.setAttribute("rand",sRand);   
   g.dispose();   
     
  

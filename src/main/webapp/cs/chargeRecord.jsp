@@ -2,11 +2,11 @@
 <%@ include file="/common/taglib.jsp"%>
 
 <c:if test="${userName=='cfhkf01'}">
- <c:set var="cz01" value="中国一川【①号】客服QQ：613697151"></c:set>
+ <c:set var="cz01" value="本公司【①号】客服QQ：613697151"></c:set>
  <c:set var="cz02" value="陈文娟"></c:set>
 </c:if>
 <c:if test="${userName=='cfhkf02'}">
- <c:set var="cz01" value="中国一川【②号】客服QQ：613697152"></c:set>
+ <c:set var="cz01" value="本公司【②号】客服QQ：613697152"></c:set>
  <c:set var="cz02" value="陈文娟"></c:set>
 </c:if>
 <div align="center">

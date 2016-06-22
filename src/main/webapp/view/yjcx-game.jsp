@@ -6,7 +6,7 @@
 <c:if test="${erroCodeNum==2}"><script language="javascript">alert('用户名输入错误或不属于自己团队的玩家，请检查后再试！');history.go(-1);</script></c:if>
 <head>
 	<meta charset="UTF-8">
-	<title>中国一川（澳门）国际有限公司</title>
+	<title>会员中心</title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
