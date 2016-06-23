@@ -27,7 +27,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
     private List<Province> provinceList = Lists.newArrayList();
 	private Integer day;
 	public String execute(){
-        if(!super.getUserName().equals("admin1")){
+        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin2")){
             return INPUT;
         }
 
@@ -40,7 +40,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	}
 	
 	public String outExcel(){
-        if(!super.getUserName().equals("admin1")){
+        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin2")){
             return INPUT;
         }
 
@@ -64,7 +64,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	private String sheng;
 	
 	public String outExcelTime(){
-        if(!super.getUserName().equals("admin1")){
+        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin2")){
             return INPUT;
         }
 
@@ -81,7 +81,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	}
 	
 	public String searchByTime(){
-        if(!super.getUserName().equals("admin1")){
+        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin2")){
             return INPUT;
         }
 

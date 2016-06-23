@@ -27,7 +27,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
     private List<Province> provinceList = Lists.newArrayList();
 	private Integer day;
 	public String execute(){
-		if(!super.getUserName().equals("admin1")){
+		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")){
 			return INPUT;
 		}
 		ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
@@ -39,7 +39,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	}
 	
 	public String outExcel(){
-		if(!super.getUserName().equals("admin1")){
+		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")){
 			return INPUT;
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -62,7 +62,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	private String sheng;
 	
 	public String outExcelTime(){
-		if(!super.getUserName().equals("admin1")){
+		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")){
 			return INPUT;
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -78,7 +78,7 @@ public class SqdayAddAction extends ALDAdminPageActionSupport<Gcuser> {
 	}
 	
 	public String searchByTime(){
-		if(!super.getUserName().equals("admin1")){
+		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin3")){
 			return INPUT;
 		}
 		ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
