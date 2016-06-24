@@ -949,7 +949,7 @@ public class UserService {
 					throw new ServiceException(15,"接点人位置已被占用，请重新选择！");
 				}
 			}else{
-				if(sgxtDao.updateBuid(tuser.getUsername(), bduser)){
+				if(!sgxtDao.updateBuid(tuser.getUsername(), bduser)){
 					throw new ServiceException(15,"接点人位置已被占用，请重新选择！");
 				}
 			}
