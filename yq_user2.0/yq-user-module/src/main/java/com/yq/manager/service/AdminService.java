@@ -1778,6 +1778,7 @@ public class AdminService {
 	/**
 	 * 后台执行xxxx
 	 */
+	@Transactional
 	public void man123(){
 
 		Fcxt fcxt = fcxtDao.get(2);

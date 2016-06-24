@@ -3,16 +3,17 @@ import java.util.Date;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.testcore.ActionTest;
 import com.sr178.game.framework.testcore.DaoTest;
+import com.sr178.game.framework.testcore.ServiceTest;
 import com.yq.common.utils.UrlRequestUtils.Mode;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.scheduler.SendChargeMsgScheduler;
 
-public class AdminServiceTest {
+public class AdminServiceTest extends ServiceTest{
 
-//	public void testWay(){
-//		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-//		adminService.managequeren();
+	public void testWay(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		adminService.managequeren();
 //		adminService.man123();
 //		adminService.resetZaqAndZbq();
 //		adminService.resetUserDownInfo();
@@ -83,5 +84,5 @@ public class AdminServiceTest {
 //			e.printStackTrace();
 //		}
 		
-//	}
+	}
 }
