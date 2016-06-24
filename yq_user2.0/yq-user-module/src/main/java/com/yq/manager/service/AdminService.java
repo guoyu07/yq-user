@@ -18,6 +18,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
+import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
@@ -164,7 +165,7 @@ public class AdminService {
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
-    public static boolean isClose = false;
+    public static boolean isClose = ConfigLoader.getIntValue("is_stop_jf_mc",0)==0?false:true;
     
 	public Session getLoginAdminUserName(String sessionId){
 		Session adminSession = adminUserMap.getIfPresent(sessionId);
@@ -1896,7 +1897,7 @@ public class AdminService {
 		gpjy.setJyid(jyid);
 		gpjyDao.add(gpjy);
 	}
-	
+	@Transactional
 	public void managequeren(){
 		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
 		gcuserDao.updateJygdateAndJygt1("<=50000", 1, null, 0);
@@ -1937,6 +1938,7 @@ public class AdminService {
 						} catch (Exception e) {
 							loseSize++;
 							LogSystem.error(e, "userName="+gcuser.getUsername()+",处理回收30%的时候出错！");
+							throw new ServiceException(8888,"userName="+gcuser.getUsername()+",处理回收30%的时候出错！");
 						}
 	    			}
 	    		}else{
@@ -1964,24 +1966,11 @@ public class AdminService {
 					for (Gcuser gcuser : tempList) {
 						try {
 							dmSize++;
-							String clname = gcuser.getUsername();
-							int jygall = gcuser.getJyg();
-							int jygnumber = gcuser.getJyg() - 50000;
-							int ForCount = (int) (jygnumber / 200);
-							int lasenumber = jygnumber % 200;
-							if (ForCount > 0) {
-								for (int j = 1; j <= ForCount; j++) {
-									addGpjyForManageQueren(clname, 200, jygall - j * 200, fcxt.getZdj());
-								}
-							}
-							if (lasenumber > 0) {
-								addGpjyForManageQueren(clname, lasenumber, jygall - ForCount * 200 - lasenumber,
-										fcxt.getZdj());
-							}
-							gcuserDao.updateManageQueren(clname, 50000, null, 0);
+							dealOnePerson(gcuser,fcxt);
 						} catch (Exception e) {
 							loseSize++;
 							LogSystem.error(e, "userName="+gcuser.getUsername()+",处理代卖的时候出错！");
+							throw new ServiceException(8888,"userName="+gcuser.getUsername()+",处理回收30%的时候出错！");
 						}
 					}
 	    		}else{
@@ -1994,17 +1983,39 @@ public class AdminService {
 	    LogSystem.info("积分代卖结束！处理人数为="+dmSize+",其中处理失败用户数为"+loseSize);
 	}
 	
+	public void dealOnePerson(Gcuser gcuser,Fcxt fcxt){
+		String clname = gcuser.getUsername();
+		int jygall = gcuser.getJyg();
+		int jygnumber = gcuser.getJyg() - 50000;
+		int ForCount = (int) (jygnumber / 200);
+		int lasenumber = jygnumber % 200;
+		if (gcuserDao.updateManageQueren(clname, 50000, null, 0)) {
+			if (ForCount > 0) {
+				for (int j = 1; j <= ForCount; j++) {
+					addGpjyForManageQueren(clname, 200, jygall - j * 200, fcxt.getZdj());
+				}
+			}
+			if (lasenumber > 0) {
+				addGpjyForManageQueren(clname, lasenumber, jygall - ForCount * 200 - lasenumber, fcxt.getZdj());
+			}
+		}
+		
+	}
+	
 	private void addGpjyForManageQueren(String clname,double mcsl,double jyg,double jg){
-		Gpjy gpjy = new Gpjy();
-		gpjy.setUsername(clname);
-		gpjy.setMcsl(mcsl);
-		gpjy.setSysl(jyg);
-		gpjy.setPay(jg);
-		gpjy.setJy(0);
-		gpjy.setBz("卖出挂牌中(系统代)");
-		gpjy.setJypay((int)(mcsl*jg*1+0.1)*1d);
-		gpjy.setNewjy(3);
-		gpjyDao.add(gpjy);
+		double jypay = (int)(mcsl*jg*1+0.1)*1d;
+		if(jypay>0){
+			Gpjy gpjy = new Gpjy();
+			gpjy.setUsername(clname);
+			gpjy.setMcsl(mcsl);
+			gpjy.setSysl(jyg);
+			gpjy.setPay(jg);
+			gpjy.setJy(0);
+			gpjy.setBz("卖出挂牌中(系统代)");
+			gpjy.setJypay(jypay);
+			gpjy.setNewjy(3);
+			gpjyDao.add(gpjy);
+		}
 	}
 	
 	private List<YouMingxi> yList = Lists.newArrayList();

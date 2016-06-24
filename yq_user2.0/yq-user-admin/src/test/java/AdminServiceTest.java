@@ -8,10 +8,11 @@ import com.yq.manager.service.AdminService;
 import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.scheduler.SendChargeMsgScheduler;
 
-public class AdminServiceTest extends ActionTest{
+public class AdminServiceTest {
 
-	public void testWay(){
+//	public void testWay(){
 //		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+//		adminService.managequeren();
 //		adminService.man123();
 //		adminService.resetZaqAndZbq();
 //		adminService.resetUserDownInfo();
@@ -82,5 +83,5 @@ public class AdminServiceTest extends ActionTest{
 //			e.printStackTrace();
 //		}
 		
-	}
+//	}
 }
