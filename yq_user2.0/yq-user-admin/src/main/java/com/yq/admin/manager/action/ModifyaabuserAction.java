@@ -48,7 +48,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private int test;
 	private static final String KEY="daddewr!@#11";
 	public String execute(){
-		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")&&!super.getUserName().equals("admin3")){
 			return INPUT;
 		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
