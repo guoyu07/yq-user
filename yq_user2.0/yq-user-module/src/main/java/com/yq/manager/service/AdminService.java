@@ -409,9 +409,13 @@ public class AdminService {
 		String beforName = gcuser.getName()==null?"":gcuser.getName();
 		String nowName = name==null?"":name;
 		
-		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
-			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
+		
+		
+		if(gcuserDao.updateUserByAdmin(beforUserId,beforName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
+			dateipDao.addDateIpLog(userName, "修改资料sy-userid="+beforUserId+",name="+beforName, ip);
 		}
+		
+		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
 			//写身份证和名字修改日志
 			Tduser tduser = new Tduser();

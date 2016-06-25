@@ -139,7 +139,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 </tr>
 </table>
 &nbsp;
-<c:if test="${fcxt.id==1}">
+
 <table cellpadding=0 cellspacing=0 width=158 align=center>
 <tr>
         <td height=25 class=menu_title onmouseover=this.className='menu_title2'; onmouseout=this.className='menu_title'; background="images/admin_left_4.gif" id=menuTitle1 onclick="showsubmenu(3)"><span>附加管理</span></td>
@@ -148,6 +148,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <td style="display:" id='submenu3'>
 <div class=sec_menu style="width:158px; height:200px">
             <table cellpadding=0 cellspacing=0 align=center width=150 height="93">
+            <c:if test="${fcxt.id==1}">
               <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="cgcp"><font color="#0000FF">抢购管理</font></a></font></td>
               </tr>
@@ -165,12 +166,6 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<tr>
 				<td height=20>☉  <a href="/admin/adminbduser" target="BoardList">双区玩家开户</a></td> 
 				</tr>
-			  <tr>
-				<td height=20>☉  <a href="/admin/sqdayadd" target="BoardList">双区进单明细</a></td> 
-				</tr>
-				<tr>
-				<td height=20>☉  <a href="/admin/w200" target="BoardList">提现申请清单</a></td> 
-				</tr>
 				<tr>
 				<td height=20>☉  <a href="/admin/telpayhander" target="BoardList">手动充话费</a></td> 
 				</tr>
@@ -187,12 +182,21 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				 <!--<tr>
 				<td height=20>☉  <a href="/admin/insertuser" target="BoardList">挂载用户</a></td> 
 				</tr>-->
+				</c:if>
+				 <c:if test="${fcxt.id==1||fcxt.id==4}">
+				<tr>
+				<td height=20>☉  <a href="/admin/sqdayadd" target="BoardList">双区进单明细</a></td> 
+				</tr>
+				<tr>
+				<td height=20>☉  <a href="/admin/w200" target="BoardList">提现申请清单</a></td> 
+				</tr>
+				</c:if>
               </table>
 	  </div>
 	</td>
   </tr>
 </table>
-</c:if>
+
 &nbsp;
 <!--  
 <table cellpadding=0 cellspacing=0 width=158 align=center>

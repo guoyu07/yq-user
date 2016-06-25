@@ -24,7 +24,7 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 		if(status==0){
 			return INPUT;
 		}
-        if(!super.getUserName().equals("admin1")){
+        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
             return INPUT;
         }
 		UserService userService  = ServiceCacheFactory.getService(UserService.class);
