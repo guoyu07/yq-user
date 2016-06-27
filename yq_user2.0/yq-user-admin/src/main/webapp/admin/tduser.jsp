@@ -10,6 +10,8 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('接收用户不存在${toUserName}');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('${toUserName}的身份证信息已退过户了，不能重复退户！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('${toUserName}和${fromUserName}已属于同一同名账号，无法退户，误操作？');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('${toUserName}不是${fromUserName}的上级！不能接收');history.go(-1);</script></c:if>
+
 <html>
 <title>历史退户记录</title>
 <meta name="GENERATOR" content="Microsoft FrontPage 6.0">

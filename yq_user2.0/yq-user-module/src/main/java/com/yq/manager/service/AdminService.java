@@ -1758,6 +1758,10 @@ public class AdminService {
 			throw new ServiceException(4, "接收用户不存在"+toUser);
 		}
 		
+		if(zuoMingxiDao.get(toUser, fromUser)==null&&youMingXiDao.get(toUser, fromUser)==null){
+			throw new ServiceException(7, "接收账户必须是被转账户的上级");
+		}
+		
 		String tduserid = from.getUserid();
 		String tdname = from.getName();
 		
