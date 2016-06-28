@@ -411,8 +411,8 @@ public class AdminService {
 		
 		
 		
-		if(gcuserDao.updateUserByAdmin(beforUserId,beforName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
-			dateipDao.addDateIpLog(userName, "修改资料sy-userid="+beforUserId+",name="+beforName, ip);
+		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
+			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
 		}
 		
 		
@@ -428,6 +428,8 @@ public class AdminService {
 			tduser.setTdcall(call);
 			tduser.setGai(1);
 			tduserDao.add(tduser);
+		}else{
+			gcuserDao.updateThenSameUserInfo(beforUserId, beforName, md5Password, password3, card, bank, call, email, qq);
 		}
 		
 		if(md5Password!=null){

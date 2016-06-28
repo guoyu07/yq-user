@@ -41,7 +41,7 @@ public class _99douInterface {
 	public _99douInterface() {
 		this.host = "http://api2.99dou.com:8000/Api/Service";
 		this.partner = "10340";
-		this.key = "NerST4g2iprvgoJ5mZKqP34YmvoCVmbqXtFG8zMLQs9g1mb0uft8IusSu6i4Q05O";
+		this.key = "vozZ1HZlRUcDkGB7QEGJkddT9hviPUPcw9xUT1rRw0SiN3DvQW6xSvzC7WeSaZpQ";
 		this.notify_url = "http://********/Demo/_99dou_notify.jsp";
 	}
 

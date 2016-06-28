@@ -153,7 +153,7 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
-	public boolean updateUserByAdmin(String beforUserId,String beforeName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,Date pwdate,int cxt){
+	public boolean updateUserByAdmin(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,Date pwdate,int cxt){
 		String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,`call`=?,email=?,qq=?,userid=?,payok=?,jcname=?,jcuserid=?,cxt=?";
 		boolean isChangePassword = false;
 		boolean isChangePwdate = false;
@@ -165,7 +165,7 @@ public class GcuserDao {
 			sql = sql+ ",pwdate=?";
 			isChangePwdate = true;
 		}
-		sql = sql + " where userid=? and name=?";
+		sql = sql + " where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(password3);
 		parameter.setString(card);
@@ -185,8 +185,7 @@ public class GcuserDao {
 		if(isChangePwdate){
 			parameter.setObject(pwdate);
 		}
-		parameter.setString(beforUserId);
-		parameter.setString(beforeName);
+		parameter.setString(userName);
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
@@ -971,6 +970,29 @@ public class GcuserDao {
 		parameter.setString(phone);
 		parameter.setString(qq);
 		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	public boolean updateThenSameUserInfo(String userId,String name,String password,String password3,String card,String bank,String call,String email,String qq){
+		String sql = "update "+table+" set password3=? , card=? , bank=? ,`call`=?,email=?,qq=?";
+		boolean isChangePassword = false;
+		if(password!=null&&!password.equals("")){
+			sql = sql+ ",password=?";
+			isChangePassword = true;
+		}
+		sql = sql + " where userid=? and name=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(password3);
+		parameter.setString(card);
+		parameter.setString(bank);
+		parameter.setString(call);
+		parameter.setString(email);
+		parameter.setString(qq);
+		if(isChangePassword){
+			parameter.setString(password);
+		}
+		parameter.setString(userId);
+		parameter.setString(name);
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
