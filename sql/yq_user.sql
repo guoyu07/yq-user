@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2016-05-18 16:02:34
+Date: 2016-06-29 18:17:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,6 +61,83 @@ CREATE TABLE `addsheng` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Table structure for agent_app
+-- ----------------------------
+DROP TABLE IF EXISTS `agent_app`;
+CREATE TABLE `agent_app` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `agent_id` int(11) NOT NULL,
+  `app_id` varchar(8) NOT NULL,
+  `app_name` varchar(32) NOT NULL,
+  `app_key` varchar(32) NOT NULL,
+  `call_back_url` varchar(512) DEFAULT NULL,
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for agent_order
+-- ----------------------------
+DROP TABLE IF EXISTS `agent_order`;
+CREATE TABLE `agent_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_user_name` varchar(32) NOT NULL,
+  `app_id` varchar(8) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `product_order` varchar(32) NOT NULL,
+  `product_desc` varchar(32) DEFAULT NULL,
+  `param` varchar(256) DEFAULT NULL,
+  `pay_user_name` varchar(32) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for agent_scores_change_log
+-- ----------------------------
+DROP TABLE IF EXISTS `agent_scores_change_log`;
+CREATE TABLE `agent_scores_change_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(32) NOT NULL,
+  `change_type` int(11) NOT NULL,
+  `change_num` int(11) NOT NULL,
+  `now_num` int(11) NOT NULL,
+  `param` varchar(312) DEFAULT NULL,
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for agent_user
+-- ----------------------------
+DROP TABLE IF EXISTS `agent_user`;
+CREATE TABLE `agent_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `agent_name` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `agent_scores` int(11) NOT NULL,
+  `agent_yb` int(11) NOT NULL,
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for agent_yb_change_log
+-- ----------------------------
+DROP TABLE IF EXISTS `agent_yb_change_log`;
+CREATE TABLE `agent_yb_change_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(32) NOT NULL,
+  `change_type` int(11) NOT NULL,
+  `change_num` int(11) NOT NULL,
+  `now_num` int(11) NOT NULL,
+  `param` varchar(312) DEFAULT NULL,
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for baby_info
 -- ----------------------------
 DROP TABLE IF EXISTS `baby_info`;
@@ -108,7 +185,7 @@ CREATE TABLE `bdbdate` (
   PRIMARY KEY (`id`),
   KEY `zuser` (`zuser`),
   KEY `bfdate` (`bfdate`)
-) ENGINE=InnoDB AUTO_INCREMENT=728242 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=728254 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for cbzyc
@@ -186,7 +263,7 @@ CREATE TABLE `dateip` (
   `dlip` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `dldate` (`dldate`)
-) ENGINE=InnoDB AUTO_INCREMENT=1126292 DEFAULT CHARSET=utf8 COMMENT='用户操作日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=1126386 DEFAULT CHARSET=utf8 COMMENT='用户操作日志表';
 
 -- ----------------------------
 -- Table structure for datepay
@@ -213,7 +290,7 @@ CREATE TABLE `datepay` (
   KEY `username` (`username`),
   KEY `newbz` (`newbz`),
   KEY `abdate` (`abdate`)
-) ENGINE=InnoDB AUTO_INCREMENT=2752222 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2752340 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for dgag
@@ -487,8 +564,10 @@ CREATE TABLE `gcuser` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE,
   KEY `idcard` (`userid`) USING BTREE,
-  KEY `up` (`up`)
-) ENGINE=InnoDB AUTO_INCREMENT=66142 DEFAULT CHARSET=utf8 COMMENT='用户表';
+  KEY `up` (`up`),
+  KEY `jyg` (`jyg`),
+  KEY `jydb` (`jydb`)
+) ENGINE=InnoDB AUTO_INCREMENT=66145 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Table structure for gpjy
@@ -515,7 +594,7 @@ CREATE TABLE `gpjy` (
   KEY `username` (`username`),
   KEY `jyid` (`jyid`),
   KEY `pay` (`pay`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3819967 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3839183 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for gpjy_index_mc
@@ -713,6 +792,17 @@ CREATE TABLE `jftzb` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Table structure for jf_wrong_data
+-- ----------------------------
+DROP TABLE IF EXISTS `jf_wrong_data`;
+CREATE TABLE `jf_wrong_data` (
+  `username` varchar(32) NOT NULL,
+  `allamount` decimal(11,0) NOT NULL,
+  `yb` decimal(11,0) NOT NULL,
+  `jb` decimal(11,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for lkjl
 -- ----------------------------
 DROP TABLE IF EXISTS `lkjl`;
@@ -879,7 +969,7 @@ CREATE TABLE `sgxt` (
   UNIQUE KEY `username` (`username`) USING BTREE,
   KEY `auid` (`auid`),
   KEY `buid` (`buid`)
-) ENGINE=InnoDB AUTO_INCREMENT=25076 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25077 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for sgxt1
@@ -1121,7 +1211,7 @@ CREATE TABLE `tduser` (
   `gai` int(11) DEFAULT '0',
   `tddate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tempdatepay
@@ -1153,7 +1243,7 @@ CREATE TABLE `txifok` (
   `txdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=37135 DEFAULT CHARSET=utf8 COMMENT='用户注册后 会向该表插入记录';
+) ENGINE=InnoDB AUTO_INCREMENT=37138 DEFAULT CHARSET=utf8 COMMENT='用户注册后 会向该表插入记录';
 
 -- ----------------------------
 -- Table structure for txpay
@@ -1270,7 +1360,7 @@ CREATE TABLE `user_scores_log` (
   `created_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user_vip_log
@@ -1301,7 +1391,7 @@ CREATE TABLE `vipcjgl` (
   `bz` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cjid`),
   KEY `vipuser` (`vipuser`)
-) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for vipxtgc
@@ -1315,7 +1405,7 @@ CREATE TABLE `vipxtgc` (
   `jcbdb` int(11) DEFAULT NULL,
   PRIMARY KEY (`vipid`),
   UNIQUE KEY `vipname` (`vipname`,`vipdate`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=369 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=370 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for you_mingxi
@@ -1328,8 +1418,9 @@ CREATE TABLE `you_mingxi` (
   `sjb` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `tjuser,count,down` (`tjuser`,`down`,`count`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=791748 DEFAULT CHARSET=utf8;
+  KEY `tjuser,count,down` (`tjuser`,`down`,`count`) USING BTREE,
+  KEY `down` (`down`)
+) ENGINE=InnoDB AUTO_INCREMENT=791751 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for zuo_mingxi
@@ -1342,8 +1433,9 @@ CREATE TABLE `zuo_mingxi` (
   `sjb` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `tjuser,count,down` (`tjuser`,`down`,`count`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1765797 DEFAULT CHARSET=utf8;
+  KEY `tjuser,count,down` (`tjuser`,`down`,`count`) USING BTREE,
+  KEY `down` (`down`)
+) ENGINE=InnoDB AUTO_INCREMENT=1765803 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Procedure structure for deleteSgxtUserForNoDown
