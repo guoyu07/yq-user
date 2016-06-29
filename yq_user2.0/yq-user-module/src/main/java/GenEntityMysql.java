@@ -19,7 +19,7 @@ import com.yq.user.bo.Datepay;
 
 public class GenEntityMysql {
 	
-	private String packageOutPath = "com.yq.user.bo";//指定实体生成所在包的路径
+	private String packageOutPath = "com.yq.agent.bo";//指定实体生成所在包的路径
 	private String[] colnames; // 列名数组
 	private String[] colTypes; //列名类型数组
 	private int[] colSizes; //列名大小数组
@@ -233,7 +233,7 @@ public class GenEntityMysql {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String[] tableNames = new String[]{"user_performance"};//表名
+		String[] tableNames = new String[]{"agent_order"};//表名
 		for(int i=0;i<tableNames.length;i++){
 			new GenEntityMysql(tableNames[i]);
 		}

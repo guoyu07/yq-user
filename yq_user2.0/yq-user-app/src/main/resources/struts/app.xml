@@ -7,8 +7,8 @@
 	
 		<!-- 一个包下可以放这个模块下的所有action -->
 		<action name="login" class="com.yq.app.app.action.AppNoAuthAction" method="login" />
-		
 		<action name="getUserInfo" class="com.yq.app.app.action.AppAction" method="getUserInfo" />
+		<action name="getUserSimpInfo" class="com.yq.app.app.action.AppAction" method="getUserSimpInfo" />
 	</package>
 
 
