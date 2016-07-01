@@ -374,7 +374,12 @@
 		     <result name="success">view/xfgl-baby.jsp</result>
 		     <result name="input">view/xfgl-baby.jsp</result>
 		</action>
-		
+		<action name="checkUserName" class="com.yq.app.user.action.CheckUserNameAction">
+		  	<result name="success" type="json" >
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">code,name</param>
+			</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
@@ -416,7 +421,6 @@
 		    <result name="success" type="json"></result>
 		</action>
 		<action name="ybts" class="com.yq.app.user.action.ChangeStatsForShopAction">
-		    
 		</action>				
 	</package>
 

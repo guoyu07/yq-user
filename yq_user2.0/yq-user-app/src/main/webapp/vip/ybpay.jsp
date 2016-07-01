@@ -61,11 +61,11 @@ function checkdate1()  {
 			<input type="hidden" name="gwpay" size="20" value="${gwpay}" readonly>${gwpay}<input type="hidden" name="sid" size="20" value="${sid}" readonly><input type="hidden" name="pid" size="20" value="${pid}" readonly></td>
 		</tr>
 		<tr>
-			<td width="214" align="right">一币服务费(2%)：</td>
+			<td width="214" align="right">服务费(2%)：</td>
 			<td width="336" align="left" colspan="2">${fee}</td>
 		</tr>
 		<tr>
-			<td width="214" align="right">合计一币：</td>
+			<td width="214" align="right">合计：</td>
 			<td width="336" align="left" colspan="2"><b><font color="#FF0000">${ybsl}<input type="hidden" name="ybpay" size="20" value="${ybsl}"></font></b></td>
 		</tr>
 		<c:if test="${pid==1}">
@@ -101,7 +101,7 @@ function checkdate1()  {
 		</tr>
 		</table>
 	<p>请不要使用它人账户进行操作，一经发现3倍罚款！</p>
-	<p>如果购物券不足，将扣除同等数量的一币！</p>
+	<p>如果购物券不足，将扣除同等数量的货币！</p>
 	</div>
 </form>
 <script type="text/javascript">

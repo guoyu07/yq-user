@@ -44,7 +44,7 @@
 					<span class="close"></span>
 					<a href="/hfcz">话费充值(100)</a>
 					<a target="_blank" href="http://www.kypwe.com">科赡票务</a>
-					<a target="_blank" href="http://www.zgybe.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>">幸福100</a>
+					<a target="_blank" href="http://www.qlsme.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>">幸福100</a>
 					<a href="/baby">口才训练营报名</a>
 					<a href="#" class="close">消费管理</a>
 				</div>

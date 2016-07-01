@@ -53,6 +53,22 @@ return (allValid);
 }
 return true;  
 }  
+
+function Check(user)
+{
+	if ( user==""){
+		alert ("提示：用户名不能为空!！");
+		return false;
+	}
+	$.post("checkUserName?user="+user,null, function(response) {
+		if(response.code==0){//注册成功
+			alert('用户名：['+user+']，姓名为:['+response.name+"]");
+		}else{
+			alert('用户名：'+user+'，不存在，请重新写入！');
+		}
+		return true;
+	});
+}
 </script>
 <body>
 	<div class="mainbox mw1024">
@@ -76,7 +92,7 @@ return true;
 						<p class="f-tk c-g">您的用户名是 <span class="c-r">${userName}</span></p>
 						<p class="z-b" style="padding-left:70px;">您的一币为：<b class="c-r">${gcuser.pay}</b></p>
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="vipjzpay?status=1">
-							<p><label class="c-r">接收用户名：</label><input type="text" name="jzuser" size="15"></p>
+							<p><label class="c-r">接收用户名：</label><input type="text" name="jzuser" id="jzuser" size="15"><input type="button" onClick="Check(document.getElementById('jzuser').value)" value="查看姓名" name="B3" style="cursor: pointer"></p>
 							<p><label>转账一币：</label><input style="width:100px;" type="text" name="jzpay" size="15" maxlength="10"></p>
 							<p><label>二级密码：</label><input type="password" name="pa3" size="20"></p>
 
