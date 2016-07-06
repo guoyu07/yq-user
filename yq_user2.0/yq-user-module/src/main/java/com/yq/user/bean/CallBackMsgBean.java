@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.yq.common.utils.UrlRequestUtils;
 
-public class CallBackMsgBean {
+public abstract class CallBackMsgBean {
 	private String url;
 	private Map<String,String> paramMap;
 	private String mode;
@@ -63,4 +63,11 @@ public class CallBackMsgBean {
 	public void setSuccessTag(String successTag) {
 		this.successTag = successTag;
 	}
+	//成功回调
+	public abstract void afterSuccess();
+	//失败回调
+	public abstract void afterFail();
+	//失效回调
+	public abstract void afterLoseEffect();
+	
 }

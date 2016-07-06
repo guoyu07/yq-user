@@ -195,12 +195,42 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			if (SHOP_SUCCESS_TAG.equals(result)) {
 				LogSystem.info("成功！");
 			}else{
-				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SHOP_SUCCESS_TAG));
+				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SHOP_SUCCESS_TAG) {
+					@Override
+					public void afterSuccess() {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void afterLoseEffect() {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void afterFail() {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 			}
 		} catch (Exception e) {
 			LogSystem.error(e, "商城回调失败！");
 			//放到队列中进行处理
-			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SHOP_SUCCESS_TAG));
+			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SHOP_SUCCESS_TAG) {
+				@Override
+				public void afterSuccess() {
+					
+				}
+				@Override
+				public void afterLoseEffect() {
+					
+				}
+				@Override
+				public void afterFail() {
+				}
+			});
 		}
 	}
 	
@@ -266,12 +296,49 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			if (SUCCESS_TAG.equals(result)) {
 				LogSystem.info("成功！");
 			}else{
-				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS_TAG));
+				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS_TAG) {
+					
+					@Override
+					public void afterSuccess() {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void afterLoseEffect() {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void afterFail() {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 			}
 		} catch (Exception e) {
 			LogSystem.error(e, "机票回调失败！");
 			//放到队列中进行处理
-			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS_TAG));
+			SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SUCCESS_TAG) {
+				@Override
+				public void afterSuccess() {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void afterLoseEffect() {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void afterFail() {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
 	}
 	

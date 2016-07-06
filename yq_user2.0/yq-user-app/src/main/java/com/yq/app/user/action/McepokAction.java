@@ -25,14 +25,14 @@ public class McepokAction extends ALDAdminActionSupport {
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		if(status==0){
-			LogSystem.warn("[确认已收到款查询]"+"["+payId+"]"+super.getUserName()+"["+super.ip()+"]");
+//			LogSystem.warn("[确认已收到款查询]"+"["+payId+"]"+super.getUserName()+"["+super.ip()+"]");
 			gcuser = userService.getUserByUserName(super.getUserName());
 			@NotAllowedCode
 			TxPayDao txPayDao = ServiceCacheFactory.getServiceCache().getService(TxPayDao.class);
 			txpay = txPayDao.getByPayid(payId);
 			return INPUT;
 		}
-		LogSystem.warn("[确认已收到款]"+"["+payId+"]["+super.getUserName()+"]["+super.ip()+"]");
+//		LogSystem.warn("[确认已收到款]"+"["+payId+"]["+super.getUserName()+"]["+super.ip()+"]");
 		userService.sureIReceivedMoney(super.getUserName(), payId, password3, smsCode, super.ip());
 		super.setErroCodeNum(2000);
 		return SUCCESS;

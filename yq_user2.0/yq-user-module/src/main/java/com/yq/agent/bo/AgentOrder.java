@@ -15,7 +15,16 @@ public class AgentOrder{
 	private String productDesc;
 	private String param;
 	private String payUserName;
+	//0 未支付    1支付成功   2 支付失败 
 	private int status;
+	
+	private int callBackStatus;
+	
+	public static final int ST_CTREATE = 0;
+	public static final int ST_SUCCESS = 1;
+	public static final int ST_FAIL = 2;
+	
+	private Date payTime;
 	private Date createdTime;
 	
 	public Integer getId() {
@@ -77,6 +86,18 @@ public class AgentOrder{
 	}
 	public Date getCreatedTime(){
 		return createdTime;
+	}
+	public Date getPayTime() {
+		return payTime;
+	}
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
+	}
+	public int getCallBackStatus() {
+		return callBackStatus;
+	}
+	public void setCallBackStatus(int callBackStatus) {
+		this.callBackStatus = callBackStatus;
 	}
 }
 

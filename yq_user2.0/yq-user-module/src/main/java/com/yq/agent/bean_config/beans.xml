@@ -12,6 +12,7 @@
       
        <bean id="agentService" class="com.yq.agent.service.AgentService"></bean>
        
+       <bean id="agentAppDao" class="com.yq.agent.dao.AgentAppDao"></bean>
        <bean id="agentUserDao" class="com.yq.agent.dao.AgentUserDao"></bean>
        <bean id="agentScoresChangeLogDao" class="com.yq.agent.dao.AgentScoresChangeLogDao"></bean>
        <bean id="agentYbChangeLogDao" class="com.yq.agent.dao.AgentYbChangeLogDao"></bean>

@@ -14,7 +14,7 @@ public class MyepokAction extends ALDAdminActionSupport {
 	private int ep;
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		LogSystem.warn("[确认已打款]"+"["+ep+"]["+super.getUserName()+"]["+super.ip()+"]");
+//		LogSystem.warn("[确认已打款]"+"["+ep+"]["+super.getUserName()+"]["+super.ip()+"]");
 		userService.sureIGivedMoney(super.getUserName(), ep);
 		super.setErroCodeNum(2000);
 		return SUCCESS;

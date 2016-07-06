@@ -29,11 +29,14 @@ public class SendChargeMsgScheduler extends SchedulerEntry {
 		LogSystem.info("开始执行异步消息回调,当前数量["+callBackMsg.size()+"]");
                for(Entry<Integer,CallBackMsgBean> entry:callBackMsg.entrySet()){
             	   if(callBackToServer(entry.getValue())){
+            		   entry.getValue().afterSuccess();
             		   callBackMsg.remove(entry.getKey());
             	   }else{
             		   entry.getValue().increaseRetryTimes();
+            		   entry.getValue().afterFail();
             		   if(entry.getValue().getRetryTimes()>10){
             			   LogSystem.log("重试超过十次，丢弃==>"+entry.getValue());
+            			   entry.getValue().afterLoseEffect();
             			   callBackMsg.remove(entry.getKey());
             		   }
             	   }

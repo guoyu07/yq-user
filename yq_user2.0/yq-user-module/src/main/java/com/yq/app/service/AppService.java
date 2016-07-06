@@ -65,21 +65,21 @@ public class AppService {
 	 * @param passWord
 	 */
 	public String login(String userName, String passWord) {
-		ParamCheck.checkString(userName, 1, "用户名不能为空");
-		ParamCheck.checkString(passWord, 2, "密码不能为空");
+		ParamCheck.checkString(userName, 2, "用户名不能为空");
+		ParamCheck.checkString(passWord, 3, "密码不能为空");
 		Gcuser gcUser = gcuserDao.getUser(userName);
 		//登录成功
 		if(gcUser!=null && gcUser.getPassword().equals(passWord)){
 			String tokenId = UUID.randomUUID().toString();
 			Session appSession = new Session(userName, System.currentTimeMillis(), tokenId);
 			setSession(tokenId, appSession);
-//			userToken.put(tokenId, gcUser.getUsername());
-			LogSystem.info(userName+"APP登录成功");
 			return tokenId;
 		}else{
-			throw new ServiceException(3, "用户名或密码错误！");
+			throw new ServiceException(4, "用户名或密码错误！");
 		}
 	}
+	
+
 	/**
 	 * 获取用户信息
 	 * @param userName

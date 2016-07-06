@@ -29,10 +29,10 @@ public class EpmyAction extends ALDAdminActionSupport {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		if(status==0){
-			LogSystem.warn("[购买确认界面]"+"["+ep+"]["+super.getUserName()+"]["+super.ip()+"]");
+//			LogSystem.warn("[购买确认界面]"+"["+ep+"]["+super.getUserName()+"]["+super.ip()+"]");
 			txpay = userService.buyYbPre(super.getUserName(), ep);
 		}else{
-			LogSystem.warn("[真的购买]"+"["+ep+"]["+super.getUserName()+"]["+super.ip()+"]");
+//			LogSystem.warn("[真的购买]"+"["+ep+"]["+super.getUserName()+"]["+super.ip()+"]");
 			txpay = userService.buyYb(super.getUserName(), ep, epnm3);
 			super.setErroCodeNum(2000);
 		}

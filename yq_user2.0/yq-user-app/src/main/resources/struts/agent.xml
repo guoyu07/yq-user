@@ -1,0 +1,43 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+    <package name="agentAuth" extends="agentLoginInterceptor" namespace="/agent/app">
+         <action name="verify" class="com.yq.app.agent.action.AgentAppAuthAction" method="verifyUserLogin" />
+         <action name="getUserSimpInfo" class="com.yq.app.agent.action.AgentAppAuthAction" method="getUserSimpInfo" />
+	</package>
+ 
+   <package name="agentNoAuth" extends="agentNoLoginInterceptor" namespace="/">
+         <action name="agentLogin" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="login" />
+         <action name="createOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="createOrder" />
+         <action name="payOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="payOrder" />
+   </package>
+	
+	<package name="agentNoLoginInterceptor" extends="myInterceptor">
+		<interceptors>
+			<!-- 不需要认证的拦截器-->
+			<interceptor name="noLoginInterceptor"
+				class="com.yq.app.agent.interceptor.AgentNoLoginInterceptor" />
+			<interceptor-stack name="noLoginStack">
+				<interceptor-ref name="noLoginInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="noLoginStack" />
+	</package>
+	
+	<package name="agentLoginInterceptor" extends="myInterceptor">
+		<interceptors>
+			<!-- 不需要认证的拦截器-->
+			<interceptor name="agentLoginInterceptor"
+				class="com.yq.app.agent.interceptor.AgentLoginInterceptor" />
+			<interceptor-stack name="agentLoginStack">
+				<interceptor-ref name="agentLoginInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="agentLoginStack" />
+	</package>
+	
+</struts>
