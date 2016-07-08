@@ -48,6 +48,15 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
         return this.renderObjectResult(agentService.payOrder(user, passWord, passWord3, order));
 	}
+	/**
+	 * 给商户加购物券
+	 * @return
+	 */
+	public String addScores(){
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		agentService.addScores(appId, orderUserName, amount,param, sign);
+		return this.renderSuccessResult();
+	}
 	
 	public String getAppId() {
 		return appId;

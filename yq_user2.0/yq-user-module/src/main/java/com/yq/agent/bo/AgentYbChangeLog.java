@@ -9,6 +9,8 @@ import java.util.Date;
 public class AgentYbChangeLog{
 	private Integer id;
 	private String userName;
+	private String toUser;
+	private String appId;
 	private int changeType;
 	private int changeNum;
 	private int nowNum;
@@ -55,6 +57,18 @@ public class AgentYbChangeLog{
 	}
 	public Date getCreatedTime(){
 		return createdTime;
+	}
+	public String getToUser() {
+		return toUser;
+	}
+	public void setToUser(String toUser) {
+		this.toUser = toUser;
+	}
+	public String getAppId() {
+		return appId;
+	}
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
 }
 

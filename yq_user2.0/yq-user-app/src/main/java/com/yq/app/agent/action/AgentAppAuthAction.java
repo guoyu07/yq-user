@@ -27,4 +27,5 @@ public class AgentAppAuthAction extends JsonBaseActionSupport{
 		return this.renderObjectResult(SimpleUserInfoBean.getSimpleByGcuser(appService.getUserInfo(super.getUserName())));
 	}
 	
+	
 }
