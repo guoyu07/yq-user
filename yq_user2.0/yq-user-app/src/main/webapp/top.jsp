@@ -9,7 +9,7 @@
 			<ul>
 				<li><a href="http://p.zgyce.com">棋牌娱乐</a></li>
 				<li><a href="http://dy.zgyce.com">影院</a></li>
-				<li><a href="http://yxgame.zgyce.com">休闲游戏</a></li>
+				<li><a href="http://keyukeji.com">精品游戏</a></li>
 				<li><a href="http://gw.zgyce.com">导购</a></li>
 				<li><a href="http://hy.zgyce.com">起点货源网</a></li>
 				<li><a href="http://www.qlsme.com">幸福100</a></li>
