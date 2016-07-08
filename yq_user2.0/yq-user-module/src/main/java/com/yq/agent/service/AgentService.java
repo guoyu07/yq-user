@@ -192,9 +192,10 @@ public class AgentService {
 	 * @param sign
 	 */
 	@Transactional
-	public void addScores(String appId, String orderUserName, String amount ,String param, String sign){
+	public void addScores(String orderId,String appId, String orderUserName, String amount ,String param, String sign){
 		ParamCheck.checkString(orderUserName, 1, "用户名不能为空");
 		ParamCheck.checkString(amount, 2, "订单金额不能为空");
+		ParamCheck.checkString(orderId, 10, "订单号不能为空");
 		ParamCheck.checkString(sign, 3, "签名更不能为空");
 		if(param==null){
 			param = "";
@@ -219,7 +220,7 @@ public class AgentService {
 		if(scores<=0){
 			throw new ServiceException(6, "金额必须是正整数！");
 		}
-		String signStr = appId+orderUserName+amount+param;
+		String signStr = appId+orderUserName+amount+param+orderId;
 		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
@@ -230,18 +231,23 @@ public class AgentService {
 		if(agentUser==null){
 			throw new ServiceException(8, "数据错误！appid--》"+appId+"对应的agentId不存在"+agentApp.getAgentId());
 		}
-		
 		if(agentUser.getAgentScores()<scores){
 			throw new ServiceException(9,"商户购物券不足！");
 		}
+		//订单号重复检查
+		AgentScoresChangeLog changeLog = agentScoresChangeLogDao.get(new SqlParamBean("app_id", appId),new SqlParamBean("and", "order_id", orderId));
+		if(changeLog!=null){
+			throw new ServiceException(11,"该订单已处理！");
+		}
 		//给商户减购物券
-		trasferScores(agentUser.getAgentName(), orderUserName, scores, agentUser.getAgentScores()-scores, param, AgentScoresChangeType.ADD_TO_USER, appId);
+		trasferScores(agentUser.getAgentName(), orderUserName, scores, agentUser.getAgentScores()-scores, param, AgentScoresChangeType.ADD_TO_USER, appId,orderId);
 	}
 	
 	@Transactional
-	private void trasferScores(String fromAgentName,String toUserName,int amount,int nowNum,String param,int changeType,String appId){
+	private void trasferScores(String fromAgentName,String toUserName,int amount,int nowNum,String param,int changeType,String appId,String orderId){
 		if(agentUserDao.reduceScore(fromAgentName, amount)){
 			AgentScoresChangeLog changeLog = new AgentScoresChangeLog(fromAgentName, toUserName, appId, changeType, -amount, nowNum, param, new Date());
+			changeLog.setOrderId(orderId);
 			agentScoresChangeLogDao.add(changeLog);
 		}else{
 			throw new ServiceException(9,"商户购物券不足！");

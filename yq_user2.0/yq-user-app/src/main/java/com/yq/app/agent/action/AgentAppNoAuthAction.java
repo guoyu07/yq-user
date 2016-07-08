@@ -52,9 +52,10 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 	 * 给商户加购物券
 	 * @return
 	 */
+	private String orderId;
 	public String addScores(){
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		agentService.addScores(appId, orderUserName, amount,param, sign);
+		agentService.addScores(orderId,appId, orderUserName, amount,param, sign);
 		return this.renderSuccessResult();
 	}
 	
@@ -123,5 +124,13 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 	}
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class AgentScoresChangeLog{
 	private Integer id;
+	private String orderId;
 	private String userName;
 	private String toUser;
 	private String appId;
@@ -70,6 +71,12 @@ public class AgentScoresChangeLog{
 	}
 	public void setAppId(String appId) {
 		this.appId = appId;
+	}
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 	/**
 	 * @param userName
