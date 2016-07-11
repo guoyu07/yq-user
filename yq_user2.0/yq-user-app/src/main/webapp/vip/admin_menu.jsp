@@ -45,19 +45,19 @@ $(document).ready(function(){
         </div>
 	  <table border="0" width="170" id="table1" height="100">
 		<tr>
-			<td width="90" align="right"><span style="font-size: 10pt; font-family: 宋体">用户名：</span></td>
+			<td width="90" align="right"><span style="font-size: 10pt; ">用户名：</span></td>
 			<td><font color="#FF0000" size="2"><b><a target="main" href="userlist"><font color="#FF0000">${gcuser.username}</font></a></b></font></td>
 		</tr>
 		<tr>
-			<td width="90" align="right"><span style="font-size: 9pt; font-family: 宋体">累计交易一币：</span></td>
+			<td width="90" align="right"><span style="font-size: 9pt; ">累计交易一币：</span></td>
 			<td><font size="2">${gcuser.cbpay}</font></td>
 		</tr>
 		<tr>
-			<td width="90" align="right"><span style="font-size: 9pt; font-family: 宋体">累计使用一币：</span></td>
+			<td width="90" align="right"><span style="font-size: 9pt; ">累计使用一币：</span></td>
 			<td><font size="2">${gcuser.txpay}</font></td>
 		</tr>
 		<tr>
-			<td width="90" align="right"><span style="font-size: 9pt; font-family: 宋体; ">当前可用一币：</span></td>
+			<td width="90" align="right"><span style="font-size: 9pt; ; ">当前可用一币：</span></td>
 			<td><font color="#0000FF" size="2"><b>${gcuser.pay}</b></font></td>
 		</tr>
 		</table>
@@ -73,7 +73,7 @@ $(document).ready(function(){
             <LI><a target="main" href="datepay?lb=8"><font color="#000000">辅导部分一币：</font><font color="#800000">${gcuser.jypay}</font></a>
             <LI><a target="main" href="datepay?lb=2"><font color="#000000">累计认购一币：</font><font color="#008000">${gcuser.rgpay}</font></a>
             <LI><a target="main" href="datepay?lb=3"><font color="#000000">累计卖出一币：</font><font color="#0000FF">${gcuser.mcpay}</font></a>
-            <LI>剩余金币：<font color="#800080" size="2" face="宋体">${gcuser.jydb}</font>
+            <LI>剩余金币：<font color="#800080" size="2" >${gcuser.jydb}</font>
             <LI>积分单价：<font color="#FF0000" size="2">${ajygj}</font>
             <LI>积分数量：<font color="#0000FF"><font size="2">${gcuser.jyg}</font></font>
             <LI>积分拆分次数：<font color="#800000"><font size="2">${gcuser.cfa}</font></font>

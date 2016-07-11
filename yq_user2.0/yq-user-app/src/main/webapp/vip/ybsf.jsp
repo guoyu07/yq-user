@@ -123,7 +123,7 @@ function checkdate1()  {
 		</tr>
 		<tr>
 			<td width="214" align="right" height="25">合计一币：</td>
-			<td width="336" align="left"><b><font color="#FF0000"><input id="ybpay" type="text" name="ybpay" size="15" style="font-family: 宋体; color: #FF0000; font-weight: bold" readonly></font></b></td>
+			<td width="336" align="left"><b><font color="#FF0000"><input id="ybpay" type="text" name="ybpay" size="15" style="; color: #FF0000; font-weight: bold" readonly></font></b></td>
 		</tr>
 		<tr>
 			<td width="214" align="right" height="25">用户名：</td>

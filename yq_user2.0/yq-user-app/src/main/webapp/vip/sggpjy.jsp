@@ -9,7 +9,7 @@
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="84" bgcolor="#D7FFE3">
 	<p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-	<font size="2" face="宋体"> 
+	<font size="2" > 
 </font></p>
 	<div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="30">
@@ -33,15 +33,15 @@
               </tr>
               </s:iterator>
             </table> 
-</div><font face="宋体" size="2"> <aldtags:pageTag/>
+</div><font  size="2"> <aldtags:pageTag/>
 </font> 
 </tr> 
 </table> 
-<font face="宋体" size="2"> 
+<font  size="2"> 
 </div> </div>
 </font>
-<p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0"><a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-weight: 700" face="宋体" size="2">返回上一页</font></a></p>
-<font face="宋体" size="2">
+<p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0"><a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-weight: 700"  size="2">返回上一页</font></a></p>
+<font  size="2">
 </body>
 </font>
 <meta http-equiv=Refresh content="180; url=">

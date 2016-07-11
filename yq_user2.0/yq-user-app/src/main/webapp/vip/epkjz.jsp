@@ -22,7 +22,7 @@
 　</p>
 			<p align="center">
 　</p>
-			<p align="center"><font color="#FF0000" face="宋体"><span style="font-size: 110pt; font-weight:700"><span id="sec" style="color:red"></span></span></font></p>
+			<p align="center"><font color="#FF0000" ><span style="font-size: 110pt; font-weight:700"><span id="sec" style="color:red"></span></span></font></p>
 			<p align="center">
 　</p>
 			<p align="center">

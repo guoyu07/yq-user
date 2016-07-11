@@ -87,8 +87,8 @@ return (allValid);
 			<option value="3">-大-</option>
 			<option value="4">-小-</option>
 			</select></td>
-		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="提交" name="B3" style="font-family: 宋体; font-size: 12pt; font-weight: bold" onClick="return confirm('提示：您确定了吗？')"></td>
-		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font face="宋体"><font color="#FFFFFF" size="2"><b>友</b></font><b><font color="#FFFFFF" size="2">情提示：</font></b></font><font face="宋体" size="2">竞猜游戏中没有100%的中奖，所投注的积分不管中与不中，均无法撤销，本游戏不是赌博，请保持良好的游戏心态，量力而行。</font></td>
+		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="提交" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('提示：您确定了吗？')"></td>
+		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FFFFFF" size="2"><b>友</b></font><b><font color="#FFFFFF" size="2">情提示：</font></b></font><font  size="2">竞猜游戏中没有100%的中奖，所投注的积分不管中与不中，均无法撤销，本游戏不是赌博，请保持良好的游戏心态，量力而行。</font></td>
 			</tr>
 			<tr>
 		<td width="165" align="right"><b>下注积分数量：</b></td>
@@ -103,33 +103,33 @@ return (allValid);
   <table border="0" cellspacing="1" width="100%" cellpadding="0" height="75" bgcolor="#008000" id="table2">
           <tr> 
         <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="73"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-	<font face="宋体"><b>积分竞猜记录</b><font size="2">
+	<font ><b>积分竞猜记录</b><font size="2">
 	</font></font></p>
 	<div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="55" id="table3">
             <tr>        
-     <td width="103" align="center" height="26" bgcolor="#E8E8FF"><b><font size="2" face="宋体">期号</font></b></td>                
-     <td width="157" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"> <font face="宋体" color="#800000" size="2"><strong>竞猜玩家</strong></font></td><b>
-     <td width="117" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000" face="宋体" size="2"> <strong>投注积分</strong></font></td></b>                
-     <td width="118" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000" face="宋体" size="2"> <strong>收入积分</strong></font></td>
-     <td width="108" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#800000" face="宋体" size="2">剩余积分</font></b></td><b>
-     <td width="220" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b> <font color="#FF0000" face="宋体" size="2">竞投时间</font></b></td></b>
-     <td width="216" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font face="宋体" size="2">备注</font></b></td>
+     <td width="103" align="center" height="26" bgcolor="#E8E8FF"><b><font size="2" >期号</font></b></td>                
+     <td width="157" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"> <font  color="#800000" size="2"><strong>竞猜玩家</strong></font></td><b>
+     <td width="117" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>投注积分</strong></font></td></b>                
+     <td width="118" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>收入积分</strong></font></td>
+     <td width="108" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#800000"  size="2">剩余积分</font></b></td><b>
+     <td width="220" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b> <font color="#FF0000"  size="2">竞投时间</font></b></td></b>
+     <td width="216" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font  size="2">备注</font></b></td>
         </tr>
       <s:iterator var="data" value="dataList">
          <tr> 
-     <td height="32" width="103" align="center" bgcolor="#DFFFEF"><b><font size="2" face="宋体">${data.kjqi}</font></b></td>
-     <td height="32" width="157" align="center" bgcolor="#DFFFEF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#008000" face="宋体" size="2" style="font-weight: 700">${data.username}</font></td><b>
-     <td valign="middle" width="117" align="center" bgcolor="#DFFFEF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" face="宋体" size="2">
+     <td height="32" width="103" align="center" bgcolor="#DFFFEF"><b><font size="2" >${data.kjqi}</font></b></td>
+     <td height="32" width="157" align="center" bgcolor="#DFFFEF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#008000"  size="2" style="font-weight: 700">${data.username}</font></td><b>
+     <td valign="middle" width="117" align="center" bgcolor="#DFFFEF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000"  size="2">
      <c:if test="${data.mcsl>0}">-${data.mcsl}</c:if><c:if test="${data.mcsl<=0}">${data.mcsl}</c:if></font></td></b>
-     <td valign="middle" width="118" align="center" bgcolor="#DFFFEF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000" face="宋体" size="2">${data.mysl}</font></td>
-     <td valign="middle" align="center" width="108" bgcolor="#DFFFEF"><font face="宋体" size="2">${data.sysl}</font></td><b>
-     <td valign="middle" align="center" width="220" bgcolor="#DFFFEF"><font size="2" face="宋体">${data.cgdate}</font></td></b>
-     <td valign="middle" align="center" width="216" bgcolor="#DFFFEF"><font size="2" face="宋体">${data.bz}</font></td>
+     <td valign="middle" width="118" align="center" bgcolor="#DFFFEF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#000000"  size="2">${data.mysl}</font></td>
+     <td valign="middle" align="center" width="108" bgcolor="#DFFFEF"><font  size="2">${data.sysl}</font></td><b>
+     <td valign="middle" align="center" width="220" bgcolor="#DFFFEF"><font size="2" >${data.cgdate}</font></td></b>
+     <td valign="middle" align="center" width="216" bgcolor="#DFFFEF"><font size="2" >${data.bz}</font></td>
          </tr>
              </s:iterator>
         </table> 
-</div><font size="2" face="宋体">
+</div><font size="2" >
 <aldtags:pageTag/>
 </font>
 </tr> 

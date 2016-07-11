@@ -28,26 +28,26 @@ function CheckAll(form) {
 	<table border="0" cellspacing="1" width="100%" cellpadding="0" height="90" id="table1">
   <tr> 
 <td width="87%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="90"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b>
-<font face="宋体" size="4">同姓名账户批量转账</font></b><font size="2" face="宋体">
+<font  size="4">同姓名账户批量转账</font></b><font size="2" >
 </font></p>
 	<div align="center">
         <table border="1" cellspacing="1" width="100%" height="66" bordercolor="#C0C0C0" style="border-collapse: collapse" id="table2">
      <tr>        
      <td width="318" align="center" height="32"><b>选中</b></td>                
-     <td width="318" align="center" height="32"><b><font color="#FF0000" face="宋体">用户名</font></b></td>                
-     <td width="416" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font face="宋体" color="#FF0000"><strong>姓名</strong></font></td><b>                
-     <td width="476" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" face="宋体"> <strong>可用一币</strong></font></td>
+     <td width="318" align="center" height="32"><b><font color="#FF0000" >用户名</font></b></td>                
+     <td width="416" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font  color="#FF0000"><strong>姓名</strong></font></td><b>                
+     <td width="476" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>可用一币</strong></font></td>
         </tr>
      <s:iterator var="data" value="dataList">
         <tr> 
       <td height="32" width="318" align="center"><input type="checkbox" name="fromUsers" value="${data.username}"></td>
-      <td height="32" width="318" align="center"><font face="宋体"><b>${data.username}</b></td>
-      <td height="32" width="416" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font face="宋体" style="font-weight: 700">${data.name}</font></td>
-      <td valign="middle" width="476" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font face="宋体"><input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}</font></b></td>
+      <td height="32" width="318" align="center"><font ><b>${data.username}</b></td>
+      <td height="32" width="416" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font  style="font-weight: 700">${data.name}</font></td>
+      <td valign="middle" width="476" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font ><input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}</font></b></td>
       </tr>
    </s:iterator>
   </table> 
-</div><font size="2" face="宋体"><aldtags:pageTag/>
+</div><font size="2" ><aldtags:pageTag/>
 </font>
 </tr> 
 </table>
