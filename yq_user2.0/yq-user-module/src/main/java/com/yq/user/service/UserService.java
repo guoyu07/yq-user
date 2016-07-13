@@ -2821,19 +2821,16 @@ public class UserService {
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量 "+gcuser.getJyg()+" ，谢谢！");
 		}
 		
-		if(gcuser.getJygt1()==0){
-			List<Gpjy> list = this.getMrPageList(10);
-			if(list!=null&&list.size()>0){
-				for(Gpjy gpjy:list){
-					if(gcuser.getJyg()*1.0d>=gpjy.getMysl()){
-						throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
-					}
-				}
-			}
-//			if(gpjyDao.get()!=null){
-//				throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+//		if(gcuser.getJygt1()==0){
+//			List<Gpjy> list = this.getMrPageList(10);
+//			if(list!=null&&list.size()>0){
+//				for(Gpjy gpjy:list){
+//					if(gcuser.getJyg()*1.0d>=gpjy.getMysl()){
+//						throw new ServiceException(10,"交易市场已有求购信息，请按需求点击 [我要卖给] ！");
+//					}
+//				}
 //			}
-		}
+//		}
 	}
 	
 	private void checkJfIsOpen(){
