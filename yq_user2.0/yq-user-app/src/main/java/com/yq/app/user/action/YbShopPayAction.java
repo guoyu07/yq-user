@@ -1,7 +1,15 @@
 package com.yq.app.user.action;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
@@ -167,35 +175,41 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 		if(!Strings.isNullOrEmpty(ybf)){
 			resultstr = userService.ybpay(ybsl,pa01, pid, ybf, user, order,  pa02, hgcode,allScores,ybstr);
 			String callBackUrl = "";
+			Map<String,String> param = null;
 			if(pid==1){
 				sn=MD5Security.md5_16(order+"$@@$"+resultstr);
 				LogSystem.info("返回的resultStr="+resultstr+"--sn="+sn+",order="+order);
 //				LogSystem.info(url+"?act=payment&resultstr="+resultstr+"&op=returnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=1&order_sn="+order+"&&payuser="+user);
-				callBackUrl = url+"?act=payment&resultstr="+resultstr+"&op=asyncreturnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=1&order_sn="+order+"&&payuser="+user;
+				param = new HashMap<String,String>();
+				param.put("resultstr", resultstr);
+				callBackUrl = url+"?act=payment&op=asyncreturnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=1&order_sn="+order+"&&payuser="+user;
 				super.setErroCodeNum(2000);
 			}else if(pid==2){
 				sn=MD5Security.md5_16(order+"$@@$"+gwpay);
 				callBackUrl = url + "?act=payment&op=asyncreturnyibi&sn="+sn+"&paycode=success&payamount="+gwpay+"&pid=2&order_sn="+order+"&&payuser="+user;
 				super.setErroCodeNum(2001);
 			}
-			callBackToServerShop(callBackUrl);
+			callBackToServerShop(callBackUrl,param);
 		}
 		return SUCCESS;
 	}
+	
 	
 	/**
 	 * 回调机票服务器
 	 */
 	private static final String SHOP_SUCCESS_TAG="success";
-	private void callBackToServerShop(String url) {
+	private void callBackToServerShop(String url,Map<String,String> param) {
 		String callBackUrl = url;
 		try {
-			String result = UrlRequestUtils.execute(callBackUrl, null, Mode.GET);
+//			callBackUrl = callBackUrl.replace("|", "%124");
+			
+			String result = UrlRequestUtils.execute(callBackUrl, param, Mode.POST);
 			LogSystem.log("商城回调请求地址:" + callBackUrl + ",result=" + result);
 			if (SHOP_SUCCESS_TAG.equals(result)) {
 				LogSystem.info("成功！");
 			}else{
-				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, null, Mode.GET, SHOP_SUCCESS_TAG) {
+				SendChargeMsgScheduler.addMsg(new CallBackMsgBean(callBackUrl, param, Mode.POST, SHOP_SUCCESS_TAG) {
 					@Override
 					public void afterSuccess() {
 						// TODO Auto-generated method stub
@@ -232,6 +246,42 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 				}
 			});
 		}
+	}
+	
+	private String orders;
+	public String dealMallOrder(){
+		 String signStr = orders+"yc$shop@Sfie68";
+		 String mySign;
+		 HttpServletResponse response = ServletActionContext.getResponse();
+		 PrintWriter write = null;
+		try {
+			write =  response.getWriter();
+		} catch (IOException e1) {
+			LogSystem.error(e1, "");
+		}
+		 
+		try {
+			mySign = MD5Security.code(signStr,32).toLowerCase();
+		} catch (Exception e) {
+			 LogSystem.error(e, "md5加密失败");
+			 write.write("error");
+			 return null;
+		}
+		 if(!sign.equals(mySign)){
+			 LogSystem.warn("md5校验失败，收到的key=["+signStr+"],md5后的值为["+mySign+"],收到的sing=["+sign+"]");
+			 write.write("error");
+			 return null;
+		 }
+		 
+		 UserService userService = ServiceCacheFactory.getService(UserService.class);
+		 try {
+			 userService.dealMallOrder(orders);
+		} catch (Exception e) {
+			 write.write("error");
+			 return null;
+		}
+		write.write("success");
+		return null;
 	}
 	
 	/**
@@ -565,6 +615,12 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 
 	public void setSign(String sign) {
 		this.sign = sign;
+	}
+	public String getOrders() {
+		return orders;
+	}
+	public void setOrders(String orders) {
+		this.orders = orders;
 	}
 	
 }

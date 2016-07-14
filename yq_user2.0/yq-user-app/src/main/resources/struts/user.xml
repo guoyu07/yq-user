@@ -382,6 +382,9 @@
 		    <result name="success" type="json"></result>
 		</action>
 		<action name="ybts" class="com.yq.app.user.action.ChangeStatsForShopAction">
+		</action>
+		
+		<action name="dealMallOrder" class="com.yq.app.user.action.YbShopPayAction" method="dealMallOrder">
 		</action>				
 	</package>
 

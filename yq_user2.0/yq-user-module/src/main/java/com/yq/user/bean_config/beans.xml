@@ -58,6 +58,10 @@
        
        <bean id="userExtinfoDao" class="com.yq.user.dao.UserExtinfoDao"></bean>
        <bean id="userDailyGainLogDao" class="com.yq.user.dao.UserDailyGainLogDao"></bean>
+       
+       <bean id="mallOrderDao" class="com.yq.user.dao.MallOrderDao"></bean>
+       
+       
        <!-- 用户数据service -->
        <bean id="userService" class="com.yq.user.service.UserService"></bean>
        <!-- 管理类service -->
