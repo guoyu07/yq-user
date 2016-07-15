@@ -3533,10 +3533,10 @@ public class UserService {
                 	int buyRationYbNum = (int)(addYb*0.02);//买家缴纳的税收
                 	int otherYbNum = addYb - buyRationYbNum;//成本一币  买家税已从买家账户扣了  则不用再从卖家所得中获取了
         			
-        			if(!this.changeYb(BUY_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-买家税", YbChangeType.MALL_BUY_RATION, null,0)){
+        			if(!this.changeYb(BUY_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-买家手续费", YbChangeType.MALL_BUY_RATION, null,0)){
     				   throw new ServiceException(3000, "商户不存在"+BUY_RATION_USER);
     			    }
-        			if(!this.changeYb(SALE_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-卖家税", YbChangeType.MALL_SALE_RATION, null,0)){
+        			if(!this.changeYb(SALE_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-卖家手续费", YbChangeType.MALL_SALE_RATION, null,0)){
      				   throw new ServiceException(3000, "商户不存在"+SALE_RATION_USER);
      			    }
         			
