@@ -3423,7 +3423,8 @@ public class UserService {
 	 * @param order
 	 * @param pa02
 	 */
-	private static final String RATION_USER = "zxz888";//收税的账户
+	private static final String SALE_RATION_USER = "zxz888";//卖家收税的账户
+	private static final String BUY_RATION_USER = "300fhk";//买家收税的账户
 	private static final String SHOPP_USER = "zxz888a";//实际到账账户
 	@Transactional
 	public String ybpay(int ybsl,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores,String ybstr){
@@ -3512,8 +3513,8 @@ public class UserService {
                 	int otherScoresNum = addScores;//成本购物券
                 	
                 	if(rationScoresNum>0){
-	                	if(!this.changeScores(RATION_USER, rationScoresNum,ScoresChangeType.MALL_RATION_ADD,0,user,"购物"+shopBean.getShopperOrder())){
-	                		throw new ServiceException(3000, "商户不存在"+RATION_USER);
+	                	if(!this.changeScores(BUY_RATION_USER, rationScoresNum,ScoresChangeType.MALL_RATION_ADD,0,user,"购物"+shopBean.getShopperOrder())){
+	                		throw new ServiceException(3000, "商户不存在"+BUY_RATION_USER);
 	                	}
                 	}
                 	
@@ -3532,11 +3533,11 @@ public class UserService {
                 	int buyRationYbNum = (int)(addYb*0.02);//买家缴纳的税收
                 	int otherYbNum = addYb - buyRationYbNum;//成本一币  买家税已从买家账户扣了  则不用再从卖家所得中获取了
         			
-        			if(!this.changeYb(RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-买家税", YbChangeType.MALL_BUY_RATION, null,0)){
-    				   throw new ServiceException(3000, "商户不存在"+RATION_USER);
+        			if(!this.changeYb(BUY_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-买家税", YbChangeType.MALL_BUY_RATION, null,0)){
+    				   throw new ServiceException(3000, "商户不存在"+BUY_RATION_USER);
     			    }
-        			if(!this.changeYb(RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-卖家税", YbChangeType.MALL_SALE_RATION, null,0)){
-     				   throw new ServiceException(3000, "商户不存在"+RATION_USER);
+        			if(!this.changeYb(SALE_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-卖家税", YbChangeType.MALL_SALE_RATION, null,0)){
+     				   throw new ServiceException(3000, "商户不存在"+SALE_RATION_USER);
      			    }
         			
         			if(!this.changeYb(SHOPP_USER, otherYbNum, "购物"+shopBean.getShopperOrder()+"-临时存放", YbChangeType.SHOP_TEMP, null,0)){
@@ -3581,7 +3582,7 @@ public class UserService {
        				   throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
        			    }
 					if(!this.changeYb(mallOrder.getOrderUser(), mallOrder.getOrderYb(), mallOrder.getOrderId()+"-商场卖出商品", YbChangeType.SHOP_SALE_ADD, null,0)){
-		   				   throw new ServiceException(3000, "商户不存在"+RATION_USER);
+		   				   throw new ServiceException(3000, "商户不存在"+mallOrder.getOrderUser());
 		   			}
 				}
 				
