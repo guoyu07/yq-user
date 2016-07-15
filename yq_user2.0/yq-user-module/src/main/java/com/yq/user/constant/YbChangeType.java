@@ -14,6 +14,8 @@ public class YbChangeType {
 	
 	public static final int SHOP_SALE_ADD = 1004;//商城卖家卖出商品获得yb
 	
+	public static final int SHOP_SALE_ADD_SELF = 1005;//商城卖家卖出商品获得yb  zxz888自己商家卖出商品
+	
 	
 	public static final int SHOP_TEMP_REDUCE = 2001;//商城临时账号转账给商家货物YB数
 }

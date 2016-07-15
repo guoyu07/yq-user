@@ -3519,9 +3519,16 @@ public class UserService {
                 	}
                 	
                 	if(otherScoresNum>0){
-                		if(!this.changeScores(SHOPP_USER, otherScoresNum,ScoresChangeType.MALL_TEMP_ADD,0,user,"购物"+shopBean.getShopperOrder())){
-                    		throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
-                    	}
+                		//如果商户是zxz888那么直接进该商家账户  不进入中转站
+                		if(shopBean.getShopper().equals("zxz888")){
+                			if(!this.changeScores("zxz888", otherScoresNum,ScoresChangeType.MALL_SALE,0,user,"购物"+shopBean.getShopperOrder())){
+                        		throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
+                        	}
+                		}else{
+                			if(!this.changeScores(SHOPP_USER, otherScoresNum,ScoresChangeType.MALL_TEMP_ADD,0,user,"购物"+shopBean.getShopperOrder())){
+                        		throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
+                        	}
+                		}
                 	}
                 	
                 	orderScores = otherScoresNum;
@@ -3536,22 +3543,33 @@ public class UserService {
         			if(!this.changeYb(BUY_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-买家手续费", YbChangeType.MALL_BUY_RATION, null,0)){
     				   throw new ServiceException(3000, "商户不存在"+BUY_RATION_USER);
     			    }
-        			if(!this.changeYb(SALE_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-卖家手续费", YbChangeType.MALL_SALE_RATION, null,0)){
-     				   throw new ServiceException(3000, "商户不存在"+SALE_RATION_USER);
-     			    }
+        			//如果商户是zxz888那么直接进该商家账户  不进入中转站
+        			if(shopBean.getShopper().equals("zxz888")){
+        				if(!this.changeYb(shopBean.getShopper(), addYb, shopBean.getShopperOrder()+"-商场卖出商品", YbChangeType.SHOP_SALE_ADD_SELF, null,0)){
+        					   throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
+        				  }
+        				orderYb  = addYb;
+        			}else{
+	        			if(!this.changeYb(SALE_RATION_USER, buyRationYbNum, "购物"+shopBean.getShopperOrder()+"-卖家手续费", YbChangeType.MALL_SALE_RATION, null,0)){
+	     				   throw new ServiceException(3000, "商户不存在"+SALE_RATION_USER);
+	     			    }
+	        			if(!this.changeYb(SHOPP_USER, otherYbNum, "购物"+shopBean.getShopperOrder()+"-临时存放", YbChangeType.SHOP_TEMP, null,0)){
+	      				   throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
+	      			    }
+	//        			if(!this.changeYb(shopBean.getShopper(), addYb, paylb, 101, null,0)){
+	//        				throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
+	//        			}
+	        			orderYb = otherYbNum;
+        			}
         			
-        			if(!this.changeYb(SHOPP_USER, otherYbNum, "购物"+shopBean.getShopperOrder()+"-临时存放", YbChangeType.SHOP_TEMP, null,0)){
-      				   throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
-      			    }
-//        			if(!this.changeYb(shopBean.getShopper(), addYb, paylb, 101, null,0)){
-//        				throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
-//        			}
-        			orderYb = otherYbNum;
         		}
         		
         		MallOrder mallOrder = new MallOrder(shopBean.getShopperOrder(), shopBean.getShopper(), orderYb, orderScores, 0, new Date());
+        		if(shopBean.getShopper().equals("zxz888")){
+        			mallOrder.setStatus(1);
+        			mallOrder.setUpdatedTime(new Date());
+        		}
         		mallOrderDao.add(mallOrder);
-        		
                 if(i==0){
                 	resultStr.append(shopBean.getShopperOrder()+":"+addScores+":"+addYb);
                 }else{
@@ -3595,7 +3613,7 @@ public class UserService {
                 	}
 				}
 			}else{
-				throw new ServiceException(1, "不存在的订单号,或重复处理！"+mallOrder.getOrderId());
+//				throw new ServiceException(1, "不存在的订单号,或重复处理！"+mallOrder.getOrderId());
 			}
 		}
 	}
