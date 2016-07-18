@@ -12,7 +12,7 @@
 				<li><a href="http://keyukeji.com">精品游戏</a></li>
 				<li><a href="http://gw.zgyce.com">导购</a></li>
 				<li><a href="http://hy.zgyce.com">起点货源网</a></li>
-				<li><a href="http://www.qlsme.com">幸福100</a></li>
+				<li><a href="http://www.zgybe.com">幸福100</a></li>
 			</ul>
 		</div>
 		<p class="clickTop"><span class="hover"></span></p>

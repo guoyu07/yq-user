@@ -13,7 +13,7 @@ Gcuser gcuserJflc = userServiceJflc.getUserByUserName(userServiceJflc.isLogin(re
 					<ul>
 					<li><a href="/hfcz">话费充值(100)</a></li>
 					<li><a target="_blank" href="http://www.kypwe.com">科赡票务</a></li>
-					<li><a target="_blank" href="http://www.qlsme.com">幸福100</a></li>
+					<li><a target="_blank" href="http://www.zgybe.com">幸福100云购在线</a></li>
 					<li><a target="_blank" href="http://yb.zgyce.com/index.asp?vipid=<%=gcuserJflc.getUsername() %>&vippa=<%=gcuserJflc.getPassword()%>">一币换购商品</a></li>
 					<li><a target="_blank" href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=<%=gcuserJflc.getUsername() %>">一币换购记录</a></li>
 			        <li><a href="/baby">口才训练营报名</a></li>
