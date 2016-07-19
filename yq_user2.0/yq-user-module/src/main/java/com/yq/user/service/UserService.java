@@ -2234,6 +2234,10 @@ public class UserService {
 		//金币数量
 		int jbCount = mz*gmsl;
 		
+		if(mz<=0||gmsl<=0){
+			throw new ServiceException(2, "注意：您的一币不够本次发卡，请充值！");
+		}
+		
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){
