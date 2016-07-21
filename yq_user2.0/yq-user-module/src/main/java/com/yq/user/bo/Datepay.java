@@ -9,12 +9,18 @@ import java.util.Date;
 public class Datepay{
 	private Integer id;
 	private String username;
+	//一币收入
 	private int syjz;
+	//一币支出
 	private int jc;
+	//金币收入
 	private int jyjz;
+	//金币支出
 	private int dbjc;
 	private int zff;
+	//当前一币
 	private int pay;
+	//当前金币
 	private int jydb;
 	private Date abdate;
 	private String regid;
