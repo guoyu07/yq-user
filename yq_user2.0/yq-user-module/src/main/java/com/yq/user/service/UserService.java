@@ -1540,6 +1540,9 @@ public class UserService {
 	 */
 	@Transactional
 	public int yqQg(String userName,int goodsId,int buyNum,int price){
+		if(buyNum<0||price<0){
+			throw new ServiceException(1,"一币不足");
+		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getPay()==0 ||  price*buyNum>gcuser.getPay()){
 			throw new ServiceException(1,"一币不足");
@@ -1849,6 +1852,9 @@ public class UserService {
 	        if(amount<0 || amount==0 || amount >50000){
 	        	throw new ServiceException(1,"您好，您转账一币不能小于零或超过50000，谢谢！");
 	        }
+		}
+		if(amount<0){
+			throw new ServiceException(1,"您好，您转账一币不能小于零或超过50000，谢谢！");
 		}
 		if(amount%100!=0){
 			throw new ServiceException(2,"转账必须是100的倍整数如：100，200，300，400，500，1000，5000，请检查输入是否正确！");
@@ -2634,6 +2640,10 @@ public class UserService {
 	@Transactional
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
+		
+		if(buyNum<0){
+			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
+		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		List<Gpjy> list = this.getMcPageList(10);
@@ -3320,6 +3330,9 @@ public class UserService {
         if(!password.equals("xyhk655ss")){
 			throw new ServiceException(2, "充值密码不正确！");
 		}
+        if(amount<0){
+        	throw new ServiceException(3, "该用户名不存在，请检查输入是否正确！");
+        }
 		Gcuser toUser = gcuserDao.getUser(toUserName);
 		if(toUser==null){
 			throw new ServiceException(3, "该用户名不存在，请检查输入是否正确！");
@@ -3434,6 +3447,10 @@ public class UserService {
 	public String ybpay(int ybsl,String pa01,int pid,String ybf,String user,String order, String pa02,String hgcode,int scores,String ybstr){
 		
 		if(ybsl<=0&&scores<=0){
+			throw new ServiceException(2, "订单信息有误，请重新提交！");
+		}
+		
+		if(ybsl<0||scores<0){
 			throw new ServiceException(2, "订单信息有误，请重新提交！");
 		}
 		
