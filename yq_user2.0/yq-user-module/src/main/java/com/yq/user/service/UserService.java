@@ -1600,6 +1600,11 @@ public class UserService {
 	 * @param smsCode
 	 * @param ip
 	 */
+	
+	//南京vip bjv168 下面的所有用户  只能体现奖金金额  不能体现其他
+    private static String FORBIDDEN_USERS = "bjv168";
+    private static String[] SKIL_USERS = new String[]{"lhj5578aa"};
+	
 	@Transactional
 	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
 		
@@ -1644,8 +1649,26 @@ public class UserService {
         if(gcuser.getTxlb()==3||gcuser.getJb()==5){
             throw new ServiceException(8,"商户或商家账号不能卖出一币！");
 		}
-		
-		
+
+        //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分
+		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
+			boolean isSkip = false;
+			for(String skipUser:SKIL_USERS){
+				if(userName.equals(skipUser)){
+					isSkip = true;
+					break;
+				}
+			}
+			if(!isSkip){
+				int prizeYb = gcuser.getJbpay()+gcuser.getJjpay()+gcuser.getJypay();
+				if(gcuser.getMcpay()+saleNum>prizeYb){
+					throw new ServiceException(9, "您所属的vip， 只能提现奖金部分 ，不能卖出其他部分!奖金部分余额不足！");
+				}
+			}
+		}
+        
+        
+        
 		double tgpay9 = 0d;
 		int tgpay09 = 0;
 		if(saleNum<1000){

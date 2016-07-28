@@ -3,7 +3,6 @@ package com.yq.app.user.action;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
-import com.yq.user.dao.GcuserDao;
 import com.yq.user.service.UserService;
 
 public class BdRegAction extends ALDAdminActionSupport {
@@ -35,18 +34,18 @@ public class BdRegAction extends ALDAdminActionSupport {
     	LogSystem.info("action中开始"+super.getUserName()+"--开始执行开户操作，节点"+up+",绑定用户--》"+bduser+",开户金额"+cjpay);
 		call = userService.bdReg(super.getUserName(), up, bduser, cjpay, pa1j, pa2j, ceid, status);
 		//江苏团队的开户限制提现
-		try {
-			if(status!=0){
-			String myvip = userService.findMyUpVipName(bduser);
-			if(myvip.equals("bjv168")){
-				GcuserDao gcuserDao = ServiceCacheFactory.getServiceCache().getService(GcuserDao.class);
-				gcuserDao.updatePayOkForUserName(bduser, 2);
-				LogSystem.info("bdReg---bjv168-->旗下用户"+bduser+",限制提现成功！···");
-			}
-			}
-		} catch (Exception e) {
-			LogSystem.error(e, "");
-		}
+//		try {
+//			if(status!=0){
+//			String myvip = userService.findMyUpVipName(bduser);
+//			if(myvip.equals("bjv168")){
+//				GcuserDao gcuserDao = ServiceCacheFactory.getServiceCache().getService(GcuserDao.class);
+//				gcuserDao.updatePayOkForUserName(bduser, 2);
+//				LogSystem.info("bdReg---bjv168-->旗下用户"+bduser+",限制提现成功！···");
+//			}
+//			}
+//		} catch (Exception e) {
+//			LogSystem.error(e, "");
+//		}
 		
 		long end = System.currentTimeMillis();
 		LogSystem.info("action中结束"+super.getUserName()+"--开始执行开户操作，节点"+up+",绑定用户--》"+bduser+",开户金额"+cjpay+",结束，耗时=["+(end-startTime)/1000+"s]");
