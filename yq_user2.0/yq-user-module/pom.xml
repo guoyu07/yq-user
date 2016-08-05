@@ -78,5 +78,22 @@
 			<version>17.0</version>
 		</dependency>
 	</dependencies>
-	
+			<repositories>
+		<repository>
+			<id>local</id>
+			<name>local Repository</name>
+			<url>http://mvn.sr178.com:8081/nexus/content/repositories/thirdparty/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>local snapshots</id>
+			<name>local Repository</name>
+			<url>http://mvn.sr178.com:8081/nexus/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
 </project>
