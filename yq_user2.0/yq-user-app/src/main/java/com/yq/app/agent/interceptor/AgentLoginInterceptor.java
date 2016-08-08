@@ -25,8 +25,7 @@ public class AgentLoginInterceptor extends AbstractInterceptor{
 			Map<String,Object> map = actionInvocation.getInvocationContext().getParameters();
 			Object values = map.get("tokenId");
 			String tokenId = values==null?null:((String[])values)[0];
-			AgentService aus = ServiceCacheFactory.getServiceCache()
-					.getService(AgentService.class);
+			AgentService aus = ServiceCacheFactory.getServiceCache().getService(AgentService.class);
 			String userName = aus.isLogin(tokenId);
 			if(userName==null){
 				return aldAction.renderErrorResult(100, "token已失效！");
