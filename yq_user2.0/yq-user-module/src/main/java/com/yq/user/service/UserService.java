@@ -1605,6 +1605,8 @@ public class UserService {
     private static String FORBIDDEN_USERS = "bjv168";
     private static String[] SKIL_USERS = new String[]{"lhj5578aa"};
 	
+    //以下身份证号码 也只能体现奖金金额  不能体现其他
+    private String FORBIDDEN_ID_CARD = "330726197208232522，330726197306032524，332523197104124019，130627198306226028，522132198106124949，513223197807113429，330725197506072727，331081198202260778，330726197501111148，330721198308316312，620403195406020028，330726197006042528，362325197202081910，450204198003071506，522401198101050823，330323197202167124，330325198004277629，33252319750516402x，332623194702070032，330726194205242510，512926197503032626，330821197012087064，422825196902071229，330726198012211126，330725198109043935";
 	@Transactional
 	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
 		
@@ -1650,8 +1652,8 @@ public class UserService {
             throw new ServiceException(8,"商户或商家账号不能卖出一币！");
 		}
 
-        //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分
-		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
+        //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分 及指定身份证号码
+		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null||FORBIDDEN_ID_CARD.indexOf(gcuser.getUserid())!=-1){
 			boolean isSkip = false;
 			for(String skipUser:SKIL_USERS){
 				if(userName.equals(skipUser)){
