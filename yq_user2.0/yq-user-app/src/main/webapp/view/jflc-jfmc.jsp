@@ -21,7 +21,7 @@
  function checkdate()  {  
   if (Form.jygj.value=="") {      alert("请输入需要卖出的单价!");  Form.jygj.focus();    return false;    } 
   if (Form.jygj.value<${fcxt.zdj}) {      alert("卖出单价不能小于 ${fcxt.zdj} !");  Form.jygj.focus();    return false;    }
-  if (Form.jygj.value>${fcxt.jygj}) {      alert("卖出单价不能大于 ${fcxt.jygj} 哦!");  Form.jygj.focus();    return false;    } 
+  if (Form.jygj.value>${fcxt.jygj}+0.03) {      alert("卖出单价不能大于 ${fcxt.jygj+0.03} 哦!");  Form.jygj.focus();    return false;    } 
     if (!chkinteger1(Form.jygj.value)){
 	alert('卖出单价只能为数字!');
 	document.Form.jygj.focus;

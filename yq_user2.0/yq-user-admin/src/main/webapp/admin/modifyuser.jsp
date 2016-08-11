@@ -81,7 +81,6 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">开户行：</font></td>
         <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><select size="1" name="bank">
 		<option selected>${gcuser.bank}</option>
-		<option>财付通</option>
 		<option>工商银行</option>
 		<option>建设银行</option>
 		<option>农业银行</option>
