@@ -922,6 +922,11 @@ public class GcuserDao {
 		return jdbc.getList(sql, Gcuser.class);
 	}
 	
+	public List<Gcuser> getAllBigVip(){
+		String sql = "select username from "+table+" where vip=2";
+		return jdbc.getList(sql, Gcuser.class);
+	}
+	
 	public List<Gcuser> getAllDownVip(String userName){
 		String leftSql = " select gc.username from zuo_mingxi zm left join gcuser gc on zm.down=gc.username where zm.tjuser=? and gc.vip<>0";
 		String rightSql = " select gc.username from you_mingxi zm left join gcuser gc on zm.down=gc.username where zm.tjuser=? and gc.vip<>0";

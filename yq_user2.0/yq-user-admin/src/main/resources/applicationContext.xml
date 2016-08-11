@@ -47,4 +47,8 @@
        <bean id="userPerformanceScheduler" class="com.yq.admin.manager.scheduler.UserPerformanceScheduler">
           <property name="cronExpression" value="0 5 0 * * ?"></property>
        </bean>
+       <!-- 每日凌晨3点过5分执行 -->
+       <bean id="vipDownTempScheduler" class="com.yq.admin.manager.scheduler.VipDownTempScheduler">
+          <property name="cronExpression" value="0 5 3 * * ?"></property>
+       </bean>
 </beans>

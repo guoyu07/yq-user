@@ -10,6 +10,7 @@ import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
+import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.module.web.session.Session;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
@@ -21,7 +22,9 @@ import com.yq.cw.bean.VipCjbLogBean;
 import com.yq.cw.bean.VipCjglForDc;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.bo.CwUser;
+import com.yq.cw.bo.VipDownTemp;
 import com.yq.cw.dao.CwUserDao;
+import com.yq.cw.dao.VipDownTempDao;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
@@ -52,6 +55,8 @@ public class CwService {
   	private AdminService adminService;
   	@Autowired
   	private SgxtDao sgxtDao;
+  	@Autowired
+  	private VipDownTempDao vipDownTempDao;
   	
   	private Cache<String,List<String>> downVipList = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
@@ -278,12 +283,42 @@ public class CwService {
 	public List<String> getMyDownVip(String userName){
 		return downVipList.getIfPresent(userName);
 	}
+	
+	/**
+	 * 生成大vip下小vip的纪录
+	 */
+	public void vipDownTempRun(){
+		List<Gcuser> list = gcuserDao.getAllBigVip();
+		for(Gcuser gcuser:list){
+			List<String> mydownVips = getCurrentNowDownVipList(gcuser.getUsername());
+			List<VipDownTemp> downTemps = Lists.newArrayList();
+			for(String downVip:mydownVips){
+				downTemps.add(new VipDownTemp(gcuser.getUsername(), downVip));
+			}
+			vipDownTempDao.delete(new SqlParamBean("user_name", gcuser.getUsername()));
+			vipDownTempDao.insertBatch(downTemps);
+		}
+	}
+	
+	
+	private List<String> getNowDownVipList(String userName) {
+		List<String> result = Lists.newArrayList();
+		if (userName.equals(ADMIN)) {
+			result = adminService.getAllVipName();
+		} else {
+			List<VipDownTemp> list = vipDownTempDao.getList(new SqlParamBean("user_name", userName));
+			for (VipDownTemp vip : list) {
+				result.add(vip.getDownVip());
+			}
+		}
+		return result;
+	}
 	/**
 	 * 即时查询当前用户下的小vip列表
 	 * @param userName
 	 * @return
 	 */
-	private List<String> getNowDownVipList(String userName){
+	private List<String> getCurrentNowDownVipList(String userName){
 		List<String> vipList = Lists.newArrayList();
 		if (userName.equals(ADMIN)) {
 			vipList = adminService.getAllVipName();
@@ -301,7 +336,9 @@ public class CwService {
 	
 	public void generatorDownList(String userName,List<String> vipList){
 		Sgxt sgxt = sgxtDao.get(userName);
-		
+		if(sgxt==null){
+			return;
+		}
 		if(!Strings.isNullOrEmpty(sgxt.getAuid())){
 			Gcuser gcuser = gcuserDao.getUser(sgxt.getAuid());
 			if(gcuser.getVip()==3){//小vip添加

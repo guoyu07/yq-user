@@ -2671,17 +2671,15 @@ public class UserService {
 		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
-		List<Gpjy> list = this.getMcPageList(10);
-		if(list!=null&&list.size()>0){
-			for(Gpjy gpjy:list){
-				if(gcuser.getJydb()*1.0d>=gpjy.getJypay()){
-					throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
-				}
-			}
-		}
-//		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
-//			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+//		List<Gpjy> list = this.getMcPageList(10);
+//		if(list!=null&&list.size()>0){
+//			for(Gpjy gpjy:list){
+//				if(gcuser.getJydb()*1.0d>=gpjy.getJypay()){
+//					throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+//				}
+//			}
 //		}
+
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));

@@ -5,11 +5,12 @@ import com.sr178.game.framework.testcore.ActionTest;
 import com.sr178.game.framework.testcore.DaoTest;
 import com.sr178.game.framework.testcore.ServiceTest;
 import com.yq.common.utils.UrlRequestUtils.Mode;
+import com.yq.cw.service.CwService;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.scheduler.SendChargeMsgScheduler;
 
-public class AdminServiceTest {
+public class AdminServiceTest extends DaoTest{
 
 	public void testWay(){
 //		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
@@ -83,6 +84,7 @@ public class AdminServiceTest {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
+//		CwService cwService = ServiceCacheFactory.getService(CwService.class);
+//		cwService.vipDownTempRun();
 	}
 }

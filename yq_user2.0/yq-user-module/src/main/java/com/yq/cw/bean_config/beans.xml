@@ -13,4 +13,6 @@
        <bean id="cwService" class="com.yq.cw.service.CwService"></bean>
        
        <bean id="cwUserDao" class="com.yq.cw.dao.CwUserDao"></bean>
+       
+       <bean id="vipDownTempDao" class="com.yq.cw.dao.VipDownTempDao"></bean>
 </beans>
