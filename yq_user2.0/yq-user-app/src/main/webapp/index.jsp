@@ -97,6 +97,41 @@
 			    }
 			    ajaxobj.send();
 		    }
+		    //验证用户是否存在，如果存在跳转到重置密码界面
+		    function checkReg(){
+				if ( Form.ygid.value==""){
+					alert ("提示：用户名不能为空!！");
+					Form.ygid.focus();
+					return;
+				}
+				 if (!CheckIfEnglish(Form.ygid.value ) || Form.ygid.value.length > 10 || Form.ygid.value.length < 4) {
+					alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+					Form.ygid.focus();
+					return ;
+				}
+			    var uName=document.Form.ygid.value;
+			    var ajaxobj = new Ajax();
+			    ajaxobj.url="checkreg?gguser="+uName;
+			    ajaxobj.callback=function(){
+				    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
+				    if(responseMsg.erroCodeNum!=0){
+				    	location.href="/resetPasswod?userName="+uName;
+					    return;
+				    }else{
+				    	alert("用户名："+uName+"可注册！");
+				    	return;
+				    }
+			    }
+			    ajaxobj.send();
+			}
+		    function CheckIfEnglish( str )
+		    {  
+		    if(/[a-z]/.test(str)&&/[0-9]/.test(str)){
+		    return true;
+		    }else{
+		    return false;
+		    }
+		    }
     	</SCRIPT>
 <body>
 	<div class="denglu">
@@ -107,7 +142,7 @@
 				<p><input type="text" name="ygid" value="<% if(request.getParameter("id")!=null){%><%=request.getParameter("id")%><%}%>" class="name" /></p>
 				<p><input type="password" name="pa" class="pw" /></p>
 				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="点击刷新" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
-				<!-- <p class="pab"><input type="checkbox" /><span>记住账号</span>   <a href="#">忘记密码</a></p> -->
+				<!-- <input type="checkbox" /><span>记住账号</span>--> <p class="pab">  <a href="#" onClick="checkReg();">忘记密码</a></p><!-- onClick="forgetpasswd();" --> 
 				<p><button class="log" onClick="logins();"></button></p>
 				<a class="restyle" href="/reg">注册账号</a>
 			</form>

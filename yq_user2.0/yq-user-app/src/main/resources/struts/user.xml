@@ -4,394 +4,417 @@
 <struts>
 
 	<package name="other" extends="managerInterceptor" namespace="/">
-	    <action name="manager" class="com.yq.app.user.action.ManagerAction">
-		    <result name="success">
-		        view/index2.jsp
-		    </result>
+		<action name="manager" class="com.yq.app.user.action.ManagerAction">
+			<result name="success">
+				view/index2.jsp
+			</result>
 		</action>
-		
+
 		<action name="user" class="com.yq.app.user.action.UserInfoAction">
-		    <result name="success">
-		        view/user.jsp
-		    </result>
+			<result name="success">
+				view/user.jsp
+			</result>
 		</action>
-	    <action name="adminmenu" class="com.yq.app.user.action.AdminMenu">
-		    <result name="success">
-		        vip/admin_menu.jsp
-		    </result>
+		<action name="adminmenu" class="com.yq.app.user.action.AdminMenu">
+			<result name="success">
+				vip/admin_menu.jsp
+			</result>
 		</action>
 		<action name="gg" class="com.yq.app.user.action.GgAction">
 			<result name="success">vgo/gg.jsp</result>
 		</action>
-		
+
 		<action name="userlist" class="com.yq.app.user.action.UserListAction">
 			<result name="success">view/zhgl-tmzhlist.jsp</result>
 		</action>
 		<action name="relogin" class="com.yq.app.user.action.ReLoginAction">
 			<result name="success" type="redirect">/manager</result>
-		</action>		
+		</action>
 		<action name="datepay" class="com.yq.app.user.action.DatePayAction">
 			<result name="success">view/yblc-details.jsp</result>
-		</action>		
+		</action>
 		<action name="userscoreslog" class="com.yq.app.user.action.UserScoresLogAction">
 			<result name="success">view/yblc-userscoreslog.jsp</result>
 		</action>
-		 <action name="userscoreslogoutExcel" class="com.yq.app.user.action.UserScoresLogAction" method="outExcel">
-            <result name="success">view/yblc-userscoreslog.jsp</result>
-        </action>
-		
+		<action name="userscoreslogoutExcel" class="com.yq.app.user.action.UserScoresLogAction"
+			method="outExcel">
+			<result name="success">view/yblc-userscoreslog.jsp</result>
+		</action>
+
 		<action name="tgurl" class="com.yq.app.user.action.TgurlAction">
-		   <result name="success">view/grxx-rule.jsp</result>
+			<result name="success">view/grxx-rule.jsp</result>
 		</action>
-		
+
 		<action name="login2j" class="com.yq.app.user.action.Login2jAction">
-		   <result name="input">view/${inputUrl}</result>
-		    <result name="success" type="json"></result>
+			<result name="input">view/${inputUrl}</result>
+			<result name="success" type="json"></result>
 		</action>
-		
-		
+
+
 		<action name="userga" class="com.yq.app.user.action.UpdateUserInfoAction">
-		    <result name="input">view/grxx-edit-userinfo.jsp</result>
-		    <result name="success" type="json"></result>
+			<result name="input">view/grxx-edit-userinfo.jsp</result>
+			<result name="success" type="json"></result>
 		</action>
-		
-		
+
+
 		<action name="updateuserjc" class="com.yq.app.user.action.UpdateUserJcAction">
-		     <result name="input">view/grxx-edit-jc.jsp</result>
-		    <result name="success" type="json"></result>
+			<result name="input">view/grxx-edit-jc.jsp</result>
+			<result name="success" type="json"></result>
 		</action>
-		
+
 		<action name="gcbf" class="com.yq.app.user.action.GcfhAction">
-		     <result name="p0">view/grxx-gcbf.jsp</result>
-		    <result name="p1">view/grxx-gcbftj.jsp</result>
+			<result name="p0">view/grxx-gcbf.jsp</result>
+			<result name="p1">view/grxx-gcbftj.jsp</result>
 		</action>
-		
-		
+
+
 		<action name="ybsf" class="com.yq.app.user.action.YbsfAction">
-		    <result name="input">view/grxx-shopmanager.jsp</result>
-		    <result name="success" type="json"></result>
+			<result name="input">view/grxx-shopmanager.jsp</result>
+			<result name="success" type="json"></result>
 		</action>
-		
+
 		<action name="yb" class="com.yq.app.user.action.GetUserYb">
-		    <result name="success" type="json"></result>
+			<result name="success" type="json"></result>
 		</action>
-		
+
 		<action name="dldate" class="com.yq.app.user.action.LoginLogListAction">
-		    <!-- <result name="success">vgo/dldate.jsp</result>  -->
-		    <result name="success">view/grxx-loginlog.jsp</result>
+			<!-- <result name="success">vgo/dldate.jsp</result> -->
+			<result name="success">view/grxx-loginlog.jsp</result>
 		</action>
 		<action name="ggck" class="com.yq.app.user.action.GgckAction">
-		    <!-- <result name="success">vgo/ggck.jsp</result> -->
-		    <result name="success">view/zhgl-notice.jsp</result>
+			<!-- <result name="success">vgo/ggck.jsp</result> -->
+			<result name="success">view/zhgl-notice.jsp</result>
 		</action>
-		
+
 		<action name="logout" class="com.yq.app.user.action.LogoutAction">
-		    <result name="ch" type="redirect">http://www.zgyce.com/</result>
-		    <result name="en" type="redirect">http://www.zgyce.com/english</result>
+			<result name="ch" type="redirect">http://www.zgyce.com/</result>
+			<result name="en" type="redirect">http://www.zgyce.com/english</result>
 		</action>
-		
+
 		<action name="sgks01" class="com.yq.app.user.action.Sgks01Action">
-		    <result name="success">view/yjcx-game.jsp</result>
+			<result name="success">view/yjcx-game.jsp</result>
 		</action>
 		<action name="sgreg" class="com.yq.app.user.action.SgRegAction">
-		    <result name="success">view/yjcx-choose-empty.jsp</result>
-		</action>			
+			<result name="success">view/yjcx-choose-empty.jsp</result>
+		</action>
 		<action name="bdreg" class="com.yq.app.user.action.BdRegAction">
-		    <result name="success">view/yjcx-choose-empty-sure.jsp</result>
-		    <result name="sgks01" type="redirect">sgks01?myup=${up}&amp;lb=1</result>
+			<result name="success">view/yjcx-choose-empty-sure.jsp</result>
+			<result name="sgks01" type="redirect">sgks01?myup=${up}&amp;lb=1</result>
 		</action>
-		
+
 		<action name="vipup" class="com.yq.app.user.action.VipUpAction">
-		   <result name="success">view/service.jsp</result>
+			<result name="success">view/service.jsp</result>
 		</action>
-		
+
 		<action name="bdbdate" class="com.yq.app.user.action.DateBdbAction">
-		   <result name="success">view/yjcx-bdb-details.jsp</result>
+			<result name="success">view/yjcx-bdb-details.jsp</result>
 		</action>
-		
+
 		<action name="bdbzz" class="com.yq.app.user.action.BdbZzAction">
-		   <result name="success">view/yjcx-bdb-zz.jsp</result>
-		   <result name="bdbdate" type="redirect">bdbdate</result>
+			<result name="success">view/yjcx-bdb-zz.jsp</result>
+			<result name="bdbdate" type="redirect">bdbdate</result>
 		</action>
-		
+
 		<action name="tgdown" class="com.yq.app.user.action.TgdownAction">
-		  <result name="success">view/zhgl-kehu.jsp</result>
+			<result name="success">view/zhgl-kehu.jsp</result>
 		</action>
-		
+
 		<action name="regTheSame" class="com.yq.app.user.action.RegTheSameAction">
-		  <result name="success">view/zhgl-regthesame.jsp</result>
-		</action>			
-		
+			<result name="success">view/zhgl-regthesame.jsp</result>
+		</action>
+
 		<action name="tjz" class="com.yq.app.user.action.TjzAction">
-		   <result name="success">view/zhgl-tmzhgl.jsp</result>
+			<result name="success">view/zhgl-tmzhgl.jsp</result>
 		</action>
-		
+
 		<action name="epjqks" class="com.yq.app.user.action.EpjqksAction">
-		   <result name="input">vip/epjqks.jsp</result>
-		</action>	
-		
-		<action name="epkjjl" class="com.yq.app.user.action.EpkjjlAction">
-		   <result name="success">vip/epkjjl.jsp</result>
+			<result name="input">vip/epjqks.jsp</result>
 		</action>
-		
-		
+
+		<action name="epkjjl" class="com.yq.app.user.action.EpkjjlAction">
+			<result name="success">vip/epkjjl.jsp</result>
+		</action>
+
+
 		<action name="ybcg" class="com.yq.app.user.action.YbqgAction">
-		   <result name="success">vip/ybcg/epcg.jsp</result>
+			<result name="success">vip/ybcg/epcg.jsp</result>
 		</action>
 		<action name="epcgks" class="com.yq.app.user.action.Ypqgks">
-		   <result name="success">vip/ybcg/epcgks.jsp</result>
+			<result name="success">vip/ybcg/epcgks.jsp</result>
 		</action>
-		
+
 		<action name="userpay" class="com.yq.app.user.action.UserPayAction">
-		   <!-- <result name="success">vip/userpay.jsp</result> -->
-		   <result name="success">view/yblc-sales.jsp</result>
-		</action>				
-		
+			<!-- <result name="success">vip/userpay.jsp</result> -->
+			<result name="success">view/yblc-sales.jsp</result>
+		</action>
+
 		<action name="updateuser" class="com.yq.app.user.action.UpdateUserAction">
-		    <result name="input">vip/upuser.jsp</result>
-			<result name="success" type="json" >
+			<result name="input">vip/upuser.jsp</result>
+			<result name="success" type="json">
 				<param name="ignoreHierarchy">false</param>
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
-		</action>	
-        <action name="glpay" class="com.yq.app.user.action.JzpayAction">
-		   <result name="success">view/yblc-mallback.jsp</result>
-		</action>		
-        <action name="backscores" class="com.yq.app.user.action.JzpayAction" method="backScores">
-		   <result name="success">view/yblc-mallbackscores.jsp</result>
-		</action>				
-		<action name="maller" class="com.yq.app.user.action.JzpayAction" method="setForMall">
-		   <result name="success" type="json">
-		     <param name="includeProperties">erroCodeNum</param>
-		   </result>
-		</action>	
+		</action>
+		<action name="glpay" class="com.yq.app.user.action.JzpayAction">
+			<result name="success">view/yblc-mallback.jsp</result>
+		</action>
+		<action name="backscores" class="com.yq.app.user.action.JzpayAction"
+			method="backScores">
+			<result name="success">view/yblc-mallbackscores.jsp</result>
+		</action>
+		<action name="maller" class="com.yq.app.user.action.JzpayAction"
+			method="setForMall">
+			<result name="success" type="json">
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
 		<action name="vipjzpay" class="com.yq.app.user.action.VipjzpayAction">
-		   <result name="success">view/yblc-transferout.jsp</result>
+			<result name="success">view/yblc-transferout.jsp</result>
 		</action>
 		<action name="ybPresent" class="com.yq.app.user.action.YbPresentAction">
-		   <result name="success">view/yblc-transferout-present.jsp</result>
+			<result name="success">view/yblc-transferout-present.jsp</result>
 		</action>
 		<action name="epjysc" class="com.yq.app.user.action.EphyscAction">
-		   <result name="success">view/yblc-mark.jsp</result>
+			<result name="success">view/yblc-mark.jsp</result>
 		</action>
-		
+
 		<action name="epmcjl" class="com.yq.app.user.action.EpmcjlAction">
-		   <result name="success">view/yblc-mcdetails.jsp</result>
+			<result name="success">view/yblc-mcdetails.jsp</result>
 		</action>
 		<action name="epmyjl" class="com.yq.app.user.action.EpmyjlAction">
-		  <result name="success">view/yblc-mrdetails.jsp</result>
+			<result name="success">view/yblc-mrdetails.jsp</result>
 		</action>
 		<action name="qxepmc" class="com.yq.app.user.action.QxepmcAction">
-		   <result name="success">vip/qxepmc.jsp</result>
-		</action>		
-		<action name="epmy" class="com.yq.app.user.action.EpmyAction">
-		   <result name="success">vip/epmy.jsp</result>
+			<result name="success">vip/qxepmc.jsp</result>
 		</action>
-		
+		<action name="epmy" class="com.yq.app.user.action.EpmyAction">
+			<result name="success">vip/epmy.jsp</result>
+		</action>
+
 		<action name="fbbank" class="com.yq.app.user.action.FbbankAction">
-		   <result name="success">vip/fbbank.jsp</result>
+			<result name="success">vip/fbbank.jsp</result>
 		</action>
 		<action name="myepok" class="com.yq.app.user.action.MyepokAction">
-		   <result name="success">vip/myepok.jsp</result>
+			<result name="success">vip/myepok.jsp</result>
 		</action>
 		<action name="mcepok" class="com.yq.app.user.action.McepokAction">
-		   <result name="input">vip/mcepok.jsp</result>
-		   <result name="success">vip/mcepok.jsp</result>
-		</action>		
+			<result name="input">vip/mcepok.jsp</result>
+			<result name="success">vip/mcepok.jsp</result>
+		</action>
 		<action name="jztojb" class="com.yq.app.user.action.JztobjAction">
-		   <result name="success">view/yblc-buy-goldcard1.jsp</result>
-		    <result name="suc2">view/yblc-buy-goldcard2.jsp</result>
-		    <result name="suc3">view/yblc-buy-goldcard3.jsp</result>
-		    <result name="suc4">view/yblc-buy-goldcard4.jsp</result>
+			<result name="success">view/yblc-buy-goldcard1.jsp</result>
+			<result name="suc2">view/yblc-buy-goldcard2.jsp</result>
+			<result name="suc3">view/yblc-buy-goldcard3.jsp</result>
+			<result name="suc4">view/yblc-buy-goldcard4.jsp</result>
 		</action>
-		
+
 		<action name="vipgo" class="com.yq.app.user.action.VipgoAction">
-		   <result name="input">view/jflc-recharge.jsp</result>
-		   <result name="success">view/jflc-recharge-ok.jsp</result>
+			<result name="input">view/jflc-recharge.jsp</result>
+			<result name="success">view/jflc-recharge-ok.jsp</result>
 		</action>
-		
+
 		<action name="bank" class="com.yq.app.user.action.BankAction">
-		    <result name="success">view/zhgl-bank.jsp</result>
-		</action>	
-		<action name="cjjl" class="com.yq.app.user.action.CjjlAction">
-		    <result name="success">vip/cjjl.jsp</result>
-		</action>	
-		<action name="gmjh" class="com.yq.app.user.action.GmjhAction">
-		    <result name="success">view/jflc-activie-goldcard.jsp</result>
+			<result name="success">view/zhgl-bank.jsp</result>
 		</action>
-		
+		<action name="cjjl" class="com.yq.app.user.action.CjjlAction">
+			<result name="success">vip/cjjl.jsp</result>
+		</action>
+		<action name="gmjh" class="com.yq.app.user.action.GmjhAction">
+			<result name="success">view/jflc-activie-goldcard.jsp</result>
+		</action>
+
 		<action name="glfhk" class="com.yq.app.user.action.GlfhkAction">
-		     <result name="success">view/jflc-activie-gold-look2.jsp</result>
-		     <result name="ckpa">view/jflc-activie-gold-look.jsp</result>
-		</action>		
+			<result name="success">view/jflc-activie-gold-look2.jsp</result>
+			<result name="ckpa">view/jflc-activie-gold-look.jsp</result>
+		</action>
 
 		<action name="czpa" class="com.yq.app.user.action.CzpaAction">
-		    <result name="success">view/jflc-activie-gold-look.jsp</result>
+			<result name="success">view/jflc-activie-gold-look.jsp</result>
 		</action>
-		
-		
+
+
 		<action name="activedGoldCard" class="com.yq.app.user.action.ActivGoldCardAction">
-		    <result name="success">vip/chklogin.jsp</result>
-		</action>		
-		
+			<result name="success">vip/chklogin.jsp</result>
+		</action>
+
 		<action name="jfjqks" class="com.yq.app.user.action.JfjqksAction">
-		    <result name="success">vip/jfjqks.jsp</result>
+			<result name="success">vip/jfjqks.jsp</result>
 		</action>
-		
+
 		<action name="jfkjjl" class="com.yq.app.user.action.JfkjjlAction">
-		    <result name="success">vip/jfkjjl.jsp</result>
+			<result name="success">vip/jfkjjl.jsp</result>
 		</action>
-		
+
 		<action name="oycg" class="com.yq.app.user.action.OycgAction">
-		    <result name="success">vip/jfcg/0ycg.jsp</result>
+			<result name="success">vip/jfcg/0ycg.jsp</result>
 		</action>
-		
+
 		<action name="cgks" class="com.yq.app.user.action.CgksAction">
-		    <result name="success">vip/jfcg/cgks.jsp</result>
+			<result name="success">vip/jfcg/cgks.jsp</result>
 		</action>
-		
+
 		<action name="jfgame" class="com.yq.app.user.action.JfgameAction">
-		    <result name="success">vip/jfgame.jsp</result>
-		    <result name="redirect" type="redirect">http://p.cfjte.com/Manage/Reg02.aspx?user=${userName}&amp;pa=${pa}</result>
+			<result name="success">vip/jfgame.jsp</result>
+			<result name="redirect" type="redirect">http://p.cfjte.com/Manage/Reg02.aspx?user=${userName}&amp;pa=${pa}
+			</result>
 		</action>
-		
+
 		<action name="mysl" class="com.yq.app.user.action.MyslAction">
-		    <result name="success">view/jflc-jfmr.jsp</result>
-		    <result name="mysl2">view/jflc-jfmr-2.jsp</result>
+			<result name="success">view/jflc-jfmr.jsp</result>
+			<result name="mysl2">view/jflc-jfmr-2.jsp</result>
 		</action>
-		
+
 		<action name="qxqg" class="com.yq.app.user.action.QxqgAction">
-		   <result name="success">vip/qxqg.jsp</result>
+			<result name="success">vip/qxqg.jsp</result>
 		</action>
-		
+
 		<action name="sgqg" class="com.yq.app.user.action.SgqgAction">
-		    <result name="success">vip/sgqg.jsp</result>
-		</action>		
+			<result name="success">vip/sgqg.jsp</result>
+		</action>
 
 		<action name="gpjy" class="com.yq.app.user.action.GpjyAction">
-		    <result name="success">view/jflc-details.jsp</result>
-		</action>	
-		
+			<result name="success">view/jflc-details.jsp</result>
+		</action>
+
 		<action name="mcsl" class="com.yq.app.user.action.McslAction">
-		    <result name="success">view/jflc-jfmc.jsp</result>
-		    <result name="redirect" type="redirect">/mcsl</result>
-		    <result name="mcsl2">vip/mcsl2.jsp</result>
+			<result name="success">view/jflc-jfmc.jsp</result>
+			<result name="redirect" type="redirect">/mcsl</result>
+			<result name="mcsl2">vip/mcsl2.jsp</result>
 		</action>
-		
+
 		<action name="sggpjy" class="com.yq.app.user.action.SggpjyAction">
-		    <result name="success">vip/sggpjy.jsp</result>
+			<result name="success">vip/sggpjy.jsp</result>
 		</action>
-		
+
 		<action name="qxyjg" class="com.yq.app.user.action.QxyjgAction">
-		    <result name="success">vip/qxyjg.jsp</result>
+			<result name="success">vip/qxyjg.jsp</result>
 		</action>
-		
+
 		<action name="diyjygj" class="com.yq.app.user.action.DiyjygjAction">
-		    <result name="success">vip/diyjygj.jsp</result>
-		</action>					
+			<result name="success">vip/diyjygj.jsp</result>
+		</action>
 
 		<action name="gpjysc" class="com.yq.app.user.action.GpjyscAction">
-		    <result name="success">view/jflc-mark.jsp</result>
-		</action>	
-		
-		<action name="gpjymc" class="com.yq.app.user.action.GpgymcAction">
-		    <result name="success">vip/gpjymc.jsp</result>
+			<result name="success">view/jflc-mark.jsp</result>
 		</action>
-		
+
+		<action name="gpjymc" class="com.yq.app.user.action.GpgymcAction">
+			<result name="success">vip/gpjymc.jsp</result>
+		</action>
+
 		<action name="gpjymy" class="com.yq.app.user.action.GpgymyAction">
-		    <result name="success">vip/gpjymy.jsp</result>
+			<result name="success">vip/gpjymy.jsp</result>
 		</action>
 		<action name="wymy" class="com.yq.app.user.action.WymrAction">
-		    <result name="success">vip/wymy.jsp</result>
+			<result name="success">vip/wymy.jsp</result>
 		</action>
 		<action name="wymc" class="com.yq.app.user.action.WymcAction">
-		    <result name="success">vip/wymc.jsp</result>
+			<result name="success">vip/wymc.jsp</result>
 		</action>
-		
+
 		<action name="sms" class="com.yq.app.user.action.SmsAction">
-		    <result name="success" type="json"></result>
+			<result name="success" type="json"></result>
 		</action>
-		
+
 		<action name="vipcjb" class="com.yq.app.user.action.VipcjbAction">
-		     <result name="success">view/yblc-vipcjb.jsp</result>
+			<result name="success">view/yblc-vipcjb.jsp</result>
 		</action>
-		
-		<action name="vipcj" class="com.yq.app.user.action.VipcjbAction" method="cj">
-		     <result name="success">view/yblc-vipcjb.jsp</result>
+
+		<action name="vipcj" class="com.yq.app.user.action.VipcjbAction"
+			method="cj">
+			<result name="success">view/yblc-vipcjb.jsp</result>
 		</action>
-		
-		<action name="hgyb" class="com.yq.app.user.action.YbShopPayAction" method="hgyb">
-		     <result name="success">vip/hgyb.jsp</result>
+
+		<action name="hgyb" class="com.yq.app.user.action.YbShopPayAction"
+			method="hgyb">
+			<result name="success">vip/hgyb.jsp</result>
 		</action>
-		<action name="hgybok" class="com.yq.app.user.action.YbShopPayAction" method="hgybok">
-		     <result name="success">vip/hgyb.jsp</result>
-		</action>	
-		
+		<action name="hgybok" class="com.yq.app.user.action.YbShopPayAction"
+			method="hgybok">
+			<result name="success">vip/hgyb.jsp</result>
+		</action>
+
 		<action name="hfcz" class="com.yq.app.user.action.TelPayAction">
-		     <result name="success">view/xfgl-mobilecharge.jsp</result>
+			<result name="success">view/xfgl-mobilecharge.jsp</result>
 		</action>
-		
+
 		<action name="baby" class="com.yq.app.user.action.BabyAction">
-		     <result name="success">view/xfgl-baby.jsp</result>
-		     <result name="input">view/xfgl-baby.jsp</result>
+			<result name="success">view/xfgl-baby.jsp</result>
+			<result name="input">view/xfgl-baby.jsp</result>
 		</action>
 		<action name="checkUserName" class="com.yq.app.user.action.CheckUserNameAction">
-		  	<result name="success" type="json" >
+			<result name="success" type="json">
 				<param name="ignoreHierarchy">false</param>
 				<param name="includeProperties">code,name</param>
 			</result>
 		</action>
+
+
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
 	<package name="login" extends="noLoginInterceptor" namespace="/">
+		<!-- 检测忘记密码，跳转到手机验证码界面 -->
+		<action name="resetPasswod" class="com.yq.app.user.action.RetsetPasswodAction">
+			<result name="input01">resetUserPass.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
 		<!-- 一个包下可以放这个模块下的所有action -->
 		<action name="login" class="com.yq.app.user.action.AdminLogin">
 			<result name="success" type="json">
-			  <param name="includeProperties">erroCodeNum</param>
+				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
 		<action name="adminlogin" class="com.yq.app.user.action.ManagerLogin">
 			<result name="success" type="redirect">
-			   /manager
+				/manager
 			</result>
 			<result name="upuser" type="redirect">
-			   /updateuser
+				/updateuser
 			</result>
 		</action>
 		<action name="reg" class="com.yq.app.user.action.RegAction">
 			<result name="input1">reg1.jsp</result>
 			<result name="input2">reg2.jsp</result>
 			<result name="input3">reg3.jsp</result>
-		    <result name="success">regend.jsp</result>
+			<result name="success">regend.jsp</result>
 		</action>
 		<action name="checkreg" class="com.yq.app.user.action.CheckReg">
 			<result name="success" type="json" />
 		</action>
-		
-		<action name="kypwe" class="com.yq.app.user.action.YbShopPayAction" method="kypwe">
-		     <result name="success">vip/kypwe.jsp</result>
-		</action>	
-		<action name="ybpay" class="com.yq.app.user.action.YbShopPayAction" method="ybpay">
-		     <result name="success">vip/ybpay.jsp</result>
-		</action>	
-		<action name="hgybsh" class="com.yq.app.user.action.YbShopPayAction" method="hgybsh">
-		     <result name="success">vip/hgyb.jsp</result>
+
+		<action name="kypwe" class="com.yq.app.user.action.YbShopPayAction"
+			method="kypwe">
+			<result name="success">vip/kypwe.jsp</result>
+		</action>
+		<action name="ybpay" class="com.yq.app.user.action.YbShopPayAction"
+			method="ybpay">
+			<result name="success">vip/ybpay.jsp</result>
+		</action>
+		<action name="hgybsh" class="com.yq.app.user.action.YbShopPayAction"
+			method="hgybsh">
+			<result name="success">vip/hgyb.jsp</result>
 		</action>
 		<action name="sms2" class="com.yq.app.user.action.SmsAction">
-		    <result name="success" type="json"></result>
+			<result name="success" type="json"></result>
 		</action>
 		<action name="ybts" class="com.yq.app.user.action.ChangeStatsForShopAction">
 		</action>
-		
-		<action name="dealMallOrder" class="com.yq.app.user.action.YbShopPayAction" method="dealMallOrder">
-		</action>				
+
+		<action name="dealMallOrder" class="com.yq.app.user.action.YbShopPayAction"
+			method="dealMallOrder">
+		</action>
+
+
 	</package>
 
-    <package name="managerInterceptor" extends="someInterceptor">
+	<package name="managerInterceptor" extends="someInterceptor">
 
 		<interceptors>
-			<!-- 认证拦截器-->
+			<!-- 认证拦截器 -->
 			<interceptor name="adminUserInterceptor"
 				class="com.yq.app.user.interceptor.UserInterceptor" />
 			<interceptor-stack name="adminStack">
@@ -408,18 +431,18 @@
 			</result>
 			<!-- 更新资料界面 -->
 			<result name="upuserg" type="redirect">
-			   /updateuser
+				/updateuser
 			</result>
-			
+
 			<result name="glober_alert">
 				/glober_alert.jsp
 			</result>
 		</global-results>
 	</package>
-	
+
 	<package name="noLoginInterceptor" extends="someInterceptor">
 		<interceptors>
-			<!-- 认证拦截器-->
+			<!-- 认证拦截器 -->
 			<interceptor name="noLoginInterceptor"
 				class="com.yq.common.interceptor.NoLoginInterceptor" />
 			<interceptor-stack name="noLoginStack">
@@ -429,18 +452,18 @@
 		</interceptors>
 		<default-interceptor-ref name="noLoginStack" />
 	</package>
-	
-	
+
+
 	<package name="someInterceptor" extends="myInterceptor">
 		<interceptors>
-		    <!-- 并发访问限制 -->
-		    <interceptor name="webRedisSessiontUserVisitSpeedInterceptor"
+			<!-- 并发访问限制 -->
+			<interceptor name="webRedisSessiontUserVisitSpeedInterceptor"
 				class="com.yq.app.user.interceptor.WebRedisSessiontUserVisitSpeedInterceptor" />
-			<!-- sql注入烂机器-->
+			<!-- sql注入烂机器 -->
 			<interceptor name="illegalCharacterInterceptor"
 				class="com.sr178.module.web.interceptor.IllegalCharacterInterceptor" />
 			<interceptor-stack name="someStack">
-			    <interceptor-ref name="webRedisSessiontUserVisitSpeedInterceptor" />
+				<interceptor-ref name="webRedisSessiontUserVisitSpeedInterceptor" />
 				<interceptor-ref name="illegalCharacterInterceptor" />
 				<interceptor-ref name="myStack" />
 			</interceptor-stack>
