@@ -477,7 +477,35 @@ public class UserService {
 		
 	}
 	
-	
+	/**
+	 * 重置玩家密码
+	 * @param userName 操作人
+	 * @param name	   用户
+	 * @param userId 身份证号
+	 * @param password	重置后的密码
+	 * @param ip
+	 * @return
+	 */
+	public String resetUserPass(String userName, String password, String smsCode, String ip){
+		Gcuser guser = gcuserDao.getUser(userName);
+		if(guser==null){
+			throw new ServiceException(1, "用户不存在!");
+		}
+		if(!smsCode.equals(guser.getVipsq())){
+			throw new ServiceException(2, "验证码有误!");
+		}
+		if(!Strings.isNullOrEmpty(password)){
+			boolean result =  gcuserDao.resetUserPass(guser.getName(), guser.getUserid(), password);
+			if(result){
+				addUserDateIpLog(userName, "重置密码", ip);
+			}
+			gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		}else{
+			gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+			throw new ServiceException(3000, "有值为空!");
+		}
+		return "success";
+	}
 	
 	/**
 	 * 更新用户信息
@@ -500,6 +528,17 @@ public class UserService {
 	}
 	
 	
+	/**
+	 * 更新用户信息
+	 * @param userName
+	 * @param idCard
+	 * @param password
+	 * @param password3
+	 * @param ganew
+	 * @param qq
+	 * @param call
+	 * @return
+	 */
 	public boolean updateUser(String userName,String name, String idCard, String password,  String card, String bank,String  addsheng,String addshi,String addqu,String ip){
 		boolean result =  gcuserDao.updateUser(name, idCard, password, card, bank, addsheng, addshi, addqu);
 		if(result){
@@ -1605,6 +1644,8 @@ public class UserService {
     private static String FORBIDDEN_USERS = "bjv168";
     private static String[] SKIL_USERS = new String[]{"lhj5578aa"};
 	
+    //以下身份证号码 也只能体现奖金金额  不能体现其他
+    private String FORBIDDEN_ID_CARD = "330726197208232522，330726197306032524，332523197104124019，130627198306226028，522132198106124949，513223197807113429，330725197506072727，331081198202260778，330726197501111148，330721198308316312，620403195406020028，330726197006042528，362325197202081910，450204198003071506，522401198101050823，330323197202167124，330325198004277629，33252319750516402x，332623194702070032，330726194205242510，512926197503032626，330821197012087064，422825196902071229，330726198012211126，330725198109043935";
 	@Transactional
 	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
 		
@@ -1650,8 +1691,8 @@ public class UserService {
             throw new ServiceException(8,"商户或商家账号不能卖出一币！");
 		}
 
-        //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分
-		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
+        //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分 及指定身份证号码
+		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null||FORBIDDEN_ID_CARD.indexOf(gcuser.getUserid())!=-1){
 			boolean isSkip = false;
 			for(String skipUser:SKIL_USERS){
 				if(userName.equals(skipUser)){
@@ -2669,17 +2710,15 @@ public class UserService {
 		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
-		List<Gpjy> list = this.getMcPageList(10);
-		if(list!=null&&list.size()>0){
-			for(Gpjy gpjy:list){
-				if(gcuser.getJydb()*1.0d>=gpjy.getJypay()){
-					throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
-				}
-			}
-		}
-//		if(gcuser.getJydb()>1500&&gpjyDao.get()!=null){
-//			throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+//		List<Gpjy> list = this.getMcPageList(10);
+//		if(list!=null&&list.size()>0){
+//			for(Gpjy gpjy:list){
+//				if(gcuser.getJydb()*1.0d>=gpjy.getJypay()){
+//					throw new ServiceException(1,"交易市场已有积分在出售中，请按需求点击 [我要买入] ！");
+//				}
+//			}
 //		}
+
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
@@ -3288,8 +3327,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Map<String,String> param = new HashMap<String,String>();
@@ -4099,5 +4138,51 @@ public class UserService {
 		}
 		return userScoresLogDao.getListByUserNameAndTime(userName, startTime, endTime);
 	}
+
+   /**
+	 * 更新玩家资料
+	 * @param userName		账户
+	 * @param secondPassword 二级密码
+	 * @param newSecondPassword1 新二级密码
+	 * @param card			银行卡号
+	 * @param idCard		身份证号
+	 * @param bank			收款银行
+	 * @param smsCode		验证码
+	 * @param provinceName	开户行
+	 * @param passowrd		登录密码
+	 * @param remoteAddr	ip
+	 * @return
+	 */
+   public String updateUser(String userName, String newSecondPassword, String secondPassword, String card, String idCard,
+		String bank, String smsCode, String provinceName, String provinceName2, String cityName, String areaName,
+		String passowrd, String remoteAddr) {
+
+	   Gcuser guser = gcuserDao.getUser(userName);
+		
+		if(guser==null){
+			throw new ServiceException(1, "用户不存在!");
+		}
+		
+		if(Strings.isNullOrEmpty(smsCode)|| !smsCode.equals(guser.getVipsq())){
+			throw new ServiceException(2, "您填入的手机验证码不正确!");
+		}
+		
+		if(Strings.isNullOrEmpty(secondPassword)||!secondPassword.equals(guser.getPassword3())){
+			throw new ServiceException(3, "您填入的二级密码不正确!");
+		}
+		
+		if(Strings.isNullOrEmpty(idCard)||!idCard.equals(guser.getUserid())){
+			throw new ServiceException(4, "您填入的身份证号码不正确！");
+		}			
+		
+		boolean result = gcuserDao.updateUser(guser.getName(), newSecondPassword, card, idCard, bank, smsCode, provinceName, cityName, areaName, passowrd);
+		if(result){
+			addUserDateIpLog(userName, "更新资料", remoteAddr);
+		}
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		
+		return "success";
 	
+   }
+
 }

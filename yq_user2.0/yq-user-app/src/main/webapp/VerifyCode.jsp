@@ -1,4 +1,4 @@
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="org.apache.struts2.ServletActionContext"%>
 <%@page import="com.sr178.game.framework.log.LogSystem"%>
 <%@page import="com.sr178.module.utils.JedisUtils"%>
@@ -14,9 +14,10 @@
   int   b=fc+random.nextInt(bc-fc);   
   return   new   Color(r,g,b);   
   }   
-  %>   
-  <%   
-try{
+  %>
+  
+  <%
+  try{
   response.setHeader("Pragma","No-cache");   
   response.setHeader("Cache-Control","no-cache");   
   response.setDateHeader("Expires",   0);

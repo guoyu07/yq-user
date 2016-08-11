@@ -27,9 +27,20 @@ public class GenEntityMysql {
 	private boolean f_sql = false; // 是否需要导入包java.sql.*
     
     //数据库连接
-	private static final String URL ="jdbc:mysql://localhost:3306/yq_user";
+	/*private static final String URL ="jdbc:mysql://localhost:3306/yq_user";
 	private static final String NAME = "yquser";
 	private static final String PASS = "yquser@123";
+	private static final String DRIVER ="com.mysql.jdbc.Driver";
+	*/
+	/*private static final String URL ="jdbc:mysql://192.168.1.100:3306/yq_user";
+	private static final String NAME = "db_owner";
+	private static final String PASS = "123456";
+	private static final String DRIVER ="com.mysql.jdbc.Driver";*/
+	
+	
+	private static final String URL ="jdbc:mysql://localhost:3306/yq_user";
+	private static final String NAME = "root";
+	private static final String PASS = "";
 	private static final String DRIVER ="com.mysql.jdbc.Driver";
 	/*
 	 * 构造函数
@@ -237,7 +248,7 @@ public class GenEntityMysql {
 		for(int i=0;i<tableNames.length;i++){
 			new GenEntityMysql(tableNames[i]);
 		}
-//		generatorInsertSql();
+		//generatorInsertSql();
 		
 	}
 	

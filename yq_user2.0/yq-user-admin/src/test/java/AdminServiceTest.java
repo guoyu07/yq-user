@@ -9,7 +9,7 @@ import com.yq.manager.service.AdminService;
 import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.scheduler.SendChargeMsgScheduler;
 
-public class AdminServiceTest {
+public class AdminServiceTest extends ServiceTest{
 
 	public void testWay(){
 //		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);

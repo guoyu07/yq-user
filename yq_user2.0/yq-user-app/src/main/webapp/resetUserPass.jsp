@@ -93,7 +93,7 @@ function checkdate1()  {
 		</tr>
 		<tr>
 			<td width="260" align="right">联系手机：</td>
-			<td width="396" align="left">${user.call}</td>
+			<td width="396" align="left"><span class="tispsfz">${user.call}</span></td>
 		</tr> 
 		<tr>
 			<td width="260" align="right">手机验证码：</td>

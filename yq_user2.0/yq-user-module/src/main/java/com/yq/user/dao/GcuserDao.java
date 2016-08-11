@@ -922,6 +922,11 @@ public class GcuserDao {
 		return jdbc.getList(sql, Gcuser.class);
 	}
 	
+	public List<Gcuser> getAllBigVip(){
+		String sql = "select username from "+table+" where vip=2";
+		return jdbc.getList(sql, Gcuser.class);
+	}
+	
 	public List<Gcuser> getAllDownVip(String userName){
 		String leftSql = " select gc.username from zuo_mingxi zm left join gcuser gc on zm.down=gc.username where zm.tjuser=? and gc.vip<>0";
 		String rightSql = " select gc.username from you_mingxi zm left join gcuser gc on zm.down=gc.username where zm.tjuser=? and gc.vip<>0";
@@ -1177,6 +1182,51 @@ public class GcuserDao {
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+
+	/**
+	 * 重置玩家密码
+	 * @param name	   用户
+	 * @param userId 身份证
+	 * @param password	重置后的密码
+	 * @return
+	 */
+	public boolean resetUserPass(String name,String userId, String password) {
+		String sql = "update "+table+" set password=? where userid=? and name=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(password);
+		parameter.setString(userId);
+		parameter.setString(name);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+
+	/**
+	 * 更新玩家信息
+	 * @param userName		账户
+	 * @param secondPassword 二级密码
+	 * @param newSecondPassword1 新二级密码
+	 * @param card			银行卡号
+	 * @param idCard		身份证号
+	 * @param bank			收款银行
+	 * @param provinceName	身份
+	 * @param passowrd		登录密码
+	 * @param remoteAddr	ip
+	 * @return
+	 */
+	public boolean updateUser(String name, String newSecondPassword, String card, String idCard, String bank,
+			String smsCode, String provinceName, String cityName, String areaName, String passowrd) {
+		String sql = "update "+table+" set password3=? , password=? ,  card=? , bank=? ,addsheng=?,addshi=?,addqu=? where name=? and userid=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(newSecondPassword);
+		parameter.setString(passowrd);
+		parameter.setString(card);
+		parameter.setString(bank);
+		parameter.setString(provinceName);
+		parameter.setString(cityName);
+		parameter.setString(areaName);
+		parameter.setString(name);
+		parameter.setString(idCard);
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	

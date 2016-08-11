@@ -1,11 +1,18 @@
 package com.yq.app.user.action;
 
+import java.util.UUID;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.google.common.base.Strings;
+import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.exception.ServiceException;
+import com.sr178.module.web.session.Session;
+import com.yq.agent.bo.AgentApp;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.MD5Security;
+import com.yq.common.utils.ParamCheck;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -39,29 +46,19 @@ public class RetsetPasswodAction extends ALDAdminActionSupport {
 		Gcuser gcuser = userService.getUserByUserName(userName);
 		if(gcuser!=null){
 			user = gcuser;
-			call = gcuser.getCall();
+			int callLenght = user.getCall().length();
+			String callLeft = user.getCall().substring(0, 3);
+			String CallRight = user.getCall().substring(callLenght-3, callLenght);
+			user.setCall(callLeft+"*****"+CallRight);
 			return "input01";
 		}else if(status==7){//表示重置密码操作
-			Gcuser guser = userService.getUserByUserName(toUserName);
-			if(guser==null){
-				super.setErroCodeNum(1);//用户不存在
-				return SUCCESS;
-			}
-			if(!smsCode.equals(guser.getVipsq())){//验证码有误
-				super.setErroCodeNum(2);
-				return SUCCESS;
-			}
-			if(!Strings.isNullOrEmpty(newPassWord1)){
-				//开始重置密码操作
-				userService.resetUserPass(toUserName,toUserName, MD5Security.md5_16(newPassWord1),guser.getUserid(),ServletActionContext.getRequest().getRemoteAddr());
-				return SUCCESS;
-			}else{
-				super.setErroCodeNum(3000);
-				return SUCCESS;
-			}
+			//开始重置密码操作
+			userService.resetUserPass(toUserName, MD5Security.md5_16(newPassWord1),smsCode,ServletActionContext.getRequest().getRemoteAddr());
+			return SUCCESS;
 		}else{	
 			return SUCCESS;
 		}
+		
 	}
 
 	public String getToUserName() {
