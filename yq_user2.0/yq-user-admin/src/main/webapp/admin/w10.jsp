@@ -11,6 +11,34 @@
 <script language=javascript>alert('设置成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
 </c:if>
 
+<c:if test="${erroCodeNum==2002}">
+<script language=javascript>alert('退回成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
+</c:if>
+<script language="javascript">
+function writeReson(id,pagesize,username) 
+{ 
+	var resionMassage=prompt("请输入备注原因:","提现退回") 
+	if(resionMassage.length>50){
+		alert("不能超过50个字，请重新输入！");
+		writeReson(id,pagesize,username) ;
+	}
+ if (resionMassage!=null && resionMassage!="") 
+	{ 
+	 go(id,pagesize,username,resionMassage);
+	} 
+}  
+
+function go(id,pagesize,username,resionMassage){
+	var str;
+	str="cancelOrder?payid="+id+"&user="+username+"&page="+pagesize+"&resionMassage="+resionMassage;
+	window.location=str; 
+	}
+</script>搜索
+<form name="form1">
+<input type="text" name="address">
+<input type="submit" onclick="return confirmAddress(this.form);">
+</from>
+
 <HTML>
 <style><!--
         A:visited{TEXT-DECORATION: none}
@@ -39,12 +67,14 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
 <div align="center">
   <center>
   <p align="left">
- <form name="form" method="POST" action="w200">
-		<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 9pt">用户名：<input type="text" name="uid" size="20" value="${uid}"> 名字：<input type="text" name="uname" size="20" value="${uname}">日期：<input type="text" name="riqi" id="riqi" size="20" value="${riqi}"><input type="submit" name="Submit" value="搜索">&nbsp;&nbsp;&nbsp; </span>
+ 		<form name="form" method="POST" action="w200">
+			<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 9pt">用户名：<input type="text" name="uid" size="20" value="${uid}"> 名字：<input type="text" name="uname" size="20" value="${uname}">日期：<input type="text" name="riqi" id="riqi" size="20" value="${riqi}"><input type="submit" name="Submit" value="搜索">&nbsp;&nbsp;&nbsp; </span>
+			</p>
+		</form>
 		</p>
-		</form></p>
-<p align="center"><b><font size="2" color="#FF0000"><span style="background-color: #FFFFFF">注意看原始姓名与现提现的姓名对不对得上，如对不上先不要通过！</span></font></b></p>
-<table width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="#FFFFFF" style="border-collapse: collapse" height="64">
+		<p align="center"><b>
+		<font size="2" color="#FF0000"><span style="background-color: #FFFFFF">注意看原始姓名与现提现的姓名对不对得上，如对不上先不要通过！</span></font></b></p>
+		<table width="100%" border="1" cellpadding="2" cellspacing="0" bordercolor="#FFFFFF" style="border-collapse: collapse" height="64">
         <tr>
           <td width="79" bgColor="#C3DAF9" height="24" align="center">交易编号</td>
           <td width="102" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center"><strong style="font-weight: 400">用户名</strong></div></td>
@@ -58,16 +88,17 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td width="80" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">收购方</div></td>
           <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">状态</div></td>
           <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">操作</div></td>
+          <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">退回操作</div></td>
         </tr>
          <s:iterator var="data" value="dataList">
-        <tr> 
+        	<tr> 
           <td height="38" width="79" align="center">${data.payid}</td>
           <td height="38" width="102" align="center"><font color="#008000">${data.payusername}</font></td>
           <td height="38" width="80" align="center" bgcolor="#AADAA3"><b>${data.name}</b></td>
           <td height="38" width="66" align="center"><font color="#FF0000"><b>${data.paynum9}</b></font></td>
           <td height="38" width="77" align="center">
            ${data.payname}<c:if test="${data.txvip>0}"><a onClick="return confirm('提示：您确定(恢复)该笔交易吗？ ')" href="syusers?payid=${data.payid}&op=0&page=${toPage}&uid=${uid}&uname=${uname}&riqi=${riqi}">-恢复</a></c:if>
-         </td>
+        	 </td>
           <td height="38" width="75" align="center" bgcolor="#DFDFDF"><b><font color="#FF0000" size="2">${data.sumPayNum}</font></b></td>
           <td height="38" width="158" align="center">${data.paytime}</td>
           <td height="38" width="170" align="center">${data.paybank}
@@ -78,9 +109,11 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td height="38" width="60" align="center">${data.ep}</td>
           <td height="38" width="60" align="center">
           <c:if test="${data.needVerify==1}"><a href="setVerify?verify=0&user=${data.payusername}&page=${toPage}&uid=${uid}&uname=${uname}&riqi=${riqi}" ><font color="green">关闭免审核</font></a></c:if><c:if test="${data.needVerify==0}"><a href="setVerify?verify=1&user=${data.payusername}&page=${toPage}&uid=${uid}&uname=${uname}&riqi=${riqi}" ><font color="red">设置为免审核</font></a></c:if></td>
-        </tr>
-        </s:iterator>
-      </table></center>
+          <td height="38" width="60" align="center"><input type="button" onclick="writeReson('${data.payid}','${toPage}','${data.payusername}')" value="提现退回" /></td>
+        	</tr>
+         </s:iterator>
+     	 </table>
+      </center>
 </div>
 <br>
           <table width="100%" border="0" cellpadding="2" cellspacing="2" borderColorLight=#808080 borderColorDark=#ffffff>
@@ -103,4 +136,5 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
 		//		minDate:'1970/01/01', // yesterday is minimum date
 		//		maxDate:'+1970/01/02' // and tommorow is maximum date calendar
 		});
+		
 	</script>

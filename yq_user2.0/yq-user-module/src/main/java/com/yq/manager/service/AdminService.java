@@ -2987,4 +2987,49 @@ public class AdminService {
 		String str = "0.820000000000";
 		System.out.println(StringUtils.substring(str, 0, 5));
 	}
+	
+	/**
+	 * 撤销卖出一币
+	 * @param admin 操作人
+	 * @param payid 订单号
+	 * @param ip	
+	 */
+	@Transactional
+	public void cancleYbSale(String admin,int payid, String resionMassage, String ip){
+		Txpay txpay = txPayDao.getByPayid(payid);
+		if(txpay==null){
+			throw new ServiceException(1, "此订单不存在！");
+		}
+		
+		String userName = txpay.getPayusername();
+		if(txpay.getEp()>0 || txpay.getZftime()!=null || txpay.getKjygid()!=0){
+			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
+		}
+		if(datePayDao.updateByQlid(txpay.getQlid())){
+			gcuserDao.backSaleYb(userName, txpay.getPaynum());
+			Gcuser gcuser = gcuserDao.getUser(userName);
+			Datepay datePay = new Datepay();
+			datePay.setUsername(userName);
+			datePay.setSyjz(txpay.getPaynum());
+			datePay.setPay(gcuser.getPay());
+			datePay.setJydb(gcuser.getJydb());
+			datePay.setRegid("提现退回 ");
+			datePay.setNewbz(3);
+			datePay.setTxbz(1); 
+			datePay.setAbdate(new Date());
+			logService.addDatePay(datePay);
+			
+			if(!txPayDao.updateByPayid(payid, 0, new Date(), "已经转账", new Date(), resionMassage, ip)){
+				throw new ServiceException(3000, "未知错误");
+			}
+			//删除索引
+			txPayDao.deleteIndex(payid);
+			
+			if(!gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0)){
+				throw new ServiceException(3000, "未知错误");
+			}
+		}else{
+			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
+		}
+	}
 }

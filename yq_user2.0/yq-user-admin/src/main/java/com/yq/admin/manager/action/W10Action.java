@@ -51,6 +51,26 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 		return SUCCESS;
 	}
 	
+	private String resionMassage;	
+	public String cancelOrder(){//管理员取消订单
+		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
+            return INPUT;
+        }
+		ServiceCacheFactory.getService(AdminService.class).cancleYbSale(super.getUserName(), payid, resionMassage, super.ip());
+		super.setErroCodeNum(2002);
+		return SUCCESS;
+	}
+	
+	
+	
+	public String getResionMassage() {
+		return resionMassage;
+	}
+
+	public void setResionMassage(String resionMassage) {
+		this.resionMassage = resionMassage;
+	}
+
 	public int getPayid() {
 		return payid;
 	}
