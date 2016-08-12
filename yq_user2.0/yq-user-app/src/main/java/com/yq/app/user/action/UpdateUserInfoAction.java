@@ -39,7 +39,7 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 	
 	private String newSecondPassword1;
 	
-	private String newSecondPassword;
+	private String newSecondPassword2;
 	
 	private String secondPassword;
 	
@@ -80,9 +80,9 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 			
 			return INPUT;
 		}if(status==2){//用户自己修改二级密码业务
-			if(!Strings.isNullOrEmpty(userName)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)&&!Strings.isNullOrEmpty(newSecondPassword1)){
+			if(!Strings.isNullOrEmpty(userName)){
 				//开始更新资料操作
-				userService.updateUser(userName, newSecondPassword1, secondPassword, card, idCard, bank, smsCode, provinceName, provinceName, cityName, areaName, MD5Security.md5_16(newPassWord1), ServletActionContext.getRequest().getRemoteAddr());
+				userService.updateUser(userName, newSecondPassword1, newSecondPassword2, secondPassword, card, idCard, bank, smsCode, provinceName, provinceName, cityName, areaName, newPassWord1, newPassWord2, ServletActionContext.getRequest().getRemoteAddr());
 				return SUCCESS;
 			}else{
 				super.setErroCodeNum(3000);//有信息为空
@@ -135,15 +135,13 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 		this.newSecondPassword1 = newSecondPassword1;
 	}
 
-	public String getNewSecondPassword() {
-		return newSecondPassword;
+	public String getNewSecondPassword2() {
+		return newSecondPassword2;
 	}
 
-	public void setNewSecondPassword(String newSecondPassword) {
-		this.newSecondPassword = newSecondPassword;
+	public void setNewSecondPassword2(String newSecondPassword2) {
+		this.newSecondPassword2 = newSecondPassword2;
 	}
-
-
 
 	public String getSecondPassword() {
 		return secondPassword;

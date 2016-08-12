@@ -11,6 +11,7 @@ import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
+import com.yq.common.utils.MD5Security;
 import com.yq.user.bean.TopReward;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
@@ -1215,19 +1216,27 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean updateUser(String name, String newSecondPassword, String card, String idCard, String bank,
-			String smsCode, String provinceName, String cityName, String areaName, String passowrd) {
-		String sql = "update "+table+" set password3=? , password=? ,  card=? , bank=? ,addsheng=?,addshi=?,addqu=? where name=? and userid=?";
+			String smsCode, String provinceName, String cityName, String areaName, String newPassowrd1) {
+		StringBuffer strBuffer = new StringBuffer();
 		SqlParameter parameter = new SqlParameter();
-		parameter.setString(newSecondPassword);
-		parameter.setString(passowrd);
+		strBuffer.append("update "+table+" set card=? , bank=? ,addsheng=?,addshi=?,addqu=?");
 		parameter.setString(card);
 		parameter.setString(bank);
 		parameter.setString(provinceName);
 		parameter.setString(cityName);
 		parameter.setString(areaName);
+		if(!Strings.isNullOrEmpty(newSecondPassword)){
+			strBuffer.append(", password3=?");
+			parameter.setString(newSecondPassword);
+		}
+		if(!Strings.isNullOrEmpty(newPassowrd1)){
+			strBuffer.append(", password=?");
+			parameter.setString(MD5Security.md5_16(newPassowrd1));
+		}
+		strBuffer.append( " where name=? and userid=?");
 		parameter.setString(name);
 		parameter.setString(idCard);
-		return this.jdbc.update(sql, parameter)>0;
+		return this.jdbc.update(strBuffer.toString(), parameter)>0;
 	}
 	
 }

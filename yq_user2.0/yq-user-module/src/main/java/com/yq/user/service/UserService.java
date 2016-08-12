@@ -4153,12 +4153,10 @@ public class UserService {
 	 * @param remoteAddr	ip
 	 * @return
 	 */
-   public String updateUser(String userName, String newSecondPassword, String secondPassword, String card, String idCard,
-		String bank, String smsCode, String provinceName, String provinceName2, String cityName, String areaName,
-		String passowrd, String remoteAddr) {
-
-	   Gcuser guser = gcuserDao.getUser(userName);
-		
+   public String updateUser(String userName, String newSecondPassword1, String newSecondPassword2, String secondPassword,
+			String card, String idCard, String bank, String smsCode, String provinceName, String provinceName2,
+			String cityName, String areaName, String newPassWord1, String newPassWord2, String remoteAddr) {
+	    Gcuser guser = gcuserDao.getUser(userName);
 		if(guser==null){
 			throw new ServiceException(1, "用户不存在!");
 		}
@@ -4173,9 +4171,9 @@ public class UserService {
 		
 		if(Strings.isNullOrEmpty(idCard)||!idCard.equals(guser.getUserid())){
 			throw new ServiceException(4, "您填入的身份证号码不正确！");
-		}			
+		}		
 		
-		boolean result = gcuserDao.updateUser(guser.getName(), newSecondPassword, card, idCard, bank, smsCode, provinceName, cityName, areaName, passowrd);
+		boolean result = gcuserDao.updateUser(guser.getName(), newSecondPassword1, card, idCard, bank, smsCode, provinceName, cityName, areaName, newPassWord1);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", remoteAddr);
 		}
@@ -4184,5 +4182,6 @@ public class UserService {
 		return "success";
 	
    }
+
 
 }
