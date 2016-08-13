@@ -173,7 +173,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							<input type="hidden" name="targetdate" size="8">
 							<input type="hidden" name="xmlmode" size="8">
 							<p><label>用户名：</label>${gcuser.username}<input type="hidden" name="userName" size="20" value="${gcuser.username}" readonly></p>
-							<p><label style="color: red">新登录密码：</label><input type="password" name="newPassWord1" size="20" maxlength="18" value="null" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
+							<p><label style="color: red">新登录密码：</label><input type="password" name="newPassWord1" size="20" maxlength="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
 							<p><label style="color: red">确认登录密码：</label><input type="password" name="newPassWord2" size="20" tabindex="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
 							<p><label style="color: red">新二级密码：</label><input type="password" name="newSecondPassword1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
 							<p><label style="color: red">确认二级密码：</label><input type="password" name="newSecondPassword2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
