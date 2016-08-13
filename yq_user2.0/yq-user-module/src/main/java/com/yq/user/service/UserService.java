@@ -481,7 +481,6 @@ public class UserService {
 	 * 重置玩家密码
 	 * @param userName 操作人
 	 * @param name	   用户
-	 * @param userId 身份证号
 	 * @param password	重置后的密码
 	 * @param ip
 	 * @return
