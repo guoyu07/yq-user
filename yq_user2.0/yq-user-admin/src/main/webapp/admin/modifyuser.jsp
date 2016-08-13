@@ -175,6 +175,9 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<c:if test="${fcxt.id==1||fcxt.id==2}"><a href="updateuserpayok?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改团队下提现限制】</font></a>
         <a href="modifyaabuserupdateUserAqOrBq?user=${gcuser.username}" style="text-decoration: none"><font color="#000000" size="3">【修改用户可结算区】</font></a>
 		</c:if>
+		<c:if test="${fcxt.id==1||fcxt.id==2}">
+			<a href="queryDownAllVip?user=${gcuser.username}" style="text-decoration: none"><font color="#FF00FF" size="3">【查看小vip】</font></a>
+		</c:if>
 		
 		
 		</div>

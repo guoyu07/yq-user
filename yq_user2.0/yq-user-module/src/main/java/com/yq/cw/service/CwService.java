@@ -363,4 +363,14 @@ public class CwService {
 		
 		
 	}
+	
+	/**
+	 * 查询当前用户下的小vip列表 
+	 * @param userName
+	 * @return
+	 */
+	public List<VipDownTemp> getDownVipList(String userName){
+		return vipDownTempDao.getDownVipList(userName);
+	}
+	
 }

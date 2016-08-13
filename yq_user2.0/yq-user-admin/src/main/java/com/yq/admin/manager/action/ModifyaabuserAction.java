@@ -1,6 +1,7 @@
 package com.yq.admin.manager.action;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -9,6 +10,8 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.MD5Security;
+import com.yq.cw.bo.VipDownTemp;
+import com.yq.cw.service.CwService;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
@@ -42,6 +45,8 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	
 	private Fcxt fcxt;
 	private String updateAllDown;
+	
+	private List<VipDownTemp> vipDownTempList;
 	
 	private String md5pass;
 	private String sign;
@@ -150,6 +155,27 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		sgxt  = userService.getSgxt(user);
 		return "updateaqorbq";
 	}
+	
+	
+	public String queryDownAllVip(){
+		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+			return INPUT;
+		}
+		vipDownTempList = ServiceCacheFactory.getService(CwService.class).getDownVipList(user);
+		return SUCCESS;
+	}
+
+	
+	
+	public List<VipDownTemp> getVipDownTempList() {
+		return vipDownTempList;
+	}
+
+
+	public void setVipDownTempList(List<VipDownTemp> vipDownTempList) {
+		this.vipDownTempList = vipDownTempList;
+	}
+
 
 	public Sgxt getSgxt() {
 		return sgxt;

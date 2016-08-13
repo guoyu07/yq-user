@@ -168,6 +168,11 @@
             </result>
             
         </action>
+        <action name="queryDownAllVip" class="com.yq.admin.manager.action.ModifyaabuserAction" method="queryDownAllVip">
+           <result name="success">
+                downVipList.jsp
+            </result>
+        </action>
 		
 		<action name="usercj" class="com.yq.admin.manager.action.UserCjAction">
 		    <result name="input">
