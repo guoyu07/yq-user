@@ -71,6 +71,7 @@ import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.Vipxtgc;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
+import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
 import com.yq.user.dao.DatePayDao;
@@ -3014,7 +3015,7 @@ public class AdminService {
 			datePay.setPay(gcuser.getPay());
 			datePay.setJydb(gcuser.getJydb());
 			datePay.setRegid("提现退回 ");
-			datePay.setNewbz(3);
+			datePay.setNewbz(YbChangeType.ADMIN_ORDER_CANCEL);
 			datePay.setTxbz(1); 
 			datePay.setAbdate(new Date());
 			logService.addDatePay(datePay);
