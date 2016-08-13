@@ -1189,15 +1189,15 @@ public class GcuserDao {
 	/**
 	 * 重置玩家密码
 	 * @param name	   用户
-	 * @param userId 身份证
+	 * @param cardId 身份证
 	 * @param password	重置后的密码
 	 * @return
 	 */
-	public boolean resetUserPass(String name,String userId, String password) {
+	public boolean resetUserPass(String name,String cardId, String password) {
 		String sql = "update "+table+" set password=? where userid=? and name=?";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(password);
-		parameter.setString(userId);
+		parameter.setString(cardId);
 		parameter.setString(name);
 		return this.jdbc.update(sql, parameter)>0;
 	}

@@ -27,19 +27,19 @@ function checkdate()  {
 	  if (Form.newPassWord1.value.length > 18 || Form.newPassWord1.value.length < 6) {  alert("提示：您的登录密码最少6位数，最大18位数！");  Form.newPassWord1.focus();  return false;  } 
   }
   if(Form.newSecondPassword1.value != "" || Form.newSecondPassword2.value != ""){
+	  if (Form.newSecondPassword1.value != Form.newSecondPassword2.value) {      alert("两次输入新二级密码不同！"); Form.newPassWord1.focus();     return false;    }
 	  if (!CheckIfEnglish(Form.newSecondPassword1.value)) {		alert("您的二级密码不符合规范，必须小写英文字母+数字！");Form.newSecondPassword1.focus();return false;}
 	  if (Form.newSecondPassword1.value.length < 10) {		alert("二级密码至少为10位数!");Form.newSecondPassword1.focus();return false;}
 	  if (Form.newSecondPassword1.value.length > 20) {		alert("二级密码至多为20位数!");Form.newSecondPassword1.focus();return false;}
-	  if (Form.newSecondPassword1.value != Form.newSecondPassword2.value) {      alert("两次输入新二级密码不同！"); Form.newPassWord1.focus();     return false;    } 
   }
-  if (Form.secondPassword.value=="") {      alert("请填入您的二级密码！");  Form.secondPassword.focus();      return false;    }
-  if (Form.idCard.value=="") {      alert("请填入您的身份证号码！");  Form.idCard.focus();      return false;    }
+  if (Form.bank.value=="") {      alert("请选择收款银行！");  Form.bank.focus();      return false;    } 
+  if (Form.card.value=="") {      alert("请填入您的收款账号！");  Form.card.focus();      return false;    } 
   if (Form.provinceName.value==0) {      alert("请选择省份!");      return false;    } 
   if (Form.cityName.value==0) {      alert("请选择城市!");      return false;    }
   if (Form.areaName.value==0) {      alert("请选择地区!");      return false;    } 
-  if (Form.bank.value=="") {      alert("请选择收款银行！");  Form.bank.focus();      return false;    } 
-  if (Form.card.value=="") {      alert("请填入您的收款账号！");  Form.card.focus();      return false;    } 
-  
+  if (Form.secondPassword.value=="") {      alert("请填入您的二级密码！");  Form.secondPassword.focus();      return false;    }
+  if (Form.idCard.value=="") {      alert("请填入您的身份证号码！");  Form.idCard.focus();      return false;    }
+ 
 	return true;
 }  
 
