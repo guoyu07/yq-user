@@ -178,8 +178,8 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<c:if test="${fcxt.id==1||fcxt.id==2}">
 			<a href="queryDownAllVip?user=${gcuser.username}" style="text-decoration: none"><font color="#FF00FF" size="3">【查看小vip】</font></a>
 		</c:if>
-		
-		
+
+
 		</div>
 		
         </td>

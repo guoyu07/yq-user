@@ -46,22 +46,13 @@ function checkdate1()  {
 			alert('用户不存在');
 			return;
 		}else if(response.erroCodeNum==2){
-			alert('您填入的手机验证码不正确！');
+			alert('验证码有误!');
 			return;
 		}else if(response.erroCodeNum==3){
-			alert("您填入的登录密码与您所登记的不相符！");
+			alert("有值为空!");
 			return;
 		}else if(response.erroCodeNum==4){
-			alert('您填入的原二级密码与您所登记的不相符，请重新输入！');
-			return;
-		}else if(response.erroCodeNum==5){
-			alert('新二级密码不能与原二级密码相同，请重新输入！');
-			return;
-		}else if(response.erroCodeNum==6){
-			alert('您填入的身份证号码与您所登记的不相符！');
-			return;
-		}else if(response.erroCodeNum==7){
-			alert('您填入的姓名与您所登记的不相符！');
+			alert("两次输入的密码不一致!");
 			return;
 		}else{
 			alert('发生了错误.['+response.erroCodeNum+']');

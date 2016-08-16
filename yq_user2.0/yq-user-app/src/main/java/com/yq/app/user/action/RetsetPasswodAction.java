@@ -38,6 +38,8 @@ public class RetsetPasswodAction extends ALDAdminActionSupport {
 	
 	private String newPassWord1;//登录新的密码
 	
+	private String newPassWord2;//登录确认登录mim
+	
 	private String toUserName;
 	
 	
@@ -53,13 +55,27 @@ public class RetsetPasswodAction extends ALDAdminActionSupport {
 			return "input01";
 		}else if(status==7){//表示重置密码操作
 			//开始重置密码操作
-			userService.resetUserPass(toUserName, MD5Security.md5_16(newPassWord1),smsCode,ServletActionContext.getRequest().getRemoteAddr());
+			userService.resetUserPass(toUserName, newPassWord1, newPassWord2, smsCode,ServletActionContext.getRequest().getRemoteAddr());
 			return SUCCESS;
 		}else{	
 			return SUCCESS;
 		}
 		
 	}
+
+	
+	
+	public String getNewPassWord2() {
+		return newPassWord2;
+	}
+
+
+
+	public void setNewPassWord2(String newPassWord2) {
+		this.newPassWord2 = newPassWord2;
+	}
+
+
 
 	public String getToUserName() {
 		return toUserName;

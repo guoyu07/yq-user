@@ -481,11 +481,12 @@ public class UserService {
 	 * 重置玩家密码
 	 * @param userName 操作人
 	 * @param name	   用户
-	 * @param password	重置后的密码
+	 * @param newPassWord1	重置后的密码
+	 * @param newPassWord2	重置后的密码
 	 * @param ip
 	 * @return
 	 */
-	public String resetUserPass(String userName, String password, String smsCode, String ip){
+	public String resetUserPass(String userName, String newPassWord1, String newPassWord2, String smsCode, String ip){
 		Gcuser guser = gcuserDao.getUser(userName);
 		if(guser==null){
 			throw new ServiceException(1, "用户不存在!");
@@ -493,16 +494,14 @@ public class UserService {
 		if(!smsCode.equals(guser.getVipsq())){
 			throw new ServiceException(2, "验证码有误!");
 		}
-		if(!Strings.isNullOrEmpty(password)){
-			boolean result =  gcuserDao.resetUserPass(guser.getName(), guser.getUserid(), password);
-			if(result){
-				addUserDateIpLog(userName, "重置密码", ip);
-			}
-			gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
-		}else{
-			gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
-			throw new ServiceException(3000, "有值为空!");
+		if(Strings.isNullOrEmpty(newPassWord1) || Strings.isNullOrEmpty(newPassWord2)){
+			throw new ServiceException(3, "有值为空!");
 		}
+		boolean result =  gcuserDao.resetUserPass(guser.getName(), guser.getUserid(), MD5Security.md5_16(newPassWord1));
+		if(result){
+			addUserDateIpLog(userName, "重置密码", ip);
+		}
+		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
 		return "success";
 	}
 	
