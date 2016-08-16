@@ -10,6 +10,12 @@
 <c:if test="${erroCodeNum==2001}">
 <script language=javascript>alert('设置成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
 </c:if>
+<c:if test="${erroCodeNum==1}">
+<script language=javascript>alert('此订单不存在！');</script>
+</c:if>
+<c:if test="${erroCodeNum==2}">
+<script language=javascript>alert('该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！');</script>
+</c:if>
 
 <c:if test="${erroCodeNum==2002}">
 <script language=javascript>alert('退回成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
