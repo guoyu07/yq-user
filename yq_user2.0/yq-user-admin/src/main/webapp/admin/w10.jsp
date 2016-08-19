@@ -39,11 +39,7 @@ function go(id,pagesize,username,resionMassage){
 	str="cancelOrder?payid="+id+"&user="+username+"&page="+pagesize+"&resionMassage="+resionMassage;
 	window.location=str; 
 	}
-</script>搜索
-<form name="form1">
-<input type="text" name="address">
-<input type="submit" onclick="return confirmAddress(this.form);">
-</from>
+</script>
 
 <HTML>
 <style><!--
