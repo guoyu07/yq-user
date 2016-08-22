@@ -4,13 +4,15 @@ import java.util.Map;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import com.sr178.module.sms.util.SubMailSendUtils;
+
+import cn.submsg.client.util.SubMsgSendUtils;
 
 
 public class YqUserAdminRun {
 	public static void main(String[] args) throws Exception {
 		Server server = buildNormalServer(8082, "/");
 		server.start();
+//		smsSend();
 	}
 	/**
 	 * 创建用于正常运行调试的Jetty Server, 以src/main/webapp为Web应用目录.
@@ -24,9 +26,9 @@ public class YqUserAdminRun {
 		return server;
 	}
 	
-	public static void smsSend(){
-		Map<String,String> param = new HashMap<String,String>();
-		param.put("code", "1234567");
-		SubMailSendUtils.sendMessage("15919820372", "aGTtt3", param);
-	}
+//	public static void smsSend(){
+//		Map<String,String> param = new HashMap<String,String>();
+//		param.put("code", "1234567");
+//		SubMsgSendUtils.sendMessage("15919820372", "aGTtt3", param);
+//	}
 }

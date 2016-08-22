@@ -16,7 +16,6 @@ import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
-import com.sr178.module.sms.util.SubMailSendUtils;
 import com.sr178.module.utils.JedisUtils;
 import com.sr178.module.web.session.Session;
 import com.yq.common.ProblemCode;
@@ -86,6 +85,8 @@ import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
 import com.yq.user.utils.Ref;
 import com.yq.user.utils._99douInterface;
+
+import cn.submsg.client.util.SubMsgSendUtils;
 
 public class UserService {
 	
@@ -3264,7 +3265,7 @@ public class UserService {
 		param.put("code", randomString);
 		if(gcuserDao.updateSmsCode(userName, randomString)){
 			    try {
-			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param)){
+			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "aGTtt3", param)){
 			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
 			    	}
 				} catch (Exception e) {
@@ -3281,7 +3282,7 @@ public class UserService {
 	public void sendYbSaleSmsMsg(String userName,int code){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 			    try {
-			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), smsCode[code], new HashMap<String,String>())){
+			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), smsCode[code], new HashMap<String,String>())){
 			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
 			    	}
 				} catch (Exception e) {
@@ -3311,7 +3312,7 @@ public class UserService {
 		param.put("userName", userName);
 		param.put("date", date);
 			    try {
-			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), "sUb981",param)){
+			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "sUb981",param)){
 //			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
 			    		LogSystem.warn("发送短信发生错误,更新错误"+userName+",call="+gcuser.getCall());
 			    	}
@@ -3336,7 +3337,7 @@ public class UserService {
 		param.put("op", OP_STR.length>op?OP_STR[op]:"");
 		if(gcuserDao.updateSmsCode(userName, randomString)){
 			    try {
-			    	if(!SubMailSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
+			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
 			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
 			    	}
 				} catch (Exception e) {
