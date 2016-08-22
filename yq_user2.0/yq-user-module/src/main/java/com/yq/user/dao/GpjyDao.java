@@ -340,9 +340,17 @@ public class GpjyDao {
 		String sql = "select * from "+table+" where username=? and dfuser=? limit 1";
 		return jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withString(userName).withString(dfuser));
 	}
-	
-//	public boolean updateGpjy(String userName,String dfuser,String bz,String toDfuser,Date cgdate){
-//		String sql = "update table set bz=?,dfuser=?,cgdate=?,newjy=0 where username=? and dfuser=? limit 1";
+	/**
+	 * 返还收购一币的押金
+	 * @param userName
+	 * @param dfuser
+	 * @param bz
+	 * @param toDfuser
+	 * @param cgdate
+	 * @return
+	 */
+//	public boolean backBuyYbGpjy(String userName,String dfuser,String bz,String toDfuser,Date cgdate){
+//		String sql = "update table set bz=?,dfuser=?,cgdate=?,newjy=0 where username=? and dfuser=? and newjy=1 limit 1";
 //		return jdbc.update(sql, SqlParameter.Instance().withString(bz).withString(toDfuser).withObject(cgdate).withString(userName).withString(dfuser))>0;
 //	}
 	

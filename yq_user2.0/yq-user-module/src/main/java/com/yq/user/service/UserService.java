@@ -2191,6 +2191,30 @@ public class UserService {
 		//发送短信通知
 		sendYbSaleSmsMsg(txpay.getPayusername(), 1);
 	}
+	
+//	private void backGpjyForBuyYb(Txpay txpay){
+//		//返还押金
+//		     Gpjy gpjy = gpjyDao.get(txpay.getDfuser(), txpay.getPayid()+"");
+//		     boolean result = gpjyDao.backBuyYbGpjy(txpay.getDfuser(), txpay.getPayid()+"", "该笔押金已返还", gpjy.getDfuser()+"-"+txpay.getPayusername(), new Date());
+//			 if(gpjy!=null&&gpjy.getNewjy()==1){//返还押金
+//				if(!gcuserDao.updateJyg(userName, txpay.getPaynum())){
+//					throw new ServiceException(6, "您好您，的积分数量不足"+txpay.getPaynum()+"（认购一币作为诚信金），暂时不能使用一币理财功能！\n\n您可以联系团队服务中心以95%的价格购买一币后进行操作！");
+//				}
+//				
+//				Gpjy gpjy = new Gpjy();
+//				gpjy.setUsername(userName);
+//				gpjy.setMcsl(Double.valueOf(txpay.getPaynum()));
+//				gpjy.setSysl(Double.valueOf(gcuser.getJyg()-txpay.getPaynum()));
+//				gpjy.setBz("冻结-认购一币-"+txpay.getPaynum()+"诚信金-"+txpay.getPayusername());
+//				gpjy.setCgdate(new Date());
+//				gpjy.setJy(1);
+//				gpjy.setDfuser(payId+"");
+//				gpjy.setNewjy(1);
+//				gpjy.setAbdate(new Date());
+//				
+//				gpjyDao.add(gpjy);	
+//			}
+//	}
 	/**
 	 * 确认已收到钱
 	 * @param userName
@@ -3897,7 +3921,9 @@ public class UserService {
 					txPayDao.resetOrder(txpay.getPayid());
 					txPayDao.updateIndexEp(txpay.getPayid(), 0);
 					sendYbSaleSmsMsg(txpay.getPayusername(), 2);
-//					gpjyDao.updateGpjy(txpay.getDfuser(), txpay.getPayid()+"", "超时未付款-并扣一诚信星-余"+(user.getCxt()-1), gpjy.getDfuser()+"-"+txpay.getPayusername(), new Date());
+//					if(gpjy!=null&&gpjy.getNewjy()==1){
+//					   gpjyDao.backBuyYbGpjy(txpay.getDfuser(), txpay.getPayid()+"", "超时未付款-并扣一诚信星-余"+(user.getCxt()-1), gpjy.getDfuser()+"-"+txpay.getPayusername(), new Date());
+//					}
 				} catch (Exception e) {
 					LogSystem.error(e, "发生错误");
 				}
