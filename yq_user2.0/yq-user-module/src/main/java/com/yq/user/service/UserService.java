@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
@@ -3830,9 +3831,12 @@ public class UserService {
 		return "error,can not find username="+userName;
 	}
 	
+	@Autowired
+	private ThreadPoolTaskExecutor taskExecuter;
+	
 	@Transactional
-	public void telCharge(String userName,String call,String pa3,String smdCode,String ip){
-		int amount = 100;
+	public void telCharge(final String userName,final String call,String pa3,String smdCode,final String ip){
+		final int amount = 100;
 		int yb = 110;
 		Fcxt fcxt = fcxtDao.get(12);
 		if(fcxt!=null&&fcxt.getPayadd()<1){
@@ -3856,15 +3860,18 @@ public class UserService {
 			throw new ServiceException(3000, "用户不存在！");
 		}
 		
-		if(this.changeYb(userName, -yb, "话费-"+call, 7, null,0d)){
-			if(callRemoteCharge(call,amount,ip,userName)){
-				fcxtDao.updatePayAdd();
-				gcuserDao.updateUserHfCz(gcuser.getName(), gcuser.getUserid(), DateUtils.addDay(new Date(), 31));
-			}else{
-				throw new ServiceException(100, "充话费失败！稍后再试");
-			}
+		if(this.changeYb(userName, -yb, "话费-"+call, 7, null,0d)&&gcuserDao.updateUserHfCz(gcuser.getName(), gcuser.getUserid(), DateUtils.addDay(new Date(), 31))){
+			taskExecuter.execute(new Runnable() {
+				@Override
+				public void run() {
+//					if(!callRemoteCharge(call,amount,ip,userName)){
+						LogSystem.warn("用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】,充值话费失败！");
+//					}
+				}
+			});
+		}else{
+			throw new ServiceException(2, "您好，测试期间同一姓名及证件号30天内仅提供一次充值，谢谢！");
 		}
-	
 		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
 	}
 	

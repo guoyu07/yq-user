@@ -910,11 +910,12 @@ public class GcuserDao {
 	}
 	
 	public boolean updateUserHfCz(String name,String idCard,Date date){
-		String sql = "update "+table+" set hfcjdate=?  where userid=? and name=?";
+		String sql = "update "+table+" set hfcjdate=?  where userid=? and name=? and (hfcjdate is null or hfcjdate<?)";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(date); 
 		parameter.setString(idCard);
 		parameter.setString(name);
+		parameter.setObject(date); 
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
