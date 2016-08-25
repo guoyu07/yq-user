@@ -3864,9 +3864,9 @@ public class UserService {
 			taskExecuter.execute(new Runnable() {
 				@Override
 				public void run() {
-//					if(!callRemoteCharge(call,amount,ip,userName)){
+					if(!callRemoteCharge(call,amount,ip,userName)){
 						LogSystem.warn("用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】,充值话费失败！");
-//					}
+					}
 				}
 			});
 		}else{

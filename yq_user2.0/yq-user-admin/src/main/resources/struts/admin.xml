@@ -660,6 +660,12 @@
             </result>
         </action>
 		
+		
+				<action name="salejf" class="com.yq.admin.manager.action.JfcfAction" method="dealJfMrByAdmin">
+		    <result name="success">
+		      /admin/salejf.jsp
+		    </result>
+		</action>		
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
@@ -695,6 +701,7 @@
 		      /admin/editbabyinfo.jsp
 		    </result>
 		</action>
+
 	</package>
 
 

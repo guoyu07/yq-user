@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -2369,8 +2370,50 @@ public class AdminService {
 		return gcuser.get(random).getUsername();
 	}
 	
-	
-	
+	public static AtomicBoolean dealJfLock = new AtomicBoolean(false);
+	//当前已处理的数量
+	public static int currentNum = 0;
+	//当前需要处理的数量
+	public static int needDealNum = 0;
+	public void dealJfMrOrder(int num){
+		if(num<=0){
+			throw new ServiceException(1,"次数不能小于0");
+		}
+		if(!dealJfLock.compareAndSet(false, true)){
+			throw new ServiceException(2,"已有线程在执行，不能同时开启多个线程");
+		}
+		needDealNum = num;
+		currentNum = 0;
+		LogSystem.log("开始成交所有求购积分的信息,num="+num);
+		final int pageSize = 500;
+		List<Gpjy> page = null;
+		List<Gcuser> listRandomUserName = gcuserDao.getCompanlyUser();
+		while(true){
+			page = gpjyDao.getMrPageForSystemOrderById(pageSize);
+			if(page!=null&&page.size()>0&&currentNum<num){
+				LogSystem.info("处理第一页，有数量 ="+page.size()+",共[]页");
+				long sigleStartTime = System.currentTimeMillis();
+				for(Gpjy gpjy:page){
+					if(currentNum<num){
+						try {
+							mcJfForSystem(getRadomUserName(listRandomUserName), gpjy);
+							currentNum++;
+						} catch (Exception e) {
+							LogSystem.error(e, "[这条记录出错了]---gpgy="+gpjy);
+						}
+					}else{
+						break;
+					}
+				}
+				long sigleEndTime = System.currentTimeMillis();
+				LogSystem.info("处理完毕，有数量 ="+page.size()+",时长="+(sigleEndTime-sigleStartTime)+"毫秒");
+			}else{
+				break;
+			}
+		}
+		dealJfLock.compareAndSet(true, false);
+		LogSystem.log("成交所有积分求购信息结束,一共处理订单数量"+currentNum);
+	}
 	/**
 	 * 批量处理积分买入
 	 */

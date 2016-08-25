@@ -68,4 +68,11 @@
        <bean id="managerService" class="com.yq.user.service.ManagerService"></bean>
        <!-- 日志类管理 -->
        <bean id="logService" class="com.yq.user.service.LogService"></bean>
+       
+          
+       <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="8" />
+		<property name="maxPoolSize" value="20" />
+		<property name="queueCapacity" value="102400" />
+	   </bean>
 </beans>

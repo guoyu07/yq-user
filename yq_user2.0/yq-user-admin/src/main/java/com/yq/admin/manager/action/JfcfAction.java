@@ -28,6 +28,47 @@ public class JfcfAction extends ALDAdminActionSupport {
 		super.setErroCodeNum(2002);
 		return SUCCESS;
 	}
+	//查询的结果  一共需要处理多少条
+	private int needNum;
+	//查询结果  当前已处理到了多少条
+	private int currentNum;
+	//数量
+	private int num;
+	//操作密码
+	private String oppa;
+	private int status;
+	public String dealJfMrByAdmin(){
+
+		if(status==0){
+			return SUCCESS;
+		}
+		if(!super.getUserName().equals("admin1")){
+			return SUCCESS;
+		}
+		if(!AdminService.dealJfLock.get()){
+			if(status==2){
+				super.setErroCodeNum(2002);
+				return SUCCESS;
+			}
+			if(oppa==null||!oppa.equals("ldkdkjjs9988")){
+				super.setErroCodeNum(2000);
+				return SUCCESS;
+			}
+			 new Thread(new Runnable() {
+		 			@Override
+		 			public void run() {
+		 				AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		 				adminService.dealJfMrOrder(num);
+		 			}
+		 		}).start();
+		}else{
+			
+		}
+		needNum = AdminService.needDealNum;
+		currentNum = AdminService.currentNum;
+		super.setErroCodeNum(2001);
+		return SUCCESS;
+	}
 	
 	public String chaifeng(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
@@ -70,6 +111,45 @@ public class JfcfAction extends ALDAdminActionSupport {
 	public void setClose(boolean close) {
 		this.close = close;
 	}
-     
-     
+
+	public int getNeedNum() {
+		return needNum;
+	}
+
+	public void setNeedNum(int needNum) {
+		this.needNum = needNum;
+	}
+
+	public int getCurrentNum() {
+		return currentNum;
+	}
+
+	public void setCurrentNum(int currentNum) {
+		this.currentNum = currentNum;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getOppa() {
+		return oppa;
+	}
+
+	public void setOppa(String oppa) {
+		this.oppa = oppa;
+	}
+	
 }
