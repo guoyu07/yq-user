@@ -107,7 +107,7 @@
 					    <input type="hidden" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa1}">
 					    <input type="hidden" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa2}">
 					    <input type="hidden" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa3}">
-						<p><label>姓名：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}"><onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if>><span>确保真实才可以得到奖励</span></p>
+						<p><label>姓名：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}">onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if>><span>确保真实才可以得到奖励</span></p>
 						<p><label>身份证号码：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span>海外身份证请联系客服</span></c:if><c:if test="${lan==1}"><span>海外玩家注册专用，国内玩家勿用 </span></c:if></p>
 						<p><label>手机号码：</label><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"></p>
 						<p><label>QQ：</label><input type="text" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10"></p>
