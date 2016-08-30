@@ -67,6 +67,8 @@ public class PageTag implements Tag {
     
     private static final String TAG_FORMAT = FIRST_PAGE_TAG+"　"+UP_PAGE_TAG+"　"+NEXT_PAGE_TAG+"　"+END_PAGE_TAG+" "+PAGES+"：<b>"+CURRENT_PAGE_NUM_TAG+"/"+ALL_PAGE_NUM_TAG+"</b>"+PAGE+"　"+TOTAL+":<b>"+ALL_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"　<b>"+PER_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"/"+PAGE+"　<input id='toPageInputText' type='text' name='toPage' style='width:49px' value='"+CURRENT_PAGE_NUM_TAG+"' onkeydown='if(event.keyCode==13)document.getElementById(&quot;pageGo&quot;).click()' /><button id='pageGo'  onClick=gotoPage(document.getElementById('toPageInputText').value); >GO</button>";
     
+    private static final String TAG_FORMAT_DEFUAT = "首页"+"　"+"上一页"+"　"+"下一页"+"　"+"尾页"+" "+PAGES+"：<b>"+CURRENT_PAGE_NUM_TAG+"/"+ALL_PAGE_NUM_TAG+"</b>"+PAGE+"　"+TOTAL+":<b>"+ALL_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"　<b>"+PER_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"/"+PAGE+"　<input id='toPageInputText' type='text' name='toPage' style='width:49px' value='"+CURRENT_PAGE_NUM_TAG+"' onkeydown='if(event.keyCode==13)document.getElementById(&quot;pageGo&quot;).click()' /><button id='pageGo'  onClick=gotoPage(document.getElementById('toPageInputText').value); >GO</button>";
+    
     
     public int doEndTag() throws JspTagException {
     	try {
@@ -181,8 +183,16 @@ public class PageTag implements Tag {
     		}
     		 //struts国际化
         	ActionSupport actionSupport = new ActionSupport();
-        	String nextPageText = actionSupport.getText("nextPageText");
-        	String upPageText = actionSupport.getText("upPageText");
+        	String nextPageText = "";
+        	String upPageText = "";
+        	if(pageContext.getSession().getAttribute("WW_TRANS_I18N_LOCALE")=="" || pageContext.getSession().getAttribute("WW_TRANS_I18N_LOCALE")==null){
+        		 nextPageText ="下一页";
+        		 upPageText ="上一页";
+        	}else{
+        		 nextPageText = actionSupport.getText("nextPageText");
+            	 upPageText = actionSupport.getText("upPageText");
+        	}
+        	
         	//只有下一页
         	String nextStr = "";
         	String upString = "";
@@ -216,8 +226,16 @@ public class PageTag implements Tag {
         			upString = "<a href='" + Tools.UrlFormat(url + "&amp;toPage=" + (currentPage - 1), sessionID) + "'>" + upPageText + "</a>";
         		}
         	}
-        	String firstPageText = actionSupport.getText("firstPageText");
-        	String endPageText = actionSupport.getText("endPageText");
+        	String firstPageText = "";//actionSupport.getText("firstPageText");
+        	String endPageText = "";//actionSupport.getText("endPageText");
+        	if(pageContext.getSession().getAttribute("WW_TRANS_I18N_LOCALE")=="" || pageContext.getSession().getAttribute("WW_TRANS_I18N_LOCALE")==null){
+	        		firstPageText ="首页";
+	        		endPageText ="尾页";
+	       	}else{
+	       		  firstPageText = actionSupport.getText("firstPageText");
+	         	  endPageText = actionSupport.getText("endPageText");
+	       	}
+       	
         	if(paraNum <= 0){
         			firstStr = "<a href='" + Tools.UrlFormat(url + "?toPage=" + 0, sessionID) + "'>"+firstPageText+"</a>";
         			endStr = "<a href='" + Tools.UrlFormat(url + "?toPage=" + (totalPage), sessionID) + "'>"+endPageText+"</a>";
@@ -236,20 +254,36 @@ public class PageTag implements Tag {
         	String page = actionSupport.getText("page");
         	String item = actionSupport.getText("item");
         	String total = actionSupport.getText("total");
-        	
-        	String result = TAG_FORMAT.replaceAll(FIRST_PAGE_TAG, firstStr)
-        			.replaceAll(END_PAGE_TAG, endStr)
-        			.replaceAll(UP_PAGE_TAG, upString)
-        			.replaceAll(NEXT_PAGE_TAG, nextStr)
-        			.replaceAll(CURRENT_PAGE_NUM_TAG, (currentPage+1)+"")
-        			.replaceAll(ALL_PAGE_NUM_TAG, (totalPage+1)+"")
-        			.replaceAll(ALL_PAGE_SIZE_NUM_TAG, totalSize+"")
-        			.replaceAll(PER_PAGE_SIZE_NUM_TAG, pageSize+"")
-        			.replaceAll(PAGES, pages)
-        			.replaceAll(PAGE, page)
-        			.replaceAll(ITEM, item)
-        			.replaceAll(TOTAL, total)
-        			;
+        	String result ="";
+        	if(pageContext.getSession().getAttribute("WW_TRANS_I18N_LOCALE")=="" || pageContext.getSession().getAttribute("WW_TRANS_I18N_LOCALE")==null){
+        		result = TAG_FORMAT.replaceAll(FIRST_PAGE_TAG, firstStr)
+            			.replaceAll(END_PAGE_TAG, endStr)
+            			.replaceAll(UP_PAGE_TAG, upString)
+            			.replaceAll(NEXT_PAGE_TAG, nextStr)
+            			.replaceAll(CURRENT_PAGE_NUM_TAG, (currentPage+1)+"")
+            			.replaceAll(ALL_PAGE_NUM_TAG, (totalPage+1)+"")
+            			.replaceAll(ALL_PAGE_SIZE_NUM_TAG, totalSize+"")
+            			.replaceAll(PER_PAGE_SIZE_NUM_TAG, pageSize+"")
+            			.replaceAll(PAGES, "页数")
+            			.replaceAll(PAGE, "页")
+            			.replaceAll(ITEM, "条")
+            			.replaceAll(TOTAL, "总共")
+            			;
+        	}else{
+        		result = TAG_FORMAT.replaceAll(FIRST_PAGE_TAG, firstStr)
+            			.replaceAll(END_PAGE_TAG, endStr)
+            			.replaceAll(UP_PAGE_TAG, upString)
+            			.replaceAll(NEXT_PAGE_TAG, nextStr)
+            			.replaceAll(CURRENT_PAGE_NUM_TAG, (currentPage+1)+"")
+            			.replaceAll(ALL_PAGE_NUM_TAG, (totalPage+1)+"")
+            			.replaceAll(ALL_PAGE_SIZE_NUM_TAG, totalSize+"")
+            			.replaceAll(PER_PAGE_SIZE_NUM_TAG, pageSize+"")
+            			.replaceAll(PAGES, pages)
+            			.replaceAll(PAGE, page)
+            			.replaceAll(ITEM, item)
+            			.replaceAll(TOTAL, total)
+            			;
+        	}
         	
         	result=result+"<script>function gotoPage(pageNum){location.href='"+endUrlStr.replaceAll("&amp;", "&")+"toPage='+(pageNum-1)+'';}</script>";
         	pageContext.getOut().write(result);
