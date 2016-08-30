@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>错误，<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.655686'/>，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==20}"><script language=javascript>alert('竞猜-<s:text name='reg1.jsp.reg1.jsp.799375'/>，请耐心等待开奖，祝君好运，游戏快乐！');location.replace('epjqks');</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='vipjfjqks.jsp.jfjqks.jsp.1063864018'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==20}"><script language=javascript>alert('<s:text name='vipjfjqks.jsp.jfjqks.jsp.1464958073'/>！');location.replace('epjqks');</script></c:if>
 <script type="text/javascript">
 	var startTime = new Date();
 	//alert('year=${year},month=${month},day=${day}');

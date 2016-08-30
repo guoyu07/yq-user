@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <html>
-<title>团队服务中心<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/></title>
+<title><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-993981874'/></title>
 <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
 <META content="text/html; charset=gb2312" http-equiv=Content-Type>
 <LINK rel=stylesheet type=text/css href="main/style.css">
@@ -64,7 +64,7 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<td align="right" width="32%"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</td>
-			<td width="66%"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a>${gcuserup.qq}</td>
+			<td width="66%"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a>${gcuserup.qq}</td>
 		</tr>
 		<tr>
 			<td align="right" width="32%"><s:text name='vipvipup.jsp.vipup.jsp.1010407087'/>：</td>

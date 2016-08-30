@@ -143,7 +143,7 @@ function checkdate1()  {
 		</tr>
 		<tr>
 			<td width="214" align="right" height="57"><p align="center">　</td>
-			<td width="336" align="right" height="57"><p align="left"><span style="font-size: 9pt"><font size="1"><input type="submit" value="<s:text name='vipybpay.jsp.ybpay.jsp.-1071255236'/>" name="B1" onClick="return confirm('提示：您<s:text name='vipybpay.jsp.ybpay.jsp.-1071255236'/>了吗？')" style="font-family: 楷体_GB2312; font-size: 14pt; font-weight: bold; "></font></span></td>
+			<td width="336" align="right" height="57"><p align="left"><span style="font-size: 9pt"><font size="1"><input type="submit" value="<s:text name='vipybpay.jsp.ybpay.jsp.-1071255236'/>" name="B1" onClick="return confirm('<s:text name='vipybsf.jsp.ybsf.jsp.1092946978a'/>？')" style="font-family: 楷体_GB2312; font-size: 14pt; font-weight: bold; "></font></span></td>
 		</tr>
 		</table>
 	<p><s:text name='vipybpay.jsp.ybpay.jsp.-1255245828'/>！</p>

@@ -17,8 +17,8 @@
 <div align="center">
 	<table border="0" width="52%" id="table1" cellspacing="1" bgcolor="#E6E6E6" height="210">
 	<tr>
-	<td><b><font size="4"><font color="#FF0000"></font>单价是：<font color="#FF0000">
-	<c:if test="${gpjy.pay<1}">0${gpjy.pay}</c:if><c:if test="${gpjy.pay>=1}">${gpjy.pay}</c:if>&nbsp; </font>总额为：<font color="#FF0000">${gpjy.jypay}</font></font><font size="4" color="#800000"> </font></b>
+	<td><b><font size="4"><font color="#FF0000"></font><s:text name="viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.1002343016a"></s:text>：<font color="#FF0000">
+	<c:if test="${gpjy.pay<1}">0${gpjy.pay}</c:if><c:if test="${gpjy.pay>=1}">${gpjy.pay}</c:if>&nbsp; </font><s:text name="Totalamount"/>：<font color="#FF0000">${gpjy.jypay}</font></font><font size="4" color="#800000"> </font></b>
 	<p><b><font size="4" color="#800000"><s:text name='vipsggpjy.jsp.sggpjy.jsp.682340'/>成功后：</font></b></p>
 	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.1468095834'/></font></b></p>
 	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188'/></font></b></p>

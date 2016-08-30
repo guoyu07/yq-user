@@ -29,7 +29,7 @@
 </script>
 <html>
 <head>
-<title>修改<s:text name='vipadmin_menu.jsp.admin_menu.jsp.616144510'/></title>
+<title><s:text name='vipadmin_menu.jsp.admin_menu.jsp.471675913'/></title>
 <link rel="stylesheet" type="text/css" href="css.css">
 </head>
 <body topmargin="5" leftmargin="5">
@@ -43,11 +43,11 @@
       </tr>
       <tr>
         <td align="right" width="495" height="30" style="border-left: 1px solid #C9D8AD" bgcolor="#FFDDFF"><b><s:text name='vipdateuserjc.jsp.dateuserjc.jsp.708938076'/>：</b></td>
-        <td width="738" align="left" style="border-right: 1px solid #C9D8AD" bgcolor="#FFDDFF"><input type="text" maxlength=32 name="jcname" value="${gcuser.jcname}" size="16" <c:if test="${gcuser.jcname!=''}">readonly</c:if> ><font color="#FF0000"> **必须填写</font></td>
+        <td width="738" align="left" style="border-right: 1px solid #C9D8AD" bgcolor="#FFDDFF"><input type="text" maxlength=32 name="jcname" value="${gcuser.jcname}" size="16" <c:if test="${gcuser.jcname!=''}">readonly</c:if> ><font color="#FF0000"> **<s:text name="Mustfill"></s:text></font></td>
       </tr>
 		<tr>
 		<td align="right" width="495" height="31" style="border-left: 1px solid #C9D8AD" bgcolor="#FFDDFF"><b><font face="Arial"><s:text name='vipdateuserjc.jsp.dateuserjc.jsp.1224987511'/>：</font></b></td>
-        <td width="738" align="left" style="border-right: 1px solid #C9D8AD" bgcolor="#FFDDFF"><input type="text" maxlength=19 name="jcuserid" value="${gcuser.jcuserid}" size="22" <c:if test="${gcuser.jcuserid!=''}">readonly</c:if> ><font color="#FF0000"> **必须填写</font></td>
+        <td width="738" align="left" style="border-right: 1px solid #C9D8AD" bgcolor="#FFDDFF"><input type="text" maxlength=19 name="jcuserid" value="${gcuser.jcuserid}" size="22" <c:if test="${gcuser.jcuserid!=''}">readonly</c:if> ><font color="#FF0000"> **<s:text name="Mustfill"></s:text></font></td>
       </tr>
       <tr>
         <td align="center" colspan="2" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD;" height="38" bgcolor="#FFFFDD"><div align="center"></div><div align="center"><input type="submit" name="submit" width="34" height="20" alt="<s:text name='vipsgreg.jsp.sgreg.jsp.812244'/>" size="20" value="确定增加继承人" onClick="checkdate();" class="lkbtn" style="font-size: 12pt"></div></td>

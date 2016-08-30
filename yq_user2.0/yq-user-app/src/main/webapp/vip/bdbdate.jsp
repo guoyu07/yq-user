@@ -56,7 +56,7 @@ $(document).ready(function(){
   
   </UL><!-- clear the floats if required -->
 <DIV class=clear></DIV></DIV>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle><s:text name='vipbdbdate.jsp.bdbdate.jsp.1257887'/></SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location><s:text name='vipdatepay.jsp.datepay.jsp.-1860602679'/></SPAN></DIV></DIV></DIV>
 <DIV class=box_title><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1143349315'/></DIV>
 <DIV class=box>
 <DIV class=box_con style=" text-align:left">

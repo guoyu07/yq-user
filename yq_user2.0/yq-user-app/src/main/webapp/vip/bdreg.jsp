@@ -6,8 +6,8 @@
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='vipbdreg.jsp.bdreg.jsp.-394660049'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='vipbdreg.jsp.bdreg.jsp.1923400400'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='vipbdreg.jsp.bdreg.jsp.1060799146'/>！！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('报单币余额小于开户金额${cjpay}，无法完成开户，请充值后再试！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==7}"><script language=javascript>alert('一币余额小于开户金额${cjpay}，无法完成开户，请充值后再试！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1996562206'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1380597198'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='vipbdreg.jsp.bdreg.jsp.-1649708849'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='vipbdreg.jsp.bdreg.jsp.-1817862406'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='vipbdreg.jsp.bdreg.jsp.153703061'/>！');history.go(-1);</script></c:if>

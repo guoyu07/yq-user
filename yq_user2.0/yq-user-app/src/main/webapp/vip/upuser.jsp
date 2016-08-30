@@ -141,7 +141,7 @@ function checkdate1()  {
 		</tr>
 		<tr>
 			<td width="260" align="right" height="28"><p align="center">　</td>
-			<td width="396" align="right" height="28"><span style="font-size: 9pt"><font size="1"><input type="submit" value="提交更新资料" name="B1" onClick="checkdate1();" style="font-family: 楷体_GB2312; font-size: 12pt; font-weight: bold; float:left"></font></span></td>
+			<td width="396" align="right" height="28"><span style="font-size: 9pt"><font size="1"><input type="submit" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1610418685'/>" name="B1" onClick="checkdate1();" style="font-family: 楷体_GB2312; font-size: 12pt; font-weight: bold; float:left"></font></span></td>
 		</tr>
 		</table>
 	<p><font color="#FF00FF"><s:text name='vipupuser.jsp.upuser.jsp.-564372223'/>！</font></p>

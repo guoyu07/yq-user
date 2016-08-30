@@ -41,7 +41,7 @@ return re.test(checkStr1)
 			<!--webbot bot="Validation" s-data-type="Number" s-number-separators=",." i-maximum-length="4" --><input type="text" name="jygj" size="6" value="${gpjy.pay}" maxlength="4"></font></span></td>
 			<td width="190" align="center"><font size="2"><s:text name='vipdiyjygj.jsp.diyjygj.jsp.630954966'/>：</font></td>
 			<td width="180" align="center"><span style="font-size: 9pt"><font size="1"><input type="password" name="pa3" size="20" maxlength="20"></font></span></td>
-			<td width="133" align="center"><p align="left"><font size="2">&nbsp;</font><span style="font-size: 9pt"><font size="1"><input type="submit" value="修改" name="B1"></font></span></td>
+			<td width="133" align="center"><p align="left"><font size="2">&nbsp;</font><span style="font-size: 9pt"><font size="1"><input type="submit" value="<s:text name='modify'/>" name="B1"></font></span></td>
 		</tr>
 	</table>
 	</div>

@@ -43,7 +43,7 @@ return (allValid);
 }
   if (Form.txpay.value> ${gcuser.pay} ) { <c:if test="${transferType==1}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977'/>!"); </c:if> <c:if test="${transferType==2}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977a'/>!"); </c:if>     return false;    }
   if (Form.txpay.value<100) {      alert("<s:text name='vipuserpay.jsp.userpay.jsp.-1837041227'/>!");      return false;    } 
-  if (Form.pa3.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.35593833'/><s:text name='vipuserpay.jsp.userpay.jsp.630954966'/>密码!");      return false;    } 
+  if (Form.pa3.value=="") {      alert("<s:text name='vipuserpay.jsp.userpay.jsp.-1989247238'/>!");      return false;    } 
 	
    $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
@@ -98,7 +98,7 @@ function checkdate1()  {
 		<option value="1000">1000</option>
 		<option value="2000">2000</option>
 		</c:if>
-		</select> **</font><font style="font-size: 9pt">当前可卖一币为：</font><font style="font-size: 9pt; " color="#FF0000"><c:if test="${transferType==1}"><c:if test="${gcuser.pay<1}"> 0${gcuser.pay-gcuser.vippay} </c:if><c:if test="${gcuser.pay>=1}"> ${gcuser.pay-gcuser.vippay} </c:if></c:if><c:if test="${transferType==2}">${gcuser.pay}</c:if></font></TD>
+		</select> **</font><font style="font-size: 9pt"><s:text name="viewyblc-sales.jsp.yblc-sales.jsp.36915859a"></s:text>：</font><font style="font-size: 9pt; " color="#FF0000"><c:if test="${transferType==1}"><c:if test="${gcuser.pay<1}"> 0${gcuser.pay-gcuser.vippay} </c:if><c:if test="${gcuser.pay>=1}"> ${gcuser.pay-gcuser.vippay} </c:if></c:if><c:if test="${transferType==2}">${gcuser.pay}</c:if></font></TD>
     </TR>
     <TR class=content> 
       <TD width="317" bgColor=#ffffff align="right" height="28"><b>

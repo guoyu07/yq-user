@@ -8,7 +8,7 @@
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="73">
 	<p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-	<b><span style="font-size: 11pt">代理/商家<font color="#FF0000">${dl}</font><s:text name='vipcjjl.jsp.cjjl.jsp.1275454120'/></span></b><span style="font-size: 11pt"></span></p>
+	<b><span style="font-size: 11pt"><s:text name='vipcjjl.jsp.cjjl.jsp.-406701522'/><font color="#FF0000">${dl}</font><s:text name='vipcjjl.jsp.cjjl.jsp.1275454120'/></span></b><span style="font-size: 11pt"></span></p>
 	<div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="49">
             <tr>        

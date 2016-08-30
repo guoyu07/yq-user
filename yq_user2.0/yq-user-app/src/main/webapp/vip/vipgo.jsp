@@ -68,7 +68,7 @@ $(document).ready(function(){
 <DIV class=box_title></DIV>
 <DIV class=box>
 <DIV class=box_con></DIV>
-<b><font color="#008000" size="5" face="<s:text name='sfz_eng.html.sfz_eng.html.857276'/>_GB2312">您的<s:text name='reg.jsp.reg.jsp.29623262'/>：</font></b> </font><font color="#FF0000" size="4">${userName}</font></span></p>
+<b><font color="#008000" size="5" face="<s:text name='sfz_eng.html.sfz_eng.html.857276'/>_GB2312"><s:text name='vipvipgo.jsp.vipgo.jsp.-559823802'/>：</font></b> </font><font color="#FF0000" size="4">${userName}</font></span></p>
   	<div align="center">
   <table width="100%" border="0" cellpadding="0" class="border" style="border-color:#C0C0C0; border-collapse: collapse; border-width: 1px" bordercolor="#111111" height="69">
   <tr>

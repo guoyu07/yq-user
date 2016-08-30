@@ -87,10 +87,10 @@ $(document).ready(function(){
             <LI><a target="main" href="gg"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.642555044'/></a>
             <LI><a target="main" href="tgurl"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.865821164'/></a>
             <LI><a target="main" href="login2j?inputUrl=login2j.jsp" style="text-decoration: none"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.471675913'/></a>
-            <LI><a target="_blank" style="text-decoration: none; font-weight: 700" href="http://bbs.zgyce.com"><font color="#FF00FF">学习专区</font></a>
+            <LI><a target="_blank" style="text-decoration: none; font-weight: 700" href="http://bbs.zgyce.com"><font color="#FF00FF"><s:text name='viewinformation.html.information.html.716972225'/></font></a>
             <LI><a target="main" href="gcbf?lb=0"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1088456654'/>：<font color="#FF0000">${gcuser.gdgc}</font></a>
             <LI><a target="main" href="gcbf?lb=1"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.989746478'/>：<font color="#008000">${gcuser.ljfh}</font></a>
-            <LI><a target="main" href="http://yb.zgyce.com/sj_login.asp?sjname=${gcuser.username}"><font color="#0000FF">管理我的商店</font></a>
+            <LI><a target="main" href="http://yb.zgyce.com/sj_login.asp?sjname=${gcuser.username}"><font color="#0000FF"><s:text name="viewinformation.html.information.html.-2010689047"></s:text></font></a>
             <LI><a target="main" href="ybsf"><font color="#FF0000"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.626816442'/></font></a>            
             <LI><s:text name='vipadmin_menu.jsp.admin_menu.jsp.16265688'/>
             <LI><a target="main" href="dldate" style="text-decoration: none"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.247726354'/></a>
@@ -106,7 +106,7 @@ $(document).ready(function(){
             <LI><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1788801323'/>：<font color="#0000FF">${gcuser.sybdb}</font>
             <LI><a target="main" href="datepay"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-881818137'/>：<font color="#0000FF">${gcuser.pay+guser.syep}</font></a>
             <LI><a target="main" href="vipup" style="text-decoration: none"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-993981874'/></a>
-            <LI><a target="main" href="bdbdate" style="text-decoration: none">报单币明细</a><c:if test="${gcuser.vip>0}">--<b><a target="main" href="bdbzz"><font size="2" color="#008000">转出</font></a></b></c:if>
+            <LI><a target="main" href="bdbdate" style="text-decoration: none"><s:text name="viewlinks.html.links.html.773655496"/></a><c:if test="${gcuser.vip>0}">--<b><a target="main" href="bdbzz"><font size="2" color="#008000"><s:text name="viewlinks.html.links.html.1159182"/></font></a></b></c:if>
             <LI><s:text name='vipadmin_menu.jsp.admin_menu.jsp.667104660'/>：<font color="#0000FF">${fbpay}</font>
             <LI><font color="#FF0000"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.801984907'/>：<c:if test="${fbpay<1}">0</c:if><c:if test="${fbpay>=1}">${fbpay}</c:if></font>
             <LI><font color="#FF0000"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.928097715'/>：${mqfh}</font>
@@ -120,7 +120,7 @@ $(document).ready(function(){
           <DD>
           <UL>
             <LI><a target="main" href="login2j?inputUrl=loginep.jsp" style="text-decoration: none"><font color="#FF0000"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.618997695'/></font></a>
-            <LI><a target="main" href="datepay" style="text-decoration: none"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1470113791'/></a><c:if test="${gcuser.username=='300fhk'}">--<b><a target="main" href="jzpay.asp"><font size="2" color="#008000">商城退款</font></a></b></c:if>
+            <LI><a target="main" href="datepay" style="text-decoration: none"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1470113791'/></a><c:if test="${gcuser.username=='300fhk'}">--<b><a target="main" href="jzpay.asp"><font size="2" color="#008000"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/></a></b></c:if>
             <LI><a target="main" href="ybcg" style="text-decoration: none"><font color="#0000FF"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.618812044'/></font></a>
 			<LI><a target="main" href="login2j?inputUrl=login3j.jsp" style="text-decoration: none"><s:text name="viewyblc-sales.jsp.yblc-sales.jsp.618675493"></s:text></a><c:if test="${gcuser.vip==2}">--<b><a target="main" href="vipjzpay"><font size="2" color="#008000"><s:text name="vipadmin_menu.jsp.admin_menu.jsp.1246610827"></s:text></font></a></b></c:if>
             <LI><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1710120446'/>：<font color="#0000FF">${gcuser.cxt}</font>
@@ -152,8 +152,8 @@ $(document).ready(function(){
           <UL>
             <LI><a target="main" href="datepay"><font size="2" color="#008080"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.669584602'/>：</font><font size="2" color="#FF0000">${gcuser.pay}</font></a>
 			<LI><a target="main" href="ybhfcj.asp"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1102075283'/>(100)</a>
-			<LI><a target="main" href="http://yb.zgyce.com/index.asp?vipid=${gcuser.username}&vippa=${gcuser.password}"><font size="2" color="#008080">一币换购商品</font></a>
-			<LI><a target="main" href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=${gcuser.username}"><font size="2" color="#008080">一币换购记录</font></a>
+			<LI><a target="main" href="http://yb.zgyce.com/index.asp?vipid=${gcuser.username}&vippa=${gcuser.password}"><font size="2" color="#008080"><s:text name='Yibiexchange_goods'/></font></a>
+			<LI><a target="main" href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=${gcuser.username}"><font size="2" color="#008080"><s:text name='Yibiexchange_record'/></font></a>
             </LI></UL></DD></DL>
         <DD>
         <DL>
