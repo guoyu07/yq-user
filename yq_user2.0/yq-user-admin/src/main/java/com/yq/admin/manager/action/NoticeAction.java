@@ -41,6 +41,8 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 	private int status;
 	private String title;
 	private String content;
+	private String title_en;
+	private String content_en;
 	public String add(){
         if(!super.getUserName().equals("admin1")){
             return INPUT;
@@ -56,7 +58,7 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 			throw new ServiceException(2, "内容不能为空");
 		}
 		ManagerService managerService = ServiceCacheFactory.getService(ManagerService.class);
-		managerService.addNotice(title, content);
+		managerService.addNotice(title, content,title_en,content_en);
 		return "redirect";
 	}
 	
@@ -81,7 +83,7 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 			throw new ServiceException(3, "时间不能为空");
 		}
 		ManagerService managerService = ServiceCacheFactory.getService(ManagerService.class);
-		managerService.editNotice(noticeId, title, content, ggdate);
+		managerService.editNotice(noticeId, title, content, ggdate,title_en,content_en);
 		return "redirect";
 	}
 
@@ -132,5 +134,23 @@ public class NoticeAction extends ALDAdminPageActionSupport<Dgag> {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public String getTitle_en() {
+		return title_en;
+	}
+
+	public void setTitle_en(String title_en) {
+		this.title_en = title_en;
+	}
+
+	public String getContent_en() {
+		return content_en;
+	}
+
+	public void setContent_en(String content_en) {
+		this.content_en = content_en;
+	}
+	
+	
 	
 }
