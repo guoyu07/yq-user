@@ -20,7 +20,7 @@
   <LI><a style="text-decoration: none" target="_top" href="logout?type=1"><s:text name='vipdatepay.jsp.datepay.jsp.1119407294'/></A> </LI>
 </UL><!-- clear the floats if required -->
 <DIV class=clear></DIV></DIV>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle><s:text name='vipdatepay.jsp.datepay.jsp.1257887'/></SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location><s:text name='viploginep.jsp.loginep.jsp.-1860602679'/></SPAN></DIV></DIV></DIV>
 <DIV class=box_title></DIV>
 <DIV class=box>
 <DIV class=box_con style=" text-align:center">
@@ -66,8 +66,8 @@
 	</form>
 	<table border="0" width="65%" id="table4" height="535">
 		<tr>
-			<td align="center" bgcolor="#E9FFD2" colspan="4"><b><font size="2" color="#008000">(${myup})</font><font size="2" color="#FF0000">当前3层内分布情况</font></b></td>
-			<td align="center" bgcolor="#FFE888" colspan="4"><b><font size="2" color="#008000">(${myup})</font><font size="2" color="#FF0000">当前<s:text name='vipsgks01.jsp.sgks01.jsp.681548'/>层内<s:text name='vipsgks01.jsp.sgks01.jsp.755711'/>顶情况</font></b></td>
+			<td align="center" bgcolor="#E9FFD2" colspan="4"><b><font size="2" color="#008000">(${myup})</font><font size="2" color="#FF0000"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1917466217'/></font></b></td>
+			<td align="center" bgcolor="#FFE888" colspan="4"><b><font size="2" color="#008000">(${myup})</font><font size="2" color="#FF0000">当前<s:text name='vipsgks01.jsp.sgks01.jsp.681548'/>层内层封顶情况</font></b></td>
 		</tr>
 		<tr>
 			<td align="center" bgcolor="#E9FFD2"><b><s:text name='vipsgks01.jsp.sgks01.jsp.1017813'/></b></td>

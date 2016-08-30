@@ -58,7 +58,7 @@ function checkdate()  {
 　</DIV>　</DIV>
 <DIV class=daohang>
 <DIV class=mainnav>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle><s:text name='viplogin2j.jsp.login2j.jsp.1257887'/></SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location><s:text name='vipvipgo.jsp.vipgo.jsp.-1860602679'/></SPAN></DIV></DIV></DIV>
 <DIV class=box_title></DIV>
 <DIV class=box>
 <DIV class=box_con style=" text-align:left">

@@ -87,7 +87,7 @@ return (allValid);
 			<option value="3">-大-</option>
 			<option value="4">-小-</option>
 			</select></td>
-		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="提交" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('<s:text name='vipjztojb3.jsp.jztojb3.jsp.600719861'/>')"></td>
+		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="<s:text name='vipsgreg.jsp.sgreg.jsp.812244'/>" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('<s:text name='vipjztojb3.jsp.jztojb3.jsp.600719861'/>')"></td>
 		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FFFFFF" size="2"><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.-599225566'/>。</font></td>
 			</tr>
 			<tr>

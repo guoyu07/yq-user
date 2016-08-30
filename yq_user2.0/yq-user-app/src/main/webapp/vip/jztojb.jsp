@@ -69,7 +69,7 @@
 				<option value="100">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</option>
 				</select>
 				</font>
-				<font color="#FF0000" style="font-size: 11pt">** </font><b>&nbsp;<INPUT class=normalButton type=submit value="提 交" name=submit2 style="font-size: 11pt"></TD>
+				<font color="#FF0000" style="font-size: 11pt">** </font><b>&nbsp;<INPUT class=normalButton type=submit value="<s:text name='vipsgreg.jsp.sgreg.jsp.812244'/>" name=submit2 style="font-size: 11pt"></TD>
     </TR>
   </TBODY>
 </TABLE>

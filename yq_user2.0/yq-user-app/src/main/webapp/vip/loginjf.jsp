@@ -58,7 +58,7 @@ function checkdate()  {
 　</DIV>　</DIV>
 <DIV class=daohang>
 <DIV class=mainnav>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle><s:text name='viplogin2j.jsp.login2j.jsp.1257887'/></SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location><s:text name='viploginep.jsp.loginep.jsp.-1860602679'/></SPAN></DIV></DIV></DIV>
 <DIV class=box_title></DIV>
 <DIV class=box>
 <DIV class=box_con style=" text-align:left">
@@ -68,9 +68,9 @@ function checkdate()  {
       <td width="93%" height="100%">
 		<form method="POST" action="" name="Form" id="Form" onSubmit="return false">
 			  <font size="3">
-			  <div align="center"><b>积分竞猜规则</b><table border="0" width="75%" id="table1">
+			  <div align="center"><b><s:text name='viploginjf.jsp.loginjf.jsp.-810512438'/></b><table border="0" width="75%" id="table1">
 					<tr>
-						<td><p align="left"><font size="2" >一、竞猜共有四种结果（单、双、大、小），系统每10分钟开出一次结果，猜中则可以获得投注额的1.9倍奖励，如果投注“单”100积&nbsp; 分，开奖结果为“单”则为猜中，可获190积分；如果投注“大”100积分，开奖结果为“大”则为猜中，可获190积分；以此类推。</font><p align="left"><font  size="2">二、积分投注每注最低为20积分起。</font><p align="left"><font  size="2">三、竞猜游戏中没有100%的中奖，所投注的积分不管输赢，均无法撤销，本游戏不是赌博，请保持良好的游戏心态，量力而行。</font></td>
+						<td><p align="left"><font size="2" ><s:text name="viploginjf.jsp.loginjf.jsp.-516728525"></s:text>。</font></td>
 					</tr>
 				</table>
 				</div>
