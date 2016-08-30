@@ -19,7 +19,7 @@
   <table border="0" cellspacing="0" width="100%" cellpadding="0" height="108">
     <tr>
       <td width="100%" height="25"> 
-        <form method="POST" action="tools!theSameUserInfo" name="Form" id="Form">
+        <form method="POST" action="toolsthesameuserinfo" name="Form" id="Form">
 			<table border="0" width="100%" id="table1">
 			    <tr><td><p align="center"><font color="#000000" face="楷体" size="5"><strong>同名账号信息查询</strong></font></td></tr>
 				<tr>

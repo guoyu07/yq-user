@@ -4,7 +4,7 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 	<link rel="stylesheet" href="/css/select.css" />
 	<script src="/scripts/jquery.js"></script>
@@ -24,12 +24,12 @@
 	
 	function checkReg(){
 		if ( Form.gguser.value==""){
-			alert ("提示：用户名不能为空!！");
+			alert ("<s:text name='index.jsp.index.jsp.-2036326914'/>!！");
 			Form.gguser.focus();
 			return;
 		}
 		 if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-			alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+			alert("<s:text name='reg2.jsp.reg2.jsp.-1848386260'/>!");
 			Form.gguser.focus();
 			return ;
 		}
@@ -39,10 +39,10 @@
 	    ajaxobj.callback=function(){
 		    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 		    if(responseMsg.erroCodeNum!=0){
-		    	alert("对不起，用户名："+uName+"，已经被注册了！");
+		    	alert("<s:text name='reg2.jsp.reg2.jsp.842685271'/>！");
 			    return;
 		    }else{
-		    	alert("恭喜，您可以注册用户名："+uName);
+		    	alert("<s:text name='reg.jsp.reg.jsp.-259258343'/>："+uName);
 		    	return;
 		    }
 	    }
@@ -57,21 +57,21 @@
 	
 
 	function checkdate1() {
-		  if (Form.ggname.value=="") {      alert("请输入您的真实姓名!");  Form.ggname.focus();    return false;    } 
+		  if (Form.ggname.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.164342206'/>!");  Form.ggname.focus();    return false;    } 
 		  <c:if test="${lan==0}">
-		  if (Form.ggname.value.length<2) {      alert("真实名字至少为2个汉字!");   Form.ggname.focus();     return false;    } 
-		  if (Form.ggname.value.length>8) {      alert("真实名字至多为4个汉字!");   Form.ggname.focus();     return false;    }
+		  if (Form.ggname.value.length<2) {      alert("<s:text name='reg.jsp.reg.jsp.815297593'/>!");   Form.ggname.focus();     return false;    } 
+		  if (Form.ggname.value.length>8) {      alert("<s:text name='reg.jsp.reg.jsp.560668046'/>!");   Form.ggname.focus();     return false;    }
 		  </c:if>
-		  if (Form.gguserid.value=="") {      alert("请填入您的身份证号码!");  Form.gguserid.focus();      return false;    }
+		  if (Form.gguserid.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-1745964948'/>!");  Form.gguserid.focus();      return false;    }
 		  <c:if test="${lan==0}">
-		  if (Form.gguserid.value.length<18) {      alert("身份证号码至少为18位数!"); Form.gguserid.focus();     return false;    } 
-		  if (Form.gguserid.value.length>18) {      alert("身份证号码至多为18位数!"); Form.gguserid.focus();     return false;    }    
+		  if (Form.gguserid.value.length<18) {      alert("<s:text name='reg.jsp.reg.jsp.1683299853'/>!"); Form.gguserid.focus();     return false;    } 
+		  if (Form.gguserid.value.length>18) {      alert("<s:text name='reg.jsp.reg.jsp.1428610724'/>!"); Form.gguserid.focus();     return false;    }    
 		  </c:if>
-		  if (Form.ggcall.value=="") {      alert("请填入您的手机号码!");  Form.ggcall.focus();      return false;    }
-		  if (Form.ggcall.value.length<11) {      alert("手机号码至少为11位数!"); Form.ggcall.focus();     return false;    } 
-		  if (Form.ggcall.value.length>11) {      alert("手机号码至多为11位数!"); Form.ggcall.focus();     return false;    }
-		  if (Form.ggqq.value=="") {      alert("请输入您的QQ号码!");  Form.ggqq.focus();    return false;    }
-		  if (Form.upvip.value=="") {      alert("推荐人不能为空!"); Form.upvip.focus();     return false;    } 
+		  if (Form.ggcall.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>!");  Form.ggcall.focus();      return false;    }
+		  if (Form.ggcall.value.length<11) {      alert("<s:text name='reg.jsp.reg.jsp.-415194682'/>!"); Form.ggcall.focus();     return false;    } 
+		  if (Form.ggcall.value.length>11) {      alert("<s:text name='reg.jsp.reg.jsp.-669883811'/>!"); Form.ggcall.focus();     return false;    }
+		  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
+		  if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
 		//		+ Form.ggpa2.value + "ggpa3=" + Form.ggpa3.value;
 		Form.submit();
@@ -94,10 +94,10 @@
 						<li class="gsd"><b><strong></strong></b></li>
 					</ul>
 					<ul class="navt2t">
-						<li class="lh">创建账户　　</li>
-						<li class="lh">设置身份信息</li>
-						<li>设置收款方式</li>
-						<li>　　成功</li>
+						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.650688080'/>　　</li>
+						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.-1147457200'/></li>
+						<li><s:text name='reg1.jsp.reg1.jsp.-1456505170'/></li>
+						<li>　　<s:text name='reg1.jsp.reg1.jsp.799375'/></li>
 					</ul>
 				</div>
 
@@ -107,12 +107,12 @@
 					    <input type="hidden" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa1}">
 					    <input type="hidden" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa2}">
 					    <input type="hidden" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa3}">
-						<p><label>姓名：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}"><onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if>><span>确保真实才可以得到奖励</span></p>
-						<p><label>身份证号码：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span>海外身份证请联系客服</span></c:if><c:if test="${lan==1}"><span>海外玩家注册专用，国内玩家勿用 </span></c:if></p>
-						<p><label>手机号码：</label><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.734362'/>：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}"><onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if>><span>确保真实才可以得到奖励</span></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.7501689'/>：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span>海外身份证请<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>客服</span></c:if><c:if test="${lan==1}"><span>海外玩家注册专用，国内玩家勿用 </span></c:if></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.806479'/>：</label><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"></p>
 						<p><label>QQ：</label><input type="text" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10"></p>
-						<p><label>推荐人：</label><input type="text"  name="upvip" size="20" value="${tag}"></p>
-						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();">下一步</a></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.25579282'/>：</label><input type="text"  name="upvip" size="20" value="${tag}"></p>
+						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
 					</div>
 				 </form>
 		</div>
