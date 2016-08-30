@@ -84,7 +84,8 @@ public class BdbDateDao {
 			parameter.setString(startDate);
 			parameter.setString(endDate);
 		}
-        sql = sql +" and (bz like '充值%' or bz like '转给%') order by id desc";
+        //sql = sql +" and (bz like '充值%' or bz like '转给%' or bz like '收到％') order by id desc";
+        sql = sql +" and (sy>0 or jc>0) order by id desc";
 		return this.jdbc.getListPage(sql, Bdbdate.class, parameter, pageSize, pageIndex);
 	}
 	
@@ -97,7 +98,8 @@ public class BdbDateDao {
 			parameter.setString(startDate);
 			parameter.setString(endDate);
 		}
-        sql = sql +" and (bz like '充值%' or bz like '转给%') order by id desc";
+       //sql = sql +" and (bz like '充值%' or bz like '转给%' or bz like '收到％') order by id desc";
+        sql = sql +" and (sy>0 or jc>0) order by id desc";
 		return this.jdbc.getList(sql, Bdbdate.class, parameter);
 	}
 	
