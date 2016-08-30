@@ -57,7 +57,7 @@ function openwindow(url) {
 					<div class="new4-bottom">
 						<h3><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.1536312008'/></h3>
 						<p>（<s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.1634195660'/>）
-(<s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.578779497'/>)</p>Click here to view the remittance
+(<s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.578779497'/>)</p>
 						<p><a href="/bank?dq=${gcuser.dqu}"><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.578779497a'/></a></p>
 					</div>
 				</div>

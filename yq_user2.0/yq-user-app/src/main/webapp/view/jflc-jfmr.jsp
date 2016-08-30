@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('交易市场已有积分在出售中，请按需求点击 [我要买入] ！');location.replace('gpjysc');</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>错误，金币<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.655686'/>，请检查输入是否正确！');location.replace('jztojb');</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('买入挂牌<s:text name='reg1.jsp.reg1.jsp.799375'/>！');location.replace('gpjy');</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='vipmysl.jsp.mysl.jsp.2024869980'/> ！');location.replace('gpjysc');</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='vipmysl.jsp.mysl.jsp.-1321238879'/>！');location.replace('jztojb');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipmysl.jsp.mysl.jsp.-2099694066'/>！');location.replace('gpjy');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

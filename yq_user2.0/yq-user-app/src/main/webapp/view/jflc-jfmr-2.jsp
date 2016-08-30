@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.630954966'/>不正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='vipvipjzpay.jsp.vipjzpay.jsp.2022589602'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

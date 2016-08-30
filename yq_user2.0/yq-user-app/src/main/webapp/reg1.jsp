@@ -143,7 +143,7 @@
 
 				<form name="Form" method="post" action="reg?step=1&lan=${lan}">
 					<div class="fbox founbox1">
-						<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')"><a href="#" onClick="checkReg();"><span class="jc">检 测</span></a></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')"><a href="#" onClick="checkReg();"><span class="jc"><s:text name='Check'/></span></a></p>
 						<p><label><s:text name='reg.jsp.reg.jsp.626784226'/>：</label><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label><s:text name='reg1.jsp.reg1.jsp.1449504216'/>：</label><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input type="password" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>

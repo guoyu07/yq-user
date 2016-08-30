@@ -214,14 +214,14 @@ function openwindow(url) {
 		<table border="0" width="53%" id="table1" height="425" cellpadding="5" bgcolor="#FFFFFF" style="border-radius:5px; -webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.2); -moz-box-shadow: 0 3px 10px rgba(0,0,0,0.2); box-shadow: 0 3px 10px rgba(0,0,0,0.2); padding:30px 0; position:relative; z-index:1;">
 			<tr>
 				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.29623262'/>：</font></b></td>
-				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="gguser" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="12"><font size="2" color="#FF0000">**<input type="button" onClick="checkReg()" value="检测" name="B1"></font></td>
+				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="gguser" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="12"><font size="2" color="#FF0000">**<input type="button" onClick="checkReg()" value="<s:text name='Check'/>" name="B1"></font></td>
 			</tr>
 			<tr>
 				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.626784226'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="15"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">确认<s:text name='reg.jsp.reg.jsp.626784226'/>：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.1449504216'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="15"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
@@ -230,11 +230,11 @@ function openwindow(url) {
 			</tr>
 			<tr>
 				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.734362'/>：</font></b></td>
-				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="ggname" size="20" maxlength="4" onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"><font size="2" color="#FF0000">** 确保真实才可以得到奖励</font></td>
+				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="ggname" size="20" maxlength="4" onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"><font size="2" color="#FF0000">** <s:text name="idcardmakesure"/></font></td>
 			</tr>
 			<tr>
 				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.7501689'/>：</font></b></td>
-				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="gguserid" size="20" maxlength="18"><font size="2" color="#FF0000">** 海外身份证请联系客服</font></td>
+				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="gguserid" size="20" maxlength="18"><font size="2" color="#FF0000">** <s:text name="pleasecontact"/></font></td>
 			</tr>
 			<tr>
 				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.799485150'/>：</font></b></td>
