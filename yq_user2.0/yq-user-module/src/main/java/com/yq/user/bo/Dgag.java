@@ -10,6 +10,8 @@ public class Dgag{
 	private Integer id;
 	private String ggbt;
 	private String ggny;
+	private String ggbt_en;
+	private String ggny_en;
 	private Date ggdate;
 	private int check;
 	private String bz;
@@ -49,5 +51,19 @@ public class Dgag{
 	public String getBz(){
 		return bz;
 	}
+	public String getGgbt_en() {
+		return ggbt_en;
+	}
+	public void setGgbt_en(String ggbt_en) {
+		this.ggbt_en = ggbt_en;
+	}
+	public String getGgny_en() {
+		return ggny_en;
+	}
+	public void setGgny_en(String ggny_en) {
+		this.ggny_en = ggny_en;
+	}
+	
+	
 }
 

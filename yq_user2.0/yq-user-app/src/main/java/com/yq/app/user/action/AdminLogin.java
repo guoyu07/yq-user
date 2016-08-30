@@ -1,12 +1,13 @@
 package com.yq.app.user.action;
 
+import java.util.ResourceBundle;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
-import com.sr178.module.utils.JedisUtils;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -21,6 +22,7 @@ public class AdminLogin extends ALDAdminActionSupport {
 	private String adminPassword;
 	private String randString;
 	private Integer version;
+
 	public String getRandString() {
 		return randString;
 	}
@@ -30,9 +32,6 @@ public class AdminLogin extends ALDAdminActionSupport {
 	}
 
 	public String execute() {
-		if (adminName == null || adminPassword == null)
-			return SUCCESS;
-
 		UserService aus = ServiceCacheFactory.getServiceCache()
 				.getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()

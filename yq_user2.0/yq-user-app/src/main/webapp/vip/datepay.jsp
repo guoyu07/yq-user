@@ -2,7 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 
 <html>
-<title>一币变化明细</title>
+<title><s:text name='vipdatepay.jsp.datepay.jsp.1846650039'/></title>
 <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
 <META content="text/html; charset=gb2312" http-equiv=Content-Type><LINK rel=stylesheet type=text/css href="main/style.css">
 <SCRIPT src="main/correctPNG.js"></SCRIPT>
@@ -14,7 +14,7 @@ function writeTitle(tit){
     document.getElementById("mTitle").innerHTML=tit;
   }
   else{
-    document.getElementById("mTitle").innerHTML="首页";
+    document.getElementById("mTitle").innerHTML="<s:text name='vipdatepay.jsp.datepay.jsp.1257887'/>";
   }
 }
 
@@ -45,20 +45,20 @@ $(document).ready(function(){
 <DIV class=menu>
 <UL>
   <LI>　</LI>
-  <LI><A>个人信息</A> </LI>
-  <LI><A>业绩查询</A> 
+  <LI><A><s:text name='vipdatepay.jsp.datepay.jsp.616144510'/></A> </LI>
+  <LI><A><s:text name='vipdatepay.jsp.datepay.jsp.627723500'/></A> 
   </LI>
-  <LI><A>财务管理</A> 
+  <LI><A><s:text name='vipdatepay.jsp.datepay.jsp.1097687684'/></A> 
   </LI>
-  <LI><A>消息管理</A> 
+  <LI><A><s:text name='vipdatepay.jsp.datepay.jsp.860074668'/></A> 
   </LI>
-  <LI><a style="text-decoration: none" target="_top" href="logout.asp">退出系统</A> 
+  <LI><a style="text-decoration: none" target="_top" href="logout.asp"><s:text name='vipdatepay.jsp.datepay.jsp.1119407294'/></A> 
   </LI>
   
   </UL><!-- clear the floats if required -->
 <DIV class=clear></DIV></DIV>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle>首页</SPAN></DIV></DIV></DIV>
-<DIV class=box_title><c:if test="${lb==2}">[认购]</c:if><c:if test="${lb==3}">[卖 出]</c:if>一 币 变 化 明 细</DIV>
+<DIV style="DISPLAY: none" class=Location><s:text name='vipdatepay.jsp.datepay.jsp.-1860602679'/></SPAN></DIV></DIV></DIV>
+<DIV class=box_title><c:if test="${lb==2}">[<s:text name='vipdatepay.jsp.datepay.jsp.1319015703'/>]</c:if><c:if test="${lb==3}">[<s:text name='SELL'/>]</c:if><s:text name='YBBHMX'/></DIV>
 <DIV class=box>
 <DIV class=box_con style=" text-align:left">
 
@@ -66,7 +66,7 @@ $(document).ready(function(){
     <tr>
       <td width="100%" height="25"> 
         <p align="center"><c:if test=""></c:if>
-		<font color="#000000" face="楷体" size="5"><strong><c:if test="${lb==1}">[平衡部分]</c:if><c:if test="${lb==9}">[推广部分]</c:if><c:if test="${lb==8}">[辅导部分]</c:if><c:if test="${lb==2}">[认购]</c:if><c:if test="${lb==3}">[卖 出]</c:if> 一 币 变 化 明 细</strong></font></td> 
+		<font color="#000000" face="楷体" size="5"><strong><s:text name='vipdatepay.jsp.datepay.jsp.609391655'/></strong></font></td> 
   </tr> 
    
  
@@ -75,15 +75,15 @@ $(document).ready(function(){
 <div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="57">
             <tr> 
-              <td width="134" align="center" height="27" bgcolor="#FFE1FF"><font face="Arial" color="#000000"><strong style="font-weight: 400">用户名</strong></font></td>
-              <td width="133" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000"> <strong style="font-weight: 400">一币收入</strong></font></td>
-              <td width="133" align="center" height="27" bgcolor="#FFE1FF"><font face="Arial" color="#000000">一币支出</font></td>
-              <td width="120" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000">金币收入</font></td>
-              <td width="118" align="center" height="27" bgcolor="#FFE1FF">金币支出</td>
-              <td width="118" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000">剩余一币</font></td>
-              <td width="112" align="center" height="27" bgcolor="#FFE1FF">剩余金币</td>
-              <td width="216" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000">更新时间</font></td>
-              <td width="247" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000">备注</font></td>
+              <td width="134" align="center" height="27" bgcolor="#FFE1FF"><font face="Arial" color="#000000"><strong style="font-weight: 400"><s:text name='vipdatepay.jsp.datepay.jsp.29623262'/></strong></font></td>
+              <td width="133" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000"> <strong style="font-weight: 400"><s:text name='vipdatepay.jsp.datepay.jsp.618817200'/></strong></font></td>
+              <td width="133" align="center" height="27" bgcolor="#FFE1FF"><font face="Arial" color="#000000"><s:text name='vipdatepay.jsp.datepay.jsp.618817132'/></font></td>
+              <td width="120" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000"><s:text name='vipdatepay.jsp.datepay.jsp.1136018751'/></font></td>
+              <td width="118" align="center" height="27" bgcolor="#FFE1FF"><s:text name='vipdatepay.jsp.datepay.jsp.1136018683'/></td>
+              <td width="118" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000"><s:text name='vipdatepay.jsp.datepay.jsp.648664593'/></font></td>
+              <td width="112" align="center" height="27" bgcolor="#FFE1FF"><s:text name='vipdatepay.jsp.datepay.jsp.649202784'/></td>
+              <td width="216" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000"><s:text name='vipdatepay.jsp.datepay.jsp.811035898'/></font></td>
+              <td width="247" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000"><s:text name='vipdatepay.jsp.datepay.jsp.734401'/></font></td>
               </tr>
              <s:iterator var="data" value="dataList">
               <tr> 
@@ -105,6 +105,6 @@ $(document).ready(function(){
 </table> 
 </div> </div>
 <p align="center">
-<a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700">返回上一页</font></a></p>
+<a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700"><s:text name='vipdatepay.jsp.datepay.jsp.326654005'/></font></a></p>
 </body> 
 </html>

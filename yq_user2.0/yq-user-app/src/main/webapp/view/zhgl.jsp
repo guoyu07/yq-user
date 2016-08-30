@@ -17,18 +17,18 @@ if(fcxt!=null){
 }
 %>
 				<div class="system">
-					<h3>账户概览</h3>
+					<h3><s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/></h3>
 					<ul>
-						<li><a href="/datepay">累计奖金一币</a>：<span class="c-r"><%=gcuserJflc.getDlpay()%></span></li>
-						<li><a href="/datepay?lb=9">推广部分一币</a>：<span class="c-z"><%=gcuserJflc.getJbpay()%></span></li>
-						<li><a href="/datepay?lb=1">平衡部分一币</a>：<span class="c-z"><%=gcuserJflc.getJjpay()%></span></li>
-						<li><a href="/datepay?lb=8">辅导部分一币</a>：<span class="c-z"><%=gcuserJflc.getJypay()%></span></li>
-						<li><a href="/datepay?lb=2">累计认购一币</a>：<span class="c-g"><%=gcuserJflc.getRgpay()%></span></li>
-						<li><a href="/datepay?lb=3">累计卖出一币</a>：<span class="c-b"><%=gcuserJflc.getMcpay()%></span></li>
-						<li>剩余金币：<span class="c-z"><%=gcuserJflc.getJydb()%></span></li>
-						<li>积分单价：<span class="c-r"><%=ajygj%></span></li>
-						<li>积分数量：<span class="c-g"><%=gcuserJflc.getJyg()%></span></li>
-						<li>积分拆分次数：<span class="c-z"><%=gcuserJflc.getCfa()%></span></li>
-						<li>积分拆分倍数：<span class="c-g"><%=gcuserJflc.getCfb()%></span></li>
+						<li><a href="/datepay"><s:text name='viewshop.html.shop.html.2019724238'/></a>：<span class="c-r"><%=gcuserJflc.getDlpay()%></span></li>
+						<li><a href="/datepay?lb=9"><s:text name='viewshop.html.shop.html.-2060498186'/></a>：<span class="c-z"><%=gcuserJflc.getJbpay()%></span></li>
+						<li><a href="/datepay?lb=1"><s:text name='viewshop.html.shop.html.-256393235'/></a>：<span class="c-z"><%=gcuserJflc.getJjpay()%></span></li>
+						<li><a href="/datepay?lb=8"><s:text name='viewshop.html.shop.html.994834486'/></a>：<span class="c-z"><%=gcuserJflc.getJypay()%></span></li>
+						<li><a href="/datepay?lb=2"><s:text name='viewshop.html.shop.html.-1892736228'/></a>：<span class="c-g"><%=gcuserJflc.getRgpay()%></span></li>
+						<li><a href="/datepay?lb=3"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1029202'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></a>：<span class="c-b"><%=gcuserJflc.getMcpay()%></span></li>
+						<li><s:text name='viewzhgl.jsp.zhgl.jsp.649202784'/>:<span class="c-z"><%=gcuserJflc.getJydb()%></span></li>
+						<li><s:text name='viewzhgl.jsp.zhgl.jsp.950786681'/>：<span class="c-r"><%=ajygj%></span></li>
+						<li><s:text name='viewshop.html.shop.html.950947478'/>：<span class="c-g"><%=gcuserJflc.getJyg()%></span></li>
+						<li><s:text name='viewjflc.jsp.jflc.jsp.-1002641178'/>：<span class="c-z"><%=gcuserJflc.getCfa()%></span></li>
+						<li><s:text name='viewjflc.jsp.jflc.jsp.-1002856070'/>：<span class="c-g"><%=gcuserJflc.getCfb()%></span></li>
 			        </ul>
 				</div>

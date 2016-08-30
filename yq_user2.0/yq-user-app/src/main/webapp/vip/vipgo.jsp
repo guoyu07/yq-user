@@ -14,7 +14,7 @@ function writeTitle(tit){
     document.getElementById("mTitle").innerHTML=tit;
   }
   else{
-    document.getElementById("mTitle").innerHTML="首页";
+    document.getElementById("mTitle").innerHTML="<s:text name='vipbdbdate.jsp.bdbdate.jsp.1257887'/>";
   }
 }
 
@@ -40,7 +40,7 @@ $(document).ready(function(){
 </SCRIPT>
 <script language="JavaScript"> 
  function checkdate()  {  
-  if (Form.cjpay.value==0) {      alert("请选择您要充值的金额!");      return false;    } 
+  if (Form.cjpay.value==0) {      alert("<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.1478585129'/>!");      return false;    } 
    return true;  }  
  </script>
 <body  text="#000000" leftmargin="0" topmargin="3" marginheight="0">
@@ -52,23 +52,23 @@ $(document).ready(function(){
 <DIV class=menu>
 <UL>
   <LI>　</LI>
-  <LI><A>个人信息</A> </LI>
-  <LI><A>业绩查询</A> 
+  <LI><A><s:text name='viewgrxx.jsp.grxx.jsp.616144510'/></A> </LI>
+  <LI><A><s:text name='viewlinks.html.links.html.627723500'/></A> 
   </LI>
-  <LI><A>财务管理</A> 
+  <LI><A><s:text name='vipbdbdate.jsp.bdbdate.jsp.1097687684'/></A> 
   </LI>
-  <LI><A>消息管理</A> 
+  <LI><A><s:text name='vipbdbdate.jsp.bdbdate.jsp.860074668'/></A> 
   </LI>
-  <LI><a style="text-decoration: none" target="_top" href="logout.asp">退出系统</A> 
+  <LI><a style="text-decoration: none" target="_top" href="logout.asp"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1119407294'/></A> 
   </LI>
   
   </UL><!-- clear the floats if required -->
 <DIV class=clear></DIV></DIV>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle>首页</SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location><s:text name='vipvipgo.jsp.vipgo.jsp.-1860602679'/></SPAN></DIV></DIV></DIV>
 <DIV class=box_title></DIV>
 <DIV class=box>
 <DIV class=box_con></DIV>
-<b><font color="#008000" size="5" face="楷体_GB2312">您的用户名：</font></b> </font><font color="#FF0000" size="4">${userName}</font></span></p>
+<b><font color="#008000" size="5" face="<s:text name='sfz_eng.html.sfz_eng.html.857276'/>_GB2312">您的<s:text name='reg.jsp.reg.jsp.29623262'/>：</font></b> </font><font color="#FF0000" size="4">${userName}</font></span></p>
   	<div align="center">
   <table width="100%" border="0" cellpadding="0" class="border" style="border-color:#C0C0C0; border-collapse: collapse; border-width: 1px" bordercolor="#111111" height="69">
   <tr>
@@ -81,11 +81,11 @@ $(document).ready(function(){
     <TR class=content> 
       <TD width="239" bgColor=#ffffff align="right" height="45">
 		<b>
-		<font face="Tahoma" style="font-size: 11pt">请选择您要充值的金额：</font></b></TD>
+		<font face="Tahoma" style="font-size: 11pt"><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.1478585129'/>：</font></b></TD>
       <TD width="278" bgColor=#ffffff height="45">  
               <p align="center">  
               <select size="1" name="cjpay">
-				<option selected value="0">==请选择收到的充值金额==</option>
+				<option selected value="0">==<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.-255407690'/>==</option>
 				<option value="100">100</option>
 				<option value="200">200</option>
 				<option value="300">300</option>
@@ -110,9 +110,9 @@ $(document).ready(function(){
 				<option value="8000">8000</option>
 				<option value="9000">9000</option>
 				<option value="10000">1万</option>
-				<option value="12000">1万2千</option>
-				<option value="15000">1万5千</option>
-				<option value="18000">1万8千</option>
+				<option value="12000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19218840'/></option>
+				<option value="15000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19218933'/></option>
+				<option value="18000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19219026'/></option>
 				<option value="20000">2万</option>
 				<option value="30000">3万</option>
 				<option value="50000">5万</option>
@@ -121,15 +121,15 @@ $(document).ready(function(){
       <TD width="140" bgColor=#ffffff height="45">  
               
                       <b>
-              <INPUT class=normalButton type=submit value="确 定 充 值" name=submit2 style="font-size: 11pt"></TD>
+              <INPUT class=normalButton type=submit value="<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.-379325335'/>" name=submit2 style="font-size: 11pt"></TD>
       <TD width="196" bgColor=#ffffff height="45">  
               
                       <p align="center"><b><font size="3" color="#008000">
-						<a href="login2j?inputUrl=login6j.jsp"><font color="#008000">激活金币卡</font></a></font></b></TD>
+						<a href="login2j?inputUrl=login6j.jsp"><font color="#008000"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.1519971254'/></font></a></font></b></TD>
     </TR>
   </TBODY>
 </TABLE>
-		<p align="center"><font color="#FF0000" size="2"><b>（注：每次充值最低100元，并以100元的整数递增，如200，300，400，同时需要加尾数）</b></font></div>
+		<p align="center"><font color="#FF0000" size="2"><b>（<s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.1634195660'/>）</b></font></div>
 </form>
     </td>
     </tr>

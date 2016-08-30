@@ -2,11 +2,11 @@
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
-<c:if test="${erroCodeNum==1}"><script language="javascript">alert('升级双区玩家成功！');</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language="javascript">alert('用户名输入错误或不属于自己团队的玩家，请检查后再试！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language="javascript">alert('<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1836756650'/>！');</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language="javascript">alert('<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.2073267590'/>！');history.go(-1);</script></c:if>
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
@@ -24,40 +24,40 @@
 				<div class="content-box1" style="background: none; padding: 0 10px 5px 15px">
 					<div>
 						<div style="width: 380px;float:left;">
-							<div align="right"><p style="float:left;">当前查询用户名：<span style="color: #ff0000;">${myup}</span></p><form method="POST" action="sgks01" name="Form"><input class="intxt" name="myup" placeholder="查找的接点人" type="text"/><input type="button" class="intub" onClick="Form.submit()"></form></div>
+							<div align="right"><p style="float:left;"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1364845601'/><input type="button" class="intub" onClick="Form.submit()"></form></div>
 							<div>
-								<p class="st1p" style="background: #799de8;">累计</p>
+								<p class="st1p" style="background: #799de8;"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1029202'/></p>
 								<div class="qbox">
 									<p>
-									   <span>左区</span>
+									   <span><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.766484'/></span>
 									   <strong>${sgxt.zaq}</strong>
 									</p>
 									<p>
-									   <span>右区</span>
+									   <span><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.687527'/></span>
 									   <strong>${sgxt.zbq}</strong>
 									</p>
 								</div>
 							</div>
 							<div class="shopt1">
-								<p class="st1p">(${myup})<b>当前3层内分布情况</b></p>
+								<p class="st1p">(${myup})<b><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1917466217'/></b></p>
 								<table class="tablen1">
 									<tr>
-										<th>系数</th>
-										<th>用户名</th>
-										<th>左总</th>
-										<th>右总</th>
+										<th><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1017813'/></th>
+										<th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+										<th><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.769813'/></th>
+										<th><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.690856'/></th>
 									</tr>
 									<tr>
 										<td><span class="stts">1-1</span></td>
 										<td><c:if test="${!empty sgxt.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxt.auid}" style="text-decoration: none">${sgxt.auid}（${sgxta.sjb}）</a></c:if>
-			<c:if test="${empty sgxt.auid}"><a href="sgreg?bd=${bdid}&myup=${myup}" style="text-decoration: none">选择空位</a></c:if></td>
+			<c:if test="${empty sgxt.auid}"><a href="sgreg?bd=${bdid}&myup=${myup}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a></c:if></td>
 										<td><span class="r"><c:if test="${sgxta.zaq!=''}">${sgxta.zaq}</c:if></span></td>
 										<td><span class="r"><c:if test="${sgxta.zbq!=''}">${sgxta.zbq}</c:if></span></td>
 									</tr>
 									<tr>
 										<td><span class="stts">1-2</span></td>
 										<td><c:if test="${!empty sgxt.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxt.buid}" style="text-decoration: none">${sgxt.buid}（${sgxtb.sjb}）</a></c:if>
-			<c:if test="${empty sgxt.buid}"><a href="sgreg?bd=${bdid}&myup=${myup}" style="text-decoration: none">选择空位</a></c:if></td>
+			<c:if test="${empty sgxt.buid}"><a href="sgreg?bd=${bdid}&myup=${myup}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a></c:if></td>
 										<td><span class="r"><c:if test="${sgxtb.zaq!=''}">${sgxtb.zaq}</c:if></span></td>
 										<td><span class="r"><c:if test="${sgxtb.zbq!=''}">${sgxtb.zbq}</c:if></span></td>
 									</tr>
@@ -70,9 +70,9 @@
 											</c:if> <c:if test="${empty sgxta.auid}">
 												<c:if test="${not empty sgxta.username}">
 													<a href="sgreg?bd=${bdid}&myup=${sgxta.username}"
-														style="text-decoration: none">选择空位</a>
+														style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 												</c:if>
-												<c:if test="${empty sgxta.username}">无接点人</c:if>
+												<c:if test="${empty sgxta.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 											</c:if>
 										</td>
 										<td><span class="r"><c:if test="${sgxtaa.zaq!=''}">${sgxtaa.zaq}</c:if></span></td>
@@ -87,9 +87,9 @@
 												</c:if> <c:if test="${empty sgxta.buid}">
 													<c:if test="${not empty sgxta.username}">
 														<a href="sgreg?bd=${bdid}&myup=${sgxta.username}"
-															style="text-decoration: none">选择空位</a>
+															style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 													</c:if>
-													<c:if test="${empty sgxta.username}">无接点人</c:if>
+													<c:if test="${empty sgxta.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 											</c:if>
 										</td>
 										<td><span class="r"><c:if test="${sgxtab.zaq!=''}">${sgxtab.zaq}</c:if></span></td>
@@ -99,8 +99,8 @@
 										<td><span class="stts stts1">2-3</span></td>
 										<td>			<c:if test="${!empty sgxtb.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxtb.auid}" style="text-decoration: none">${sgxtb.auid}（${sgxtba.sjb}）</a></c:if>
 			<c:if test="${empty sgxtb.auid}">
-			   <c:if test="${not empty sgxtb.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtb.username}" style="text-decoration: none">选择空位</a></c:if>
-			   <c:if test="${empty sgxtb.username}">无接点人</c:if>
+			   <c:if test="${not empty sgxtb.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtb.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a></c:if>
+			   <c:if test="${empty sgxtb.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			 </c:if></td>
 										<td><span class="r"><c:if test="${sgxtba.zaq!=''}">${sgxtba.zaq}</c:if></span></td>
 										<td><span class="r"><c:if test="${sgxtba.zbq!=''}">${sgxtba.zbq}</c:if></span></td>
@@ -109,8 +109,8 @@
 										<td><span class="stts stts1">2-4</span></td>
 										<td><c:if test="${!empty sgxtb.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxtb.buid}" style="text-decoration: none">${sgxtb.buid}（${sgxtbb.sjb}）</a></c:if>
 			<c:if test="${empty sgxtb.buid}">
-			   <c:if test="${not empty sgxtb.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtb.username}" style="text-decoration: none">选择空位</a></c:if>
-			   <c:if test="${empty sgxtb.username}">无接点人</c:if>
+			   <c:if test="${not empty sgxtb.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtb.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a></c:if>
+			   <c:if test="${empty sgxtb.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"><c:if test="${sgxtbb.zaq!=''}">${sgxtbb.zaq}</c:if></span></td>
 										<td><span class="r"><c:if test="${sgxtbb.zbq!=''}">${sgxtbb.zbq}</c:if></span></td>
@@ -121,9 +121,9 @@
 			
 			<c:if test="${empty sgxtaa.auid}">
 			<c:if test="${not empty sgxtaa.username}">
-			<a href="sgreg?bd=${bdid}&myup=${sgxtaa.username}" style="text-decoration: none">选择空位</a>
+			<a href="sgreg?bd=${bdid}&myup=${sgxtaa.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 			</c:if>
-			<c:if test="${empty sgxtaa.username}">无接点人</c:if>
+			<c:if test="${empty sgxtaa.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
@@ -132,8 +132,8 @@
 										<td><span class="stts stts2">3-2</span></td>
 										<td><c:if test="${!empty sgxtaa.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxtaa.buid}" style="text-decoration: none">${sgxtaa.buid}（${sgxtaab.sjb}）</a></c:if>
 			<c:if test="${empty sgxtaa.buid}">
-			    <c:if test="${not empty sgxtaa.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtaa.username}" style="text-decoration: none">选择空位</a></c:if>
-			    <c:if test="${empty sgxtaa.username}">无接点人</c:if>
+			    <c:if test="${not empty sgxtaa.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtaa.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a></c:if>
+			    <c:if test="${empty sgxtaa.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
@@ -142,8 +142,8 @@
 										<td><span class="stts stts2">3-3</span></td>
 										<td><c:if test="${!empty sgxtab.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxtab.auid}" style="text-decoration: none">${sgxtab.auid}（${sgxtaba.sjb}）</a></c:if>
 			<c:if test="${empty sgxtab.auid}">
-			    <c:if test="${not empty sgxtab.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtab.username}" style="text-decoration: none">选择空位</a></c:if>
-			    <c:if test="${empty sgxtab.username}">无接点人</c:if>
+			    <c:if test="${not empty sgxtab.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtab.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a></c:if>
+			    <c:if test="${empty sgxtab.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
@@ -152,8 +152,8 @@
 										<td><span class="stts stts2">3-4</span></td>
 										<td><c:if test="${!empty sgxtab.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxtab.buid}" style="text-decoration: none">${sgxtab.buid}（${sgxtabb.sjb}）</a></c:if>
 			<c:if test="${empty sgxtab.buid}">
-			    <c:if test="${not empty sgxtab.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtab.username}" style="text-decoration: none">选择空位</a></c:if>
-			    <c:if test="${empty sgxtab.username}">无接点人</c:if>
+			    <c:if test="${not empty sgxtab.username}"><a href="sgreg?bd=${bdid}&myup=${sgxtab.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a></c:if>
+			    <c:if test="${empty sgxtab.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
@@ -163,9 +163,9 @@
 										<td><c:if test="${!empty sgxtba.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxtba.auid}" style="text-decoration: none">${sgxtba.auid}（${sgxtbaa.sjb}）</a></c:if>
 			<c:if test="${empty sgxtba.auid}">
 			   <c:if test="${not empty sgxtba.username}">
-			   		<a href="sgreg?bd=${bdid}&myup=${sgxtba.username}" style="text-decoration: none">选择空位</a>
+			   		<a href="sgreg?bd=${bdid}&myup=${sgxtba.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 			   </c:if>
-			   <c:if test="${empty sgxtba.username}">无接点人</c:if>
+			   <c:if test="${empty sgxtba.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
@@ -175,9 +175,9 @@
 										<td><c:if test="${!empty sgxtba.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxtba.buid}" style="text-decoration: none">${sgxtba.buid}（${sgxtbab.sjb}）</a></c:if>
 			<c:if test="${empty sgxtba.buid}">
 			   <c:if test="${not empty sgxtba.username}">
-			   <a href="sgreg?bd=${bdid}&myup=${sgxtba.username}" style="text-decoration: none">选择空位</a>
+			   <a href="sgreg?bd=${bdid}&myup=${sgxtba.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 			   </c:if>
-			   <c:if test="${empty sgxtba.username}">无接点人</c:if>
+			   <c:if test="${empty sgxtba.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
             </c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
@@ -187,9 +187,9 @@
 										<td><c:if test="${!empty sgxtbb.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxtbb.auid}" style="text-decoration: none">${sgxtbb.auid}（${sgxtbba.sjb}）</a></c:if>
 			<c:if test="${empty sgxtbb.auid}">
 			    <c:if test="${not empty sgxtbb.username}">
-			      <a href="sgreg?bd=${bdid}&myup=${sgxtbb.username}" style="text-decoration: none">选择空位</a>
+			      <a href="sgreg?bd=${bdid}&myup=${sgxtbb.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 			    </c:if>
-			    <c:if test="${empty sgxtbb.username}">无接点人</c:if>
+			    <c:if test="${empty sgxtbb.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
@@ -200,46 +200,46 @@
 										<td><c:if test="${!empty sgxtbb.buid}"><a href="sgks01?bd=${bdid}&myup=${sgxtbb.buid}" style="text-decoration: none">${sgxtbb.buid}（${sgxtbbb.sjb}）</a></c:if>
 			<c:if test="${empty sgxtbb.buid}">
 			    <c:if test="${not empty sgxtbb.username}">
-			      <a href="sgreg?bd=${bdid}&myup=${sgxtbb.username}" style="text-decoration: none">选择空位</a>
+			      <a href="sgreg?bd=${bdid}&myup=${sgxtbb.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 			    </c:if>
-			    <c:if test="${empty sgxtbb.username}">无接点人</c:if>
+			    <c:if test="${empty sgxtbb.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>
 									</tr>
 								</table>
-								<p class="st1pbottom">当前3层内的左总与右总指的是该用户名网络下全部累计总单数<br />
-								当前16层内指的是(<span style="color:#f00">${myup}</span>)各层左与右目前的总单数</p>
+								<p class="st1pbottom"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1039881654'/><br />
+								<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.2025953425'/>
 							</div>
 						</div>
 
 						
 						<div class="shopri">
 							<div style="overflow: hidden;">
-								<a href="sgks01?bd=${bdid}&myup=${userName}" style="float: left;">返回自己：${userName}</a>
-								<a href="javascript:history.back();" style="float: right;">返回上一页</a>
+								<a href="sgks01?bd=${bdid}&myup=${userName}" style="float: left;"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1119330385'/>：${userName}</a>
+								<a href="javascript:history.back();" style="float: right;"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.326654005'/></a>
 							</div>
 							<div>
-								<p class="st1p">即将结算</p>
+								<p class="st1p"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.660102487'/></p>
 								<div class="qbox">
 									<p>
-									   <span>左区</span>
+									   <span><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.766484'/></span>
 									   <strong>${sgxt.aq}</strong>
 									</p>
 									<p>
-									   <span>右区</span>
+									   <span><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.687527'/></span>
 									   <strong>${sgxt.bq}</strong>
 									</p>
 								</div>
 							</div>
 							<div class="srt2">
-							<p class="st1p">(${myup})当前16层内层封情况</p>
+							<p class="st1p">(${myup})<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.438864785'/></p>
 							<table class="tablen1">
 									<tr>
-										<th>层数</th>
-										<th>左总</th>
-										<th>右总</th>
-										<th>层封</th>
+										<th><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.758126'/></th>
+										<th><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.769813'/></th>
+										<th><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.690856'/></th>
+										<th><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.755711'/></th>
 									</tr>
 									<tr>
 										<td><span class="yuan">1</span></td>

@@ -4,7 +4,7 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 	<link rel="stylesheet" href="/css/select.css" />
 	<script src="/scripts/jquery.js"></script>
@@ -24,12 +24,12 @@
 	
 	function checkReg(){
 		if ( Form.gguser.value==""){
-			alert ("提示：用户名不能为空!！");
+			alert ("<s:text name='reg1.jsp.reg1.jsp.-2036326914'/>!！");
 			Form.gguser.focus();
 			return;
 		}
 		 if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-			alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+			 alert ("<s:text name='reg1.jsp.reg1.jsp.-1848386260'/>!！");
 			Form.gguser.focus();
 			return ;
 		}
@@ -39,10 +39,10 @@
 	    ajaxobj.callback=function(){
 		    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 		    if(responseMsg.erroCodeNum!=0){
-		    	alert("对不起，用户名："+uName+"，已经被注册了！");
+		    	alert("<s:text name='reg.jsp.reg.jsp.842685271'/>");
 			    return;
 		    }else{
-		    	alert("恭喜，您可以注册用户名："+uName);
+		    	alert("<s:text name='reg.jsp.reg.jsp.-259258343'/>："+uName);
 		    	return;
 		    }
 	    }
@@ -58,58 +58,58 @@
 
 	function checkdate1() {
 		if (Form.gguser.value == "") {
-			alert("用户名不能为空!");
+			alert("<s:text name='reg.jsp.reg.jsp.-609490706'/>!");
 			Form.gguser.focus();
 			return;
 		}
 		if (!CheckIfEnglish(Form.gguser.value) || Form.gguser.value.length > 10
 				|| Form.gguser.value.length < 4) {
-			alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+			alert ("<s:text name='reg1.jsp.reg1.jsp.-1848386260'/>!！");
 			Form.gguser.focus();
 			return;
 		}
 		if (Form.ggpa1.value == "") {
-			alert("一级密码不能为空!");
+			alert("<s:text name='reg.jsp.reg.jsp.-899532046'/>!");
 			Form.ggpa1.focus();
 			return;
 		}
 		if (!CheckIfEnglish(Form.ggpa1.value)) {
-			alert("您的登录密码不符合规范，必须小写英文字母+数字！");
+			alert("<s:text name='reg1.jsp.reg1.jsp.-768271497'/>");
 			Form.ggpa1.focus();
 			return;
 		}
 		if (Form.ggpa1.value.length < 6) {
-			alert("一级密码至少为6位数!");
+			alert("<s:text name='reg.jsp.reg.jsp.1079298527'/>!");
 			Form.ggpa1.focus();
 			return;
 		}
 		if (Form.ggpa2.value != Form.ggpa1.value) {
-			alert("一级两次输入密码不同!");
+			alert("<s:text name='reg.jsp.reg.jsp.-1310540176'/>!");
 			Form.ggpa2.focus();
 			return;
 		}
 		if (Form.ggpa3.value == "") {
-			alert("二级密码不能为空!");
+			alert("<s:text name='reg.jsp.reg.jsp.-1719221018'/>!");
 			Form.ggpa3.focus();
 			return;
 		}
 		if (!CheckIfEnglish(Form.ggpa3.value)) {
-			alert("您的二级密码不符合规范，必须小写英文字母+数字！");
+			alert("<s:text name='reg1.jsp.reg1.jsp.-1932694410'/>");
 			Form.ggpa3.focus();
 			return;
 		}
 		if (Form.ggpa3.value.length < 10) {
-			alert("二级密码至少为10位数!");
+			alert("<s:text name='reg.jsp.reg.jsp.908634376'/>!");
 			Form.ggpa3.focus();
 			return;
 		}
 		if (Form.ggpa3.value.length > 20) {
-			alert("二级密码至多为20位数!");
+			alert("<s:text name='reg.jsp.reg.jsp.653975038'/>!");
 			Form.ggpa3.focus();
 			return;
 		}
 		if (!Form.sfz.checked) {
-			alert("请您认真查看协议及声明，只有同意后才可以继续");
+			alert("<s:text name='reg.jsp.reg.jsp.741412114'/>");
 			return;
 		}
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
@@ -134,21 +134,21 @@
 						<li><b>4</b></li>
 					</ul>
 					<ul class="navt2t">
-						<li class="lh">创建账户　　</li>
-						<li>设置身份信息</li>
-						<li>设置收款方式</li>
-						<li>　　成功</li>
+						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.650688080'/></li>
+						<li><s:text name='reg1.jsp.reg1.jsp.-1147457200'/></li>
+						<li><s:text name='reg1.jsp.reg1.jsp.-1456505170'/></li>
+						<li>　　<s:text name='reg1.jsp.reg1.jsp.799375'/></li>
 					</ul>
 				</div>
 
 				<form name="Form" method="post" action="reg?step=1&lan=${lan}">
 					<div class="fbox founbox1">
-						<p><label>用户名：</label><input type="text" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')"><a href="#" onClick="checkReg();"><span class="jc">检 测</span></a></p>
-						<p><label>一级密码：</label><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
-						<p><label>确认一级密码：</label><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
-						<p><label>二级密码：</label><input type="password" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
-						<p class="tyxy"><input type="checkbox" checked="checked" name="sfz">同意<a href="javascript:openwindow('sfz.html')">《积分游戏平台用户使用协议》</a></p>
-						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();">下一步</a></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" name="gguser" onKeyUp="value=value.replace(/[\W]/g,'')"><a href="#" onClick="checkReg();"><span class="jc">检 测</span></a></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.626784226'/>：</label><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
+						<p><label><s:text name='reg1.jsp.reg1.jsp.1449504216'/>：</label><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
+						<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input type="password" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
+						<p class="tyxy"><input type="checkbox" checked="checked" name="sfz"><s:text name='reg1.jsp.reg1.jsp.-2094390242'/></p>
+						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
 					</div>
 				 </form>
 		</div>

@@ -4,19 +4,19 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
                 <%@ include file="/view/zhgl.jsp" %>
                 
@@ -24,20 +24,20 @@
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>同名账户列表</span>
+						<span><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.1302371267'/></span>
 					</div>
 					<div class="content-table">
 						<table>
 							<tr>
-							    <th>用户名</th>
-								<th>姓名</th>
-								<th>游戏级别</th>
-								<th>可用一币</th>
-								<th>积分数量</th>
-								<th>可用金币</th>
-								<th>注册时间</th>
-								<th>开户时间</th>
-								<th>信誉星</th>
+							    <th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.29623262'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.734362'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.865732987'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.669584602'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.950947478'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.670122793'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.851482466'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.749527093'/></th>
+								<th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.20777047'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>

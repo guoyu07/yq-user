@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
@@ -12,6 +13,8 @@ import com.yq.user.bo.Dgag;
 public class DgagDao {
 	@Autowired
 	private Jdbc jdbc;
+	
+	//private String i18n = (String) ActionContext.getContext().getSession().get("WW_TRANS_I18N_LOCALE");
 	
 	private final String table = "dgag";
 	/**
@@ -41,8 +44,8 @@ public class DgagDao {
 		return jdbc.insert(dgag)>0;
 	}
 	
-	public boolean update(int id,String title,String content,Date ggdate){
-		String sql = "update "+table+" set ggbt=?,ggny=?,ggdate=? where id=?";
-		return jdbc.update(sql, SqlParameter.Instance().withString(title).withString(content).withObject(ggdate).withInt(id))>0;
+	public boolean update(int id,String title,String content,Date ggdate,String title_en,String content_en){
+		String sql = "update "+table+" set ggbt=?,ggny=?,ggbt_en=?,ggny_en=?,ggdate=? where id=?";
+		return jdbc.update(sql, SqlParameter.Instance().withString(title).withString(content).withString(title_en).withString(content_en).withObject(ggdate).withInt(id))>0;
 	}
 }

@@ -4,40 +4,40 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp"%>
 				<%@ include file="/view/zhgl.jsp"%>
 			</div>
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>我的客户</span>
+						<span><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.777812136'/></span>
 					</div>
 					<div class="a-kh">
-						如果有问题请第一时间联系我(推荐人): QQ:${up.qq} <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${up.qq}&site=qq&menu=yes"> 点击这里给我发消息</a>　手机：${up.call}  ${upName}先生/小姐
+						<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253'/>
 					</div>
 					<div class="content-table">
 						<table>
 							<tr>
-								<th>用户名</th>
+								<th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.29623262'/></th>
 								<th>QQ</th>
-								<th>注册时间</th>
-								<th>累计充值</th>
-								<th>最近充值时间</th>
-								<th>双区玩家</th>
-								<th>升级时间</th>
+								<th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.851482466'/></th>
+								<th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.989728617'/></th>
+								<th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-738867994'/></th>
+								<th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.660492955'/></th>
+								<th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.667120382'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>
@@ -46,7 +46,7 @@
 								<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
 								<td>${data.cjtj}</td>
 								<td><fmt:formatDate value="${data.gmdate}" type="both"/></td>
-								<td><c:if test="${data.sjb==0}">否</c:if><c:if test="${data.sjb!=0}">${data.sjb}单</c:if></td>
+								<td><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-522793551'/></td>
 								<td><fmt:formatDate value="${data.bddate}" type="both"/></td>
 							</tr>
 						   </s:iterator>

@@ -17,45 +17,46 @@ return true;
 return false;
 }
 }
-function checkdate()  {
+function checkdate(s)  {
 
-  if (Form.name.value=="") {      alert("请输入姓名！");Form.name.focus();      return false;    }
-  if (Form.newPassWord1.value=="") {      alert("请填入您的新登录密码！");  Form.newPassWord1.focus();      return false;    } 
-  if (!CheckIfEnglish(Form.newPassWord1.value)) {      alert("您的新登录密码不符合规范，必须小写英文字母+数字！");  Form.newPassWord1.focus();      return false;    } 
-  if (Form.newPassWord1.value.length > 18 || Form.newPassWord1.value.length < 6) {  alert("提示：您的登录密码最少6位数，最大18位数！");  Form.newPassWord1.focus();  return false;  } 
-  if (Form.newPassWord1.value != Form.newPassWord2.value) {      alert("两次输入新登录密码不同！"); Form.newPassWord1.focus();     return false;    } 
+  var languege = s;
+  if (Form.name.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.35593833'/><s:text name='reg.jsp.reg.jsp.734362'/>！");Form.name.focus();      return false;    }
+  if (Form.newPassWord1.value=="") {      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1740598616'/>！");  Form.newPassWord1.focus();      return false;    } 
+  if (!CheckIfEnglish(Form.newPassWord1.value)) {      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-627569921'/>！");  Form.newPassWord1.focus();      return false;    } 
+  if (Form.newPassWord1.value.length > 18 || Form.newPassWord1.value.length < 6) {  alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-525641962'/>！");  Form.newPassWord1.focus();  return false;  } 
+  if (Form.newPassWord1.value != Form.newPassWord2.value) {      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.856129909'/>！"); Form.newPassWord1.focus();     return false;    } 
     $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
 	$.post("/sms2?op=13", data, function(response) {
 		$("#btn").removeAttr("disabled");
-		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
-		settime($("#btn"));
-		alert("手机验证码发送成功");
+		if (response.erroCodeNum!=0) { alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>"); return false; }
+		settime($("#btn"),languege);
+		alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
 	});
 	return true;
 }  
 function checkdate1()  {  
-  if (Form.smsCode.value=="") {   alert("请先点击获取验证码，然后再填入您的手机收到的验证码");  Form.smsCode.focus();   return false;    }
+  if (Form.smsCode.value=="") {   alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");  Form.smsCode.focus();   return false;    }
   var data = $("#Form").serialize();
 
   $.post("/resetPasswod?status=7", data, function(response) {
-		if(response.erroCodeNum==0){//重置成功
-			alert('重置成功，请重新登录！');
+		if(response.erroCodeNum==0){//重置<s:text name='reg1.jsp.reg1.jsp.799375'/>
+			alert('<s:text name='resetUserPass.jsp.resetUserPass.jsp.1543820152'/>！');
 		    location.replace('../index.jsp?id='+Form.toUserName.value);
 		}else if(response.erroCodeNum==1){
-			alert('用户不存在');
+			alert('<s:text name='resetUserPass.jsp.resetUserPass.jsp.-1597545170'/>');
 			return;
 		}else if(response.erroCodeNum==2){
-			alert('验证码有误!');
+			alert('<s:text name='resetUserPass.jsp.resetUserPass.jsp.-1020311822'/>!');
 			return;
 		}else if(response.erroCodeNum==3){
-			alert("有值为空!");
+			alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.806188307'/>!");
 			return;
 		}else if(response.erroCodeNum==4){
-			alert("两次输入的密码不一致!");
+			alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.436948753'/>!");
 			return;
 		}else{
-			alert('发生了错误.['+response.erroCodeNum+']');
+			alert('<s:text name='resetUserPass.jsp.resetUserPass.jsp.-745085746'/>.['+response.erroCodeNum+']');
 			return;
 		}
 	});
@@ -68,37 +69,38 @@ function checkdate1()  {
 			<input type="hidden" name="xmlmode" size="8">
 	<div align="center">
 	<p>　</p>
-	<p><b><font color="#FF0000">重置您的登录密码！</font></b></p>
+	<p><b><font color="#FF0000"><s:text name='resetUserPass.jsp.resetUserPass.jsp.1499362834'/>！</font></b></p>
 	<table border="0" id="table1" height="405" width="666">
 		<tr>
-			<td width="260" align="right">用户名：</td>
+			<td width="260" align="right"><s:text name='reg.jsp.reg.jsp.29623262'/>：</td>
 			<td width="396" align="left"><input type="text" name="toUserName" size="20" value="${user.username}" readonly></td>
 		</tr>
 		<tr>
-			<td width="260" align="right"><font color="#FF0000">新登录密码：</font></td>
+			<td width="260" align="right"><font color="#FF0000"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-800902043'/>：</font></td>
 			<td width="396" align="left"><input type="password" name="newPassWord1" size="20" maxlength="18" onKeyUp="value=value.replace(/[\W]/g,'')"></td>
 		</tr>
 		<tr>
-			<td width="260" align="right"><font color="#FF0000">确认登录密码：</font></td>
+			<td width="260" align="right"><font color="#FF0000"><s:text name='resetUserPass.jsp.resetUserPass.jsp.1750523051'/>：</font></td>
 			<td width="396" align="left"><input type="password" name="newPassWord2" size="20" tabindex="18" onKeyUp="value=value.replace(/[\W]/g,'')"></td>
 		</tr>
 		<tr>
-			<td width="260" align="right">联系手机：</td>
+			<td width="260" align="right"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/><s:text name='reg.jsp.reg.jsp.806479'/>：</td>
 			<td width="396" align="left"><span class="tispsfz">${user.call}</span></td>
 		</tr> 
 		<tr>
-			<td width="260" align="right">手机验证码：</td>
+			<td width="260" align="right"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</td>
 			<td width="396" align="left"><input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
-			<input id="btn" type="button" onclick="checkdate()" value="获取验证码" name="B2"></td>
+			<s:set name="SESSION_LOCALE" value="#session['WW_TRANS_I18N_LOCALE']" />
+			<input id="btn" type="button" onclick="checkdate('<s:text name="#SESSION_LOCALE"/>')" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>" name="B2"></td>
 		</tr> 
 		<tr>
 			<td width="260" align="right" height="28"><p align="center">　</td>
-			<td width="396" align="right" height="28"><span style="font-size: 9pt"><font size="1"><input type="submit" value="提交更新资料" name="B1" onClick="checkdate1();" style="font-family: 楷体_GB2312; font-size: 12pt; font-weight: bold; float:left"></font></span></td>
+			<td width="396" align="right" height="28"><span style="font-size: 9pt"><font size="1"><input type="submit" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1610418685'/>" name="B1" onClick="checkdate1();" style="font-family: <s:text name='sfz_eng.html.sfz_eng.html.857276'/>_GB2312; font-size: 12pt; font-weight: bold; float:left"></font></span></td>
 		</tr>
 		</table>
-	<p><font color="#FF00FF">这是一个重置登录密码的界面！</font></p>
-	<p><font color="#FF00FF">通过手机验证码进行重置登录密码！</font></p></div>
+	<p><font color="#FF00FF"><s:text name='resetUserPass.jsp.resetUserPass.jsp.81135556'/>！</font></p>
+	<p><font color="#FF00FF"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1451452169'/>！</font></p></div>
 </form>
 <script type="text/javascript">
-btnStatus($("#btn"));
+btnStatus($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 </script>

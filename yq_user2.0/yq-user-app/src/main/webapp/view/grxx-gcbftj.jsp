@@ -4,37 +4,37 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp"%>
 				<%@ include file="/view/grxx.jsp"%>
 			</div>
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>全 部 分 红 明 细</span>
+						<span><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.1749444652'/></span>
 					</div>
 					<div class="content-table">
 						<table>
 							<tr>
-								<th>用户名</th>
-								<th>个人持点数量</th>
-								<th>每点分红</th>
-								<th>本期累计</th>
-								<th>所有累计</th>
-								<th>分红时间</th>
-								<th>备注</th>
+								<th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+								<th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.-439906297'/></th>
+								<th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.850616742'/></th>
+								<th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.813238533'/></th>
+								<th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.775680731'/></th>
+								<th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.657552666'/></th>
+								<th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>

@@ -1,29 +1,29 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('发布一币数量有误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('您好，您发布的一币数量不能大于您剩余一币  ${gcuser.pay}，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('您好，您有 ${gcuser.vippay}-一币是[服务中心转入]或[游戏收益部分]，此额度不提供卖出，仅用于开户使用，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('您好，您二级密码不正确，请重新输入！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('您好，手机验证码不正确，请重新输入！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('您好，您发布的一币数量不能小于100，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==7}"><script language=javascript>alert('您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，商户账号不能卖出一币！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==9}"><script language=javascript>alert('您好，您所属的vip， 只能卖出奖金部分 ，不能卖出其他部分所得!奖金部分余额不足！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1713705348'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.834213896'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1543089961'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-817035023'/>!');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.2053058834='/>!');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.165401067'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.939890499'/>!');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1027680370'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.2057159235'/>！');history.go(-1);</script></c:if>
 
-<c:if test="${erroCodeNum==-1}"><script language=javascript>alert('您的发布已经成功提交，发布成功后如有认购一币方向您下单后2小时内打到您的收款账号上！请您及时查收！');location.replace('epmcjl');</script></c:if>
+<c:if test="${erroCodeNum==-1}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1862966729'/>！');location.replace('epmcjl');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 <script type="text/javascript" src="images/jquery.min.js"></script>
 <script type="text/ecmascript" src="images/md5.js"></script>
 <script language="JavaScript"> 
  function checkdate()  {  
-  if (Form.txpay.value==0) {      alert("请选择卖出一币的数量!");      return false;    }
+  if (Form.txpay.value==0) {      alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.35601975'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>的数量!");      return false;    }
   if (!chkinteger(Form.txpay.value)){
-	alert('卖出一币只能为整字!');
+	alert('<s:text name='vipuserpay.jsp.userpay.jsp.431301541'/>!');
 	document.Form.txpay.focus;
 	return false;
  }
@@ -45,23 +45,23 @@
   }
  
   
-  if (Form.txpay.value> ${gcuser.pay} ) { <c:if test="${transferType==1}"> alert("您的发布不能大于您可卖的${gcuser.pay-gcuser.vippay}一币哦!"); </c:if> <c:if test="${transferType==2}"> alert("您的发布不能大于您可卖的${gcuser.pay}一币哦!"); </c:if>     return false;    }
-  if (Form.txpay.value<100) {      alert("您的发布不能小于100一币!");      return false;    } 
-  if (Form.pa3.value=="") {      alert("请输入二级密码密码!");      return false;    } 
+  if (Form.txpay.value> ${gcuser.pay} ) { <c:if test="${transferType==1}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977'/>"); </c:if> <c:if test="${transferType==2}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977a'/>"); </c:if>     return false;    }
+  if (Form.txpay.value<100) {      alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1837041227'/>!");      return false;    } 
+  if (Form.pa3.value=="") {      alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1989247238'/>!");      return false;    } 
 	
 	$("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
 	$.post("/sms?op=3", data, function(response) {
 		$("#btn").removeAttr("disabled");
-		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		if (response.erroCodeNum!=0) { alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1886666017'/>"); return false; }
 		settime($("#btn"));
-		alert("手机验证码发送成功");
+		alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1886721436'/>");
 	});
 	return false;
 }  
 
 function checkdate1()  {  
-  if (Form.ybcodeid.value=="") {   alert("请先点击获取验证码，然后再填入您的手机收到的验证码");  Form.ybcodeid.focus();   return false;    }
+  if (Form.ybcodeid.value=="") {   alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-352812950'/>");  Form.ybcodeid.focus();   return false;    }
   return true;
 }
 </script>	
@@ -69,13 +69,13 @@ function checkdate1()  {
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
                 <%@ include file="/view/yblc.jsp" %>
                 
@@ -83,24 +83,24 @@ function checkdate1()  {
 						<div class="z-l">
 				<div class="content-box1 new7" style="height:190px;">
 					<div class="content-title">
-						<span>一币卖出</span>
+						<span><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/></span>
 					</div>
 					<div class="content-form">
-						 <h4>发布卖出说明:</h4>  
-						 <p>1.最低100一币起就可以发布卖出，每次发布需等上一次处理（您确认收到款）了才可以发起第二次，发布成功后我们认购一币—方向下单后2小时内打到您的收款账号上！</p>
-						<p style="color: red;">2.一币卖出低于500（含500），交易手续费为15%，高于500为10%。</p>
+						 <h4><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1523778640'/></h4>  
+						 <p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.398889769'/>！</p>
+						<p style="color: red;">2.<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.476105277'/></p>
 					</div>
 				</div>
-				<div class="content-box2 mt10"  style="height:350px;">
+				<div class="content-box2 mt10"  style="height:370px;">
 					<div style="color: #515151;">
-						<p>尊敬的玩家<b style="font-size: 20px;">${gcuser.name}</b>您好！您申请发布后，认购一币-方向您下单后2小时内打到您的收款账号上</p>
-						<p>您当前可卖一币为：<b style="color: red"><c:if test="${transferType==1}"><c:if test="${gcuser.pay<1}"> 0${gcuser.pay-gcuser.vippay} </c:if><c:if test="${gcuser.pay>=1}"> ${gcuser.pay-gcuser.vippay} </c:if></c:if><c:if test="${transferType==2}">${gcuser.pay}</c:if></b> 一币</p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1318893197'/></p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.36915859'/></p>
 					</div>
 					<div class="z-cb">
 					<form class="form form3" style="width: 420px; float:left;" method="POST" name="Form" id="Form" onSubmit="return checkdate1()" action="userpay?status=1">
-							<p><label>用户名：</label>${userName}</p>
-							<p><label>卖出一币数量：</label><select size="1" name="txpay">
-								<option selected value="0">=选择卖出数据=</option>
+							<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label>${userName}</p>
+							<p><label><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>数量：</label><select size="1" name="txpay">
+								<option selected value="0">=<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1646927970'/>=</option>
 								<option value="100">100</option>
 								<option value="200">200</option>
 								<option value="500">500</option>
@@ -109,22 +109,20 @@ function checkdate1()  {
 								<option value="5000">5000</option>
 								<option value="10000">10000</option>
 								</select></p>
-							<p><label>二级密码：</label><INPUT name="pa3" size=15 type=password></p>
-							<c:if test="${gcuser.ganew!=0}"><p><label>手机验证码：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><input type="text" name="ybcodeid" size="15"><input id="btn" type="button" onclick="checkdate()" value="获取验证码" name="B2"></span></c:if>
-							<p><label></label><button class="but1" type="submit" id="btn"  onClick="return confirm('提示：发布卖出的一币如低于500（含500）交易手续费为15%，高于500的则为10%，您确定了吗？')">发 布 卖 出</button></p>
+							<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><INPUT name="pa3" size=15 type=password></p>
+							<c:if test="${gcuser.ganew!=0}"><p><label><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1451653422'/> name="B2"></span></c:if>
+							<p><label></label><button class="but1" type="submit" id="btn"  onClick="return confirm('<s:text name='vipuserpay.jsp.userpay.jsp.-1517150275a'/>')"><s:text name='vipuserpay.jsp.userpay.jsp.-1517150275b'/></button></p>
 					</form>
-					<div style=" float:left; padding:30px 0 0 30px; ">
-						<p>真实姓名：${gcuser.name}</p>
-						<p>手机号码：${gcuser.simpleCall}</p>
-						<p>收款方式：${gcuser.bank}</p>
-						<p>　　账号：${gcuser.card}</p>
-						<p>　开户行：${gcuser.addsheng}${gcuser.addshi}${gcuser.addqu}支行</p>
-					</div>
+					<%-- <div style=" float:left; padding:30px 0 0 30px; ">
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.931750201'/>：${gcuser.name}</p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.775723385'/>：${gcuser.simpleCall}</p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.799099710'/>：${gcuser.bank}</p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/>：${gcuser.card}</p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-18488543'/></p>
+					</div> --%>
 					</div>
 					<div style="color: #515151">
-						<p>警告：请认真核对以下收款信息，如有错误请马上点<a href="login2j?inputUrl=login2j.jsp">修改个人资料</a>，再进行发布卖出！如不认真核对，造成付款不成功，
-该笔卖出将冻结，申请解冻将加收20%手续费！</p>
-
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1485487385'/>，<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-472493681'/>！</p>
 					</div>
 				</div>
 			</div>

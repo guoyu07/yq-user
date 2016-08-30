@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('非商户用户名，请联系管理员！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1635825042'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 <script type="text/javascript" src="/images/jquery.min.js"></script>
 <script>
@@ -23,76 +23,76 @@ document.getElementById('ybpay').value="";
 function Check()
 {
 	if ( Form.user.value==""){
-		alert ("提示：用户名不能为空!！");
+		alert ("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-2036326914'/>!！");
 		Form.user.focus();
 		return false;
 	}
 	var uName=document.Form.user.value;
 	var data= null;
 	$.post("yb?username="+uName,data, function(response) {
-		if(response.erroCodeNum==0){//注册成功
-			alert('用户名：'+uName+'，一币余额为：'+response.yb);
+		if(response.erroCodeNum==0){//注册<s:text name='reg1.jsp.reg1.jsp.799375'/>
+			alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.945991493'/>：'+response.yb);
 		}else{
-			alert('用户名：'+uName+'，不存在，请重新写入！');
+			alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-1777679097'/>！');
 		}
 		return true;
 	});
 }
 
 function checkdate()  {
-	 if (Form.shpa.value=="") {      alert("请填入商户二级密码!");  Form.shpa.focus();      return false;    }
-	  if (Form.sfpay.value=="") {     alert("请填入消费金额!");  Form.sfpay.focus();      return false;    }
-	  if (Form.user.value=="") {     alert("请填入您的用户名!");  Form.user.focus();      return false;    }
-	  if (Form.pa01.value=="") {      alert("请填入您的登录密码!");  Form.pa01.focus();      return false;    }
-	  if (Form.pa02.value=="") {      alert("请填入您的二级密码!");  Form.pa02.focus();      return false;    }
+	 if (Form.shpa.value=="") {      alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-781315880'/>!");  Form.shpa.focus();      return false;    }
+	  if (Form.sfpay.value=="") {     alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-1672844946'/>!");  Form.sfpay.focus();      return false;    }
+	  if (Form.user.value=="") {     alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.751820177'/>!");  Form.user.focus();      return false;    }
+	  if (Form.pa01.value=="") {      alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1841070946'/>!");  Form.pa01.focus();      return false;    }
+	  if (Form.pa02.value=="") {      alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1544222851'/>!");  Form.pa02.focus();      return false;    }
 	$("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
 	$.post("/sms?op=11&toUserName="+Form.user.value, data, function(response) {
 		$("#btn").removeAttr("disabled");
-		if (response.erroCodeNum!=0) { alert("手机验证码发送失败"); return false; }
+		if (response.erroCodeNum!=0) { alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1886666017'/>"); return false; }
 		settime($("#btn"));
-		alert("手机验证码发送成功");
+		alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1886721436'/>");
 	});
 	return false;
 }  
 
 function checkdate1()  {  
-	  if (Form.shpa.value=="") {      alert("请填入商户二级密码!");  Form.shpa.focus();      return false;    }
-	  if (Form.sfpay.value=="") {     alert("请填入消费金额!");  Form.sfpay.focus();      return false;    }
-	  if (Form.user.value=="") {     alert("请填入您的用户名!");  Form.user.focus();      return false;    }
-	  if (Form.pa01.value=="") {      alert("请填入您的登录密码!");  Form.pa01.focus();      return false;    }
-	  if (Form.pa02.value=="") {      alert("请填入您的二级密码!");  Form.pa02.focus();      return false;    }
-  //if (Form.sfcode.value=="") {   alert("请先点击获取验证码，然后再填入您的手机收到的验证码");  Form.sfcode.focus();   return false;    }
+	  if (Form.shpa.value=="") {      alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-781315880'/>!");  Form.shpa.focus();      return false;    }
+	  if (Form.sfpay.value=="") {     alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-1672844946'/>!");  Form.sfpay.focus();      return false;    }
+	  if (Form.user.value=="") {     alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.751820177'/>!");  Form.user.focus();      return false;    }
+	  if (Form.pa01.value=="") {      alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1841070946'/>!");  Form.pa01.focus();      return false;    }
+	  if (Form.pa02.value=="") {      alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1544222851'/>!");  Form.pa02.focus();      return false;    }
+  //if (Form.sfcode.value=="") {   alert("请先点击<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>，然后再填入您的<s:text name='reg.jsp.reg.jsp.806479'/>收到的验证码");  Form.sfcode.focus();   return false;    }
   	  var data = $("#Form").serialize();
 	  $.post("ybsf?status=1", data, function(response) {
 		    var responseMsg = response;
-			if(responseMsg.erroCodeNum==0){//注册成功
-				alert('支付操作成功！');
+			if(responseMsg.erroCodeNum==0){//注册<s:text name='reg1.jsp.reg1.jsp.799375'/>
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.801114631'/>！');
 				location.replace('ybsf');
 				return false;
 			}else if(responseMsg.erroCodeNum==1){
-				alert('非商户用户名，请联系管理员！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1635825042'/>！');
 				return false;
 			}else if(responseMsg.erroCodeNum==2){
-				alert('输入的商户二级密码不正确，请检查输入是否正确！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-1519470525'/>！');
 				return false;
 			}else if(responseMsg.erroCodeNum==3){
-				alert('订单信息有误，请重新提交！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.274591465'/>！');
 				return false;
 			}else if(responseMsg.erroCodeNum==4){
-				alert('输入的用户名不存在，请检查输入是否正确！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-155027371'/>！');
 				return false;
 			}else if(responseMsg.erroCodeNum==5){
-				alert('输入的登录密码不正确，请检查输入是否正确！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-1103003435'/>！');
 				return false;
 			}else if(responseMsg.erroCodeNum==6){
-				alert('输入的二级密码不正确，请检查输入是否正确！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.2037393748'/>！');
 				return false;
 			}else if(responseMsg.erroCodeNum==7){
-				alert('您的一币余额不足，请检查输入是否正确！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1747166923'/>！');
 				return false;
 			}else if(responseMsg.erroCodeNum==8){
-				alert('您好，手机验证码不正确，请重新输入！');
+				alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.2053058834'/>！');
 				return false;
 			}
 		});
@@ -103,13 +103,13 @@ function checkdate1()  {
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp"%>
 				<%@ include file="/view/grxx.jsp"%>
 			</div>
@@ -119,18 +119,18 @@ function checkdate1()  {
 						<span>${gcuser.name}</span>
 					</div>
 					<div class="content-form">				 
-						<p class="f-tk c-g">消费项目：<span class="c-r">${gcuser.name}</span></p>
-						<p class="z-b" style="padding-left:70px;">商户用户名：：<b class="c-r">${gcuser.username}</b></p>
+						<p class="f-tk c-g"><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.871323142'/>：<span class="c-r">${gcuser.name}</span></p>
+						<p class="z-b" style="padding-left:70px;"><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-535714675'/>：：<b class="c-r">${gcuser.username}</b></p>
 						<form class="form form4 e6b" method="post" action="" id="Form" name="Form" onSubmit="return checkdate1()">
-							<p><label class="c-r">商户用户名：</label>${gcuser.username}<input type="hidden" name="sh" size="20" value="${gcuser.username}" readonly></p>
-							<p><label>二级密码：</label><input type="password" name="shpa" size="20"></p>
-							<p><label>消费金额：</label><input style="width:100px;" type="text" name="sfpay" onKeyUp="value=value.replace(/[^\d]/g,'');rst(this.value)" size="20"></p>
-                            <p><label>服务费(2%)：</label><input id="pay10" type="text" name="pay10" size="20" readonly><input type="hidden" name="remark" size="5" value="12" readonly></p>
-                            <p><label>合计一币：</label><input id="ybpay" type="text" name="ybpay" size="15" readonly></p>
-                            <p><label>用户名：</label><input type="text" name="user" size="20"><input type="button" onClick="Check()" value="检测一币余额" name="B3" style="cursor: pointer"></p>
-                            <p><label>登录密码：</label><input type="password" name="pa01" size="20"></p>
-                            <p><label>二级密码：</label><input type="password" name="pa02" size="20" maxlength="20"></p>
-                            <p><label>手机验证码：</label><input name="sfcode" size="10"><input id="btn" type="button" onClick="checkdate()" value="获取验证码" name="B2" style="cursor: pointer"></p>
+							<p><label class="c-r"><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-535714675'/>：</label>${gcuser.username}<input type="hidden" name="sh" size="20" value="${gcuser.username}" readonly></p>
+							<p><label><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.630954966'/>：</label><input type="password" name="shpa" size="20"></p>
+							<p><label><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.871278941'/>：</label><input style="width:100px;" type="text" name="sfpay" onKeyUp="value=value.replace(/[^\d]/g,'');rst(this.value)" size="20"></p>
+                            <p><label><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.26044037'/>(2%)：</label><input id="pay10" type="text" name="pay10" size="20" readonly><input type="hidden" name="remark" size="5" value="12" readonly></p>
+                            <p><label><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.675858010'/>：</label><input id="ybpay" type="text" name="ybpay" size="15" readonly></p>
+                            <p><label><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.29623262'/>：</label><input type="text" name="user" size="20"><input type="button" onClick="Check()" value="<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1725871048'/>" name="B3" style="cursor: pointer"></p>
+                            <p><label><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.927803061'/>：</label><input type="password" name="pa01" size="20"></p>
+                            <p><label><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.630954966'/>：</label><input type="password" name="pa02" size="20" maxlength="20"></p>
+                            <p><label><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</label><input name="sfcode" size="10"><input id="btn" type="button" onClick="checkdate()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>" name="B2" style="cursor: pointer"></p>
 							<p><label></label><button class="but1" type=submit  name=submit2  onClick="return confirm('提示：您确定支付了吗？')">确定支付</button></p>
 					</form>
 					</div>

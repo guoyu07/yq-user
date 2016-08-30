@@ -1,12 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('此用户名已有人使用！请更换！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('恭喜同姓名用户注册成功，请进行下一步的操作！');location.href='tgdown'</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-931208490'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('恭喜同<s:text name='reg.jsp.reg.jsp.734362'/>用户注册<s:text name='reg1.jsp.reg1.jsp.799375'/>，请进行<s:text name='reg1.jsp.reg1.jsp.19846320'/>的<s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>！');location.href='tgdown'</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 	
 <SCRIPT>
@@ -21,12 +21,12 @@ function openwindow(url) {
 <script language="JavaScript"> 
 function Check(){
 	if ( Form.gguser.value==""){
-		alert ("提示：用户名不能为空!！");
+		alert ("<s:text name='index.jsp.index.jsp.-2036326914'/>!！");
 		Form.gguser.focus();
 		return false;
 	}
 	 if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-		alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+		alert("<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.-1147321682'/>！");
 		Form.gguser.focus();
 		return false;
 	}
@@ -36,10 +36,10 @@ function Check(){
     ajaxobj.callback=function(){
 	    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 	    if(responseMsg.erroCodeNum!=0){
-	    	alert("对不起，用户名："+uName+"，已经被注册了！");
+	    	alert("<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.842685271'/>！");
 		    return;
 	    }else{
-	    	alert("恭喜，您可以注册用户名："+uName);
+	    	alert("<s:text name='reg.jsp.reg.jsp.-259258343'/>："+uName);
 	    	return;
 	    }
     }
@@ -65,27 +65,27 @@ function CheckIfEnglish( String )
 }
 
  function checkdate()  {  
-  if (Form.gguser.value=="") {      alert("用户名不能为空!"); Form.gguser.focus();     return false;    } 
+  if (Form.gguser.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-609490706'/>!"); Form.gguser.focus();     return false;    } 
   	        if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 12 || Form.gguser.value.length < 4) {
-		alert("提示：\n\n您的用户名不符合规范，必须4-12个小写英文字母+数字！");
+		alert("<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.-1147321682'/>！");
 		Form.gguser.focus();
 		return false;
 	}
  
-  if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    } 
+  if (Form.sfz.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.741412114'/>");      return false;    } 
 return true;  }  
 </script>
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp"%>
 				<%@ include file="/view/zhgl.jsp" %>
 				
@@ -93,28 +93,28 @@ return true;  }
 			<div class="z-l">
 				<div class="content-box1" style="height:190px;">
 					<div class="content-title">
-						<span>添加同名用户</span>
+						<span><s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.1616957653'/></span>
 					</div>
 					<div class="content-form">
-						 此处注册为当前登录账户快捷添加同姓名新用户使用，仅需要自定义一个新用户名，其它资料与当前登录账户相同！ 如您需要注册不同姓名的新用户请到   <a href="reg">注册新账户</a>
+						<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.-1290755823'/>
 					</div>
 				</div>
-				<div class="content-box2 mt10"  style="height:310px;">
+				<div class="content-box2 mt10"  style="height:370px;">
 					<form class="form form3" method="POST" action="regTheSame?status=1" name="Form" onSubmit="return checkdate()">
-							<p><label>用户名：</label><input type="text" name="gguser" size="15" maxlength="12" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
-							<p><label>一级密码：</label>与当前登录账户相同</p>
-							<p><label>二级密码：</label>与当前登录账户相同</p>
-							<p><label>姓名：</label>${gcuser.name}</p>
-							<p><label>推荐人：</label>${gcuser.username}</p>
-							<p><label>协议及声明：</label>
+							<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" name="gguser" size="15" maxlength="12" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
+							<p><label><s:text name='reg.jsp.reg.jsp.626784226'/>：</label><s:text name='vipreg.jsp.reg.jsp.-1975491897'/></p>
+							<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><s:text name='vipreg.jsp.reg.jsp.-1975491897'/></p>
+							<p><label><s:text name='reg.jsp.reg.jsp.734362'/>：</label>${gcuser.name}</p>
+							<p><label><s:text name='reg.jsp.reg.jsp.25579282'/>：</label>${gcuser.username}</p>
+							<p><label><s:text name='reg.jsp.reg.jsp.-692292151'/>：</label>
 								<select size="1" name="sfz">
-								<option selected value="0">==请选择是否同意协议及声明==</option>
-								<option value="0">不同意！</option>
-								<option value="1">同意协议及声明，自愿参与！</option>
+								<option selected value="0">==<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.2105797912'/>==</option>
+								<option value="0"><s:text name='reg.jsp.reg.jsp.19893584'/>！</option>
+								<option value="1"><s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.1259576711'/>！</option>
 								</select>
-								<a href="javascript:openwindow('/sfz.html')" class="c-g xy-sm">查看协议及声明</a>
+								<a href="javascript:openwindow('/sfz.html')" class="c-g xy-sm"><s:text name='reg.jsp.reg.jsp.-692292151'/></a>
 							</p>
-							<p><label></label><button class="but1" type="submit">提 交 注 册</button></p>
+							<p><label></label><button class="but1" type="submit"><s:text name='reg.jsp.reg.jsp.-1871876984'/></button></p>
 					</form>
 				</div>
 			</div>

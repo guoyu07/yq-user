@@ -1,19 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('注意：您的一币不够本次购卡，请充值！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('电子卡发放及业绩更新成功！');location.href='datepay'</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1616194221'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipjztojb.jsp.jztojb.jsp.200453681'/>！');location.href='datepay'</script></c:if>
 
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
 </head>
 <script language="JavaScript"> 
  function checkdate()  {  
-  if (Form.gmmj.value==0) {      alert("请选择你要购买的金币卡面值!");      return false;    } 
+  if (Form.gmmj.value==0) {      alert("<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.640107298'/>!");      return false;    } 
   return true;  }  
  </script>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
-<title>一币转金币卡</title>
+<title><s:text name='vipjztojb.jsp.jztojb.jsp.-1978587226'/></title>
 <style>
 <!--
 .border {
@@ -35,7 +35,7 @@
 		<div align="center">
 			<table border="0" width="81%" id="table3" cellspacing="1" height="133" bgcolor="#FFFFFF">
 			<tr>
-			<td align="center" width="97%" bgcolor="#FFF4DF" height="33"><b><font color="#669933">一币-购金币卡</font></td>
+			<td align="center" width="97%" bgcolor="#FFF4DF" height="33"><b><font color="#669933"><s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-735901424'/></font></td>
 				</tr>
 				<b>
 				<tr>
@@ -55,27 +55,27 @@
       <TD width="266" bgColor=#ffffff align="left" style="color: #304618; font-size: 12px">
 		<p align="right" style="line-height: 200%; margin-top: 0; margin-bottom: 0">
 		<b>
-		<font size="3" color="#FF0000">请选择要购买的金币卡面值：</font></b></TD>
+		<font size="3" color="#FF0000"><s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-1898581836'/>：</font></b></TD>
       <TD width="321" bgColor=#ffffff style="color: #304618; font-size: 12px" align="left">  
               <p style="line-height: 200%; margin-top: 0; margin-bottom: 0">  
               <font size="3">  
               <select size="1" name="gmmj">
-				<option value="0" selected>==请选择金币卡面值==</option>
-				<option value="1">10金币（15一币/张）</option>
-				<option value="5">50金币（75一币/张）</option>
-				<option value="10">100金币（150一币/张）</option>
-				<option value="30">300金币（450一币/张）</option>
-				<option value="50">500金币（750一币/张）</option>
-				<option value="100">1000金币（1500一币/张）</option>
+				<option value="0" selected>==<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-697677804'/>==</option>
+				<option value="1">10<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1554998638'/>）</option>
+				<option value="5">50<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1726773544'/>）</option>
+				<option value="10">100<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-356053146'/>）</option>
+				<option value="30">300<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-1988509399'/>）</option>
+				<option value="50">500<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.674001644'/>）</option>
+				<option value="100">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</option>
 				</select>
 				</font>
 				<font color="#FF0000" style="font-size: 11pt">** </font><b>&nbsp;<INPUT class=normalButton type=submit value="提 交" name=submit2 style="font-size: 11pt"></TD>
     </TR>
   </TBODY>
 </TABLE>
-		<p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2">提示：您的一币剩余<font color="#FF0000">${pay}</font></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
-		<font style="font-size: 11pt">按<font color="#FF0000">15-一币-买10金币</font>的比例，成功后显示相应金币卡</font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
-		<font style="font-size: 11pt">再到<font color="#0000FF"><b>积分理财</b></font>下<font color="#0000FF"><b>我要充值</b></font>-激活或复制赠送即可！</font></div>
+		<p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2">提示：您的<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/><font color="#FF0000">${pay}</font></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
+		<font style="font-size: 11pt"><s:text name='vipjztojb.jsp.jztojb.jsp.186706464'/></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
+		<font style="font-size: 11pt"><s:text name='vipjztojb.jsp.jztojb.jsp.17234952'/>！</font></div>
 </form>
     </td>
     </tr>
@@ -85,7 +85,7 @@
 				</tr>
 			</table>
 			<p style="line-height: 200%; margin-top: 0; margin-bottom: 0">　</p>
-<p><a href="javascript:history.back();" style="text-decoration: none"><font color="#000000" style="font-weight: 700" size="6">返回上一页</font></a></p>
+<p><a href="javascript:history.back();" style="text-decoration: none"><font color="#000000" style="font-weight: 700" size="6"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.326654005'/></font></a></p>
 
 		</div>
 		</td>

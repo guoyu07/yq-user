@@ -116,11 +116,15 @@ public class ManagerService {
 	 * 添加公告
 	 * @param title
 	 * @param content
+	 * @param title_en
+	 * @param content_en
 	 */
-	public void addNotice(String title,String content){
+	public void addNotice(String title,String content ,String title_en ,String content_en){
 		Dgag dgag = new Dgag();
 		dgag.setGgbt(title);
 		dgag.setGgny(content);
+		dgag.setGgbt_en(title_en);
+		dgag.setGgny_en(content_en);
 		dgag.setGgdate(new Date());
 		dgagDao.add(dgag);
 	}
@@ -128,10 +132,12 @@ public class ManagerService {
 	 * 修改公告
 	 * @param title
 	 * @param content
+	 * @param title_en
+	 * @param content_en
 	 */
-	public boolean editNotice(int id,String title,String content,String ggdate){
+	public boolean editNotice(int id,String title,String content,String ggdate,String title_en,String content_en){
 		Date ggdateO = DateUtils.StringToDate(ggdate,DateStyle.YYYY_MM_DD_HH_MM_SS);
-		return dgagDao.update(id, title, content, ggdateO);
+		return dgagDao.update(id, title, content, ggdateO,title_en,content_en);
 	}
 	
 }

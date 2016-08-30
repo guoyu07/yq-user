@@ -12,7 +12,7 @@ function writeTitle(tit){
     document.getElementById("mTitle").innerHTML=tit;
   }
   else{
-    document.getElementById("mTitle").innerHTML="首页";
+    document.getElementById("mTitle").innerHTML="<s:text name='viplogin2j.jsp.login2j.jsp.1257887'/>";
   }
 }
 
@@ -35,7 +35,7 @@ $(document).ready(function(){
 });
 
 function checkdate()  {  
-	  if (Form.password3.value=="") {   alert("二级密码不能为空");  Form.password3.focus();   return false;    }
+	  if (Form.password3.value=="") {   alert("<s:text name='viplogin2j.jsp.login2j.jsp.-1719221018'/>");  Form.password3.focus();   return false;    }
 	  var data = $("#Form").serialize();
 	  $.post("login2j?status=1", data, function(response) {
 		    var responseMsg = eval('(' + response + ')');
@@ -44,7 +44,7 @@ function checkdate()  {
 				location.replace('gmjh');
 				return;
 			}else{
-				alert('二级密码输入错误！请重新输入');
+				alert('<s:text name='viplogin2j.jsp.login2j.jsp.950326025'/>');
 				Form.password3.focus();
 				return;
 			}
@@ -58,7 +58,7 @@ function checkdate()  {
 　</DIV>　</DIV>
 <DIV class=daohang>
 <DIV class=mainnav>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle>首页</SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle><s:text name='viplogin2j.jsp.login2j.jsp.1257887'/></SPAN></DIV></DIV></DIV>
 <DIV class=box_title></DIV>
 <DIV class=box>
 <DIV class=box_con style=" text-align:left">
@@ -71,14 +71,14 @@ function checkdate()  {
                     <center>
                   <table border="0" cellpadding="0" style="border:1px solid #008000; border-collapse: collapse" width="50%" id="AutoNumber4" height="112" bgcolor="#FFD7D7">
                     <tr> 
-                      <td width="42%" height="40" align="right" bgcolor="#FFD7D7"><font style="font-size: 11pt">用户名：</font></td>
+                      <td width="42%" height="40" align="right" bgcolor="#FFD7D7"><font style="font-size: 11pt"><s:text name='viplogin2j.jsp.login2j.jsp.29623262'/>：</font></td>
                       <td width="57%" height="40" align="left" bgcolor="#FFD7D7"><font size="3"> <span style="font-size: 11pt"><INPUT name="m_username" size=12 value="${userName}" readonly></span></font></td>
                     </tr>
                     <tr> 
-                      <td width="42%" height="40" align="right"><font style="font-size: 11pt">二级密码：</font></td>
+                      <td width="42%" height="40" align="right"><font style="font-size: 11pt"><s:text name='viplogin2j.jsp.login2j.jsp.630954966'/>：</font></td>
                       <td width="57%" height="40" align="left"><font size="3"> <span style="font-size: 11pt"><INPUT name="password3" size=12 type="password" ></span></font></td>
                     </tr>
-                    <tr><td width="70%" height="40" align="center" colspan="2" bgcolor="#FFD7D7"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font size="3"><span style="font-size: 11pt"><input type="submit" value=" 登陆管理 " name="login" class="lkbtn" onClick="checkdate();"></span></font></td>
+                    <tr><td width="70%" height="40" align="center" colspan="2" bgcolor="#FFD7D7"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font size="3"><span style="font-size: 11pt"><input type="submit" value=" <s:text name='viplogin2j.jsp.login2j.jsp.941571312'/> " name="login" class="lkbtn" onClick="checkdate();"></span></font></td>
                     </tr>
                     </table>
                     </center>

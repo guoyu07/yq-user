@@ -354,6 +354,10 @@
 
 	<!-- 一个包可以就是一个模块 -->
 	<package name="login" extends="noLoginInterceptor" namespace="/">
+		<!-- 国际化-->
+		<action name="I18N" class="com.yq.app.user.action.I18NAction">
+			<result name="success">/index.jsp</result>
+		</action>
 		<!-- 检测忘记密码，跳转到手机验证码界面 -->
 		<action name="resetPasswod" class="com.yq.app.user.action.RetsetPasswodAction">
 			<result name="input01">resetUserPass.jsp</result>

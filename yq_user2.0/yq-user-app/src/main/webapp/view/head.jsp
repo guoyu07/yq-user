@@ -2,6 +2,7 @@
 <%@page import="com.yq.user.bo.Gcuser"%>
 <%@page import="com.sr178.game.framework.context.ServiceCacheFactory"%>
 <%@page import="com.yq.user.service.UserService"%>
+<s:set name="SESSION_LOCALE" value="#session['WW_TRANS_I18N_LOCALE']" />
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
@@ -14,42 +15,88 @@
   String time = new Date().getTime()+"";
   String sign = MD5Security.code(gcuserHead.getUsername()+key+time, 32).toLowerCase();
 %>
+
 <div class="header">
 	<div class="logo"><a href="#"><img src="/images/logo.jpg" /></a></div>
 	<div class="nav">
 		<ul>
-			<li><a href="/manager"><img src="/images/sy.png" /></a></li>
-			<li><a href="#"><img src="/images/cfzx.png" vertical-align="center"/></a>
+			<li><a href="/manager">
+			 <c:choose>  
+						<c:when test="${SESSION_LOCALE=='en_US'}">    
+						<img src="/images/sy_<s:text name='#SESSION_LOCALE'/>.png" />
+		   				</c:when>
+						<c:otherwise>
+							<img src="/images/sy.png" />    
+		   				</c:otherwise> 
+		   	</c:choose>
+			</a></li>
+			<li><a href="#">
+			 <c:choose>  
+						<c:when test="${SESSION_LOCALE=='en_US'}">    
+						<img src="/images/cfzx_<s:text name='#SESSION_LOCALE'/>.png" vertical-align="center"/>
+		   				</c:when>
+						<c:otherwise>
+							<img src="/images/cfzx.png" />    
+		   				</c:otherwise> 
+		   	</c:choose>
+		   	</a>
 				<div class="ej">
 					<span class="close"></span>
-					<a href="/vipgo">积分理财</a>
-					<a href="/login2j?inputUrl=login3j.jsp">一币理财</a>
-					<a href="/bdbdate">业绩查询</a>
-					<a href="/datepay">账户概览</a>
-					<a href="#" class="close">财富中心</a>
+					<a href="/vipgo"><s:text name='viewjflc.jsp.jflc.jsp.951062035'/></a>
+					<a href="/login2j?inputUrl=login3j.jsp"><s:text name='viewyblc.jsp.yblc.jsp.618950045'/></a>
+					<a href="/bdbdate"><s:text name='viewlinks.html.links.html.627723500'/></a>
+					<a href="/datepay"><s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/></a>
+					<a href="#" class="close"><s:text name='viewhead.jsp.head.jsp.1099577248'/></a>
 				</div>
 			</li>
-			<li><a href="#"><img src="/images/zhgl.png" /></a>
+			<li><a href="#">
+			 <c:choose>  
+						<c:when test="${SESSION_LOCALE=='en_US'}">    
+						<img src="/images/zhgl_<s:text name='#SESSION_LOCALE'/>.png" />
+		   				</c:when>
+						<c:otherwise>
+							<img src="/images/zhgl.png" />    
+		   				</c:otherwise> 
+		   	</c:choose>
+				</a>
 				<div class="ej">
 					<span class="close"></span>
-					<a href="/tjz">同名帐户管理</a>
-					<a href="/regTheSame">添加同名帐户</a>
-					<a href="/tgdown">我的客户</a>
-					<a href="/tgurl">个人信息</a>
-					<a href="#" class="close">帐户管理</a>
+					<a href="/tjz"><s:text name='viewhead.jsp.head.jsp.742540524a'/></a>
+					<a href="/regTheSame"><s:text name='viewhead.jsp.head.jsp.742540524b'/></a>
+					<a href="/tgdown"><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.777812136'/></a>
+					<a href="/tgurl"><s:text name='viewgrxx.jsp.grxx.jsp.616144510'/></a>
+					<a href="#" class="close"><s:text name='viewhead.jsp.head.jsp.742540524'/></a>
 				</div>
 			</li>
-			<li><a href="#"><img src="/images/xfgl.png" /></a>
+			<li><a href="#"> 
+			<c:choose>  
+						<c:when test="${SESSION_LOCALE=='en_US'}">    
+						<img src="/images/xfgl_<s:text name='#SESSION_LOCALE'/>.png" />
+		   				</c:when>
+						<c:otherwise>
+							<img src="/images/xfgl.png" />    
+		   				</c:otherwise> 
+		   	</c:choose>
+		   		</a>
 				<div class="ej">
 					<span class="close"></span>
-					<a href="/hfcz">话费充值(100)</a>
-					<a target="_blank" href="http://www.kypwe.com">科赡票务</a>
-					<a target="_blank" href="http://www.zgybe.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>">幸福100云购在线</a>
-					<a href="/baby">口才训练营报名</a>
-					<a href="#" class="close">消费管理</a>
+					<a href="/hfcz"><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.1102075283'/>(100)</a>
+					<a target="_blank" href="http://www.kypwe.com"><s:text name='keshanpiaowu'/></a>
+					<a target="_blank" href="http://www.zgybe.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>"><s:text name='HAPPY100_online'/></a>
+					<a href="/baby"><s:text name='eloquence_training_camp'/></a>
+					<a href="#" class="close"><s:text name='viewhead.jsp.head.jsp.871093494'/></a>
 				</div>
 			</li>
-			<li><a href="/vipup"><img src="/images/kfzx.png" /></a></li>
+			<li><a href="/vipup">
+			<c:choose>  
+						<c:when test="${SESSION_LOCALE=='en_US'}">    
+						<img src="/images/kfzx_<s:text name='#SESSION_LOCALE'/>.png" />
+		   				</c:when>
+						<c:otherwise>
+							<img src="/images/kfzx.png" />    
+		   				</c:otherwise> 
+		   	</c:choose>
+				</a></li>
 		</ul>
 	</div>
 </div>

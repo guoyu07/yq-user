@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('操作错误，一币不足，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==20}"><script language=javascript>alert('竞猜-成功，请耐心等待开奖，祝君好运，游戏快乐！');location.replace('epjqks');</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>错误，<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.655686'/>，请检查输入是否正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==20}"><script language=javascript>alert('竞猜-<s:text name='reg1.jsp.reg1.jsp.799375'/>，请耐心等待开奖，祝君好运，游戏快乐！');location.replace('epjqks');</script></c:if>
 <script type="text/javascript">
 	var startTime = new Date();
 	//alert('year=${year},month=${month},day=${day}');
@@ -39,12 +39,12 @@
 </script>
 <script language="JavaScript"> 
  function checkdate()  { 
-  if (Form.tzlb.value==0) {      alert("请选择要的竞猜项目!");      return false;    }
-  if (Form.tzsl.value=="") {      alert("请写入投注一币数量!");      return false;    }
-  if (Form.tzsl.value<10) {      alert("投注一币数量不能小于10");      return false;    }
-  if (Form.tzsl.value> ${pay} ) {      alert("投注一币数量不能大于您剩余的数量 ${pay}哦!");    return false;    }
+  if (Form.tzlb.value==0) {      alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.35601975'/>要的竞猜项目!");      return false;    }
+  if (Form.tzsl.value=="") {      alert("请写入投注<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>数量!");      return false;    }
+  if (Form.tzsl.value<10) {      alert("投注<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>数量不能小于10");      return false;    }
+  if (Form.tzsl.value> ${pay} ) {      alert("投注<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>数量不能大于您<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/>的数量 ${pay}哦!");    return false;    }
   if (!chkinteger(Form.tzsl.value)){
-	alert('一币投注只能为整字!');
+	alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>投注只能为整字!');
 	document.Form.tzsl.focus;
 	return (false);
  }
@@ -67,25 +67,25 @@ return (allValid);
    return true;  }
 </script>
 <html>
-<title>一币竞猜记录</title>
+<title><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>竞猜记录</title>
 </head>
 <div align="center"><b><form method="POST" action="epjqks?status=1" name="Form" onSubmit="return checkdate()">
 		<table border="0" width="100%" id="table4" height="60" bgcolor="#FFFF66">
 			<tr>
-		<td width="330" rowspan="2"><b><p>&nbsp;离<font color="#FF0000">第${epkjdate.kid}期</font>一币开奖还有：<!--<span id="RemainD">&nbsp;</span>天<span id="RemainH">&nbsp;</span>时--><span id="RemainM">&nbsp;</span>分<span id="RemainS">&nbsp;</span>秒</td>
-		<td width="165" align="right"><b>选择竞猜项目：</b></td>
+		<td width="330" rowspan="2"><b><p>&nbsp;离<font color="#FF0000">第${epkjdate.kid}期</font><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>开奖还有：<!--<span id="RemainD">&nbsp;</span>天<span id="RemainH">&nbsp;</span>时--><span id="RemainM">&nbsp;</span>分<span id="RemainS">&nbsp;</span>秒</td>
+		<td width="165" align="right"><b><s:text name='vipepjqks.jsp.epjqks.jsp.1956974099'/>：</b></td>
 		<td><b><select size="1" name="tzlb">
-			<option selected value="0">=选择竞猜项目=</option>
+			<option selected value="0">=<s:text name='vipepjqks.jsp.epjqks.jsp.1956974099'/>=</option>
 			<option value="1">-单-</option>
 			<option value="2">-双-</option>
 			<option value="3">-大-</option>
 			<option value="4">-小-</option>
 			</select></td>
-		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="提交" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('提示：您确定了吗？')"></td>
-		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FF0000" size="2"><b>友</b></font><b><font color="#FF0000" size="2">情提示：</font></b></font><font  size="2">竞猜游戏中没有100%的中奖，所投注的-一币-不管中与不中，均无法撤销，本游戏不是赌博，请保持良好的游戏心态，量力而行。</font></td>
+		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="<s:text name='vipsgreg.jsp.sgreg.jsp.812244'/>" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')"></td>
+		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FF0000" size="2"><b>友</b></font><b><font color="#FF0000" size="2">情提示：</font></b></font><font  size="2">竞猜游戏中没有100%的中奖，所投注的-<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>-不管中与不中，均无法撤销，本游戏不是赌博，请保持良好的游戏心态，量力而行。</font></td>
 			</tr>
 			<tr>
-		<td width="165" align="right"><b>下注一币数量：</b></td>
+		<td width="165" align="right"><b>下注<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>数量：</b></td>
 		<td><input type="text" name="tzsl" size="15"></td>
 			</tr>
 		</table>
@@ -97,19 +97,19 @@ return (allValid);
   <table border="0" cellspacing="1" width="100%" cellpadding="0" height="75" bgcolor="#FF6600" id="table2">
         <tr> 
         <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="73"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-        <font ><b>一币-竞猜记录</b><font size="2">
+        <font ><b><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>-竞猜记录</b><font size="2">
 </font></font></p>
 	<div align="center">    
       <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="55" id="table3">
         <tr>        
      <td width="103" align="center" height="26" bgcolor="#E8E8FF"><b>
-		<font size="2" >期号</font></b></td>                
-     <td width="157" align="center" height="26" bgcolor="#E8E8FF"> <p style="line-height: 150%; margin-top: 0; margin-bottom: 0"> <font  color="#800000" size="2"><strong>竞猜玩家</strong></font></td><b>
-     <td width="117" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>投注一币</strong></font></td></b>                
-     <td width="118" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>收入一币</strong></font></td>
-     <td width="108" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#800000"  size="2">剩余一币</font></b></td><b>
-     <td width="220" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b> <font color="#FF0000"  size="2">竞投时间</font></b></td></b>
-     <td width="216" align="center" height="26" bgcolor="#E8E8FF"> <p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font  size="2">备注</font></b></td>
+		<font size="2" ><s:text name='vipepjqks.jsp.epjqks.jsp.839864'/></font></b></td>                
+     <td width="157" align="center" height="26" bgcolor="#E8E8FF"> <p style="line-height: 150%; margin-top: 0; margin-bottom: 0"> <font  color="#800000" size="2"><strong><s:text name='vipepjqks.jsp.epjqks.jsp.966306219'/></strong></font></td><b>
+     <td width="117" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>投注<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></strong></font></td></b>                
+     <td width="118" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>收入<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></strong></font></td>
+     <td width="108" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#800000"  size="2"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></font></b></td><b>
+     <td width="220" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b> <font color="#FF0000"  size="2">竞投<s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.847550'/></font></b></td></b>
+     <td width="216" align="center" height="26" bgcolor="#E8E8FF"> <p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font  size="2"><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></font></b></td>
         </tr>
       <s:iterator var="data" value="dateList">
         <tr> 

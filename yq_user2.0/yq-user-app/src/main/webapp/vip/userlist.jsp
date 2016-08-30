@@ -2,7 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 
 <html>
-<title>同姓名账户</title>
+<title><s:text name='vipuserlist.jsp.userlist.jsp.-897491465'/></title>
 </head>
 
 <body topmargin="0">
@@ -10,19 +10,19 @@
 	<table border="0" cellspacing="1" width="100%" cellpadding="0" height="90">
   <tr> 
 <td width="87%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="90" bgcolor="#808000"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b>
-<font  size="4">同姓名账户</font></b><font size="2" >
+<font  size="4"><s:text name='vipuserlist.jsp.userlist.jsp.-897491465'/></font></b><font size="2" >
 </font></p>
 	<div align="center">    
         <table border="1" cellspacing="1" width="100%" height="60" bgcolor="#000000" bordercolor="#C0C0C0" style="border-collapse: collapse">
      <tr>        
-     <td width="231" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><b><font color="#FF0000" >用户名</font></b></td>                
-     <td width="144" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font  color="#FF0000"><strong>姓名</strong></font></td><b>                
-     <td width="146" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>游戏级别</strong></font></b></td>
-     <td width="159" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>可用一币</strong></font></td>
-     <td width="204" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>积分数量</strong></font></td>
-     <td width="159" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>可用金币</strong></font></td>
-     <td width="326" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>注册时间</strong></font></b></td>
-     <td width="326" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>开户时间</strong></font></b></td>
+     <td width="231" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><b><font color="#FF0000" ><s:text name='vipupuser.jsp.upuser.jsp.29623262'/></font></b></td>                
+     <td width="144" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font  color="#FF0000"><strong><s:text name='vipuserga.jsp.userga.jsp.734362'/></strong></font></td><b>                
+     <td width="146" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong><s:text name='vipuserlist.jsp.userlist.jsp.865732987'/></strong></font></b></td>
+     <td width="159" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong><s:text name='vipuserlist.jsp.userlist.jsp.669584602'/></strong></font></td>
+     <td width="204" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong><s:text name='vipuserlist.jsp.userlist.jsp.950947478'/></strong></font></td>
+     <td width="159" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong><s:text name='vipuserlist.jsp.userlist.jsp.670122793'/></strong></font></td>
+     <td width="326" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong><s:text name='vipuserlist.jsp.userlist.jsp.851482466'/></strong></font></b></td>
+     <td width="326" align="center" height="27" bgcolor="#000000" bordercolor="#000000"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong><s:text name='vipuserlist.jsp.userlist.jsp.749527093'/></strong></font></b></td>
         </tr>
      <s:iterator var="data" value="dataList">
         <tr> 

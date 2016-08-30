@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="common/taglib.jsp"%>
 
-<title>新用户注册登记</title>
+<title><s:text name='reg.jsp.reg.jsp.-1179328136'/></title>
 <style type="text/css">
-/* web_bg 全屏背景
+/* web_bg <s:text name='reg.jsp.reg.jsp.644602186'/>
 --------------------------*/
 body,ul,li { margin:0; padding:0; }
 #web_bg { position:absolute; width:100%; height:100%; z-index:-1; }
@@ -31,12 +31,12 @@ return false;
 
 function checkReg(){
 	if ( Form.gguser.value==""){
-		alert ("提示：用户名不能为空!！");
+		alert ("<s:text name='index.jsp.index.jsp.-2036326914'/>!");
 		Form.gguser.focus();
 		return false;
 	}
 	 if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-		alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+		alert("<s:text name='reg.jsp.reg.jsp.-1848386260'/>");
 		Form.gguser.focus();
 		return false;
 	}
@@ -46,10 +46,10 @@ function checkReg(){
     ajaxobj.callback=function(){
 	    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 	    if(responseMsg.erroCodeNum!=0){
-	    	alert("对不起，用户名："+uName+"，已经被注册了！");
+	    	alert("<s:text name='reg.jsp.reg.jsp.842685271'/>！");
 		    return;
 	    }else{
-	    	alert("恭喜，您可以注册用户名："+uName);
+	    	alert("<s:text name='reg.jsp.reg.jsp.-259258343'/>："+uName);
 	    	return;
 	    }
     }
@@ -59,12 +59,12 @@ function checkReg(){
 
 function reg(){
 	if ( Form.gguser.value==""){
-		alert ("提示：用户名不能为空!！");
+		alert("<s:text name='reg.jsp.reg.jsp.-2036326914'/>");
 		Form.gguser.focus();
 		return false;
 	}
 	 if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-		alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+		alert("<s:text name='reg.jsp.reg.jsp.-1848386260'/>！");
 		Form.gguser.focus();
 		return false;
 	}
@@ -75,25 +75,25 @@ function reg(){
 	    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 	    if(responseMsg.erroCodeNum!=0){
 	    	if(responseMsg.erroCodeNum==1){
-	    		alert('此用户名已有人使用！请更换！');
+	    		alert('<s:text name='reg.jsp.reg.jsp.-931208490'/>！');
 	    	}else if(responseMsg.erroCodeNum==2){
-	    		alert('没有这个推荐人账号，请重新写入！');
+	    		alert('<s:text name='reg.jsp.reg.jsp.-109709084'/>！');
 	    	}else if(responseMsg.erroCodeNum==3){
-	    		alert('该姓名['+uName+']及身份证号码['+Form.gguserid.value+']已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！');
+	    		alert('<s:text name='reg.jsp.reg.jsp.498992772'/>]！');
 	    	}else if(responseMsg.erroCodeNum==4){
-	    		alert('注意：您填写的身份证号码不合法或错误，请检查后再试！！');
+	    		alert('<s:text name='reg.jsp.reg.jsp.-834832388'/>！！');
 	    	}else if(responseMsg.erroCodeNum==5){
-	    		alert('该姓名['+uName+']及身份证号码['+Form.gguserid.value+']禁止注册！');
+	    		alert('<s:text name='reg.jsp.reg.jsp.451801346'/>！');
 	    	}else if(responseMsg.erroCodeNum==6){
-	    		alert('所在地区不全！请重新选择！');
+	    		alert('<s:text name='reg.jsp.reg.jsp.-889663866'/>！');
 	    	}else if(responseMsg.erroCodeNum==7){
-	    		alert('注册失败！数据异常');
+	    		alert('<s:text name='reg.jsp.reg.jsp.-1989997891'/>');
 	    	}else{
-	    		alert('注册失败！');
+	    		alert('<s:text name='reg.jsp.reg.jsp.851378872'/>！');
 	    	}
 		    return;
 	    }else{
-	    	alert("恭喜注册成功！请登录进行其它操作！");
+	    	alert("<s:text name='reg.jsp.reg.jsp.-517693217'/>！");
 	    	location.href="index.jsp?id="+uName;
 	    	return;
 	    }
@@ -104,37 +104,37 @@ function reg(){
 
 
  function checkdate()  {  
-  if (Form.gguser.value=="") {      alert("用户名不能为空!"); Form.gguser.focus();     return false;    } 
+  if (Form.gguser.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-609490706'/>!"); Form.gguser.focus();     return false;    } 
   	        if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-		alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+		alert("<s:text name='reg.jsp.reg.jsp.-1848386260'/>！");
 		Form.gguser.focus();
 		return false;
 	}
-  if (Form.ggpa1.value=="") {      alert("一级密码不能为空!");Form.ggpa1.focus();      return false;    } 
-  if (!CheckIfEnglish(Form.ggpa1.value)) {      alert("您的登录密码不符合规范，必须小写英文字母+数字！");  Form.ggpa1.focus();      return false;    } 
-  if (Form.ggpa1.value.length<6) {      alert("一级密码至少为6位数!"); Form.ggpa1.focus();     return false;    } 
-  if (Form.ggpa2.value != Form.ggpa1.value) {      alert("一级两次输入密码不同!"); Form.ggpa2.focus();     return false;    }
-  if (Form.ggpa3.value=="") {      alert("二级密码不能为空!"); Form.ggpa3.focus();     return false;    } 
-  if (!CheckIfEnglish(Form.ggpa3.value)) {      alert("您的二级密码不符合规范，必须小写英文字母+数字！");  Form.ggpa3.focus();      return false;    } 
-  if (Form.ggpa3.value.length<10) {      alert("二级密码至少为10位数!"); Form.ggpa3.focus();     return false;    } 
-  if (Form.ggpa3.value.length>20) {      alert("二级密码至多为20位数!"); Form.ggpa3.focus();     return false;    } 
-  if (Form.ggname.value=="") {      alert("请输入您的真实姓名!");  Form.ggname.focus();    return false;    } 
-  if (Form.ggname.value.length<2) {      alert("真实名字至少为2个汉字!");   Form.ggname.focus();     return false;    } 
-  if (Form.ggname.value.length>8) {      alert("真实名字至多为4个汉字!");   Form.ggname.focus();     return false;    }
-  if (Form.ggbank.value==0) {      alert("请选择收款银行!");   Form.ggbank.focus();     return false;    }  
-  if (Form.ggcard.value=="") {      alert("请填入您的对应银行帐号!");  Form.ggcard.focus();      return false;    }  
-  if (Form.gguserid.value=="") {      alert("请填入您的身份证号码!");  Form.gguserid.focus();      return false;    }
-  if (Form.gguserid.value.length<18) {      alert("身份证号码至少为18位数!"); Form.gguserid.focus();     return false;    } 
-  if (Form.gguserid.value.length>18) {      alert("身份证号码至多为18位数!"); Form.gguserid.focus();     return false;    }    
-  if (Form.ggcall.value=="") {      alert("请填入您的手机号码!");  Form.ggcall.focus();      return false;    }
-  if (Form.ggcall.value.length<11) {      alert("手机号码至少为11位数!"); Form.ggcall.focus();     return false;    } 
-  if (Form.ggcall.value.length>11) {      alert("手机号码至多为11位数!"); Form.ggcall.focus();     return false;    }
-  if (Form.ggqq.value=="") {      alert("请输入您的QQ号码!");  Form.ggqq.focus();    return false;    }
-  if (Form.provinceName.value==0) {      alert("请选择您的所在的省!");      return false;    }
-  if (Form.cityName.value==0) {      alert("请选择您的所在的市!");      return false;    }
-  if (Form.areaName.value==0) {      alert("请选择您的所在的地区/县!");      return false;    }
-  if (Form.upvip.value=="") {      alert("推荐人不能为空!"); Form.upvip.focus();     return false;    } 
-  if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    } 
+  if (Form.ggpa1.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-899532046'/>!");Form.ggpa1.focus();      return false;    } 
+  if (!CheckIfEnglish(Form.ggpa1.value)) {      alert("<s:text name='reg.jsp.reg.jsp.-768271497'/>！");  Form.ggpa1.focus();      return false;    } 
+  if (Form.ggpa1.value.length<6) {      alert("<s:text name='reg.jsp.reg.jsp.1079298527'/>!"); Form.ggpa1.focus();     return false;    } 
+  if (Form.ggpa2.value != Form.ggpa1.value) {      alert("<s:text name='reg.jsp.reg.jsp.-1310540176'/>!"); Form.ggpa2.focus();     return false;    }
+  if (Form.ggpa3.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-1719221018'/>!"); Form.ggpa3.focus();     return false;    } 
+  if (!CheckIfEnglish(Form.ggpa3.value)) {      alert("<s:text name='reg.jsp.reg.jsp.-1932694410'/>！");  Form.ggpa3.focus();      return false;    } 
+  if (Form.ggpa3.value.length<10) {      alert("<s:text name='reg.jsp.reg.jsp.908634376'/>!"); Form.ggpa3.focus();     return false;    } 
+  if (Form.ggpa3.value.length>20) {      alert("<s:text name='reg.jsp.reg.jsp.653975038'/>!"); Form.ggpa3.focus();     return false;    } 
+  if (Form.ggname.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.164342206'/>!");  Form.ggname.focus();    return false;    } 
+  if (Form.ggname.value.length<2) {      alert("<s:text name='reg.jsp.reg.jsp.815297593'/>!");   Form.ggname.focus();     return false;    } 
+  if (Form.ggname.value.length>8) {      alert("<s:text name='reg.jsp.reg.jsp.560668046'/>!");   Form.ggname.focus();     return false;    }
+  if (Form.ggbank.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1996388245'/>!");   Form.ggbank.focus();     return false;    }  
+  if (Form.ggcard.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-998560219'/>!");  Form.ggcard.focus();      return false;    }  
+  if (Form.gguserid.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-1745964948'/>!");  Form.gguserid.focus();      return false;    }
+  if (Form.gguserid.value.length<18) {      alert("<s:text name='reg.jsp.reg.jsp.1683299853'/>!"); Form.gguserid.focus();     return false;    } 
+  if (Form.gguserid.value.length>18) {      alert("<s:text name='reg.jsp.reg.jsp.1428610724'/>!"); Form.gguserid.focus();     return false;    }    
+  if (Form.ggcall.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>!");  Form.ggcall.focus();      return false;    }
+  if (Form.ggcall.value.length<11) {      alert("<s:text name='reg.jsp.reg.jsp.-415194682'/>!"); Form.ggcall.focus();     return false;    } 
+  if (Form.ggcall.value.length>11) {      alert("<s:text name='reg.jsp.reg.jsp.-669883811'/>!"); Form.ggcall.focus();     return false;    }
+  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
+  if (Form.provinceName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924286904'/>!");      return false;    }
+  if (Form.cityName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924280505'/>!");      return false;    }
+  if (Form.areaName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1280507619'/>!");      return false;    }
+  if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
+  if (Form.sfz.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.741412114'/>");      return false;    } 
   reg();
 return true;  }  
 </script>
@@ -145,7 +145,7 @@ function ChangeProvince(subid)
 	document.getElementById("cityName").length = 0; 
 	var subid=subid;
 	var i;
-	document.getElementById("cityName").options[0] = new Option('==请选择城市==','0');
+	document.getElementById("cityName").options[0] = new Option('==<s:text name='reg.jsp.reg.jsp.-145519509'/>==','0');
 	for (i=0;i < subCity.length; i++)
 	{
 		if (subCity[i][1] == subid)
@@ -161,7 +161,7 @@ function ChangeCity(subid)
 	document.getElementById("areaName").length = 0; 
 	var subid=subid;
 	var i;
-	document.getElementById("areaName").options[0] = new Option('==请选择地区==','0');
+	document.getElementById("areaName").options[0] = new Option('==<s:text name='reg.jsp.reg.jsp.-145527167'/>==','0');
 	for (i=0;i < subArea.length; i++)
 	{
 		if (subArea[i][1] == subid)
@@ -197,11 +197,11 @@ function openwindow(url) {
 //-->
 </SCRIPT>
 <body>
-<!--web_bg 全屏背景-->
+<!--web_bg <s:text name='reg.jsp.reg.jsp.644602186'/>-->
 <ul id="web_bg">
     <li style="display:block;"><img src="image/yellow_bg.jpg" /></li>    
 </ul>
-<!--对联区-->
+<!--<s:text name='reg.jsp.reg.jsp.23666463'/>-->
 <div class="couplet_left"><img src="image/advert1.jpg" alt=""></div>
 <div class="couplet_right"><img src="image/advert2.jpg" alt=""></div>
 
@@ -213,61 +213,61 @@ function openwindow(url) {
 		<p style="margin-top: 0; margin-bottom: 0">　</p>
 		<table border="0" width="53%" id="table1" height="425" cellpadding="5" bgcolor="#FFFFFF" style="border-radius:5px; -webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.2); -moz-box-shadow: 0 3px 10px rgba(0,0,0,0.2); box-shadow: 0 3px 10px rgba(0,0,0,0.2); padding:30px 0; position:relative; z-index:1;">
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">用户名：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.29623262'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="gguser" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="12"><font size="2" color="#FF0000">**<input type="button" onClick="checkReg()" value="检测" name="B1"></font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">一级密码：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.626784226'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="15"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">确认一级密码：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">确认<s:text name='reg.jsp.reg.jsp.626784226'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="15"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">二级密码：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.630954966'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="password" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">姓名：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.734362'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="ggname" size="20" maxlength="4" onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"><font size="2" color="#FF0000">** 确保真实才可以得到奖励</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">身份证号码：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.7501689'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="gguserid" size="20" maxlength="18"><font size="2" color="#FF0000">** 海外身份证请联系客服</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">收款银行：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.799485150'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><select size="1" name="ggbank">
-				<option selected value="0">==请选择收款银行==</option>
-				<option value="工商银行">工商银行</option>
-				<option value="农业银行">农业银行</option>
-				<option value="建设银行">建设银行</option>
-				<option value="中国银行">中国银行</option>
+				<option selected value="0">==<s:text name='reg.jsp.reg.jsp.1996388245'/>==</option>
+				<option value="<s:text name='reg.jsp.reg.jsp.-453899062'/>"><s:text name='reg.jsp.reg.jsp.-453899062'/></option>
+				<option value="<s:text name='reg.jsp.reg.jsp.1781968004'/>"><s:text name='reg.jsp.reg.jsp.1781968004'/></option>
+				<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
+				<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option>
 				</select> <font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">银行帐号：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.1170349181'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="ggcard" onKeyUp="value=value.replace(/[^\d]/g,'')" size="19" maxlength="20"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">开户行所在地：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.-1009112269'/>：</font></b></td>
 				<td>
 				    
     
 <select name="provinceName" onChange="ChangeProvince(document.getElementById('provinceName').options[document.getElementById('provinceName').selectedIndex].value);" id="provinceName" style="font-weight: 700">
-                      <option selected= "selected" value="">==请选择省份==</option>
+                      <option selected= "selected" value="">==<s:text name='reg.jsp.reg.jsp.-145275757'/>==</option>
  <s:iterator var="data" value="provinceList">
 <option value="${data.b}">${data.b}</option>
 				</s:iterator>
             </select><select name="cityName" onChange="ChangeCity(document.getElementById('cityName').options[document.getElementById('cityName').selectedIndex].value);" id="cityName" style="font-weight: 700">
-            <option selected="selected" value="">==请选择城市==</option>
+            <option selected="selected" value="">==<s:text name='reg.jsp.reg.jsp.-145519509'/>==</option>
             </select><select name="areaName" onChange="ChangeArea(document.getElementById('areaName').options[document.getElementById('areaName').selectedIndex].value);" id="areaName" style="font-weight: 700">
-            <option selected="selected" value="">==请选择地区==</option>
+            <option selected="selected" value="">==<s:text name='reg.jsp.reg.jsp.-145527167'/>==</option>
             </select></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">手机：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.806479'/>：</font></b></td>
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
@@ -275,25 +275,25 @@ function openwindow(url) {
 				<td><p style="margin-top: 0; margin-bottom: 0"><input type="text" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10"><font size="2" color="#FF0000">**</font></td>
 			</tr>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">推荐人：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.25579282'/>：</font></b></td>
 			    <td><p style="margin-top: 0; margin-bottom: 0"><input type="text" onKeyUp="value=value.replace(/[\W]/g,'')" name="upvip" size="20" value="${tag}"><font size="2" color="#FF0000">**</font></td>
 			</tr>
             <tr>
             	<td colspan="2" style="position:absolute; right:60px; top:35px;"><a href="index.jsp"><img border="0" src="image/login.jpg" width="102" height="32" align="right"></td>
 			<tr>
-				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2">协议及声明：</font></b></td>
+				<td width="193" align="right"><p style="margin-top: 0; margin-bottom: 0"><b><font color="#808000" size="2"><s:text name='reg.jsp.reg.jsp.-692292151'/>：</font></b></td>
 				<td><font size="2" color="#FF0000">
 				<span style="font-size: 11pt">
 				<select size="1" name="sfz">
-				<option selected value="0">==请选择是否同意协议及声明==</option>
-				<option value="0">不同意！</option>
-				<option value="1">同意协议及声明，自愿参与！</option>
+				<option selected value="0">==<s:text name='reg.jsp.reg.jsp.2105797912'/>==</option>
+				<option value="0"><s:text name='reg.jsp.reg.jsp.19893584'/>！</option>
+				<option value="1"><s:text name='reg.jsp.reg.jsp.1259576711'/>！</option>
 				</select></span></font><font color="#FF0000" style="font-size: 11pt"> </font> 
-				<font color="#008000" style="font-size: 11pt" size="2">&nbsp;</font><font color="#FF0000"><a href="javascript:openwindow('sfz.html')" style="text-decoration: none; font-weight: 700; "><font color="#008000" size="3">查看协议及声明</font></a></font></td>
+				<font color="#008000" style="font-size: 11pt" size="2">&nbsp;</font><font color="#FF0000"><a href="javascript:openwindow('sfz.html')" style="text-decoration: none; font-weight: 700; "><font color="#008000" size="3"><s:text name='vipreg.jsp.reg.jsp.-692292151a'/></font></a></font></td>
 			</tr>
 		</table>
 		<p style="margin-top: 0; margin-bottom: 0"></p>
-		<p style="margin-top: 10px; margin-bottom: 0"><input type="submit" value="提 交 注 册" name="submit" onClick="checkdate();" style="font-size: 12pt; font-weight: bold"></p>
+		<p style="margin-top: 10px; margin-bottom: 0"><input type="submit" value="<s:text name='reg.jsp.reg.jsp.-1871876984'/>" name="submit" onClick="checkdate();" style="font-size: 12pt; font-weight: bold"></p>
 		<p style="margin-top: 0; margin-bottom: 0" align="right"></p>
         </form>
 <p style="margin-top: 0; margin-bottom: 0">　</div>

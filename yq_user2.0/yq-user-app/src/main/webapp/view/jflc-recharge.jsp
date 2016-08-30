@@ -4,19 +4,19 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp" %>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
                 <%@ include file="/view/jflc.jsp" %>
 				
@@ -24,13 +24,13 @@
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>充值记录明细</span>
+						<span><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.1507906292'/></span>
 					</div>
 					<div class="a-recharge">
 					<form method="POST" name="Form" onSubmit="return checkdate()" action="vipgo?status=1">
-						<strong>请选择您要充值的金额：</strong>
+						<strong><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.1478585129'/>：</strong>
 						<select name="cjpay">
-							<option selected value="0">==请选择收到的充值金额==</option>
+							<option selected value="0">==<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.-255407690'/>==</option>
 							<option value="100">100</option>
 							<option value="200">200</option>
 							<option value="300">300</option>
@@ -55,30 +55,30 @@
 							<option value="8000">8000</option>
 							<option value="9000">9000</option>
 							<option value="10000">1万</option>
-							<option value="12000">1万2千</option>
-							<option value="15000">1万5千</option>
-							<option value="18000">1万8千</option>
+							<option value="12000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19218840'/></option>
+							<option value="15000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19218933'/></option>
+							<option value="18000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19219026'/></option>
 							<option value="20000">2万</option>
 							<option value="30000">3万</option>
 							<option value="50000">5万</option>
 						</select>
 						<span class="c-r">**</span>
-						<button type="submit">确 定 充 值</button>
+						<button type="submit"><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.-379325335'/></button>
 						</form>
-						<a href="/login2j?inputUrl=login6j.jsp" class="c-g">激活金币卡</a>
-						<p class="c-r">（注：每次充值最低100元，并以100元的整数递增，如200，300，400，同时需要加尾数）</p>
+						<a href="/login2j?inputUrl=login6j.jsp" class="c-g"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.1519971254'/></a>
+						<p class="c-r">（<s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.1634195660'/>）</p>
 					</div>
 					<div class="content-table">
 						<table>
 							<tr>
-								<th>用户名</th>
-								<th>最近充值</th>
-								<th>累计充值</th>
-								<th>充值时间</th>
-								<th>充值方式</th>
-								<th>愿购买者</th>
-								<th>操作员</th>
-								<th>IP地址</th>
+								<th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.821575720'/></th>
+								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.989728617'/></th>
+								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.640388245'/></th>
+								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.640372301'/></th>
+								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.777033699'/></th>
+								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.25449993'/></th>
+								<th>IP<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.714256'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>

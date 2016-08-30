@@ -9,6 +9,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.yq.common.utils.Tools;
 
 
@@ -53,6 +54,10 @@ public class PageTag implements Tag {
     private static final String UP_PAGE_TAG = "UP_PAGE_TAG";
     private static final String NEXT_PAGE_TAG = "NEXT_PAGE_TAG";
     private static final String END_PAGE_TAG = "END_PAGE_TAG";
+    private static final String PAGES = "PAGES";
+    private static final String PAGE = "PAGE";
+    private static final String ITEM = "ITEM";
+    private static final String TOTAL = "TOTAL";
     
     private static final String CURRENT_PAGE_NUM_TAG="CURRENT_PAGE_NUM_TAG";
     private static final String ALL_PAGE_NUM_TAG="ALL_PAGE_NUM_TAG";
@@ -60,7 +65,7 @@ public class PageTag implements Tag {
     private static final String PER_PAGE_SIZE_NUM_TAG = "PER_PAGE_SIZE_NUM_TAG";
     
     
-    private static final String TAG_FORMAT = ">>分页　"+FIRST_PAGE_TAG+"　"+UP_PAGE_TAG+"　"+NEXT_PAGE_TAG+"　"+END_PAGE_TAG+"　页次：<b>"+CURRENT_PAGE_NUM_TAG+"/"+ALL_PAGE_NUM_TAG+"</b>页　共<b>"+ALL_PAGE_SIZE_NUM_TAG+"</b>条　<b>"+PER_PAGE_SIZE_NUM_TAG+"</b>条/页　转到：<input id='toPageInputText' type='text' name='toPage' value='"+CURRENT_PAGE_NUM_TAG+"' onkeydown='if(event.keyCode==13)document.getElementById(&quot;pageGo&quot;).click()' /><button id='pageGo'  onClick=gotoPage(document.getElementById('toPageInputText').value); >GO</button>";
+    private static final String TAG_FORMAT = FIRST_PAGE_TAG+"　"+UP_PAGE_TAG+"　"+NEXT_PAGE_TAG+"　"+END_PAGE_TAG+" "+PAGES+"：<b>"+CURRENT_PAGE_NUM_TAG+"/"+ALL_PAGE_NUM_TAG+"</b>"+PAGE+"　"+TOTAL+":<b>"+ALL_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"　<b>"+PER_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"/"+PAGE+"　<input id='toPageInputText' type='text' name='toPage' style='width:49px' value='"+CURRENT_PAGE_NUM_TAG+"' onkeydown='if(event.keyCode==13)document.getElementById(&quot;pageGo&quot;).click()' /><button id='pageGo'  onClick=gotoPage(document.getElementById('toPageInputText').value); >GO</button>";
     
     
     public int doEndTag() throws JspTagException {
@@ -174,10 +179,10 @@ public class PageTag implements Tag {
     			url = url + "?" + datePara2 + "=" + dateValue2Str;
     			paraNum++;
     		}
-        	//struts国际化
-//    		ActionSupport actionSupport = new ActionSupport();
-        	String nextPageText = "下一页";//actionSupport.getText("nextPageText");
-        	String upPageText = "上一页";//actionSupport.getText("upPageText");
+    		 //struts国际化
+        	ActionSupport actionSupport = new ActionSupport();
+        	String nextPageText = actionSupport.getText("nextPageText");
+        	String upPageText = actionSupport.getText("upPageText");
         	//只有下一页
         	String nextStr = "";
         	String upString = "";
@@ -211,8 +216,8 @@ public class PageTag implements Tag {
         			upString = "<a href='" + Tools.UrlFormat(url + "&amp;toPage=" + (currentPage - 1), sessionID) + "'>" + upPageText + "</a>";
         		}
         	}
-        	String firstPageText = "首页";//actionSupport.getText("FirstPageText");
-        	String endPageText = "尾页";//actionSupport.getText("EndPageText");
+        	String firstPageText = actionSupport.getText("firstPageText");
+        	String endPageText = actionSupport.getText("endPageText");
         	if(paraNum <= 0){
         			firstStr = "<a href='" + Tools.UrlFormat(url + "?toPage=" + 0, sessionID) + "'>"+firstPageText+"</a>";
         			endStr = "<a href='" + Tools.UrlFormat(url + "?toPage=" + (totalPage), sessionID) + "'>"+endPageText+"</a>";
@@ -227,6 +232,10 @@ public class PageTag implements Tag {
         	}else{
         		endUrlStr = url+"&";
         	}
+        	String pages = actionSupport.getText("pages");
+        	String page = actionSupport.getText("page");
+        	String item = actionSupport.getText("item");
+        	String total = actionSupport.getText("total");
         	
         	String result = TAG_FORMAT.replaceAll(FIRST_PAGE_TAG, firstStr)
         			.replaceAll(END_PAGE_TAG, endStr)
@@ -236,6 +245,10 @@ public class PageTag implements Tag {
         			.replaceAll(ALL_PAGE_NUM_TAG, (totalPage+1)+"")
         			.replaceAll(ALL_PAGE_SIZE_NUM_TAG, totalSize+"")
         			.replaceAll(PER_PAGE_SIZE_NUM_TAG, pageSize+"")
+        			.replaceAll(PAGES, pages)
+        			.replaceAll(PAGE, page)
+        			.replaceAll(ITEM, item)
+        			.replaceAll(TOTAL, total)
         			;
         	
         	result=result+"<script>function gotoPage(pageNum){location.href='"+endUrlStr.replaceAll("&amp;", "&")+"toPage='+(pageNum-1)+'';}</script>";

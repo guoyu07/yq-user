@@ -64,7 +64,7 @@ a:hover{ color:#272a3d;}
 .z-cb:after,.z-cb li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 
 /* 模块元件布局 */
-.mainbox{ color: #656e73; height:768px; background: #f4f0e2;  }
+.mainbox{ color: #656e73; height:828px; background: #f4f0e2;  }
 .mw1024{ width: 1024px; margin: 0 auto}
 
 .header{  background: url(../images/headbg.jpg) no-repeat 0 bottom; }
@@ -79,10 +79,10 @@ a:hover{ color:#272a3d;}
 .center{ padding:25px 0 25px 10px; color:#000;}
 .leftbox{ width:200px; margin-right: 20px; }
 
-.user{ color:#2b2b2b; height: 150px; font-size: 14px; font-weight: bold; margin-bottom: 10px; background:#fff url(../images/jinbi1.png) no-repeat bottom center;}
+.user{ color:#2b2b2b; height: 180px; font-size: 14px; font-weight: bold; margin-bottom: 10px; background:#fff url(../images/jinbi1.png) no-repeat bottom center;}
 .user p{ padding: 2px 0 0 15px;}
 
-.system{ padding: 5px 10px; height: 350px; background-color: #FFF; color:#000;background:#fff url(../images/jinbi2.png) no-repeat bottom center;}
+.system{ padding: 5px 10px; height: 380px; background-color: #FFF; color:#000;background:#fff url(../images/jinbi2.png) no-repeat bottom center;}
 .system li{ padding: 5px 0 0 5px;}
 .system h3{ text-indent: 15px; margin-bottom: 5px; font-weight: lighter; background:#fdc50b; height: 20px; line-height: 20px; color: #FFF; font-size:19px; }
 .system a{ color:#666;}
@@ -134,7 +134,7 @@ a:hover{ color:#272a3d;}
 /* 表单样式 */
 .content-form{ font-size: 15px; }
 .content-box1, .content-box2{ width: 740px; padding:0 20px 5px 25px;background:#fff;}
-.content-boxindexnews{ width: 740px; padding:0 20px 5px 25px;background:#fff url(../images/jinbi3.png) no-repeat right center;}
+.content-boxindexnews{ width: 740px; padding:0 20px 45px 25px;background:#fff url(../images/jinbi3.png) no-repeat right center;}
 .content-box3{ width: 950px; padding:0 20px 5px 25px;   background: #FFF;}
 .form{ padding:5px 0; }
 .form p{ padding: 3px 0;}
@@ -297,7 +297,7 @@ a:hover{ color:#272a3d;}
 .fbox .newbut, .fbox p input, .founbox1 p input, .founbox1 p .jc{ background: url(../images/new02.png) no-repeat; }
 .fbox{ padding-top:40px; margin:0 auto;  }
 .fbox .newbut{ text-align: center; font-size: 34px; color: #FFF;  display: inline-block; line-height: 74px; height: 74px; width: 180px; background-position:-9px -85px; margin:0 auto;  }
-.fbox p label{ width: 200px; text-align: right; display: inline-block; font-size: 24px; color: #333;}
+.fbox p label{ width: 200px; text-align: right; display: inline-block; font-size: 15px; color: #333;}
 .fbox p input{ background-position:0 -186px; padding:0 30px;  font-size: 24px; height: 52px; line-height: 52px; border: none;}
 
 .founbox1{  margin:0 auto; padding-left: 50px; width: 860px; }
@@ -309,7 +309,7 @@ a:hover{ color:#272a3d;}
 .founbox1 p.tyxy input{ margin-right: 10px; width: auto; height:auto; }
 
 .founbox2{  margin:0 auto; padding-left: 50px; width: 860px;  }
-.founbox2 p span{ color: red; font-size: 24px; padding-left: 30px; }
+.founbox2 p span{ color: red; font-size: 20px; padding-left: 30px; }
 .founbox2 p input{ width: 300px; }
 .founbox2 p{ padding-bottom: 15px;}
 .founbox2 p .newbut{ margin-top: 20px; }

@@ -1,19 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('注意：您的一币小于15，请充值！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('注意：您的一币不够本次购卡，请充值！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1055187381'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1616194221'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 	<script language="JavaScript"> 
  function checkdate()  {  
 
-  if (Form.pa3.value=="") {      alert("请输入二级密码!");      return false;    } 
+  if (Form.pa3.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.35593833'/><s:text name='reg.jsp.reg.jsp.630954966'/>!");      return false;    } 
   
-	 if(!confirm('提示：您确定了吗？ ')){
+	 if(!confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？ ')){
 		 return false;
 	 }
   
@@ -24,13 +24,13 @@
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
                 <%@ include file="/view/yblc.jsp" %>
                 
@@ -38,22 +38,22 @@
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>一币-购金币卡</span>
+						<span><s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-735901424'/></span>
 					</div>
 					<div class="content-table">
-					  <p>您正在操作的是<b>一币转换电子金币卡</b>录入</p>
-					  <p>请认真确定一下购买的是否正确</p>
+					  <p>您正在<s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>的是<b><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>转换电子金币卡</b>录入</p>
+					  <p><s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.-1610588230'/></p>
 					  <p><b>${gmsl}</b>张,面值<b>
-							<c:if test="${mj==10}">10金币（15一币/张）</c:if>
-							<c:if test="${mj==50}">50金币（75一币/张）</c:if>
-							<c:if test="${mj==100}">100金币（150一币/张）</c:if>
-							<c:if test="${mj==300}">300金币（450一币/张）</c:if>
-							<c:if test="${mj==500}">500金币（750一币/张）</c:if>
-							<c:if test="${mj==1000}">1000金币（1500一币/张）</c:if></b></p>
-					 <p>需要<b>${gmsl*mj*1.5}</b>一币，现金=<b>${gmsl*mj/10}张</b>面值10金币的卡累计金币${gmsl*mj}个</p>
+							<c:if test="${mj==10}">10<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1554998638'/>）</c:if>
+							<c:if test="${mj==50}">50<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1726773544'/>）</c:if>
+							<c:if test="${mj==100}">100<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-356053146'/>）</c:if>
+							<c:if test="${mj==300}">300<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-1988509399'/>）</c:if>
+							<c:if test="${mj==500}">500<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.674001644'/>）</c:if>
+							<c:if test="${mj==1000}">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</c:if></b></p>
+					 <p><s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.586521860'/></p>
 					 <p><form action="jztojb?status=3&mj=${mj}&gmsl=${gmsl}" method="post" onSubmit="return checkdate();" name="Form" id="Form">
-					 二级密码：<input type="password" name="pa3" />
-					 <button type="submit" >确定从我的一币-扣除</button>
+					 <s:text name='reg.jsp.reg.jsp.630954966'/>：<input type="password" name="pa3" />
+					 <button type="submit" ><s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.1964436824'/></button>
 					 </form></p>		
 					</div>
 				</div>

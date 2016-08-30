@@ -1,24 +1,24 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('二级密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('您好，您已申请的卖出尚未交易成功，暂时不能使用转账功能，谢谢！');location.replace('epmcjl');</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('操作错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('选中了不存在的用户');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('非同名用户,不能转');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('您至少选择一个需要转账的用户名，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==7}"><script language=javascript>alert('非双区用户不能使用该功能！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已成功批量转账！');location.href='tjz'</script></c:if>
-<c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户一币发生了改变！请重试');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==101}"><script language=javascript>alert('被转用户购物券发生了改变！请重试');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.1923400400'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.1141572332'/>！');location.replace('epmcjl');</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-830018135'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-898207976'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.529929694'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.174913287'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.262431727'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.1396615689'/>！');location.href='tjz'</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-1964813948'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==101}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.573081321'/>');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <script language = "JavaScript"> 
-//全选操作    
+//<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.682913'/>操作    
 function CheckAll(form) {
  for (var i=0;i<form.elements.length;i++) {
  var e = form.elements[i];
@@ -28,42 +28,42 @@ function CheckAll(form) {
  
  function cf(){
 	 if(form.tp.value==0){
-		 return confirm('一经转账的一币不再提供卖出，确定了吗?');
+		 return confirm('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-474644738'/>?');
 	 }else{
-		 return confirm('确认批量转入购物券?');
+		 return confirm('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-1733349801'/>?');
 	 }
  }
 </script>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp"%>
 				<%@ include file="/view/zhgl.jsp"%>
 			</div>
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>同姓名账户批量转账</span>
+						<span><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-48484697'/></span>
 					</div>
 					<c:if test="${empty dataList}">
 					<div class="a-transfer">
-						<p>没有可以转账的用户!</p>
+						<p><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.768356219'/>!</p>
 					</div>
 					</c:if>
 					<c:if test="${not empty dataList}">
 					<form method="POST" action="tjz?status=1" name="form" id="form">
 					<div class="a-tableTop z-cb">
-					<p class="z-r">转账类型：<select name="tp"><option value="0">一币</option><option value="1">购物券</option></select> 二级密码：<input type="password" name="pa2j" size="15"> <button type="submit" onClick="return cf()">批量提交转至</button> 当前登陆的用户名：<span class="c-r z-b">${userName}</span> </p>
+					<p class="z-r"><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-146135140'/>：<span class="c-r z-b">${userName}</span> </p>
 					</div>
 					<div class="a-tableTop z-cb">
-					<p class="z-l"><input type='checkbox' name=chkall onclick='CheckAll(this.form)'>全选</p>
+					<p class="z-l"><input type='checkbox' name=chkall onclick='CheckAll(this.form)'><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.682913'/></p>
 					</div>
 					<div class="content-table">
 						<table>
@@ -72,8 +72,8 @@ function CheckAll(form) {
 								<td><input type="checkbox" name="fromUsers" value="${data.username}"></td>
 								<td>${data.username}</td>
 								<td>${data.name}</td>
-								<td><input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}一币</td>
-								<td>${data.scores}购物券</td>
+								<td><input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></td>
+								<td>${data.scores}<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.35660508'/></td>
 							</tr>
 						</s:iterator>
 						</table>

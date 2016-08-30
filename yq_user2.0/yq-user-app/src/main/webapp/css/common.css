@@ -29,7 +29,8 @@ a:hover{ color:#272a3d;}
 .bg-f{ background: #FFF;}
 
 .m10{ margin: 10px;}
-.mt10{ margin-top: 10px;}
+.mt10{ margin-top:10px;overflow-y:auto;}
+.mth10{ margin-top:10px;overflow-y:auto;height:370px;}
 .mb20{ margin-bottom: 20px!important;}
 .ml10{ margin-left: 10px;}
 .mr10{ margin-right: 10px;}
@@ -64,7 +65,7 @@ a:hover{ color:#272a3d;}
 .z-cb:after,.z-cb li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 
 /* 模块元件布局 */
-.mainbox{ color: #656e73; height:768px; background: #f4f0e2;  }
+.mainbox{ color: #656e73; height:828px; background: #f4f0e2;  }
 .mw1024{ width: 1024px; margin: 0 auto}
 
 .header{  background: url(../images/headbg.jpg) no-repeat 0 bottom; }
@@ -79,10 +80,10 @@ a:hover{ color:#272a3d;}
 .center{ padding:25px 0 25px 10px; color:#000;}
 .leftbox{ width:200px; margin-right: 20px; }
 
-.user{ color:#2b2b2b; height: 150px; font-size: 14px; font-weight: bold; margin-bottom: 10px; background:#fff url(../images/jinbi1.png) no-repeat bottom center;}
+.user{ color:#2b2b2b; height: 180px; font-size: 14px; font-weight: bold; margin-bottom: 10px; background:#fff url(../images/jinbi1.png) no-repeat bottom center;}
 .user p{ padding: 2px 0 0 15px;}
 
-.system{ padding: 5px 10px; height: 350px; background-color: #FFF; color:#000;background:#fff url(../images/jinbi2.png) no-repeat bottom center;}
+.system{ padding: 5px 10px; height: 380px; background-color: #FFF; color:#000;background:#fff url(../images/jinbi2.png) no-repeat bottom center;}
 .system li{ padding: 5px 0 0 5px;}
 .system h3{ text-indent: 15px; margin-bottom: 5px; font-weight: lighter; background:#fdc50b; height: 20px; line-height: 20px; color: #FFF; font-size:19px; }
 .system a{ color:#666;}
@@ -93,9 +94,10 @@ a:hover{ color:#272a3d;}
 .content-title .r-link{ float:right; margin-top: 10px; color:#999;  font-size: 15px;}
 .content-title .r-link a{  color:#999; margin-right: 5px; }
 .content-title .r-link a:hover{ color:#E66987;  }
-.content-box{ padding: 0 10px; height: 520px;}
+.content-box{ padding: 0 10px; height: 579px;}
 
 /* 表单样式 */
+.content-table{height: 500px;overflow-x:auto;}
 .content-table table{ width: 100%; text-align: center;  color:#000;  font-size: 12px;  }
 .content-table tr{ background: #e3e3e3; border-left:1px solid #989898; border-right:1px solid #989898;}
 .content-table tr, .content-table td, .content-table th{ border-left:1px solid #989898; border-right:1px solid #989898;}
@@ -117,7 +119,7 @@ a:hover{ color:#272a3d;}
 .a-kh{ font-size: 15px; padding: 2px 0 20px 5px; }
 
 /* 充值记录 */
-.a-recharge{ font-size: 16px; }
+.a-recharge{ font-size: 15px; }
 .a-recharge strong{ color:#000;}
 .a-recharge .c-g{ margin-left: 120px; font-weight: bold; font-size: 16px;}
 .a-recharge button{ margin-left: 10px; margin-right: 5px;}
@@ -134,15 +136,15 @@ a:hover{ color:#272a3d;}
 /* 表单样式 */
 .content-form{ font-size: 15px; }
 .content-box1, .content-box2{ width: 740px; padding:0 20px 5px 25px;background:#fff;}
-.content-boxindexnews{ width: 740px; padding:0 20px 5px 25px;background:#fff url(../images/jinbi3.png) no-repeat right center;}
+.content-boxindexnews{ width: 740px; padding:0 20px 45px 25px;background:#fff url(../images/jinbi3.png) no-repeat right center;}
 .content-box3{ width: 950px; padding:0 20px 5px 25px;   background: #FFF;}
 .form{ padding:5px 0; }
-.form p{ padding: 3px 0;}
-.form label{ width: 130px; text-align: right; display: inline-block;}
-.form input{ border:1px solid #888; padding-left: 3px; width: 235px; height: 31px; line-height: 31px; }
+.form p{ padding: 3px 0;font-size:12px;}
+.form label{ width: 200px; text-align: right; display: inline-block;}
+.form input{ border:1px solid #888; padding-left: 3px; width: 215px; height: 31px; line-height: 31px; }
 .form .but1{ border: none; font-size: 16px; color:#FFF; width: 123px; height: 49px; background: url(../images/bgbut.jpg) no-repeat 0 0; }
 .form .but2{ margin:35px 0 25px 0;}
-.form .xy-sm{ margin-left: 20px; font-weight: bold; font-size: 16px;}
+.form .xy-sm{ margin-left: 20px; font-weight: bold; font-size: 12px;}
 
 .form1 { padding-left:100px; }
 .form3 p{ padding: 8px 0;}
@@ -167,7 +169,7 @@ a:hover{ color:#272a3d;}
 .notice .title{ font-size: 24px; color:#c20f36; font-weight: lighter; text-align: center; }
 .notice .txt-main{ padding:10px; }
 
-.i-gg{ height: 140px; color:#666; line-height: 22px; width: 570px; margin:5px auto;  overflow-y:auto; }
+.i-gg{ height: 140px; color:#666; line-height: 22px; width: 720px; margin:5px auto;  overflow-y:auto; }
 
 .new-list li{ border-bottom:1px solid #eee; padding: 5px 0; }
 .new-list li span{ color:#c185e4; }
@@ -232,7 +234,7 @@ a:hover{ color:#272a3d;}
 .d-login .pab span{ padding-left: 30px;  font-size:18px; padding-right:120px; }
 .d-login .pab a{ font-size: 18px; text-decoration: underline; color:#656e73; }
 .d-login .nbkey{ color: #48627c; font-size: 26px; }
-.d-login .restyle{ position: absolute; top:10px; left:360px; display: inline-block; width: 100px; font-size: 18px; text-decoration: underline; color:#656e73; }
+.d-login .restyle{ position: absolute; top:10px; left:360px; display: inline-block; width: 200px; font-size: 18px; text-decoration: underline; color:#656e73; }
 
 .d-tips{ font-size: 36px; color:#FFF; font-weight: bold; text-align: center;  }
 .d-tips span{ padding: 0 20px; font-weight: lighter; display: inline-block; }
@@ -263,7 +265,7 @@ a:hover{ color:#272a3d;}
 .new4-bottom p{ text-align: center; padding: 20px 0; }
 .new4-bottom p a{ color: red; font-size: 30px; }
 
-.new5-box{  height: 515px; }
+.new5-box{  height: 575px; }
 .new5-box .form label{ width: 150px; }
 .new5-box .content-form{ width: 400px; float: left; }
 .new5-box .r-link .hover{ color: red; }
@@ -271,7 +273,7 @@ a:hover{ color:#272a3d;}
 .new5-box .new5-right h3{ font-size: 22px; color: #575757; font-weight: lighter; }
 .new5-box .new5-right a{ color: #00a8ff; font-size: 16px; }
 
-.new6-box{  }
+.new6-box{height:520px;overflow-y:auto;overflow-x:auto;  }
 .new6-box form input{ height: 20px; line-height: 20px; width: 170px; }
 .new6-box form .tispsfz{ white-space:nowrap; width: 10px; padding-left: 10px; display: inline-block; }
 .new6-box form .btns{ white-space:nowrap; width: 100px; margin-left: 10px; display: inline-block; margin-right: -100px; cursor: pointer;}
@@ -297,7 +299,7 @@ a:hover{ color:#272a3d;}
 .fbox .newbut, .fbox p input, .founbox1 p input, .founbox1 p .jc{ background: url(../images/new02.png) no-repeat; }
 .fbox{ padding-top:40px; margin:0 auto;  }
 .fbox .newbut{ text-align: center; font-size: 34px; color: #FFF;  display: inline-block; line-height: 74px; height: 74px; width: 180px; background-position:-9px -85px; margin:0 auto;  }
-.fbox p label{ width: 200px; text-align: right; display: inline-block; font-size: 24px; color: #333;}
+.fbox p label{ width: 200px; text-align: right; display: inline-block; font-size: 15px; color: #333;}
 .fbox p input{ background-position:0 -186px; padding:0 30px;  font-size: 24px; height: 52px; line-height: 52px; border: none;}
 
 .founbox1{  margin:0 auto; padding-left: 50px; width: 860px; }
@@ -309,7 +311,7 @@ a:hover{ color:#272a3d;}
 .founbox1 p.tyxy input{ margin-right: 10px; width: auto; height:auto; }
 
 .founbox2{  margin:0 auto; padding-left: 50px; width: 860px;  }
-.founbox2 p span{ color: red; font-size: 24px; padding-left: 30px; }
+.founbox2 p span{ color: red; font-size: 20px; padding-left: 30px; }
 .founbox2 p input{ width: 300px; }
 .founbox2 p{ padding-bottom: 15px;}
 .founbox2 p .newbut{ margin-top: 20px; }
@@ -335,7 +337,7 @@ a:hover{ color:#272a3d;}
 .fwzxc-l{ float: left; width: 260px; padding: 10px; }
 .fwzxc-l p{ font-size: 18px; }
 .fwzxc-r{ float: left; width:460px;  padding: 10px 0  10px  0;  }
-.fwzxbottom{ background: #e8c479; padding: 10px; line-height: 24px; }
+.fwzxbottom{ background: #e8c479; padding: 10px; line-height: 24px;height:159px;overflow-x:auto;overflow-y:auto; }
 .fwzxbottom span{ color: #0078ff; }
 .fwzxbottom strong{ font-size: 20px; padding-bottom: 5px;  display: block; font-weight: lighter; }
 .formtj{ padding:30px 0 118px 0; }
@@ -363,4 +365,5 @@ a:hover{ color:#272a3d;}
 .r{ color: red; }
 .intxt{ border-radius: 8px; margin-bottom: 1px; padding: 0 5px; height: 20px; width: 100px; border: 1px solid #989898; }
 .intub{ width: 33px; border:none; float: right; margin-left: 5px; height: 20px; background: #999; cursor: pointer; background: url(../images/cz.png) no-repeat 0 0; }
+.content-box2 mt10{height:370px;}
 

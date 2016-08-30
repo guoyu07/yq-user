@@ -2,23 +2,23 @@
 <%@ include file="/common/taglib.jsp"%>
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
 <table border="0" cellspacing="0" width="100%" cellpadding="0" height="85" id="tablen">
-										<p style="text-align:center; font-size: 18px; display:block; border:1px solid #333; border-bottom: none;">求购信息</p>
+										<p style="text-align:center; font-size: 18px; display:block; border:1px solid #333; border-bottom: none;"><s:text name='vipgpjymy.jsp.gpjymy.jsp.861017881'/></p>
   								<tr>
 					    		 <td width="100%" style="border: 1px solid #E5EAC2; border-top:none;" height="62" >
 									<div align="center">    
 							          <table border="1" cellspacing="0" bgcolor="#f1f1f1" style="border-collapse: collapse" cellpadding="0" height="58" id="table2">
 							           <tr bgcolor="#6fbec2" align="center" height="30" > 
-								          <td width="200"><font size="2"><strong>求购数量</strong></font></td>
-								          <td width="160"><b><font size="2">单价</font></b></td>
-								          <td width="200"><font color="#000000" size="2"><strong>交易额</strong></font></td>
-								          <td width="180"><b><font color="#000000" size="2">发布方</font></b></td>
-								          <td width="238"><b><font size="2">操作</font></b></td>
+								          <td width="200"><font size="2"><strong><s:text name='vipgpjymy.jsp.gpjymy.jsp.861201610'/></strong></font></td>
+								          <td width="160"><b><font size="2"><s:text name='viewjflc-details.jsp.jflc-details.jsp.681538'/></font></b></td>
+								          <td width="200"><font color="#000000" size="2"><strong><s:text name='viewjflc-details.jsp.jflc-details.jsp.20195982'/></strong></font></td>
+								          <td width="180"><b><font color="#000000" size="2"><s:text name='vipgpjymc.jsp.gpjymc.jsp.21392295'/></font></b></td>
+								          <td width="238"><b><font size="2"><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></font></b></td>
 							          </tr>
 							          
          <s:iterator var="data" value="dataList">
@@ -37,7 +37,7 @@
 										    </c:choose>
 								          </font></td>
 								          <td  width="238">
-								         <c:if test="${data.mysl>0}"><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymc?id=${data.id}&sl=${data.mysl}"><span style="font-size: 11pt; font-weight: 700"><font color="#008000">我要卖</font></span></a></c:if>
+								         <c:if test="${data.mysl>0}"><a onClick="return confirm('<s:text name='vipgpjymy.jsp.gpjymy.jsp.1046836541'/>？')" target="main" href="wymc?id=${data.id}&sl=${data.mysl}"><span style="font-size: 11pt; font-weight: 700"><font color="#008000"><s:text name='vipgpjymy.jsp.gpjymy.jsp.1046836541a'/></font></span></a></c:if>
 								          </td>
 							          </tr>
 		</s:iterator> 

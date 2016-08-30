@@ -1,5 +1,6 @@
 package com.yq.app.user.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Dgag;
@@ -18,7 +19,6 @@ public class GgckAction extends ALDAdminActionSupport {
 	private Dgag dgag;
 	
 	public String execute(){
-		
 		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
 		dgag = managerService.getDgag(ck);
 		return SUCCESS;

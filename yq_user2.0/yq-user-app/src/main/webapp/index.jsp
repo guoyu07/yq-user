@@ -1,10 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="com.yq.common.utils.I18NUtil" %>
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心--积分游戏、消费增值平台、员工内部薪酬结算、办公、游戏理财及娱乐休闲平台！</title>
+	<title><s:text  name='index.jsp.index.jsp.955964342'/></title>
 	<link rel="stylesheet" href="/css/common.css" /> 
 		<style type="text/css">
 
@@ -65,16 +66,16 @@
 <script language="javascript" src="/js/ajax.js"></script>
 <SCRIPT type=text/javascript>
 		    function checkdate(){
-			  if (Form.ygid.value=="") {      alert("请写入您的用户名!");      return false;    } 
-			  if (Form.pa.value=="") {      alert("请写入登录密码!");      return false;    }
-			  if (Form.validcode.value=="") {      alert("请写入验证码!");      return false;    }
+			  if (Form.ygid.value=="") {      alert("<s:text name='index.jsp.index.jsp.1653587007'/>");      return false;    } 
+			  if (Form.pa.value=="") {      alert(" <s:text name='index.jsp.index.jsp.-63210920'/>");      return false;    }
+			  if (Form.validcode.value=="") {      alert("<s:text  name='index.jsp.index.jsp.2085402601'/>");    return false;    }
 			 // if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    }
 			  return true;  
-			}  
+			} 
 		    function logins(){
-		    	if (Form.ygid.value=="") {      alert("请写入您的用户名!");      return false;    } 
-		    	if (Form.pa.value=="") {      alert("请写入登录密码!");      return false;    }
-		    	if (Form.validcode.value=="") {      alert("请写入验证码!");      return false;    }
+		    	if (Form.ygid.value=="") {      alert("<s:text name='index.jsp.index.jsp.1653587007'/>");      return false;    } 
+		    	if (Form.pa.value=="") {      alert(" <s:text name='index.jsp.index.jsp.-63210920'/>");      return false;    }
+		    	if (Form.validcode.value=="") {      alert("<s:text name='index.jsp.index.jsp.2085402601'/>");      return false;    }
 		    	//if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    }
 			    var ajaxobj = new Ajax();
 			    ajaxobj.url="/login?adminName="+Form.ygid.value+"&adminPassword="+Form.pa.value+"&randString="+Form.validcode.value;
@@ -82,11 +83,11 @@
 				    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 				    if(responseMsg.erroCodeNum!=0){
 				    	if(responseMsg.erroCodeNum==1){
-				    		alert("验证码过期");
+				    		alert(" <s:text name='index.jsp.index.jsp.-1019997916'/>");
 				    	}else if(responseMsg.erroCodeNum==2){
-				    		alert("验证码错误");
+				    		alert(" <s:text name='index.jsp.index.jsp.-1019946270'/>");
 				    	}else if(responseMsg.erroCodeNum==3){
-				    		alert("用户名或密码错误");
+				    		alert(" <s:text name='index.jsp.index.jsp.-1545864663'/>");
 				    	}else if(responseMsg.erroCodeNum==4){
 				    		location.href='/updateuser';
 				    	}
@@ -100,12 +101,12 @@
 		    //验证用户是否存在，如果存在跳转到重置密码界面
 		    function checkReg(){
 				if ( Form.ygid.value==""){
-					alert ("提示：用户名不能为空!！");
+					alert (" <s:text name='index.jsp.index.jsp.-2036326914'/>");
 					Form.ygid.focus();
 					return;
 				}
 				 if (!CheckIfEnglish(Form.ygid.value ) || Form.ygid.value.length > 10 || Form.ygid.value.length < 4) {
-					alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+					alert(" <s:text name='index.jsp.index.jsp.-1848386260'/>");
 					Form.ygid.focus();
 					return ;
 				}
@@ -118,7 +119,7 @@
 				    	location.href="/resetPasswod?userName="+uName;
 					    return;
 				    }else{
-				    	alert("用户名："+uName+"可注册！");
+				    	alert(" <s:text name='index.jsp.index.jsp.-1643377023'/>");
 				    	return;
 				    }
 			    }
@@ -142,21 +143,22 @@
 				<p><input type="text" name="ygid" value="<% if(request.getParameter("id")!=null){%><%=request.getParameter("id")%><%}%>" class="name" /></p>
 				<p><input type="password" name="pa" class="pw" /></p>
 				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="点击刷新" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
-				<!-- <input type="checkbox" /><span>记住账号</span>--> <p class="pab">  <a href="#" onClick="checkReg();">忘记密码</a></p><!-- onClick="forgetpasswd();" --> 
+				<!-- <input type="checkbox" /><span>记住账号</span>--> <p class="pab">  <a href="#" onClick="checkReg();"><s:text name='Forget_password'/></a></p><!-- onClick="forgetpasswd();" --> 
 				<p><button class="log" onClick="logins();"></button></p>
-				<a class="restyle" href="/reg">注册账号</a>
+				<a class="restyle" href="/reg"><s:text  name='reg.jsp.reg.jsp.-1179328136'/></a>
 			</form>
 		</div>
 		<div class="d-tips">
 			<p>
-				<span>用心经营</span>
-				<span>全力打造</span>
-				<span>稳步收益</span>
-				<span>再创新高</span>
+				<span><s:text  name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.918090769'/></span>
+				<span><s:text  name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.641983904'/></span>
+				<span><s:text  name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.959206246'/></span>
+				<span><s:text  name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.642992598'/></span>
 			</p>
 		</div>
 		</div>
 	</div>
+	
 <span style="display:none"><script src="http://s11.cnzz.com/z_stat.php?id=1259177711&web_id=1259177711" language="JavaScript"></script></span>
 </body>
 </html>

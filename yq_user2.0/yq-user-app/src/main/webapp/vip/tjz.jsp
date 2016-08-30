@@ -1,18 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('二级密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('您好，您已申请的卖出尚未交易成功，暂时不能使用转账功能，谢谢！');location.replace('epmcjl');</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('操作错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('选中了不存在的用户');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('非同名用户,不能转');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('您至少选择一个需要转账的用户名，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已成功批量转账！');location.href='tjz'</script></c:if>
-<c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户一币发生了改变');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viptjz.jsp.tjz.jsp.1923400400'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viptjz.jsp.tjz.jsp.1141572332'/>！');location.replace('epmcjl');</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viptjz.jsp.tjz.jsp.-830018135'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-898207976'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.529929694'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viptjz.jsp.tjz.jsp.174913287'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已<s:text name='viptjz.jsp.tjz.jsp.1396615689'/>！');location.href='tjz'</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户<s:text name='viptjz.jsp.tjz.jsp.1639887174'/>');history.go(-1);</script></c:if>
 <html>
-<title>同姓名账户批量转账</title>
+<title><s:text name='viptjz.jsp.tjz.jsp.-48484697'/></title>
 </head>
 <script language = "JavaScript"> 
-//全选操作    
+//<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.682913'/><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>    
 function CheckAll(form) {
  for (var i=0;i<form.elements.length;i++) {
  var e = form.elements[i];
@@ -28,15 +28,15 @@ function CheckAll(form) {
 	<table border="0" cellspacing="1" width="100%" cellpadding="0" height="90" id="table1">
   <tr> 
 <td width="87%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="90"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b>
-<font  size="4">同姓名账户批量转账</font></b><font size="2" >
+<font  size="4"><s:text name='viptjz.jsp.tjz.jsp.-48484697'/></font></b><font size="2" >
 </font></p>
 	<div align="center">
         <table border="1" cellspacing="1" width="100%" height="66" bordercolor="#C0C0C0" style="border-collapse: collapse" id="table2">
      <tr>        
-     <td width="318" align="center" height="32"><b>选中</b></td>                
-     <td width="318" align="center" height="32"><b><font color="#FF0000" >用户名</font></b></td>                
-     <td width="416" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font  color="#FF0000"><strong>姓名</strong></font></td><b>                
-     <td width="476" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong>可用一币</strong></font></td>
+     <td width="318" align="center" height="32"><b><s:text name='viptjz.jsp.tjz.jsp.1163076'/></b></td>                
+     <td width="318" align="center" height="32"><b><font color="#FF0000" ><s:text name='reg.jsp.reg.jsp.29623262'/></font></b></td>                
+     <td width="416" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font  color="#FF0000"><strong><s:text name='reg.jsp.reg.jsp.734362'/></strong></font></td><b>                
+     <td width="476" align="center" height="32"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" > <strong><s:text name='viptjz.jsp.tjz.jsp.669584602'/></strong></font></td>
         </tr>
      <s:iterator var="data" value="dataList">
         <tr> 
@@ -60,8 +60,8 @@ function CheckAll(form) {
 		<td width="47%" height="8"></td>
 	</tr>
 	<tr>
-		<td width="258" bgcolor="#E5EAC2"><p align="center"><input type='checkbox' name=chkall onclick='CheckAll(this.form)'>全选</td>
-		<td colspan="2" bgcolor="#E5EAC2"><p align="left">二级密码：<input type="password" name="pa2j" size="15"> <input type="submit" value="批量提交转至" name="B1" onClick="{if(confirm('一经转账的一币不再提供卖出，确定了吗?')){this.style.visibility='hidden';return true;}return false;}">当前登录的用户名：<b><font color="#FF0000">${userName}</font></b></td>
+		<td width="258" bgcolor="#E5EAC2"><p align="center"><input type='checkbox' name=chkall onclick='CheckAll(this.form)'><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.682913'/></td>
+		<td colspan="2" bgcolor="#E5EAC2"><p align="left"><s:text name='viptjz.jsp.tjz.jsp.571440148'/>：<b><font color="#FF0000">${userName}</font></b></td>
 	</tr>
 </table>
 </form>

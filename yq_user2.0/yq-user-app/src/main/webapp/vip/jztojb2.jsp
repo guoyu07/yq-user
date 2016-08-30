@@ -1,17 +1,17 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('注意：您的一币小于15，请充值！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='vipjztojb2.jsp.jztojb2.jsp.1055187381'/>！');history.go(-1);</script></c:if>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
 </head>
 <script language="JavaScript"> 
  function checkdate()  {  
-  if (Form.gmsl.value==0) {      alert("请选择你要购买的数量!");      return false;    } 
+  if (Form.gmsl.value==0) {      alert("<s:text name='vipjztojb2.jsp.jztojb2.jsp.2026567304'/>!");      return false;    } 
   return true;  }  
  </script>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
-<title>一币转金币卡</title>
+<title><s:text name='vipjztojb.jsp.jztojb.jsp.-1978587226'/></title>
 <style>
 <!--
 .border {
@@ -34,7 +34,7 @@
 			<table border="0" width="81%" id="table3" cellspacing="1" height="98" bgcolor="#FFFFFF">
 				<tr>
 	<b>
-			<td align="center" width="97%" bgcolor="#FFF4DF" height="33"><b><font color="#669933">一币-购金币卡</font></td>
+			<td align="center" width="97%" bgcolor="#FFF4DF" height="33"><b><font color="#669933"><s:text name='vipjztojb.jsp.jztojb.jsp.-735901424'/></font></td>
 				</tr>
 				<b>
 				<tr>
@@ -52,15 +52,15 @@
   <TBODY>
     <TR class=content> 
       <TD width="213" bgColor=#ffffff align="left" style="color: #304618; font-size: 12px" height="63">
-		<p align="right"><b><font size="3" color="#FF0000">已选择的面值为：</font></b></TD>
+		<p align="right"><b><font size="3" color="#FF0000"><s:text name='vipjztojb2.jsp.jztojb2.jsp.408193998'/>：</font></b></TD>
       <TD width="304" bgColor=#ffffff style="color: #304618; font-size: 12px" align="left" height="63">
 		<b><font size="2" color="#0000FF">
-		<c:if test="${gmmj==1}">10金币（15一币/张）</c:if>
-		<c:if test="${gmmj==5}">50金币（75一币/张）</c:if>
-		<c:if test="${gmmj==10}">100金币（150一币/张）</c:if>
-		<c:if test="${gmmj==30}">300金币（450一币/张）</c:if>
-		<c:if test="${gmmj==50}">500金币（750一币/张）</c:if>
-		<c:if test="${gmmj==100}">1000金币（1500一币/张）</c:if>
+		<c:if test="${gmmj==1}">10<s:text name='vipjztojb.jsp.jztojb.jsp.1554998638'/>）</c:if>
+		<c:if test="${gmmj==5}">50<s:text name='vipjztojb.jsp.jztojb.jsp.1726773544'/>）</c:if>
+		<c:if test="${gmmj==10}">100<s:text name='vipjztojb.jsp.jztojb.jsp.-356053146'/>）</c:if>
+		<c:if test="${gmmj==30}">300<s:text name='vipjztojb.jsp.jztojb.jsp.-1988509399'/>）</c:if>
+		<c:if test="${gmmj==50}">500<s:text name='vipjztojb.jsp.jztojb.jsp.674001644'/>）</c:if>
+		<c:if test="${gmmj==100}">1000<s:text name='vipjztojb.jsp.jztojb.jsp.530883694'/>）</c:if>
 		</font></b></TD>
     </TR>
     <tr>
@@ -68,12 +68,12 @@
       <TD width="213" bgColor=#ffffff align="left" style="color: #304618; font-size: 12px" height="42">
 		<p align="right" style="line-height: 200%; margin-top: 0; margin-bottom: 0">
 		<b>
-		<font size="3">请选择要购买的数量：</font></b></TD>
+		<font size="3"><s:text name='vipjztojb2.jsp.jztojb2.jsp.1570472502'/>：</font></b></TD>
       <TD width="304" bgColor=#ffffff style="color: #304618; font-size: 12px" align="left" height="42">  
               <p style="line-height: 200%; margin-top: 0; margin-bottom: 0">  
               <font size="3">  
               <select size="1" name="gmsl">
-				<option value="0" selected>==请选择数量==</option>
+				<option value="0" selected>==<s:text name='vipjztojb2.jsp.jztojb2.jsp.-145398058'/>==</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -99,11 +99,11 @@
 				<font color="#FF0000" style="font-size: 11pt">** </font><b>
 				<input type="hidden" name="mj" size="5" value="${gmmj}0" readonly></TD>
     </tr>
-    <TR class=content><TD width="517" bgColor=#ffffff align="center" style="color: #304618; font-size: 12px" colspan="2"><b><p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2">提示：您的一币-剩余<font color="#FF0000">${pay}</font></font></TD>
+    <TR class=content><TD width="517" bgColor=#ffffff align="center" style="color: #304618; font-size: 12px" colspan="2"><b><p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2"><s:text name='vipjztojb2.jsp.jztojb2.jsp.1800145680'/><font color="#FF0000">${pay}</font></font></TD>
     </TR>
     <TR class=content> 
       <TD width="213" bgColor=#ffffff align="left" style="color: #304618; font-size: 12px"></TD>
-      <TD width="304" bgColor=#ffffff style="color: #304618; font-size: 12px" align="left"><b><INPUT class=normalButton type=submit value="提 交" name=submit2 style="font-size: 11pt"><font color="#FF6600" style="font-size: 12pt; font-weight: 700">&nbsp; </font><a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700">返回上一步</font></a></TD>
+      <TD width="304" bgColor=#ffffff style="color: #304618; font-size: 12px" align="left"><b><INPUT class=normalButton type=submit value="提 交" name=submit2 style="font-size: 11pt"><font color="#FF6600" style="font-size: 12pt; font-weight: 700">&nbsp; </font><a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700"><s:text name='vipjztojb3.jsp.jztojb3.jsp.326642469'/></font></a></TD>
     </TR>
   </TBODY>
 </TABLE>

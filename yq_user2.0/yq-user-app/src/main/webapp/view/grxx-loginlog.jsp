@@ -4,35 +4,35 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp"%>
 				<%@ include file="/view/grxx.jsp"%>
 			</div>
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>登 录 记 录 明 细</span>
+						<span><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.-242629559'/></span>
 					</div>
 					<div class="content-table">
 						<table>
 							<tr>
-								<th>员工编号</th>
-								<th>最近登录时间</th>
-								<th>退出时间</th>
-								<th>ip地址</th>
-								<th>相关操作</th>
+								<th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.667376878'/></th>
+								<th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.-451364663'/></th>
+								<th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.1119230520'/></th>
+								<th>ip<s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.714256'/></th>
+								<th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.928172778'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>

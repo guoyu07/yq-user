@@ -1,28 +1,28 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('注意：您的一币小于15，请充值！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1055187381'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 	<script> 
 	 function checkdate()  {  
-	  if (Form.gmsl.value==0) {      alert("请选择你要购买的数量!");      return false;    } 
+	  if (Form.gmsl.value==0) {      alert("<s:text name='viewyblc-buy-goldcard2.jsp.yblc-buy-goldcard2.jsp.2026567304'/>!");      return false;    } 
 	  return true;  }  
 	</script>
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
                 <%@ include file="/view/yblc.jsp" %>
                 
@@ -30,20 +30,20 @@
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>一币-购金币卡</span>
+						<span><s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-735901424'/></span>
 					</div>
 					<div class="content-table">
 						<form class="form form3" method="POST" align="center" action="jztojb?status=2" name="Form" onSubmit="return checkdate()">
-							<p><label>已选择的面值为：</label> 
-							<c:if test="${gmmj==1}">10金币（15一币/张）</c:if>
-							<c:if test="${gmmj==5}">50金币（75一币/张）</c:if>
-							<c:if test="${gmmj==10}">100金币（150一币/张）</c:if>
-							<c:if test="${gmmj==30}">300金币（450一币/张）</c:if>
-							<c:if test="${gmmj==50}">500金币（750一币/张）</c:if>
-							<c:if test="${gmmj==100}">1000金币（1500一币/张）</c:if></p>
-							<p><label>请选择要购买的数量：</label> 
+							<p><label><s:text name='viewyblc-buy-goldcard2.jsp.yblc-buy-goldcard2.jsp.408193998'/>：</label> 
+							<c:if test="${gmmj==1}">10<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1554998638'/>）</c:if>
+							<c:if test="${gmmj==5}">50<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1726773544'/>）</c:if>
+							<c:if test="${gmmj==10}">100<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-356053146'/>）</c:if>
+							<c:if test="${gmmj==30}">300<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-1988509399'/>）</c:if>
+							<c:if test="${gmmj==50}">500<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.674001644'/>）</c:if>
+							<c:if test="${gmmj==100}">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</c:if></p>
+							<p><label><s:text name='viewyblc-buy-goldcard2.jsp.yblc-buy-goldcard2.jsp.1570472502'/>：</label> 
 							<select size="1" name="gmsl">
-								<option value="0" selected>==请选择数量==</option>
+								<option value="0" selected>==<s:text name='viewyblc-buy-goldcard2.jsp.yblc-buy-goldcard2.jsp.-145398058'/>==</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -66,10 +66,10 @@
 								<option value="20">20</option>
 								</select></p>
 								
-							<p><label></label><button class="but1" type=submit>提交</button></p>
+							<p><label></label><button class="but1" type=submit><s:text name='vipsgreg.jsp.sgreg.jsp.812244'/></button></p>
 							<input type="hidden" name="mj" size="5" value="${gmmj}0" readonly>
 					</form>
-					<p >提示：您的一币剩余<b>${pay}</b></p>
+					<p ><s:text name='viewyblc-buy-goldcard2.jsp.yblc-buy-goldcard2.jsp.890004381'/><b>${pay}</b></p>
 					</div>
 				</div>
 			</div>

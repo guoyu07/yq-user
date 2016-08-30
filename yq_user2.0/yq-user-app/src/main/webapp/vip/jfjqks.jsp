@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('操作错误，一币不足，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('竞猜-成功，请耐心等待开奖，祝君好运，游戏快乐！');location.replace('jfjqks');</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='vipjfjqks.jsp.jfjqks.jsp.1063864018'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipjfjqks.jsp.jfjqks.jsp.1464958073'/>！');location.replace('jfjqks');</script></c:if>
 
 <script type="text/javascript" src="images/jquery.min.js"></script>
 
@@ -42,12 +42,12 @@
 </script>
 <script language="JavaScript"> 
  function checkdate()  { 
-  if (Form.tzlb.value==0) {      alert("请选择要的竞猜项目!");      return false;    }
-  if (Form.tzsl.value=="") {      alert("请写入投注积分数量!");      return false;    }
-  if (Form.tzsl.value<10) {      alert("投注积分数量不能小于10");      return false;    }
-  if (Form.tzsl.value>${jyg}) {      alert("投注积分数量不能大于您剩余的数量 ${jyg} 哦!");      return false;    } 
+  if (Form.tzlb.value==0) {      alert("<s:text name='vipjfjqks.jsp.jfjqks.jsp.846497453'/>!");      return false;    }
+  if (Form.tzsl.value=="") {      alert("<s:text name='vipjfjqks.jsp.jfjqks.jsp.-1288376084'/>!");      return false;    }
+  if (Form.tzsl.value<10) {      alert("<s:text name='vipjfjqks.jsp.jfjqks.jsp.862540408'/>10");      return false;    }
+  if (Form.tzsl.value>${jyg}) {      alert("<s:text name='vipjfjqks.jsp.jfjqks.jsp.1637608855'/>!");      return false;    } 
   if (!chkinteger(Form.tzsl.value)){
-	alert('积分投注只能为整字!');
+	alert('<s:text name='vipjfjqks.jsp.jfjqks.jsp.-229804544'/>!');
 	document.Form.tzsl.focus;
 	return (false);
  }
@@ -70,7 +70,7 @@ return (allValid);
    return true;  }
 </script>
 <html>
-<title>积分竞猜记录</title>
+<title><s:text name='vipjfjqks.jsp.jfjqks.jsp.-810493798'/></title>
 </head>
 
 <div align="center">
@@ -78,20 +78,20 @@ return (allValid);
   	<form method="POST" action="jfjqks?status=1" name="Form" onSubmit="return checkdate()">
 		<table border="0" width="100%" id="table4" height="60" bgcolor="#FC273D">
 			<tr>
-		<td width="330" rowspan="2"><b><p>&nbsp;离<font color="#FFFFFF">第${jfkjdate.kid}期</font>积分开奖还有：<!--<span id="RemainD">&nbsp;</span>天<span id="RemainH">&nbsp;</span>时--><span id="RemainM">&nbsp;</span>分<span id="RemainS">&nbsp;</span>秒</td>
-		<td width="165" align="right"><b>选择竞猜项目：</b></td>
+		<td width="330" rowspan="2"><b><p>&nbsp;<s:text name='vipjfjqks.jsp.jfjqks.jsp.-1206515557'/></td>
+		<td width="165" align="right"><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.1956974099'/>：</b></td>
 		<td><b><select size="1" name="tzlb">
-			<option selected value="0">=选择竞猜项目=</option>
+			<option selected value="0">=<s:text name='vipjfjqks.jsp.jfjqks.jsp.1956974099'/>=</option>
 			<option value="1">-单-</option>
 			<option value="2">-双-</option>
 			<option value="3">-大-</option>
 			<option value="4">-小-</option>
 			</select></td>
-		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="提交" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('提示：您确定了吗？')"></td>
-		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FFFFFF" size="2"><b>友</b></font><b><font color="#FFFFFF" size="2">情提示：</font></b></font><font  size="2">竞猜游戏中没有100%的中奖，所投注的积分不管中与不中，均无法撤销，本游戏不是赌博，请保持良好的游戏心态，量力而行。</font></td>
+		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="提交" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('<s:text name='vipjztojb3.jsp.jztojb3.jsp.600719861'/>')"></td>
+		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FFFFFF" size="2"><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.-599225566'/>。</font></td>
 			</tr>
 			<tr>
-		<td width="165" align="right"><b>下注积分数量：</b></td>
+		<td width="165" align="right"><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.1680066643'/>：</b></td>
 		<td><input type="text" name="tzsl" size="15"></td>
 			</tr>
 		</table>
@@ -103,18 +103,18 @@ return (allValid);
   <table border="0" cellspacing="1" width="100%" cellpadding="0" height="75" bgcolor="#008000" id="table2">
           <tr> 
         <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="73"><p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-	<font ><b>积分竞猜记录</b><font size="2">
+	<font ><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.-810493798'/></b><font size="2">
 	</font></font></p>
 	<div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="55" id="table3">
             <tr>        
-     <td width="103" align="center" height="26" bgcolor="#E8E8FF"><b><font size="2" >期号</font></b></td>                
-     <td width="157" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"> <font  color="#800000" size="2"><strong>竞猜玩家</strong></font></td><b>
-     <td width="117" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>投注积分</strong></font></td></b>                
-     <td width="118" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong>收入积分</strong></font></td>
-     <td width="108" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#800000"  size="2">剩余积分</font></b></td><b>
-     <td width="220" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b> <font color="#FF0000"  size="2">竞投时间</font></b></td></b>
-     <td width="216" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font  size="2">备注</font></b></td>
+     <td width="103" align="center" height="26" bgcolor="#E8E8FF"><b><font size="2" ><s:text name='vipepkjjl.jsp.epkjjl.jsp.839864'/></font></b></td>                
+     <td width="157" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"> <font  color="#800000" size="2"><strong><s:text name='vipjfjqks.jsp.jfjqks.jsp.966306219'/></strong></font></td><b>
+     <td width="117" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong><s:text name='vipjfjqks.jsp.jfjqks.jsp.779616810'/></strong></font></td></b>                
+     <td width="118" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#800000"  size="2"> <strong><s:text name='vipjfjqks.jsp.jfjqks.jsp.792897830'/></strong></font></td>
+     <td width="108" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#800000"  size="2"><s:text name='vipjfjqks.jsp.jfjqks.jsp.649010183'/></font></b></td><b>
+     <td width="220" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b> <font color="#FF0000"  size="2"><s:text name='vipjfjqks.jsp.jfjqks.jsp.962146421'/></font></b></td></b>
+     <td width="216" align="center" height="26" bgcolor="#E8E8FF"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font  size="2"><s:text name='vipdatepay.jsp.datepay.jsp.734401'/></font></b></td>
         </tr>
       <s:iterator var="data" value="dataList">
          <tr> 

@@ -12,7 +12,7 @@
 　</p>
 			<p align="center">
 　</p>
-			<p align="center"><font style="font-size: 30pt; font-weight: 700" color="#FFFF00">截止竞猜投注，系统准备开奖！</font></p>
+			<p align="center"><font style="font-size: 30pt; font-weight: 700" color="#FFFF00"><s:text name='vipepkjz.jsp.epkjz.jsp.641105758'/>！</font></p>
 　</p>
 			<p align="center">
 　</p>

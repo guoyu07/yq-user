@@ -42,24 +42,24 @@ if( asjb==1 ){
 }
 %>
 				<div class="system">
-					<h3>业绩查询</h3>
+					<h3><s:text name='viewlinks.html.links.html.627723500'/></h3>
 					<ul>
-						<li><a href="/sgks01">游戏业务</a></li>
-						<li>游戏级别：<span class="c-z"><%=yjcxGcuser.getSjb()%></span></li>
-						<li>报单币余额：<span class="c-z"><%=yjcxGcuser.getSybdb()%></span></li>
-						<li>可开户一币：<span class="c-z"><%=yjcxGcuser.getPay()+yjcxGcuser.getSyep()%></span></li>
-						<li><a href="/bdbdate">报单币明细</a>
+						<li><a href="/sgks01"><s:text name='viewlinks.html.links.html.865347806'/></a></li>
+						<li><s:text name='viewlinks.html.links.html.865732987'/>：<span class="c-z"><%=yjcxGcuser.getSjb()%></span></li>
+						<li><s:text name='viewlinks.html.links.html.-1788801323'/>：<span class="c-z"><%=yjcxGcuser.getSybdb()%></span></li>
+						<li><s:text name='viewlinks.html.links.html.-881818137'/>：<span class="c-z"><%=yjcxGcuser.getPay()+yjcxGcuser.getSyep()%></span></li>
+						<li><a href="/bdbdate"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>
 						<% if(yjcxGcuser.getVip()>0) {%>
-						<%="--<a href=\"/bdbzz\">转出</a>"%>
+						<%="--<a href=\"/bdbzz\"><s:text name='viewlinks.html.links.html.1159182'/></a>"%>
 						<%}%>
 						</li>
-						<li>周封奖金：<span class="c-b"><%=fdpay%></span></li>
-						<li>收益比例：<span class="c-z">
+						<li><s:text name='viewlinks.html.links.html.667104660'/>：<span class="c-b"><%=fdpay%></span></li>
+						<li><s:text name='viewlinks.html.links.html.801984907'/>：<span class="c-z">
 						<% if(fbpay<1) {%>
 						<%="0"%>
 						<%}else{ %>
 						<%=fbpay%>
 						<%}%></span></li>
-						<li>目前收益：<span class="c-r"><%=mqfh%></span></li>
+						<li><s:text name='viewlinks.html.links.html.928097715'/>：<span class="c-r"><%=mqfh%></span></li>
 			        </ul>
 				</div>

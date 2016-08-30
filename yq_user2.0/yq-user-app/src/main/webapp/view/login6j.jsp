@@ -4,22 +4,22 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <SCRIPT type=text/javascript src="/main/jquery-1.2.6.min.js"></SCRIPT>
 <SCRIPT type=text/javascript>
 function checkdate()  {  
-	  if (Form.password3.value=="") {   alert("二级密码不能为空");  Form.password3.focus();   return false;    }
+	  if (Form.password3.value=="") {   alert("<s:text name='reg.jsp.reg.jsp.-1719221018'/>");  Form.password3.focus();   return false;    }
 	  var data = $("#Form").serialize();
 	  $.post("login2j?status=1", data, function(response) {
 		    var responseMsg = response;
-			if(responseMsg.erroCodeNum==0){//注册成功
+			if(responseMsg.erroCodeNum==0){//注册<s:text name='reg1.jsp.reg1.jsp.799375'/>
 				//执行跳转
 				location.replace('gmjh');
 				return;
 			}else{
-				alert('二级密码输入错误！请重新输入');
+				alert('<s:text name='reg.jsp.reg.jsp.630954966'/>输入错误！请重新输入');
 				Form.password3.focus();
 				return;
 			}
@@ -30,31 +30,31 @@ function checkdate()  {
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
 				<%@ include file="/view/jflc.jsp" %>
 			</div>
 			<div class="z-l">
 				<div class="content-box1" style="height:190px;">
 					<div class="content-title">
-						<span>一币购买金币卡</span>
+						<span><s:text name='viewlogin5j.jsp.login5j.jsp.2056268269'/></span>
 					</div>
 					<div class="content-form">				 
 						<p class="jjgz">
 						</p>
 					</div>
 				</div>
-				<div class="content-box2 mt10"  style="height:310px;">
+				<div class="content-box2 mth10" >
 					<form class="form form4" method="POST" action="" name="Form" id="Form" onSubmit="return false">
-							<p><label>用户名：</label><input type="text" value="${userName}" readonly></p>
-							<p><label>二级密码：</label><input name="password3" size=12 type="password"></p>
-							<p><label></label><button class="but1" type="submit" value=" 登陆管理 " name="login" onClick="checkdate();">同 意 规 则</button></p>
+							<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" value="${userName}" readonly></p>
+							<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input name="password3" size=12 type="password"></p>
+							<p><label></label><button class="but1" type="submit" value=" <s:text name='viplogin2j.jsp.login2j.jsp.941571312'/> " name="login" onClick="checkdate();"><s:text name='viplogin8j.jsp.login8j.jsp.665975448'/></button></p>
 					</form>
 				</div>
 			</div>

@@ -37,7 +37,7 @@ function delCookie(name) {
 
 var cookiesName = "secondsremained";
 var initWait = 60;
-function settime(o) {
+function settime(o,language) {
 	var wait = getCookie(cookiesName);
 	if (!wait) {
 		wait = initWait;
@@ -45,20 +45,32 @@ function settime(o) {
 	}
 	if (wait == 0) {
 		o.removeAttr("disabled");
-		o.val("获取验证码");
+		if(language=="en_US"){
+			o.val("get verification code");
+		}
+		if(language=="zh_CN"){
+			o.val("获取验证码");
+		}
+		
 		delCookie(cookiesName);
 	} else {
 		o.attr("disabled", "disabled");
-		o.val(wait + "秒后可重发");
+		if(language=="en_US"){
+			o.val(wait + "seconds after the re-issued");
+		}
+		if(language=="zh_CN"){
+			o.val(wait + "秒后可重发");
+		}
+		
 		wait--;
 		setCookie(cookiesName, wait, "h1");
 		setTimeout(function() {
-			settime(o)
+			settime(o,language)
 		}, 1000)
 	}
 }
 
-function btnStatus(o){
+function btnStatus(o,language){
 	if(!o){
 		return;
 	}
@@ -66,11 +78,16 @@ function btnStatus(o){
 	//alert("wait==="+wait);
 	if(wait!=null&&wait>0){
 		o.attr("disabled", "disabled");
-		o.val(wait + "秒后可重发");
+		if(language=="en_US"){
+			o.val(wait + "seconds after the re-issued");
+		}
+		if(language=="zh_CN"){
+			o.val(wait + "秒后可重发");
+		}
 		wait--;
 		setCookie(cookiesName, wait, "h1");
 		setTimeout(function() {
-			settime(o)
+			settime(o,language)
 		}, 1000);
 	}
 }

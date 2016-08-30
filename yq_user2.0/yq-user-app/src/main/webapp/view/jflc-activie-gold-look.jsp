@@ -4,19 +4,19 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp" %>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
 
 				<%@ include file="/view/jflc.jsp" %>
@@ -24,12 +24,12 @@
 			<div class="z-l">
 				<div class="content-box1">
 					<div class="content-title">
-						<span>激活金币卡</span>
+						<span><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.1519971254'/></span>
 					</div>
 					<div class="content-form new3-top">
-						  <p>消费编号是：<b>${id}</b>  登录密码为：<b>${pdpa}</b>  防伪编号为：<b>${fwid}</b>  金币面值：<b>${ejbk.bf2}0</b></p>
-						  <p>请牢记，并及时交给客户以便尽快激活购买积分增值！</p>
-						  <p><a onClick="return confirm('提示：按此激活将是自己使用，不能再用于赠送，您确定了吗？')" href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}"><button class="but1">快 速 激  活</button></a></p>
+						  <p><s:text name="viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1226774048"></s:text>：<b>${ejbk.bf2}0</b></p>
+						  <p><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-426269472'/>！</p>
+						  <p><a onClick="return confirm('<s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1035441473'/>？')" href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}"><button class="but1"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1035441473a'/></button></a></p>
 					</div>
 				</div>
 			</div>

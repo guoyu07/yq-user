@@ -19,7 +19,16 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+	<!-- 国际化开始 -->
+	<filter>
+		<filter-name>i18nFilter</filter-name>
+		<filter-class>com.yq.common.utils.I18nFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>i18nFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- 国际化结束 -->
 	<jsp-config>
 		<taglib>
 			<taglib-uri>/aldmanagertags</taglib-uri>

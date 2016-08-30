@@ -4,7 +4,7 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心--积分游戏、消费增值平台、员工内部薪酬结算、办公、游戏理财及娱乐休闲平台！</title>
+	<title><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.955964342'/>！</title>
 	<link rel="stylesheet" href="/css/common.css" /> 
 		<style type="text/css">
 
@@ -30,7 +30,7 @@
 }
 
 .time-item h1 {
-	font-family:"微软雅黑";
+	font-family:"<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.766224877'/>";
 	font-size:40px;
 	margin:20px 0;
 	border-bottom:solid 1px #ccc;
@@ -65,28 +65,28 @@
 <script language="javascript" src="/js/ajax.js"></script>
 <SCRIPT type=text/javascript>
 		    function checkdate(){
-			  if (Form.ygid.value=="") {      alert("请写入您的用户名!");      return false;    } 
-			  if (Form.pa.value=="") {      alert("请写入登录密码!");      return false;    }
-			  if (Form.validcode.value=="") {      alert("请写入验证码!");      return false;    }
-			 // if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    }
+			  if (Form.ygid.value=="") {      alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.1653587007'/>!");      return false;    } 
+			  if (Form.pa.value=="") {      alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.-63210920'/>!");      return false;    }
+			  if (Form.validcode.value=="") {      alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.2085402601'/>!");      return false;    }
+			 // if (Form.sfz.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.741412114'/>");      return false;    }
 			  return true;  
 			}  
 		    function logins(){
-		    	if (Form.ygid.value=="") {      alert("请写入您的用户名!");      return false;    } 
-		    	if (Form.pa.value=="") {      alert("请写入登录密码!");      return false;    }
-		    	if (Form.validcode.value=="") {      alert("请写入验证码!");      return false;    }
-		    	//if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    }
+		    	if (Form.ygid.value=="") {      alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.1653587007'/>!");      return false;    } 
+		    	if (Form.pa.value=="") {      alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.-63210920'/>!");      return false;    }
+		    	if (Form.validcode.value=="") {      alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.2085402601'/>!");      return false;    }
+		    	//if (Form.sfz.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.741412114'/>");      return false;    }
 			    var ajaxobj = new Ajax();
 			    ajaxobj.url="/login?adminName="+Form.ygid.value+"&adminPassword="+Form.pa.value+"&randString="+Form.validcode.value;
 			    ajaxobj.callback=function(){
 				    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 				    if(responseMsg.erroCodeNum!=0){
 				    	if(responseMsg.erroCodeNum==1){
-				    		alert("验证码过期");
+				    		alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.-1019997916'/>");
 				    	}else if(responseMsg.erroCodeNum==2){
-				    		alert("验证码错误");
+				    		alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.-1019946270'/>");
 				    	}else if(responseMsg.erroCodeNum==3){
-				    		alert("用户名或密码错误");
+				    		alert("<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.-1545864663'/>");
 				    	}else if(responseMsg.erroCodeNum==4){
 				    		location.href='/updateuser';
 				    	}
@@ -107,24 +107,24 @@
 				<p><input type="text" name="ygid" value="<% if(request.getParameter("id")!=null){%><%=request.getParameter("id")%><%}%>" class="name" /></p>
 				<p><input type="password" name="pa" class="pw" /></p>
 				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="点击刷新" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
-				<!-- <p class="pab"><input type="checkbox" /><span>记住账号</span>   <a href="#">忘记密码</a></p> -->
+				<!-- <p class="pab"><input type="checkbox" /><span>记住<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></span>   <a href="#">忘记密码</a></p> -->
 				<p><button class="log" onClick="logins();"></button></p>
-				<a class="restyle" href="/reg">注册账号</a>
+				<a class="restyle" href="/reg">注册<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></a>
 			</form>
 		</div>
 		<div class="d-tips">
 			<p>
-				<span>用心经营</span>
-				<span>全力打造</span>
-				<span>稳步收益</span>
-				<span>再创新高</span>
+				<span><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.918090769'/></span>
+				<span><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.641983904'/></span>
+				<span><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.959206246'/></span>
+				<span><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.642992598'/></span>
 			</p>
 		</div>
 		</div>
 	</div>
 	<div class="time-item">
-		<span>关闭</span>
-		<!-- <strong>倒记时</strong> -->
+		<span><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.684762'/></span>
+		<!-- <strong><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.20833240'/></strong> -->
 		<strong id="hour_show">0时</strong>
 		<strong id="minute_show">0分</strong>
 		<strong id="second_show">0秒</strong>
@@ -142,7 +142,7 @@
 			var day=0,
 				hour=0,
 				minute=0,
-				second=0;//时间默认值		
+				second=0;//<s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.847550'/>默认值		
 			if(intDiff > 0){
 				day = Math.floor(intDiff / (60 * 60 * 24));
 				hour = Math.floor(intDiff / (60 * 60)) - (day * 24);

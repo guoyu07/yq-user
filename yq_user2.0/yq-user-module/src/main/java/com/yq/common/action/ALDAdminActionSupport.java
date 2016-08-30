@@ -24,5 +24,6 @@ public class ALDAdminActionSupport extends BaseActionSupport {
 	public void setErroDescrip(String erroDescrip) {
 		super.setDesc(erroDescrip);
 	}
+
 	
 }

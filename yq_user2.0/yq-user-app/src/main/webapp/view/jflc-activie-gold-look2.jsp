@@ -4,19 +4,19 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp" %>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
 
 				<%@ include file="/view/jflc.jsp" %>
@@ -24,13 +24,13 @@
 			<div class="z-l">
 				<div class="content-box1">
 					<div class="content-title">
-						<span>激活金币卡</span>
+						<span><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.1519971254'/></span>
 					</div>
 					<div class="content-form new3-top">
-						  <p>你好，你上次已查看过该消费编号<b>${id}</b>的登录密码</p>
-						  <p>如果已经把密码给到客户手上，请不要随便重置密码。</p>
-						  <p>客户真的忘记了密码，我决定再次<a href="czpa?id=${id}"><b>重置密码</b></a></p>
-			              <p><a href="gmjh?jh=${id}">不重置点击返回</a></p>
+						  <p><s:text name='viewjflc-activie-gold-look2.jsp.jflc-activie-gold-look2.jsp.-927810697'></s:text></p>
+						  <p><s:text name='viewjflc-activie-gold-look2.jsp.jflc-activie-gold-look2.jsp.1056780068'/>。</p>
+						  <p><s:text name='viewjflc-activie-gold-look2.jsp.jflc-activie-gold-look2.jsp.-748934348'/></p>
+			              <p><a href="gmjh?jh=${id}"><s:text name='viewjflc-activie-gold-look2.jsp.jflc-activie-gold-look2.jsp.-629368710'/></a></p>
 					</div>
 				</div>
 			</div>

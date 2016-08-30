@@ -4,19 +4,19 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 </head>
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- 头部 -->
+		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- 会员中心用户信息 -->
+				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
                 <%@ include file="/view/jflc.jsp" %>
                 
@@ -24,21 +24,21 @@
 			<div class="content z-l">
 				<div class="content-box">
 					<div class="content-title">
-						<span>积分交易明细</span>
+						<span><s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/></span>
 					</div>
 					<div class="content-table">
 						<table>
 							<tr>
-								<th width="60">用户名</th>
-								<th width="70">卖出数量</th>
-								<th width="70">买入数量</th>
-								<th width="70">剩余数量</th>
-								<th width="70">挂牌时间</th>
-								<th width="35">单价</th>
-								<th width="60">交易额</th>
-								<th>状态</th>
-								<th>对方</th>
-								<th>成交时间</th>
+								<th width="60"><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+								<th width="70"><s:text name='viewjflc-details.jsp.jflc-details.jsp.656571075'/></th>
+								<th width="70"><s:text name='viewjflc-details.jsp.jflc-details.jsp.619069972'/></th>
+								<th width="70"><s:text name='viewjflc-details.jsp.jflc-details.jsp.648863855'/></th>
+								<th width="70"><s:text name='viewjflc-details.jsp.jflc-details.jsp.784049096'/></th>
+								<th width="35"><s:text name='viewjflc-details.jsp.jflc-details.jsp.681538'/></th>
+								<th width="60"><s:text name='viewjflc-details.jsp.jflc-details.jsp.20195982'/></th>
+								<th><s:text name='viewjflc-details.jsp.jflc-details.jsp.934923'/></th>
+								<th><s:text name='viewjflc-details.jsp.jflc-details.jsp.755936'/></th>
+								<th><s:text name='viewjflc-details.jsp.jflc-details.jsp.768067666'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>

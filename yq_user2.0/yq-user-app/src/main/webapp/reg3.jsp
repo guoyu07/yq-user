@@ -1,14 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="common/taglib.jsp"%>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('没有这个推荐人账号，请重新写入！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('该姓名[${ggname}]及身份证号码[${gguserid}]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('注意：您填写的身份证号码不合法或错误，请检查后再试！！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('该姓名[${ggname}]及身份证号码[${gguserid}]禁止注册！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-109709084'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.-1243798858'/>]！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-834832388'/>！！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.912511120'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
-	<title>会员中心</title>
+	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 	<link rel="stylesheet" href="/css/select.css" />
 	<script src="/scripts/jquery.js"></script>
@@ -31,12 +31,12 @@
 	
 	function checkReg(){
 		if ( Form.gguser.value==""){
-			alert ("提示：用户名不能为空!！");
+			alert ("<s:text name='index.jsp.index.jsp.-2036326914'/>!！");
 			Form.gguser.focus();
 			return;
 		}
 		 if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-			alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+			alert("<s:text name='reg3.jsp.reg3.jsp.-1848386260'/>!");
 			Form.gguser.focus();
 			return ;
 		}
@@ -46,10 +46,10 @@
 	    ajaxobj.callback=function(){
 		    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 		    if(responseMsg.erroCodeNum!=0){
-		    	alert("对不起，用户名："+uName+"，已经被注册了！");
+		    	alert("<s:text name='reg3.jsp.reg3.jsp.842685271'/>");
 			    return;
 		    }else{
-		    	alert("恭喜，您可以注册用户名："+uName);
+		    	alert("<s:text name='reg.jsp.reg.jsp.-259258343'/>："+uName);
 		    	return;
 		    }
 	    }
@@ -64,11 +64,11 @@
 	
 
 	function checkdate1() {
-		 if (Form.ggbank.value==0) {      alert("请选择收款银行!");   Form.ggbank.focus();     return ;    }  
-		  if (Form.ggcard.value=="") {      alert("请填入您的对应银行帐号!");  Form.ggcard.focus();      return ;    }  
-		 if (Form.provinceName.value==0) {      alert("请选择您的所在的省!");      return ;    }
-		  if (Form.cityName.value==0) {      alert("请选择您的所在的市!");      return ;    }
-		  if (Form.areaName.value==0) {      alert("请选择您的所在的地区/县!");      return ;    }
+		 if (Form.ggbank.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1996388245'/>!");   Form.ggbank.focus();     return ;    }  
+		  if (Form.ggcard.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-998560219'/>!");  Form.ggcard.focus();      return ;    }  
+		 if (Form.provinceName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924286904'/>!");      return ;    }
+		  if (Form.cityName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924280505'/>!");      return ;    }
+		  if (Form.areaName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1280507619'/>!");      return ;    }
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
 		//		+ Form.ggpa2.value + "ggpa3=" + Form.ggpa3.value;
 		Form.submit();
@@ -77,12 +77,12 @@
 	
 	function reg(){
 		if ( Form.gguser.value==""){
-			alert ("提示：用户名不能为空!！");
+			alert ("<s:text name='index.jsp.index.jsp.-2036326914'/>!！");
 			Form.gguser.focus();
 			return false;
 		}
 		 if (!CheckIfEnglish(Form.gguser.value ) || Form.gguser.value.length > 10 || Form.gguser.value.length < 4) {
-			alert("提示：\n\n您的用户名不符合规范，必须4-10个小写英文字母+数字！");
+			alert("<s:text name='reg3.jsp.reg3.jsp.-1848386260'/>！");
 			Form.gguser.focus();
 			return false;
 		}
@@ -93,25 +93,25 @@
 		    var responseMsg = eval('(' + ajaxobj.gettext() + ')');
 		    if(responseMsg.erroCodeNum!=0){
 		    	if(responseMsg.erroCodeNum==1){
-		    		alert('此用户名已有人使用！请更换！');
+		    		alert('<s:text name='reg.jsp.reg.jsp.-931208490'/>！');
 		    	}else if(responseMsg.erroCodeNum==2){
-		    		alert('没有这个推荐人账号，请重新写入！');
+		    		alert('<s:text name='reg.jsp.reg.jsp.-109709084'/>！');
 		    	}else if(responseMsg.erroCodeNum==3){
-		    		alert('该姓名['+uName+']及身份证号码['+Form.gguserid.value+']已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！');
+		    		alert('<s:text name='reg3.jsp.reg3.jsp.498992772'/>]！');
 		    	}else if(responseMsg.erroCodeNum==4){
-		    		alert('注意：您填写的身份证号码不合法或错误，请检查后再试！！');
+		    		alert('<s:text name='reg.jsp.reg.jsp.-834832388'/>！！');
 		    	}else if(responseMsg.erroCodeNum==5){
-		    		alert('该姓名['+uName+']及身份证号码['+Form.gguserid.value+']禁止注册！');
+		    		alert('<s:text name='reg3.jsp.reg3.jsp.451801346'/>！');
 		    	}else if(responseMsg.erroCodeNum==6){
-		    		alert('所在地区不全！请重新选择！');
+		    		alert('<s:text name='reg.jsp.reg.jsp.-889663866'/>！');
 		    	}else if(responseMsg.erroCodeNum==7){
-		    		alert('注册失败！数据异常');
+		    		alert('<s:text name='reg.jsp.reg.jsp.-1989997891'/>');
 		    	}else{
-		    		alert('注册失败！');
+		    		alert('<s:text name='reg.jsp.reg.jsp.851378872'/>！');
 		    	}
 			    return;
 		    }else{
-		    	alert("恭喜注册成功！请登录进行其它操作！");
+		    	alert("<s:text name='reg.jsp.reg.jsp.-517693217'/>！");
 		    	location.href="index.jsp?id="+uName;
 		    	return;
 		    }
@@ -128,7 +128,7 @@ function ChangeProvince(subid)
 	document.getElementById("loc_city").length = 0; 
 	var subid=subid;
 	var i;
-	document.getElementById("loc_city").options[0] = new Option('=请选择城市=','0');
+	document.getElementById("loc_city").options[0] = new Option('=<s:text name='reg.jsp.reg.jsp.-145519509'/>=','0');
 	for (i=0;i < subCity.length; i++)
 	{
 		if (subCity[i][1] == subid)
@@ -144,7 +144,7 @@ function ChangeCity(subid)
 	document.getElementById("loc_town").length = 0; 
 	var subid=subid;
 	var i;
-	document.getElementById("loc_town").options[0] = new Option('=请选择地区=','0');
+	document.getElementById("loc_town").options[0] = new Option('=<s:text name='reg.jsp.reg.jsp.-145527167'/>=','0');
 	for (i=0;i < subArea.length; i++)
 	{
 		if (subArea[i][1] == subid)
@@ -188,10 +188,10 @@ function AmendCity(ProvinceID,CityID,AreaID)
 						<li class="gsd"><b><strong></strong></b></li>
 					</ul>
 					<ul class="navt2t">
-						<li class="lh">创建账户　　</li>
-						<li class="lh">设置身份信息</li>
-						<li class="lh">设置收款方式</li>
-						<li>　　成功</li>
+						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.650688080'/>　　</li>
+						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.-1147457200'/></li>
+						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.-1456505170'/></li>
+						<li>　　<s:text name='reg1.jsp.reg1.jsp.799375'/></li>
 					</ul>
 				</div>
 
@@ -206,15 +206,15 @@ function AmendCity(ProvinceID,CityID,AreaID)
 					<input type="hidden" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10" value="${ggqq}">
 					<input type="hidden" onKeyUp="value=value.replace(/[\W]/g,'')" name="upvip" size="20" value="${upvip}">
 					<div class="fbox founbox3">
-						<p><label>收款银行：</label><select id="loc_bank" style="width:350px;" name="ggbank">
-										<option value="工商银行">工商银行</option>
-										<option value="农业银行">农业银行</option>
-										<option value="建设银行">建设银行</option>
-										<option value="中国银行">中国银行</option>
+						<p><label><s:text name='reg.jsp.reg.jsp.799485150'/>：</label><select id="loc_bank" style="width:350px;" name="ggbank">
+										<option value="<s:text name='reg.jsp.reg.jsp.-453899062'/>"><s:text name='reg.jsp.reg.jsp.-453899062'/></option>
+										<option value="<s:text name='reg.jsp.reg.jsp.1781968004'/>"><s:text name='reg.jsp.reg.jsp.1781968004'/></option>
+										<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
+										<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option>
 						</select>
-					 	<p><label>银行帐号：</label><input type="text" name="ggcard" onKeyUp="value=value.replace(/[^\d]/g,'')" size="19" maxlength="20"></p>
+					 	<p><label><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label><input type="text" name="ggcard" onKeyUp="value=value.replace(/[^\d]/g,'')" size="19" maxlength="20"></p>
 						<p class="bwky">
-							<label>开户行所在地：</label>
+							<label><s:text name='reg.jsp.reg.jsp.-1009112269'/>：</label>
 							<select style="width:220px;" id="loc_province" name="provinceName" onChange="ChangeProvince(document.getElementById('loc_province').options[document.getElementById('loc_province').selectedIndex].value);">
 							   <s:iterator var="data" value="provinceList">
 									<option value="${data.b}">${data.b}</option>
@@ -225,7 +225,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							<select style="width:220px;" id="loc_town" name="areaName" onChange="ChangeArea(document.getElementById('loc_town').options[document.getElementById('loc_town').selectedIndex].value);">
 							</select>
 						</p>
-						<p class="z-tc"><a class="newbut" id="xyb" href="#" onClick="checkdate1();">下一步</a></p>
+						<p class="z-tc"><a class="newbut" id="xyb" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
 					</div>
 					
 				 </form>
