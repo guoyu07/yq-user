@@ -75,10 +75,16 @@ function openwindow(url) {
 						<c:choose>  
 						<c:when test="${SESSION_LOCALE=='en_US'}">  
 							<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
+							<c:if test="${data.ggbt_en==null}">
+								<p><a href="/ggck?ck=${data.id}">${data.ggbt}</a></p>
+							</c:if>
 							<p><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></p>
 		   				</c:when>
-		   				<c:when test="${SESSION_LOCALE=='zn_CN'}">    
-							<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
+		   				<c:when test="${SESSION_LOCALE=='zn_CN'}">   
+		   					<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
+							<c:if test="${data.ggbt==null}">
+								<p><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></p>
+							</c:if>
 							<p><a href="/ggck?ck=${data.id}">${data.ggbt}</a></p>
 		   				</c:when>  
 						<c:otherwise>
