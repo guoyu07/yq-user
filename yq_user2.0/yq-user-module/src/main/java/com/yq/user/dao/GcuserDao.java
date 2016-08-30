@@ -824,7 +824,7 @@ public class GcuserDao {
 			and = " and g.bddate between '"+startTime+"' and '" +endTime+"'";
 		}
 		if(!Strings.isNullOrEmpty(sheng)){
-			and = " and g.addsheng='"+sheng+"'";
+			and = and + " and g.addsheng='"+sheng+"'";
 		}
 		String sql = "select g.*,gup.gmdate as upgmdate from "+table+" g left join gcuser gup on g.up=gup.username  where g.sjb>10"+and+" order by g.bddate desc";
 		return jdbc.getListPage(sql, Gcuser.class, null, pageSize, pageIndex);
@@ -836,7 +836,7 @@ public class GcuserDao {
 			and = " and g.bddate between '"+startTime+"' and '" +endTime+"'";
 		}
 		if(!Strings.isNullOrEmpty(sheng)){
-			and = " and g.addsheng='"+sheng+"'";
+			and = and + " and g.addsheng='"+sheng+"'";
 		}
 		String sql = "select g.*,gup.gmdate as upgmdate from "+table+" g left join gcuser gup on g.up=gup.username  where g.sjb>10"+and+" order by g.bddate desc";
 		return jdbc.getList(sql, GcuserForExcel.class, null);
