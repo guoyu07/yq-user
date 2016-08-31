@@ -46,7 +46,7 @@
 								<option value="50">500<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.674001644'/>）</option>
 								<option value="100">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</option>
 								</select></p>
-							<p><label></label><button class="but1" type=submit>购 买</button></p>
+							<p><label></label><button class="but1" type=submit><s:text name='buy'/></button></p>
 					</form>
 					<p ><s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.890004381'/><b>${pay}</b></p>
 					<p ><s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-1175229943'/>！</p>

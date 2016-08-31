@@ -41,9 +41,9 @@
 						<span><s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-735901424'/></span>
 					</div>
 					<div class="content-table">
-					  <p>您正在<s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>的是<b><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>转换电子金币卡</b>录入</p>
+					  <p><s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.-930056467'/></p>
 					  <p><s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.-1610588230'/></p>
-					  <p><b>${gmsl}</b>张,面值<b>
+					  <p><b>${gmsl}</b><s:text name='pieceYibi'/><b>
 							<c:if test="${mj==10}">10<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1554998638'/>）</c:if>
 							<c:if test="${mj==50}">50<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1726773544'/>）</c:if>
 							<c:if test="${mj==100}">100<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-356053146'/>）</c:if>
