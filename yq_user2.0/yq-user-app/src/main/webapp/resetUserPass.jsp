@@ -30,7 +30,7 @@ function checkdate(s)  {
 	$.post("/sms2?op=13", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>"); return false; }
-		settime($("#btn"),languege);
+		settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 		alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
 	});
 	return true;

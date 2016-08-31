@@ -32,11 +32,11 @@
 <p align="center"><s:text name='vipepmy.jsp.epmy.jsp.-1234597066'/>！</p>
 <p align="center">　</p>
 <p align="center"><font size="6"><s:text name="vipepmy.jsp.epmy.jsp.-1710734480"></s:text>：<font color="#FF0000">${txpay.paynum}</font></font><b><font color="#FF00FF" size="5" face="楷体"><s:text name="vipepmy.jsp.epmy.jsp.-1710734480a"></s:text></font></b></p>
-<p align="center"><b><font color="#800000" face="楷体" style="font-size: 20pt"><s:text name=""></s:text></font><font color="#000080" face="楷体" style="font-size: 20pt">${txpay.payusername}</font><font color="#800000" face="楷体" style="font-size: 20pt">支付：</font><font color="#FF0000" face="楷体" style="font-size: 20pt">${txpay.paynum*0.9}</font><font face="楷体" style="font-size: 20pt"><s:text name="YUAN"></s:text></font></b></p>
+<p align="center"><b><font color="#800000" face="楷体" style="font-size: 20pt"><s:text name=""></s:text></font><font color="#000080" face="楷体" style="font-size: 20pt">${txpay.payusername}</font><font color="#800000" face="楷体" style="font-size: 20pt"><s:text name='pay'/>：</font><font color="#FF0000" face="楷体" style="font-size: 20pt">${txpay.paynum*0.9}</font><font face="楷体" style="font-size: 20pt"><s:text name="YUAN"></s:text></font></b></p>
 <div align="center">
 	<table border="0" width="80%" id="table1" cellspacing="1" bgcolor="#EFEFEF" height="135">
 	<tr>
-	<td><b><font color="#FF0000"><s:text name='vipepmy.jsp.epmy.jsp.-169470345'/>：</font><font color="#0000FF">(<s:text name='vipepmy.jsp.epmy.jsp.-169470345a'/>“</font><font color="#008000">${txpay.paybank}</font><font color="#0000FF">”)</font></b><p>
+	<td><b><font color="#FF0000"><s:text name='vipepmy.jsp.epmy.jsp.-1694703455'/>：</font><font color="#0000FF">(<s:text name='vipepmy.jsp.epmy.jsp.-1694703455a'/>“</font><font color="#008000">${txpay.paybank}</font><font color="#0000FF">”)</font></b><p>
 	<s:text name='vipepmy.jsp.epmy.jsp.-520616714'/>！<p>
 	<s:text name='vipepmy.jsp.epmy.jsp.768179352'/>！</td>
 	</tr>
@@ -44,7 +44,7 @@
 <table border="0" width="80%" id="table2" cellspacing="3" cellpadding="2" bgcolor="#E6FFF2">
 		<tr>
 			<td align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 11pt"><s:text name='vipvipgook.jsp.vipgook.jsp.803273677'/>！</span></p>
-			<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 11pt"><s:text name='vipvipgook.jsp.vipgook.jsp.-1069342756'/><b><font color="#0000FF">${cz01}</font></b> </span><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a></p>
+			<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><span style="font-size: 11pt"><s:text name='vipvipgook.jsp.vipgook.jsp.-1069342756'/><b><font color="#0000FF">${cz01}</font></b> </span><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a></p>
 			<p style="line-height: 150%; margin-top: 0; margin-bottom: 0" align="right"></p>
 			<p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FF0000" size="2"><s:text name='vipepmy.jsp.epmy.jsp.-1381859196'/></font></td>
 		</tr>
@@ -55,7 +55,7 @@
 	<div align="center">
 		<table border="0" width="56%" id="table3">
 			<tr>
-				<td align="center"><p align="right"><span style="font-size: 11pt">认购方<font color="#FF0000">${userName}</font>的<s:text name='vipmcsl.jsp.mcsl.jsp.630954966'/>：</span></td>
+				<td align="center"><p align="right"><span style="font-size: 11pt"><s:text name="vipepmy.jsp.epmy.jsp.-181528430"></s:text>：</span></td>
 				<td align="center" width="160"><span style="font-size: 11pt"><input type="password" name="epnm3" size="20"></span></td>
 				<td align="center" width="189"><input type="submit" value="<s:text name='vipepmy.jsp.epmy.jsp.941836283'/>" name="B1" style="font-size: 11pt; color: #0000FF; font-weight: bold; float:left"></a></td>
 			</tr>

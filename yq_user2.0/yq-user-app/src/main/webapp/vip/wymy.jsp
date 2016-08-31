@@ -12,7 +12,7 @@
 <p align="center"><font size="6"><s:text name='vipwymy.jsp.wymy.jsp.1181588703'/>：<font color="#FF0000">${gpjy.jypay}</font></font></p>
 <p align="center"><font size="5"><s:text name='vipwymy.jsp.wymy.jsp.-766773789'/>：<b><font color="#FF0000">${gpjy.jypay}</font></b></font></p>
 <p align="center">　</p>
-<p align="center"><a onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861='/>？')" href="/wymy?status=1&id=${id}"><input type="button" value="<s:text name='vipepmy.jsp.epmy.jsp.941836283'/>" name="B1" onclick=disabled=true style="font-size: 14pt; color: #0000FF; font-weight: bold"></a></p>
+<p align="center"><a onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')" href="/wymy?status=1&id=${id}"><input type="button" value="<s:text name='vipepmy.jsp.epmy.jsp.941836283'/>" name="B1" onclick=disabled=true style="font-size: 14pt; color: #0000FF; font-weight: bold"></a></p>
 <p align="center">　</p>
 <p align="center"><b><a style="text-decoration: none" onClick="return confirm('<s:text name='vipepmy.jsp.epmy.jsp.-246306007'/>')" href="/gpjysc"><font color="#008000"><s:text name='vipepmy.jsp.epmy.jsp.-246306007a'/></font></a></b></p>
 <p align="center">　</p>

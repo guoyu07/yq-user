@@ -19,7 +19,7 @@
 	<tr>
 	<td><b><font size="4"><font color="#FF0000"></font><s:text name="viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.1002343016a"></s:text>：<font color="#FF0000">
 	<c:if test="${gpjy.pay<1}">0${gpjy.pay}</c:if><c:if test="${gpjy.pay>=1}">${gpjy.pay}</c:if>&nbsp; </font><s:text name="Totalamount"/>：<font color="#FF0000">${gpjy.jypay}</font></font><font size="4" color="#800000"> </font></b>
-	<p><b><font size="4" color="#800000"><s:text name='vipsggpjy.jsp.sggpjy.jsp.682340'/>成功后：</font></b></p>
+	<p><b><font size="4" color="#800000"><s:text name='vipwymc.jsp.wymc.jsp.-1122443397'/>：</font></b></p>
 	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.1468095834'/></font></b></p>
 	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188'/></font></b></p>
 	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.-817911047'/></font></font></b></p>
