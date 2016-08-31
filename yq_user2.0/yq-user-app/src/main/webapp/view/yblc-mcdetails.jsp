@@ -40,18 +40,24 @@
 							<tr>
 								<td>***${data.simplePayid}</td>
 								<td>${data.payusername}</td>
-								<td>${data.paynum9}元</td>
+								<td>${data.paynum9}<s:text name='yuan'/></td>
 								<td><fmt:formatDate value="${data.paytime}" type="both"/></td>
-								<td> <c:if test="${not empty data.zftime}"><s:text name='reg1.jsp.reg1.jsp.799375'/><c:if test="${data.tp==1}">（系统）</c:if> --<s:text name='viewjflc-details.jsp.jflc-details.jsp.755936'/>--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/></c:if>
-								 <c:if test="${empty data.zftime}">
-             <c:if test="${data.ep==1}">${data.dfuser}--已下单，等待${data.dfuser}付款中...</c:if>
-             <c:if test="${data.ep==2}">${data.dfuser}--已向您付款-${data.paynum9}元，等待您在<b><font color="#0000FF"><fmt:formatDate value="${data.rgdate}" type="both"/></font></b>前确认。。。</c:if>
-             <c:if test="${data.ep!=1&&data.ep!=2}">等待认购中。。--<b><a onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000">撤销<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/></font></a></b></c:if>
-              </c:if>
+								<td> 
+								<c:if test="${not empty data.zftime}">
+									<s:text name='reg1.jsp.reg1.jsp.799375'/>
+									<c:if test="${data.tp==1}">
+									（<s:text name='system'/>）
+									</c:if> --<s:text name='viewjflc-details.jsp.jflc-details.jsp.755936'/>--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/>
+								</c:if>
+								<c:if test="${empty data.zftime}">
+						             <c:if test="${data.ep==1}">${data.dfuser}--<s:text name="viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912"></s:text>...</c:if>
+						             <c:if test="${data.ep==2}">${data.dfuser}--<s:text name="viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008"></s:text>。。。</c:if>
+						             <c:if test="${data.ep!=1&&data.ep!=2}"><s:text name="viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928"></s:text></font></a></b></c:if>
+					            </c:if>
 								</td>
-								<td><a onClick="return confirm('提示：您确定已收到认购方 ${data.dfuser}给打款 ${data.paynum9}了吗？ 确定后不可恢复！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
-          <c:if test="${data.ep==2}"><input type="button" value="确认收到${data.paynum9}元款" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
-          </c:if>
+								<td><a onClick="return confirm('<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267'/>！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
+					          		<c:if test="${data.ep==2}"><input type="button" value="<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994'/>" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
+					          		</c:if>
           </font>
           </a></td>
 							</tr>

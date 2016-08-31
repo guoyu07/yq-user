@@ -45,7 +45,7 @@
 								<td><fmt:formatDate value="${data.rgdate}" type="both"/></td>
 								<td> ${data.payusername}</td>
 								<td> <c:if test="${not empty zftime}">
-                                                               <s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.691355938'/>
+                                 <s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.691355938'/>
           </c:if>
           <c:if test="${empty zftime}">
                 <c:if test="${data.ep==1}"><font color="#FF00FF"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-2134021130'/>！</font></a></b></font></c:if>                                                
