@@ -42,22 +42,16 @@
 								<td>${data.payusername}</td>
 								<td>${data.paynum9}<s:text name='yuan'/></td>
 								<td><fmt:formatDate value="${data.paytime}" type="both"/></td>
-								<td> 
-								<c:if test="${not empty data.zftime}">
-									<s:text name='reg1.jsp.reg1.jsp.799375'/>
-									<c:if test="${data.tp==1}">
-									（<s:text name='system'/>）
-									</c:if> --<s:text name='viewjflc-details.jsp.jflc-details.jsp.755936'/>--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/>
-								</c:if>
-								<c:if test="${empty data.zftime}">
-						             <c:if test="${data.ep==1}">${data.dfuser}--<s:text name="viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912"></s:text>...</c:if>
-						             <c:if test="${data.ep==2}">${data.dfuser}--<s:text name="viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008"></s:text>。。。</c:if>
-						             <c:if test="${data.ep!=1&&data.ep!=2}"><s:text name="viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928"></s:text></font></a></b></c:if>
-					            </c:if>
+								<td> <c:if test="${not empty data.zftime}"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.316595986'/><c:if test="${data.tp==1}">（<s:text name="system"></s:text>）</c:if> --<s:text name="viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.316595986a"></s:text>--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/></c:if>
+								 <c:if test="${empty data.zftime}">
+             <c:if test="${data.ep==1}">${data.dfuser}--<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912a'/>...</c:if>
+             <c:if test="${data.ep==2}">${data.dfuser}--<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008'/>-${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008a'/><b><font color="#0000FF"><fmt:formatDate value="${data.rgdate}" type="both"/></font></b><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008b'/>。。。</c:if>
+             <c:if test="${data.ep!=1&&data.ep!=2}"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928'/>。。--<b><a onClick="return confirm('<s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-38357087'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928b'/></font></a></b></c:if>
+              </c:if>
 								</td>
-								<td><a onClick="return confirm('<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267'/>！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
-					          		<c:if test="${data.ep==2}"><input type="button" value="<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994'/>" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
-					          		</c:if>
+								<td><a onClick="return confirm('<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267a'/> ${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267b'/>！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
+          <c:if test="${data.ep==2}"><input type="button" value="<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994'/>${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994a'/>" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
+          </c:if>
           </font>
           </a></td>
 							</tr>
