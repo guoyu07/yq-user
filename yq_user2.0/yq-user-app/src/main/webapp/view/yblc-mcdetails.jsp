@@ -46,7 +46,7 @@
 								 <c:if test="${empty data.zftime}">
              <c:if test="${data.ep==1}">${data.dfuser}--<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912a'/>...</c:if>
              <c:if test="${data.ep==2}">${data.dfuser}--<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008'/>-${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008a'/><b><font color="#0000FF"><fmt:formatDate value="${data.rgdate}" type="both"/></font></b><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008b'/>。。。</c:if>
-             <c:if test="${data.ep!=1&&data.ep!=2}"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928'/>。。--<b><a onClick="return confirm('<s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-38357087'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928b'/></font></a></b></c:if>
+             <c:if test="${data.ep!=1&&data.ep!=2}"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928'/>。。--<b><a onClick="return confirm('<s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-38357087'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928a'/></font></a></b></c:if>
               </c:if>
 								</td>
 								<td><a onClick="return confirm('<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267a'/> ${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267b'/>！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">

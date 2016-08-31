@@ -25,24 +25,24 @@
 				<div class="content-box">
 					<div class="content-title">
 						<span><s:text
-								name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-871299322' /></span>
+								name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-871299322'/></span>
 					</div>
 					<div class="content-table">
 						<table>
 							<tr>
 								<th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.27758404' /></th>
 								<th><s:text
-										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1089491839' />）</th>
+										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1089491839'/>）</th>
 								<th><s:text
-										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.868743081' /></th>
+										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.868743081'/></th>
 								<th><s:text
-										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1100547719' /></th>
+										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1100547719'/></th>
 								<th><s:text
-										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.21178581' /></th>
+										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.21178581'/></th>
 								<th><s:text
-										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.625799226' /></th>
+										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.625799226'/></th>
 								<th><s:text
-										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.820271' /></th>
+										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.820271'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 								<tr>
