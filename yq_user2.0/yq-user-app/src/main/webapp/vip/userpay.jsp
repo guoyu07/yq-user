@@ -112,7 +112,7 @@ function checkdate1()  {
       <TD width="571" bgColor=#ffffff height="39"><input type="text" name="ybcodeid" size="15"><b><font style="font-size: 9pt" color="#FF0000"> **</font><input id="btn" type="button" onclick="checkdate()" value="<s:text name='vipupuser.jsp.upuser.jsp.1753968781'/>" name="B2"></b></TD>
     </TR></c:if>
     <TR class=content> 
-		<TD width="897" bgColor=#ffffff align="right" height="30" colspan="2"><p align="left"><font size="2" color="#0000FF"><b>警告：</b></font><font color="#FF0000" size="2">请认真核对以下收款信息，如有错误请马上点<a href="login2j?inputUrl=login2j.jsp" style="text-decoration: none"><s:text name='vipuserga.jsp.userga.jsp.472164400'/></a>，再进行发布卖出！如不认真核对，造成付款不成功，该笔卖出将冻结，申请解冻将加收20%手续费！</font></TD>
+		<TD width="897" bgColor=#ffffff align="right" height="30" colspan="2"><p align="left"><font size="2" color="#0000FF"><b><s:text name="vipuserpay.jsp.userpay.jsp.973134113"></s:text>！</font></TD>
     </TR>
     <TR class=content> 
 		<TD width="317" bgColor=#ffffff align="right" height="29"><span style="font-size: 10pt">真实<s:text name='vipuserga.jsp.userga.jsp.734362'/>：</span></TD>
@@ -131,7 +131,7 @@ function checkdate1()  {
 		<TD width="571" bgColor=#ffffff height="24"><font size="2">${gcuser.addsheng}${gcuser.addshi}${gcuser.addqu}<s:text name='vipuserpay.jsp.userpay.jsp.837885'/></font></TD>
     </TR>
     <TR class=content>
-		<TD colSpan=3 align=middle bgColor=#ffffff width="931" height="29"><p style="margin-top: 0; margin-bottom: 0"><p style="margin-top: 0; margin-bottom: 0"><INPUT class=normalButton type=submit value="发 布 卖 出" name=submit2 style="font-size: 11pt" onClick="return confirm('提示：发布卖出的一币如低于500（含500）交易手续费为15%，高于500的则为10%，您确定了吗？')"></TD>
+		<TD colSpan=3 align=middle bgColor=#ffffff width="931" height="29"><p style="margin-top: 0; margin-bottom: 0"><p style="margin-top: 0; margin-bottom: 0"><INPUT class=normalButton type=submit value="<s:text name='vipuserpay.jsp.userpay.jsp.-1517150275b'/>" name=submit2 style="font-size: 11pt" onClick="return confirm('<s:text name='vipuserpay.jsp.userpay.jsp.-1517150275a'/>？')"></TD>
     </TR>
   </TBODY>
 </TABLE>

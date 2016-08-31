@@ -206,7 +206,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 <table border="0" width="100%" id="table1" height="33" cellspacing="1" bgcolor="#FFFFFF">
 	<tr>
 		<td width="20"></td>
-		<td><a target="_blank" href="images/积分游戏平台<s:text name='vipupuser.jsp.upuser.jsp.29623262'/>转让申请书.doc" style="text-decoration: none; font-weight:700">积分游戏平台<s:text name='vipupuser.jsp.upuser.jsp.29623262'/>转让申请书</a></td>
+		<td><a target="_blank" href="images/积分游戏平台用户名转让申请书.doc" style="text-decoration: none; font-weight:700">积分游戏平台用户名转让申请书</a></td>
 		<td><a target="_blank" href="http://bf.zgyce.com/公司三阶段相关培训资料.zip" style="text-decoration: none; font-weight:700">公司三阶段相关培训资料</a></td>
 	</tr>
 </table>

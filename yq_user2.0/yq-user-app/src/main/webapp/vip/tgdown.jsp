@@ -28,7 +28,7 @@
           <s:iterator var="data" value="dataList">
           <tr> 
           <td height="23" width="148" align="center"><p><font color="#000000" size="2">${data.username}</font></td>
-          <td valign="middle" align="left" width="168"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></font></a><font size="2" color="#000000">${data.qq}</font></td>
+          <td valign="middle" align="left" width="168"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font size="2" color="#000000">${data.qq}</font></td>
           <td valign="middle" align="center" width="202"><font color="#000000" size="2">${data.regtime}</font></td>
           <td valign="middle" align="center" width="116"><b><font color="#FF0000" size="2">${data.cjtj}</font></b></td>
           <td valign="middle" align="center" width="217"><font color="#000000" size="2">${data.gmdate}</font></td>

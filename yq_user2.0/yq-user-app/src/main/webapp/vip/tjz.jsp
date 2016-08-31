@@ -6,8 +6,8 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-898207976'/>');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.529929694'/>');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viptjz.jsp.tjz.jsp.174913287'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已<s:text name='viptjz.jsp.tjz.jsp.1396615689'/>！');location.href='tjz'</script></c:if>
-<c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户<s:text name='viptjz.jsp.tjz.jsp.1639887174'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='viptjz.jsp.tjz.jsp.1396615689'/>！');location.href='tjz'</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('<s:text name='viptjz.jsp.tjz.jsp.1639887174'/>');history.go(-1);</script></c:if>
 <html>
 <title><s:text name='viptjz.jsp.tjz.jsp.-48484697'/></title>
 </head>
