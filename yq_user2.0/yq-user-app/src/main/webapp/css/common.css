@@ -30,7 +30,7 @@ a:hover{ color:#272a3d;}
 
 .m10{ margin: 10px;}
 .mt10{ margin-top:10px;overflow-y:auto;}
-.mth10{ margin-top:10px;overflow-y:auto;height:370px;}
+.mth10{ margin-top:10px;overflow-y:auto;height:429px;}
 .mb20{ margin-bottom: 20px!important;}
 .ml10{ margin-left: 10px;}
 .mr10{ margin-right: 10px;}
@@ -65,7 +65,7 @@ a:hover{ color:#272a3d;}
 .z-cb:after,.z-cb li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 
 /* 模块元件布局 */
-.mainbox{ color: #656e73; height:828px; background: #f4f0e2;  }
+.mainbox{ color: #656e73; height:878px; background: #f4f0e2;  }
 .mw1024{ width: 1024px; margin: 0 auto}
 
 .header{  background: url(../images/headbg.jpg) no-repeat 0 bottom; }
@@ -83,7 +83,7 @@ a:hover{ color:#272a3d;}
 .user{ color:#2b2b2b; height: 180px; font-size: 14px; font-weight: bold; margin-bottom: 10px; background:#fff url(../images/jinbi1.png) no-repeat bottom center;}
 .user p{ padding: 2px 0 0 15px;}
 
-.system{ padding: 5px 10px; height: 380px; background-color: #FFF; color:#000;background:#fff url(../images/jinbi2.png) no-repeat bottom center;}
+.system{ padding: 5px 10px; height: 440px; background-color: #FFF; color:#000;background:#fff url(../images/jinbi2.png) no-repeat bottom center;}
 .system li{ padding: 5px 0 0 5px;}
 .system h3{ text-indent: 15px; margin-bottom: 5px; font-weight: lighter; background:#fdc50b; height: 20px; line-height: 20px; color: #FFF; font-size:19px; }
 .system a{ color:#666;}
@@ -94,7 +94,7 @@ a:hover{ color:#272a3d;}
 .content-title .r-link{ float:right; margin-top: 10px; color:#999;  font-size: 15px;}
 .content-title .r-link a{  color:#999; margin-right: 5px; }
 .content-title .r-link a:hover{ color:#E66987;  }
-.content-box{ padding: 0 10px; height: 579px;}
+.content-box{ padding: 0 10px; height: 638px;}
 
 /* 表单样式 */
 .content-table{height: 500px;overflow-x:auto;}
@@ -134,7 +134,7 @@ a:hover{ color:#272a3d;}
 .a-tableTop .z-r button{ margin-right: 10px; width: 100px;  height: 24px;}
 
 /* 表单样式 */
-.content-form{ font-size: 15px; }
+.content-form{ font-size: 13px; }
 .content-box1, .content-box2{ width: 740px; padding:0 20px 5px 25px;background:#fff;}
 .content-boxindexnews{ width: 740px; padding:0 20px 45px 25px;background:#fff url(../images/jinbi3.png) no-repeat right center;}
 .content-box3{ width: 950px; padding:0 20px 5px 25px;   background: #FFF;}
@@ -162,7 +162,7 @@ a:hover{ color:#272a3d;}
 .f-tk{ font-size: 30px; padding: 8px 30px; }
 
 /* 文字内容页面 */
-.content-txt{ height: 473px; overflow-y:auto; overflow-x:hidden; }
+.content-txt{ height: 570px; overflow-y:auto; overflow-x:hidden; }
 .content-txt2{ height: 800px;}
 .service{ padding: 30px 0 0 75px; line-height: 24px; color: #666;}
 .notice{ }
@@ -337,7 +337,7 @@ a:hover{ color:#272a3d;}
 .fwzxc-l{ float: left; width: 260px; padding: 10px; }
 .fwzxc-l p{ font-size: 18px; }
 .fwzxc-r{ float: left; width:460px;  padding: 10px 0  10px  0;  }
-.fwzxbottom{ background: #e8c479; padding: 10px; line-height: 24px;height:159px;overflow-x:auto;overflow-y:auto; }
+.fwzxbottom{ background: #e8c479; padding: 10px; line-height: 24px;height:280px;overflow-x:auto;overflow-y:auto; }
 .fwzxbottom span{ color: #0078ff; }
 .fwzxbottom strong{ font-size: 20px; padding-bottom: 5px;  display: block; font-weight: lighter; }
 .formtj{ padding:30px 0 118px 0; }
@@ -367,3 +367,10 @@ a:hover{ color:#272a3d;}
 .intub{ width: 33px; border:none; float: right; margin-left: 5px; height: 20px; background: #999; cursor: pointer; background: url(../images/cz.png) no-repeat 0 0; }
 .content-box2 mt10{height:370px;}
 
+/* 底部表单样式 */
+.content-tabledown{height: 230px;overflow-x:auto;}
+.content-tabledown table{ width: 100%; text-align: center;  color:#000;  font-size: 12px;  }
+.content-tabledown tr{ background: #e3e3e3; border-left:1px solid #989898; border-right:1px solid #989898;}
+.content-tabledown tr, .content-tabledown td, .content-tabledown th{ border-left:1px solid #989898; border-right:1px solid #989898;}
+.content-tabledown th{ background: #fdc50b; text-align: center; font-size: 16px; border-top:1px solid #989898;　}
+.content-tabledown td{ font-weight:bold; height: 22px; line-height: 22px;}

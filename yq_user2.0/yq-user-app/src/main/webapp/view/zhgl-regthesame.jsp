@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-931208490'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('恭喜同<s:text name='reg.jsp.reg.jsp.734362'/>用户注册<s:text name='reg1.jsp.reg1.jsp.799375'/>，请进行<s:text name='reg1.jsp.reg1.jsp.19846320'/>的<s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/>！');location.href='tgdown'</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.-931208490'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.1935130424'/>！');location.href='tgdown'</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -99,7 +99,7 @@ return true;  }
 						<s:text name='viewzhgl-regthesame.jsp.zhgl-regthesame.jsp.-1290755823'/>
 					</div>
 				</div>
-				<div class="content-box2 mt10"  style="height:370px;">
+				<div class="content-box2 mth10" >
 					<form class="form form3" method="POST" action="regTheSame?status=1" name="Form" onSubmit="return checkdate()">
 							<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" name="gguser" size="15" maxlength="12" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
 							<p><label><s:text name='reg.jsp.reg.jsp.626784226'/>：</label><s:text name='vipreg.jsp.reg.jsp.-1975491897'/></p>

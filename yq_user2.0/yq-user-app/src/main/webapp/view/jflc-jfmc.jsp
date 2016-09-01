@@ -103,7 +103,7 @@ return (allValid);
 						</div>
 					</c:if>
 					<c:if test="${not empty dataList}">
-					<div class="content-table">
+					<div class="content-tabledown ">
 						<table>
 							<tr>
 								<th width="75"><s:text name='reg.jsp.reg.jsp.29623262'/></th>

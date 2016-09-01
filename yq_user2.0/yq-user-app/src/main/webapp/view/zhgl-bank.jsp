@@ -43,7 +43,7 @@
 				<%@ include file="/view/zhgl.jsp"%>
 			</div>
 			<div class="z-l">
-				<div class="content-box2">
+				<div class="content-box2" style="height:633px;">
 					<div class="fwzxbox">
 						<div class="fwzxtop"><s:text name='viewindex2.jsp.index2.jsp.803273677'/>！<br />
 							<s:text name='viewzhgl-bank.jsp.zhgl-bank.jsp.909107657'/></a><span><br />

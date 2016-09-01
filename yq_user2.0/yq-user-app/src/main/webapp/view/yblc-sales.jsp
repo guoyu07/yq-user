@@ -91,7 +91,7 @@ function checkdate1()  {
 						<p style="color: red;">2.<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.476105277'/></p>
 					</div>
 				</div>
-				<div class="content-box2 mt10"  style="height:370px;">
+				<div class="content-box2 mth10" >
 					<div style="color: #515151;">
 						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1318893197'/></p>
 						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.36915859'/></p>

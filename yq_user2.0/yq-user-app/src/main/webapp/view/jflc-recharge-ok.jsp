@@ -50,7 +50,7 @@ function openwindow(url) {
 <s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.1316609687'/></p>
 					</div>
 				</div>
-				<div class="content-box2 mt10">
+				<div class="content-box2 mth10">
 					<div class="content-title">
 						<span><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.853151501'/></span>
 					</div>

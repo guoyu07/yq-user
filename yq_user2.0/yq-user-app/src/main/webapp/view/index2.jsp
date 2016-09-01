@@ -50,7 +50,7 @@ function openwindow(url) {
 						<s:text name='viewindex2.jsp.index2.jsp.-628120199'/>
 					</div>
 				</div>
-				<div class="content-boxindexnews mt10">
+				<div class="content-boxindexnews mt10" style="height:391px;">
 					<div class="content-title">
 						<span><s:text name='viewindex2.jsp.index2.jsp.70014993'/></span>
 					</div>
