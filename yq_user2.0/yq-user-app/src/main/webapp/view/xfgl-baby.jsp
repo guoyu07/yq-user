@@ -31,7 +31,7 @@
 		$.post("/sms?op=12", data, function(response) {
 			$("#btn").removeAttr("disabled");
 			if (response.erroCodeNum!=0) { alert("<s:text name='viewxfgl-baby.jsp.xfgl-baby.jsp.1886666017'/>"); return false; }
-			settime($("#btn"));
+			settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 			alert("<s:text name='viewxfgl-baby.jsp.xfgl-baby.jsp.1886721436'/>");
 		});
 		return false;
@@ -85,5 +85,5 @@
 </body>
 </html>
 <script type="text/javascript">
-btnStatus($("#btn"));
+btnStatus($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 </script>
