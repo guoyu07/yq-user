@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="common/taglib.jsp"%>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-109709084'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.-1243798858'/>]！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.-1243798858'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-834832388'/>！！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.912511120'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>

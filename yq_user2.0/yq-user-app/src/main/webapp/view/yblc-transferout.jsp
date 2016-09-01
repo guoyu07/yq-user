@@ -62,9 +62,9 @@ function Check(user)
 	}
 	$.post("checkUserName?user="+user,null, function(response) {
 		if(response.code==0){//注册<s:text name='reg1.jsp.reg1.jsp.799375'/>
-			alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-737966009'/>:['+response.name+"]");
+			alert('<s:text name='reg.jsp.reg.jsp.29623262'/>：['+user+']，<s:text name='reg.jsp.reg.jsp.734362'/>:['+response.name+"]");
 		}else{
-			alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1911170702'/>！');
+			alert('<s:text name='reg.jsp.reg.jsp.29623262'/>：'+user+'，<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1911170702'/>！');
 		}
 		return true;
 	});
@@ -92,12 +92,12 @@ function Check(user)
 						<p class="f-tk c-g"><s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1396688147'/> <span class="c-r">${userName}</span></p>
 						<p class="z-b" style="padding-left:70px;"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1994385923'/>：<b class="c-r">${gcuser.pay}</b></p>
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="vipjzpay?status=1">
-							<p><label class="c-r">接收<s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" name="jzuser" id="jzuser" size="15"><input type="button" onClick="Check(document.getElementById('jzuser').value)" value="查看<s:text name='reg.jsp.reg.jsp.734362'/>" name="B3" style="cursor: pointer"></p>
+							<p><label class="c-r"><s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-1410198515'/>：</label><input type="text" name="jzuser" id="jzuser" size="15"><input type="button" onClick="Check(document.getElementById('jzuser').value)" value="<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792a'/>" name="B3" style="cursor: pointer"></p>
 							<p><label><s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.1129174203'/>：</label><input style="width:100px;" type="text" name="jzpay" size="15" maxlength="10"></p>
 							<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input type="password" name="pa3" size="20"></p>
 
 							<p><label></label><button class="but1" type=submit  name=submit2  onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')"><s:text name="viewyblc-mallback.jsp.yblc-mallback.jsp.537856614a"></s:text></button></p>
-							<c:if test="${gcuser.vip==2}"><p><a href="vipcjb">VIP充值管理（<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.989728617'/>币：${gcuser.vipljcjb}）（已使用：${gcuser.vipsycjb}）（<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/>：${gcuser.vipcjcjb}）</a></p></c:if>
+							<c:if test="${gcuser.vip==2}"><p><a href="vipcjb"><s:text name="viewyblc-transferout.jsp.yblc-transferout.jsp.-1480031139"></s:text>（<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.989728617'/>：${gcuser.vipljcjb}）（<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1480031139a'/>：${gcuser.vipsycjb}）（<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/>：${gcuser.vipcjcjb}）</a></p></c:if>
 					</form>
 					</div>
 				</div>

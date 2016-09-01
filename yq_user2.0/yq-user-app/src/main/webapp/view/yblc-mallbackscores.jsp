@@ -71,7 +71,7 @@ function dbz_show(){
 					</div>
 					<div class="content-form">				 
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/backscores?status=1">
-						    <p><label class="c-r"><s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1081070777'/></button></p>
+						    <p><label class="c-r"><s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1081070777'/></label><input type="text" name="fromUser" size="15" maxlength="20"><button class="but1" type="button" value="设置成商户" name="btnn" id="btnn"  onClick="setmaller(3)"><s:text name="viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1081070777a"></s:text></button><button class="but1" type="button" value="设置成商户" name="btnn" id="btnn"  onClick="setmaller(0)"><s:text name="viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1081070777b"></s:text></button></p>
 							<p><label class="c-r"><s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.198636997'/>：</label><input type="text" name="jzuser" size="15" maxlength="20"></p>
 							<p><label><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1129727398'/>：</label><input style="width:100px;" type="text" name="jzpay" size="15"></p>
 							<p><label><s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.789039466'/></label><input type="password" name="pa3" size="15"></p>

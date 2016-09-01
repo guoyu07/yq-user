@@ -37,8 +37,8 @@
 	<table border="0" width="80%" id="table1" cellspacing="1" bgcolor="#EFEFEF" height="135">
 	<tr>
 	<td><b><font color="#FF0000"><s:text name='vipepmy.jsp.epmy.jsp.-1694703455'/>：</font><font color="#0000FF">(<s:text name='vipepmy.jsp.epmy.jsp.-1694703455a'/>“</font><font color="#008000">${txpay.paybank}</font><font color="#0000FF">”)</font></b><p>
-	<s:text name='vipepmy.jsp.epmy.jsp.-520616714'/>！<p>
-	<s:text name='vipepmy.jsp.epmy.jsp.768179352'/>！</td>
+	<s:text name='vipepmy.jsp.epmy.jsp.-520616714'/>：<b><font color="#008000">${userName} </font></b><s:text name='vipepmy.jsp.epmy.jsp.-520616714a'/><b><font color="#FF0000">${txpay.paynum}</font></b><s:text name='vipepmy.jsp.epmy.jsp.-520616714b'/>！<p>
+	<s:text name='vipepmy.jsp.epmy.jsp.768179352'/>“<font color="#FF0000"><s:text name='vipepmy.jsp.epmy.jsp.768179352a'/></font>”<s:text name='vipepmy.jsp.epmy.jsp.768179352b'/><font color="#0000FF">${txpay.payusername}</font><s:text name='vipepmy.jsp.epmy.jsp.768179352c'/><b><font color="#FF0000">${txpay.paynum*0.9}</font></b><s:text name='vipepmy.jsp.epmy.jsp.768179352d'/><font color="#0000FF">${txpay.payusername}</font><s:text name='vipepmy.jsp.epmy.jsp.768179352e'/><b><font color="#FF0000">${txpay.paynum*0.9}</font></b><s:text name='vipepmy.jsp.epmy.jsp.768179352f'/>！</td>
 	</tr>
 	</table>
 <table border="0" width="80%" id="table2" cellspacing="3" cellpadding="2" bgcolor="#E6FFF2">

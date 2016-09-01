@@ -79,7 +79,7 @@ function checkdate1()  {
 		</tr>
        </c:if>
 		<tr>
-			<td align="right" colspan="3" bgcolor="#EAEAEA" height="31"><p align="center"><span style="font-size: 11pt"><font color="#800000"><s:text name="vipbdreg.jsp.bdreg.jsp.-808057141"></s:text></font><font color="#0000FF">${cjpay}</font></span></td>
+			<td align="right" colspan="3" bgcolor="#EAEAEA" height="31"><p align="center"><span style="font-size: 11pt"><font color="#800000"><s:text name="vipbdreg.jsp.bdreg.jsp.-808057141"></s:text>（</font><b>${userName}</b><font color="#800000">）<c:if test="${cjpay<9000}"><s:text name='yibi'/><s:text name='yibi'/></c:if><c:if test="${cjpay>=9000}"><s:text name='Order'/></c:if><c:if test="${cjpay>=9000}"><s:text name='deduction'/></c:if></font><font color="#0000FF">${cjpay}</font></span></td>
 		</tr>
 	</table>
 		<p><input type="submit" value="<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165'/>" name="B1" onClick="{if(confirm('<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165a'/>?')){this.style.visibility='hidden';return true;}return false;}" style="font-size: 14pt; color: #0000FF; font-weight: bold"></p>

@@ -56,7 +56,7 @@ $(document).ready(function(){
   
   </UL><!-- clear the floats if required -->
 <DIV class=clear></DIV></DIV>
-<DIV style="DISPLAY: none" class=Location>当前位置：<SPAN id=mTitle><s:text name='vipepjysc.jsp.epjysc.jsp.1257887'/></SPAN></DIV></DIV></DIV>
+<DIV style="DISPLAY: none" class=Location><s:text name="vipepjysc.jsp.epjysc.jsp.-1860602679"></s:text>：<SPAN id=mTitle><s:text name='vipepjysc.jsp.epjysc.jsp.1257887'/></SPAN></DIV></DIV></DIV>
 <DIV class=box_title><s:text name='vipepjysc.jsp.epjysc.jsp.-925818028'/></DIV>
 <DIV class=box>
 <DIV class=box_con style=" text-align:left">

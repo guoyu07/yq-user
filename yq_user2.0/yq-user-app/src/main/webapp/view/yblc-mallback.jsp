@@ -42,9 +42,9 @@ function Check(user)
 	}
 	$.post("checkUserName?user="+user,null, function(response) {
 		if(response.code==0){//注册<s:text name='reg1.jsp.reg1.jsp.799375'/>
-			alert('<s:text name='reg.jsp.reg.jsp.29623262'/>：['+user+']，<s:text name='reg.jsp.reg.jsp.734362'/>为:['+response.name+"]");
+			alert('<s:text name='reg.jsp.reg.jsp.29623262'/>：['+user+']，<s:text name='reg.jsp.reg.jsp.734362'/>:['+response.name+"]");
 		}else{
-			alert('<s:text name='reg.jsp.reg.jsp.29623262'/>：'+user+'，不存在，请重新写入！');
+			alert('<s:text name='reg.jsp.reg.jsp.29623262'/>：'+user+'，<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1911170702'/>！');
 		}
 		return true;
 	});
@@ -73,8 +73,8 @@ function Check(user)
 						<p class="f-tk c-g"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1396688147'/> <span class="c-r">${userName}</span></p>
 						<p class="z-b" style="padding-left:70px;"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1994385923'/>：<b class="c-r">${gcuser.pay}</b></p>
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/glpay?status=1">
-						    <p><label class="c-r"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792'/></p>
-							<p><label class="c-r"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-377971233'/></p>
+						    <p><label class="c-r"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792'/>:<input type="text" name="fromUser" id="fromUser" size="15" maxlength="20" value="${userName}"><input type="button" onClick="Check(document.getElementById('fromUser').value)" value="<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792a'/>" name="B3" style="cursor: pointer"></label></p>
+							<p><label class="c-r"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-377971233'/>:<input type="text" name="jzuser" id="jzuser"  size="15" maxlength="20"><input type="button" onClick="Check(document.getElementById('jzuser').value)" value="<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792a'/>" name="B3" style="cursor: pointer"></label></p>
 							<p><label><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1129727398'/>：</label><input style="width:100px;" type="text" name="jzpay" size="15"></p>
 							<p><label><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.789039466'/>：</label><input type="password" name="pa3" size="15"></p>
 							<p><label><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1129224748'/>：</label><input type="text" name="yy" size="20"></p>

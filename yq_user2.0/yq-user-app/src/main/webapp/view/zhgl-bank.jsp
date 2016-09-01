@@ -46,7 +46,7 @@
 				<div class="content-box2" style="height:633px;">
 					<div class="fwzxbox">
 						<div class="fwzxtop"><s:text name='viewindex2.jsp.index2.jsp.803273677'/>！<br />
-							<s:text name='viewzhgl-bank.jsp.zhgl-bank.jsp.909107657'/></a><span><br />
+							<s:text name='viewzhgl-bank.jsp.zhgl-bank.jsp.909107657'/><span style="color: #0078ff;">${gcuserup.qq}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a></span><br />
 							<span style="color: #ff0000"><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.-1381859196'/></span>
 						</div>
 						<div class="fwzxc">

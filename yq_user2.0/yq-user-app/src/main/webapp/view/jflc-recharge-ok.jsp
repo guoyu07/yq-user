@@ -44,7 +44,7 @@ function openwindow(url) {
 					</div>
 					<div class="i-gg">
 					<p><s:text name='viewindex2.jsp.index2.jsp.803273677'/>！
-					<p><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.-836674711'/></a></p>
+					<p><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.-836674711'/>:${cz01}<s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.-836674711a'/>:${qq}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${qq}&site=qq&menu=yes"><s:text name='viewservice.jsp.service.jsp.488997268'/></a></p>
 					<p style="color: red;"><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.-1381859196'/></p><br />
 					<p><s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.1839200756'/>
 <s:text name='viewjflc-recharge-ok.jsp.jflc-recharge-ok.jsp.1316609687'/></p>

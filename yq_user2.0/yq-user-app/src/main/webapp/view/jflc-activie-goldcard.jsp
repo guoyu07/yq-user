@@ -83,7 +83,7 @@ function openwindow(url) {
 								<td><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.1402093537'/>。</td>
 								<td> 
 								<c:if test="${data.gpa>1}"><a href="glfhk?id=${data.pdid}" style="text-decoration: none"><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.544376205'/></a></c:if>
-                                <c:if test="${data.gpa<=1}"><a href="glfhk?id=${data.pdid}" >重置(查看)该卡密码或激活</a></c:if>
+                                <c:if test="${data.gpa<=1}"><a href="glfhk?id=${data.pdid}" ><s:text name="viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.-1380739490"></s:text></a></c:if>
                                 </td>
 							</tr>
 							</s:iterator>

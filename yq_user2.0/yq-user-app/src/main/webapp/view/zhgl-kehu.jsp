@@ -42,11 +42,11 @@
 							<s:iterator var="data" value="dataList">
 							<tr>
 								<td>${data.username}</td>
-								<td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></font></a><font size="2" color="#000000">${data.qq}</font></td>
+								<td><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font size="2" color="#000000">${data.qq}</font></td>
 								<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
 								<td>${data.cjtj}</td>
 								<td><fmt:formatDate value="${data.gmdate}" type="both"/></td>
-								<td><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-522793551'/></td>
+								<td><c:if test="${data.sjb==0}"><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-522793551'/></c:if><c:if test="${data.sjb!=0}">${data.sjb}<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-522793551a'/></c:if></td>
 								<td><fmt:formatDate value="${data.bddate}" type="both"/></td>
 							</tr>
 						   </s:iterator>

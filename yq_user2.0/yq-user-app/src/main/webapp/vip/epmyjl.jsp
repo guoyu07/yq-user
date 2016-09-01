@@ -91,15 +91,15 @@ $(document).ready(function(){
           <td valign="middle" align="center" width="120">${data.payusername}</td>
           <td valign="middle" align="center" width="450">
           <c:if test="${not empty zftime}">
-          <s:text name='vipepmyjl.jsp.epmyjl.jsp.691355938'/>。
+          <s:text name='vipepmyjl.jsp.epmyjl.jsp.691355938'/>:${data.payusername}。
           </c:if>
           <c:if test="${empty zftime}">
                 <c:if test="${data.ep==1}"><font color="#FF00FF"><s:text name='vipepmyjl.jsp.epmyjl.jsp.-2134021130'/></font><font color="#0000FF"><b>${data.rgdate}</b></font><font color="#FF00FF"><s:text name='vipepmyjl.jsp.epmyjl.jsp.-2134021130a'/>，<b><a target="_blank" href="fbbank?fb=${data.payid}"><font color="#008000"><s:text name='vipepmyjl.jsp.epmyjl.jsp.-2134021130b'/>！</font></a></b></font></c:if>                                                
-                <c:if test="${data.ep==2}">${data.dfuser}--<s:text name='vipepmyjl.jsp.epmyjl.jsp.-1073667942'/>。。。</c:if>
+                <c:if test="${data.ep==2}">${data.dfuser}--<s:text name='vipepmyjl.jsp.epmyjl.jsp.-1073667942'/>${data.payusername}。。。</c:if>
           </c:if>
           </td>
           <td valign="middle" align="center" width="250"><a onClick="return confirm('<s:text name='vipepmyjl.jsp.epmyjl.jsp.-1689415574'/>')" href="myepok?ep=${data.payid}"><font color="#FF0000" size="2">
-            <c:if test="${data.ep==1}"><s:text name='vipepmyjl.jsp.epmyjl.jsp.314771621'/>。</c:if></font></a></td>
+            <c:if test="${data.ep==1}"><s:text name='vipepmyjl.jsp.epmyjl.jsp.314771621'/>${data.paynum9}<s:text name='yuan'/>。</c:if></font></a></td>
           </tr>
          </s:iterator>
             </table> 
