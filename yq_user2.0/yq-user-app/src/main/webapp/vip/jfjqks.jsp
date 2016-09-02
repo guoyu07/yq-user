@@ -78,14 +78,14 @@ return (allValid);
   	<form method="POST" action="jfjqks?status=1" name="Form" onSubmit="return checkdate()">
 		<table border="0" width="100%" id="table4" height="60" bgcolor="#FC273D">
 			<tr>
-		<td width="330" rowspan="2"><b><p>&nbsp;<s:text name='vipjfjqks.jsp.jfjqks.jsp.-1206515557'/></td>
+		<td width="330" rowspan="2"><b><p>&nbsp;离<font color="#FFFFFF">第${jfkjdate.kid}期</font>积分开奖还有：<!--<span id="RemainD">&nbsp;</span>天<span id="RemainH">&nbsp;</span>时--><span id="RemainM">&nbsp;</span>分<span id="RemainS">&nbsp;</span>秒</td>
 		<td width="165" align="right"><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.1956974099'/>：</b></td>
 		<td><b><select size="1" name="tzlb">
 			<option selected value="0">=<s:text name='vipjfjqks.jsp.jfjqks.jsp.1956974099'/>=</option>
-			<option value="1">-单-</option>
-			<option value="2">-双-</option>
-			<option value="3">-大-</option>
-			<option value="4">-小-</option>
+			<option value="1">-<s:text name='single'/>-</option>
+			<option value="2">-<s:text name='double'/>-</option>
+			<option value="3">-<s:text name='big'/>-</option>
+			<option value="4">-<s:text name='small'/>-</option>
 			</select></td>
 		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="<s:text name='vipsgreg.jsp.sgreg.jsp.812244'/>" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('<s:text name='vipjztojb3.jsp.jztojb3.jsp.600719861'/>')"></td>
 		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FFFFFF" size="2"><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.-599225566'/>。</font></td>

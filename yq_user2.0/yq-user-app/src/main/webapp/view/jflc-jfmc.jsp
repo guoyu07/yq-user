@@ -82,7 +82,7 @@ return (allValid);
 						<span><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1817700589'/></span>
 					</div>
 					<div class="content-form">
-						<p><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-998216117'/>：<strong><c:if test="${fcxt.jygj<1}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></strong></p>
+						<p><s:text name='vipmcsl.jsp.mcsl.jsp.227454429'/>：<strong>${gcuser.jyg}</strong><s:text name='vipmcsl.jsp.mcsl.jsp.227454429a'/>：<strong><c:if test="${fcxt.jygj<1}">${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></strong></p>
 						<form class="form form1 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="mcsl?status=1">
 							<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label>${userName}</p>
 							<p><label><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='viewjflc-details.jsp.jflc-details.jsp.681538'/>：</label><input type="text" name="jygj" size="10" maxlength="4"></p>

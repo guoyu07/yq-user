@@ -68,7 +68,7 @@ $(document).ready(function(){
 		　<p align="center">
 		<img border="0" src="images/02.png" width="926" height="238"><p align="center">
 		　<p align="center">
-		<a href="http://p.cfjte.com/GameInfo.html"><font color="#FF0000" size="3"><s:text name='viewjflc.jsp.jflc.jsp.951004942'/>介绍</font></a>&nbsp;&nbsp;&nbsp;&nbsp; <font color="#FF0000" size="3">&nbsp;<a href="http://p.cfjte.com/FaqList.html"><font color="#FF0000">帮助中心</font></a>&nbsp;&nbsp;&nbsp; </font><b> <font color="#008000" size="3">&nbsp;</font></b><p align="center">
+		<a href="http://p.cfjte.com/GameInfo.html"><font color="#FF0000" size="3"><s:text name='viewjflc.jsp.jflc.jsp.951004942'/><s:text name="introduce"></s:text></font></a>&nbsp;&nbsp;&nbsp;&nbsp; <font color="#FF0000" size="3">&nbsp;<a href="http://p.cfjte.com/FaqList.html"><font color="#FF0000"><s:text name="help"></s:text></font></a>&nbsp;&nbsp;&nbsp; </font><b> <font color="#008000" size="3">&nbsp;</font></b><p align="center">
 		　<p align="center">
 		<b> <font color="#008000" size="3"><s:text name='vipjfgame.jsp.jfgame.jsp.-1686466288'/>）</font><p align="center">
 		　<p align="center">

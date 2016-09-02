@@ -13,15 +13,15 @@
 <p align="center">　</p>
 <p align="center">　</p>
 <p align="center"><font size="6"><s:text name='vipwymc.jsp.wymc.jsp.-1871713252'/>：<font color="#FF0000">${gpjy.mysl}</font></font></p>
-<p align="center"><font size="5"><s:text name='vipwymc.jsp.wymc.jsp.1883427228'/></font></p>
+<p align="center"><font size="5"><s:text name='vipwymc.jsp.wymc.jsp.1883427228'/><b><font color="#FF0000">${gpjy.mysl}</font></b></font><font size="6"><s:text name="point"></s:text></font></p>
 <div align="center">
 	<table border="0" width="52%" id="table1" cellspacing="1" bgcolor="#E6E6E6" height="210">
 	<tr>
 	<td><b><font size="4"><font color="#FF0000"></font><s:text name="viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.1002343016a"></s:text>：<font color="#FF0000">
 	<c:if test="${gpjy.pay<1}">0${gpjy.pay}</c:if><c:if test="${gpjy.pay>=1}">${gpjy.pay}</c:if>&nbsp; </font><s:text name="Totalamount"/>：<font color="#FF0000">${gpjy.jypay}</font></font><font size="4" color="#800000"> </font></b>
 	<p><b><font size="4" color="#800000"><s:text name='vipwymc.jsp.wymc.jsp.-1122443397'/>：</font></b></p>
-	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.1468095834'/></font></b></p>
-	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188'/></font></b></p>
+	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.1468095834'/><font color="#800080">${dqpay}</font> <s:text name="yibi"></s:text></font></b></p>
+	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188'/><font color="#800080">${mc70}</font> <s:text name="yibi"></s:text></font></b></p>
 	<p><b><font size="4"><s:text name='vipwymc.jsp.wymc.jsp.-817911047'/></font></font></b></p>
 	</td>
 	</tr>
