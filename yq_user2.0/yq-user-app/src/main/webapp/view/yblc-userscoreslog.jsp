@@ -30,7 +30,7 @@
             </div>
             <div class="content z-l">
                 <div class="content-box">
- <div class="content-title"><span><s:text name='viewuser.jsp.user.jsp.35660508'/>变化明细 </span><c:if test="${userName=='zxz888'}"><p><form method="POST" action="userscoreslog" name="Form" id="Form">开始日期:<input name="startDate1" id="startDate1" type="text" value="${startDate1}"/>结束日期:<input name="endDate1" id="endDate1" type="text" value="${endDate1}"/><input type="submit" value="查询" name="B1"><input type="button" onClick="exportExcel()" value="导出excel"/>(每次的导出数量不能超过5000条)</form></p></c:if></div>
+ <div class="content-title"><span><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846'/> </span><c:if test="${userName=='zxz888'}"><p><form method="POST" action="userscoreslog" name="Form" id="Form"><s:text name='startdate'/>:<input name="startDate1" id="startDate1" type="text" value="${startDate1}"/><s:text name='enddate'/>:<input name="endDate1" id="endDate1" type="text" value="${endDate1}"/><input type="submit" value="查询" name="B1"><input type="button" onClick="exportExcel()" value="导出excel"/>(<s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846a'/>)</form></p></c:if></div>
                     <div class="content-table">
                         <table>
                             <tr>

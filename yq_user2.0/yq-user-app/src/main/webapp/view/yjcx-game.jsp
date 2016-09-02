@@ -209,7 +209,7 @@
 									</tr>
 								</table>
 								<p class="st1pbottom"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1039881654'/><br />
-								<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.2025953425'/>
+								<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.2025953425'/>(<span style="color:#f00">${myup}</span>)<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.2025953425a'/>
 							</div>
 						</div>
 

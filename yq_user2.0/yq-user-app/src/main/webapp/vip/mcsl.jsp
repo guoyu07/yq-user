@@ -66,7 +66,7 @@ return (allValid);
 <div align="center"><b><p><font color="#008000" face="隶书" style="font-size: 30pt"><s:text name='vipmcsl.jsp.mcsl.jsp.1977784533'/></font></p>
 			<table border="0" width="75%" id="table1" height="32" bgcolor="#FFEEEE">
 			<tr>
-			<td><s:text name='vipmcsl.jsp.mcsl.jsp.227454429'/>：<b><font color="#FF0000">
+			<td><s:text name='vipmcsl.jsp.mcsl.jsp.227454429'/>：<font color="#008000"><b>${gcuser.jyg} </b></font><s:text name="vipmcsl.jsp.mcsl.jsp.227454429a"></s:text><b><font color="#FF0000">
 			<c:if test="${fcxt.jygj<1}">0${fcxt.jygj}</c:if><c:if test="${fcxt.jygj>=1}">${fcxt.jygj}</c:if></font></b></td>
 			</tr>
 			</table>

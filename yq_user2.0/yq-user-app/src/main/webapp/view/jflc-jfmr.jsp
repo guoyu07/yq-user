@@ -14,7 +14,7 @@
 	  if (Form.txpay.value=="") {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.-477498021'/>!");  Form.txpay.focus();     return false;    } 
 	  if (Form.txpay.value==0) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.175650976'/>!");      return false;    }
 	  if (Form.txpay.value<1) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.2087317176'/>");      return false;    }
-	  if (Form.txpay.value>2000) {      alert("<s:text name='iewjflc-jfmr.jsp.jflc-jfmr.jsp.1250924413'/>");      return false;    }
+	  if (Form.txpay.value>2000) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.1250924413'/>");      return false;    }
 	  if (Form.txpay.value>${zdjyg}) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.150034015'/>${zdjyg}");      return false;    }
 	  if (!chkinteger(Form.txpay.value)){
 		alert('<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.-1758918826'/>!');
@@ -61,7 +61,7 @@
 						<span><s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.1817661566'/></span>
 					</div>
 					<div class="content-form">
-						<p><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.-567234310'/>：<strong><c:if test="${jygj<1}">${jygj}</c:if><c:if test="${jygj>=1}">${jygj}</c:if></strong></p>
+						<p><s:text name='vipmcsl.jsp.mcsl.jsp.227454429'/>：<strong>${jydb}</strong> <s:text name='vipmcsl.jsp.mcsl.jsp.227454429a'/>：<strong><c:if test="${jygj<1}">${jygj}</c:if><c:if test="${jygj>=1}">${jygj}</c:if></strong></p>
 						<form class="form form1 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/mysl?status=1">
 							<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label>${userName}</p>
 							<p><label><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.2135544875'/></font></p>

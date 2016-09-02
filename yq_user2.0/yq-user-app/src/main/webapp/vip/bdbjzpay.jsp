@@ -66,7 +66,7 @@ return (allValid);
 		<option value="20000">--2万--</option>
 		<option value="30000">--3万--</option>
 		<option value="50000">--5万--</option>
-		</select> ** </font><font color="#008000" size="2">剩余：</font><b><font color="#0000FF" size="2">${sybdb}</font></b></TD>
+		</select> ** </font><font color="#008000" size="2"><s:text name="vipsggpjy.jsp.sggpjy.jsp.674320"></s:text>：</font><b><font color="#0000FF" size="2">${sybdb}</font></b></TD>
     </TR>
     <tr>
       <TD align=middle bgColor=#ffffff width="185" height="39"><b><p align="right"><font face="Tahoma" style="font-size: 11pt"><s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-1410198515'/>：</font></TD>

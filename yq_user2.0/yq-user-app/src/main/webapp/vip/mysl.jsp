@@ -42,7 +42,7 @@ return true;  }
 <div align="center"><b><p><font color="#FF0000" face="隶书" style="font-size: 30pt"><s:text name='vipmysl.jsp.mysl.jsp.-1733445863'/></font></p>
         <table border="0" width="60%" id="table1" height="32" bgcolor="#FFEEEE">
         <tr>
-		<td><s:text name='vipmysl.jsp.mysl.jsp.672800012'/>：<b><font color="#FF0000">
+		<td><s:text name='vipmcsl.jsp.mcsl.jsp.227454429'/>：<font color="#008000"><b>${jydb}</b></font><s:text name='vipmcsl.jsp.mcsl.jsp.227454429a'/><b><font color="#FF0000">
 		<c:if test="${jygj<1}">0${jygj}</c:if><c:if test="${jygj>=1}">${jygj}</c:if>&nbsp; </font></b></td>
 		</tr>
 		</table>

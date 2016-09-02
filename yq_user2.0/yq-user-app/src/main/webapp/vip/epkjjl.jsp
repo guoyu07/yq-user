@@ -20,9 +20,9 @@
          <tr> 
       <td height="24" width="425" align="center"><b><font size="2"  color="#FFFFFF">${data.kid}</font></b></td>
       <td height="24" width="412" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FFFFFF"  size="2" style="font-weight: 700">
-      <c:if test="${data.dskj==1}">单</c:if><c:if test="${data.dskj==2}">双</c:if></font></td>
+      <c:if test="${data.dskj==1}"><s:text name='single'/></c:if><c:if test="${data.dskj==2}"><s:text name='double'/></c:if></font></td>
       <td valign="middle" width="394" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#FFFFFF"  size="2">
-      <c:if test="${data.kdxj==3}">大</c:if><c:if test="${data.dskj==4}">小</c:if></font></b></td>
+      <c:if test="${data.kdxj==3}"><s:text name='big'/></c:if><c:if test="${data.dskj==4}"><s:text name='small'/></c:if></font></b></td>
       </tr>
        </s:iterator>
        </table> 

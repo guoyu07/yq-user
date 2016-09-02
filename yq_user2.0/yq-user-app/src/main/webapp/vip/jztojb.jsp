@@ -73,7 +73,7 @@
     </TR>
   </TBODY>
 </TABLE>
-		<p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2">提示：您的<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/><font color="#FF0000">${pay}</font></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
+		<p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2"><s:text name='vipjztojb.jsp.jztojb.jsp.890004381'/><font color="#FF0000">${pay}</font></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
 		<font style="font-size: 11pt"><s:text name='vipjztojb.jsp.jztojb.jsp.186706464'/></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
 		<font style="font-size: 11pt"><s:text name='vipjztojb.jsp.jztojb.jsp.17234952'/>！</font></div>
 </form>

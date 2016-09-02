@@ -70,7 +70,7 @@ function checkdate()  {
 			 <font size="3">
 			  <div align="center">
 		<p style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-		<font size="5" color="#FF0000" face="楷体_GB2312"><s:text name='viplogin3j.jsp.login3j.jsp.-1886394640'/></font></p>
+		<font size="5" color="#FF0000" face="楷体_GB2312"><s:text name='viploginmy.jsp.loginmy.jsp.-1886394640'/></font></p>
 			  <table border="0" width="100%" id="table1">
 					<tr>
 						<td>

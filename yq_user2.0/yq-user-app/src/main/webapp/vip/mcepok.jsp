@@ -70,7 +70,7 @@ function checkdate1()  {
 		</tr>
 		<tr>
 			<td width="253" align="right" height="46"><p align="center">　</td>
-			<td width="403" align="right" height="46" colspan="2"><span style="font-size: 9pt"><font size="1"><input type="submit" value="<s:text name='vipmcepok.jsp.mcepok.jsp.-2106428585'/>_GB2312; font-size: 12pt; font-weight: bold; float:left"></font></span></td>
+			<td width="403" align="right" height="46" colspan="2"><span style="font-size: 9pt"><font size="1"><input type="submit" value="<s:text name='vipmcepok.jsp.mcepok.jsp.-2106428585'/>" name="B1" style="font-family: 楷体_GB2312; font-size: 12pt; font-weight: bold; float:left"></font></span></td>
 		</tr>
 		</table>
 	</div>

@@ -76,10 +76,10 @@ return (allValid);
 		<td width="165" align="right"><b><s:text name='vipepjqks.jsp.epjqks.jsp.1956974099'/>：</b></td>
 		<td><b><select size="1" name="tzlb">
 			<option selected value="0">=<s:text name='vipepjqks.jsp.epjqks.jsp.1956974099'/>=</option>
-			<option value="1">-单-</option>
-			<option value="2">-双-</option>
-			<option value="3">-大-</option>
-			<option value="4">-小-</option>
+			<option value="1">-<s:text name="single"></s:text>-</option>
+			<option value="2">-<s:text name="double"></s:text>-</option>
+			<option value="3">-<s:text name="big"></s:text>-</option>
+			<option value="4">-<s:text name="small"></s:text>-</option>
 			</select></td>
 		<td width="75" rowspan="2"><p align="center"><b><input type="submit" value="<s:text name='vipsgreg.jsp.sgreg.jsp.812244'/>" name="B3" style="; font-size: 12pt; font-weight: bold" onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')"></td>
 		<td width="500" rowspan="2"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font ><font color="#FF0000" size="2"><b><s:text name="vipepjqks.jsp.epjqks.jsp.-1866571030"/>。</font></td>
