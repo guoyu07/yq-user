@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Language" content="zh-cn">
 </head>
 <p align="center">　</p>
-<p align="center"><s:text name='vipepmy.jsp.epmy.jsp.-1234597066'/>！</p>
+<p align="center"><s:text name='vipwymy.jsp.wymy.jsp.-1234597066'/><b><font color="#FF0000"> </font></b><span id="sec" style="color:red"></span><b><font color="#FF0000"></font></b><s:text name="vipwymy.jsp.wymy.jsp.-1234597066a"></s:text>！</p>
 <p align="center">　</p>
 <p align="center"><font size="6"><s:text name='vipwymy.jsp.wymy.jsp.1181588703'/>：<font color="#FF0000">${gpjy.jypay}</font></font></p>
 <p align="center"><font size="5"><s:text name='vipwymy.jsp.wymy.jsp.-766773789'/>：<b><font color="#FF0000">${gpjy.jypay}</font></b></font></p>

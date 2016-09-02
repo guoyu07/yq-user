@@ -41,7 +41,7 @@
 						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.650688080'/>　　</li>
 						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.-1147457200'/></li>
 						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.-1456505170'/></li>
-						<li class="lh">　　<s:text name='reg1.jsp.reg1.jsp.799375'/></li>
+						<li class="lh"><s:text name='reg1.jsp.reg1.jsp.799375'/></li>
 					</ul>
 				</div>
 

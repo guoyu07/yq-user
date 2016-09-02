@@ -29,7 +29,7 @@
   return true;  }  
  </script>
 <p align="center">　</p>
-<p align="center"><s:text name='vipepmy.jsp.epmy.jsp.-1234597066'/>！</p>
+<p align="center"><s:text name='vipwymy.jsp.wymy.jsp.-1234597066'/><b><font color="#FF0000"> </font></b><span id="sec" style="color:red"></span><b><font color="#FF0000"></font></b><s:text name="vipwymy.jsp.wymy.jsp.-1234597066a"></s:text>！</p>
 <p align="center">　</p>
 <p align="center"><font size="6"><s:text name="vipepmy.jsp.epmy.jsp.-1710734480"></s:text>：<font color="#FF0000">${txpay.paynum}</font></font><b><font color="#FF00FF" size="5" face="楷体"><s:text name="vipepmy.jsp.epmy.jsp.-1710734480a"></s:text></font></b></p>
 <p align="center"><b><font color="#800000" face="楷体" style="font-size: 20pt"><s:text name=""></s:text></font><font color="#000080" face="楷体" style="font-size: 20pt">${txpay.payusername}</font><font color="#800000" face="楷体" style="font-size: 20pt"><s:text name='pay'/>：</font><font color="#FF0000" face="楷体" style="font-size: 20pt">${txpay.paynum*0.9}</font><font face="楷体" style="font-size: 20pt"><s:text name="YUAN"></s:text></font></b></p>
