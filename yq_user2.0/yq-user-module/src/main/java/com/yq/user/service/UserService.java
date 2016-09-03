@@ -2729,7 +2729,7 @@ public class UserService {
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
 		
-		if(buyNum<0){
+		if(buyNum<=0){
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
 		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
@@ -2746,6 +2746,11 @@ public class UserService {
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		
+		if(needJb<=0){
+			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
+		}
+		
 		
 		if(!gcuserDao.reduceOnlyJB(userName, needJb)){
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
@@ -2865,6 +2870,10 @@ public class UserService {
 		}
 		
 		int needJb = (int)(Math.ceil(price*saleNum));
+		
+		if(needJb<=0){
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
+		}
 		
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy = new Gpjy();
