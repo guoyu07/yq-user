@@ -28,10 +28,16 @@
 					<div class="content-txt">
 						<div class="notice">
 							<c:choose>  
-							<c:when test="${SESSION_LOCALE=='en_US'}">    
+							<c:when test="${SESSION_LOCALE=='en_US'}"> 
 								<h3 class="title">${dgag.ggbt_en}</h3>
-								<div class="txt-main">${dgag.ggny_en}
-							   	</div>
+								<c:choose>  
+									<c:when test="${data.ggny_en==null}">
+										<div class="txt-main">${dgag.ggny}</div>
+									</c:when>
+									<c:otherwise>
+										<div class="txt-main">${dgag.ggny_en}</div>
+									</c:otherwise>
+								</c:choose>
 			   				</c:when>
 			   				<c:when test="${SESSION_LOCALE=='zn_CN'}">    
 								<h3 class="title">${dgag.ggbt}</h3>
