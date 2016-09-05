@@ -94,12 +94,12 @@ function checkdate1()  {
 				<div class="content-box2 mth10" >
 					<div style="color: #515151;">
 						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1318893197'/></p>
-						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.36915859'/></p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.36915859'/>：<b style="color: red"><c:if test="${transferType==1}"><c:if test="${gcuser.pay<1}"> 0${gcuser.pay-gcuser.vippay} </c:if><c:if test="${gcuser.pay>=1}"> ${gcuser.pay-gcuser.vippay} </c:if></c:if><c:if test="${transferType==2}">${gcuser.pay}</c:if></b><s:text name='yibi'/></p>
 					</div>
 					<div class="z-cb">
 					<form class="form form3" style="width: 420px; float:left;" method="POST" name="Form" id="Form" onSubmit="return checkdate1()" action="userpay?status=1">
 							<p><label><s:text name='reg.jsp.reg.jsp.29623262'/>：</label>${userName}</p>
-							<p><label><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>数量：</label><select size="1" name="txpay">
+							<p><label><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-586037884'/>：</label><select size="1" name="txpay">
 								<option selected value="0">=<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1646927970'/>=</option>
 								<option value="100">100</option>
 								<option value="200">200</option>
