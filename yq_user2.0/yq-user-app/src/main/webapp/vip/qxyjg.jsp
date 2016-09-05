@@ -15,5 +15,5 @@
  </script>
 <form method="POST" action="qxyjg?status=1&qxid=${qxid}"  name="Form" onSubmit="return checkdate()">
 	<p align="center">　</p>
-	<p align="center"><s:text name='vipupuser.jsp.upuser.jsp.35593833'/><font color="#FF0000">${userName}</font><s:text name='reg.jsp.reg.jsp.630954966'/>：<input type="password" name="pa3" size="20">&nbsp; <input type="submit" value="确认无误" name="B1"></p>
+	<p align="center"><s:text name='vipupuser.jsp.upuser.jsp.35593833'/><font color="#FF0000">${userName}</font><s:text name='reg.jsp.reg.jsp.630954966'/>：<input type="password" name="pa3" size="20">&nbsp; <input type="submit" value="<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165'/>" name="B1"></p>
 </form>
