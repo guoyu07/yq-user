@@ -16,6 +16,7 @@ public class TelPayByHandAction extends ALDAdminActionSupport {
 	private String user;
 	private String oppa;
 	public String execute(){
+		
         if(!super.getUserName().equals("admin1")){
             return INPUT;
         }

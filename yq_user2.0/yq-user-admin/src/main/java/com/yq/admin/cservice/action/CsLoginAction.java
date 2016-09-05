@@ -21,8 +21,8 @@ public class CsLoginAction extends ALDAdminActionSupport {
 			return SUCCESS;
 		}
 		CsService csService = ServiceCacheFactory.getServiceCache().getService(CsService.class);
-		HttpSession sessionhttp = ServletActionContext.getRequest()
-				.getSession();
+		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
+		
 		if(csService.csLogin(csUserName, passWord, sessionhttp.getId())){
 			return "redirect";
 		}else{
