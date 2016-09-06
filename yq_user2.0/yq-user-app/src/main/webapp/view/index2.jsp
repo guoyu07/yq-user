@@ -46,7 +46,7 @@ function openwindow(url) {
 					</div>
 					<div class="i-gg">
 						<s:text name='viewindex2.jsp.index2.jsp.803273677'/>！
-						<s:text name='viewindex2.jsp.index2.jsp.-1525283383'/><br /><br />
+						<s:text name='viewzhgl-bank.jsp.zhgl-bank.jsp.909107657'/>：${gcuserup.qq}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a> <br /><br />
 						<s:text name='viewindex2.jsp.index2.jsp.-628120199'/>
 					</div>
 				</div>

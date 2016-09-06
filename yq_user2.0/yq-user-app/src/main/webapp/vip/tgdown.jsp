@@ -5,7 +5,7 @@
 </head>
 
 <div align="center">
-  <p align="left"><s:text name="viptgdown.jsp.tgdown.jsp.-284260618"></s:text></font></p>
+  <p align="left"><s:text name="viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253"></s:text>QQ：<font color="#FF0000">${up.qq}</font><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${up.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${up.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font color="#FF0000"></font> <s:text name='phone'/>：<font color="#FF0000">${up.call}</font><font color="#0000FF"> ${upName}<s:text name='mr_ms'/></font></p>
   <table border="1" cellspacing="0" width="100%" style="border-collapse: collapse" bordercolor="#006699" cellpadding="0" height="108">
     <tr>
       <td width="100%" height="25" background="images/admin_bg_1.gif"> 
