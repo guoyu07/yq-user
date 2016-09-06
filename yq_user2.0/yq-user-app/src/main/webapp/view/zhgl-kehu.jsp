@@ -26,7 +26,7 @@
 						<span><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.777812136'/></span>
 					</div>
 					<div class="a-kh">
-						<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253'/>
+						<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253'/> QQ:${up.qq} <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${up.qq}&site=qq&menu=yes"> <s:text name='viewservice.jsp.service.jsp.488997268'/></a>　<s:text name="phone"></s:text>：${up.call}  ${upName}<s:text name="mr_ms"></s:text>
 					</div>
 					<div class="content-table">
 						<table>
