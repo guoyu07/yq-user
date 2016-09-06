@@ -12,7 +12,7 @@
 	<script language="JavaScript"> 
  function checkdate()  {  
   if (Form.bduser.value=="") {      alert("<s:text name='viewyjcx-choose-empty.jsp.yjcx-choose-empty.jsp.779063'/><s:text name='reg.jsp.reg.jsp.-609490706'/>!");      return false;    } 
-  if (Form.cjpay.value==0) {      alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.35601975'/>一个<s:text name='viewgrxx-rule.jsp.grxx-rule.jsp.748185'/>！");      return false;    }
+  if (Form.cjpay.value==0) {      alert("<s:text name='viewyjcx-choose-empty.jsp.yjcx-choose-empty.jsp.1811747578'/>！");      return false;    }
   if (Form.pa1j.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.35593833'/><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.927803061'/>！");      return false;    }
   if (Form.pa2j.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.35593833'/><s:text name='reg.jsp.reg.jsp.630954966'/>！");      return false;    }
   return true;  }  
