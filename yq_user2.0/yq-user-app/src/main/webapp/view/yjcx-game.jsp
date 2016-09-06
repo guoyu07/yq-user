@@ -24,7 +24,7 @@
 				<div class="content-box1" style="background: none; padding: 0 10px 5px 15px">
 					<div>
 						<div style="width: 380px;float:left;">
-							<div align="right"><p style="float:left;"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1364845601'/><input type="button" class="intub" onClick="Form.submit()"></form></div>
+							<div align="right"><p style="float:left;"><s:text name="viewyjcx-game.jsp.yjcx-game.jsp.29623262"></s:text>：<span style="color: #ff0000;">${myup}</span></p><form method="POST" action="sgks01" name="Form"><input class="intxt" name="myup" placeholder='<s:text name="viewyjcx-game.jsp.yjcx-game.jsp.1364845601"></s:text>' type="text"/><input type="button" class="intub" onClick="Form.submit()"></form></div>
 							<div>
 								<p class="st1p" style="background: #799de8;"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1029202'/></p>
 								<div class="qbox">
