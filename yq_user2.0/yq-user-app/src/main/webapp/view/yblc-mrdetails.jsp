@@ -32,7 +32,7 @@
 							<tr>
 								<th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.27758404' /></th>
 								<th><s:text
-										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1089491839'/>）</th>
+										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1089491839'/></th>
 								<th><s:text
 										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.868743081'/></th>
 								<th><s:text
