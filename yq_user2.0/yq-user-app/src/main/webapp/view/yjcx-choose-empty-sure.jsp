@@ -37,7 +37,7 @@
 		$.post("/sms?op=2", data, function(response) {
 			$("#btn").removeAttr("disabled");
 			if (response.erroCodeNum!=0) { alert("<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1886666017'/>"); return false; }
-			settime($("#btn"));
+			settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 			alert("<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1886721436'/>");
 		});
 	return false;
@@ -52,7 +52,7 @@ function checkdate1()  {
 <body>
 <div class="zzbg"></div>
 <div class="zzcontent">
-<h2 align="center"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.579202987'/>本页！</h2>
+<h2 align="center"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.579202987'/>！</h2>
 </div>
 	<div class="mainbox mw1024">
 		
@@ -79,14 +79,14 @@ function checkdate1()  {
 							<p><label><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.473018246'/>：</label><b style="color: #ff0000;"><input type="hidden" name="up" size="10" value="${up}" readonly>${up}</b></p>
 							<p><label><s:text name='viewyjcx-choose-empty.jsp.yjcx-choose-empty.jsp.779063'/><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="hidden" name="bduser" size="10" value="${bduser}" readonly>${bduser}</p>
 							<p><label><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.473018246'/>：</label>
-								<font color="#008000"><b>${cjpay}</b></font><input type="hidden" name="pa1j" size="8" value="${pa1j}"><input type="hidden" name="pa2j" size="8" value="${pa2j}">（将从您的（<b>${userName}</b>）<c:if test="${cjpay<9000}"><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></c:if><c:if test="${cjpay>=9000}">报单币</c:if>账户扣除${cjpay}）
+								<font color="#008000"><b>${cjpay}</b></font><input type="hidden" name="pa1j" size="8" value="${pa1j}"><input type="hidden" name="pa2j" size="8" value="${pa2j}">（<s:text name="vipbdreg.jsp.bdreg.jsp.-808057141"></s:text>（<b>${userName}</b>）<c:if test="${cjpay<9000}"><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></c:if><c:if test="${cjpay>=9000}"><s:text name='Order'/></c:if><s:text name='deduction'/>${cjpay}）
 							</p>
 							<c:if test="${cjpay<9000}">
 							   <p><label><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1539312043'/>：</label>${call}</p>
 							   <p><label><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1704827075'/>：</label><input type="text" name="ceid" size="8" /><input id="btn" type="button"
 										onclick="checkdate()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>" name="B2" /></p>
 							</c:if>
-							<p align="center"><input class="but1" type="submit" value="确认无误" name="B1" onClick="{if(confirm('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1719272165'/>?')){this.style.visibility='hidden';return true;}return false;}" /></p>
+							<p align="center"><input class="but1" type="submit" value="<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165'/>" name="B1" onClick="{if(confirm('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1719272165'/>?')){this.style.visibility='hidden';return true;}return false;}" /></p>
 							<p align="center"><b><font color="#FF0000"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-2118781725'/>！</p>
 						</form>
 					
@@ -98,7 +98,7 @@ function checkdate1()  {
 </body>
 </html>
 <script type="text/javascript">
-btnStatus($("#btn"));
+btnStatus($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 
 function showZz(){
     $('.zzbg').fadeIn(200);
