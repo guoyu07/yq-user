@@ -10,10 +10,10 @@ Gcuser yblcGcuser = userServiceyblc.getUserByUserName(userServiceyblc.isLogin(re
 					<h3><s:text name='viewyblc.jsp.yblc.jsp.618950045'/></h3>
 					<ul>
 						<%if(yblcGcuser.getUsername().equals("300fhk")||yblcGcuser.getUsername().equals("zxz888")){
-							%><%="<li><a href=\"/glpay\"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/></a></li>"%>
+							%><%="<li><a href=\"/glpay\">"%><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/><%="</a></li>"%>
 						<%}%>
 						<%if(yblcGcuser.getUsername().equals("zxz888")){
-							%><%="<li><a href=\"/backscores\"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/><s:text name='viewuser.jsp.user.jsp.35660508'/></a></li>"%>
+							%><%="<li><a href=\"/backscores\">"%><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/><s:text name='viewuser.jsp.user.jsp.35660508'/><%="</a></li>"%>
 						<%}%>
 						<li><a href="/datepay"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1470113791'/></a></li>
 						<li><a href="/login2j?inputUrl=login3j.jsp"><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/></a><%if(yblcGcuser.getVip()!=0){%><%="<b><a  href='vipjzpay'><s:text name='viewlinks.html.links.html.1159182'/></a></b>"%><%}%></li>

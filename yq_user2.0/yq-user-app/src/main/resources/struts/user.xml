@@ -158,8 +158,7 @@
 		<action name="glpay" class="com.yq.app.user.action.JzpayAction">
 			<result name="success">view/yblc-mallback.jsp</result>
 		</action>
-		<action name="backscores" class="com.yq.app.user.action.JzpayAction"
-			method="backScores">
+		<action name="backscores" class="com.yq.app.user.action.JzpayAction" method="backScores">
 			<result name="success">view/yblc-mallbackscores.jsp</result>
 		</action>
 		<action name="maller" class="com.yq.app.user.action.JzpayAction"

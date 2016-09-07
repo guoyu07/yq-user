@@ -5,7 +5,7 @@
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1580362770'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-752014255'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1476527375'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.1129174203'/>不能大于您<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1580362770'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1580362770'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-47326774'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.246684949'/>！');location.replace('/datepay');</script></c:if>
 <!DOCTYPE html>
@@ -69,7 +69,7 @@ function Check(user)
 					<div class="content-title">
 						<span><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/></span>
 					</div>
-					<div class="content-form">				 
+					<div class="content-form new6-box">				 
 						<p class="f-tk c-g"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1396688147'/> <span class="c-r">${userName}</span></p>
 						<p class="z-b" style="padding-left:70px;"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1994385923'/>：<b class="c-r">${gcuser.pay}</b></p>
 						<form class="form form4 e6b" method="POST" name="Form" onSubmit="return checkdate()" action="/glpay?status=1">
