@@ -106,10 +106,10 @@
 			<form method="POST" name="Form" onSubmit="return false">
 				<p><input type="text" name="ygid" value="<% if(request.getParameter("id")!=null){%><%=request.getParameter("id")%><%}%>" class="name" /></p>
 				<p><input type="password" name="pa" class="pw" /></p>
-				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="点击刷新" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
+				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="<s:text name='Clickrefresh'/>" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
 				<!-- <p class="pab"><input type="checkbox" /><span>记住<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></span>   <a href="#">忘记密码</a></p> -->
 				<p><button class="log" onClick="logins();"></button></p>
-				<a class="restyle" href="/reg">注册<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></a>
+				<a class="restyle" href="/reg"><s:text name='register'/><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></a>
 			</form>
 		</div>
 		<div class="d-tips">
@@ -125,9 +125,9 @@
 	<div class="time-item">
 		<span><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.684762'/></span>
 		<!-- <strong><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.20833240'/></strong> -->
-		<strong id="hour_show">0时</strong>
-		<strong id="minute_show">0分</strong>
-		<strong id="second_show">0秒</strong>
+		<strong id="hour_show">0<s:text name="hour"></s:text></strong>
+		<strong id="minute_show">0<s:text name="Minute"></s:text></strong>
+		<strong id="second_show">0<s:text name="second"></s:text></strong>
 	</div>
 </body>
 </html>
