@@ -1816,11 +1816,12 @@ public class UserService {
 				throw new ServiceException(2, "此订单号已经处理过，请不要重复！");
 			}
 		}else{
-			if(fromUser.equals("300fhk")){
-				regId = "收到-300***"+"-"+yy;
-			}else{
-				regId = "收到-"+fromUser+"-"+yy;
-			}
+			regId = "收到-"+fromUser.substring(0, 2)+"***";
+//			if(fromUser.equals("300fhk")){
+//				regId = "收到-300***"+"-"+yy;
+//			}else{
+//				regId = "收到-"+fromUser+"-"+yy;
+//			}
 		}
         Gcuser toGcUser = gcuserDao.getUser(toUser);
 		
@@ -2842,6 +2843,14 @@ public class UserService {
 //		if(result!=null&&result.size()==0){
 //			LogSystem.warn("求购信息的列表不为Null,但其数量为0");
 //		}
+		Fcxt fcxt = managerService.getFcxtById(2);
+		double price = fcxt.getJygj();
+		if(result!=null&&result.size()>0){
+			for(Gpjy gpjy:result){
+				gpjy.setPay(price);
+				gpjy.setMysl(Double.valueOf(gpjy.countNum(price)));
+			}
+		}
 		return result;
 	}
 	
@@ -3140,7 +3149,16 @@ public class UserService {
 			throw new ServiceException(4,"二级密码不正确！");
 		}
 		
+		
+		
 		Gpjy gpjy1 = gpjyDao.getById(id);
+		
+		//重置数量和价格
+		Fcxt fcxt = managerService.getFcxtById(2);
+		double price = fcxt.getJygj();
+		gpjy1.setPay(price);
+		gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
+		
 		double dqpay92 = (0.9 * gpjy1.getJypay());
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
 		double mc70a = 0.7 * dqpay;
@@ -3163,7 +3181,7 @@ public class UserService {
 
 		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
-		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg())) {
+		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
 			gpjyDao.cleanCache(id);
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
