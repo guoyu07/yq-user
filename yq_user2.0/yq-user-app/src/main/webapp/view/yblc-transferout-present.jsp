@@ -1,14 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.927803061'/>不正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.630954966'/>不正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2086525283'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2022589602'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2053458535'/>0');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2011642676'/>100！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewlinks.html.links.html.1159182'/><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1597545170'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('转入<s:text name='resetUserPass.jsp.resetUserPass.jsp.-1597545170'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.1881640416'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.1910864213'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.859836633'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==100}"><script language=javascript>alert('YB<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.655686'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！捐助<s:text name='reg1.jsp.reg1.jsp.799375'/>！');location.replace('datepay');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.-104104076'/>！');location.replace('datepay');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

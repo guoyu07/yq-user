@@ -109,13 +109,13 @@ $(document).ready(function(){
 				<option value="7000">7000</option>
 				<option value="8000">8000</option>
 				<option value="9000">9000</option>
-				<option value="10000">1万</option>
+				<option value="10000">1<s:text name='wan'/></option>
 				<option value="12000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19218840'/></option>
 				<option value="15000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19218933'/></option>
 				<option value="18000">1<s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.19219026'/></option>
-				<option value="20000">2万</option>
-				<option value="30000">3万</option>
-				<option value="50000">5万</option>
+				<option value="20000">2<s:text name='wan'/></option>
+				<option value="30000">3<s:text name='wan'/></option>
+				<option value="50000">5<s:text name='wan'/></option>
 				</select><b><font color="#FF0000" size="3"> 
 				**</font></TD>
       <TD width="140" bgColor=#ffffff height="45">  

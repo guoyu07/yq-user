@@ -92,7 +92,7 @@ return (allValid);
     </TR>
     <TR class=content> 
       <TD width="337" bgColor=#ffffff align="right" height="30"><font style="font-size: 10pt"><s:text name='vipmcsl.jsp.mcsl.jsp.656571075'/>：</font></TD>
-      <TD width="527" bgColor=#ffffff height="30"><font size="3"> <span style="font-size: 11pt"><INPUT name="txpay" size=20 ></span></font><font style="font-size: 9pt" color="#FF0000"> ** 可<s:text name='vipsggpjy.jsp.sggpjy.jsp.682340'/>为：</font><font style="font-size: 9pt" color="#008000">${gcuser.jyg}</font></TD>
+      <TD width="527" bgColor=#ffffff height="30"><font size="3"> <span style="font-size: 11pt"><INPUT name="txpay" size=20 ></span></font><font style="font-size: 9pt" color="#FF0000"> ** <s:text name='canbesold'/>：</font><font style="font-size: 9pt" color="#008000">${gcuser.jyg}</font></TD>
     </TR>
     <TR class=content>
 		<TD colSpan=2 align=middle bgColor=#ffffff width="347" height="29"><b><p align="right"><font style="font-size: 10pt"><s:text name='vipmcsl.jsp.mcsl.jsp.630954966'/>：</font></TD>

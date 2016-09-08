@@ -115,7 +115,7 @@ function checkdate1()  {
 		<TD width="897" bgColor=#ffffff align="right" height="30" colspan="2"><p align="left"><font size="2" color="#0000FF"><b><s:text name="vipuserpay.jsp.userpay.jsp.973134113"></s:text>！</font></TD>
     </TR>
     <TR class=content> 
-		<TD width="317" bgColor=#ffffff align="right" height="29"><span style="font-size: 10pt">真实<s:text name='vipuserga.jsp.userga.jsp.734362'/>：</span></TD>
+		<TD width="317" bgColor=#ffffff align="right" height="29"><span style="font-size: 10pt"><s:text name='vipuserpay.jsp.userpay.jsp.931750201'/>：</span></TD>
 		<TD width="571" bgColor=#ffffff height="29"><font color="#800080">${gcuser.name}</font></TD>
     </TR>
     <TR class=content><TD width="317" bgColor=#ffffff align="right" height="33"><b><span style="font-size: 10pt"><s:text name='vipuserpay.jsp.userpay.jsp.775723385'/>：</span></TD>
@@ -143,7 +143,7 @@ function checkdate1()  {
   <p style="margin-top: 0; margin-bottom: 0">　</p>
   <table border="1" width="75%" id="table2" style="border-collapse: collapse" bgcolor="#E6FFFF">
   <tr>
-  <td><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font style="font-size: 11pt" color="#FF0000">发布卖出说明：</font></p><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font style="font-size: 10pt">一、最低100一币起就可以发布卖出，每次发布需等上一次处理（您确认收到款）了才可以发起第二次，发布成功后我们认购一币-方向您下单后2小时内打到您的<s:text name='vipuserga.jsp.userga.jsp.799409753'/>上！</font></p>
+  <td><b><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font style="font-size: 11pt" color="#FF0000"><s:text name='vipuserpay.jsp.userpay.jsp.459641224'/>：</font></p><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font style="font-size: 10pt"><s:text name='vipuserpay.jsp.userpay.jsp.459641224a'/>！</font></p>
   <p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font style="font-size: 10pt" color="#800080"><s:text name='vipuserpay.jsp.userpay.jsp.840473127'/>10%。</font></p>
 	</td>
 	</tr>

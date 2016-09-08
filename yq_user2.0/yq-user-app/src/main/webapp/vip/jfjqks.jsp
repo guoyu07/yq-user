@@ -78,7 +78,7 @@ return (allValid);
   	<form method="POST" action="jfjqks?status=1" name="Form" onSubmit="return checkdate()">
 		<table border="0" width="100%" id="table4" height="60" bgcolor="#FC273D">
 			<tr>
-		<td width="330" rowspan="2"><b><p>&nbsp;离<font color="#FFFFFF">第${jfkjdate.kid}期</font>积分开奖还有：<!--<span id="RemainD">&nbsp;</span>天<span id="RemainH">&nbsp;</span>时--><span id="RemainM">&nbsp;</span>分<span id="RemainS">&nbsp;</span>秒</td>
+		<%-- <td width="330" rowspan="2"><b><p>&nbsp;离<font color="#FFFFFF">第${jfkjdate.kid}期</font>积分开奖还有：<!--<span id="RemainD">&nbsp;</span>天<span id="RemainH">&nbsp;</span>时--><span id="RemainM">&nbsp;</span><s:text name='Minute'/><span id="RemainS">&nbsp;</span><s:text name='second'/></td> --%>
 		<td width="165" align="right"><b><s:text name='vipjfjqks.jsp.jfjqks.jsp.1956974099'/>：</b></td>
 		<td><b><select size="1" name="tzlb">
 			<option selected value="0">=<s:text name='vipjfjqks.jsp.jfjqks.jsp.1956974099'/>=</option>

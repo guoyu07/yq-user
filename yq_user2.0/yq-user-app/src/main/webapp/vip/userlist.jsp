@@ -26,7 +26,7 @@
         </tr>
      <s:iterator var="data" value="dataList">
         <tr> 
-      <td height="22" width="231" align="center"><font  color="#FFFFFF"><a target="_top" href="chuserlist.asp" style="text-decoration: none"><b><font color="#FFFFFF">${data.username}<c:if test="${data.username==gcuser.username}"></font></b><font color="#FF00FF">(当前)</font><b><font color="#FFFFFF"></c:if></font></b></a></font></td>
+      <td height="22" width="231" align="center"><font  color="#FFFFFF"><a target="_top" href="chuserlist.asp" style="text-decoration: none"><b><font color="#FFFFFF">${data.username}<c:if test="${data.username==gcuser.username}"></font></b><font color="#FF00FF">(<s:text name="surrent"></s:text>)</font><b><font color="#FFFFFF"></c:if></font></b></a></font></td>
       <td height="22" width="144" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><font color="#FFFFFF"  style="font-weight: 700">${data.name}</font></td>
       <td valign="middle" width="146" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#FFFFFF" >${data.sjb}</font></b></td>
       <td valign="middle" width="159" align="center"><p style="line-height: 150%; margin-top: 0; margin-bottom: 0"><b><font color="#FFFFFF" >${data.pay}</font></b></td>

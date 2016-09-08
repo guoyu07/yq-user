@@ -67,7 +67,7 @@
 	<table border="0" width="65%" id="table4" height="535">
 		<tr>
 			<td align="center" bgcolor="#E9FFD2" colspan="4"><b><font size="2" color="#008000">(${myup})</font><font size="2" color="#FF0000"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1917466217'/></font></b></td>
-			<td align="center" bgcolor="#FFE888" colspan="4"><b><font size="2" color="#008000">(${myup})</font><font size="2" color="#FF0000">当前<s:text name='vipsgks01.jsp.sgks01.jsp.681548'/>层内层封顶情况</font></b></td>
+			<td align="center" bgcolor="#FFE888" colspan="4"><b><font size="2" color="#008000">(${myup})</font><font size="2" color="#FF0000"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.438864785'/></font></b></td>
 		</tr>
 		<tr>
 			<td align="center" bgcolor="#E9FFD2"><b><s:text name='vipsgks01.jsp.sgks01.jsp.1017813'/></b></td>

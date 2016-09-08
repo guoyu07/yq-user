@@ -125,9 +125,9 @@
 	<div class="time-item">
 		<span><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.684762'/></span>
 		<!-- <strong><s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.20833240'/></strong> -->
-		<strong id="hour_show">0时</strong>
-		<strong id="minute_show">0分</strong>
-		<strong id="second_show">0秒</strong>
+		<strong id="hour_show">0<s:test name="hour"></s:test></strong>
+		<strong id="minute_show">0<s:test name="Minute"></s:test></strong>
+		<strong id="second_show">0<s:test name="second"></s:test></strong>
 	</div>
 </body>
 </html>

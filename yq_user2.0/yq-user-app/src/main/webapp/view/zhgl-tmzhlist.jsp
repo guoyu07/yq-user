@@ -41,7 +41,7 @@
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>
-								<td><a href="/relogin?luserName=${data.username}">${data.username}</a><c:if test="${data.username==gcuser.username}"></font><b><font color="#FF00FF">(当前)</font></b></c:if></td>
+								<td><a href="/relogin?luserName=${data.username}">${data.username}</a><c:if test="${data.username==gcuser.username}"></font><b><font color="#FF00FF">(<s:text name='current'/>)</font></b></c:if></td>
 								<td>${data.name}</td>
 								<td>${data.sjb}</td>
 								<td>${data.pay}</td>

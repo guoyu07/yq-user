@@ -69,13 +69,13 @@
 				<option value="100">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</option>
 				</select>
 				</font>
-				<font color="#FF0000" style="font-size: 11pt">** </font><b>&nbsp;<INPUT class=normalButton type=submit value="提 交" name=submit2 style="font-size: 11pt"></TD>
+				<font color="#FF0000" style="font-size: 11pt">** </font><b>&nbsp;<INPUT class=normalButton type=submit value="<s:text name='submit'/>" name=submit2 style="font-size: 11pt"></TD>
     </TR>
   </TBODY>
 </TABLE>
-		<p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2">提示：您的<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/><font color="#FF0000">${pay}</font></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
-		<font style="font-size: 11pt">按<font color="#FF0000">15-<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>-买10金币</font>的比例，<s:text name='reg1.jsp.reg1.jsp.799375'/>后显示相应金币卡</font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
-		<font style="font-size: 11pt">再到<font color="#0000FF"><b><s:text name='viewjflc.jsp.jflc.jsp.951062035'/></b></font>下<font color="#0000FF"><b><s:text name='vipadmin_menu.jsp.admin_menu.jsp.782396711'/></b></font>-激活或复制赠送即可！</font></div>
+		<p style="line-height: 200%; margin-top: 0; margin-bottom: 0"><font size="2"><s:text name='vipjztojb.jsp.jztojb.jsp.890004381'/><font color="#FF0000">${pay}</font></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
+		<font style="font-size: 11pt"><s:text name='vipjztojb.jsp.jztojb.jsp.186706464'/></font><p style="line-height: 200%; margin-top: 0; margin-bottom: 0">
+		<font style="font-size: 11pt"><s:text name='vipjztojb.jsp.jztojb.jsp.17234952'/>！</font></div>
 </form>
     </td>
     </tr>

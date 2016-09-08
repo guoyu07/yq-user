@@ -65,10 +65,10 @@ return (allValid);
 						<form class="form form4 h463" method="POST" name="Form" onSubmit="return checkdate()" action="bdbzz?status=1">
 							<p><label class="c-r"><s:text name='viewlinks.html.links.html.1159182'/><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><input type="text" name="jcname" size="15" value="${userName}" readonly></p>
 							<p><label><s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.1129373465'/>：</label><select size="1" name="jzpay">
-		<option selected value="10000">--1万--</option>
-		<option value="20000">--2万--</option>
-		<option value="30000">--3万--</option>
-		<option value="50000">--5万--</option>
+		<option selected value="10000">--1<s:text name='wan'/>--</option>
+		<option value="20000">--2<s:text name='wan'/>--</option>
+		<option value="30000">--3<s:text name='wan'/>--</option>
+		<option value="50000">--5<s:text name='wan'/>--</option>
 		</select></font><font color="#008000" size="2"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/>：</font><b><font color="#0000FF" size="2">${sybdb}</font></b></p>
 							<p><label><s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1542679092'/>：</label><input type="text" name="syuser" size="15"></p>
 							<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input type="password" name="pa3" size="20"></p>

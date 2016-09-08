@@ -11,7 +11,7 @@
  </script>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
-<title><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>转金币卡</title>
+<title><s:text name='vipjztojb2.jsp.jztojb2.jsp.-1978587226'/></title>
 <style>
 <!--
 .border {

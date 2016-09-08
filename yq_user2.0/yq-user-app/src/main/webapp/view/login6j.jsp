@@ -19,7 +19,7 @@ function checkdate()  {
 				location.replace('gmjh');
 				return;
 			}else{
-				alert('<s:text name='reg.jsp.reg.jsp.630954966'/>输入错误！请重新输入');
+				alert('<s:text name='viewlogin6j.jsp.login6j.jsp.950326025'/>');
 				Form.password3.focus();
 				return;
 			}

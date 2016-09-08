@@ -108,7 +108,7 @@ $(document).ready(function(){
 </table> 
 </div> </div>
 <p align="center">
-<a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.326654005'/></font></a><font color="#FF6600" style="font-size: 12pt; font-weight: 700">---<a href="epjysc"><font color="#0000FF">到<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>-交易市场</font></a>---<a href="epmcjl"><font color="#008000">到<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>-<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/>明细</font></a></font></p>
+<a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700"><s:text name='vipepjysc.jsp.epjysc.jsp.1091246016'/></font></a><font color="#FF6600" style="font-size: 12pt; font-weight: 700">---<a href="epjysc"><font color="#0000FF"><s:text name='vipepjysc.jsp.epjysc.jsp.1091246016a'/></font></a>---<a href="epmcjl"><font color="#008000"><s:text name='vipepjysc.jsp.epjysc.jsp.1091246016b'/></font></a></font></p>
 <p align="center"></p>
 <p align="center"></p>
 </body> 

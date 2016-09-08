@@ -106,7 +106,7 @@ function checkdate1()  {
 			<td width="336" align="left"><font color="#0000FF"><b>${gcuser.name}</b></font></td>
 		</tr>
 		<tr>
-			<td width="214" align="right" height="25">商户<s:text name='vipybpay.jsp.ybpay.jsp.29623262'/>：</td>
+			<td width="214" align="right" height="25"><s:text name='vipybsf.jsp.ybsf.jsp.-535714675'/>：</td>
 			<td width="336" align="left" height="18"><font color="#008000"><b>${gcuser.username}</b></font><input type="hidden" name="sh" size="20" value="${gcuser.username}" readonly></td>
 			</tr>
 		<tr>
@@ -122,7 +122,7 @@ function checkdate1()  {
 			<td width="336" align="left"><input id="pay10" type="text" name="pay10" size="20" style="color: #0000FF" readonly><input type="hidden" name="remark" size="5" value="12" readonly></td>
 		</tr>
 		<tr>
-			<td width="214" align="right" height="25"><s:text name='vipybpay.jsp.ybpay.jsp.702617'/>一币：</td>
+			<td width="214" align="right" height="25"><s:text name='vipybsf.jsp.ybsf.jsp.675858010'/>：</td>
 			<td width="336" align="left"><b><font color="#FF0000"><input id="ybpay" type="text" name="ybpay" size="15" style="; color: #FF0000; font-weight: bold" readonly></font></b></td>
 		</tr>
 		<tr>
