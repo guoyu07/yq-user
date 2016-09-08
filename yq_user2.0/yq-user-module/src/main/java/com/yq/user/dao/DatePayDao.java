@@ -183,7 +183,8 @@ public class DatePayDao {
 	}
 	
 	public IPage<DatepayMore> getPageByJfMr(String username,int pageIndex,int pageSize){
-		String sql="select dp.*,gp.mysl from datepay dp left join gpjy gp on dp.id=gp.jyid where dp.username = ? and dp.dbjc>0 and dp.regid='买入挂牌中' order by dp.id desc" ;
+//		String sql="select dp.*,gp.mysl from datepay dp left join gpjy gp on dp.id=gp.jyid where dp.username = ? and dp.dbjc>0 and dp.regid='买入挂牌中' order by dp.id desc" ;
+		String sql="select * from datepay where username = ? and dbjc>0 and regid='买入挂牌中' order by id desc" ;
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(username);
 		return this.jdbc.getListPage(sql, DatepayMore.class, sqlParameter, pageSize, pageIndex);

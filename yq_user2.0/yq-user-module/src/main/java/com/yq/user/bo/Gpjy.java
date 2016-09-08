@@ -119,6 +119,9 @@ public class Gpjy{
 	public void setNewjy(int newjy) {
 		this.newjy = newjy;
 	}
+	public int countNum(double price){
+		return (int)(this.jypay/price);
+	}
 	@Override
 	public String toString() {
 		return "Gpjy [id=" + id + ", jyid=" + jyid + ", kjqi=" + kjqi + ", username=" + username + ", mysl=" + mysl
