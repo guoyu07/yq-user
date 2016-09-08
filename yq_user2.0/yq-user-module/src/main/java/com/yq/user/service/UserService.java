@@ -1816,7 +1816,7 @@ public class UserService {
 				throw new ServiceException(2, "此订单号已经处理过，请不要重复！");
 			}
 		}else{
-			regId = "收到-"+fromUser.substring(0, 2)+"***";
+			regId = "收到-"+fromUser.substring(0, 2)+"***"+"-"+yy;
 //			if(fromUser.equals("300fhk")){
 //				regId = "收到-300***"+"-"+yy;
 //			}else{
