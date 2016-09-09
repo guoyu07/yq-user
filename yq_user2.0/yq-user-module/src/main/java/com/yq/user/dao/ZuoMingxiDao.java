@@ -40,7 +40,6 @@ public class ZuoMingxiDao {
     	jdbc.insert(list);
     }
     
-    
     public List<ZuoMingxi> getDownList(String down){
     	String sql = "select * from "+table+" where down = ?";
     	SqlParameter parameter = new SqlParameter();

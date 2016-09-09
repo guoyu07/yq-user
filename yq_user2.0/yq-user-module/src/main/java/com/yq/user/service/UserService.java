@@ -1039,7 +1039,7 @@ public class UserService {
 			
 			List<ZuoMingxi> zTList = Lists.newArrayList();
 			List<YouMingxi> yTList = Lists.newArrayList();
-			cupUser(bduser,bduser,1,zysjb,zTList,yTList);//不知道他在干嘛
+			cupUser(bduser,bduser,1,zysjb,zTList,yTList);//建立团队关系
 			if(zTList.size()>0){
 				zuoMingxiDao.batchInsert(zTList);
 			}
@@ -1051,7 +1051,7 @@ public class UserService {
 			List<ZuoMingxi> zList = zuoMingxiDao.getDownList(bduser);
 			if(zList!=null&&!zList.isEmpty()){
 				for(ZuoMingxi zuoMingxi:zList){
-					int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
+					int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());//得到明细的sjb的总和
 					if(sjtjzb>0){
 						if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
 							sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());

@@ -12,7 +12,7 @@ import com.yq.user.service.UserService;
 public class Gcuser{
 	private Integer id;
 	private String username;
-	private String up;
+	private String up;				//上级
 	private int jb;
 	private int sjb;
 	//0普通用户   2大vip  3小vip
@@ -30,9 +30,9 @@ public class Gcuser{
 	private String vipzh;
 	private int cbgc;
 	private int jbpay;
-	private int cbpay;
-	private int pay;
-	private int txpay;
+	private int cbpay;				//累计交易一币
+	private int pay;				//当前可用一币
+	private int txpay;				//累计使用一币(已提现)
 	private int vippay;
 	private int jjpay;
 	private int fhpay;
@@ -54,11 +54,11 @@ public class Gcuser{
 	private int stopgc;
 	private int fhsy;
 	private int ljfh;
-	private int jyg;
+	private int jyg;				//积分
 	private int stopjyg;
 	private Date jygdate;
 	private int jygt1;
-	private int jydb;
+	private int jydb;				//金币
 	private Date dbdate;
 	private int dbt1;
 	private int cfa;

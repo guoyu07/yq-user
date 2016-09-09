@@ -22,12 +22,12 @@ public class Sgxt{
 	private Integer dqzuo;
 	private Integer dqyou;
 	private int count;
-	private int zaq;
-	private int zbq;
-	private int aq;
-	private int bq;
-	private String auid;
-	private String buid;
+	private int zaq;				//左a区
+	private int zbq;				//左b区
+	private int aq;					//右a区
+	private int bq;					//右b区
+	private String auid;			//左区用户id
+	private String buid;			//右区用户id
 	private double cbpay;
 	private double pay;
 	private Date bddate;
