@@ -97,7 +97,7 @@ a:hover{ color:#272a3d;}
 .content-box{ padding: 0 10px; height: 638px;}
 
 /* 表单样式 */
-.content-table{height: 580px;overflow-x:auto;}
+.content-table{height: 520px;overflow-x:auto;}
 .content-table table{ width: 100%; text-align: center;  color:#000;  font-size: 12px;  }
 .content-table tr{ background: #e3e3e3; border-left:1px solid #989898; border-right:1px solid #989898;}
 .content-table tr, .content-table td, .content-table th{ border-left:1px solid #989898; border-right:1px solid #989898;}
