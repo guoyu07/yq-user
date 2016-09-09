@@ -113,13 +113,13 @@ function closeadright(){
 	return;
 }
 window.onload = function(){
- var adleft = document.getElementById("adleft");
- var adright = document.getElementById("adright");
- var adtop = adleft.offsetTop;
- window.onscroll = function(){
-  adleft.style.top = adtop + (document.documentElement.scrollTop || document.body.scrollTop) +"px"; 
-  adright.style.top = adtop + (document.documentElement.scrollTop || document.body.scrollTop) +"px"; 
- }
+	 var adleft = document.getElementById("adleft");
+	 var adright = document.getElementById("adright");
+	 var adtop = adleft.offsetTop;
+	 window.onscroll = function(){
+	  adleft.style.top = adtop + (document.documentElement.scrollTop || document.body.scrollTop) +"px"; 
+	  adright.style.top = adtop + (document.documentElement.scrollTop || document.body.scrollTop) +"px"; 
+	 }
 } 
 </script>
 </body>

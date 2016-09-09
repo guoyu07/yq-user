@@ -72,7 +72,7 @@ return true;
 							<p><label><s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.778584440'/>：</label><input style="width:100px;" type="text" name="jzpay" size="15" maxlength="10"></p>
 							<p><label><s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.-1306168857'/>：</label><input type="password" name="pa" size="20"></p>
 							<p><label><s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.-1603016952'/>：</label><input type="password" name="pa3" size="20"></p>
-							<p><label></label><button class="but1" type=submit  name=submit2  onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')">确 定 转 账</button></p>
+							<p><label></label><button class="but1" type=submit  name=submit2  onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')"><s:text name="viewyblc-mallback.jsp.yblc-mallback.jsp.537856614a"></s:text></button></p>
 					</form>
 					</div>
 				</div>

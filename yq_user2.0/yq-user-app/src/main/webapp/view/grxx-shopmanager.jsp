@@ -10,18 +10,17 @@
 <script type="text/javascript" src="/images/jquery.min.js"></script>
 <script>
 function rst(n){
-if(n!=""){
-document.getElementById('pay10').value=(n*0.02).toFixed(0);
-document.getElementById('ybpay').value=(n*1.02).toFixed(0);
-}else{
-document.getElementById('pay10').value="";
-document.getElementById('ybpay').value="";
-}
+	if(n!=""){
+		document.getElementById('pay10').value=(n*0.02).toFixed(0);
+		document.getElementById('ybpay').value=(n*1.02).toFixed(0);
+	}else{
+		document.getElementById('pay10').value="";
+		document.getElementById('ybpay').value="";
+	}
 }
 
 
-function Check()
-{
+function Check(){
 	if ( Form.user.value==""){
 		alert ("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-2036326914'/>!！");
 		Form.user.focus();

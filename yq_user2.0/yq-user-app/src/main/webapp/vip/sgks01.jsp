@@ -317,14 +317,14 @@
 			<td align="center" bgcolor="#FFF2BF"><font color="#FF0000">${sgxt.cfd}</font></td>
 		</tr>
 		<tr>
-			<td align="center" width="367" bgcolor="#E3E3E3" colspan="4"><p align="left"><font color="#0000FF">当前3层内的<s:text name='vipsgks01.jsp.sgks01.jsp.769813'/>与<s:text name='vipsgks01.jsp.sgks01.jsp.690856'/>指的是该<s:text name='vipdatepay.jsp.datepay.jsp.29623262'/>网络下全部<s:text name='vipsgks01.jsp.sgks01.jsp.1029202'/>总单数</font></td>
+			<td align="center" width="367" bgcolor="#E3E3E3" colspan="4"><p align="left"><font color="#0000FF"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1039881654'/></font></td>
 			<td align="center" bgcolor="#FFF2BF"><b><s:text name='vipsgks01.jsp.sgks01.jsp.680819'/></b></td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.z15}</td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.y15}</td>
 			<td align="center" bgcolor="#FFF2BF"><font color="#FF0000">${sgxt.cfd}</font></td>
 		</tr>
 		<tr>
-			<td align="center" width="367" bgcolor="#E3E3E3" colspan="4"><p align="left"><font color="#0000FF">当前16层内指的是</font><b><font size="2" color="#008000">(${myup})</font></b><font color="#0000FF">各层左与右目前的总单数</font></td>
+			<td align="center" width="367" bgcolor="#E3E3E3" colspan="4"><p align="left"><font color="#0000FF"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.2025953425'/></font><b><font size="2" color="#008000">(${myup})</font></b><font color="#0000FF"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.2025953425a'/></font></td>
 			<td align="center" bgcolor="#FFF2BF"><b><s:text name='vipsgks01.jsp.sgks01.jsp.681548'/></b></td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.z16}</td>
 			<td align="center" bgcolor="#FFF2BF">${sgxt.y16}</td>

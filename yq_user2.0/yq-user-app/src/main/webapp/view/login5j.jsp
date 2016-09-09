@@ -19,7 +19,7 @@ function checkdate()  {
 				location.replace('jztojb');
 				return;
 			}else{
-				alert('<s:text name='reg.jsp.reg.jsp.630954966'/>输入错误！请重新输入');
+				alert('<s:text name='viewlogin2j.jsp.login2j.jsp.950326025'/>');
 				Form.password3.focus();
 				return;
 			}
@@ -36,7 +36,6 @@ function checkdate()  {
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
 				<%@ include file="/view/yblc.jsp" %>
 			</div>

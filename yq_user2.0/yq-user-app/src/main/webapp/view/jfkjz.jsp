@@ -41,18 +41,17 @@
 	</table>
 </div>
 <script>
-var secs = 60;  //6为倒计时秒数
-for(i=0;i<=secs;i++) {
-   window.setTimeout("update(" + i + ")", i * 1000);
-}
-
-function update(num) {
-if(num == secs) {
-   window.location="jfjqks";  //2.htm为到时跳转的页面URL
-}
-else {
- printnr = secs-num;
- document.getElementById('sec').innerHTML = printnr;
-}
-}
+	var secs = 60;  //6为倒计时秒数
+	for(i=0;i<=secs;i++) {
+	   window.setTimeout("update(" + i + ")", i * 1000);
+	}
+	
+	function update(num) {
+		if(num == secs) {
+		   	 window.location="jfjqks";  //2.htm为到时跳转的页面URL
+		}else {
+			 printnr = secs-num;
+			 document.getElementById('sec').innerHTML = printnr;
+		}
+	}
 </script>

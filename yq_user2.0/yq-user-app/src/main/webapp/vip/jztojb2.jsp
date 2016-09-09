@@ -103,7 +103,7 @@
     </TR>
     <TR class=content> 
       <TD width="213" bgColor=#ffffff align="left" style="color: #304618; font-size: 12px"></TD>
-      <TD width="304" bgColor=#ffffff style="color: #304618; font-size: 12px" align="left"><b><INPUT class=normalButton type=submit value="提 交" name=submit2 style="font-size: 11pt"><font color="#FF6600" style="font-size: 12pt; font-weight: 700">&nbsp; </font><a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700"><s:text name='vipjztojb3.jsp.jztojb3.jsp.326642469'/></font></a></TD>
+      <TD width="304" bgColor=#ffffff style="color: #304618; font-size: 12px" align="left"><b><INPUT class=normalButton type=submit value="<s:text name='vipsgreg.jsp.sgreg.jsp.812244'/>" name=submit2 style="font-size: 11pt"><font color="#FF6600" style="font-size: 12pt; font-weight: 700">&nbsp; </font><a href="javascript:history.back();" style="text-decoration: none"><font color="#FF6600" style="font-size: 12pt; font-weight: 700"><s:text name='vipjztojb3.jsp.jztojb3.jsp.326642469'/></font></a></TD>
     </TR>
   </TBODY>
 </TABLE>

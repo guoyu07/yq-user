@@ -19,7 +19,7 @@
   if (Form.jzpay.value<5000) {      alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.97164307'/>5000!");      return false;    } 
   if (Form.syuser.value=="") {      alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1479911832'/>!");      return false;    }
   if (Form.jcname.value==Form.syuser.value) {      alert("<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1929667708'/>!");      return false;    }
-  if (Form.pa3.value=="") {      alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1989247238'/>密码!");      return false;    } 
+  if (Form.pa3.value=="") {      alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1989247238'/>!");      return false;    } 
   if (!chkinteger(Form.jzpay.value)){
 	alert('<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.375811844'/>!');
 	document.Form.jzpay.focus;

@@ -163,9 +163,11 @@
 										<td><c:if test="${!empty sgxtba.auid}"><a href="sgks01?bd=${bdid}&myup=${sgxtba.auid}" style="text-decoration: none">${sgxtba.auid}（${sgxtbaa.sjb}）</a></c:if>
 			<c:if test="${empty sgxtba.auid}">
 			   <c:if test="${not empty sgxtba.username}">
-			   		<a href="sgreg?bd=${bdid}&myup=${sgxtba.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
+			   	<a href="sgreg?bd=${bdid}&myup=${sgxtba.username}" style="text-decoration: none"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1123809299'/></a>
 			   </c:if>
-			   <c:if test="${empty sgxtba.username}"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/></c:if>
+			   <c:if test="${empty sgxtba.username}">
+			   	<s:text name='viewyjcx-game.jsp.yjcx-game.jsp.802378150'/>
+			   </c:if>
 			</c:if></td>
 										<td><span class="r"></span></td>
 										<td><span class="r"></span></td>

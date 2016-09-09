@@ -50,7 +50,7 @@ if( asjb==1 ){
 						<li><s:text name='viewlinks.html.links.html.-881818137'/>：<span class="c-z"><%=yjcxGcuser.getPay()+yjcxGcuser.getSyep()%></span></li>
 						<li><a href="/bdbdate"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>
 						<% if(yjcxGcuser.getVip()>0) {%>
-						<%="--<a href=\"/bdbzz\"><s:text name='viewlinks.html.links.html.1159182'/></a>"%>
+						<%="--<a href=\"/bdbzz\">"%><s:text name='viewlinks.html.links.html.1159182'/><%="</a>"%>
 						<%}%>
 						</li>
 						<li><s:text name='viewlinks.html.links.html.667104660'/>：<span class="c-b"><%=fdpay%></span></li>

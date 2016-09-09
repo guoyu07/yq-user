@@ -21,7 +21,7 @@
 <script type="text/ecmascript" src="images/md5.js"></script>
 <script language="JavaScript"> 
  function checkdate()  {  
-  if (Form.txpay.value==0) {      alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.35601975'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>的数量!");      return false;    }
+  if (Form.txpay.value==0) {      alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-861806777'/>!");      return false;    }
   if (!chkinteger(Form.txpay.value)){
 	alert('<s:text name='vipuserpay.jsp.userpay.jsp.431301541'/>!');
 	document.Form.txpay.focus;

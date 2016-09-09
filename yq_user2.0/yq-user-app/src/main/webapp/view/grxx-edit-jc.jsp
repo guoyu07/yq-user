@@ -64,6 +64,7 @@
 					</div>
 					<div class="new5-right">
 						<h3><s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.-948760164'/></h3>
+						<%//TODO 此处需要做国际化处理 %>
                         <p><a target="_blank" href="images/积分游戏平台用户名转让申请书.doc">《积分游戏平台用户名转让申请书》</a></p>
 					</div>
 				</div>

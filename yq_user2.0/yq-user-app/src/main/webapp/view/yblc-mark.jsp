@@ -50,7 +50,7 @@
 								<td> ${data.paynum}</td>
 								<td>${data.paynum-data.paynum9}</td>
 								<td>${data.paytime}</td>
-								<td> <c:if test="${data.payusername==userName}"><b><a onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000"><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.625799226a'/></font></a></b></c:if><c:if test="${data.payusername!=userName}"><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.1991539691'/>。。。</c:if></td>
+								<td> <c:if test="${data.payusername==userName}"><b><a onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000"><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.625799226a'/></font></a></b></c:if><c:if test="${data.payusername!=userName}"><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.1991539691'/></c:if></td>
 								<td><a onClick="<s:text name='viewyblc-mark.jsp.yblc-mark.jsp.1903383816'/>" href="epmy?ep=${data.payid}"><font color="#FF0000" size="2"><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.1903383816a'/></font></a></td>
 							</tr>
 							</s:iterator>

@@ -76,7 +76,7 @@ $(document).ready(function(){
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0">
             <tr> 
           <td width="104" align="center" height="23" bgcolor="#FBFAEC"><b><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.27758404'/>1</b></td>
-          <td width="136" align="center" height="23" bgcolor="#FBFAEC"><font face="Arial" color="#000000"><strong style="font-weight: 400"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/>方（自己）</strong></font></td>
+          <td width="136" align="center" height="23" bgcolor="#FBFAEC"><font face="Arial" color="#000000"><strong style="font-weight: 400"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-365289126'/></strong></font></td>
           <td width="83" align="center" height="23" bgcolor="#FBFAEC"><font color="#FF0000"><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.855285018'/></font></td>
           <td width="133" align="center" height="23" bgcolor="#FBFAEC"><font color="#000000"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.663201424'/></font></td>
           <td width="242" align="center" height="23" bgcolor="#FBFAEC"><s:text name='vipepmcjl.jsp.epmcjl.jsp.625799226'/></td>

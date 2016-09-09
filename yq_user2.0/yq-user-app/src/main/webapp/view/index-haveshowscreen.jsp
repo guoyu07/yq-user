@@ -106,7 +106,7 @@
 			<form method="POST" name="Form" onSubmit="return false">
 				<p><input type="text" name="ygid" value="<% if(request.getParameter("id")!=null){%><%=request.getParameter("id")%><%}%>" class="name" /></p>
 				<p><input type="password" name="pa" class="pw" /></p>
-				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="点击刷新" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
+				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="<s:text name='Clickrefresh'/>" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
 				<!-- <p class="pab"><input type="checkbox" /><span>记住<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></span>   <a href="#">忘记密码</a></p> -->
 				<p><button class="log" onClick="logins();"></button></p>
 				<a class="restyle" href="/reg"><s:text name='register'/><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></a>

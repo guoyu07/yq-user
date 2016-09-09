@@ -57,7 +57,7 @@
 		</tbody></table>
 	</div>
 		<p class="z-tc"><font size="2"><s:text name='viewjflc-markbak.jsp.jflc-markbak.jsp.101873798'/>。</font>
-		<table border="1" width="100%" id="table2" cellpadding="2">
+			<table border="1" width="100%" id="table2" cellpadding="2">
 			<tr>
 				<td align="center">
 					<iframe name="I1" marginwidth="1" marginheight="1" width="100%" height="768" align="center" border="0" frameborder="0" src="gpjymc" scrolling="no" ></iframe>
@@ -66,9 +66,12 @@
 					<iframe name="I2" marginwidth="1" marginheight="1" width="100%" height="768" align="center" border="0" frameborder="0" src="gpjymy" scrolling="no" ></iframe>
 				</td>
 			</tr>
-		</table>
-</p></td></tr> 
-</tbody></table>
+			</table>
+		</p>
+				</td>
+					</tr>
+					</tbody>
+					</table>
 					</div>
 				</div>
 			</div>

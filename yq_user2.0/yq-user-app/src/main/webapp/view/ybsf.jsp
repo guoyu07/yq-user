@@ -6,13 +6,13 @@
 <script src="/scripts/sms.js"></script>
 <script>
 function rst(n){
-if(n!=""){
-document.getElementById('pay10').value=(n*0.02).toFixed(0);
-document.getElementById('ybpay').value=(n*1.02).toFixed(0);
-}else{
-document.getElementById('pay10').value="";
-document.getElementById('ybpay').value="";
-}
+	if(n!=""){
+		document.getElementById('pay10').value=(n*0.02).toFixed(0);
+		document.getElementById('ybpay').value=(n*1.02).toFixed(0);
+	}else{
+		document.getElementById('pay10').value="";
+		document.getElementById('ybpay').value="";
+	}
 }
 
 
@@ -21,12 +21,12 @@ function Check()
 	if ( Form.user.value==""){
 		alert ("<s:text name='index.jsp.index.jsp.-2036326914'/>!！");
 		Form.user.focus();
-		return false;vipybsf.jsp.ybsf.jsp.-1777679097
+		return false;
 	}
 	var uName=document.Form.user.value;
 	var data= null;
 	$.post("yb?username="+uName,data, function(response) {
-		if(response.erroCodeNum==0){//注册<s:text name='reg1.jsp.reg1.jsp.799375'/>
+		if(response.erroCodeNum==0){
 			alert('<s:text name='vipybsf.jsp.ybsf.jsp.945991493'/>：'+response.yb);
 		}else{
 			alert('<s:text name='vipybsf.jsp.ybsf.jsp.-1777679097'/>！');
@@ -53,7 +53,6 @@ function checkdate1()  {
 	  if (Form.user.value=="") {     alert("<s:text name='vipybsf.jsp.ybsf.jsp.751820177'/>!");  Form.user.focus();      return false;    }
 	  if (Form.pa01.value=="") {      alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1841070946'/>!");  Form.pa01.focus();      return false;    }
 	  if (Form.pa02.value=="") {      alert("<s:text name='vipybsf.jsp.ybsf.jsp.1544222851'/>!");  Form.pa02.focus();      return false;    }
-  //if (Form.sfcode.value=="") {   alert("请先点击<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>，然后再填入您的<s:text name='reg.jsp.reg.jsp.806479'/>收到的验证码");  Form.sfcode.focus();   return false;    }
   	  var data = $("#Form").serialize();
   	  alert(data);
 	  $.post("ybsf?status=1", data, function(response) {
