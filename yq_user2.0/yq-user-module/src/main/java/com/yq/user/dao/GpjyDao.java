@@ -95,7 +95,7 @@ public class GpjyDao {
 	
 	private List<Gpjy> initMrCache(int pageSize){
 //		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
-		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mr order by id asc limit "+pageSize+")t )";
+		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mr order by pay desc limit "+pageSize+")t )";
 		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
 		
 		setCacheList(MR_KEY, list);
