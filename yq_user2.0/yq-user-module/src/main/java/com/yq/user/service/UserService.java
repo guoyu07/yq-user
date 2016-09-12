@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,7 @@ import com.yq.user.bo.UserScoresLogForExcel;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
+import com.yq.user.constant.GpjyChangeType;
 import com.yq.user.constant.ScoresChangeType;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.BabyInfoDao;
@@ -1816,12 +1819,15 @@ public class UserService {
 				throw new ServiceException(2, "此订单号已经处理过，请不要重复！");
 			}
 		}else{
-			regId = "收到-"+fromUser.substring(0, 2)+"***"+"-"+yy;
-//			if(fromUser.equals("300fhk")){
-//				regId = "收到-300***"+"-"+yy;
-//			}else{
-//				regId = "收到-"+fromUser+"-"+yy;
-//			}
+//			regId = "收到-"+fromUser.substring(0, 2)+"***"+"-"+yy;
+			if(fromUser.equals("300fhk")){
+				regId = "收到-300***"+"-"+yy;
+			}else if(fromUser.equals("xtgc002")){
+				regId = "收到-xtg***"+"-"+yy;
+			}
+			else{
+				regId = "收到-"+fromUser+"-"+yy;
+			}
 		}
         Gcuser toGcUser = gcuserDao.getUser(toUser);
 		
@@ -2847,8 +2853,10 @@ public class UserService {
 		double price = fcxt.getJygj();
 		if(result!=null&&result.size()>0){
 			for(Gpjy gpjy:result){
-				gpjy.setPay(price);
-				gpjy.setMysl(Double.valueOf(gpjy.countNum(price)));
+				if(gpjy.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
+					gpjy.setPay(price);
+					gpjy.setMysl(Double.valueOf(gpjy.countNum(price)));
+				}
 			}
 		}
 		return result;
@@ -3156,8 +3164,10 @@ public class UserService {
 		//重置数量和价格
 		Fcxt fcxt = managerService.getFcxtById(2);
 		double price = fcxt.getJygj();
-		gpjy1.setPay(price);
-		gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
+		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
+			gpjy1.setPay(price);
+			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
+		}
 		
 		double dqpay92 = (0.9 * gpjy1.getJypay());
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
@@ -3869,6 +3879,12 @@ public class UserService {
 		if(fcxt!=null&&fcxt.getPayadd()<1){
 			throw new ServiceException(1, "您好，今天的名额已用完，请于明天再试，谢谢！");
 		}
+		if(Strings.isNullOrEmpty(call)){
+			throw new ServiceException(6,"手机号码不符合规则！");
+		}
+		if(!isMobile(call)){
+			throw new ServiceException(6,"手机号码不符合规则！");
+		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser!=null){
 			if(gcuser.getHfcjdate()!=null&&gcuser.getHfcjdate().getTime()>System.currentTimeMillis()){
@@ -3887,6 +3903,8 @@ public class UserService {
 			throw new ServiceException(3000, "用户不存在！");
 		}
 		
+		
+		
 		if(this.changeYb(userName, -yb, "话费-"+call, 7, null,0d)&&gcuserDao.updateUserHfCz(gcuser.getName(), gcuser.getUserid(), DateUtils.addDay(new Date(), 31))){
 			taskExecuter.execute(new Runnable() {
 				@Override
@@ -3900,6 +3918,23 @@ public class UserService {
 			throw new ServiceException(2, "您好，测试期间同一姓名及证件号30天内仅提供一次充值，谢谢！");
 		}
 		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+	}
+	
+	
+	/**
+	 * 手机号验证
+	 * 
+	 * @param  str
+	 * @return 验证通过返回true
+	 */
+	public static boolean isMobile(String str) { 
+		Pattern p = null;
+		Matcher m = null;
+		boolean b = false; 
+		p = Pattern.compile("^[1][0-9][0-9]{9}$"); // 验证手机号
+		m = p.matcher(str);
+		b = m.matches(); 
+		return b;
 	}
 	
 	public boolean callRemoteCharge(String call,int amount,String ip,String userName){
