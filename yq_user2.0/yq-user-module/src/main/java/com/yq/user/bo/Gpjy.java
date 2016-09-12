@@ -22,7 +22,7 @@ public class Gpjy{
 	private int jy;
 	private String dfuser;
 	private Date dqdate;
-	private int newjy;
+	private int newjy;//用这个来标识类型  100系统代买
 	public Integer getId() {
 		return id;
 	}

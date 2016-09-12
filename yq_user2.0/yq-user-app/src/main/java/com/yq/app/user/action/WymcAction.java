@@ -5,6 +5,7 @@ import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.constant.GpjyChangeType;
 import com.yq.user.service.ManagerService;
 import com.yq.user.service.UserService;
 
@@ -36,8 +37,11 @@ public class WymcAction extends ALDAdminActionSupport {
 		gpjy = userService.getGpjyById(id);
 		
 		Fcxt fcxt = managerService.getFcxtById(2);
-		gpjy.setPay(fcxt.getJygj());
-		gpjy.setMysl(Double.valueOf(gpjy.countNum(fcxt.getJygj())));
+		if(gpjy.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
+			gpjy.setPay(fcxt.getJygj());
+			gpjy.setMysl(Double.valueOf(gpjy.countNum(fcxt.getJygj())));
+		}
+		
 		
 		double dqpay92=(0.9*gpjy.getJypay());
 		dqpay=(int)(dqpay92*1+0.1);
