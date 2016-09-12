@@ -278,6 +278,13 @@ a:hover{ color:#272a3d;}
 .new6-box form .tispsfz{ white-space:nowrap; width: 10px; padding-left: 10px; display: inline-block; }
 .new6-box form .btns{ white-space:nowrap; width: 100px; margin-left: 10px; display: inline-block; margin-right: -100px; cursor: pointer;}
 
+.cnew6-box{  }
+.cnew6-box form input{ height: 20px; line-height: 20px; width: 170px; }
+.cnew6-box form .tispsfz{ white-space:nowrap; width: 10px; padding-left: 10px; display: inline-block; }
+.cnew6-box form .btns{ white-space:nowrap; width: 100px; margin-left: 10px; display: inline-block; margin-right: -100px; cursor: pointer;}
+
+
+
 .new7 h5{ text-align: center; }
 .new7 h4{ font-size: 24px; font-weight: lighter; color: #666; }
 .new7 .bst a{ font-size: 24px; color: #666; font-weight: lighter; }

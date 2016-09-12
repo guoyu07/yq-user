@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="/images/jquery.min.js"></script>
 	    <script language="javascript" src="/scripts/myarea.js"></script>
 	
-	<script language="JavaScript"> 
+<script language="JavaScript"> 
 function CheckIfEnglish( str )
 {  
 if(/[a-z]/.test(str)&&/[0-9]/.test(str)){
@@ -52,7 +52,7 @@ function sendMsg(){
 	$.post("/sms?op=1", data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1886666017'/>"); return false; }
-		settime($("#btn"));
+		settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 		alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1886721436'/>");
 	});
 }
@@ -91,6 +91,90 @@ function checkdate1()  {
 	});
   return true;
 }
+
+
+
+
+
+//中文版提交
+
+function ccheckdate()  {
+
+  if (Cform.name.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-153330493'/>！");Cform.name.focus();      return false;    }
+  if(Cform.newPassWord1.value != "" || Cform.newPassWord2.value != ""){
+	  if (Cform.newPassWord1.value != Cform.newPassWord2.value) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.856129909'/>！"); Cform.newPassWord1.focus();     return false;    }
+	  if (!CheckIfEnglish(Cform.newPassWord1.value)) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-627569921'/>！");  Cform.newPassWord1.focus();      return false;    } 
+	  if (Cform.newPassWord1.value.length > 18 || Cform.newPassWord1.value.length < 6) {  alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-525641962'/>！");  Cform.newPassWord1.focus();  return false;  } 
+  }
+  if(Cform.newSecondPassword1.value != "" || Cform.newSecondPassword2.value != ""){
+	  if (Cform.newSecondPassword1.value != Cform.newSecondPassword2.value) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-947047850'/>！"); Cform.newPassWord1.focus();     return false;    }
+	  if (!CheckIfEnglish(Cform.newSecondPassword1.value)) {		alert("s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1932694410'/>！");Cform.newSecondPassword1.focus();return false;}
+	  if (Cform.newSecondPassword1.value.length < 10) {		alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.908634376'/>!");Cform.newSecondPassword1.focus();return false;}
+	  if (Cform.newSecondPassword1.value.length > 20) {		alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.653975038'/>!");Cform.newSecondPassword1.focus();return false;}
+  }
+  if (Cform.bank.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1996388245'/>！");  Cform.bank.focus();      return false;    } 
+  if (Cform.card.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1712677638'/>！");  Cform.card.focus();      return false;    } 
+  if (Cform.provinceName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145275757'/>!");      return false;    } 
+  if (Cform.cityName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145519509'/>!");      return false;    }
+  if (Cform.areaName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145527167'/>!");      return false;    } 
+  if (Cform.secondPassword.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1544222851'/>！");  Cform.secondPassword.focus();      return false;    }
+  if (Cform.idCard.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1745964948'/>！");  Cform.idCard.focus();      return false;    }
+ 
+	return true;
+}  
+
+function csendMsg(){
+	if(!ccheckdate()){
+		  return;
+	}
+	$("#cbtn").attr("disabled","disabled");
+	var data = $("#Cform").serialize();
+	$.post("/sms?op=1", data, function(response) {
+		$("#cbtn").removeAttr("disabled");
+		if (response.erroCodeNum!=0) { alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1886666017'/>"); return false; }
+		settime($("#cbtn"),'<s:text name="#SESSION_LOCALE"/>');
+		alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1886721436'/>");
+	});
+}
+function ccheckdate1()  {  
+  if (Cform.smsCode.value=="") {   alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-352812950'/>");  Cform.smsCode.focus();   return false;    }
+  if(!ccheckdate()){
+	  return;
+  }
+  var data = $("#Cform").serialize();
+  $.post("userga?status=2", data, function(response) {
+		if(response.erroCodeNum==0){//更新成功
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.606198600'/>！');
+		    location.replace('../index.jsp?id='+Cform.userName.value);
+		}else if(response.erroCodeNum==1){
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1597545170'/>');
+			return;
+		}else if(response.erroCodeNum==2){
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.39306141'/>！');
+			return;
+		}else if(response.erroCodeNum==3){
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-869667680'/>！');
+			return;
+		}else if(response.erroCodeNum==4){
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.698939873'/>！');
+			return;
+		}else if(response.erroCodeNum==5){
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.856129909'/>！');
+			return;
+		}else if(response.erroCodeNum==6){
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-947047850'/>！');
+			return;
+		}else{
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-745085746'/>.['+response.erroCodeNum+']');
+			return;
+		}
+	});
+  return true;
+}
+
+
+
+
 </script>
 <script language="javascript" type="text/javascript">
 <!--
@@ -167,47 +251,97 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							<a href="updateuserjc"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.709350807'/></a>
 						</p>
 					</div>
-					<div class="content-form new6-box">				 
-						<form class="form" method="post" action="" name="Form" id="Form" onSubmit="return false">
-							<input type="hidden" name="remark" size="5" value="2" readonly>
-							<input type="hidden" name="targetdate" size="8">
-							<input type="hidden" name="xmlmode" size="8">
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.29623262'/>：</label>${gcuser.username}<input type="hidden" name="userName" size="20" value="${gcuser.username}" readonly></p>
-							<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-800902043'/>：</label><input type="password" name="newPassWord1" size="20" maxlength="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
-							<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1750523051'/>：</label><input type="password" name="newPassWord2" size="20" tabindex="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
-							<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1097750138'/>：</label><input type="password" name="newSecondPassword1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
-							<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1453674956'/>：</label><input type="password" name="newSecondPassword2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.734362'/>：</label>${gcuser.name}</p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799485150'/>：</label>
-							<select size="1" name="bank">
-							<option selected value="${gcuser.bank}">${gcuser.bank}</option>			
-							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/></option>
-							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/></option>
-							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/></option>
-							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/></option>
-							</select></p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799409753'/>：</label><input type="text" name="card" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="19" value="${gcuser.card}" /></p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1010247606'/>：</label>${gcuser.call}</p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</label>${gcuser.qq}</p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1768474821'/>：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><select name="provinceName" OnChange="ChangeProvince(document.getElementById('provinceName').options[document.getElementById('provinceName').selectedIndex].value);" id="provinceName">
-                      		<option selected= "selected" value="${gcuser.addsheng}">${gcuser.addsheng}</option>
-							<s:iterator var="data" value="provinceList">
-							                      <option value="${data.b}">${data.b}</option>
-							</s:iterator>
-                    </select>
-					 <select name="cityName" onChange="ChangeCity(document.getElementById('cityName').options[document.getElementById('cityName').selectedIndex].value);" id="cityName">
-                      <option selected="selected" value="${gcuser.addshi}">${gcuser.addshi}</option>
-                    </select>
-					 <select name="areaName" onChange="ChangeArea(document.getElementById('areaName').options[document.getElementById('areaName').selectedIndex].value);" id="areaName">
-                      <option selected="selected" value="${gcuser.addqu}">${gcuser.addqu}</option>
-                    </select></span></p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1875608565'/>：</label><input type="password" name="secondPassword" size="20" /></p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-386556444'/>：</label><input type="text" name="idCard" size="20" maxlength="19" /><span class="tispsfz">${gcuser.userid}</span></p>
-							<p><label><s:text name='vipbdreg.jsp.bdreg.jsp.-1704827075'/>：</label><input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"><input class="btns" id="btn" type="button" onclick="sendMsg()" value="<s:text name='vipbdreg.jsp.bdreg.jsp.1753968781'/>" name="B2" /></p>
-							<p style="color: red;"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-2064239147'/>！</p>
-							<p><label></label><button class="but1" type="submit" value="<s:text name="vipuserga.jsp.userga.jsp.1384157160"></s:text>" name="B1" onClick="checkdate1();"><s:text name="vipuserga.jsp.userga.jsp.1384157160"></s:text></button></p>
-					</form>
+					
+					<!-- 判断当前语言，中文的用一种css样式，英文的用一种css样式 -->
+					<c:choose>  
+						<c:when test="${SESSION_LOCALE=='en_US'}">    
+								<div class="content-form new6-box">				 
+								<form class="form" method="post" action="" name="Form" id="Form" onSubmit="return false">
+									<input type="hidden" name="remark" size="5" value="2" readonly>
+									<input type="hidden" name="targetdate" size="8">
+									<input type="hidden" name="xmlmode" size="8">
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.29623262'/>：</label>${gcuser.username}<input type="hidden" name="userName" size="20" value="${gcuser.username}" readonly></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-800902043'/>：</label><input type="password" name="newPassWord1" size="20" maxlength="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1750523051'/>：</label><input type="password" name="newPassWord2" size="20" tabindex="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1097750138'/>：</label><input type="password" name="newSecondPassword1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1453674956'/>：</label><input type="password" name="newSecondPassword2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.734362'/>：</label>${gcuser.name}</p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799485150'/>：</label>
+									<select size="1" name="bank">
+									<option selected value="${gcuser.bank}">${gcuser.bank}</option>			
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/></option>
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/></option>
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/></option>
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/></option>
+									</select></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799409753'/>：</label><input type="text" name="card" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="19" value="${gcuser.card}" /></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1010247606'/>：</label>${gcuser.call}</p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</label>${gcuser.qq}</p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1768474821'/>：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><select name="provinceName" OnChange="ChangeProvince(document.getElementById('provinceName').options[document.getElementById('provinceName').selectedIndex].value);" id="provinceName">
+		                      		<option selected= "selected" value="${gcuser.addsheng}">${gcuser.addsheng}</option>
+									<s:iterator var="data" value="provinceList">
+									                      <option value="${data.b}">${data.b}</option>
+									</s:iterator>
+		                    </select>
+							 <select name="cityName" onChange="ChangeCity(document.getElementById('cityName').options[document.getElementById('cityName').selectedIndex].value);" id="cityName">
+		                      <option selected="selected" value="${gcuser.addshi}">${gcuser.addshi}</option>
+		                    </select>
+							 <select name="areaName" onChange="ChangeArea(document.getElementById('areaName').options[document.getElementById('areaName').selectedIndex].value);" id="areaName">
+		                      <option selected="selected" value="${gcuser.addqu}">${gcuser.addqu}</option>
+		                    </select></span></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1875608565'/>：</label><input type="password" name="secondPassword" size="20" /></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-386556444'/>：</label><input type="text" name="idCard" size="20" maxlength="19" /><span class="tispsfz">${gcuser.userid}</span></p>
+									<p><label><s:text name='vipbdreg.jsp.bdreg.jsp.-1704827075'/>：</label><input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"><input class="btns" id="btn" type="button" onclick="sendMsg()" value="<s:text name='vipbdreg.jsp.bdreg.jsp.1753968781'/>" name="B2" /></p>
+									<p style="color: red;"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-2064239147'/>！</p>
+									<p><label></label><button class="but1" type="submit" value="<s:text name="vipuserga.jsp.userga.jsp.1384157160"></s:text>" name="B1" onClick="checkdate1();"><s:text name="vipuserga.jsp.userga.jsp.1384157160"></s:text></button></p>
+							</form>
+							</div>
+		   				</c:when>
+						<c:otherwise>
+							<div class="content-form cnew6-box">				 
+								<form class="form" method="post" action="" name="Cform" id="Cform" onSubmit="return false">
+									<input type="hidden" name="remark" size="5" value="2" readonly>
+									<input type="hidden" name="targetdate" size="8">
+									<input type="hidden" name="xmlmode" size="8">
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.29623262'/>：</label>${gcuser.username}<input type="hidden" name="userName" size="20" value="${gcuser.username}" readonly></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-800902043'/>：</label><input type="password" name="newPassWord1" size="20" maxlength="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1750523051'/>：</label><input type="password" name="newPassWord2" size="20" tabindex="18" onKeyUp="value=value.replace(/[\W]/g,'')"></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1097750138'/>：</label><input type="password" name="newSecondPassword1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
+									<p><label style="color: red"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1453674956'/>：</label><input type="password" name="newSecondPassword2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.734362'/>：</label>${gcuser.name}</p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799485150'/>：</label>
+									<select size="1" name="bank">
+									<option selected value="${gcuser.bank}">${gcuser.bank}</option>			
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/></option>
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/></option>
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/></option>
+									<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/></option>
+									</select></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799409753'/>：</label><input type="text" name="card" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="19" value="${gcuser.card}" /></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1010247606'/>：</label>${gcuser.call}</p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</label>${gcuser.qq}</p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1768474821'/>：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><select name="provinceName" OnChange="ChangeProvince(document.getElementById('provinceName').options[document.getElementById('provinceName').selectedIndex].value);" id="provinceName">
+		                      		<option selected= "selected" value="${gcuser.addsheng}">${gcuser.addsheng}</option>
+									<s:iterator var="data" value="provinceList">
+									                      <option value="${data.b}">${data.b}</option>
+									</s:iterator>
+		                    </select>
+							 <select name="cityName" onChange="ChangeCity(document.getElementById('cityName').options[document.getElementById('cityName').selectedIndex].value);" id="cityName">
+		                      <option selected="selected" value="${gcuser.addshi}">${gcuser.addshi}</option>
+		                    </select>
+							 <select name="areaName" onChange="ChangeArea(document.getElementById('areaName').options[document.getElementById('areaName').selectedIndex].value);" id="areaName">
+		                      <option selected="selected" value="${gcuser.addqu}">${gcuser.addqu}</option>
+		                    </select></span></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1875608565'/>：</label><input type="password" name="secondPassword" size="20" /></p>
+									<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-386556444'/>：</label><input type="text" name="idCard" size="20" maxlength="19" /><span class="tispsfz">${gcuser.userid}</span></p>
+									<p><label><s:text name='vipbdreg.jsp.bdreg.jsp.-1704827075'/>：</label><input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"><input class="btns" id="cbtn" type="button" onclick="csendMsg()" value="<s:text name='vipbdreg.jsp.bdreg.jsp.1753968781'/>" name="B2" /></p>
+									<p style="color: red;"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-2064239147'/>！</p>
+									<p><label></label><button class="but1" type="submit" value="<s:text name="vipuserga.jsp.userga.jsp.1384157160"></s:text>" name="B1" onClick="ccheckdate1();"><s:text name="vipuserga.jsp.userga.jsp.1384157160"></s:text></button></p>
+							</form>
 					</div>
+		   				</c:otherwise> 
+				   	</c:choose>
+					
 					<div class="new5-right">
 						<h3><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-948760164'/></h3>
 						<p><a target="_blank" href="images/积分游戏平台用户名转让申请书.doc">《积分游戏平台用户名转让申请书》</a></p>
@@ -219,5 +353,5 @@ function AmendCity(ProvinceID,CityID,AreaID)
 </body>
 </html>
 <script type="text/javascript">
-btnStatus($("#btn"));
+btnStatus($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 </script>
