@@ -73,6 +73,7 @@ import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.Vipxtgc;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
+import com.yq.user.constant.GpjyChangeType;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
@@ -1857,6 +1858,7 @@ public class AdminService {
 	    
 	    pageIndex = 0;
 	    //第二遍循环
+	    int buyPerGold = 500;
 	    while(true){
 			page= gcuserDao.getBatchUser(pageIndex, pageSize, endTime);
 	    	if(page!=null){
@@ -1866,17 +1868,17 @@ public class AdminService {
 	    				String clname=gcuser.getUsername();
 	    				int jydball=gcuser.getJydb();
 	    				int jydbnumber=gcuser.getJydb()-30;
-	    				int	ForCount=(int)(jydbnumber/30);
-	    				int lasenumber=jydbnumber%30;
+	    				int	ForCount=(int)(jydbnumber/buyPerGold);
+	    				int lasenumber=jydbnumber%buyPerGold;
 	    				if(ForCount>0){
 	    					for(int j=1;j<=ForCount;j++){
-	    						int insertid = adddatepay(clname,30,jydball-j*30,gcuser.getPay(),"买入挂牌中(系统代)");
-	    						addGpjy(clname,30,(jydball-ForCount*30)*1d,insertid,jyj);
+	    						int insertid = adddatepay(clname,buyPerGold,jydball-j*buyPerGold,gcuser.getPay(),"买入挂牌中(系统代)");
+	    						addGpjy(clname,buyPerGold,(jydball-j*buyPerGold)*1d,insertid,jyj);
 	    					}
 	    				}
 	    				if(lasenumber>1){
-	    					 int insertid=adddatepay(clname,lasenumber,jydball-ForCount*30-lasenumber,gcuser.getPay(),"买入挂牌中(系统代)");
-	    					 addGpjy(clname,lasenumber,(jydball-ForCount*30-lasenumber)*1d,insertid,jyj);
+	    					 int insertid=adddatepay(clname,lasenumber,jydball-ForCount*buyPerGold-lasenumber,gcuser.getPay(),"买入挂牌中(系统代)");
+	    					 addGpjy(clname,lasenumber,(jydball-ForCount*buyPerGold-lasenumber)*1d,insertid,jyj);
 	    				}
 	    				gcuserDao.updateMan1234(clname, 30, null, 0);
 	    			}
@@ -1909,6 +1911,7 @@ public class AdminService {
 		gpjy.setBz("买入挂牌中(系统代)");
 		gpjy.setJypay((int)(mysl+0.1)/1d);
 		gpjy.setJyid(jyid);
+		gpjy.setNewjy(GpjyChangeType.BUY_BY_SYSTEM);
 		gpjyDao.add(gpjy);
 	}
 	@Transactional
@@ -2453,11 +2456,13 @@ public class AdminService {
 		//重置数量和价格
 		Fcxt fcxt = fcxtDao.get(2);
 		double price = fcxt.getJygj();
-		gpjy1.setPay(price);
-		gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));		
+		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
+			gpjy1.setPay(price);
+			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));		
+		}
 		
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
-		if (!gpjyDao.updateBuySuccess(gpjy1.getId(), userName, "买入成功",(int)(dfuser.getJyg()+gpjy1.getMysl()),price,Double.valueOf(gpjy1.countNum(price)))) {
+		if (!gpjyDao.updateBuySuccess(gpjy1.getId(), userName, "买入成功",(int)(dfuser.getJyg()+gpjy1.getMysl()),gpjy1.getPay(),gpjy1.getMysl())) {
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
 		gpjyDao.deleteIndex(gpjy1.getId());
