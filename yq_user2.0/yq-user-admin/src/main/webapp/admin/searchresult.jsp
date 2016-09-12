@@ -83,7 +83,7 @@
 <p>
 			<table class="tablen1">
 						<tr>
-							<td colspan="4"><font color="#000000" style="font-size: 24px;color:red;background:'/meme/images/admin_bg_1.gif'; ">(william123)当前16层内层封情况</font></td>
+							<td colspan="4"><font color="#000000" style="font-size: 20px;color:red;background:'/meme/images/admin_bg_1.gif'; ">（${data.username}）当前16层内层封情况</font></td>
 						</tr>
 						<tr>
 							<th>层数</th>
