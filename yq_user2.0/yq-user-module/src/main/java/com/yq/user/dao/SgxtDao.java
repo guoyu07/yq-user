@@ -70,6 +70,21 @@ public class SgxtDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	/**
+	 * 
+	 * 更新用户左区的业绩
+	 * 
+	 * @param userName 用户名
+	 * 
+	 * @param filedName 左区字段（通常16层内：z1~z16）
+	 * 
+	 * @param filedValue 左区字段的值
+	 *   
+	 * @param dqyou 
+	 * 
+	 * @param count 左区所在层数
+	 * 
+	 * */
 	public boolean updateZfiled(String userName,String filedName,int filedValue,int dqzuo,int count){
 		String sql = "update "+table+" set "+filedName+"=?,dqzuo=?,count=? where username=?";
 		SqlParameter parameter = new SqlParameter();
@@ -79,6 +94,22 @@ public class SgxtDao {
 		parameter.setString(userName);
 		return jdbc.update(sql, parameter)>0;
 	}
+	
+	/**
+	 * 
+	 * 更新用右区的业绩
+	 * 
+	 * @param userName 用户名
+	 * 
+	 * @param filedName 右区字段（通常16层内：y1~y16）
+	 * 
+	 * @param filedValue 右区字段的值
+	 *   
+	 * @param dqyou 
+	 * 
+	 * @param count 右区所在层数
+	 * 
+	 * */
 	
 	public boolean updateYfiled(String userName,String filedName,int filedValue,int dqyou,int count){
 		String sql = "update "+table+" set "+filedName+"=?,dqyou=?,count=? where username=?";

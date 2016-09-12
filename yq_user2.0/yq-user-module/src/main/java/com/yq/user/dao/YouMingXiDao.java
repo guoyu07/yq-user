@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.yq.user.bo.YouMingxi;
+import com.yq.user.bo.ZuoMingxi;
 
 public class YouMingXiDao {
     @Autowired
@@ -14,6 +15,15 @@ public class YouMingXiDao {
     
     private final String table = "you_mingxi";
     
+    /**
+     * 
+     * 通过上、下级用户得到右明细记录
+     * 
+     * @param tjuser
+     * 
+     * @param down
+     * 
+     * */
     public YouMingxi get(String tjuser,String down){
     	String sql = "select * from "+table+" where tjuser = ? and down = ? limit 1";
     	SqlParameter parameter = new SqlParameter();
@@ -22,6 +32,11 @@ public class YouMingXiDao {
     	return jdbc.get(sql, YouMingxi.class, parameter);
     }
     
+    /**
+     * 
+     * 通过下级用户得到右明细记录
+     * 
+     * */
     public YouMingxi get(String down){
     	String sql = "select * from "+table+" where down = ? limit 1";
     	SqlParameter parameter = new SqlParameter();
@@ -37,6 +52,11 @@ public class YouMingXiDao {
     	jdbc.insert(list);
     }
     
+    /**
+     * 
+     * 通过下级用户获取右明细记录列表
+     * 
+     * */
     public List<YouMingxi> getDownList(String down){
     	String sql = "select * from "+table+" where down = ?";
     	SqlParameter parameter = new SqlParameter();
@@ -44,7 +64,27 @@ public class YouMingXiDao {
     	return jdbc.getList(sql, YouMingxi.class, parameter);
     }
     
+    /**
+     * 
+     * 通过上级用户获取右明细记录列表
+     * 
+     * */
+    public List<YouMingxi> getTjuserList(String tjuser){
+    	String sql = "select * from "+table+" where tjuser = ?";
+    	SqlParameter parameter = new SqlParameter();
+    	parameter.setString(tjuser);
+    	return jdbc.getList(sql, YouMingxi.class, parameter);
+    }
     
+    /**
+     * 
+     * 通过上级用户和用户所在层数得到业绩总和
+     * 
+     * @param tjuser 上级用户
+     * 
+     * @param count 用户所在层数
+     * 
+     * */
     public int getSumSjb(String tjuser,int count){
     	String sql = "select sum(sjb) from "+table+" where tjuser = ? and count = ?";
     	SqlParameter parameter = new SqlParameter();

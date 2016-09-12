@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.config.ConfigLoader;
+import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
@@ -3081,4 +3082,39 @@ public class AdminService {
 			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
 		}
 	}
+	
+	/**
+	 * 
+	 * 重置玩家成就
+	 * 
+	 * @param guser 需要重置的玩家
+	 * 
+	 * @return
+	 * */
+	public String resetUserAchivement(String guser) {
+		List<ZuoMingxi> zList = zuoMingxiDao.getTjuserList(guser);
+		if(zList!=null&&!zList.isEmpty()){
+			for(ZuoMingxi zuoMingxi:zList){
+				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
+				if(sjtjzb>0){
+					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
+						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb,zuoMingxi.getCount());
+					}
+				}
+			}
+		}
+		List<YouMingxi> yList = youMingXiDao.getTjuserList(guser);
+		if(yList!=null&&!yList.isEmpty()){
+			for(YouMingxi youMingxi:yList){
+				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
+				if(sjtjzb>0){
+					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
+						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb,youMingxi.getCount());
+					}
+				}
+			}
+		}
+		return "success";
+	}
+	
 }

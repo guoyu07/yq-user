@@ -5,6 +5,8 @@ import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Sgxt;
+import com.yq.user.service.UserService;
 
 public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
 	/**
@@ -19,13 +21,16 @@ public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
 	
 	private Fcxt fcxt;
 	
+	private Sgxt sgxt;
 	public String execute(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		fcxt = adminService.getAdminUser(super.getUserName());
 		
 		if(status==0){
 			return INPUT;
 		}
+		sgxt = userService.getSgxt(user);
 		super.initPage(adminService.searchUser(user,super.getToPage(),300));
 		return SUCCESS;
 	}
@@ -52,6 +57,14 @@ public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
 
 	public void setFcxt(Fcxt fcxt) {
 		this.fcxt = fcxt;
+	}
+
+	public Sgxt getSgxt() {
+		return sgxt;
+	}
+
+	public void setSgxt(Sgxt sgxt) {
+		this.sgxt = sgxt;
 	}
 	
 	

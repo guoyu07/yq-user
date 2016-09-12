@@ -156,6 +156,10 @@
 		    </result>
 		    
 		</action>
+		
+		<action name="resetAchievement" class="com.yq.admin.manager.action.AchievementAction">
+		  <result name="success" type="json" />
+		</action>
 		<action name="modifyaabuserupdateUserAqOrBq" class="com.yq.admin.manager.action.ModifyaabuserAction" method="updateUserAqOrBq">
             <result name="input">
                 modifyuser.jsp

@@ -15,7 +15,15 @@ public class ZuoMingxiDao {
     
     private final String table = "zuo_mingxi";
     
-    
+    /**
+     * 
+     * 通过上、下级用户得到左明细记录
+     * 
+     * @param tjuser
+     * 
+     * @param down
+     * 
+     * */
     public ZuoMingxi get(String tjuser,String down){
     	String sql = "select * from "+table+" where tjuser = ? and down = ? limit 1";
     	SqlParameter parameter = new SqlParameter();
@@ -24,6 +32,11 @@ public class ZuoMingxiDao {
     	return jdbc.get(sql, ZuoMingxi.class, parameter);
     }
     
+    /**
+     * 
+     * 通过下级用户得到左明细记录
+     * 
+     * */
     public ZuoMingxi get(String down){
     	String sql = "select * from "+table+" where down = ? limit 1";
     	SqlParameter parameter = new SqlParameter();
@@ -40,6 +53,11 @@ public class ZuoMingxiDao {
     	jdbc.insert(list);
     }
     
+    /**
+     * 
+     * 通过下级用户获取左明细记录列表
+     * 
+     * */
     public List<ZuoMingxi> getDownList(String down){
     	String sql = "select * from "+table+" where down = ?";
     	SqlParameter parameter = new SqlParameter();
@@ -47,6 +65,27 @@ public class ZuoMingxiDao {
     	return jdbc.getList(sql, ZuoMingxi.class, parameter);
     }
     
+    /**
+     * 
+     * 通过上级用户获取左明细记录
+     * 
+     * */
+    public List<ZuoMingxi> getTjuserList(String tjuser){
+    	String sql = "select * from "+table+" where tjuser = ?";
+    	SqlParameter parameter = new SqlParameter();
+    	parameter.setString(tjuser);
+    	return jdbc.getList(sql, ZuoMingxi.class, parameter);
+    }
+    
+    /**
+     * 
+     * 通过上级用户和用户所在层数得到业绩总和
+     * 
+     * @param tjuser 上级用户
+     * 
+     * @param count 用户所在层数
+     * 
+     * */
     public int getSumSjb(String tjuser,int count){
     	String sql = "select sum(sjb) from "+table+" where tjuser = ? and count = ?";
     	SqlParameter parameter = new SqlParameter();
