@@ -2941,8 +2941,8 @@ public class UserService {
 			throw new ServiceException(6,"卖出单价不能大于 "+(fcxt.getJygj()+0.03)+" 哦！");
 		}
 		
-		if(saleNum<=0){
-			throw new ServiceException(7,"您好，您卖出数量不能小于零，谢谢！");
+		if(saleNum<5){
+			throw new ServiceException(7,"您好，您卖出数量不能小于5，谢谢！");
 		}
 //		if(gcuser.getStopjyg()>19){
 //			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
