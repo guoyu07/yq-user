@@ -208,7 +208,7 @@ public class GpjyDao {
 	 * @return
 	 */
 	public List<Gpjy> getMrPageForSystem(int pageSize,String date){
-		String sql="select * from "+table+" where jy=0 and mysl>0 and abdate<'"+date+"'  order by pay asc limit "+pageSize;
+		String sql="select * from "+table+" where jy=0 and mysl>0 and abdate<'"+date+"'  order by id desc limit "+pageSize;
 		return this.jdbc.getList(sql, Gpjy.class, null);
 //		if(mrCache==null){
 //			initMrCache(pageSize);
@@ -223,7 +223,7 @@ public class GpjyDao {
 	 * @return
 	 */
 	public List<Gpjy> getMrPageForSystemOrderByPay(int pageSize){
-		String sql="select * from "+table+" where jy=0 and mysl>0  order by pay asc limit "+pageSize;
+		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mr order by pay desc limit "+pageSize+")t )";
 		return this.jdbc.getList(sql, Gpjy.class, null);
 //		if(mrCache==null){
 //			initMrCache(pageSize);
