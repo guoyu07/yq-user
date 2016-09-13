@@ -82,7 +82,7 @@
 					<span class="close"></span>
 					<a href="/hfcz"><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.1102075283'/>(100)</a>
 					<a target="_blank" href="http://www.kypwe.com"><s:text name='keshanpiaowu'/></a>
-					<a target="_blank" href="http://www.zgybe.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>"><s:text name='HAPPY100_online'/></a>
+					<a target="_blank" href="http://www.qlsme.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>"><s:text name='HAPPY100_online'/></a>
 					<a href="/baby"><s:text name='eloquence_training_camp'/></a>
 					<a href="#" class="close"><s:text name='viewhead.jsp.head.jsp.871093494'/></a>
 				</div>

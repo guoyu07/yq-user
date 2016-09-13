@@ -2778,7 +2778,7 @@ public class UserService {
 		gpjy.setUsername(userName);
 		gpjy.setMysl(Double.valueOf(buyNum));
 		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
-		gpjy.setPay(fcxt.getJygj());
+		gpjy.setPay(0d);//此处设置价格为0
 		gpjy.setBz("买入挂牌中");
 		gpjy.setJypay(Double.valueOf(needJb));
 		gpjy.setJyid(id);

@@ -18,7 +18,7 @@
 				<li><a href="http://keyukeji.com"><s:text name='JPYX'/></a></li>
 				<li><a href="http://gw.zgyce.com"><s:text name='DG'/></a></li>
 				<li><a href="http://hy.zgyce.com"><s:text name='QDHYW'/></a></li>
-				<li><a href="http://www.zgybe.com"><s:text name='HAPPY100'/></a></li>
+				<li><a href="http://www.qlsme.com"><s:text name='HAPPY100'/></a></li>
 			</ul>
 		</div>
 		<p class="clickTop"><span class="hover"></span></p>
