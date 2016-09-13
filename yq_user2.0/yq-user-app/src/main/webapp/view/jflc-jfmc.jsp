@@ -6,7 +6,7 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2022589602'/>');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='vipmcsl2.jsp.mcsl2.jsp.440060053'/> ${fcxt.zdj} ！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.908656802'/>');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2045778169'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.603950472'/>!');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.115010359'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1038261267'/>!');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.809721657'/>！');location.replace('gpjysc');</script></c:if>
