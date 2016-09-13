@@ -162,7 +162,7 @@ a:hover{ color:#272a3d;}
 .f-tk{ font-size: 30px; padding: 8px 30px; }
 
 /* 文字内容页面 */
-.content-txt{ height: 570px; overflow-y:auto; overflow-x:hidden; }
+.content-txt{ height: 540px; overflow-y:auto; overflow-x:hidden; }
 .content-txt2{ height: 800px;}
 .service{ padding: 30px 0 0 75px; line-height: 24px; color: #666;}
 .notice{ }
@@ -273,13 +273,11 @@ a:hover{ color:#272a3d;}
 .new5-box .new5-right h3{ font-size: 22px; color: #575757; font-weight: lighter; }
 .new5-box .new5-right a{ color: #00a8ff; font-size: 16px; }
 
-/*此处中英版不同 （默认中文）*/
-.new6-box{  }
+/*此处中英版不同（英文） */
+.new6-box{height:580px;overflow-y:auto;overflow-x:auto;  }
 .new6-box form input{ height: 20px; line-height: 20px; width: 170px; }
 .new6-box form .tispsfz{ white-space:nowrap; width: 10px; padding-left: 10px; display: inline-block; }
 .new6-box form .btns{ white-space:nowrap; width: 100px; margin-left: 10px; display: inline-block; margin-right: -100px; cursor: pointer;}
-
-
 
 .new7 h5{ text-align: center; }
 .new7 h4{ font-size: 24px; font-weight: lighter; color: #666; }

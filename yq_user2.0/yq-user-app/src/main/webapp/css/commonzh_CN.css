@@ -273,13 +273,11 @@ a:hover{ color:#272a3d;}
 .new5-box .new5-right h3{ font-size: 22px; color: #575757; font-weight: lighter; }
 .new5-box .new5-right a{ color: #00a8ff; font-size: 16px; }
 
-/*此处中英版不同 （默认中文）*/
+/*此处中英版不同（中文） */
 .new6-box{  }
 .new6-box form input{ height: 20px; line-height: 20px; width: 170px; }
 .new6-box form .tispsfz{ white-space:nowrap; width: 10px; padding-left: 10px; display: inline-block; }
 .new6-box form .btns{ white-space:nowrap; width: 100px; margin-left: 10px; display: inline-block; margin-right: -100px; cursor: pointer;}
-
-
 
 .new7 h5{ text-align: center; }
 .new7 h4{ font-size: 24px; font-weight: lighter; color: #666; }
