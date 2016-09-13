@@ -18,48 +18,51 @@
 	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
 	<link rel="stylesheet" href="/css/common.css" />
 <script language="JavaScript">
- function checkdate()  {  
-  if (Form.jygj.value=="") {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1510332280'/>");  Form.jygj.focus();    return false;    } 
-  if (Form.jygj.value<${fcxt.zdj}) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.440060053'/> ${fcxt.zdj} !");  Form.jygj.focus();    return false;    }
-  if (Form.jygj.value>${fcxt.jygj}+0.03) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1972445948'/>");  Form.jygj.focus();    return false;    } 
-    if (!chkinteger1(Form.jygj.value)){
-	alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2139966856'/>');
-	document.Form.jygj.focus;
-	return (false);
- }
-function chkinteger1(checkStr1)
-{
-var re=/^(0|[1-9]+)\.\d{0,2}$|^(0|[1-9]+)$/;
-return re.test(checkStr1)
-}
-  if (Form.txpay.value=="") {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1510493077'/>!");  Form.txpay.focus();    return false;    } 
-  if (Form.txpay.value==0) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1384480305'/>");      return false;    }
-  if (!chkinteger(Form.txpay.value)){
-	alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1416619015'/>!');
-	document.Form.txpay.focus;
-	return (false);
- }
- function chkinteger(checkStr) {
-var checkOK = "0123456789";
-var allValid = true;
-for (i=0; i<checkStr.length; i++) {
-ch = checkStr.charAt(i);
-if (checkOK.indexOf(ch) == -1) {
-allValid = false;
-break;
-}
-if ((ch == '+' || ch == '-') && i>0) {
-allValid = false;
-break;
-}
-}
-return (allValid);
-}
-  if (Form.txpay.value<10) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.603950472'/>!");      return false;    }
-  if (Form.txpay.value>3000) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1469760371'/>!");      return false;    }
-  if (Form.txpay.value>${gcuser.jyg}) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1086289612'/>");      return false;    } 
-  if (Form.pa3.value=="") {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>");   Form.pa3.focus();   return false;    } 
-  return true;  }  
+	 function checkdate()  {  
+		    if (Form.jygj.value=="") {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1510332280'/>");  Form.jygj.focus();    return false;    } 
+		    if (Form.jygj.value<${fcxt.zdj}) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.440060053'/> ${fcxt.zdj} !");  Form.jygj.focus();    return false;    }
+		    if (Form.jygj.value>${fcxt.jygj}+0.03) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1972445948'/>");  Form.jygj.focus();    return false;    } 
+		    if (!chkinteger1(Form.jygj.value)){
+				alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2139966856'/>');
+				document.Form.jygj.focus;
+				return (false);
+	 		}
+    
+			function chkinteger1(checkStr1){
+				var re=/^(0|[1-9]+)\.\d{0,2}$|^(0|[1-9]+)$/;
+				return re.test(checkStr1)
+			}
+	
+		  	if (Form.txpay.value=="") {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1510493077'/>!");  Form.txpay.focus();    return false;    } 
+		  	if (Form.txpay.value==0) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1384480305'/>");      return false;    }
+		  	if (!chkinteger(Form.txpay.value)){
+				alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1416619015'/>!');
+				document.Form.txpay.focus;
+				return (false);
+	 		}
+		  	
+			function chkinteger(checkStr) {
+				var checkOK = "0123456789";
+				var allValid = true;
+				for (i=0; i<checkStr.length; i++) {
+					ch = checkStr.charAt(i);
+					if (checkOK.indexOf(ch) == -1) {
+					allValid = false;
+					break;
+				}
+				if ((ch == '+' || ch == '-') && i>0) {
+					allValid = false;
+					break;
+				}
+				}
+				return (allValid);
+			}
+			  if (Form.txpay.value<5) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.603950472'/>!");      return false;    }
+			  if (Form.txpay.value>3000) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1469760371'/>!");      return false;    }
+			  if (Form.txpay.value>${gcuser.jyg}) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1086289612'/>");      return false;    } 
+			  if (Form.pa3.value=="") {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>");   Form.pa3.focus();   return false;    } 
+			  return true;
+		  }  
  </script>
 </head>
 <body>
