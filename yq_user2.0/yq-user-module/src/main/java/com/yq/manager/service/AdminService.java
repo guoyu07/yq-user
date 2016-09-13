@@ -2393,7 +2393,7 @@ public class AdminService {
 		List<Gpjy> page = null;
 		List<Gcuser> listRandomUserName = gcuserDao.getCompanlyUser();
 		while(true){
-			page = gpjyDao.getMrPageForSystemOrderById(pageSize);
+			page = gpjyDao.getMrPageForSystemOrderByPay(pageSize);
 			if(page!=null&&page.size()>0&&currentNum<num){
 				LogSystem.info("处理第一页，有数量 ="+page.size()+",共[]页");
 				long sigleStartTime = System.currentTimeMillis();
