@@ -12,7 +12,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><s:text name='reg1.jsp.reg1.jsp.624662580'/></title>
-	<link rel="stylesheet" href="/css/common.css" />
+	<link rel="stylesheet" href="/css/common${SESSION_LOCALE}.css" />
 	<link rel="stylesheet" href="/css/select.css" />
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
@@ -30,11 +30,11 @@
 				<div class="navt2">
 					<ul>
 						<li><b class="lh">1</b></li>
-						<li><span class="lh"></span></li>
+						<li><span class="spanl"></span></li>
 						<li><b class="lh">2</b></li>
-						<li><span class="lh"></span></li>
+						<li><span class="spanl"></span></li>
 						<li><b class="lh">3</b></li>
-						<li><span class="lh"></span></li>
+						<li><span class="spanl"></span></li>
 						<li class="gsd"><b class="lh"><strong></strong></b></li>
 					</ul>
 					<ul class="navt2t">

@@ -50,7 +50,7 @@ html[dir="rtl"] .select2-container .select2-choice {
 
 .select2-container .select2-choice > .select2-chosen {
     display: block;
-    font-size: 24px;
+    font-size: 15px;
     text-indent: 20px;
     overflow: hidden;
     white-space: nowrap;

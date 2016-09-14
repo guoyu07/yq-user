@@ -375,3 +375,6 @@ a:hover{ color:#272a3d;}
 .content-tabledown tr, .content-tabledown td, .content-tabledown th{ border-left:1px solid #989898; border-right:1px solid #989898;}
 .content-tabledown th{ background: #fdc50b; text-align: center; font-size: 16px; border-top:1px solid #989898;　}
 .content-tabledown td{ font-weight:bold; height: 22px; line-height: 22px;}
+
+
+.navt2 ul li span.spanl{width: 128px;height: 15px;display: inline-block;margin: 25px 10px 0;background-position: -100px 0;}

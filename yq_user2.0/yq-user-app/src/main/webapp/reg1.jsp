@@ -126,11 +126,11 @@
 				<div class="navt2">
 					<ul>
 						<li><b class="lh">1</b></li>
-						<li><span></span></li>
+						<li><span class="spanl"></span></li>
 						<li><b>2</b></li>
-						<li><span></span></li>
+						<li><span class="spanl"></span></li>
 						<li><b>3</b></li>
-						<li><span></span></li>
+						<li><span class="spanl"></span></li>
 						<li><b>4</b></li>
 					</ul>
 					<ul class="navt2t">
