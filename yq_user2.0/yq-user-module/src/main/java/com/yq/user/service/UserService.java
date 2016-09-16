@@ -2736,8 +2736,8 @@ public class UserService {
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
 		
-		if(buyNum<=0){
-			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
+		if(buyNum<5){
+			throw new ServiceException(7,"买入数量至少为5个积分！");
 		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		

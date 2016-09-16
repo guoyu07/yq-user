@@ -11,7 +11,7 @@
  function checkdate()  {  
   if (Form.txpay.value=="") {      alert("<s:text name='vipmysl.jsp.mysl.jsp.-477498021'/>!");  Form.txpay.focus();     return false;    } 
   if (Form.txpay.value==0) {      alert("<s:text name='vipmysl.jsp.mysl.jsp.175650976'/>!");      return false;    }
-  if (Form.txpay.value<1) {      alert("<s:text name='vipmysl.jsp.mysl.jsp.2087317176'/>");      return false;    }
+  if (Form.txpay.value<5) {      alert("<s:text name='vipmysl.jsp.mysl.jsp.2087317176'/>");      return false;    }
   if (Form.txpay.value>2000) {      alert("<s:text name='vipmysl.jsp.mysl.jsp.1250924413'/>");      return false;    }
   if (Form.txpay.value>${zdjyg}) {      alert("<s:text name='vipmysl.jsp.mysl.jsp.150034015'/>${zdjyg}");      return false;    }
   if (!chkinteger(Form.txpay.value)){
