@@ -22,6 +22,6 @@ function openwindow2(url) {
 						<li><a target="_blank" href="http://yb.zgyce.com/sj_login.asp?sjname=<%=gcuser1.getUsername()%>"><span class="c-b"><s:text name="viewinformation.html.information.html.-2010689047"></s:text></span></a></li>
 						<li><a href="ybsf"><span class="c-b"><s:text name='viewgrxx.jsp.grxx.jsp.626816442'/></span></a></li>
 						<li><a href="dldate"><s:text name='viewgrxx.jsp.grxx.jsp.247726354'/></a></li>
-						<li><a href="javascript: openwindow2('sfz.html');"><s:text name='viewgrxx.jsp.grxx.jsp.238200148'/></a></li>
+						<li><a href="javascript: openwindow2('sfz${SESSION_LOCALE}.html');"><s:text name='viewgrxx.jsp.grxx.jsp.238200148'/></a></li>
 			        </ul>
 				</div>
