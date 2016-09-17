@@ -10,13 +10,12 @@
 <body>
 	<div class="mainbox mw1024">
 
-		<!-- <s:text name='viewgrxx-rule.jsp.grxx-rule.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 
-				<!-- <s:text name='viewgrxx-rule.jsp.grxx-rule.jsp.624662580'/>用户信息 -->
+				<!-- 会员中心用户信息 -->
 				<%@ include file="/view/user.jsp"%>
 				<%@ include file="/view/grxx.jsp"%>
 			</div>
