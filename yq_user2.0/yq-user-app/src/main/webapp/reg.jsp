@@ -2,9 +2,12 @@
 <%@ include file="common/taglib.jsp"%>
 
 <title><s:text name='reg.jsp.reg.jsp.-1179328136'/></title>
+<SCRIPT>
+function openwindow(url) {
+   window.open(url,'new','toolbar=no,scrollbars=yes,width=800,height=850');
+    }
+</SCRIPT>
 <style type="text/css">
-/* web_bg <s:text name='reg.jsp.reg.jsp.644602186'/>
---------------------------*/
 body,ul,li { margin:0; padding:0; }
 #web_bg { position:absolute; width:100%; height:100%; z-index:-1; }
 #web_bg li { display:none; }
@@ -189,13 +192,6 @@ function AmendCity(ProvinceID,CityID,AreaID)
 
 //-->
 </script>
-<SCRIPT>
-<!--
-function openwindow(url) {
-   window.open(url,'new','toolbar=no,scrollbars=yes,width=800,height=850');
-    }
-//-->
-</SCRIPT>
 <body>
 <!--web_bg <s:text name='reg.jsp.reg.jsp.644602186'/>-->
 <ul id="web_bg">
@@ -289,7 +285,7 @@ function openwindow(url) {
 				<option value="0"><s:text name='reg.jsp.reg.jsp.19893584'/>！</option>
 				<option value="1"><s:text name='reg.jsp.reg.jsp.1259576711'/>！</option>
 				</select></span></font><font color="#FF0000" style="font-size: 11pt"> </font> 
-				<font color="#008000" style="font-size: 11pt" size="2">&nbsp;</font><font color="#FF0000"><a href="javascript:openwindow('sfz.html')" style="text-decoration: none; font-weight: 700; "><font color="#008000" size="3"><s:text name='vipreg.jsp.reg.jsp.-692292151a'/></font></a></font></td>
+				<font color="#008000" style="font-size: 11pt" size="2">&nbsp;</font><font color="#FF0000"><a href="javascript: openwindow('sfz${SESSION_LOCALE}.html');" style="text-decoration: none; font-weight: 700; "><font color="#008000" size="3"><s:text name='vipreg.jsp.reg.jsp.-692292151a'/></font></a></font></td>
 			</tr>
 		</table>
 		<p style="margin-top: 0; margin-bottom: 0"></p>
