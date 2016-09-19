@@ -212,5 +212,15 @@ public class Txpay{
 	public void setTp(int tp) {
 		this.tp = tp;
 	}
+	@Override
+	public String toString() {
+		return "Txpay [payid=" + payid + ", jyid=" + jyid + ", pdid=" + pdid + ", payusername=" + payusername + ", cxt="
+				+ cxt + ", vipname=" + vipname + ", paynum=" + paynum + ", paynum9=" + paynum9 + ", payname=" + payname
+				+ ", paybank=" + paybank + ", paycard=" + paycard + ", dqu=" + dqu + ", bankbz=" + bankbz + ", paytime="
+				+ paytime + ", zftime=" + zftime + ", openonoff=" + openonoff + ", ep=" + ep + ", rgdate=" + rgdate
+				+ ", dfuser=" + dfuser + ", kjygid=" + kjygid + ", bz=" + bz + ", qlid=" + qlid + ", payonoff="
+				+ payonoff + ", txip=" + txip + ", clip=" + clip + ", txlb=" + txlb + ", txvip=" + txvip + ", tp=" + tp
+				+ "]";
+	}
 }
 

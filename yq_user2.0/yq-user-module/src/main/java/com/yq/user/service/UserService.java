@@ -3986,8 +3986,9 @@ public class UserService {
 						datePay.setAbdate(new Date());
 						logService.addDatePay(datePay);
 					}
-					
+					LogSystem.log("超时未付款，重置订单:"+txpay);
 					txPayDao.resetOrder(txpay.getPayid());
+					
 					txPayDao.updateIndexEp(txpay.getPayid(), 0);
 					sendYbSaleSmsMsg(txpay.getPayusername(), 2);
 //					if(gpjy!=null&&gpjy.getNewjy()==1){
