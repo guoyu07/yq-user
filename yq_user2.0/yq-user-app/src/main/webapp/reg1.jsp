@@ -13,7 +13,7 @@
 	<script src="/scripts/select2.js"></script>
 	<script src="/scripts/select2_locale_zh-CN.js"></script>
 	<script language="javascript" src="/js/ajax.js"></script>
-<script language="JavaScript">
+	<script language="JavaScript">
 	function CheckIfEnglish(str) {
 		if (/[a-z]/.test(str) && /[0-9]/.test(str)) {
 			return true;
@@ -49,12 +49,9 @@
 	    ajaxobj.send();
 	}
 	
-	<!--
 	function openwindow(url) {
 	   window.open(url,'new','toolbar=no,scrollbars=yes,width=800,height=850');
 	    }
-	//-->
-	
 
 	function checkdate1() {
 		if (Form.gguser.value == "") {
@@ -147,7 +144,7 @@
 						<p><label><s:text name='reg.jsp.reg.jsp.626784226'/>：</label><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label><s:text name='reg1.jsp.reg1.jsp.1449504216'/>：</label><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input type="password" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
-						<p class="tyxy"><input type="checkbox" checked="checked" name="sfz"><s:text name='reg1.jsp.reg1.jsp.-2094390242'/></p>
+						<p class="tyxy"><input type="checkbox" checked="checked" name="sfz"><s:text name='reg1.jsp.reg1.jsp.-2094390242'/><a href="javascript:openwindow('sfz${SESSION_LOCALE}.html')"><s:text name='reg1.jsp.reg1.jsp.-2094390242a'/></a></p>
 						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
 					</div>
 				 </form>

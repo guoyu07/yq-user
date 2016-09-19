@@ -59,28 +59,17 @@ function openwindow(url) {
 						<s:iterator var="data" value="dataList">
 						<li>
 						<a href="/ggck?ck=${data.id}" class="ck">
-						<s:set name="SESSION_LOCALE" value="#session['WW_TRANS_I18N_LOCALE']" />
-						<c:choose>  
-						<c:when test="${SESSION_LOCALE=='en_US'}">    
-						<img src="/images/en_ck.png" />  
-		   				</c:when>
-		   				<c:when test="${SESSION_LOCALE=='zn_CN'}">    
-						<img src="/images/en_ck.png" />  
-		   				</c:when>  
-						<c:otherwise>
-							<img src="/images/ck.png" />    
-		   				</c:otherwise> 
-		   				</c:choose>
+						<img src="/images/ck${SESSION_LOCALE}.png" />  
 						</a>
 						<c:choose>  
-						<c:when test="${SESSION_LOCALE=='en_US'}">  
+						<c:when test="${SESSION_LOCALE=='en_US'}"> 
 							<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
 							<c:if test="${data.ggbt_en==null}">
 								<p><a href="/ggck?ck=${data.id}">${data.ggbt}</a></p>
 							</c:if>
 							<p><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></p>
 		   				</c:when>
-		   				<c:when test="${SESSION_LOCALE=='zn_CN'}">   
+		   				<c:when test="${SESSION_LOCALE=='zh_CN'}">   
 		   					<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
 							<c:if test="${data.ggbt==null}">
 								<p><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></p>
