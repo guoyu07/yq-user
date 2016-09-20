@@ -1090,7 +1090,7 @@ public class UserService {
 		if(sgxtBd==null){
 			return;
 		}
-		if(sgxtBd.getAuid().equals(userName)){
+		if(sgxtBd.getAuid()!=null&&sgxtBd.getAuid().equals(userName)){
 			sgxtDao.updateZaq(sgxtBd.getUsername(), sjb);
 			ZuoMingxi zuo = zuoMingxiDao.get(sgxtBd.getUsername(), bduser);
 			int dqzuo = zuoMingxiDao.getSumSjb(sgxtBd.getUsername(), zuo.getCount())-sjb;
@@ -1130,7 +1130,7 @@ public class UserService {
 				 logList.add(bdbdate);
 			}
 			CalculateQ(sgxtBd.getUsername(),sjb,bduser,logList);
-		}else if(sgxtBd.getBuid().equals(userName)){
+		}else if(sgxtBd.getBuid()!=null&&sgxtBd.getBuid().equals(userName)){
 			sgxtDao.updateZbq(sgxtBd.getUsername(), sjb);
 			YouMingxi you = youMingXiDao.get(sgxtBd.getUsername(), bduser);
 			int dqyou = youMingXiDao.getSumSjb(sgxtBd.getUsername(), you.getCount())-sjb;
