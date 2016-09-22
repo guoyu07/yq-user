@@ -27,6 +27,7 @@ import com.sr178.module.web.session.Session;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.FileCreatUtil;
+import com.yq.common.utils.Global;
 import com.yq.common.utils.MD5Security;
 import com.yq.cservice.bean.SqDayAddBean;
 import com.yq.manager.bean.Performance;
@@ -2917,7 +2918,7 @@ public class AdminService {
 	
 	
 	public void setVerifile(String userName,int verify){
-		if(verify==0){//取消
+		if(verify==Global.VERIFY){//设置审核
 			userExtinfoDao.updateUserExtinfo(userName, verify);
 		}else{//设置成免审核
 			if(!userExtinfoDao.updateUserExtinfo(userName, verify)){

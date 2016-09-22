@@ -1,7 +1,7 @@
 package com.yq.user.bo;
 
 public class UserExtinfo {
-
+	
 	private String userName;
 	private int needVerify;//是否需要审核  0需要   1不需要
 	public String getUserName() {

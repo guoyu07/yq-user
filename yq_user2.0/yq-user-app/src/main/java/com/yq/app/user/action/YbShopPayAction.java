@@ -15,6 +15,7 @@ import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.utils.Global;
 import com.yq.common.utils.MD5Security;
 import com.yq.common.utils.UrlRequestUtils;
 import com.yq.common.utils.UrlRequestUtils.Mode;
@@ -114,7 +115,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 			int scores = 0;
 			 paylb="购物-"+order;
 			 title="来自幸福100的订单";
-			 if(UserService.isOpenScoresPay){
+			 if(Global.OpenScoresPay){
 				 try {
 					 String signStr = order+"yc$shop@Sfie68"+ybstr;
 					 String mySign =  MD5Security.code(signStr,32).toLowerCase();

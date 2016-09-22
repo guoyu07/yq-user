@@ -10,11 +10,9 @@ import com.yq.user.dao.TxPayDao;
 import com.yq.user.service.ManagerService;
 import com.yq.user.service.UserService;
 
+
 public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String dq;
 	//<script language=javascript>alert('您有认购他人一币还没有付款，请尽快完成付款！');location.replace('../vip/epmyjl.asp');</script>

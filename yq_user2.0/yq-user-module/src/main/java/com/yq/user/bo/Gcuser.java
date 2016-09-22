@@ -3,6 +3,7 @@ package com.yq.user.bo;
 import java.util.Date;
 
 import com.yq.common.utils.DateUtils;
+import com.yq.common.utils.Global;
 import com.yq.user.service.UserService;
    /**
     * gcuser 实体类
@@ -33,7 +34,7 @@ public class Gcuser{
 	private int cbpay;				//累计交易一币
 	private int pay;				//当前可用一币
 	private int txpay;				//累计使用一币(已提现)
-	private int vippay;
+	private int vippay;				//表示服务中心转入或游戏收益部分的一币
 	private int jjpay;
 	private int fhpay;
 	private int rgpay;
@@ -603,7 +604,7 @@ public class Gcuser{
 	this.vipsq=vipsq;
 	}
 	public String getVipsq(){
-		if(vipsq==null||vipsq.equals(UserService.INIT_SMS_CODE)){
+		if(vipsq==null||vipsq.equals(Global.INIT_SMS_CODE)){
 			return "252493618";//测试时用的短信码 
 		}
 		return vipsq;

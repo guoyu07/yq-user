@@ -24,6 +24,7 @@ import com.sr178.module.web.session.Session;
 import com.yq.common.ProblemCode;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
+import com.yq.common.utils.Global;
 import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.manager.service.AdminService;
@@ -198,10 +199,7 @@ public class UserService {
     }
     
     
-    public static final String INIT_SMS_CODE="00000000";
-    
-    
-    public static final boolean isOpenScoresPay = true; 
+
     
 	/**
 	 * 登录
@@ -506,7 +504,7 @@ public class UserService {
 		if(result){
 			addUserDateIpLog(userName, "重置密码", ip);
 		}
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		return "success";
 	}
 	
@@ -526,7 +524,7 @@ public class UserService {
 		if(result){
 			addUserDateIpLog(userName, "更新资料", ip);
 		}
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		return result;
 	}
 	
@@ -978,7 +976,7 @@ public class UserService {
 //						super.setErroCodeNum(16);//alert('验证码错误，请检查输入是否正确！');history.go(-1);
 //						return SUCCESS;
 				}
-				gcuserDao.updateSmsCode(operatorUser.getUsername(), INIT_SMS_CODE);
+				gcuserDao.updateSmsCode(operatorUser.getUsername(), Global.INIT_SMS_CODE);
 				if(!this.changeYb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0,null,0)){
 					throw new ServiceException(7,"一币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
@@ -1766,14 +1764,14 @@ public class UserService {
 		txpay2.setJyid(jypay);
 		txpay2.setVipname(gcuser.getVipname());
 //		txpay2.setTxvip(gcuser.getTxlb());
-		txpay2.setTxvip(1);
+		txpay2.setTxvip(Global.NOVERIFY);//默认需不要审核
 		//比对原始姓名与当前提款的姓名
 //		Txifok txifOk = txifokDao.get(userName);
 //		if(txifOk!=null&&!Strings.isNullOrEmpty(txifOk.getName())&&txifOk.getName().equals(txpay2.getPayname())){
 			UserExtinfo userExtinfo = userExtinfoDao.get(userName);
 			//是否生审核过的
-			if(userExtinfo!=null&&userExtinfo.getNeedVerify()==1){
-				txpay2.setTxvip(0);
+			if(userExtinfo!=null&&userExtinfo.getNeedVerify()==Global.NOVERIFY){
+				txpay2.setTxvip(Global.VERIFY);
 			}
 //		}
 		
@@ -1791,7 +1789,7 @@ public class UserService {
 		
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 1);
 		
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 	}
 	/**
 	 * 商城退款
@@ -2248,7 +2246,7 @@ public class UserService {
 			throw new ServiceException(4, "手机验证码输入错误，请检查输入是否正确！");
 		}
 		//重置短信码
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		//更新订单状态
 		if(!txPayDao.updateEpToHaveReceive(payId, ip)){
 			throw new ServiceException(8888, "订单异常！");
@@ -3302,7 +3300,7 @@ public class UserService {
 //			return SUCCESS;
 			throw new ServiceException(8, "");
 		}
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		//减一币
 		if(!this.changeYb(user, -ybpay,gcuser.getName(),12,null,0)){
 //			super.setErroCodeNum(7);//alert('您的一币余额不足，请检查输入是否正确！');
@@ -3529,7 +3527,7 @@ public class UserService {
 		if(!hgcode.equals(gcuser.getVipsq())){
 			throw new ServiceException(5, "手机验证码不正确");
 		}
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		if(!this.changeYb(userName, -ybsl, "换购-"+gwno, 4, null,0)){
 			throw new ServiceException(2, "一币不够！");
 		}
@@ -3616,7 +3614,7 @@ public class UserService {
 				throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 			}
 		}
-		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(user, Global.INIT_SMS_CODE);
 		
 		//处理给商户加一币和购物卷
 		StringBuffer resultStr = new StringBuffer();
@@ -3846,7 +3844,7 @@ public class UserService {
 //		}
 //		gcuserDao.updatePwdate(gcuser.getUserid(), gcuser.getName(), DateUtils.addDay(date, 30));
 		userDailyGainLogDao.addUserDailyGain(user, 1, ybsl, date);
-		gcuserDao.updateSmsCode(user, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(user, Global.INIT_SMS_CODE);
 		return day;
 	}
 	
@@ -3917,7 +3915,7 @@ public class UserService {
 		}else{
 			throw new ServiceException(2, "您好，测试期间同一姓名及证件号30天内仅提供一次充值，谢谢！");
 		}
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 	}
 	
 	
@@ -4108,7 +4106,7 @@ public class UserService {
 		if(!gcuser.getVipsq().equals(smsCode)){
 			throw new ServiceException(3, "手机验证码不正确");
 		}
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		if(!this.changeYb(userName, -23800, "口才训练营报名", 0, null,0)){
 			throw new ServiceException(1, "一币不足");
 		}
@@ -4272,7 +4270,7 @@ public class UserService {
 		if(result){
 			addUserDateIpLog(userName, "更新资料", remoteAddr);
 		}
-		gcuserDao.updateSmsCode(userName, INIT_SMS_CODE);
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		
 		return "success";
 	
