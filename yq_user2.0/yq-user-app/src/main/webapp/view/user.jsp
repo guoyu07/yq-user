@@ -1,5 +1,7 @@
 <%@page import="com.yq.user.bo.Gcuser"%>
 <%@page import="com.yq.user.service.UserService"%>
+<%@page import="com.yq.user.service.UserService"%>
+<%@page import="com.yq.common.utils.Global"%>
 <%@page import="com.sr178.game.framework.context.ServiceCacheFactory"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
@@ -12,7 +14,7 @@
 	<p><s:text name='viewuser.jsp.user.jsp.1504881972'/>：<span class="c-z z-fl"><%=gcuser.getPay()%></span></p>
 	<p><s:text name='viewuser.jsp.user.jsp.1927395202'/>：<span class="z-fl"><%=gcuser.getCbpay()%></span></p>
 	<p><s:text name='viewuser.jsp.user.jsp.1937629852'/>：<span class="z-fl"><%=gcuser.getTxpay()%></span></p>
-	<% if(UserService.isOpenScoresPay){
+	<% if(Global.OpenScoresPay){
 	 %>
 	<p><s:text name='viewuser.jsp.user.jsp.35660508'/>：<span class="z-fl"><a href="/userscoreslog"><%=gcuser.getScores()%></a></span></p>
 	<%
