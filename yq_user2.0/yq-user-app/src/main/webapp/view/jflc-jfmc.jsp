@@ -57,7 +57,7 @@
 				}
 				return (allValid);
 			}
-			  if (Form.txpay.value<5) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.603950472'/>!");      return false;    }
+			  if (Form.txpay.value<10) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.603950472'/>!");      return false;    }
 			  if (Form.txpay.value>3000) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1469760371'/>!");      return false;    }
 			  if (Form.txpay.value>${gcuser.jyg}) {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1086289612'/>");      return false;    } 
 			  if (Form.pa3.value=="") {      alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>");   Form.pa3.focus();   return false;    } 

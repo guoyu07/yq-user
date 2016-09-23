@@ -2737,6 +2737,10 @@ public class UserService {
 		if(buyNum<5){
 			throw new ServiceException(7,"买入数量至少为5个积分！");
 		}
+		
+		if(buyNum>3000){
+			throw new ServiceException(8,"单笔买入数量不能超过3000个积分！");
+		}
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 //		List<Gpjy> list = this.getMcPageList(10);
@@ -2881,7 +2885,7 @@ public class UserService {
 //			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
 //		}
 		if(saleNum>3000){
-			throw new ServiceException(11,"积分单笔卖出数量不能超过1000！");
+			throw new ServiceException(11,"积分单笔卖出数量不能超过3000！");
 		}
 		
 		int needJb = (int)(Math.ceil(price*saleNum));
@@ -2939,8 +2943,8 @@ public class UserService {
 			throw new ServiceException(6,"卖出单价不能大于 "+(fcxt.getJygj()+0.03)+" 哦！");
 		}
 		
-		if(saleNum<5){
-			throw new ServiceException(7,"您好，您卖出数量不能小于5，谢谢！");
+		if(saleNum<10){
+			throw new ServiceException(7,"您好，您卖出数量不能小于10，谢谢！");
 		}
 //		if(gcuser.getStopjyg()>19){
 //			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");

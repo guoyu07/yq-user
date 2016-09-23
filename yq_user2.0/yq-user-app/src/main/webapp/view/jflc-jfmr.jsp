@@ -3,6 +3,7 @@
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='vipmysl.jsp.mysl.jsp.2024869980'/> ！');location.replace('gpjysc');</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='vipmysl.jsp.mysl.jsp.-1321238879'/>！');location.replace('jztojb');</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.2087317176'/>！');location.replace('jztojb');</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.2087317176a'/>！');location.replace('jztojb');</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipmysl.jsp.mysl.jsp.-2099694066'/>！');location.replace('gpjy');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -15,7 +16,7 @@
 	  if (Form.txpay.value=="") {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.-477498021'/>!");  Form.txpay.focus();     return false;    } 
 	  if (Form.txpay.value==0) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.175650976'/>!");      return false;    }
 	  if (Form.txpay.value<5) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.2087317176'/>");      return false;    }
-	  if (Form.txpay.value>2000) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.1250924413'/>");      return false;    }
+	  if (Form.txpay.value>3000) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.1250924413'/>");      return false;    }
 	  if (Form.txpay.value>${zdjyg}) {      alert("<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.150034015'/>${zdjyg}");      return false;    }
 	  if (!chkinteger(Form.txpay.value)){
 		alert('<s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.-1758918826'/>!');
