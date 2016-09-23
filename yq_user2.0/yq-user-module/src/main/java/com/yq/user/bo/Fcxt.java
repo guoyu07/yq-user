@@ -12,7 +12,7 @@ public class Fcxt{
 	private String adminusername;
 	private String password;
 	private double dqgj;
-	private double jygj;
+	private double jygj;				//交易价格	
 	private int fsjygsl;
 	private int syjygsl;
 	private int jygsl;
