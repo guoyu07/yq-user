@@ -41,6 +41,17 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 		return super.getJdbc().getList(sql, Vipcjgl.class, sqlParameter);
 	}
 	
+	public IPage<Vipcjgl> getVipcjglListAsc(String startTime,String endTime,int pageSize,int pageIndex){
+		String sql = "select * from "+super.getTable();
+		SqlParameter sqlParameter = SqlParameter.Instance();
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			sql = sql +" where cjdate between ? and ?";
+			sqlParameter.setString(startTime);
+			sqlParameter.setString(endTime);
+		}
+		sql = sql +" order by cjdate desc";
+		return super.getJdbc().getListPage(sql, Vipcjgl.class, sqlParameter,pageSize, pageIndex);
+	}
 	
 	public List<VipCjglForDc> getVipcjglListForDcAsc(String userName,String startTime,String endTime){
 		String sql = "select * from "+super.getTable()+" where vipuser=? ";
@@ -66,6 +77,9 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 	
 	public IPage<Vipcjgl> getVipcjglPageList(String userName,String startTime,String endTime,int pageSize,int pageIndex){
 		String sql = "select * from "+super.getTable()+" where vipuser=?";
+		if(userName==null){
+			return getVipcjglListAsc(startTime,endTime,pageSize,pageIndex);
+		}
 		SqlParameter sqlParameter = SqlParameter.Instance();
 		sqlParameter.withString(userName);
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
@@ -101,4 +115,7 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 		}
 		return super.getJdbc().getDouble(sql, sqlParameter);
 	}
+	
+	
+	
 }

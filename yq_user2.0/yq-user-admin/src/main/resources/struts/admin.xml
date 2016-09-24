@@ -596,8 +596,13 @@
 		
 		<action name="vipcjbdetails" class="com.yq.admin.manager.action.VipcjbDetailsAction">
 		   <result name="success">
-		      vipcjbdetails.jsp
-		    </result>
+		     vipcjbdetails.jsp
+		   </result>
+		</action>
+		<action name="rechargedetail" class="com.yq.admin.manager.action.VipcjbDetailsAction" method="rechargedetail">
+		   <result name="success">
+		     vipcjbchargedetails.jsp
+		   </result>
 		</action>
 		<action name="vipcjbdetailsoutexcel" class="com.yq.admin.manager.action.VipcjbDetailsAction" method="outExcel">
 		</action>

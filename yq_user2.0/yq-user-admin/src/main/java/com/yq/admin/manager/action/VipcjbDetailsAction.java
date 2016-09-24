@@ -36,6 +36,19 @@ public class VipcjbDetailsAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		return SUCCESS;
 	}
 
+	public String rechargedetail(){
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+		String queryStartDate = null;
+		String queryEndDatet = null;
+		if(!Strings.isNullOrEmpty(startDate1)&&!Strings.isNullOrEmpty(endDate1)){
+			queryStartDate = startDate1+" 00:00:00";
+			queryEndDatet = endDate1 + " 23:59:59";
+		}
+		super.initPage(userService.getVipcjbPageList(zuser, super.getToPage(), 30, queryStartDate, queryEndDatet));
+		return SUCCESS;
+	}
+
+	
 
 	public String outExcel(){
 		String queryStartDate = null;

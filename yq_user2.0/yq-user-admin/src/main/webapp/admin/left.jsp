@@ -63,6 +63,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
                 <td height=20>☉  <a href="/admin/chargeDetails" target="BoardList"><font color="#000000">充值记录明细</font></a></td>
               </tr>
               <tr> 
+                <td height=20>☉  <a href="/admin/rechargedetail" target="BoardList"><font color="#000000">VIP充值币记录明细</font></a></td>
+              </tr>
+              <tr> 
                 <td height=20>☉  <a href="/admin/goldcardmanager" target="BoardList"><font color="#000000">金币卡--管理</font></a></td>
               </tr>
               <tr> 
