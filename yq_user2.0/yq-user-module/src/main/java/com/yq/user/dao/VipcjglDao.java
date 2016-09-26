@@ -37,10 +37,10 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 	}
 	
 	private List<Vipcjgl> getVipcjglList(String startTime, String endTime) {
-		String sql = "select * from "+super.getTable();
+		String sql = "select * from "+super.getTable()+" where cjuser='系统'";
 		SqlParameter sqlParameter = SqlParameter.Instance();
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
-			sql = sql +" where cjdate between ? and ?";
+			sql = sql +" and cjdate between ? and ?";
 			sqlParameter.setString(startTime);
 			sqlParameter.setString(endTime);
 		}
@@ -75,10 +75,10 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 	
 	
 	public IPage<Vipcjgl> getVipcjglListDesc(String startTime,String endTime,int pageSize,int pageIndex){
-		String sql = "select * from "+super.getTable();
+		String sql = "select * from "+super.getTable()+" where cjuser='系统'";
 		SqlParameter sqlParameter = SqlParameter.Instance();
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
-			sql = sql +" where cjdate between ? and ?";
+			sql = sql +" and cjdate between ? and ?";
 			sqlParameter.setString(startTime);
 			sqlParameter.setString(endTime);
 		}
