@@ -59,12 +59,16 @@ public class VipcjbDetailsAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String path = ServletActionContext.getServletContext().getRealPath("/");
-		String descDirectoryPath = path + "/temp/"+zuser+"-vipcjb.xls";
-		String[] headers =
-		{ "id", "充值用户","充值金额", "充值时间", "操作者", "剩余充值币","备注"};
+		String descDirectoryPath = null;
+		if(zuser!=null){
+			descDirectoryPath=path + "/temp/"+zuser+"-vipcjb.xls";
+		}else{
+			descDirectoryPath=path + "/temp/"+startDate1+"~"+endDate1+"-vipcjb.xls";
+		}
+		String[] headers ={ "id", "充值用户","充值金额", "充值时间", "操作者", "剩余充值币","备注"};
 		List<Vipcjgl> data = ServiceCacheFactory.getService(UserService.class).getVipcjbList(zuser, queryStartDate, queryEndDatet);
-		writeExcel(descDirectoryPath, "用户"+zuser+"的充值币明细", headers, data, "yyyy-MM-dd hh:mm:ss");
-		download(descDirectoryPath, response);
+		writeExcel(descDirectoryPath.toString(), "用户"+zuser+"的充值币明细", headers, data, "yyyy-MM-dd hh:mm:ss");
+		download(descDirectoryPath.toString(), response);
 		return null;
 	}
 
