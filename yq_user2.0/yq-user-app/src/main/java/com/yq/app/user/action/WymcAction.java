@@ -10,9 +10,7 @@ import com.yq.user.service.ManagerService;
 import com.yq.user.service.UserService;
 
 public class WymcAction extends ALDAdminActionSupport {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private int status;

@@ -21,7 +21,7 @@
 								          <td width="238"><b><font size="2"><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></font></b></td>
 							          </tr>
 							          
-         <s:iterator var="data" value="dataList">
+         						<s:iterator var="data" value="dataList">
 							          <tr align="center" height="25"> 
 								          <td width="200"><b><font style="font-weight: lighter;" size="2">${data.mysl}</font></b></td>
 								          <td width="160"><b><font color="#FF0000" size="2"><c:if test="${data.pay<1}">${data.pay}</c:if><c:if test="${data.pay>=1}">${data.pay}</c:if></font></b></td>
@@ -40,7 +40,7 @@
 								         <c:if test="${data.mysl>0}"><a onClick="return confirm('<s:text name='vipgpjymy.jsp.gpjymy.jsp.1046836541'/>？')" target="main" href="wymc?id=${data.id}&sl=${data.mysl}"><span style="font-size: 11pt; font-weight: 700"><font color="#008000"><s:text name='vipgpjymy.jsp.gpjymy.jsp.1046836541a'/></font></span></a></c:if>
 								          </td>
 							          </tr>
-		</s:iterator> 
+								</s:iterator> 
 					    			</table> 
 								</div> 
 							</td>

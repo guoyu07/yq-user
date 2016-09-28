@@ -11,12 +11,22 @@ public class GpgymyAction extends ALDAdminPageActionSupport<Gpjy> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	private String userName;
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 //		super.initPage(userService.getMrPageList(super.getUserName(), super.getToPage(), 10));
 		super.setDataList(userService.getMrPageList(10));
+		userName = super.getUserName();
 		return SUCCESS;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 }

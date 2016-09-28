@@ -9,6 +9,7 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.module.utils.JedisUtils;
+import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.GpjyIndexMc;
 import com.yq.user.bo.GpjyIndexMr;
@@ -152,11 +153,29 @@ public class GpjyDao {
 		cleanCache(id);
 	}
 	
+	
+	
 	public void updateIndexPay(int id,double pay){
 		String sqlMc = "update gpjy_index_mc set pay=? where id="+id;
 		String sqlMr = "update gpjy_index_mr set pay=? where id="+id;
 		jdbc.update(sqlMc, SqlParameter.Instance().withDouble(pay));
 		jdbc.update(sqlMr, SqlParameter.Instance().withDouble(pay));
+	}
+	
+	/**
+	 * 
+	 * 修改买卖索引交易数量
+	 * 
+	 * @param id	
+	 * 	
+	 * @param count 交易数量
+	 * 
+	 * */
+	public void updateIndexCount(int id,double count){
+		String sqlMc = "update gpjy_index_mc set mcsl=? where id="+id;
+		String sqlMr = "update gpjy_index_mr set mysl=? where id="+id;
+		jdbc.update(sqlMc, SqlParameter.Instance().withDouble(count));
+		jdbc.update(sqlMr, SqlParameter.Instance().withDouble(count));
 	}
 	
 	
@@ -180,6 +199,7 @@ public class GpjyDao {
 	public List<Gpjy> getMcPageList(int pageSize){
 //		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay asc limit "+pageSize;
 //		return this.jdbc.getList(sql, Gpjy.class, null);
+		
 		List<Gpjy> mcCache = getCacheList(MC_KEY);
 		if(mcCache==null){
 			return initMcCache(pageSize);
@@ -195,6 +215,7 @@ public class GpjyDao {
 	public List<Gpjy> getMrPage(int pageSize){
 //		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
 //		return this.jdbc.getList(sql, Gpjy.class, null);
+		
 		List<Gpjy> mrCache = getCacheList(MR_KEY);
 		if(mrCache==null){
 			return initMrCache(pageSize);
@@ -401,5 +422,118 @@ public class GpjyDao {
 		String sql="select * from "+table+" where "+field+" = ? order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(value), pageSize, pageIndex);
 	}
+	
+	/**
+	 * 得到卖出索引列表
+	 * 
+	 * */
+	public List<GpjyIndexMc> getMcIndexList(){
+		String sql = "select * from gpjy_index_mc ";
+		return this.jdbc.getList(sql, GpjyIndexMc.class);
+	}
+	
+	
+	/**
+	 * 得到买入索引列表
+	 * 
+	 * */
+	public List<GpjyIndexMr> getMrIndexList(){
+		String sql = "select * from gpjy_index_mr  ";
+		return this.jdbc.getList(sql, GpjyIndexMr.class);
+	}
 
+	/**
+	 * 根据价格得到卖出索引列表
+	 * 
+	 * @param price 价格
+	 * 
+	 * */
+	public List<GpjyIndexMc> getMcIndexList(double price){
+		String sql = "select * from gpjy_index_mc where pay=? ";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setDouble(price);
+		return this.jdbc.getList(sql, GpjyIndexMc.class, paramter);
+	}
+	
+	
+	/**
+	 * 根据价格得到卖出索引列表
+	 * 
+	 * @param price 价格
+	 * 
+	 * */
+	public List<GpjyIndexMr> getMrIndexList(double price){
+		String sql = "select * from gpjy_index_mr where pay=? ";
+		SqlParameter paramter = new SqlParameter();
+		paramter.setDouble(price);
+		return this.jdbc.getList(sql, GpjyIndexMr.class, paramter);
+	}
+
+	/**
+	 * 得到没有交易过的订单
+	 * 
+	 * @param orderId 订单id
+	 * 
+	 * */
+	public Gpjy getNoJyById(int orderId) {
+		String sql="select * from "+table+" where id=? and jy=0 limit 1";
+		return this.jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withInt(orderId));
+	}
+
+	/**
+	 * 
+	 * 修改卖出积分交易
+	 * 
+	 * @param id
+	 * 
+	 * @param buyUser	买入用户
+	 * 
+	 * @param saleNum	卖出数量
+	 * 
+	 * @param bz		备注
+	 * 
+	 * */
+	public boolean updateSaleJf(Integer id, String buyUser, double saleNum, String bz) {
+		String sql = "update "+table+" set mcsl=mcsl-?,cgdate=?,dfuser=?,bz=? where id=? and jy=0 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setDouble(saleNum);
+		parameter.setObject(new Date());
+		parameter.setString(buyUser);
+		parameter.setString(bz);
+		parameter.setInt(id);
+		boolean result =  this.jdbc.update(sql, parameter)>0;
+		if(result){
+			cleanCache(id);
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * 修改买入积分交易
+	 * 
+	 * @param id
+	 * 
+	 * @param saleUser	卖出用户
+	 * 
+	 * @param saleNum	买入数量
+	 * 
+	 * @param bz		备注
+	 * 
+	 * */
+	public boolean updateBuyJf(Integer id, String saleUser, double buyNum, String bz) {
+		String sql = "update "+table+" set mysl=mysl-?,cgdate=?,dfuser=?,bz=? where id=? and jy=0 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setDouble(buyNum);
+		parameter.setObject(new Date());
+		parameter.setString(saleUser);
+		parameter.setString(bz);
+		parameter.setInt(id);
+		boolean result =  this.jdbc.update(sql, parameter)>0;
+		if(result){
+			cleanCache(id);
+		}
+		return result;
+	}
+	
 }

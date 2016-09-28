@@ -46,13 +46,11 @@
 <body>
 	<div class="mainbox mw1024">
 		
-		<!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.745012'/> -->
 		<%@ include file="/view/head.jsp"%>
 
 		<div class="center z-cb">
 			<div class="leftbox z-l">
 				
-				<!-- <s:text name='reg1.jsp.reg1.jsp.624662580'/>用户信息 -->
 				<%@ include file="/view/user.jsp" %>
 
 				<%@ include file="/view/jflc.jsp" %>

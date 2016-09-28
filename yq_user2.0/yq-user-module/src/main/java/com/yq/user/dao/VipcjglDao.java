@@ -21,10 +21,10 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 	 * 
 	 * */
 	public List<Vipcjgl> getVipcjglList(String userName,String startTime,String endTime){
-		String sql = "select * from "+super.getTable()+" where vipuser=? ";
 		if(userName==null){
 			return getVipcjglList(startTime,endTime);
 		}
+		String sql = "select * from "+super.getTable()+" where vipuser=? ";
 		SqlParameter sqlParameter = SqlParameter.Instance();
 		sqlParameter.withString(userName);
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
@@ -109,10 +109,10 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 	
 	
 	public IPage<Vipcjgl> getVipcjglPageList(String userName,String startTime,String endTime,int pageSize,int pageIndex){
-		String sql = "select * from "+super.getTable()+" where vipuser=?";
 		if(userName==null){
 			return getVipcjglListDesc(startTime,endTime,pageSize,pageIndex);
 		}
+		String sql = "select * from "+super.getTable()+" where vipuser=?";
 		SqlParameter sqlParameter = SqlParameter.Instance();
 		sqlParameter.withString(userName);
 		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
