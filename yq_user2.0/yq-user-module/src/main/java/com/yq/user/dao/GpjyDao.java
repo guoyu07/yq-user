@@ -9,7 +9,6 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.module.utils.JedisUtils;
-import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.GpjyIndexMc;
 import com.yq.user.bo.GpjyIndexMr;
@@ -85,8 +84,13 @@ public class GpjyDao {
 	
 	
 	
-	private List<Gpjy> initMcCache(int pageSize){
+	
+	private List<Gpjy> initMcCache(int pageSize, String userName){
 //		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay asc limit "+pageSize;
+		/*String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mc order by pay asc limit "+pageSize+")t ) and username <> ?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, parameter);*/
 		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mc order by pay asc limit "+pageSize+")t )";
 		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
 //		mcCache = list;
@@ -94,8 +98,12 @@ public class GpjyDao {
 		return list;
 	}
 	
-	private List<Gpjy> initMrCache(int pageSize){
+	private List<Gpjy> initMrCache(int pageSize, String userName){
 //		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
+		/*String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mr order by pay desc,id asc limit "+pageSize+")t ) and username <> ?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, parameter);*/
 		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mr order by pay desc,id asc limit "+pageSize+")t )";
 		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
 		
@@ -172,13 +180,12 @@ public class GpjyDao {
 	 * 
 	 * */
 	public void updateIndexCount(int id,double count){
-		String sqlMc = "update gpjy_index_mc set mcsl=? where id="+id;
-		String sqlMr = "update gpjy_index_mr set mysl=? where id="+id;
+		String sqlMc = "update gpjy_index_mc set mcsl=mcsl-? where id="+id;
+		String sqlMr = "update gpjy_index_mr set mysl=mysl-? where id="+id;
 		jdbc.update(sqlMc, SqlParameter.Instance().withDouble(count));
 		jdbc.update(sqlMr, SqlParameter.Instance().withDouble(count));
 	}
-	
-	
+
 	public IPage<Gpjy> getPageList(String userName,int pageIndex,int pageSize){
 		String sql = "select * from gpjy where username = ? and kjqi>0 order by id desc" ;
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
@@ -196,13 +203,12 @@ public class GpjyDao {
 //		String sql="select * from "+table+" where jy=0 and mcsl>0 order by id";
 //		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 //	}
-	public List<Gpjy> getMcPageList(int pageSize){
+	public List<Gpjy> getMcPageList(int pageSize, String userName){
 //		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay asc limit "+pageSize;
 //		return this.jdbc.getList(sql, Gpjy.class, null);
-		
 		List<Gpjy> mcCache = getCacheList(MC_KEY);
 		if(mcCache==null){
-			return initMcCache(pageSize);
+			return initMcCache(pageSize, userName);
 		}
 		return mcCache;
 	}
@@ -212,13 +218,12 @@ public class GpjyDao {
 		return this.jdbc.getListPage(sql, Gpjy.class, null, pageSize, pageIndex);
 	}
 	
-	public List<Gpjy> getMrPage(int pageSize){
+	public List<Gpjy> getMrPage(int pageSize, String userName){
 //		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
 //		return this.jdbc.getList(sql, Gpjy.class, null);
-		
 		List<Gpjy> mrCache = getCacheList(MR_KEY);
 		if(mrCache==null){
-			return initMrCache(pageSize);
+			return initMrCache(pageSize, userName);
 		}
 		return mrCache;
 	}
@@ -447,26 +452,30 @@ public class GpjyDao {
 	 * 
 	 * @param price 价格
 	 * 
+	 * @param pageIndex 
+	 * 
+	 * @param pageSize
+	 * 
 	 * */
-	public List<GpjyIndexMc> getMcIndexList(double price){
-		String sql = "select * from gpjy_index_mc where pay=? ";
+	public IPage<GpjyIndexMc> getMcIndexList(double price, int pageIndex, int pageSize){
+		String sql = "select * from gpjy_index_mc where pay=? order by pay asc";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setDouble(price);
-		return this.jdbc.getList(sql, GpjyIndexMc.class, paramter);
+		return jdbc.getListPage(sql, GpjyIndexMc.class, paramter, pageSize, pageIndex);
 	}
 	
 	
 	/**
 	 * 根据价格得到卖出索引列表
 	 * 
-	 * @param price 价格
+	 * @param pageIndex 
+	 * 
+	 * @param pageSize
 	 * 
 	 * */
-	public List<GpjyIndexMr> getMrIndexList(double price){
-		String sql = "select * from gpjy_index_mr where pay=? ";
-		SqlParameter paramter = new SqlParameter();
-		paramter.setDouble(price);
-		return this.jdbc.getList(sql, GpjyIndexMr.class, paramter);
+	public IPage<GpjyIndexMr> getMrIndexList(int pageIndex, int pageSize){
+		String sql = "select * from gpjy_index_mr order by pay asc";
+		return jdbc.getListPage(sql, GpjyIndexMr.class, null, pageSize, pageIndex);
 	}
 
 	/**
@@ -493,18 +502,12 @@ public class GpjyDao {
 	 * @param bz		备注
 	 * 
 	 * */
-	public boolean updateSaleJf(Integer id, String buyUser, double saleNum, String bz) {
-		String sql = "update "+table+" set mcsl=mcsl-?,cgdate=?,dfuser=?,bz=? where id=? and jy=0 limit 1";
+	public boolean updateSaleJf(Integer id, double saleNum) {
+		String sql = "update "+table+" set mcsl=mcsl-? where id=? and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setDouble(saleNum);
-		parameter.setObject(new Date());
-		parameter.setString(buyUser);
-		parameter.setString(bz);
 		parameter.setInt(id);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
-		if(result){
-			cleanCache(id);
-		}
 		return result;
 	}
 	
@@ -514,25 +517,15 @@ public class GpjyDao {
 	 * 
 	 * @param id
 	 * 
-	 * @param saleUser	卖出用户
-	 * 
 	 * @param saleNum	买入数量
 	 * 
-	 * @param bz		备注
-	 * 
 	 * */
-	public boolean updateBuyJf(Integer id, String saleUser, double buyNum, String bz) {
-		String sql = "update "+table+" set mysl=mysl-?,cgdate=?,dfuser=?,bz=? where id=? and jy=0 limit 1";
+	public boolean updateBuyJf(Integer id, double buyNum) {
+		String sql = "update "+table+" set mysl=mysl-? where id=? and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setDouble(buyNum);
-		parameter.setObject(new Date());
-		parameter.setString(saleUser);
-		parameter.setString(bz);
 		parameter.setInt(id);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
-		if(result){
-			cleanCache(id);
-		}
 		return result;
 	}
 	

@@ -34,6 +34,12 @@
 
                                             </font></td>
 									          <td  width="238">
+									          <%-- <c:choose>
+									          	<c:when test="${data.username==userName}"><a onClick="return confirm('<s:text name='canot_buy'/>？')" href="#"><font color="#FF0000" style="font-size: 11pt;text-decoration:line-through;"><s:text name="vipgpjymc.jsp.gpjymc.jsp.1526835300a"></s:text></font></a></c:when>
+									          <c:otherwise>
+									          	<c:if test="${data.mcsl>0}"><b><a onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')" target="main" href="wymy?id=${data.id}&pay=${data.jypay}"><font color="#FF0000" style="font-size: 11pt"><s:text name="vipgpjymc.jsp.gpjymc.jsp.1526835300a"></s:text></font></a></b></c:if>
+									          </c:otherwise>
+									          </c:choose> --%>
 									          <c:if test="${data.mcsl>0}"><b><a onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')" target="main" href="wymy?id=${data.id}&pay=${data.jypay}"><font color="#FF0000" style="font-size: 11pt"><s:text name="vipgpjymc.jsp.gpjymc.jsp.1526835300a"></s:text></font></a></b></c:if>
 									          </td>
 								          </tr>

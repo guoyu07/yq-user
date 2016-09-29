@@ -16,8 +16,9 @@ public class GpgymyAction extends ALDAdminPageActionSupport<Gpjy> {
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 //		super.initPage(userService.getMrPageList(super.getUserName(), super.getToPage(), 10));
-		super.setDataList(userService.getMrPageList(10));
 		userName = super.getUserName();
+		super.setDataList(userService.getMrPageList(10,userName));
+		
 		return SUCCESS;
 	}
 	
