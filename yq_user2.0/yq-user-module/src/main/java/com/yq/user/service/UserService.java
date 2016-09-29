@@ -2767,7 +2767,9 @@ public class UserService {
 			return;
 		}
 		
-		if(!gcuserDao.reduceOnlyJB(userName, needJb)){
+		int needJb1 = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		
+		if(!gcuserDao.reduceOnlyJB(userName, needJb1)){
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
 		}
 		
@@ -2789,9 +2791,9 @@ public class UserService {
 		Datepay datePay = new Datepay();
 		datePay.setUsername(userName);
 		datePay.setRegid("买入挂牌中");
-		datePay.setDbjc(needJb);
+		datePay.setDbjc(needJb1);
 		datePay.setPay(gcuser.getPay());
-		datePay.setJydb(gcuser.getJydb()-needJb);
+		datePay.setJydb(gcuser.getJydb()-needJb1);
 		datePay.setAbdate(new Date());
 		int id = logService.addDatePay(datePay);
 		
@@ -2803,7 +2805,7 @@ public class UserService {
 		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(0d);//此处设置价格为0
 		gpjy.setBz("买入挂牌中");
-		gpjy.setJypay(Double.valueOf(needJb));
+		gpjy.setJypay(Double.valueOf(needJb1));
 		gpjy.setJyid(id);
 		gpjy.setAbdate(new Date());
 		gpjyDao.add(gpjy);
@@ -2937,6 +2939,7 @@ public class UserService {
 			return;
 		}
 		
+		int needJb1 = (int)(Math.ceil(price*saleNum));
 		
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
@@ -2944,7 +2947,7 @@ public class UserService {
 		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(price);
 		gpjy.setBz("卖出挂牌中");
-		gpjy.setJypay(Double.valueOf(needJb));
+		gpjy.setJypay(Double.valueOf(needJb1));
 		gpjy.setAbdate(new Date());
 		gpjyDao.add(gpjy);
 		
@@ -3004,7 +3007,7 @@ public class UserService {
 						if(saleCount>=salenum){
 							saleCount = saleCount - salenum;
 							//直接完结买入订单
-							automcJf(userName,orderId);
+							automcJf(userName,gpjy);
 						}else{
 							//修改订单
 							changemcJf(userName,gpjy,saleCount);
@@ -3013,7 +3016,7 @@ public class UserService {
 						}
 						
 					}
-					pageIndex++;
+					
 				}else{
 					break;
 				}
@@ -3021,6 +3024,7 @@ public class UserService {
 			}else{
 				break;
 			}
+			pageIndex++;
 		}
 	
 		return saleCount;
@@ -3225,15 +3229,16 @@ public class UserService {
 
 	/**
 	 * 自动积分卖出
+	 * 
 	 * @param userName
-	 * @param id 订单id
+	 * 
+	 * @param gpjy1  订单
 	 */
 	@Transactional
-	public void automcJf(String userName,int id){
+	public void automcJf(String userName,Gpjy gpjy1){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		
-		Gpjy gpjy1 = gpjyDao.getById(id);
+		int id= gpjy1.getId();
 		
 		//重置数量和价格
 		Fcxt fcxt = managerService.getFcxtById(2);
@@ -3572,6 +3577,9 @@ public class UserService {
 			page= gpjyDao.getMcIndexList(price, pageIndex, pageSize);
 	    	if(page!=null){
 	    		tempList = page.getData();
+	    		if(buycount==0){
+					break;
+				}
 	    		if(tempList!=null&&tempList.size()>0){
 	    			for (GpjyIndexMc gpjyIndexMc : tempList) {
 	    				int orderId = gpjyIndexMc.getId();
@@ -3591,7 +3599,7 @@ public class UserService {
 	    				if(buycount>=buynum){
 	    					buycount = buycount - buynum;
 	    					//完结卖出订单结算
-	    					automrJf(userName,orderId);
+	    					automrJf(userName,gpjy);
 	    				}else{
 	    					// 减掉卖出订单数量，同时做相关的修改
 	    					changemrJf(userName,gpjy,buycount);
@@ -3600,7 +3608,7 @@ public class UserService {
 	    				}
 	    				
 	    			}
-	    			pageIndex++;
+	    			
 	    		}else{
 					break;
 				}
@@ -3608,6 +3616,7 @@ public class UserService {
 			}else{
 				break;
 			}
+	    	pageIndex++;
 		 }
 		return buycount;
 		
@@ -3616,14 +3625,14 @@ public class UserService {
 	/**
 	 * 自动买入积分
 	 * @param userName
-	 * @param id 买入积分订单id
+	 * @param gpjy 买入积分订单
 	 * @return 
 	 */
-	public void automrJf(String userName,int id){
+	public void automrJf(String userName,Gpjy gpjy1){
 		
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		Gpjy gpjy1 = gpjyDao.getById(id);
+		int id= gpjy1.getId();
 
 		//扣除玩家金币
 		gcuserDao.reduceOnlyJB(userName, gpjy1.getJypay().intValue());
