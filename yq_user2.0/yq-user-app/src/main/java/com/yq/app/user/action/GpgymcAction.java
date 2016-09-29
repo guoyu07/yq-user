@@ -7,18 +7,13 @@ import com.yq.user.service.UserService;
 
 public class GpgymcAction extends ALDAdminPageActionSupport<Gpjy> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String userName;
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 //		super.initPage(userService.getMcPageList(super.getUserName(), super.getToPage(), 10));
-		userName = super.getUserName();
-		super.setDataList(userService.getMcPageList(10,userName));
-		
+		super.setDataList(userService.getMcPageList(10,super.getUserName()));
 		return SUCCESS;
 	}
 
