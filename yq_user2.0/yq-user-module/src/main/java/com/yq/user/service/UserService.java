@@ -2915,8 +2915,6 @@ public class UserService {
 		}
 		
 		
-		
-		
 //		if(!gcuserDao.increaseStopjyg(userName,20)){
 //			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
 //		}
@@ -2941,6 +2939,7 @@ public class UserService {
 		
 		int needJb1 = (int)(Math.ceil(price*saleNum));
 		
+		//余下挂单处理
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
 		gpjy.setMcsl(Double.valueOf(saleNum));
@@ -2962,7 +2961,7 @@ public class UserService {
 	 * 
 	 * @param saleCount	卖出的数量
 	 * 
-	 * @return salenum 如果有余下，挂单...
+	 * @return saleCount 如果有余下，挂单...
 	 * 
 	 * */
 	public int automationSaleJf(String userName,double price,int saleCount, String passwrod3) {
@@ -3083,8 +3082,13 @@ public class UserService {
 		gpjyDao.updateIndexCount(id, saleCount);
 		
 
-		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
 		gcuser = gcuserDao.getUser(userName);
+		
+		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
+		
+		
+		//记录日志
+		
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
 		gpjy.setMcsl((double) saleCount);
@@ -3151,6 +3155,7 @@ public class UserService {
 		gcuser = gcuserDao.getUser(userName);
 		
 		Fcxt fcxt = managerService.getFcxtById(2);
+		
 		double needJb = Math.ceil(fcxt.getJygj()*buyCount);
 		
 		//增加一条购买成功的记录（作为买入数量的）
@@ -3168,6 +3173,7 @@ public class UserService {
 
 		String mcdj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
 
+		//记录买入者日志
 		Datepay datePay1 = new Datepay();
 		datePay1.setUsername(userName);
 		datePay1.setDbjc(gpjy1.getJypay().intValue());
@@ -3189,6 +3195,7 @@ public class UserService {
 		gcuserDao.reduceStopjyg(gpjy1.getUsername());
 
 		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
+		//记录卖出者日志
 		Datepay datePay2 = new Datepay();
 		datePay2.setUsername(gpjy1.getUsername());
 		datePay2.setSyjz(mc70);
@@ -3204,7 +3211,7 @@ public class UserService {
 	}
 
 	/**
-	 * 自动积分卖出
+	 * 自动积分卖出,正常流程
 	 * 
 	 * @param userName
 	 * 
@@ -3244,9 +3251,9 @@ public class UserService {
 		
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
         
-		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
-			gpjyDao.cleanCache(id);
-		}
+		gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl());
+		
+		
 		gpjyDao.deleteIndex(id);
 		
 
@@ -3542,9 +3549,8 @@ public class UserService {
 
 		Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
 		double price = fcxt.getJygj();
+		
 		int buynum = 0;
-		
-		
 		int pageIndex = 0;
 		int pageSize = 100;
 		Collection<GpjyIndexMc> tempList = null;
@@ -3571,7 +3577,7 @@ public class UserService {
 	    					break;
 	    				}
 	    				
-	    				//如果卖出的数量大于卖出的数量,需要完结卖出订单，否则完结卖出订单，同时做相关的业务逻辑处理
+	    				//如果买入的数量大于卖出的数量,需要完结卖出订单，否则完结卖出订单，同时做相关的业务逻辑处理
 	    				if(buycount>=buynum){
 	    					buycount = buycount - buynum;
 	    					//完结卖出订单结算
@@ -3599,7 +3605,7 @@ public class UserService {
 	}
 
 	/**
-	 * 自动买入积分
+	 * 自动买入积分（正常流程）
 	 * @param userName
 	 * @param gpjy 买入积分订单
 	 * @return 
