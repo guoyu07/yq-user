@@ -3083,13 +3083,14 @@ public class UserService {
 		gpjyDao.updateIndexCount(id, saleCount);
 		
 
+		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
 		gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
 		gpjy.setMcsl((double) saleCount);
 		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(gpjy1.getPay());
-		gpjy.setJypay(gpjy1.getJypay());
+		gpjy.setJypay(needJb);
 		gpjy.setAbdate(gpjy1.getAbdate());
 		gpjy.setBz("卖出成功");
 		gpjy.setCgdate(new Date());
@@ -3149,6 +3150,8 @@ public class UserService {
 		
 		gcuser = gcuserDao.getUser(userName);
 		
+		Fcxt fcxt = managerService.getFcxtById(2);
+		double needJb = Math.ceil(fcxt.getJygj()*buyCount);
 		
 		//增加一条购买成功的记录（作为买入数量的）
 		Gpjy gpjy = new Gpjy();
@@ -3156,7 +3159,7 @@ public class UserService {
 		gpjy.setMysl((double) buyCount);
 		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
 		gpjy.setPay(gpjy1.getPay());
-		gpjy.setJypay(gpjy1.getJypay());
+		gpjy.setJypay(needJb);
 		gpjy.setBz("买入成功");
 		gpjy.setCgdate(new Date());
 		gpjy.setJy(1);
@@ -3198,33 +3201,6 @@ public class UserService {
 
 		fcxtDao.update(2,buyCount);
 		 
-	}
-
-	/**
-	 * 修改卖出积分
-	 * @param userName
-	 * @param price
-	 * @param saleNum
-	 * 
-	 */
-	private void updateSaleJf(String userName,double price,int saleNum){
-		int needJb = (int)(Math.ceil(price*saleNum));
-		
-		if(needJb<=0){
-			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
-		}
-		
-		Gcuser gcuser = gcuserDao.getUser(userName);
-		Gpjy gpjy = new Gpjy();
-		gpjy.setUsername(userName);
-		gpjy.setMcsl(Double.valueOf(saleNum));
-		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
-		gpjy.setPay(price);
-		gpjy.setBz("卖出挂牌中");
-		gpjy.setJypay(Double.valueOf(needJb));
-		gpjy.setAbdate(new Date());
-		gpjyDao.add(gpjy);
-		
 	}
 
 	/**

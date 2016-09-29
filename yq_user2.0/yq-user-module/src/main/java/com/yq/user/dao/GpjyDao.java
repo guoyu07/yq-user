@@ -83,6 +83,12 @@ public class GpjyDao {
 	}
 	
 	
+	public void cleanCache(){
+			delCache(MC_KEY);
+			delCache(MR_KEY);
+	}
+	
+	
 	
 	
 	private List<Gpjy> initMcCache(int pageSize, String userName){
@@ -184,6 +190,7 @@ public class GpjyDao {
 		String sqlMr = "update gpjy_index_mr set mysl=mysl-? where id="+id;
 		jdbc.update(sqlMc, SqlParameter.Instance().withDouble(count));
 		jdbc.update(sqlMr, SqlParameter.Instance().withDouble(count));
+		cleanCache();
 	}
 
 	public IPage<Gpjy> getPageList(String userName,int pageIndex,int pageSize){
@@ -207,7 +214,7 @@ public class GpjyDao {
 //		String sql="select * from "+table+" where jy=0 and mcsl>0 order by pay asc limit "+pageSize;
 //		return this.jdbc.getList(sql, Gpjy.class, null);
 		List<Gpjy> mcCache = getCacheList(MC_KEY);
-		if(mcCache==null){
+		if(mcCache==null || mcCache.isEmpty()){
 			return initMcCache(pageSize, userName);
 		}
 		return mcCache;
@@ -222,7 +229,7 @@ public class GpjyDao {
 //		String sql="select * from "+table+" where jy=0 and mysl>0 order by pay asc limit "+pageSize;
 //		return this.jdbc.getList(sql, Gpjy.class, null);
 		List<Gpjy> mrCache = getCacheList(MR_KEY);
-		if(mrCache==null){
+		if(mrCache==null || mrCache.isEmpty()){
 			return initMrCache(pageSize, userName);
 		}
 		return mrCache;
@@ -503,11 +510,15 @@ public class GpjyDao {
 	 * 
 	 * */
 	public boolean updateSaleJf(Integer id, double saleNum) {
-		String sql = "update "+table+" set mcsl=mcsl-? where id=? and jy=0 limit 1";
+		String sql = "update "+table+" set mcsl=mcsl-?,jypay=jypay-? where id=? and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
+		parameter.setDouble(saleNum);
 		parameter.setDouble(saleNum);
 		parameter.setInt(id);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
+		if(result){
+			cleanCache();
+		}
 		return result;
 	}
 	
@@ -521,11 +532,15 @@ public class GpjyDao {
 	 * 
 	 * */
 	public boolean updateBuyJf(Integer id, double buyNum) {
-		String sql = "update "+table+" set mysl=mysl-? where id=? and jy=0 limit 1";
+		String sql = "update "+table+" set mysl=mysl-?,jypay=jypay-? where id=? and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
+		parameter.setDouble(buyNum);
 		parameter.setDouble(buyNum);
 		parameter.setInt(id);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
+		if(result){
+			cleanCache();
+		}
 		return result;
 	}
 	
