@@ -510,11 +510,12 @@ public class GpjyDao {
 	 * 
 	 * */
 	public boolean updateSaleJf(Integer id, double saleNum) {
-		String sql = "update "+table+" set mcsl=mcsl-?,jypay=jypay-? where id=? and jy=0 limit 1";
+		String sql = "update "+table+" set mcsl=mcsl-?,jypay=jypay-? where id=? and mcsl-?>=0 and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setDouble(saleNum);
 		parameter.setDouble(saleNum);
 		parameter.setInt(id);
+		parameter.setDouble(saleNum);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
 		if(result){
 			cleanCache();
@@ -532,11 +533,12 @@ public class GpjyDao {
 	 * 
 	 * */
 	public boolean updateBuyJf(Integer id, double buyNum) {
-		String sql = "update "+table+" set mysl=mysl-?,jypay=jypay-? where id=? and jy=0 limit 1";
+		String sql = "update "+table+" set mysl=mysl-?,jypay=jypay-? where id=? and mysl-?>=0 and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setDouble(buyNum);
 		parameter.setDouble(buyNum);
 		parameter.setInt(id);
+		parameter.setDouble(buyNum);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
 		if(result){
 			cleanCache();
