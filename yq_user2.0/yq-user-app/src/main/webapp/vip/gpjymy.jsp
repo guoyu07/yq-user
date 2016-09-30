@@ -38,7 +38,7 @@
 								          </font></td>
 								          <td  width="238">
 								           <c:choose>
-									          <c:when test="${data.username==userName}"><a onClick="return confirm('<s:text name='canot_sell'/>!')" href="#"><font color="#008000" style="font-size: 11pt;text-decoration:line-through;"><s:text name="vipgpjymc.jsp.gpjymc.jsp.1526835300a"></s:text></font></a></c:when>
+									          <c:when test="${data.username==userName}"><a onClick="return confirm('<s:text name='canot_sell'/>!')" href="#"><font color="#008000" style="font-size: 11pt;text-decoration:line-through;"><s:text name="vipgpjymy.jsp.gpjymy.jsp.1046836541a"></s:text></font></a></c:when>
 									          <c:otherwise>
 									          	<c:if test="${data.mysl>0}"><a onClick="return confirm('<s:text name='vipgpjymy.jsp.gpjymy.jsp.1046836541'/>？')" target="main" href="wymc?id=${data.id}&sl=${data.mysl}"><span style="font-size: 11pt; font-weight: 700"><font color="#008000"><s:text name='vipgpjymy.jsp.gpjymy.jsp.1046836541a'/></font></span></a></c:if>
 									          </c:otherwise>
