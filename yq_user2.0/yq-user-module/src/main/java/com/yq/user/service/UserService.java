@@ -2974,14 +2974,11 @@ public class UserService {
 		
 		int salenum = 0;
 		
-		int pageIndex = 0;
-		int pageSize = 100;
-		
 		Collection<GpjyIndexMr> tempList = null;
 		IPage<GpjyIndexMr> page = null;
 		for (int i = 0; i < 3; i++) {
 			//1、得到相同所有单价的买入积分列表
-			page = gpjyDao.getMrIndexList(pageIndex, pageSize);
+			page = gpjyDao.getMrIndexList(i, 100);
 			
 			if(page!=null){
 				tempList = page.getData();
@@ -3004,12 +3001,19 @@ public class UserService {
 						}
 						//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
 						if(saleCount>=salenum){
-							//直接完结买入订单
-							saleCount = automcJf(userName,gpjy,saleCount);
+							try{
+								//直接完结买入订单
+								saleCount = automcJf(userName,gpjy,saleCount);
+							}catch(ServiceException e){
+								continue;
+							}
 						}else{
-							//修改订单
-							saleCount = changemcJf(userName,gpjy,saleCount);
-							break;
+							try{
+								//修改订单
+								saleCount = changemcJf(userName,gpjy,saleCount);
+							}catch(ServiceException e){
+								continue;
+							}
 						}
 						
 					}
@@ -3021,7 +3025,6 @@ public class UserService {
 			}else{
 				break;
 			}
-			pageIndex++;
 		}
 	
 		return saleCount;
@@ -3041,7 +3044,7 @@ public class UserService {
 	 * 
 	 * */
 	@Transactional
-	private int changemcJf(String userName, Gpjy gpjy1, int saleCount) {
+	public int changemcJf(String userName, Gpjy gpjy1, int saleCount) {
 		int id = gpjy1.getId();
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
@@ -3063,7 +3066,7 @@ public class UserService {
 
 		//扣除积分
 		if(!gcuserDao.updateJyg(userName, saleCount)){
-			return saleCount;
+			throw new ServiceException(saleCount, "");
 		};
 
 		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
@@ -3074,7 +3077,7 @@ public class UserService {
 		
 		//发布买入者获得积分
 		if(!gcuserDao.updateJyg(gpjy1.getUsername(), -saleCount)){
-			return saleCount;
+			throw new ServiceException(saleCount, "");
 		};
 		
 		//更新订单
@@ -3138,7 +3141,7 @@ public class UserService {
 	 * @param buyCount 卖出数量  
 	 */
 	@Transactional
-	private int changemrJf(String userName,Gpjy gpjy1,int buyCount){
+	public int changemrJf(String userName,Gpjy gpjy1,int buyCount){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id = gpjy1.getId();
@@ -3149,17 +3152,17 @@ public class UserService {
 		
 		//扣除用户金币
 		if(!gcuserDao.reduceOnlyJB(userName, (int) needJb)){
-			return buyCount;
+			throw new ServiceException(buyCount, "");
 		}
 
 		//获得积分
 		if(!gcuserDao.updateJyg(userName, - buyCount)){
-			return buyCount;
+			throw new ServiceException(buyCount, "");
 		}
 
 		//修改卖出交易
 		if(!gpjyDao.updateSaleJf(gpjy1.getId(), buyCount)){
-			return buyCount;
+			throw new ServiceException(buyCount, "");
 		}
 		
 		
@@ -3258,7 +3261,7 @@ public class UserService {
 
 		//扣除积分
 		if (!gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue())) {
-			return saleCount;
+			throw new ServiceException(saleCount, "");
 		}
 
 		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
@@ -3272,7 +3275,7 @@ public class UserService {
         
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
 			gpjyDao.cleanCache(id);
-			return saleCount;
+			throw new ServiceException(saleCount, "");
 		}
 		gpjyDao.deleteIndex(id);
 		
@@ -3571,12 +3574,10 @@ public class UserService {
 		double price = fcxt.getJygj();
 		
 		int buynum = 0;
-		int pageIndex = 0;
-		int pageSize = 100;
 		Collection<GpjyIndexMc> tempList = null;
 		IPage<GpjyIndexMc> page = null;
 		for (int i = 0; i < 3; i++) {
-			page= gpjyDao.getMcIndexList(price, pageIndex, pageSize);
+			page= gpjyDao.getMcIndexList(price, i, 100);
 	    	if(page!=null){
 	    		tempList = page.getData();
 	    		if(buycount==0){
@@ -3599,12 +3600,20 @@ public class UserService {
 	    				
 	    				//如果买入的数量大于卖出的数量,需要完结卖出订单，否则完结卖出订单，同时做相关的业务逻辑处理
 	    				if(buycount>=buynum){
-	    					//完结卖出订单结算
-	    					buycount =automrJf(userName,gpjy,buycount);
+	    					try{
+	    						//完结卖出订单结算
+	    						buycount = automrJf(userName,gpjy,buycount);
+	    					}catch(ServiceException e){
+	    						continue;
+	    					}
+	    					
 	    				}else{
-	    					// 减掉卖出订单数量，同时做相关的修改
-	    					buycount=changemrJf(userName,gpjy,buycount);
-	    					continue;
+	    					try{
+		    					// 减掉卖出订单数量，同时做相关的修改
+		    					buycount=changemrJf(userName,gpjy,buycount);
+	    					}catch(ServiceException e){
+	    						continue;
+	    					}
 	    				}
 	    				
 	    			}
@@ -3616,7 +3625,6 @@ public class UserService {
 			}else{
 				break;
 			}
-	    	pageIndex++;
 		 }
 		return buycount;
 		
@@ -3628,25 +3636,26 @@ public class UserService {
 	 * @param gpjy 买入积分订单
 	 * @return 
 	 */
+	@Transactional
 	public int automrJf(String userName,Gpjy gpjy1, int buycount){
 		
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
-
+		
 		//扣除玩家金币
 		if (!gcuserDao.reduceOnlyJB(userName, gpjy1.getJypay().intValue())) {
-			return buycount;
+			throw new ServiceException(buycount, "");
 		}
 
 		//获得积分
 		if (!gcuserDao.updateJyg(userName, - gpjy1.getMcsl().intValue())) {
-			return buycount;
+			throw new RuntimeException();
 		}
 
 		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
 			gpjyDao.cleanCache(id);
-			return buycount;
+			throw new RuntimeException();
 		}
 		
 		

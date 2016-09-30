@@ -440,7 +440,7 @@ public class GpjyDao {
 	 * 
 	 * */
 	public List<GpjyIndexMc> getMcIndexList(){
-		String sql = "select * from gpjy_index_mc ";
+		String sql = "select * from gpjy_index_mc order by pay asc ";
 		return this.jdbc.getList(sql, GpjyIndexMc.class);
 	}
 	
@@ -450,7 +450,7 @@ public class GpjyDao {
 	 * 
 	 * */
 	public List<GpjyIndexMr> getMrIndexList(){
-		String sql = "select * from gpjy_index_mr  ";
+		String sql = "select * from gpjy_index_mr order by pay asc ";
 		return this.jdbc.getList(sql, GpjyIndexMr.class);
 	}
 
@@ -465,7 +465,7 @@ public class GpjyDao {
 	 * 
 	 * */
 	public IPage<GpjyIndexMc> getMcIndexList(double price, int pageIndex, int pageSize){
-		String sql = "select * from gpjy_index_mc where pay=? order by pay asc";
+		String sql = "select * from gpjy_index_mc where pay=? order by pay desc,id asc";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setDouble(price);
 		return jdbc.getListPage(sql, GpjyIndexMc.class, paramter, pageSize, pageIndex);
@@ -481,7 +481,7 @@ public class GpjyDao {
 	 * 
 	 * */
 	public IPage<GpjyIndexMr> getMrIndexList(int pageIndex, int pageSize){
-		String sql = "select * from gpjy_index_mr order by pay asc";
+		String sql = "select * from gpjy_index_mr order by pay desc,id asc";
 		return jdbc.getListPage(sql, GpjyIndexMr.class, null, pageSize, pageIndex);
 	}
 
