@@ -3082,10 +3082,12 @@ public class UserService {
 		//发布买入者获得积分
 		if(!gcuserDao.updateJyg(gpjy1.getUsername(), -saleCount)){
 			throw new ServiceException(saleCount, "");
-		};
+		}
 		
 		//更新订单
-		gpjyDao.updateBuyJf(id, saleCount);
+		if(!gpjyDao.updateBuyJf(id, saleCount)){
+			throw new ServiceException(saleCount, "");
+		}
 		
 		
 		//修改买卖索引交易数量
@@ -3277,7 +3279,9 @@ public class UserService {
 		gcuserDao.addOnlyJB(userName, mc30);
 
 		//卖出者获得积分
-		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
+		if (!gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue())){
+			throw new ServiceException(saleCount, "");
+		};
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
         
         
