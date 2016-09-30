@@ -3047,7 +3047,7 @@ public class UserService {
 	 * @param saleCount 卖出数量
 	 * 
 	 * */
-	@Transactional
+	@Transactional(rollbackFor=ServiceException.class) 
 	public int changemcJf(String userName, Gpjy gpjy1, int saleCount) {
 		int id = gpjy1.getId();
 		checkJfIsOpen();
@@ -3152,7 +3152,7 @@ public class UserService {
 	 * 
 	 * @param buyCount 卖出数量  
 	 */
-	@Transactional
+	@Transactional(rollbackFor=ServiceException.class) 
 	public int changemrJf(String userName,Gpjy gpjy1,int buyCount){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
@@ -3254,7 +3254,7 @@ public class UserService {
 	 * 
 	 * @param gpjy1  订单
 	 */
-	@Transactional
+	@Transactional(rollbackFor=ServiceException.class) 
 	public int automcJf(String userName,Gpjy gpjy1, int saleCount){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
@@ -3657,7 +3657,7 @@ public class UserService {
 	 * @param gpjy 买入积分订单
 	 * @return 
 	 */
-	@Transactional
+	@Transactional(rollbackFor=ServiceException.class) 
 	public int automrJf(String userName,Gpjy gpjy1, int buycount){
 		
 		checkJfIsOpen();
