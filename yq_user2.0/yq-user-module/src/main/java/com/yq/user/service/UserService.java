@@ -3004,9 +3004,8 @@ public class UserService {
 						}
 						//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
 						if(saleCount>=salenum){
-							saleCount = saleCount - salenum;
 							//直接完结买入订单
-							automcJf(userName,gpjy);
+							saleCount = automcJf(userName,gpjy,saleCount);
 						}else{
 							//修改订单
 							saleCount = changemcJf(userName,gpjy,saleCount);
@@ -3235,7 +3234,7 @@ public class UserService {
 	 * @param gpjy1  订单
 	 */
 	@Transactional
-	public void automcJf(String userName,Gpjy gpjy1){
+	public int automcJf(String userName,Gpjy gpjy1, int saleCount){
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
@@ -3254,26 +3253,29 @@ public class UserService {
 		int mc70 = (int) (mc70a * 1 + 0.1);
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
+		
+		
 
 		//扣除积分
-		gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue());
+		if (!gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue())) {
+			return saleCount;
+		}
 
 		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
 		
 		//增加金币
 		gcuserDao.addOnlyJB(userName, mc30);
 
-		//发布买入者获得积分
+
 		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
-		
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
         
-		gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl());
-		
-		
+		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
+			gpjyDao.cleanCache(id);
+			return saleCount;
+		}
 		gpjyDao.deleteIndex(id);
 		
-
 		gcuser = gcuserDao.getUser(userName);
 		
 		//增加卖出者记录
@@ -3305,6 +3307,7 @@ public class UserService {
 		String dStr = d==null?"":d;
 		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
 		fcxtDao.update(2, gpjy1.getMysl().intValue());
+		return saleCount-gpjy1.getMysl().intValue();
 			 
 	}
 
@@ -3596,9 +3599,8 @@ public class UserService {
 	    				
 	    				//如果买入的数量大于卖出的数量,需要完结卖出订单，否则完结卖出订单，同时做相关的业务逻辑处理
 	    				if(buycount>=buynum){
-	    					buycount = buycount - buynum;
 	    					//完结卖出订单结算
-	    					automrJf(userName,gpjy);
+	    					buycount =automrJf(userName,gpjy,buycount);
 	    				}else{
 	    					// 减掉卖出订单数量，同时做相关的修改
 	    					buycount=changemrJf(userName,gpjy,buycount);
@@ -3626,20 +3628,27 @@ public class UserService {
 	 * @param gpjy 买入积分订单
 	 * @return 
 	 */
-	public void automrJf(String userName,Gpjy gpjy1){
+	public int automrJf(String userName,Gpjy gpjy1, int buycount){
 		
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
 
 		//扣除玩家金币
-		gcuserDao.reduceOnlyJB(userName, gpjy1.getJypay().intValue());
+		if (!gcuserDao.reduceOnlyJB(userName, gpjy1.getJypay().intValue())) {
+			return buycount;
+		}
 
 		//获得积分
-		gcuserDao.updateJyg(userName, - gpjy1.getMcsl().intValue());
+		if (!gcuserDao.updateJyg(userName, - gpjy1.getMcsl().intValue())) {
+			return buycount;
+		}
 
+		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
+			gpjyDao.cleanCache(id);
+			return buycount;
+		}
 		
-		gpjyDao.updateSaleSuccess(id, userName, "卖出成功");
 		
 		gpjyDao.deleteIndex(id);
 
@@ -3690,6 +3699,8 @@ public class UserService {
 		logService.addDatePay(datePay2);
 
 		fcxtDao.update(2,gpjy1.getMcsl().intValue());
+		
+		return buycount - gpjy1.getMcsl().intValue();
 		 
 	}
 
