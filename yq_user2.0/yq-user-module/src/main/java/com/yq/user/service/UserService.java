@@ -3124,7 +3124,7 @@ public class UserService {
 	
 
 	/**
-	 * 改变买入积分 此处需要处理两个行为：1、买入成功后的记录，2、买入后卖出订单的剩余数量作为新增卖出积分的一个订单（很重要）
+	 * 改变买入积分 此处需要处理两个行为：1、买入成功后的记录，2、买入后卖出订单的剩余数量作为新增卖出积分的一个订单
 	 * 
 	 * @param userName
 	 * 
@@ -3137,8 +3137,13 @@ public class UserService {
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id = gpjy1.getId();
+		
+		Fcxt fcxt = managerService.getFcxtById(2);
+		
+		double needJb = Math.ceil(fcxt.getJygj()*buyCount);
+		
 		//扣除用户金币
-		gcuserDao.reduceOnlyJB(userName, buyCount);
+		gcuserDao.reduceOnlyJB(userName, (int) needJb);
 
 		//获得积分
 		gcuserDao.updateJyg(userName, - buyCount);
@@ -3154,9 +3159,7 @@ public class UserService {
 		
 		gcuser = gcuserDao.getUser(userName);
 		
-		Fcxt fcxt = managerService.getFcxtById(2);
-		
-		double needJb = Math.ceil(fcxt.getJygj()*buyCount);
+	
 		
 		//增加一条购买成功的记录（作为买入数量的）
 		Gpjy gpjy = new Gpjy();
