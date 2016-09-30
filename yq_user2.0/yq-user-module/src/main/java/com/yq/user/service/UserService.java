@@ -3063,7 +3063,7 @@ public class UserService {
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
 		//扣除积分
-		if(gcuserDao.updateJyg(userName, saleCount)){
+		if(!gcuserDao.updateJyg(userName, saleCount)){
 			return saleCount;
 		};
 
@@ -3074,7 +3074,7 @@ public class UserService {
 
 		
 		//发布买入者获得积分
-		if(gcuserDao.updateJyg(gpjy1.getUsername(), -saleCount)){
+		if(!gcuserDao.updateJyg(gpjy1.getUsername(), -saleCount)){
 			return saleCount;
 		};
 		
