@@ -3071,12 +3071,16 @@ public class UserService {
 		//扣除积分
 		if(!gcuserDao.updateJyg(userName, saleCount)){
 			throw new ServiceException(saleCount, "");
-		};
+		}
 
-		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
+		if(!gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70)){
+			throw new ServiceException(saleCount, "");
+		}
 		
 		//增加金币
-		gcuserDao.addOnlyJB(userName, mc30);
+		if(!gcuserDao.addOnlyJB(userName, mc30)){
+			throw new ServiceException(saleCount, "");
+		}
 
 		
 		//发布买入者获得积分
@@ -3215,9 +3219,15 @@ public class UserService {
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
-		gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70);
-		gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30);
-		gcuserDao.reduceStopjyg(gpjy1.getUsername());
+		if(!gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70)){
+			throw new ServiceException(buyCount, "");
+		}
+		if(!gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30)){
+			throw new ServiceException(buyCount, "");
+		}
+		if(!gcuserDao.reduceStopjyg(gpjy1.getUsername())){
+			throw new ServiceException(buyCount, "");
+		}
 
 		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
 		//记录卖出者日志
@@ -3273,10 +3283,14 @@ public class UserService {
 		
 
 		//增加一币
-		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
+		if(!gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70)){
+			throw new ServiceException(saleCount, "");
+		};
 		
 		//增加金币
-		gcuserDao.addOnlyJB(userName, mc30);
+		if(!gcuserDao.addOnlyJB(userName, mc30)){
+			throw new ServiceException(saleCount, "");
+		};
 
 		//卖出者获得积分
 		if (!gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue())){
@@ -3699,9 +3713,15 @@ public class UserService {
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
-		gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70);
-		gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30);
-		gcuserDao.reduceStopjyg(gpjy1.getUsername());
+		if (!gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70)){
+			throw new ServiceException(buycount, "");
+		};
+		if(!gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30)){
+			throw new ServiceException(buycount, "");
+		};
+		if(!gcuserDao.reduceStopjyg(gpjy1.getUsername())){
+			throw new ServiceException(buycount, "");
+		};
 
 		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
 		Datepay datePay2 = new Datepay();
