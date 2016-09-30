@@ -2937,6 +2937,12 @@ public class UserService {
 			return;
 		}
 		
+		//扣除积分
+		if (!gcuserDao.updateJyg(userName, saleNum)) {
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
+		}
+		
+		
 		int needJb1 = (int)(Math.ceil(price*saleNum));
 		
 		//余下挂单处理
@@ -3055,7 +3061,7 @@ public class UserService {
 			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
 		}
 		
-		double dqpay92 = (0.9 * gpjy1.getJypay());
+		double dqpay92 = (0.9 * saleCount);
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
 		double mc70a = 0.7 * dqpay;
 		int mc70 = (int) (mc70a * 1 + 0.1);
@@ -3084,6 +3090,8 @@ public class UserService {
 		
 		//修改买卖索引交易数量
 		gpjyDao.updateIndexCount(id, saleCount);
+		
+		
 		
 
 		gcuser = gcuserDao.getUser(userName);
@@ -3198,7 +3206,7 @@ public class UserService {
 		datePay1.setAbdate(new Date());
 		logService.addDatePay(datePay1);
 
-		double dqpay92 = (0.9 * gpjy1.getJypay());
+		double dqpay92 = (0.9 * buyCount);
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
 		double mc70a = 0.7 * dqpay;
 		int mc70 = (int) (mc70a * 1 + 0.1);
@@ -3256,20 +3264,22 @@ public class UserService {
 		int mc30 = (int) (mc30a * 1 + 0.1);
 		
 		
-
 		//扣除积分
 		if (!gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue())) {
 			throw new ServiceException(saleCount, "");
 		}
+		
 
+		//增加一币
 		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
 		
 		//增加金币
 		gcuserDao.addOnlyJB(userName, mc30);
 
-
+		//卖出者获得积分
 		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
+        
         
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
 			gpjyDao.cleanCache(id);
@@ -3751,7 +3761,6 @@ public class UserService {
 
 		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
 		gcuserDao.addOnlyJB(userName, mc30);
-
 		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
