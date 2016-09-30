@@ -2999,21 +2999,19 @@ public class UserService {
 						if(saleCount==0){
 							break ;
 						}
-						//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
-						if(saleCount>=salenum){
-							try{
-								//直接完结买入订单
-								saleCount = automcJf(userName,gpjy,saleCount);
-							}catch(ServiceException e){
-								continue;
+						try{
+							//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
+							if(saleCount>=salenum){
+								
+									//直接完结买入订单
+									saleCount = automcJf(userName,gpjy,saleCount);
+								
+							}else{
+									//修改订单
+									saleCount = changemcJf(userName,gpjy,saleCount);
 							}
-						}else{
-							try{
-								//修改订单
-								saleCount = changemcJf(userName,gpjy,saleCount);
-							}catch(ServiceException e){
-								continue;
-							}
+						}catch(ServiceException e){
+							continue;
 						}
 						
 					}
@@ -3597,24 +3595,19 @@ public class UserService {
 	    				if(buycount==0){
 	    					break;
 	    				}
-	    				
-	    				//如果买入的数量大于卖出的数量,需要完结卖出订单，否则完结卖出订单，同时做相关的业务逻辑处理
-	    				if(buycount>=buynum){
-	    					try{
-	    						//完结卖出订单结算
-	    						buycount = automrJf(userName,gpjy,buycount);
-	    					}catch(ServiceException e){
-	    						continue;
-	    					}
-	    					
-	    				}else{
-	    					try{
-		    					// 减掉卖出订单数量，同时做相关的修改
-		    					buycount=changemrJf(userName,gpjy,buycount);
-	    					}catch(ServiceException e){
-	    						continue;
-	    					}
-	    				}
+	    				try{
+		    				//如果买入的数量大于卖出的数量,需要完结卖出订单，否则完结卖出订单，同时做相关的业务逻辑处理
+		    				if(buycount>=buynum){
+		    						//完结卖出订单结算
+		    						buycount = automrJf(userName,gpjy,buycount);
+		    					
+		    				}else{
+			    					// 减掉卖出订单数量，同时做相关的修改
+			    					buycount=changemrJf(userName,gpjy,buycount);
+		    				}
+		    			}catch(ServiceException e){
+							continue;
+						}
 	    				
 	    			}
 	    			
@@ -3650,12 +3643,12 @@ public class UserService {
 
 		//获得积分
 		if (!gcuserDao.updateJyg(userName, - gpjy1.getMcsl().intValue())) {
-			throw new RuntimeException();
+			throw new ServiceException(buycount, "");
 		}
 
 		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
 			gpjyDao.cleanCache(id);
-			throw new RuntimeException();
+			throw new ServiceException(buycount, "");
 		}
 		
 		

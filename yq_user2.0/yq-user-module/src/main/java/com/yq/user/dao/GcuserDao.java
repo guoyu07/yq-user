@@ -515,7 +515,6 @@ public class GcuserDao {
 		if(result){
 			resetJydbLimit(userName);
 		}
-		
 		return result;
 	}	
 	public boolean updateSjb(String userName,int sjb){
@@ -583,6 +582,7 @@ public class GcuserDao {
 		}
 		
 		return result;
+		
 	}
 	
 	public boolean updateGmdate(String userName,Date gmdate){
