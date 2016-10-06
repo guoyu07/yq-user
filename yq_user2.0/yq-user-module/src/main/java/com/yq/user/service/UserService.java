@@ -2841,15 +2841,15 @@ public class UserService {
 		
 		
 		datePayDao.updateRegIdToCancel(orderId,"已撤销");
-		Datepay datepay = datePayDao.getById(orderId);
+//		Datepay datepay = datePayDao.getById(orderId);
 		//返还金币
-		gcuserDao.addOnlyJB(userName, datepay.getDbjc());
+		gcuserDao.addOnlyJB(userName,gpjy1.getJypay().intValue());
 		
 		gcuser = gcuserDao.getUser(userName);
 		Datepay datePay = new Datepay();
 		datePay.setUsername(userName);
 		datePay.setRegid("撤销求购积分");
-		datePay.setJyjz(datepay.getDbjc());
+		datePay.setJyjz(gpjy1.getJypay().intValue());
 		datePay.setJydb(gcuser.getJydb());
 		datePay.setPay(gcuser.getPay());
 		datePay.setNewbz(0);
@@ -3088,8 +3088,10 @@ public class UserService {
 			throw new ServiceException(saleCount, "");
 		}
 		
+		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
+		
 		//更新订单
-		if(!gpjyDao.updateBuyJf(id, saleCount)){
+		if(!gpjyDao.updateBuyJf(id, saleCount,needJb)){
 			throw new ServiceException(saleCount, "");
 		}
 		
@@ -3102,7 +3104,7 @@ public class UserService {
 
 		gcuser = gcuserDao.getUser(userName);
 		
-		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
+		
 		
 		
 		//记录日志
