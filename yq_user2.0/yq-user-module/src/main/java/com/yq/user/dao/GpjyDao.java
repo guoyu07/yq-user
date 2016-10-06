@@ -510,9 +510,8 @@ public class GpjyDao {
 	 * 
 	 * */
 	public boolean updateSaleJf(Integer id, double saleNum) {
-		String sql = "update "+table+" set mcsl=mcsl-?,jypay=jypay-? where id=? and mcsl-?>=0 and jy=0 limit 1";
+		String sql = "update "+table+" set mcsl=mcsl-?,jypay=CAST(mcsl*pay AS SIGNED INTEGER) where id=? and mcsl-?>0 and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
-		parameter.setDouble(saleNum);
 		parameter.setDouble(saleNum);
 		parameter.setInt(id);
 		parameter.setDouble(saleNum);
@@ -532,11 +531,11 @@ public class GpjyDao {
 	 * @param saleNum	买入数量
 	 * 
 	 * */
-	public boolean updateBuyJf(Integer id, double buyNum) {
-		String sql = "update "+table+" set mysl=mysl-?,jypay=jypay-? where id=? and mysl-?>=0 and jy=0 limit 1";
+	public boolean updateBuyJf(Integer id, double buyNum,double needJb) {
+		String sql = "update "+table+" set mysl=mysl-?,jypay=jypay-? where id=? and mysl-?>0 and jy=0 limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setDouble(buyNum);
-		parameter.setDouble(buyNum);
+		parameter.setDouble(needJb);
 		parameter.setInt(id);
 		parameter.setDouble(buyNum);
 		boolean result =  this.jdbc.update(sql, parameter)>0;

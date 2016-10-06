@@ -1249,6 +1249,5 @@ public class GcuserDao {
 		parameter.setString(idCard);
 		return this.jdbc.update(strBuffer.toString(), parameter)>0;
 	}
-
 	
 }
