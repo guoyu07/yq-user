@@ -30,7 +30,7 @@ public class Gcuser{
 	private String vipzfb;
 	private String vipzh;
 	private int cbgc;
-	private int jbpay;
+	private int jbpay;				//
 	private int cbpay;				//累计交易一币
 	private int pay;				//当前可用一币
 	private int txpay;				//累计使用一币(已提现)

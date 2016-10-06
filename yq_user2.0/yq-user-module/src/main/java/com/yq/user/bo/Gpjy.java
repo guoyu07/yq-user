@@ -15,7 +15,7 @@ public class Gpjy{
 	private Double mcsl;
 	private Double sysl;
 	private Double pay;
-	private Double jypay;
+	private Double jypay;	//该笔订单买入或卖出需要的金币数量
 	private Date abdate;
 	private String bz;
 	private Date cgdate;

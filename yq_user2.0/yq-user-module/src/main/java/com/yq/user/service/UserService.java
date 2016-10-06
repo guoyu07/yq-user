@@ -2736,22 +2736,6 @@ public class UserService {
 	@Transactional
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
-		Gcuser gcuser = gcuserDao.getUser(userName);
-		
-		Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
-		
-		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
-		
-		
-		
-		if(needJb<=0){
-			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
-		}
-		
-		if (gcuser.getJydb() < needJb) {
-			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
-		}
-		
 		if(buyNum<5){
 			throw new ServiceException(7,"买入数量至少为5个积分！");
 		}
@@ -2759,7 +2743,22 @@ public class UserService {
 			throw new ServiceException(8,"单笔买入数量不能超过3000个积分！");
 		}
 		
-
+		
+		
+		double currentPrice=managerService.getCurrentyPrice();//得到当前交易价格
+		
+		int needJb = (int)(Math.ceil(currentPrice*buyNum));
+		
+		if(needJb<=0){
+			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
+		}
+		
+		if (!enoughUserItem(userName,"金币",needJb)) {//判断玩家物品是否足够
+			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
+		}
+		
+		
+		
 		//自动积分买入
 		buyNum = automationBuyJf(userName,buyNum);
 		
@@ -2767,9 +2766,12 @@ public class UserService {
 			return;
 		}
 		
-		int needJb1 = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		Gcuser gcuser = gcuserDao.getUser(userName);
 		
-		if(!gcuserDao.reduceOnlyJB(userName, needJb1)){
+		int needJb1 = (int)(Math.ceil(currentPrice*buyNum));
+		
+		//买入积分扣除金币
+		if(!useUserItem(userName, "金币", needJb1)){
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
 		}
 		
@@ -2812,6 +2814,7 @@ public class UserService {
 		 
 	}
 	
+
 	/**
 	 * 取消购买积分
 	 * @param userName
@@ -2906,7 +2909,7 @@ public class UserService {
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		//先判断卖出的积分是否大于自己所剩积分
-		if (gcuser.getJyg() < saleNum) {
+		if (!enoughUserItem(userName, "积分", saleNum)) {
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
 		
@@ -2930,7 +2933,7 @@ public class UserService {
 			throw new ServiceException(3,"未满100天的账户，积分暂时停止卖出交易，收益完成后自动开放！");
 		}
 		
-		// 自动积分卖出功能 
+		// 自动积分卖出
 		saleNum = automationSaleJf(userName, price, saleNum, passwrod3);
 		
 		if(saleNum<=0){
@@ -2938,7 +2941,7 @@ public class UserService {
 		}
 		
 		//扣除积分
-		if (!gcuserDao.updateJyg(userName, saleNum)) {
+		if (!useUserItem(userName, "积分", saleNum)) {
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
 		
@@ -2958,6 +2961,8 @@ public class UserService {
 		
 	}
 	
+	
+
 	/**
 	 * 自动化积分卖出
 	 * 
@@ -2972,8 +2977,7 @@ public class UserService {
 	 * */
 	public int automationSaleJf(String userName,double price,int saleCount, String passwrod3) {
 		//得到当前价格的买入列表
-		Fcxt fcxt = managerService.getFcxtById(2);
-		double currentPrice = fcxt.getJygj(); //查詢當前價格
+		double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
 		if(currentPrice!=price){//如果卖出价格与当前价格不等，直接创建新的交易订单
 			return saleCount;
 		}
@@ -3050,12 +3054,10 @@ public class UserService {
 	@Transactional(rollbackFor=ServiceException.class) 
 	public int changemcJf(String userName, Gpjy gpjy1, int saleCount) {
 		int id = gpjy1.getId();
-		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		//重置数量和价格
-		Fcxt fcxt = managerService.getFcxtById(2);
-		double price = fcxt.getJygj();
+		double price = managerService.getCurrentyPrice();
 		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
 			gpjy1.setPay(price);
 			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
@@ -3068,6 +3070,8 @@ public class UserService {
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
+		
+		
 		//扣除积分
 		if(!gcuserDao.updateJyg(userName, saleCount)){
 			throw new ServiceException(saleCount, "");
@@ -3102,7 +3106,7 @@ public class UserService {
 
 		gcuser = gcuserDao.getUser(userName);
 		
-		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
+		double needJb = (int)(Math.ceil(price*saleCount));
 		
 		
 		//记录日志
@@ -3154,13 +3158,12 @@ public class UserService {
 	 */
 	@Transactional(rollbackFor=ServiceException.class) 
 	public int changemrJf(String userName,Gpjy gpjy1,int buyCount){
-		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id = gpjy1.getId();
 		
-		Fcxt fcxt = managerService.getFcxtById(2);
+		double price = managerService.getCurrentyPrice();
 		
-		double needJb = Math.ceil(fcxt.getJygj()*buyCount);
+		double needJb = Math.ceil(price*buyCount);
 		
 		//扣除用户金币
 		if(!gcuserDao.reduceOnlyJB(userName, (int) needJb)){
@@ -3256,13 +3259,11 @@ public class UserService {
 	 */
 	@Transactional(rollbackFor=ServiceException.class) 
 	public int automcJf(String userName,Gpjy gpjy1, int saleCount){
-		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
 		
 		//重置数量和价格
-		Fcxt fcxt = managerService.getFcxtById(2);
-		double price = fcxt.getJygj();
+		double price = managerService.getCurrentyPrice();
 		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
 			gpjy1.setPay(price);
 			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
@@ -3277,23 +3278,22 @@ public class UserService {
 		
 		
 		//扣除积分
-		if (!gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue())) {
+		if (!this.useUserItem(userName, "积分", gpjy1.getMysl().intValue())) {
 			throw new ServiceException(saleCount, "");
 		}
 		
-
 		//增加一币
-		if(!gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70)){
+		if(!this.giveUserItem(userName, "一币", mc70)){
 			throw new ServiceException(saleCount, "");
 		};
 		
 		//增加金币
-		if(!gcuserDao.addOnlyJB(userName, mc30)){
+		if(!this.giveUserItem(userName, "金币", mc30)){
 			throw new ServiceException(saleCount, "");
 		};
 
 		//卖出者获得积分
-		if (!gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue())){
+		if (!this.giveUserItem(gpjy1.getUsername(), "积分", gpjy1.getMysl().intValue())){
 			throw new ServiceException(saleCount, "");
 		};
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
@@ -3385,7 +3385,7 @@ public class UserService {
 //			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
 //		}
 		
-		if(saleNum>gcuser.getJyg()){
+		if(!enoughUserItem(userName, "积分", saleNum)){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量 "+gcuser.getJyg()+" ，谢谢！");
 		}
 		
@@ -3401,6 +3401,12 @@ public class UserService {
 //		}
 	}
 	
+	
+	/**
+	 * 
+	 * 检查系统是否打开
+	 * 
+	 * */
 	private void checkJfIsOpen(){
 		if(AdminService.isClose){
 			throw new ServiceException(1860,"系统已关闭！请稍后再操作！");
@@ -3596,8 +3602,7 @@ public class UserService {
 	 */
 	private int automationBuyJf(String userName, int buycount) {
 
-		Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
-		double price = fcxt.getJygj();
+		double price = managerService.getCurrentyPrice(); //查詢當前價格
 		
 		int buynum = 0;
 		Collection<GpjyIndexMc> tempList = null;
@@ -3659,8 +3664,6 @@ public class UserService {
 	 */
 	@Transactional(rollbackFor=ServiceException.class) 
 	public int automrJf(String userName,Gpjy gpjy1, int buycount){
-		
-		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
 		
@@ -4873,6 +4876,108 @@ public class UserService {
 		return "success";
 	
    }
-
+   
+   /**
+	 * 判断玩家物品是否足够
+	 * 
+	 *@param  gcuser 用户
+	 *
+	 *@param  item  玩家物品（一币（参数可以为："yibi","一币","pay"），金币（参数可以为："jinbi","金币","jydb"），积分（参数可以为："jifen","积分","jyg"）等）
+	 *
+	 *@param  number 物品数量
+	 * 
+	 * */
+	public boolean enoughUserItem(Gcuser gcuser, String item, int number) {
+		
+		if(item.equals("yibi") || item.equals("一币") || item.equals("pay")){
+			if(gcuser.getPay() >= number){
+				return true;
+			}
+		}else if(item.equals("jinbi") || item.equals("金币") || item.equals("jydb")){
+			if(gcuser.getJydb() >= number){
+				return true;
+			}
+		}else if(item.equals("jifen") || item.equals("积分") || item.equals("jyg")){
+			if(gcuser.getJyg() >= number){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	/**
+	 * 判断玩家物品是否足够
+	 * 
+	 *@param  userName 用户名
+	 *
+	 *@param  item  玩家物品（一币（参数可以为："yibi","一币","pay"），金币（参数可以为："jinbi","金币","jydb"），积分（参数可以为："jifen","积分","jyg"）等）
+	 *
+	 *@param  number 物品数量
+	 * 
+	 * */
+	private boolean enoughUserItem(String userName, String item, int number) {
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(item.equals("yibi") || item.equals("一币") || item.equals("pay")){
+			if(gcuser.getPay() >= number){
+				return true;
+			}
+		}else if(item.equals("jinbi") || item.equals("金币") || item.equals("jydb")){
+			if(gcuser.getJydb() >= number){
+				return true;
+			}
+		}else if(item.equals("jifen") || item.equals("积分") || item.equals("jyg")){
+			if(gcuser.getJyg() >= number){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * 使用玩家物品
+	 * 
+	 *@param  userName 用户名
+	 *
+	 *@param  item  玩家物品（一币（参数可以为："yibi","一币","pay"），金币（参数可以为："jinbi","金币","jydb"），积分（参数可以为："jifen","积分","jyg"）等）
+	 *
+	 *@param  number 物品数量
+	 *
+	 * */
+	
+	public boolean useUserItem(String userName, String item, int number) {
+		if(item.equals("yibi") || item.equals("一币") || item.equals("pay")){
+			return gcuserDao.reduceYb(userName, number);
+		}else if(item.equals("jinbi") || item.equals("金币") || item.equals("jydb")){
+			return gcuserDao.reduceOnlyJB(userName, number);
+		}else if(item.equals("jifen") || item.equals("积分") || item.equals("jyg")){
+			return gcuserDao.updateJyg(userName, number);
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * 玩家获得物品
+	 * 
+	 *@param  userName 用户名
+	 *
+	 *@param  item  玩家物品（一币（参数可以为："yibi","一币","pay"），金币（参数可以为："jinbi","金币","jydb"），积分（参数可以为："jifen","积分","jyg"）等）
+	 *
+	 *@param  number 物品数量(大于0的数)
+	 *
+	 * */
+	
+	public boolean giveUserItem(String userName, String item, int number) {
+		if(item.equals("yibi") || item.equals("一币") || item.equals("pay")){
+			return gcuserDao.addWhenOtherPersionBuyJbCard(userName, number);
+		}else if(item.equals("jinbi") || item.equals("金币") || item.equals("jydb")){
+			return gcuserDao.addOnlyJB(userName, number);
+		}else if(item.equals("jifen") || item.equals("积分") || item.equals("jyg")){
+			return gcuserDao.updateJyg(userName, -number);
+		}
+		return false;
+	}
 
 }

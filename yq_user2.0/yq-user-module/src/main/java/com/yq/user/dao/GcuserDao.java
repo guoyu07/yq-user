@@ -504,6 +504,16 @@ public class GcuserDao {
 		
 		return result;
 	}
+	
+	/**
+	 * 
+	 * 扣除金币
+	 * 
+	 * @param userName 用户名
+	 * 
+	 * @param jydb 金币数量
+	 * 
+	 * */
 	public boolean reduceOnlyJB(String userName,int jydb){
 		String sql = "update "+table+" set jydb=jydb-? where username=? and jydb-?>=0 limit 1";
 		SqlParameter paramter = new SqlParameter();
@@ -1239,5 +1249,6 @@ public class GcuserDao {
 		parameter.setString(idCard);
 		return this.jdbc.update(strBuffer.toString(), parameter)>0;
 	}
+
 	
 }

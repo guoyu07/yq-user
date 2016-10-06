@@ -140,4 +140,15 @@ public class ManagerService {
 		return dgagDao.update(id, title, content, ggdateO,title_en,content_en);
 	}
 	
+	/**
+	 * 
+	 * 得到当前价格
+	 * 
+	 * 
+	 * */
+	public double getCurrentyPrice() {
+		Fcxt fcxt = this.getFcxtById(2);
+		return fcxt.getJygj();
+	}
+	
 }
