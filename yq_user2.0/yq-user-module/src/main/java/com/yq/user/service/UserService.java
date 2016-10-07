@@ -3123,9 +3123,11 @@ public class UserService {
 		datePay1.setRegid("卖出" + saleCount + "积分单价" + mydj + "到" + gpjy1.getUsername());
 		datePay1.setAbdate(new Date());
 		logService.addDatePay(datePay1);
-		String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
-		String dStr = d==null?"":d;
-		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + saleCount + "-单价" + mydj);
+		//String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+		//String dStr = d==null?"":d;
+		
+		//logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + saleCount + "-单价" + mydj);
+		logService.updateNumberId(gpjy1.getJyid(),needJb);
 		fcxtDao.update(2, saleCount);
 		
 		return 0;

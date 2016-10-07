@@ -232,4 +232,16 @@ public class LogService {
 	public IPage<Jbkzj> getAllJbkjzPageList(int pageIndex,int pageSize){
 		return jbkzjDao.getPage(pageIndex, pageSize);
 	}
+	
+	/**
+	 * 更新日志金币支出数量
+	 * 
+	 * @param needJb
+	 * 
+	 * 
+	 * */
+	public boolean updateNumberId(int id, double needJb) {
+		return datePayDao.updateCostGoldNumber(id, needJb);
+		
+	}
 }

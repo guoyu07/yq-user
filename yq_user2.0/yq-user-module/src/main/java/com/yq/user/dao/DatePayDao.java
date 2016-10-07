@@ -313,5 +313,17 @@ public class DatePayDao {
 		sqlParameter.setString(userName);
 		return jdbc.getDouble(sql, sqlParameter);
 	}
+
+	/**
+	 * 
+	 * 修改花费金币的数量
+	 * 
+	 * 
+	 * */
+	
+	public boolean updateCostGoldNumber(int id, double needJb) {
+		String sql = "update "+table+" set dbjc=dbjc-? where id=? and dbjc-?>0 limit 1";
+		return jdbc.update(sql, SqlParameter.Instance().withDouble(needJb).withInt(id).withDouble(needJb))>0;
+	}
 	
 }
