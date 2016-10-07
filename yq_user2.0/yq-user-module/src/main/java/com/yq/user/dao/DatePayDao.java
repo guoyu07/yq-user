@@ -320,10 +320,15 @@ public class DatePayDao {
 	 * 
 	 * 
 	 * */
-	
 	public boolean updateCostGoldNumber(int id, double needJb) {
+		
 		String sql = "update "+table+" set dbjc=dbjc-? where id=? and dbjc-?>0 limit 1";
-		return jdbc.update(sql, SqlParameter.Instance().withDouble(needJb).withInt(id).withDouble(needJb))>0;
+		SqlParameter parameter = new SqlParameter();
+		parameter.setDouble(needJb);
+		parameter.setInt(id);
+		parameter.setDouble(needJb);
+		boolean result =  this.jdbc.update(sql, parameter)>0;
+		return result;
 	}
 	
 }
