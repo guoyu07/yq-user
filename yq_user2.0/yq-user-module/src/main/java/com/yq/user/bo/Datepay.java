@@ -37,27 +37,47 @@ public class Datepay{
 	public String getUsername(){
 		return username;
 	}
+	/**设置一币收入*/
 	public void setSyjz(int syjz){
 	this.syjz=syjz;
 	}
+	/**得到一币收入*/
 	public int getSyjz(){
 		return syjz;
 	}
+	/**设置一币支出*/
 	public void setJc(int jc){
 	this.jc=jc;
 	}
+	/**得到一币支出*/
 	public int getJc(){
 		return jc;
 	}
+	/**
+	 * 设置金币收入
+	 * 
+	 * */
 	public void setJyjz(int jyjz){
 	this.jyjz=jyjz;
 	}
+	/**
+	 * 得到金币收入
+	 * 
+	 * */
 	public int getJyjz(){
 		return jyjz;
 	}
+	/**
+	 * 设置金币支出
+	 * 
+	 * */
 	public void setDbjc(int dbjc){
 	this.dbjc=dbjc;
 	}
+	/**
+	 * 得到金币支出
+	 * 
+	 * */
 	public int getDbjc(){
 		return dbjc;
 	}
@@ -67,15 +87,19 @@ public class Datepay{
 	public int getZff(){
 		return zff;
 	}
+	/**设置当前一币*/
 	public void setPay(int pay){
 	this.pay=pay;
 	}
+	/**得到当前一币*/
 	public int getPay(){
 		return pay;
 	}
+	/**设置当前金币*/
 	public void setJydb(int jydb){
 	this.jydb=jydb;
 	}
+	/**获得当前金币*/
 	public int getJydb(){
 		return jydb;
 	}

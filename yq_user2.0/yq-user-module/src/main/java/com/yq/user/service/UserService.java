@@ -3053,15 +3053,17 @@ public class UserService {
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
+		
 		//重置数量和价格
 		Fcxt fcxt = managerService.getFcxtById(2);
+		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
 		double price = fcxt.getJygj();
 		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
 			gpjy1.setPay(price);
 			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
 		}
 		
-		double dqpay92 = (0.9 * saleCount);
+		double dqpay92 = (0.9 * needJb);
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
 		double mc70a = 0.7 * dqpay;
 		int mc70 = (int) (mc70a * 1 + 0.1);
@@ -3070,29 +3072,28 @@ public class UserService {
 
 		//扣除积分
 		if(!gcuserDao.updateJyg(userName, saleCount)){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
 
 		if(!gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70)){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(3000,"未知错误！");
 		}
 		
 		//增加金币
 		if(!gcuserDao.addOnlyJB(userName, mc30)){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(3000,"未知错误！");
 		}
 
 		
 		//发布买入者获得积分
 		if(!gcuserDao.updateJyg(gpjy1.getUsername(), -saleCount)){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
 		
-		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
 		
 		//更新订单
 		if(!gpjyDao.updateBuyJf(id, saleCount,needJb)){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
 		
 		
@@ -3156,7 +3157,6 @@ public class UserService {
 	 */
 	@Transactional(rollbackFor=ServiceException.class) 
 	public int changemrJf(String userName,Gpjy gpjy1,int buyCount){
-		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id = gpjy1.getId();
 		
@@ -3166,17 +3166,17 @@ public class UserService {
 		
 		//扣除用户金币
 		if(!gcuserDao.reduceOnlyJB(userName, (int) needJb)){
-			throw new ServiceException(buyCount, "");
+			throw new ServiceException(1, "金币不足！");
 		}
 
 		//获得积分
 		if(!gcuserDao.updateJyg(userName, - buyCount)){
-			throw new ServiceException(buyCount, "");
+			throw new ServiceException(3000, "未知错误");
 		}
 
 		//修改卖出交易
 		if(!gpjyDao.updateSaleJf(gpjy1.getId(), buyCount)){
-			throw new ServiceException(buyCount, "");
+			throw new ServiceException(3000, "未知错误");
 		}
 		
 		
@@ -3207,14 +3207,14 @@ public class UserService {
 		//记录买入者日志
 		Datepay datePay1 = new Datepay();
 		datePay1.setUsername(userName);
-		datePay1.setDbjc(gpjy1.getJypay().intValue());
+		datePay1.setDbjc((int) needJb);
 		datePay1.setPay(gcuser.getPay());
 		datePay1.setJydb(gcuser.getJydb());
 		datePay1.setRegid("买入" + gpjy1.getUsername() + "-积分" + buyCount + "-单价" + mcdj);
 		datePay1.setAbdate(new Date());
 		logService.addDatePay(datePay1);
 
-		double dqpay92 = (0.9 * buyCount);
+		double dqpay92 = (0.9 * needJb);
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
 		double mc70a = 0.7 * dqpay;
 		int mc70 = (int) (mc70a * 1 + 0.1);
@@ -3222,13 +3222,13 @@ public class UserService {
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
 		if(!gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70)){
-			throw new ServiceException(buyCount, "");
+			throw new ServiceException(3000, "未知错误");
 		}
 		if(!gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30)){
-			throw new ServiceException(buyCount, "");
+			throw new ServiceException(3000, "未知错误");
 		}
 		if(!gcuserDao.reduceStopjyg(gpjy1.getUsername())){
-			throw new ServiceException(buyCount, "");
+			throw new ServiceException(3000, "未知错误");
 		}
 
 		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
@@ -3258,7 +3258,6 @@ public class UserService {
 	 */
 	@Transactional(rollbackFor=ServiceException.class) 
 	public int automcJf(String userName,Gpjy gpjy1, int saleCount){
-		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
 		
@@ -3280,30 +3279,30 @@ public class UserService {
 		
 		//扣除积分
 		if (!gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue())) {
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
 		
 
 		//增加一币
 		if(!gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70)){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(3000, "未知錯誤");
 		};
 		
 		//增加金币
 		if(!gcuserDao.addOnlyJB(userName, mc30)){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(3000, "未知錯誤");
 		};
 
 		//卖出者获得积分
 		if (!gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue())){
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		};
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
         
         
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
 			gpjyDao.cleanCache(id);
-			throw new ServiceException(saleCount, "");
+			throw new ServiceException(3000, "未知錯誤");
 		}
 		gpjyDao.deleteIndex(id);
 		
@@ -3662,23 +3661,22 @@ public class UserService {
 	@Transactional(rollbackFor=ServiceException.class) 
 	public int automrJf(String userName,Gpjy gpjy1, int buycount){
 		
-		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
 		
 		//扣除玩家金币
 		if (!gcuserDao.reduceOnlyJB(userName, gpjy1.getJypay().intValue())) {
-			throw new ServiceException(buycount, "");
+			throw new ServiceException(2,"金币不足，请检查输入是否正确！");
 		}
 
 		//获得积分
 		if (!gcuserDao.updateJyg(userName, - gpjy1.getMcsl().intValue())) {
-			throw new ServiceException(buycount, "");
+			throw new ServiceException(3000, "未知错误");
 		}
 
 		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
 			gpjyDao.cleanCache(id);
-			throw new ServiceException(buycount, "");
+			throw new ServiceException(3000, "未知错误");
 		}
 		
 		
@@ -3716,13 +3714,13 @@ public class UserService {
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
 		if (!gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70)){
-			throw new ServiceException(buycount, "");
+			throw new ServiceException(3000, "未知错误");
 		};
 		if(!gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30)){
-			throw new ServiceException(buycount, "");
+			throw new ServiceException(3000, "未知错误");
 		};
 		if(!gcuserDao.reduceStopjyg(gpjy1.getUsername())){
-			throw new ServiceException(buycount, "");
+			throw new ServiceException(3000, "未知错误");
 		};
 
 		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
