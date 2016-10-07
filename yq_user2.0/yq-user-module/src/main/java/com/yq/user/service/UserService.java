@@ -2864,6 +2864,14 @@ public class UserService {
 		return gpjyDao.getUserPageDetailsList(userName, pageIndex, pageSize);
 	}
 	
+	/**
+	 * 得到卖出列表
+	 * 
+	 * */
+	public IPage<Gpjy> getMrPageList(String userName,int pageIndex,int pageSize){
+		return gpjyDao.getMrPageList(userName, pageIndex, pageSize);
+	}
+	
 	public List<Gpjy> getMrPageList(int pageSize, String userName){
 		
 		List<Gpjy> result =  gpjyDao.getMrPage(pageSize, userName);
@@ -3123,11 +3131,11 @@ public class UserService {
 		datePay1.setRegid("卖出" + saleCount + "积分单价" + mydj + "到" + gpjy1.getUsername());
 		datePay1.setAbdate(new Date());
 		logService.addDatePay(datePay1);
-		//String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
-		//String dStr = d==null?"":d;
+		String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+		String dStr = d==null?"":d;
 		
-		//logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + saleCount + "-单价" + mydj);
-		logService.updateNumberId(gpjy1.getJyid(),needJb);
+		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + saleCount + "-单价" + mydj);
+		//logService.updateNumberId(gpjy1.getJyid(),needJb);
 		fcxtDao.update(2, saleCount);
 		
 		return 0;

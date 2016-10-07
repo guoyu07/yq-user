@@ -54,7 +54,8 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 		}
 		if(status==2){
 			userService.saleJf(super.getUserName(), jygj, txpay, "-1");
-			return "redirect";
+			super.setErroCodeNum(2000);
+			return "mcsl2";
 		}
 		if(status==0){
 			super.initPage(userService.getAllGpjyDetailsPageList(super.getUserName(), super.getToPage(), 15));

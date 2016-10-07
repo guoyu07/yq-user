@@ -3,14 +3,13 @@ package com.yq.app.user.action;
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
-import com.yq.user.bo.DatepayMore;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
-import com.yq.user.service.LogService;
+import com.yq.user.bo.Gpjy;
 import com.yq.user.service.ManagerService;
 import com.yq.user.service.UserService;
 
-public class MyslAction extends ALDAdminPageActionSupport<DatepayMore> {
+public class MyslAction extends ALDAdminPageActionSupport<Gpjy> {
 
 	/**
 	 * 
@@ -44,8 +43,7 @@ public class MyslAction extends ALDAdminPageActionSupport<DatepayMore> {
 		jydb = gcuser.getJydb();
 		zdjyg = (int)(gcuser.getJydb()/fcxt.getJygj()+0.1);
 		if(status==0){
-			LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
-			super.initPage(logService.getDatePayJfmrListPage(super.getUserName(), super.getToPage(), 15));
+			super.initPage(userService.getMrPageList(super.getUserName(), super.getToPage(), 15));
 		}
 		if(status==1){
 			if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){

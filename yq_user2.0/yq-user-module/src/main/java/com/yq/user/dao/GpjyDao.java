@@ -545,5 +545,15 @@ public class GpjyDao {
 		}
 		return result;
 	}
+
+	/**
+	 * 
+	 * 得到卖出列表
+	 * 
+	 * */
+	public IPage<Gpjy> getMrPageList(String userName, int pageIndex, int pageSize) {
+		String sql="select * from "+table+" where username = ? and jy=0 and mysl>0 order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
+	}
 	
 }

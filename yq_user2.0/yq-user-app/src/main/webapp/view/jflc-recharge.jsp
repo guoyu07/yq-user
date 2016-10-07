@@ -74,6 +74,7 @@
 								<th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
 								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.821575720'/></th>
 								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.989728617'/></th>
+								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.640388245a'/></th>
 								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.640388245'/></th>
 								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.640372301'/></th>
 								<th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.777033699'/></th>
@@ -85,6 +86,7 @@
 								<td>${data.cjuser}</td>
 								<td>${data.dqcj}</td>
 								<td>${data.ljcj}</td>
+								<td><fmt:formatDate value="${data.cjdate}" type="both"/></td>
 								<td><fmt:formatDate value="${data.qldate}" type="both"/></td>
 								<td>${data.cjfs}</td>
 								<td>${data.bz}</td>

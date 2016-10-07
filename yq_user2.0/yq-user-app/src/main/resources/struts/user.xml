@@ -277,7 +277,7 @@
 
 		<action name="mcsl" class="com.yq.app.user.action.McslAction">
 			<result name="success">view/jflc-jfmc.jsp</result>
-			<result name="redirect" type="redirect">/mcsl</result>
+			<!-- <result name="redirect" type="redirect">/mcsl</result> -->
 			<result name="mcsl2">vip/mcsl2.jsp</result>
 		</action>
 
