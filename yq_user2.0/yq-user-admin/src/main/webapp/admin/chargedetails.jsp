@@ -36,6 +36,8 @@
 			<font color="#000000" face="宋体" size="2"> <strong>最近</strong></font></td>
           <td width="71" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font face="宋体" color="#000000" style="font-weight:700" size="2">累计</font></td>
+		  <td width="178" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
+			<font color="#000000" style="font-weight:700" face="宋体" size="2">购买日期</font></td>
           <td width="178" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" style="font-weight:700" face="宋体" size="2">充值时间</font></td>
           <td width="190" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
@@ -56,6 +58,7 @@
 			<font color="#000000" face="宋体" size="2">${data.dqcj}</font></td>
           <td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
 			<font size="2" face="宋体">${data.ljcj}</font></td>
+		 <td valign="middle" align="center" width="178">${data.cjdate}</td>
           <td valign="middle" align="center" width="178">${data.qldate}</td>
           <td valign="middle" align="center" width="190">
 			<font size="2" face="宋体">${data.cjfs}</font></td>
