@@ -3107,7 +3107,6 @@ public class UserService {
 		
 		
 		//记录日志
-		
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);
 		gpjy.setMcsl((double) saleCount);
@@ -3120,6 +3119,9 @@ public class UserService {
 		gpjy.setJy(1);
 		gpjy.setDfuser(gpjy1.getUsername());
 		gpjyDao.add(gpjy);
+		
+		
+	
 
 		String mydj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
 
@@ -3132,9 +3134,25 @@ public class UserService {
 		datePay1.setRegid("卖出" + saleCount + "积分单价" + mydj + "到" + gpjy1.getUsername());
 		datePay1.setAbdate(new Date());
 		logService.addDatePay(datePay1);
+		
+		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
+		// 记录日志
+		Gpjy gpjy2 = new Gpjy();
+		gpjy2.setUsername(gpjy1.getUsername());
+		gpjy2.setMysl((double) saleCount);
+		gpjy2.setSysl(Double.valueOf(gcuser2.getJyg()));
+		gpjy2.setPay(gpjy1.getPay());
+		gpjy2.setJypay(needJb);
+		gpjy2.setAbdate(gpjy1.getAbdate());
+		gpjy2.setBz("买入成功");
+		gpjy2.setCgdate(new Date());
+		gpjy2.setJy(1);
+		gpjy2.setDfuser(userName);
+		gpjyDao.add(gpjy2);
+		
+		
 		String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
 		String dStr = d==null?"":d;
-		
 		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + saleCount + "-单价" + mydj);
 		//logService.updateNumberId(gpjy1.getJyid(),needJb);
 		fcxtDao.update(2, saleCount);
