@@ -4508,7 +4508,14 @@ public class UserService {
 				@Override
 				public void run() {
 					if(!callRemoteCharge(call,amount,ip,userName)){
-						LogSystem.warn("用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】,充值话费失败！");
+						//重试一次
+						if(!callRemoteCharge(call,amount,ip,userName)){
+							//再重试一次
+							if(!callRemoteCharge(call,amount,ip,userName)){
+								//再重试一次
+								LogSystem.warn("用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】,充值话费失败！");
+							}
+						}
 					}
 				}
 			});
@@ -4551,7 +4558,7 @@ public class UserService {
         	result =_99dou.Huafei(out_trade_id, account, account_info, quantity, value, client_ip, expired_mini, msg);
 		} catch (Exception e) {
 			LogSystem.error(e, "");
-			throw new ServiceException(100, "充值话费失败！稍后再试");
+//			throw new ServiceException(100, "充值话费失败！稍后再试");
 		}
         LogSystem.info("话费充值返回 :"+result+" 消息:"+msg);
         if(result==0){//成功
