@@ -3243,6 +3243,20 @@ public class UserService {
 		datePay2.setAbdate(new Date());
 		logService.addDatePay(datePay2);
 
+		//增加一条卖出成功的记录（作为卖出数量的）
+		Gpjy gpjy2 = new Gpjy();
+		gpjy2.setUsername(gpjy1.getUsername());
+		gpjy2.setMcsl((double) buyCount);
+		gpjy2.setSysl(Double.valueOf(gcuser2.getPay()));
+		gpjy2.setPay(gpjy1.getPay());
+		gpjy2.setJypay(needJb);
+		gpjy2.setBz("卖出成功");
+		gpjy2.setCgdate(new Date());
+		gpjy2.setJy(1);
+		gpjy2.setDfuser(userName);
+		gpjyDao.add(gpjy2);
+
+		
 		fcxtDao.update(2,buyCount);
 		
 		return 0;
