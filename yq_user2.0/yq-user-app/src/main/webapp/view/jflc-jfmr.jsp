@@ -95,7 +95,7 @@
 								<td>${data.mysl}</td>
 								<td>${data.jypay}</td>
 								<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
-								<td><a href="qxqg?qxid=${data.id}" style="text-decoration: none"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.836270'/></a></td>
+								<td><a href="qxqg?qxid=${data.jyid}" style="text-decoration: none"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.836270'/></a></td>
 							</tr>
 							</s:iterator>
 						</table>

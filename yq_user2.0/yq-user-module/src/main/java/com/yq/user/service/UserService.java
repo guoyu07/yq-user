@@ -2865,7 +2865,7 @@ public class UserService {
 	}
 	
 	/**
-	 * 得到卖出列表
+	 * 得到买入列表
 	 * 
 	 * */
 	public IPage<Gpjy> getMrPageList(String userName,int pageIndex,int pageSize){
