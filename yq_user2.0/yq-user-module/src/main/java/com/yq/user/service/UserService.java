@@ -4949,11 +4949,11 @@ public class UserService {
 	
 	public boolean useUserItem(String userName, String item, int number) {
 		if(item.equals("yibi") || item.equals("一币") || item.equals("pay")){
-			return gcuserDao.reduceYb(userName, number);
+			return  gcuserDao.reduceYb(userName, number);
 		}else if(item.equals("jinbi") || item.equals("金币") || item.equals("jydb")){
-			return gcuserDao.reduceOnlyJB(userName, number);
+			return  gcuserDao.reduceOnlyJB(userName, number);
 		}else if(item.equals("jifen") || item.equals("积分") || item.equals("jyg")){
-			return gcuserDao.updateJyg(userName, number);
+			return  gcuserDao.updateJyg(userName, number);
 		}
 		return false;
 	}

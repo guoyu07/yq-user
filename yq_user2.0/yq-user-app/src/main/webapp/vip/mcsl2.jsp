@@ -13,7 +13,7 @@
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='vipmcsl.jsp.mcsl.jsp.115010359'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='vipmcsl.jsp.mcsl.jsp.-1038261267'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='vipmcsl.jsp.mcsl.jsp.809721657'/> ！');location.replace('gpjysc');</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='Sell_success'/>!');location.replace('mcsl');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipmysl.jsp.mysl.jsp.-2099694066a'/>!');location.replace('mcsl');</script></c:if>
 <div align="center">
 	　<p>　</p>
 	<table border="1" width="50%" id="table1" height="367" style="border-collapse: collapse">
