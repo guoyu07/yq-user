@@ -2736,7 +2736,7 @@ public class UserService {
 	@Transactional
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
-		Gcuser gcuser = gcuserDao.getUser(userName);
+		
 		
 		Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
 		
@@ -2748,7 +2748,7 @@ public class UserService {
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
 		}
 		
-		if (gcuser.getJydb() < needJb) {
+		if (!enoughUserItem(userName, "金币", needJb)) {
 			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
 		}
 		
@@ -2769,7 +2769,7 @@ public class UserService {
 		
 		int needJb1 = (int)(Math.ceil(fcxt.getJygj()*buyNum));
 		
-		if(!gcuserDao.reduceOnlyJB(userName, needJb1)){
+		if(!useUserItem(userName, "金币", needJb1)){
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
 		}
 		
@@ -2786,7 +2786,7 @@ public class UserService {
 		
 		
 		
-		
+		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		Datepay datePay = new Datepay();
 		datePay.setUsername(userName);
@@ -2912,7 +2912,6 @@ public class UserService {
 		checkJfIsOpen();
 		
 		
-		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		
 //		if(!gcuserDao.increaseStopjyg(userName,20)){
@@ -2941,6 +2940,8 @@ public class UserService {
 		
 		
 		int needJb1 = (int)(Math.ceil(price*saleNum));
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		//余下挂单处理
 		Gpjy gpjy = new Gpjy();
@@ -3292,7 +3293,7 @@ public class UserService {
 		};
 
 		//卖出者获得积分
-		if (!giveUserItem(gpjy1.getUsername(),"积分", -gpjy1.getMysl().intValue())){
+		if (!giveUserItem(gpjy1.getUsername(),"积分", gpjy1.getMysl().intValue())){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		};
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
