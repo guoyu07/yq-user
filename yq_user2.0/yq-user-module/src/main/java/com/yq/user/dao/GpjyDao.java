@@ -270,7 +270,7 @@ public class GpjyDao {
 	}
 	
 	public IPage<Gpjy> getAllPageList(String userName,int pageIndex,int pageSize){
-		String sql="select * from "+table+" where username = ? order by id desc";
+		String sql="select * from "+table+" where username = ? order by id desc,cgdate desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
 	}
 	
