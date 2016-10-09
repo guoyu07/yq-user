@@ -274,6 +274,10 @@
 		<action name="gpjy" class="com.yq.app.user.action.GpjyAction">
 			<result name="success">view/jflc-details.jsp</result>
 		</action>
+		
+		<action name="gpjyOfDeal" class="com.yq.app.user.action.GpjyAction" method="gpjyOfDeal">
+			<result name="success">view/dealjflc-details.jsp</result>
+		</action>
 
 		<action name="mcsl" class="com.yq.app.user.action.McslAction">
 			<result name="success">view/jflc-jfmc.jsp</result>

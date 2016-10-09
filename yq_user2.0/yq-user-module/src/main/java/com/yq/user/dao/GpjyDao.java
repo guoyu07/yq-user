@@ -270,7 +270,7 @@ public class GpjyDao {
 	}
 	
 	public IPage<Gpjy> getAllPageList(String userName,int pageIndex,int pageSize){
-		String sql="select * from "+table+" where username = ? order by id desc,cgdate desc";
+		String sql="select * from "+table+" where username = ? and not ISNULL(cgdate) order by cgdate desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
 	}
 	
@@ -553,6 +553,12 @@ public class GpjyDao {
 	 * */
 	public IPage<Gpjy> getMrPageList(String userName, int pageIndex, int pageSize) {
 		String sql="select * from "+table+" where username = ? and jy=0 and mysl>0 order by id desc";
+		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
+	}
+
+	/**获得未成交的积分交易明细*/
+	public IPage<Gpjy> getAllNoDealGpjyPageList(String userName, int pageIndex, int pageSize) {
+		String sql="select * from "+table+" where username = ? and  ISNULL(cgdate) order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
 	}
 	

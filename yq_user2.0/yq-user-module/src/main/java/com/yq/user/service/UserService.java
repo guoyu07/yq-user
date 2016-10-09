@@ -5020,6 +5020,13 @@ public class UserService {
 		return false;
 	}
 
+	
+	/**获得未成交的积分交易明细*/
+	public IPage<Gpjy> getAllNoDealGpjyPageList(String userName, int pageIndex, int pageSize) {
+		return gpjyDao.getAllNoDealGpjyPageList(userName, pageIndex, pageSize);
+	}
+
+
    
 
 }
