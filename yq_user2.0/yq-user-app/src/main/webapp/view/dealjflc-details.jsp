@@ -26,7 +26,7 @@
 					<div class="content-title">
 						<span><s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/></span>
 						<p class="r-link">
-							<a href="gpjy" style="font-size:20px;">未成交</a>|
+							<a href="gpjy" style="font-size: 20px;">未成交</a>|
 							<a href="gpjyOfDeal" class="hover" style="font-size:20px;">已成交</a>
 						</p>
 					</div>
