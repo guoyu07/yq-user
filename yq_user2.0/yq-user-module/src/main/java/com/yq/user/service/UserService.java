@@ -3421,7 +3421,7 @@ public class UserService {
 //			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
 //		}
 		
-		if(!enoughUserItem(gcuser, "积分", saleNum)){
+		if(!enoughUserItem(gcuser, "积分", (double) saleNum)){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量 "+gcuser.getJyg()+" ，谢谢！");
 		}
 		
@@ -3550,17 +3550,16 @@ public class UserService {
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy1 = gpjyDao.getById(id);
 
-		
-		if (gcuser.getJydb() < gpjy1.getJypay()) {
+		if (!enoughUserItem(gcuser, "金币", gpjy1.getJypay())) {
 			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
 		}
 
-		if (!gcuserDao.reduceOnlyJB(userName, gpjy1.getJypay().intValue())) {
+		if (!useUserItem(userName, "金币", gpjy1.getJypay().intValue())) {
 			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
 		}
 
 		
-		if (!gcuserDao.updateJyg(userName, - gpjy1.getMcsl().intValue())) {
+		if (!giveUserItem(userName, "积分", gpjy1.getMcsl().intValue())) {
 			throw new ServiceException(3000, "未知错误");
 		}
 
@@ -3602,8 +3601,9 @@ public class UserService {
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
-		gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70);
-		gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30);
+		
+		giveUserItem(gpjy1.getUsername(), "一币", mc70);
+		giveUserItem(gpjy1.getUsername(), "金币", mc30);
 		gcuserDao.reduceStopjyg(gpjy1.getUsername());
 
 		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
@@ -3807,19 +3807,20 @@ public class UserService {
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
 
-		if (gcuser.getJyg() < gpjy1.getMysl()) {
+		if (!enoughUserItem(gcuser, "积分", gpjy1.getMysl())) {
 			throw new ServiceException(1,
 					"您好，本次交易积分数量大于您剩余交易积分数量 " + gcuser.getJyg() + " ，暂时不能交易，本次交易需要 " + gpjy1.getMysl() + " 积分，谢谢！");
 		}
 
-		if (!gcuserDao.updateJyg(userName, gpjy1.getMysl().intValue())) {
+		if (!useUserItem(userName, "积分", gpjy1.getMysl().intValue())) {
 			throw new ServiceException(1,
 					"您好，本次交易积分数量大于您剩余交易积分数量 " + gcuser.getJyg() + " ，暂时不能交易，本次交易需要 " + gpjy1.getMysl() + " 积分，谢谢！");
 		}
 
-		gcuserDao.addWhenOtherPersionBuyJbCard(userName, mc70);
-		gcuserDao.addOnlyJB(userName, mc30);
-		gcuserDao.updateJyg(gpjy1.getUsername(), -gpjy1.getMysl().intValue());
+		giveUserItem(userName, "一币", mc70);
+		giveUserItem(userName, "金币", mc30);
+		
+		giveUserItem(gpjy1.getUsername(), "积分", gpjy1.getMysl().intValue());
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
 		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
 			gpjyDao.cleanCache(id);
@@ -4927,7 +4928,7 @@ public class UserService {
 	 *@param  number 物品数量
 	 * 
 	 * */
-	public boolean enoughUserItem(Gcuser gcuser, String item, int number) {
+	public boolean enoughUserItem(Gcuser gcuser, String item, Double number) {
 		
 		if(item.equals("yibi") || item.equals("一币") || item.equals("pay")){
 			if(gcuser.getPay() >= number){
