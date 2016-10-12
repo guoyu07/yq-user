@@ -3155,6 +3155,19 @@ public class UserService {
 		String dStr = d==null?"":d;
 		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + saleCount + "-单价" + mydj);
 		//logService.updateNumberId(gpjy1.getJyid(),needJb);
+		
+		//XXX 解決日志条目不等原因
+		Datepay datePay2 = new Datepay();
+		datePay2.setUsername(gpjy1.getUsername());
+		datePay2.setDbjc((int) needJb);
+		datePay2.setPay(gcuser2.getPay());
+		datePay2.setJydb(gcuser2.getJydb());
+		datePay2.setRegid("买入" + userName + "-积分" + saleCount + "-单价" + mydj);
+		datePay2.setAbdate(new Date());
+		logService.addDatePay(datePay2);
+
+		
+		
 		fcxtDao.update(2, saleCount);
 		
 		return 0;
