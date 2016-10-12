@@ -3156,7 +3156,7 @@ public class UserService {
 		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + saleCount + "-单价" + mydj);
 		//logService.updateNumberId(gpjy1.getJyid(),needJb);
 		
-		//XXX 解決日志条目不等原因
+		//XXX 新增日志
 		Datepay datePay2 = new Datepay();
 		datePay2.setUsername(gpjy1.getUsername());
 		datePay2.setDbjc((int) needJb);
