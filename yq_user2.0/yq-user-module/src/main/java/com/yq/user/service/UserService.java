@@ -2991,7 +2991,6 @@ public class UserService {
 					}
 					for (GpjyIndexMr gpjyIndexMr : tempList) {
 						int orderId = gpjyIndexMr.getId();
-						salenum = (int) gpjyIndexMr.getMysl();
 						Gpjy gpjy = gpjyDao.getNoJyById(orderId);
 						if(null==gpjy){
 							continue;
@@ -3002,6 +3001,15 @@ public class UserService {
 						if(saleCount==0){
 							break ;
 						}
+						// 重置数量和价格
+						if(gpjy.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
+							gpjy.setPay(price);
+							gpjy.setMysl(Double.valueOf(gpjy.countNum(price)));
+							salenum =  (int) (gpjyIndexMr.getPay()/currentPrice);
+						}else{
+							salenum =  (int) gpjyIndexMr.getMysl();
+						}
+						
 						try{
 							//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
 							if(saleCount>=salenum){
@@ -3050,15 +3058,10 @@ public class UserService {
 		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
+		double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
+		double needJb = (int)(Math.ceil(currentPrice*saleCount));
+
 		
-		//重置数量和价格
-		Fcxt fcxt = managerService.getFcxtById(2);
-		double needJb = (int)(Math.ceil(fcxt.getJygj()*saleCount));
-		double price = fcxt.getJygj();
-		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
-			gpjy1.setPay(price);
-			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
-		}
 		
 		double dqpay92 = (0.9 * needJb);
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
@@ -3306,12 +3309,6 @@ public class UserService {
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
 		
-		//重置数量和价格
-		double price = managerService.getCurrentyPrice(); //查詢當前價格
-		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
-			gpjy1.setPay(price);
-			gpjy1.setMysl(Double.valueOf(gpjy1.countNum(price)));
-		}
 		
 		double dqpay92 = (0.9 * gpjy1.getJypay());
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
@@ -3381,7 +3378,12 @@ public class UserService {
 		String dStr = d==null?"":d;
 		logService.updateRegId(gpjy1.getJyid(), dStr+"支出成功到" + userName + "-积分" + gpjy1.getMysl() + "-单价" + mydj);
 		fcxtDao.update(2, gpjy1.getMysl().intValue());
-		return saleCount-gpjy1.getMysl().intValue();
+		double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
+		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
+			return (int) (saleCount-gpjy1.getPay()/currentPrice);
+		}else{
+			return saleCount-gpjy1.getMysl().intValue();
+		}
 			 
 	}
 
