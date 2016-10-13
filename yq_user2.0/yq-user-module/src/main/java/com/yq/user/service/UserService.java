@@ -3009,7 +3009,9 @@ public class UserService {
 						}else{
 							salenum =  (int) gpjyIndexMr.getMysl();
 						}
-						
+						if(salenum<=0){
+							break;
+						}
 						try{
 							//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
 							if(saleCount>=salenum){
