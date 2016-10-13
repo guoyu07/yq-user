@@ -3005,7 +3005,7 @@ public class UserService {
 						if(gpjy.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
 							gpjy.setPay(price);
 							gpjy.setMysl(Double.valueOf(gpjy.countNum(price)));
-							salenum =  (int) (gpjyIndexMr.getPay()/currentPrice);
+							salenum =  (int) (gpjy.getJypay()/currentPrice);
 						}else{
 							salenum =  (int) gpjyIndexMr.getMysl();
 						}
@@ -3380,7 +3380,7 @@ public class UserService {
 		fcxtDao.update(2, gpjy1.getMysl().intValue());
 		double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
 		if(gpjy1.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
-			return (int) (saleCount-gpjy1.getPay()/currentPrice);
+			return (int) (saleCount-gpjy1.getJypay()/currentPrice);
 		}else{
 			return saleCount-gpjy1.getMysl().intValue();
 		}
