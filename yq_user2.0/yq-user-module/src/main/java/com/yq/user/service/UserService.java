@@ -2793,7 +2793,7 @@ public class UserService {
 		datePay.setRegid("买入挂牌中");
 		datePay.setDbjc(needJb1);
 		datePay.setPay(gcuser.getPay());
-		datePay.setJydb(gcuser.getJydb()-needJb1);
+		datePay.setJydb(gcuser.getJydb());
 		datePay.setAbdate(new Date());
 		int id = logService.addDatePay(datePay);
 		

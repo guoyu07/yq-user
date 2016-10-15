@@ -270,7 +270,7 @@ public class GpjyDao {
 	}
 	
 	public IPage<Gpjy> getAllPageList(String userName,int pageIndex,int pageSize){
-		String sql="select * from "+table+" where username = ? and not ISNULL(cgdate) order by cgdate desc";
+		String sql="select * from "+table+" where username = ? and not ISNULL(cgdate) order by cgdate desc,abdate asc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
 	}
 	
