@@ -334,13 +334,14 @@ public class GpjyDao {
 		return this.jdbc.get(sql, Gpjy.class, SqlParameter.Instance().withInt(id));
 	}
 	
-	public boolean updateSaleSuccess(int id,String buyUser,String bz){
-		String sql = "update "+table+" set bz=?,cgdate=?,jy=1,dfuser=? where id=? and jy=0 limit 1";
+	public boolean updateSaleSuccess(int id,String buyUser,String bz,double mcsl){
+		String sql = "update "+table+" set bz=?,cgdate=?,jy=1,dfuser=? where id=? and jy=0 and mcsl=? limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(bz);
 		parameter.setObject(new Date());
 		parameter.setString(buyUser);
 		parameter.setInt(id);
+		parameter.setDouble(mcsl);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
 		if(result){
 			cleanCache(id);
@@ -348,8 +349,8 @@ public class GpjyDao {
 		return result;
 	}
 	
-	public boolean updateBuySuccess(int id,String buyUser,String bz,int jyg,double price,double mysl){
-		String sql = "update "+table+" set bz=?,cgdate=?,sysl=?,jy=1,dfuser=?,pay=?,mysl=? where id=? and jy=0 limit 1";
+	public boolean updateBuySuccess(int id,String buyUser,String bz,int jyg,double price,double mysl,double jypay){
+		String sql = "update "+table+" set bz=?,cgdate=?,sysl=?,jy=1,dfuser=?,pay=?,mysl=? where id=? and jy=0 and jypay=? limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(bz);
 		parameter.setObject(new Date());
@@ -358,6 +359,7 @@ public class GpjyDao {
 		parameter.setDouble(price);
 		parameter.setDouble(mysl);
 		parameter.setInt(id);
+		parameter.setDouble(jypay);
 		boolean result =  this.jdbc.update(sql, parameter)>0;
 		if(result){
 			cleanCache(id);

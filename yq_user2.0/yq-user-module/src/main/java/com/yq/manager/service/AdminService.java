@@ -2463,7 +2463,7 @@ public class AdminService {
 		}
 		
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
-		if (!gpjyDao.updateBuySuccess(gpjy1.getId(), userName, "买入成功",(int)(dfuser.getJyg()+gpjy1.getMysl()),gpjy1.getPay(),gpjy1.getMysl())) {
+		if (!gpjyDao.updateBuySuccess(gpjy1.getId(), userName, "买入成功",(int)(dfuser.getJyg()+gpjy1.getMysl()),gpjy1.getPay(),gpjy1.getMysl(),gpjy1.getJypay())) {
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
 		gpjyDao.deleteIndex(gpjy1.getId());

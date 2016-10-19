@@ -3343,7 +3343,7 @@ public class UserService {
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
         
         
-		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
+		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl(),gpjy1.getJypay())) {
 			gpjyDao.cleanCache(id);
 			throw new ServiceException(3000, "未知錯誤");
 		}
@@ -3580,7 +3580,7 @@ public class UserService {
 			throw new ServiceException(3000, "未知错误");
 		}
 
-		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
+		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功",gpjy1.getMcsl())) {
 			gpjyDao.cleanCache(id);
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
@@ -3725,7 +3725,7 @@ public class UserService {
 			throw new ServiceException(3000, "未知错误");
 		}
 
-		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功")) {
+		if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功",gpjy1.getMcsl())) {
 			gpjyDao.cleanCache(id);
 			throw new ServiceException(3000, "未知错误");
 		}
@@ -3839,7 +3839,7 @@ public class UserService {
 		
 		giveUserItem(gpjy1.getUsername(), "积分", gpjy1.getMysl().intValue());
         Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
-		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl())) {
+		if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl(),gpjy1.getJypay())) {
 			gpjyDao.cleanCache(id);
 			throw new ServiceException(2, "该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
