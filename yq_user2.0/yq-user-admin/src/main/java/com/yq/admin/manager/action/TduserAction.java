@@ -79,7 +79,7 @@ public class TduserAction extends ALDAdminPageActionSupport<Tduser> {
 	
 	
 	private void checkPassword(){
-        if(!cjpa.equals("zg201th")){
+        if(!cjpa.equals("xfyc15th")){
 			throw new ServiceException(100, "密码错误");
 		}
 	}
