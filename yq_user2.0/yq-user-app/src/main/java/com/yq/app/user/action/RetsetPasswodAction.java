@@ -1,5 +1,7 @@
 package com.yq.app.user.action;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.struts2.ServletActionContext;
@@ -143,5 +145,7 @@ public class RetsetPasswodAction extends ALDAdminActionSupport {
 	public void setNewPassWord1(String newPassWord1) {
 		this.newPassWord1 = newPassWord1;
 	}
+
+	
 	
 }

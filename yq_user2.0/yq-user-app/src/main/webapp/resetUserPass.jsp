@@ -23,8 +23,9 @@ function checkdate(s)  {
   if (Form.name.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.35593833'/><s:text name='reg.jsp.reg.jsp.734362'/>！");Form.name.focus();      return false;    }
   if (Form.newPassWord1.value=="") {      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1740598616'/>！");  Form.newPassWord1.focus();      return false;    } 
   if (!CheckIfEnglish(Form.newPassWord1.value)) {      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-627569921'/>！");  Form.newPassWord1.focus();      return false;    } 
-  if (Form.newPassWord1.value.length > 18 || Form.newPassWord1.value.length < 6) {  alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-525641962'/>！");  Form.newPassWord1.focus();  return false;  } 
+  if (Form.newPassWord1.value.length > 18 || Form.newPassWord1.value.length < 6) {  alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-525641962'/>！");  Form.newPassWord1.focus();  return false;  }
   if (Form.newPassWord1.value != Form.newPassWord2.value) {      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.856129909'/>！"); Form.newPassWord1.focus();     return false;    } 
+  if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
     $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
 	$.post("/sms2?op=13", data, function(response) {
@@ -35,6 +36,17 @@ function checkdate(s)  {
 	});
 	return true;
 }  
+function checkNumber()  { 
+	if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
+	var data = $("#Form").serialize();
+	$.post("/checkUserParam?status=8",data, function(response) {
+		if(response.erroCodeNum==2){
+			alert('<s:text name='Enter_phone_number_error'/>！');
+			Form.inputCall.focus();  return false;
+		}
+	});
+
+}
 function checkdate1()  {  
   if (Form.smsCode.value=="") {   alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");  Form.smsCode.focus();   return false;    }
   var data = $("#Form").serialize();
@@ -86,6 +98,10 @@ function checkdate1()  {
 		<tr>
 			<td width="260" align="right"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/><s:text name='reg.jsp.reg.jsp.806479'/>：</td>
 			<td width="396" align="left"><span class="tispsfz">${user.call}</span></td>
+		</tr> 
+		<tr>
+			<td width="260" align="right"><s:text name='enter.phone.number'/>：</td>
+			<td width="396" align="left"><input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" onblur="checkNumber()"></input></td>
 		</tr> 
 		<tr>
 			<td width="260" align="right"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</td>

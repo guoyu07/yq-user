@@ -369,6 +369,14 @@
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
+		<!-- 检测玩家属性 -->
+		<action name="checkUserParam" class="com.yq.app.user.action.CheckUserParamAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
 		<!-- 一个包下可以放这个模块下的所有action -->
 		<action name="login" class="com.yq.app.user.action.AdminLogin">
 			<result name="success" type="json">

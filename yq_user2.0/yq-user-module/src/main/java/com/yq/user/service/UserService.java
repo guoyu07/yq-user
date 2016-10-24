@@ -5044,6 +5044,34 @@ public class UserService {
 		return gpjyDao.getAllNoDealGpjyPageList(userName, pageIndex, pageSize);
 	}
 
+	
+	/**
+	 * 
+	 * 验证玩家参数信息
+	 * 
+	 * @param map key表示玩家属性，value表示界面传过来的值 
+	 * 
+	 * @param userName 
+	 * 
+	 * */
+	public void checkUserInfo(String userName, Map<String, String> map) {
+		
+		Gcuser guser = gcuserDao.getUser(userName);
+		 for (String key : map.keySet()) {
+			  if(key.equals("call")){
+				  if(!guser.getCall().equals(map.get(key))){
+					  throw new ServiceException(2, "输入的手机号与预留手机号不一致！");
+				  }
+			  }
+			  if(key.equals("userName")){
+				  if(!guser.getUsername().equals(map.get(key))){
+					  throw new ServiceException(3, "用户名不一样！");
+				  }
+			  }
+		 }
+		
+	}
+
 
    
 
