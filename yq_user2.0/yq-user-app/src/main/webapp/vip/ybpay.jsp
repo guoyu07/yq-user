@@ -39,6 +39,10 @@ function checkNumber()  {
 	if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
 	var data = $("#Form").serialize();
 	$.post("/checkUserParam?status=8&toUserName="+Form.user.value,data, function(response) {
+		if(response.erroCodeNum==1){
+			alert('<s:text name='dones.not.exist.username'/>！');
+			Form.user.value;  return false;
+		}
 		if(response.erroCodeNum==2){
 			alert('<s:text name='Enter_phone_number_error'/>！');
 			Form.inputCall.focus();  return false;

@@ -5057,6 +5057,10 @@ public class UserService {
 	public void checkUserInfo(String userName, Map<String, String> map) {
 		
 		Gcuser guser = gcuserDao.getUser(userName);
+		if(guser==null){
+			throw new ServiceException(1, "用户不存在！");
+		}
+		
 		 for (String key : map.keySet()) {
 			  if(key.equals("call")){
 				  if(!guser.getCall().equals(map.get(key))){
