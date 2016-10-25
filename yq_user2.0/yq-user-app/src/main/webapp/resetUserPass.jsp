@@ -28,7 +28,13 @@ function checkdate(s)  {
   if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
     $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
-	$.post("/sms2?op=13", data, function(response) {
+	$.post("/sms2?op=13&status=8", data, function(response) {
+		if(response.erroCodeNum==2){
+			alert('<s:text name='Enter_phone_number_error'/>！');
+			$("#btn").attr("disabled",false);
+			Form.inputCall.focus();  return false;
+			
+		}
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>"); return false; }
 		settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
@@ -104,8 +110,8 @@ function checkdate1()  {
 			<td width="396" align="left"><span class="tispsfz">${user.call}</span></td>
 		</tr> 
 		<tr>
-			<td width="260" align="right"><s:text name='enter.phone.number'/>：</td>
-			<td width="396" align="left"><input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" onblur="checkNumber()"></input></td>
+			<td width="260" align="right"><s:text name='enter.phone.number'/>：</td><!-- onblur="checkNumber()" -->
+			<td width="396" align="left"><input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input></td>
 		</tr> 
 		<tr>
 			<td width="260" align="right"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</td>

@@ -414,7 +414,10 @@
 			<result name="success">vip/hgyb.jsp</result>
 		</action>
 		<action name="sms2" class="com.yq.app.user.action.SmsAction">
-			<result name="success" type="json"></result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
 		</action>
 		<action name="ybts" class="com.yq.app.user.action.ChangeStatsForShopAction">
 		</action>

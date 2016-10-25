@@ -27,7 +27,13 @@ function checkdate()  {
   	
     $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
-	$.post("/sms2?op=7&toUserName="+Form.user.value, data, function(response) {
+	$.post("/sms2?op=7&status=8&toUserName="+Form.user.value, data, function(response) {
+		if(response.erroCodeNum==2){
+			alert('<s:text name='Enter_phone_number_error'/>！');
+			$("#btn").attr("disabled",false);
+			Form.inputCall.focus();  return false;
+			
+		}
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("<s:text name='vipybpay.jsp.ybpay.jsp.1886666017'/>"); return false; }
 		settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
@@ -104,8 +110,8 @@ function checkdate1()  {
 			<td width="336" align="left" colspan="2"><span style="font-size: 9pt"><font size="1"><input type="password" name="pa02" size="20" maxlength="20"></font></span></td>
 		</tr>
 		<tr>
-			<td width="260" align="right"><s:text name='enter.phone.number'/>：</td>
-			<td width="336" align="left" colspan="2" ><input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" onblur="checkNumber()"></input></td>
+			<td width="260" align="right"><s:text name='enter.phone.number'/>：</td><!-- onblur="checkNumber()" -->
+			<td width="336" align="left" colspan="2" ><input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input></td>
 		</tr> 
 		<tr>
 			<td width="214" align="right" height="30"><s:text name='vipybpay.jsp.ybpay.jsp.-1704827075'/>：</td>
