@@ -35,6 +35,7 @@ public class Txpay{
 	private int txlb;
 	private int txvip;
 	private int tp;
+	private String opstate;			//	操作状态
 	public void setPayid(int payid){
 	this.payid=payid;
 	}
@@ -212,6 +213,13 @@ public class Txpay{
 	public void setTp(int tp) {
 		this.tp = tp;
 	}
+	
+	public String getOpstate() {
+		return opstate;
+	}
+	public void setOpstate(String opstate) {
+		this.opstate = opstate;
+	}
 	@Override
 	public String toString() {
 		return "Txpay [payid=" + payid + ", jyid=" + jyid + ", pdid=" + pdid + ", payusername=" + payusername + ", cxt="
@@ -219,7 +227,7 @@ public class Txpay{
 				+ ", paybank=" + paybank + ", paycard=" + paycard + ", dqu=" + dqu + ", bankbz=" + bankbz + ", paytime="
 				+ paytime + ", zftime=" + zftime + ", openonoff=" + openonoff + ", ep=" + ep + ", rgdate=" + rgdate
 				+ ", dfuser=" + dfuser + ", kjygid=" + kjygid + ", bz=" + bz + ", qlid=" + qlid + ", payonoff="
-				+ payonoff + ", txip=" + txip + ", clip=" + clip + ", txlb=" + txlb + ", txvip=" + txvip + ", tp=" + tp
+				+ payonoff + ", txip=" + txip + ", clip=" + clip + ", txlb=" + txlb + ", txvip=" + txvip + ", tp=" + tp + ", opstate=" + opstate
 				+ "]";
 	}
 }

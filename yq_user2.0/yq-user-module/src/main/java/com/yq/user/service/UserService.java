@@ -2749,7 +2749,7 @@ public class UserService {
 		}
 		
 		if (!enoughUserItem(userName, "金币", needJb)) {
-			throw new ServiceException(1, "您好，金币余额不能小于零，谢谢！");
+			throw new ServiceException(2, "操作错误，金币不足，请检查输入是否正确！");
 		}
 		
 		if(buyNum<5){

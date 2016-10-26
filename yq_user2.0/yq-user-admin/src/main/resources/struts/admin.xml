@@ -493,6 +493,11 @@
 		       w10.jsp
 		    </result>
 		</action>
+		<action name="resetOrder" class="com.yq.admin.manager.action.W10Action" method="resetOrder">
+		    <result name="success">
+		       w10.jsp
+		    </result>
+		</action>
 		<action name="tduser" class="com.yq.admin.manager.action.TduserAction">
 		    <result name="success">
 		       tduser.jsp

@@ -243,4 +243,23 @@ public class TxPayDao {
     public boolean addTxIndex(TxpayIndex index){
             return jdbc.insert(index)>0;	
     }
+
+    /**
+     * 
+     * 修改订单操作状态
+     * @param payId
+     * @param ep
+     * @param rgdate
+     * @param payonoff
+     * @param zftime
+     * @param opstate
+     * @param clip
+     * @return
+     * */
+    
+	public boolean updateOpStateByPayid(int payId,int ep,Date rgdate,String payonoff,Date zftime,String opstate,String clip) {
+		String sql = "update "+table+" set ep=?,rgdate=?,payonoff=?,zftime=?,opstate=?,clip=? where payid=? limit 1";
+    	boolean result = this.jdbc.update(sql, SqlParameter.Instance().withInt(ep).withObject(rgdate).withString(payonoff).withObject(zftime).withString(opstate).withString(clip).withInt(payId))>0;
+    	return result;
+	}
 }

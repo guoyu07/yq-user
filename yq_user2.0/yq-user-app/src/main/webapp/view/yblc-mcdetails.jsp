@@ -35,6 +35,7 @@
 								<th><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.663201424'/></th>
 								<th><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.625799226'/></th>
 								<th><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></th>
+								<th><s:text name='operation.state'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>
@@ -49,11 +50,14 @@
              <c:if test="${data.ep!=1&&data.ep!=2}"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928'/>。。--<b><a onClick="return confirm('<s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-38357087'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928a'/></font></a></b></c:if>
               </c:if>
 								</td>
-								<td><a onClick="return confirm('<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267a'/> ${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267b'/>！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
-          <c:if test="${data.ep==2}"><input type="button" value="<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994'/>${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994a'/>" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
-          </c:if>
-          </font>
-          </a></td>
+								<td>
+								<a onClick="return confirm('<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267a'/> ${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267b'/>！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
+          						<c:if test="${data.ep==2}"><input type="button" value="<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994'/>${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994a'/>" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
+          						</c:if>
+          						</font>
+					         	</a>
+					         	</td>	
+					          	<td>${data.opstate}</td>
 							</tr>
 							</s:iterator>
 						</table>

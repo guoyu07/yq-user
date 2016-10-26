@@ -20,6 +20,9 @@
 <c:if test="${erroCodeNum==2002}">
 <script language=javascript>alert('退回成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
 </c:if>
+<c:if test="${erroCodeNum==2003}">
+<script language=javascript>alert('重置订单成功！');location.href="w200?toPage=${page}&uid=${uid}&uname=${uname}&riqi=${riqi}";</script>
+</c:if>
 <script language="javascript">
 function writeReson(id,pagesize,username) 
 { 
@@ -37,6 +40,12 @@ function writeReson(id,pagesize,username)
 function go(id,pagesize,username,resionMassage){
 	var str;
 	str="cancelOrder?payid="+id+"&user="+username+"&page="+pagesize+"&resionMassage="+resionMassage;
+	window.location=str; 
+	}
+	
+	/** 重置订单 */
+function resetOrder(id,pagesize,username) {
+	var str="resetOrder?payid="+id+"&user="+username+"&page="+pagesize+"&resionMassage="+"订单被重置";
 	window.location=str; 
 	}
 </script>
@@ -90,7 +99,7 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td width="80" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">收购方</div></td>
           <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">状态</div></td>
           <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">操作</div></td>
-          <td width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">退回操作</div></td>
+          <td colspan="2" width="60" bgColor="#C3DAF9" height="24" align="center"><div class="word2" align="center">退回操作</div></td>
         </tr>
          <s:iterator var="data" value="dataList">
         	<tr> 
@@ -112,6 +121,7 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td height="38" width="60" align="center">
           <c:if test="${data.needVerify==1}"><a href="setVerify?verify=0&user=${data.payusername}&page=${toPage}&uid=${uid}&uname=${uname}&riqi=${riqi}" ><font color="green">关闭免审核</font></a></c:if><c:if test="${data.needVerify==0}"><a href="setVerify?verify=1&user=${data.payusername}&page=${toPage}&uid=${uid}&uname=${uname}&riqi=${riqi}" ><font color="red">设置为免审核</font></a></c:if></td>
           <td height="38" width="60" align="center"><input type="button" onclick="writeReson('${data.payid}','${toPage}','${data.payusername}')" value="提现退回" /></td>
+          <td height="38" width="60" align="center"><input type="button" onclick="resetOrder('${data.payid}','${toPage}','${data.payusername}')" value="重置订单" /></td>
         	</tr>
          </s:iterator>
      	 </table>

@@ -331,4 +331,12 @@ public class DatePayDao {
 		return result;
 	}
 	
+	/**
+	 * 订单重置日志
+	 * */
+	public boolean updateRecordByQlid(int id){
+		String sql = "update "+table+" set regid=CONCAT(regid,'-已重置'),txbz=0 where id=? and txbz=1";
+		return jdbc.update(sql, SqlParameter.Instance().withInt(id))>0;
+	}
+	
 }

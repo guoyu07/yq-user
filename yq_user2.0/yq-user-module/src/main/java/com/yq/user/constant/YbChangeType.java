@@ -20,4 +20,6 @@ public class YbChangeType {
 	public static final int SHOP_TEMP_REDUCE 	= 2001;		//商城临时账号转账给商家货物YB数
 	
 	public static final int ADMIN_ORDER_CANCEL 	= 2007;		//管理员撤销获得
+	
+	public static final int ADMIN_ORDER_RESET 	= 2008;		//管理员重置订单
 }

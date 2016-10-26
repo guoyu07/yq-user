@@ -43,10 +43,12 @@
 										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.625799226'/></th>
 								<th><s:text
 										name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.820271'/></th>
+								<th><s:text name='operation.state'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
+							
 								<tr>
-									<td>***${data.simplePayid}</td>
+								<td>***${data.simplePayid}</td>
 								<td>${data.dfuser}</td>
 								<td>${data.paynum}</td>
 								<td><fmt:formatDate value="${data.rgdate}" type="both"/></td>
@@ -66,6 +68,7 @@
           						<td><a onClick="return confirm('<s:text name="viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1689415574"/> ${data.payusername} <s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1689415574a'/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1689415574'/>？')" href="myepok?ep=${data.payid}"><font color="#FF0000" size="2">
             						<c:if test="${data.ep==1}"><s:text name="viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621"/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621a'/>。</c:if></font></a>
             					</td>
+            					<td>${data.opstate}</td>
 								</tr>
 							</s:iterator>
 						</table>
