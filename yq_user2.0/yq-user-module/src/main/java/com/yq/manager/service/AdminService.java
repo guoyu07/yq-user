@@ -3154,76 +3154,62 @@ public class AdminService {
 		//修改之前订单，修改为完成状态（并且做日志和订单的修改）
 		//重新生成订单，并增加相关的日志记录
 		/**老订单处理开始*/
-		if(datePayDao.updateRecordByQlid(oldtxpay.getQlid())){//以前的订单日志重置
-			Gcuser gcuser = gcuserDao.getUser(userName);
-			
-			if(!txPayDao.updateOpStateByPayid(payid, 0, new Date(), "已经转账", new Date(), resionMassage, ip)){//修改老订单
-				throw new ServiceException(3000, "未知错误");
-			}
-			
-			//更新索引
-			txPayDao.updateIndexEp(payid, 2);
-			
-			
-			/**老订单处理完毕，重新生成新订单*/
-			int saleNum =olddatePay.getJc();
-			
-			// 重新生成订单和日志
-			Datepay newDatePay = new Datepay();
-			newDatePay.setUsername(userName);
-			newDatePay.setJc(saleNum);
-			newDatePay.setPay(gcuser.getPay());
-			newDatePay.setJydb(gcuser.getJydb());
-			newDatePay.setRegid(olddatePay.getRegid());
-			newDatePay.setNewbz(3);
-			newDatePay.setTxbz(1); 
-			newDatePay.setAbdate(new Date());
-			int datePayId = logService.addDatePay(newDatePay);
-			
-			Txpay txpay = txPayDao.get();
-			int jypay = 1;
-			if(txpay!=null){
-				jypay = txpay.getPayid()+1;
-			}
-			
-			
-			Txpay txpay2 = new Txpay();
-			txpay2.setPayusername(userName);
-			txpay2.setCxt(gcuser.getCxt());
-			txpay2.setPaynum(saleNum);
-			txpay2.setPaynum9(oldtxpay.getPaynum9());
-			txpay2.setPayname(gcuser.getName());
-			txpay2.setPaybank(gcuser.getBank());
-			txpay2.setPaycard(gcuser.getCard());
-			txpay2.setPayonoff("尚未转账");
-			txpay2.setBankbz(oldtxpay.getBankbz());
-			txpay2.setBz(gcuser.getPay()+"");
-			txpay2.setDqu(gcuser.getDqu());
-			txpay2.setQlid(datePayId);
-			txpay2.setPdid(11);
-			txpay2.setJyid(jypay);
-			txpay2.setVipname(gcuser.getVipname());
-			txpay2.setTxvip(Global.NOVERIFY);//默认需不要审核
-			UserExtinfo userExtinfo = userExtinfoDao.get(userName);
-			//是否生审核过的
-			if(userExtinfo!=null&&userExtinfo.getNeedVerify()==Global.NOVERIFY){
-					txpay2.setTxvip(Global.VERIFY);
-			}
-			
-			txpay2.setTxip(ip);
-			int newpayid = txPayDao.add(txpay2);
-			
-			//添加索引
-			TxpayIndex index = new TxpayIndex();
-			index.setPayid(newpayid);
-			index.setEp(txpay2.getEp());
-			index.setTxvip(txpay2.getTxvip());
-		    index.setCreatedTime(new Date());
-			txPayDao.addTxIndex(index);
-			//新增订单完毕
-		}else{
-			throw new ServiceException(2, "该一币交易进行中或已经由它人交易成功，暂时不能撤销，或稍后再试！");
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		
+		if(!txPayDao.updateOpStateByPayid(payid, 0, new Date(), "已经转账", new Date(), resionMassage, ip)){//修改老订单
+			throw new ServiceException(3000, "未知错误");
 		}
+		
+		//更新索引
+		txPayDao.updateIndexEp(payid, 2);
+		
+		
+		/**老订单处理完毕，重新生成新订单*/
+		
+		
+		int saleNum =olddatePay.getJc();
+		
+		Txpay txpay = txPayDao.get();
+		int jypay = 1;
+		if(txpay!=null){
+			jypay = txpay.getPayid()+1;
+		}
+		
+		
+		Txpay txpay2 = new Txpay();
+		txpay2.setPayusername(userName);
+		txpay2.setCxt(gcuser.getCxt());
+		txpay2.setPaynum(saleNum);
+		txpay2.setPaynum9(oldtxpay.getPaynum9());
+		txpay2.setPayname(gcuser.getName());
+		txpay2.setPaybank(gcuser.getBank());
+		txpay2.setPaycard(gcuser.getCard());
+		txpay2.setPayonoff("尚未转账");
+		txpay2.setBankbz(oldtxpay.getBankbz());
+		txpay2.setBz(gcuser.getPay()+"");
+		txpay2.setDqu(gcuser.getDqu());
+		txpay2.setQlid(oldtxpay.getQlid());
+		txpay2.setPdid(11);
+		txpay2.setJyid(jypay);
+		txpay2.setVipname(gcuser.getVipname());
+		txpay2.setTxvip(Global.NOVERIFY);//默认需不要审核
+		UserExtinfo userExtinfo = userExtinfoDao.get(userName);
+		//是否生审核过的
+		if(userExtinfo!=null&&userExtinfo.getNeedVerify()==Global.NOVERIFY){
+				txpay2.setTxvip(Global.VERIFY);
+		}
+		
+		txpay2.setTxip(ip);
+		int newpayid = txPayDao.add(txpay2);
+		
+		//添加索引
+		TxpayIndex index = new TxpayIndex();
+		index.setPayid(newpayid);
+		index.setEp(txpay2.getEp());
+		index.setTxvip(txpay2.getTxvip());
+	    index.setCreatedTime(new Date());
+		txPayDao.addTxIndex(index);
+		//新增订单完毕
 		
 		
 	}

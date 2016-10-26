@@ -57,7 +57,7 @@
           						</font>
 					         	</a>
 					         	</td>	
-					          	<td>${data.opstate}</td>
+					          	<td><c:if test="${data.opstate=='1'}"><s:text name='Order.is.reset'/></c:if></td>
 							</tr>
 							</s:iterator>
 						</table>
