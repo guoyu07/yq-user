@@ -4036,8 +4036,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Map<String,String> param = new HashMap<String,String>();
@@ -4046,6 +4046,9 @@ public class UserService {
 		param.put("userName", userName);
 		param.put("op", OP_STR.length>op?OP_STR[op]:"");
 		if(gcuserDao.updateSmsCode(userName, randomString)){
+				if(op==14){//如果是幸福100App绑定的话就不需要想用户发送验证码
+					return;
+				}
 			    try {
 			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
 			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
@@ -5070,6 +5073,16 @@ public class UserService {
 			  if(key.equals("userName")){
 				  if(!guser.getUsername().equals(map.get(key))){
 					  throw new ServiceException(3, "用户名不一样！");
+				  }
+			  }
+			  if(key.equals("passWord")){
+				  if(!guser.getPassword().equals(map.get(key))){
+					  throw new ServiceException(4, "密码错误！");
+				  }
+			  }
+			  if(key.equals("secondPassWord")){
+				  if(!guser.getPassword3().equals(map.get(key))){
+					  throw new ServiceException(5, "二级密码错误！");
 				  }
 			  }
 		 }

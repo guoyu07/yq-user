@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
 import com.sr178.common.jdbc.bean.SqlParamBean;
+import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.utils.JedisUtils;
@@ -25,6 +26,7 @@ import com.yq.agent.dao.AgentOrderDao;
 import com.yq.agent.dao.AgentScoresChangeLogDao;
 import com.yq.agent.dao.AgentUserDao;
 import com.yq.app.utils.MacShaUtils;
+import com.yq.common.utils.Global;
 import com.yq.common.utils.ParamCheck;
 import com.yq.common.utils.UrlRequestUtils;
 import com.yq.common.utils.UrlRequestUtils.Mode;
@@ -352,4 +354,66 @@ public class AgentService {
 			SendChargeMsgScheduler.addMsg(callbackMsg);
 		}
 	}
+
+	
+	/**
+	 * 
+	 * 参数检测
+	 * 
+	 * @param userName 用户名
+	 * 
+	 * @param passWord 登录密码
+	 *   
+	 * @param secondPassWord 二级密码
+	 * 
+	 * 
+	 * */
+	public void checkParam(String userName, String passWord, String secondPassWord) {
+		Gcuser gcuser = userService.getUserByUserName(userName);
+		if(gcuser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		ParamCheck.checkString(userName, 7, "用户名不能为空");
+		ParamCheck.checkString(passWord,8, "密码不能为空");
+		ParamCheck.checkString(secondPassWord, 9, "二级密码不能为空");
+		//ParamCheck.checkString(call, 5, "手机号不能为空");
+		Map<String, String> param= new HashMap<>();
+		//param.put("call", call);
+		param.put("userName", userName);
+		param.put("passWord", MD5Security.md5_16_Small(passWord));
+		param.put("secondPassWord", secondPassWord);
+		userService.checkUserInfo(userName,param);
+	}
+	
+	
+	
+	/**
+	 * 验证验证码
+	 * 
+	 * 
+	 * @param userName 用户名
+	 * 
+	 * @param passWord 登录密码
+	 *   
+	 * @param secondPassWord 二级密码
+	 * 
+	 * @param smsCode 验证码
+	 * 
+	 * */
+	public String bindAccountCheck(String userName, String passWord, String secondPassWord, String smsCode) {
+		if(smsCode==null){
+			throw new ServiceException(11, "验证码为空!");
+		}
+		checkParam(userName, passWord, secondPassWord);
+		Gcuser gcuser = userService.getUserByUserName(userName);
+		
+		if(!smsCode.equals(gcuser.getVipsq())){
+			throw new ServiceException(10, "验证码有误!");
+		}
+		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
+		return "1000";
+		
+	}
+
+	
 }
