@@ -257,9 +257,9 @@ public class TxPayDao {
      * @return
      * */
     
-	public boolean updateOpStateByPayid(int payId,int ep,Date rgdate,String payonoff,Date zftime,String opstate,String clip) {
+	public boolean updateOpStateByPayid(int payId,int ep,Date rgdate,String payonoff,Date zftime,int opstate,String clip) {
 		String sql = "update "+table+" set ep=?,rgdate=?,payonoff=?,zftime=?,opstate=?,clip=? where payid=? limit 1";
-    	boolean result = this.jdbc.update(sql, SqlParameter.Instance().withInt(ep).withObject(rgdate).withString(payonoff).withObject(zftime).withString(opstate).withString(clip).withInt(payId))>0;
+    	boolean result = this.jdbc.update(sql, SqlParameter.Instance().withInt(ep).withObject(rgdate).withString(payonoff).withObject(zftime).withInt(opstate).withString(clip).withInt(payId))>0;
     	return result;
 	}
 }

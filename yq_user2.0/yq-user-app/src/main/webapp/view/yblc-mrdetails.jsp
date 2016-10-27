@@ -68,7 +68,7 @@
           						<td><a onClick="return confirm('<s:text name="viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1689415574"/> ${data.payusername} <s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1689415574a'/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1689415574'/>？')" href="myepok?ep=${data.payid}"><font color="#FF0000" size="2">
             						<c:if test="${data.ep==1}"><s:text name="viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621"/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621a'/>。</c:if></font></a>
             					</td>
-            					<td><c:if test="${data.opstate=='1'}"><s:text name='Order.is.reset'/></c:if></td>
+            					<td><c:if test="${data.opstate==1}"><s:text name='Order.is.reset'/></c:if></td>
 								</tr>
 							</s:iterator>
 						</table>

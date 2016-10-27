@@ -3138,7 +3138,7 @@ public class AdminService {
      * @return
 	 * */
 	@Transactional
-	public void resetYbOrder(String admin, int payid, String resionMassage, String ip) {
+	public void resetYbOrder(String admin, int payid, int opstate, String ip) {
 		Txpay oldtxpay = txPayDao.getByPayid(payid);
 		if(oldtxpay==null){
 			throw new ServiceException(1, "此订单不存在！");
@@ -3156,7 +3156,7 @@ public class AdminService {
 		/**老订单处理开始*/
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
-		if(!txPayDao.updateOpStateByPayid(payid, 0, new Date(), "已经转账", new Date(), resionMassage, ip)){//修改老订单
+		if(!txPayDao.updateOpStateByPayid(payid, 0, new Date(), "已经转账", new Date(), opstate, ip)){//修改老订单
 			throw new ServiceException(3000, "未知错误");
 		}
 		

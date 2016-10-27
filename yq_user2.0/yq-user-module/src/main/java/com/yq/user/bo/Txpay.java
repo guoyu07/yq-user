@@ -35,7 +35,7 @@ public class Txpay{
 	private int txlb;
 	private int txvip;
 	private int tp;
-	private String opstate;			//	操作状态
+	private int opstate;			//	操作状态
 	public void setPayid(int payid){
 	this.payid=payid;
 	}
@@ -214,10 +214,12 @@ public class Txpay{
 		this.tp = tp;
 	}
 	
-	public String getOpstate() {
+	
+	
+	public int getOpstate() {
 		return opstate;
 	}
-	public void setOpstate(String opstate) {
+	public void setOpstate(int opstate) {
 		this.opstate = opstate;
 	}
 	@Override

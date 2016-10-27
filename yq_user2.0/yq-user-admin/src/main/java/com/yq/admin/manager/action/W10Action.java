@@ -52,6 +52,7 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	}
 	
 	private String resionMassage;	
+	private int opstate;
 	public String cancelOrder(){//管理员取消订单
 		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
@@ -65,7 +66,7 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
         }
-		ServiceCacheFactory.getService(AdminService.class).resetYbOrder(super.getUserName(), payid, resionMassage, super.ip());
+		ServiceCacheFactory.getService(AdminService.class).resetYbOrder(super.getUserName(), payid, opstate, super.ip());
 		super.setErroCodeNum(2003);
 		return SUCCESS;
 	}
@@ -131,5 +132,15 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	public void setVerify(int verify) {
 		this.verify = verify;
 	}
+
+	public int getOpstate() {
+		return opstate;
+	}
+
+	public void setOpstate(int opstate) {
+		this.opstate = opstate;
+	}
+	
+	
 	
 }

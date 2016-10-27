@@ -45,7 +45,7 @@ function go(id,pagesize,username,resionMassage){
 	
 	/** 重置订单 */
 function resetOrder(id,pagesize,username) {
-	var str="resetOrder?payid="+id+"&user="+username+"&page="+pagesize+"&resionMassage="+"1";
+	var str="resetOrder?payid="+id+"&user="+username+"&page="+pagesize+"&opstate="+1;
 	window.location=str; 
 	}
 </script>
