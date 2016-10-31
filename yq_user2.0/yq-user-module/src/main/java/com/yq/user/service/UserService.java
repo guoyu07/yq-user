@@ -4046,9 +4046,6 @@ public class UserService {
 		param.put("userName", userName);
 		param.put("op", OP_STR.length>op?OP_STR[op]:"");
 		if(gcuserDao.updateSmsCode(userName, randomString)){
-				if(op==14){//如果是幸福100App绑定的话就不需要想用户发送验证码
-					return;
-				}
 			    try {
 			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
 			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");

@@ -3128,13 +3128,10 @@ public class AdminService {
 	/**
 	 * 
 	 * 重置一币订单
+	 * @param admin
 	 * @param payId
-     * @param ep
-     * @param rgdate
-     * @param payonoff
-     * @param zftime
      * @param opstate
-     * @param clip
+     * @param ip
      * @return
 	 * */
 	@Transactional
