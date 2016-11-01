@@ -11,9 +11,10 @@ public class JfcfAction extends ALDAdminActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	private String beishu;
 	public String execute(){
 		close = AdminService.isClose;
+		beishu = AdminService.beishu;
 		return SUCCESS;
 	}
 	private String date;
@@ -73,6 +74,7 @@ public class JfcfAction extends ALDAdminActionSupport {
 	public String chaifeng(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.JygChaifen();
+		
 		 super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -150,6 +152,10 @@ public class JfcfAction extends ALDAdminActionSupport {
 
 	public void setOppa(String oppa) {
 		this.oppa = oppa;
+	}
+
+	public String getBeishu() {
+		return beishu;
 	}
 	
 }

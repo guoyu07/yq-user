@@ -2480,7 +2480,7 @@ public class AdminService {
 	/**
 	 * 积分拆分
 	 */
-	private final String beishu = "1.6";//拆分倍数
+	public static final String beishu = "2.3";//拆分倍数
 	private final double dijia = 0.78;//底价
 	
 	public synchronized void JygChaifen(){

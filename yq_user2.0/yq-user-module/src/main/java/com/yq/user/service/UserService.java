@@ -2737,7 +2737,6 @@ public class UserService {
 	public void buyJf(String userName,int buyNum){
 		checkJfIsOpen();
 		
-		
 		Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
 		
 		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
@@ -3563,7 +3562,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void mrJf(String userName,int id){
-		checkJfIsOpen();
+//		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy1 = gpjyDao.getById(id);
 
@@ -3798,7 +3797,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void mcJf(String userName,int id,String pa3){
-		checkJfIsOpen();
+//		checkJfIsOpen();
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		if(!gcuser.getName().equals("公司")&&!gcuser.getPassword3().equals(pa3)){

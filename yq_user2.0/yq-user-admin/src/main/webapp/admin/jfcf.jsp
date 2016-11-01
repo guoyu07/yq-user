@@ -33,7 +33,8 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
 <body bgcolor="#DDECFE" topmargin="5" leftmargin="5">
 <title>积分拆分及代卖</title>
 <div align="center">
-<a href="closeMm?close=${!close}"  onClick="return confirm('确定吗,close=${!close}');"><c:if test="${close}">开启积分买入卖出</c:if><c:if test="${!close}">关闭积分买入卖出</c:if></a><-----------------------><form action="djm" method="post" onSubmit="return confirm('确定成交所有吗?');"><input type="text" name="date" value="" /><input type="submit" value="成交所有当前求购积分信息"/></form><-----------------------><a href="cf"  onClick="return confirm('确定拆分吗?');">拆分</a>《--------------------------》<a href="dm" onClick="return confirm('确定执行代卖吗?');">拆分满3次自动卖70%</a>
+<p>当前拆分倍数：${beishu}</p>
+<a href="closeMm?close=${!close}"  onClick="return confirm('确定吗,close=${!close}');"><c:if test="${close}">开启积分买入卖出</c:if><c:if test="${!close}">关闭积分买入卖出</c:if></a><-----------------------><form action="djm" method="post" onSubmit="return confirm('确定成交所有吗?');"><input type="text" name="date" value="" /><input type="submit" value="成交所有当前求购积分信息"/></form><-----------------------><a href="cf"  onClick="return confirm('确定拆分吗?倍数为:${beishu}');">拆分</a>《--------------------------》<a href="dm" onClick="return confirm('确定执行代卖吗?');">拆分满3次自动卖70%</a>
  </div>
 </BODY>
 </HTML>

@@ -17,3 +17,4 @@
 			+ path + "/";
 	request.setAttribute("basePath", basePath);
 %>
+<c:if test="${erroCodeNum==1860}"><script language=javascript>alert('系统暂时关闭，请稍后访问！');history.go(-1);</script></c:if>
