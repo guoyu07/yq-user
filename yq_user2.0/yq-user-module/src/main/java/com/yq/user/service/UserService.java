@@ -3475,7 +3475,7 @@ public class UserService {
 		Gpjy gpjy1 = gpjyDao.getById(orderId);
 		double mcsl=gpjy1.getMcsl();
 		
-		if(!gpjy1.getUsername().equals(userName)){
+		if(!gpjy1.getUsername().equals(userName)||gpjy1.getNewjy()==3){
 			throw new ServiceException(3000,"非法操作");
 		}
 		
@@ -5085,7 +5085,37 @@ public class UserService {
 		
 	}
 
-
-   
+   @Transactional
+   public void chargeBdbByBigVip(String userName,String pa3){
+	   Gcuser gcuser = gcuserDao.getUser(userName);
+	   if(gcuser.getVip()!=2){
+		   throw new ServiceException(1,"大vip才能使用这个功能！");
+	   }
+	   if(gcuser.getVipcjcjb()<5000){
+		   throw new ServiceException(2,"充值币不足！");
+	   }
+	   
+	   if(!gcuser.getPassword3().equals(pa3)){
+			throw new ServiceException(5, "二级密码不正确");
+		}
+	   int czb = 5000;
+	   int byBdb = 20000;
+	   int yb = 25000;
+	   if(gcuser.getSyep()<20000){
+		   yb = yb +(20000 - gcuser.getSyep());
+		   byBdb = gcuser.getSyep();
+	   }
+	   if(!gcuserDao.reduceVipcjcjb(userName, 5000)){
+		   throw new ServiceException(2,"充值币不足！");
+	   }
+	   if(byBdb>0&&!gcuserDao.reduceSyep(userName, byBdb)){
+		   throw new ServiceException(3,"备用报单币不足！");
+	   }
+	   if(!this.changeYb(userName, -yb, czb+"充值币-"+byBdb+"备用报单币-"+yb+"一币转50000报单币", YbChangeType.TRANSFER_TO_BDB, null, 0)){
+		   throw new ServiceException(4,"一币不足！");
+	   }
+	   //加报单币
+	   this.updateSybdb(userName, 50000, czb+"充值币-"+byBdb+"备用报单币-"+yb+"一币转50000报单币");
+   }
 
 }

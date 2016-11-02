@@ -51,6 +51,7 @@ if( asjb==1 ){
 						<li><a href="/bdbdate"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>
 						<% if(yjcxGcuser.getVip()>0) {%>
 						<%="--<a href=\"/bdbzz\">"%><s:text name='viewlinks.html.links.html.1159182'/><%="</a>"%>
+						<%="--<a href=\"/bdbcz\">"%><s:text name='charge'/><%="</a>"%>
 						<%}%>
 						</li>
 						<li><s:text name='viewlinks.html.links.html.667104660'/>：<span class="c-b"><%=fdpay%></span></li>

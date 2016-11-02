@@ -110,8 +110,13 @@
 			<result name="success">view/yjcx-bdb-details.jsp</result>
 		</action>
 
-		<action name="bdbzz" class="com.yq.app.user.action.BdbZzAction">
+		<action name="bdbzz" class="com.yq.app.user.action.BdbZzAction" >
 			<result name="success">view/yjcx-bdb-zz.jsp</result>
+			<result name="bdbdate" type="redirect">bdbdate</result>
+		</action>
+		
+		<action name="bdbcz" class="com.yq.app.user.action.BdbZzAction" method="bdbcz">
+			<result name="success">view/yjcx-bdb-cz.jsp</result>
 			<result name="bdbdate" type="redirect">bdbdate</result>
 		</action>
 
@@ -351,8 +356,6 @@
 				<param name="includeProperties">code,name</param>
 			</result>
 		</action>
-
-
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

@@ -37,6 +37,23 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	//报单币充值
+	private Gcuser czgcuser;
+	public String bdbcz(){
+		UserService userSercice = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		if(status==1){
+			userSercice.chargeBdbByBigVip(super.getUserName(),pa3);
+			return "bdbdate";
+		}else{
+			czgcuser = userSercice.getUserByUserName(super.getUserName());
+			if(czgcuser.getVip()!=2){
+				super.setErroCodeNum(1);
+				return SUCCESS;
+			}
+		}
+		return SUCCESS;
+	}
 
 	public int getStatus() {
 		return status;
@@ -77,4 +94,15 @@ public class BdbZzAction extends ALDAdminActionSupport {
 	public void setSybdb(int sybdb) {
 		this.sybdb = sybdb;
 	}
+
+	public Gcuser getCzgcuser() {
+		return czgcuser;
+	}
+
+	public void setCzgcuser(Gcuser czgcuser) {
+		this.czgcuser = czgcuser;
+	}
+
+	
+	
 }

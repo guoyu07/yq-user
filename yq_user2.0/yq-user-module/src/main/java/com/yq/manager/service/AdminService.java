@@ -1407,13 +1407,13 @@ public class AdminService {
 	 */
 	public void addSyep(String userName,int addAmount){
 		if (gcuserDao.addSyep(userName, addAmount)) {
-			Gcuser gcuser = gcuserDao.getUser(userName);
-			Bdbdate bdbdate = new Bdbdate();
-			bdbdate.setZuser(userName);
-			bdbdate.setSy(addAmount);
-			bdbdate.setSybdb(gcuser.getSybdb());
-			bdbdate.setLjbdb(gcuser.getLjbdb());
-			bdbDateDao.add(bdbdate);
+//			Gcuser gcuser = gcuserDao.getUser(userName);
+//			Bdbdate bdbdate = new Bdbdate();
+//			bdbdate.setZuser(userName);
+//			bdbdate.setSy(addAmount);
+//			bdbdate.setSybdb(gcuser.getSybdb());
+//			bdbdate.setLjbdb(gcuser.getLjbdb());
+//			bdbDateDao.add(bdbdate);
 		}else{
 			throw new ServiceException(1, "该用户名不存在，请检查输入是否正确！");
 		}

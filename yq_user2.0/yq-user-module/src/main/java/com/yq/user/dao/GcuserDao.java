@@ -752,6 +752,15 @@ public class GcuserDao {
 		return jdbc.update(sql, parameter)>0;
 	}
 	
+	public boolean reduceSyep(String userName,int syep){
+		String sql = "update "+table+" set syep=syep-?  where username=? and syep-?>=0 limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(syep);
+		parameter.setString(userName);
+		parameter.setInt(syep);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
 	public boolean updateGwuid(String userName,int gwuid){
 		String sql = "update "+table+" set gwuid=?  where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
