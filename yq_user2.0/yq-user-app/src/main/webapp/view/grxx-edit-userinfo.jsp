@@ -28,7 +28,7 @@ function checkdate()  {
   }
   if(Form.newSecondPassword1.value != "" || Form.newSecondPassword2.value != ""){
 	  if (Form.newSecondPassword1.value != Form.newSecondPassword2.value) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-947047850'/>！"); Form.newPassWord1.focus();     return false;    }
-	  if (!CheckIfEnglish(Form.newSecondPassword1.value)) {		alert("s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1932694410'/>！");Form.newSecondPassword1.focus();return false;}
+	  if (!CheckIfEnglish(Form.newSecondPassword1.value)) {		alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1932694410'/>！");Form.newSecondPassword1.focus();return false;}
 	  if (Form.newSecondPassword1.value.length < 10) {		alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.908634376'/>!");Form.newSecondPassword1.focus();return false;}
 	  if (Form.newSecondPassword1.value.length > 20) {		alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.653975038'/>!");Form.newSecondPassword1.focus();return false;}
   }
