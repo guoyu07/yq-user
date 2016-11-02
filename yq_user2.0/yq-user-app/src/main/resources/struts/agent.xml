@@ -13,6 +13,7 @@
          <action name="createOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="createOrder" />
          <action name="payOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="payOrder" />
          <action name="addScores" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="addScores" />
+         <action name="getUserInfo" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="getUserInfo" />
    </package>
 	
 	<package name="agentNoLoginInterceptor" extends="myInterceptor">

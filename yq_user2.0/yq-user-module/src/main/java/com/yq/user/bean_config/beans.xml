@@ -68,6 +68,8 @@
        <bean id="managerService" class="com.yq.user.service.ManagerService"></bean>
        <!-- 日志类管理 -->
        <bean id="logService" class="com.yq.user.service.LogService"></bean>
+       <!-- 系统币日志表 -->
+       <bean id="sysBiLogDao" class="com.yq.user.dao.SysBiLogDao"></bean>
        
           
        <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">

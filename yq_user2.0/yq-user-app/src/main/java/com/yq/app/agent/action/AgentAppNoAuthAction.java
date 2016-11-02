@@ -3,10 +3,14 @@ package com.yq.app.agent.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.module.web.action.JsonBaseActionSupport;
 import com.yq.agent.service.AgentService;
+import com.yq.app.bean.SimpleUserInfoBean;
+import com.yq.app.service.AppService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -89,6 +93,17 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
 		agentService.addScores(orderId,appId, orderUserName, amount,param, sign);
 		return this.renderSuccessResult();
+	}
+	
+	
+	/**
+	 * 
+	 * 获取玩家信息
+	 * 
+	 * */
+	public String getUserInfo(){
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		return this.renderObjectResult(SimpleUserInfoBean.getSimpleByGcuser(agentService.getUserInfo(appId, user,param,sign)));
 	}
 	
 	public String getAppId() {

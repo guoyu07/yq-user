@@ -221,7 +221,15 @@
 		   <result name="success">
 		        jzbdb_result.jsp
 		    </result>
-		</action>		
+		</action>	
+		<action name="sysbidetail" class="com.yq.admin.manager.action.SysBiAction">
+		   <result name="success">
+		       systemchargedetails.jsp
+		    </result>
+		</action>	
+		<action name="outputSysBiExcel" class="com.yq.admin.manager.action.SysBiAction" method="outExcel">
+		</action>	
+			
 		<action name="vipcjb" class="com.yq.admin.manager.action.VipcjbAction">
 		    <result name="input">
 		        vipcjb.jsp

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
 import com.sr178.common.jdbc.bean.SqlParamBean;
-import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.utils.JedisUtils;
@@ -410,9 +409,46 @@ public class AgentService {
 		if(!smsCode.equals(gcuser.getVipsq())){
 			throw new ServiceException(10, "验证码有误!");
 		}
+		LogSystem.info("玩家：["+userName+"],绑定账号成功！");
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		return "1000";
 		
+	}
+
+	
+	/**
+	 * 
+	 * 获取玩家信息
+	 * 
+	 * @param appId 应用ID
+	 * @param user	玩家
+	 * @param param 时间参数，精确到秒
+	 * @param sign	签名后的字符串
+	 * @return
+	 */
+	public Gcuser getUserInfo(String appId, String user, String param, String sign) {
+		//检测客户端传过来的参数是否为空
+		ParamCheck.checkString(user, 2, "用户名不能为空");
+		ParamCheck.checkString(sign, 5, "签名不能为空");
+		if(param==null){
+			param = "";
+		}
+		Gcuser guser=gcuserDao.getUser(user);
+		if(guser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		//获得app
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appId");
+		}
+		String signString = appId+user+param;
+		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}
+		return guser;
 	}
 
 	

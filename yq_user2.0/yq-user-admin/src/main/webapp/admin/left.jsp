@@ -54,8 +54,8 @@ eval("submenu" + sid + ".style.display=\"none\";");
 </tr>
 <tr>
 <td style="display:" id='submenu1'>
-<div class=sec_menu style="width:158px; height:200px">
-            <table cellpadding=0 cellspacing=0 align=center width=150 height="133">
+<div class=sec_menu style="width:158px; height:260px">
+            <table cellpadding=0 cellspacing=0 align=center width=150 height="153">
               <tr> 
                 <td height=20>☉  <a href="/admin/userlist" target="BoardList"><font color="#000000">全部会员管理</font></a></td>
               </tr>
@@ -89,6 +89,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
               	<tr>
 				<td height=20>☉  <a href="/admin/bdbjzpay" target="BoardList">报单币转账</a></td> 
 				</tr>
+			  <tr>
+			  	<td height=20>☉  <a href="/admin/sysbidetail" target="BoardList">系统转账明细</a></td> 
+			  </tr>
             </table>
 </div>
 </td>

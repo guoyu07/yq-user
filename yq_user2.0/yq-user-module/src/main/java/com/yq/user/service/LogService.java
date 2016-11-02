@@ -17,12 +17,14 @@ import com.yq.user.bo.DatepayMore;
 import com.yq.user.bo.Dldate;
 import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Jbkzj;
+import com.yq.user.bo.SysBiLog;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.DatecjDao;
 import com.yq.user.dao.DateipDao;
 import com.yq.user.dao.DldateDao;
 import com.yq.user.dao.GcfhDao;
+import com.yq.user.dao.SysBiLogDao;
 
 public class LogService {
 	@Autowired
@@ -39,6 +41,8 @@ public class LogService {
 	private DatecjDao datecjDao;
 	@Autowired
 	private JbkzjDao jbkzjDao;
+	@Autowired
+	private SysBiLogDao sysBiLogDao;
 	
 	/**
 	 * 获取一币奖励日志
@@ -244,4 +248,39 @@ public class LogService {
 		return datePayDao.updateCostGoldNumber(id, needJb);
 		
 	}
+	
+	/**
+	 * 得到分页系统币列表
+	 * 
+	 * @param zuser
+	 * @param startTime
+	 * @param endTime
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<SysBiLog> getSysBiLogPageList(String zuser, String startTime,String endTime, int pageIndex,int pageSize){
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return sysBiLogDao.getPage(zuser, startTime, endTime, pageIndex, pageSize);
+	}
+	
+	
+	
+	/**
+	 * @param zuser
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<SysBiLog> getSysBiLogList(String zuser, String startTime, String endTime) {
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return sysBiLogDao.getList(zuser, startTime, endTime);
+	}
+	
 }

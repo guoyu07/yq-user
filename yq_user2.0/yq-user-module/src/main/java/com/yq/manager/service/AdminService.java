@@ -66,6 +66,7 @@ import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.Sgtj;
 import com.yq.user.bo.Sgxt;
+import com.yq.user.bo.SysBiLog;
 import com.yq.user.bo.Tduser;
 import com.yq.user.bo.Txpay;
 import com.yq.user.bo.TxpayIndex;
@@ -89,6 +90,7 @@ import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.SgxtDao;
+import com.yq.user.dao.SysBiLogDao;
 import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
@@ -166,6 +168,8 @@ public class AdminService {
 	private PointsChangeLogDao pointsChangeLogDao;
 	@Autowired
 	private UserVipLogDao userVipLogDao;
+	@Autowired
+	private SysBiLogDao sysBiLogDao;
 	
 	
 	
@@ -1402,11 +1406,25 @@ public class AdminService {
 	}
 	/**
 	 * 添加备用报单币
+	 * 
 	 * @param userName
 	 * @param addAmount
+	 * @param operator
 	 */
-	public void addSyep(String userName,int addAmount){
+	@Transactional
+	public void addSyep(String userName,int addAmount, String operator){
 		if (gcuserDao.addSyep(userName, addAmount)) {
+			Gcuser gcuser=gcuserDao.getUser(userName);
+			//增加备用白单币日志
+			SysBiLog sysBi=new SysBiLog();
+			sysBi.setUsername(userName);
+			sysBi.setCurrentamount(gcuser.getSyep());
+			sysBi.setRechargedate(new Date());
+			sysBi.setAmount(addAmount);
+			sysBi.setOperator(operator);
+			sysBiLogDao.add(sysBi);
+			
+			
 //			Gcuser gcuser = gcuserDao.getUser(userName);
 //			Bdbdate bdbdate = new Bdbdate();
 //			bdbdate.setZuser(userName);
