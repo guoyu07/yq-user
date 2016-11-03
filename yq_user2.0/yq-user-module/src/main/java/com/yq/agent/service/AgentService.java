@@ -136,7 +136,7 @@ public class AgentService {
 		ParamCheck.checkString(amount, 2, "订单金额不能为空");
 		ParamCheck.checkString(productOrder, 3, "商户订单号不能为空");
 		ParamCheck.checkString(productDesc, 4, "商品名称不能为空不能为空");
-		ParamCheck.checkString(sign, 5, "前民更不能为空");
+		ParamCheck.checkString(sign, 5, "签名不能为空");
 		if(param==null){
 			param = "";
 		}
@@ -288,6 +288,7 @@ public class AgentService {
 		if (!password.equals(gcuser.getPassword())) {
 			throw new ServiceException(6, "登录密码错误！");
 		}
+		System.out.println("MD5Security.md5_16_Small(gcuser.getPassword3())="+MD5Security.md5_16_Small(gcuser.getPassword3()));
 		if (!password3.equals(MD5Security.md5_16_Small(gcuser.getPassword3()))) {
 			throw new ServiceException(7, "二级密码错误！");
 		}
