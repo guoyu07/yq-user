@@ -90,7 +90,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 				<td height=20>☉  <a href="/admin/bdbjzpay" target="BoardList">报单币转账</a></td> 
 				</tr>
 			  <tr>
-			  	<td height=20>☉  <a href="/admin/sysbidetail" target="BoardList">系统转账明细</a></td> 
+			  	<td height=20>☉  <a href="/admin/sysbidetail" target="BoardList">备用报单币明细</a></td> 
 			  </tr>
             </table>
 </div>
