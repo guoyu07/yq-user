@@ -28,6 +28,7 @@ public class BdbDateAction extends ALDAdminPageActionSupport<Bdbdate> {
 	private String zuser;
 	private String startDate1;
 	private String endDate1;
+	private int type;
 	public String bdbdateByDateAndUserName(){
 		String queryStartDate = null;
 		String queryEndDatet = null;
@@ -80,5 +81,10 @@ public class BdbDateAction extends ALDAdminPageActionSupport<Bdbdate> {
 	public void setEndDate1(String endDate1) {
 		this.endDate1 = endDate1;
 	}
-	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 }

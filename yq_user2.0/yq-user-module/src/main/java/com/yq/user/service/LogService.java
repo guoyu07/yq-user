@@ -173,8 +173,8 @@ public class LogService {
 	 * @param pageSize
 	 * @return
 	 */
-	public IPage<Bdbdate> getBdbPage(String zuser,int pageIndex,int pageSize){
-		return bdbDateDao.getPageList(zuser, pageSize, pageIndex);
+	public IPage<Bdbdate> getBdbPage(String zuser,int type,int pageIndex,int pageSize){
+		return bdbDateDao.getPageList(zuser,type, pageSize, pageIndex);
 	}
 	
 	

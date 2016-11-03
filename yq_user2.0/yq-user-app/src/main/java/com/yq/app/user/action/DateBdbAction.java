@@ -14,7 +14,7 @@ public class DateBdbAction extends ALDAdminPageActionSupport<Bdbdate> {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	private int type;
 	public String execute(){
 		
 		@ProblemCode
@@ -104,10 +104,17 @@ public class DateBdbAction extends ALDAdminPageActionSupport<Bdbdate> {
 //		rs_qr.UpdateBatch
 //		%>
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
-		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(), super.getToPage(), 10);
+		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(),type, super.getToPage(), 10);
 		super.initPage(page);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	
 	
 }

@@ -5105,8 +5105,17 @@ public class UserService {
 		   yb = yb +(20000 - gcuser.getSyep());
 		   byBdb = gcuser.getSyep();
 	   }
-	   if(!gcuserDao.reduceVipcjcjb(userName, 5000)){
+	   if(!gcuserDao.reduceVipcjcjb(userName, czb)){
 		   throw new ServiceException(2,"充值币不足！");
+	   }else{
+			Vipcjgl vipcjgl = new Vipcjgl();
+			vipcjgl.setCjuser(userName);
+			vipcjgl.setCjjo(czb);
+			vipcjgl.setSycjb(gcuser.getVipcjcjb()-czb);
+			vipcjgl.setVipuser(userName);
+			vipcjgl.setBz("充值50000报单币");
+			vipcjgl.setCjdate(new Date());
+			vipcjglDao.add(vipcjgl);
 	   }
 	   if(byBdb>0&&!gcuserDao.reduceSyep(userName, byBdb)){
 		   throw new ServiceException(3,"备用报单币不足！");

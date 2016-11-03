@@ -49,8 +49,16 @@ public class BdbDateDao {
 	 * @param pageIndex
 	 * @return
 	 */
-	public IPage<Bdbdate> getPageList(String zuser,int pageSize,int pageIndex){
-		String sql = "select * from "+table+" where zuser = ? order by id desc";
+	public IPage<Bdbdate> getPageList(String zuser,int type,int pageSize,int pageIndex){
+		
+		String typeStr = "";
+		if(type==0){//0 为只显示报单币转账日志
+			typeStr = " and (sy>0 or jc>0) ";
+		}else{//1 为显示开户日志
+			typeStr = " and (sy=0 and jc=0) ";
+		}
+		
+		String sql = "select * from "+table+" where zuser = ? "+typeStr+" order by id desc";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(zuser);
 		return this.jdbc.getListPage(sql, Bdbdate.class, parameter, pageSize, pageIndex);
