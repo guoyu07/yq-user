@@ -26,6 +26,7 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 	private String secondPassWord;	//二级密码
 	private String smsCode; 		//手机验证码
 	private int state;				
+	private String call;
 	/**
 	 * 加密登录接口
 	 * @return
@@ -39,7 +40,7 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 			if(gcuser==null){
 				throw new ServiceException(1, "用户名不存在！");
 			}
-			agentService.checkParam(user, passWord, secondPassWord);
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			int callLenght = gcuser.getCall().length();
 			String callLeft = gcuser.getCall().substring(0, 3);
 			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
@@ -48,15 +49,15 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 			return renderObjectResult(result);
 		}
 		if(state==2){
-			agentService.checkParam(user, passWord, secondPassWord);
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			userService.sendSmsMsg(user,14);//发送验证码
 			Gcuser gcuser = userService.getUserByUserName(user);
 			result.put("smsCodeSuccess", gcuser.getVipsq());
 			return renderObjectResult(result);
 		}
 		if(state==3){
-			agentService.checkParam(user, passWord, secondPassWord);
-			result.put("resultCode", agentService.bindAccountCheck(user,passWord,secondPassWord,smsCode));
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			result.put("call", agentService.bindAccountCheck(user, passWord, secondPassWord, smsCode, call));
 			return renderObjectResult(result);
 		}
 		result.put("tokenId", agentService.login(user, passWord,appId));
@@ -203,6 +204,16 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 
 	public void setState(int state) {
 		this.state = state;
+	}
+
+
+	public String getCall() {
+		return call;
+	}
+
+
+	public void setCall(String call) {
+		this.call = call;
 	}
 	
 

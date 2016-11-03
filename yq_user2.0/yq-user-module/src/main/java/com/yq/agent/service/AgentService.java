@@ -365,19 +365,26 @@ public class AgentService {
 	 *   
 	 * @param secondPassWord 二级密码
 	 * 
+	 * @param call 手机号
 	 * 
-	 * */
-	public void checkParam(String userName, String passWord, String secondPassWord) {
+	 * @param step 步骤
+	 */
+	public void checkParam(String userName, String passWord, String secondPassWord, String call, int step) {
 		Gcuser gcuser = userService.getUserByUserName(userName);
 		if(gcuser==null){
 			throw new ServiceException(1, "用户名不存在！");
 		}
+		Map<String, String> param= new HashMap<>();
+		if(step==2){
+			ParamCheck.checkString(call, 5, "手机号不能为空");
+			param.put("call", call);
+			if(!call.equals(gcuser.getCall())){
+				throw new ServiceException(12, "输入的手机号与预留的手机号不匹配！");
+			}
+		}
 		ParamCheck.checkString(userName, 7, "用户名不能为空");
 		ParamCheck.checkString(passWord,8, "密码不能为空");
 		ParamCheck.checkString(secondPassWord, 9, "二级密码不能为空");
-		//ParamCheck.checkString(call, 5, "手机号不能为空");
-		Map<String, String> param= new HashMap<>();
-		//param.put("call", call);
 		param.put("userName", userName);
 		param.put("passWord", MD5Security.md5_16_Small(passWord));
 		param.put("secondPassWord", secondPassWord);
@@ -399,11 +406,10 @@ public class AgentService {
 	 * @param smsCode 验证码
 	 * 
 	 * */
-	public String bindAccountCheck(String userName, String passWord, String secondPassWord, String smsCode) {
+	public String bindAccountCheck(String userName, String passWord, String secondPassWord, String smsCode, String call) {
 		if(smsCode==null){
 			throw new ServiceException(11, "验证码为空!");
 		}
-		checkParam(userName, passWord, secondPassWord);
 		Gcuser gcuser = userService.getUserByUserName(userName);
 		
 		if(!smsCode.equals(gcuser.getVipsq())){
@@ -411,7 +417,7 @@ public class AgentService {
 		}
 		LogSystem.info("玩家：["+userName+"],绑定账号成功！");
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
-		return "1000";
+		return gcuser.getCall();
 		
 	}
 
