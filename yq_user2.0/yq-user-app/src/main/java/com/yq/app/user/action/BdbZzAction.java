@@ -40,10 +40,11 @@ public class BdbZzAction extends ALDAdminActionSupport {
 	
 	//报单币充值
 	private Gcuser czgcuser;
+	private String touser;
 	public String bdbcz(){
 		UserService userSercice = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		if(status==1){
-			userSercice.chargeBdbByBigVip(super.getUserName(),pa3);
+			userSercice.chargeBdbByBigVip(super.getUserName(),pa3,touser);
 			return "bdbdate";
 		}else{
 			czgcuser = userSercice.getUserByUserName(super.getUserName());
@@ -103,6 +104,11 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		this.czgcuser = czgcuser;
 	}
 
-	
-	
+	public String getTouser() {
+		return touser;
+	}
+
+	public void setTouser(String touser) {
+		this.touser = touser;
+	}
 }

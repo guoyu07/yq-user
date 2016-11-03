@@ -52,6 +52,7 @@ import com.yq.user.bo.MallOrder;
 import com.yq.user.bo.Province;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.ShopBean;
+import com.yq.user.bo.SysBiLog;
 import com.yq.user.bo.Txifok;
 import com.yq.user.bo.Txpay;
 import com.yq.user.bo.TxpayIndex;
@@ -81,6 +82,7 @@ import com.yq.user.dao.JftzbDao;
 import com.yq.user.dao.MallOrderDao;
 import com.yq.user.dao.ProvinceDao;
 import com.yq.user.dao.SgxtDao;
+import com.yq.user.dao.SysBiLogDao;
 import com.yq.user.dao.TduserDao;
 import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
@@ -156,6 +158,9 @@ public class UserService {
 	private UserScoresLogDao userScoresLogDao;
 	@Autowired
 	private MallOrderDao mallOrderDao;
+	
+	@Autowired
+	private SysBiLogDao sysBiLogDao;
     
   //用户id与UserMapper的映射map
 //  	private Cache<String,Session> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(20000).build();
@@ -5086,45 +5091,79 @@ public class UserService {
 	}
 
    @Transactional
-   public void chargeBdbByBigVip(String userName,String pa3){
+   public void chargeBdbByBigVip(String userName,String pa3,String toUser){
+	   int czb = 5000;
+	   int byBdb = 22200;
+	   int yb = 22800;
+	   
+	   int addBdb = 50000;
+	   
 	   Gcuser gcuser = gcuserDao.getUser(userName);
 	   if(gcuser.getVip()!=2){
 		   throw new ServiceException(1,"大vip才能使用这个功能！");
 	   }
-	   if(gcuser.getVipcjcjb()<5000){
-		   throw new ServiceException(2,"充值币不足！");
+	   Gcuser to = null;
+	   if(!userName.equals(toUser)){
+		   to = gcuserDao.getUser(toUser);
+		   if(to==null){
+			   throw new ServiceException(2,"被充值用户不存在！");
+		   }
+		   if(to.getVip()!=3){
+			   throw new ServiceException(3,"被充值用户必须是小vip！");
+		   }
+			if(zuoMingxiDao.get(userName, toUser)==null&&youMingXiDao.get(userName, toUser)==null){
+				throw new ServiceException(4,"充值用户必须是您团队下的！");
+			}
+		}else{
+			to = gcuser;
+		}
+	   
+	   if(gcuser.getVipcjcjb()<czb){
+		   throw new ServiceException(5,"充值币不足！");
+	   }
+	   
+	   if(gcuser.getSyep()<byBdb){
+		   throw new ServiceException(6,"备用报单币不足！");
+	   }
+	   
+	   if(to.getPay()<yb){
+		   throw new ServiceException(7,"被充值用户的一币不足！");
 	   }
 	   
 	   if(!gcuser.getPassword3().equals(pa3)){
-			throw new ServiceException(5, "二级密码不正确");
+			throw new ServiceException(8, "二级密码不正确");
 		}
-	   int czb = 5000;
-	   int byBdb = 20000;
-	   int yb = 25000;
-	   if(gcuser.getSyep()<20000){
-		   yb = yb +(20000 - gcuser.getSyep());
-		   byBdb = gcuser.getSyep();
-	   }
+	  
 	   if(!gcuserDao.reduceVipcjcjb(userName, czb)){
-		   throw new ServiceException(2,"充值币不足！");
+		   throw new ServiceException(5,"充值币不足！");
 	   }else{
 			Vipcjgl vipcjgl = new Vipcjgl();
 			vipcjgl.setCjuser(userName);
 			vipcjgl.setCjjo(czb);
 			vipcjgl.setSycjb(gcuser.getVipcjcjb()-czb);
 			vipcjgl.setVipuser(userName);
-			vipcjgl.setBz("充值50000报单币");
+			vipcjgl.setBz("给"+toUser+"充值"+addBdb+"报单币");
 			vipcjgl.setCjdate(new Date());
 			vipcjglDao.add(vipcjgl);
 	   }
-	   if(byBdb>0&&!gcuserDao.reduceSyep(userName, byBdb)){
-		   throw new ServiceException(3,"备用报单币不足！");
+	   
+	   if(!gcuserDao.reduceSyep(userName, byBdb)){
+		   throw new ServiceException(6,"备用报单币不足！");
+	   }else{
+			SysBiLog sysBi=new SysBiLog();
+			sysBi.setUsername(userName);
+			sysBi.setCurrentamount(gcuser.getSyep()-byBdb);
+			sysBi.setRechargedate(new Date());
+			sysBi.setAmount(-byBdb);
+			sysBi.setOperator(userName);
+			sysBiLogDao.add(sysBi);
 	   }
-	   if(!this.changeYb(userName, -yb, czb+"充值币-"+byBdb+"备用报单币-"+yb+"一币转50000报单币", YbChangeType.TRANSFER_TO_BDB, null, 0)){
-		   throw new ServiceException(4,"一币不足！");
+	   
+	   if(!this.changeYb(toUser, -yb, userName+"-"+czb+"充值币-"+byBdb+"备用报单币-"+yb+"一币转"+addBdb+"报单币", YbChangeType.TRANSFER_TO_BDB, null, 0)){
+		   throw new ServiceException(7,"一币不足！");
 	   }
 	   //加报单币
-	   this.updateSybdb(userName, 50000, czb+"充值币-"+byBdb+"备用报单币-"+yb+"一币转50000报单币");
+	   this.updateSybdb(toUser, addBdb, userName+"-"+czb+"-充值币-"+byBdb+"备用报单币-"+yb+"一币转"+addBdb+"报单币");
    }
 
 }

@@ -13,10 +13,10 @@ public class Fcxt{
 	private String password;
 	private double dqgj;
 	private double jygj;				//交易价格	
-	private int fsjygsl;
-	private int syjygsl;
-	private int jygsl;
-	private int jy5w;
+	private long fsjygsl;
+	private long syjygsl;
+	private long jygsl;
+	private long jy5w;
 	private double zgj;
 	private double zdj;
 	private String lname;
@@ -57,35 +57,37 @@ public class Fcxt{
 	public double getDqgj(){
 		return dqgj;
 	}
-	public void setJygj(double jygj){
-	this.jygj=jygj;
-	}
-	public double getJygj(){
+
+
+	public double getJygj() {
 		return jygj;
 	}
-	public void setFsjygsl(int fsjygsl){
-	this.fsjygsl=fsjygsl;
+	public void setJygj(double jygj) {
+		this.jygj = jygj;
 	}
-	public int getFsjygsl(){
+	public long getFsjygsl() {
 		return fsjygsl;
 	}
-	public void setSyjygsl(int syjygsl){
-	this.syjygsl=syjygsl;
+	public void setFsjygsl(long fsjygsl) {
+		this.fsjygsl = fsjygsl;
 	}
-	public int getSyjygsl(){
+	public long getSyjygsl() {
 		return syjygsl;
 	}
-	public void setJygsl(int jygsl){
-	this.jygsl=jygsl;
+	public void setSyjygsl(long syjygsl) {
+		this.syjygsl = syjygsl;
 	}
-	public int getJygsl(){
+	public long getJygsl() {
 		return jygsl;
 	}
-	public void setJy5w(int jy5w){
-	this.jy5w=jy5w;
+	public void setJygsl(long jygsl) {
+		this.jygsl = jygsl;
 	}
-	public int getJy5w(){
+	public long getJy5w() {
 		return jy5w;
+	}
+	public void setJy5w(long jy5w) {
+		this.jy5w = jy5w;
 	}
 	public void setZgj(double zgj){
 	this.zgj=zgj;

@@ -1421,7 +1421,7 @@ public class AdminService {
 			sysBi.setCurrentamount(gcuser.getSyep());
 			sysBi.setRechargedate(new Date());
 			sysBi.setAmount(addAmount);
-			sysBi.setOperator(operator);
+			sysBi.setOperator("系统");
 			sysBiLogDao.add(sysBi);
 			
 			
