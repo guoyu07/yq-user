@@ -34,7 +34,7 @@
 					   <p>当前充值币:${czgcuser.vipcjcjb},当前备用报单币:${czgcuser.syep}</p>
 					   <p>本次操作需要消耗当前用户5000充值币，22200备用报单币及被充值用户22800一币，，</p>
 						<form class="form form4 h463" method="POST" name="Form"  action="bdbcz?status=1">
-						    <p><label>被充值用户：</label><input type="text" name="touser" size="20"></p>
+						    <p><label>被充值用户：</label><input type="text" name="touser" size="20">注：只能给团队下的小vip充值</p>
 							<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input type="password" name="pa3" size="20"></p>
 							<p><label></label><button class="but1" type="submit" onClick="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')"><s:text name='charge'/></button></p>
 						</form>

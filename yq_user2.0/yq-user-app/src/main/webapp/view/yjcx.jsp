@@ -47,7 +47,7 @@ if( asjb==1 ){
 						<li><a href="/sgks01"><s:text name='viewlinks.html.links.html.865347806'/></a></li>
 						<li><s:text name='viewlinks.html.links.html.865732987'/>：<span class="c-z"><%=yjcxGcuser.getSjb()%></span></li>
 						<li><s:text name='viewlinks.html.links.html.-1788801323'/>：<span class="c-z"><%=yjcxGcuser.getSybdb()%></span></li>
-						<li><s:text name='viewlinks.html.links.html.-881818137'/>：<span class="c-z"><%=yjcxGcuser.getPay()+yjcxGcuser.getSyep()%></span></li>
+						<li><a href="/bybdblog"><s:text name='viewlinks.html.links.html.-881818137'/>：<span class="c-z"><%=yjcxGcuser.getSyep()%></span></a></li>
 						<li><a href="/bdbdate"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>
 						<% if(yjcxGcuser.getVip()>0) {%>
 						<%="--<a href=\"/bdbzz\">"%><s:text name='viewlinks.html.links.html.1159182'/><%="</a>"%>

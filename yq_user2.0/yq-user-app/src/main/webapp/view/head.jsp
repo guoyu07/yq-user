@@ -44,7 +44,7 @@
 					<span class="close"></span>
 					<a href="/vipgo"><s:text name='viewjflc.jsp.jflc.jsp.951062035'/></a>
 					<a href="/login2j?inputUrl=login3j.jsp"><s:text name='viewyblc.jsp.yblc.jsp.618950045'/></a>
-					<a href="/bdbdate"><s:text name='viewlinks.html.links.html.627723500'/></a>
+					<a href="/sgks01"><s:text name='viewlinks.html.links.html.627723500'/></a>
 					<a href="/datepay"><s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/></a>
 					<a href="#" class="close"><s:text name='viewhead.jsp.head.jsp.1099577248'/></a>
 				</div>

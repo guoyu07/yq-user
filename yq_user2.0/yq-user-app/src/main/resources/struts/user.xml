@@ -109,6 +109,9 @@
 		<action name="bdbdate" class="com.yq.app.user.action.DateBdbAction">
 			<result name="success">view/yjcx-bdb-details.jsp</result>
 		</action>
+		<action name="bybdblog" class="com.yq.app.user.action.BybdbLogAction">
+			<result name="success">view/yjcx-bybdb-details.jsp</result>
+		</action>
 
 		<action name="bdbzz" class="com.yq.app.user.action.BdbZzAction" >
 			<result name="success">view/yjcx-bdb-zz.jsp</result>
