@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class AgentOrder{
 	public static final int ST_CTREATE = 0;
-	public static final String ST_SUCCESS = "SUCCESS";
+	public static final int ST_SUCCESS = 1;
 	private int id;
 	private String orderUserName;
 	private String appId;
