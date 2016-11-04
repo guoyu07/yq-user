@@ -1,5 +1,8 @@
 package com.yq.agent.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -288,7 +291,6 @@ public class AgentService {
 		if (!password.equals(gcuser.getPassword())) {
 			throw new ServiceException(6, "登录密码错误！");
 		}
-		System.out.println("MD5Security.md5_16_Small(gcuser.getPassword3())="+MD5Security.md5_16_Small(gcuser.getPassword3()));
 		if (!password3.equals(MD5Security.md5_16_Small(gcuser.getPassword3()))) {
 			throw new ServiceException(7, "二级密码错误！");
 		}
@@ -305,7 +307,12 @@ public class AgentService {
 				paramMap.put("order", orderId+"");
 				paramMap.put("param", agentOrder.getParam());
 				String signStr = payUserName+agentOrder.getAmount()+agentOrder.getProductOrder()+orderId+agentOrder.getParam();
-				String sign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
+				String sign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey()).trim();
+				try {
+					sign=URLEncoder.encode(sign, "utf-8");//解决网络传输过程特殊符号的处理   
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
 				paramMap.put("sign", sign);
 				LogSystem.info("开启第三方商户支付回调，回调签名字符串为["+signStr+"],key为["+agentApp.getAppKey()+"],签名为["+sign+"]");
 				//回调
