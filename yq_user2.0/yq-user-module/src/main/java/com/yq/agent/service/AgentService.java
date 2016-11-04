@@ -308,11 +308,6 @@ public class AgentService {
 				paramMap.put("param", agentOrder.getParam());
 				String signStr = payUserName+agentOrder.getAmount()+agentOrder.getProductOrder()+orderId+agentOrder.getParam();
 				String sign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey()).trim();
-				try {
-					sign=URLEncoder.encode(sign, "utf-8");//解决网络传输过程特殊符号的处理   
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
 				paramMap.put("sign", sign);
 				LogSystem.info("开启第三方商户支付回调，回调签名字符串为["+signStr+"],key为["+agentApp.getAppKey()+"],签名为["+sign+"]");
 				//回调
