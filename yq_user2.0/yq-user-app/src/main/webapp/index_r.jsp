@@ -31,7 +31,7 @@
 }
 
 .time-item h1 {
-	font-family:"<s:text name='index-haveshowscreen.jsp.index-haveshowscreen.jsp.766224877'/>";
+	font-family:"微软雅黑";
 	font-size:40px;
 	margin:20px 0;
 	border-bottom:solid 1px #ccc;
@@ -69,14 +69,14 @@
 			  if (Form.ygid.value=="") {      alert("<s:text name='index.jsp.index.jsp.1653587007'/>");      return false;    } 
 			  if (Form.pa.value=="") {      alert(" <s:text name='index.jsp.index.jsp.-63210920'/>");      return false;    }
 			  if (Form.validcode.value=="") {      alert("<s:text  name='index.jsp.index.jsp.2085402601'/>");    return false;    }
-			 // if (Form.sfz.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.741412114'/>");      return false;    }
+			 // if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    }
 			  return true;  
 			} 
 		    function logins(){
 		    	if (Form.ygid.value=="") {      alert("<s:text name='index.jsp.index.jsp.1653587007'/>");      return false;    } 
 		    	if (Form.pa.value=="") {      alert(" <s:text name='index.jsp.index.jsp.-63210920'/>");      return false;    }
 		    	if (Form.validcode.value=="") {      alert("<s:text name='index.jsp.index.jsp.2085402601'/>");      return false;    }
-		    	//if (Form.sfz.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.741412114'/>");      return false;    }
+		    	//if (Form.sfz.value==0) {      alert("请您认真查看协议及声明，只有同意后才可以继续");      return false;    }
 			    var ajaxobj = new Ajax();
 			    ajaxobj.url="/login?adminName="+Form.ygid.value+"&adminPassword="+Form.pa.value+"&randString="+Form.validcode.value;
 			    ajaxobj.callback=function(){
@@ -142,8 +142,8 @@
 			<form method="POST" name="Form" onSubmit="return false">
 				<p><input type="text" name="ygid" value="<% if(request.getParameter("id")!=null){%><%=request.getParameter("id")%><%}%>" class="name" /></p>
 				<p><input type="password" name="pa" class="pw" /></p>
-				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="点击刷新" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
-				<!-- <input type="checkbox" /><span>记住<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/></span>--> <p class="pab">  <a href="#" onClick="checkReg();"><s:text name='Forget_password'/></a></p><!-- onClick="forgetpasswd();" --> 
+				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="<s:text name='Clickrefresh'/>" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
+				<!-- <input type="checkbox" /><span>记住账号</span>--> <p class="pab">  <a href="#" onClick="checkReg();"><s:text name='Forget_password'/></a></p><!-- onClick="forgetpasswd();" --> 
 				<p><button class="log" onClick="logins();"></button></p>
 				<a class="restyle" href="/reg"><s:text  name='reg.jsp.reg.jsp.-1179328136'/></a>
 			</form>
@@ -159,6 +159,6 @@
 		</div>
 	</div>
 	
-<span style="display:none"><script src="https://s11.cnzz.com/z_stat.php?id=1259177711&web_id=1259177711" language="JavaScript"></script></script></span>
+<span style="display:none"><script src="https://s11.cnzz.com/z_stat.php?id=1259177711&web_id=1259177711" language="JavaScript"></script></span>
 </body>
 </html>
