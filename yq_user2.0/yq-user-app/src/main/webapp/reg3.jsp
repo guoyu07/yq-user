@@ -211,6 +211,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 										<option value="<s:text name='reg.jsp.reg.jsp.1781968004'/>"><s:text name='reg.jsp.reg.jsp.1781968004'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option>
+										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
 						</select>
 					 	<p><label><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label><input type="text" name="ggcard" onKeyUp="value=value.replace(/[^\d]/g,'')" size="19" maxlength="20"></p>
 						<p class="bwky">
@@ -219,6 +220,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							   <s:iterator var="data" value="provinceList">
 									<option value="${data.b}">${data.b}</option>
 								</s:iterator>
+								<option value="国外">国外</option>
 							</select>
 							<select style="width:220px;" id="loc_city" name="cityName" onChange="ChangeCity(document.getElementById('loc_city').options[document.getElementById('loc_city').selectedIndex].value);">
 							</select>
