@@ -3,8 +3,10 @@ package com.yq.admin.manager.action;
 
 import java.util.Date;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.common.utils.DateUtils;
 import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Mtfhtj;
@@ -24,8 +26,8 @@ public class BackCountAction extends ALDAdminPageActionSupport<Mtfhtj> {
 		
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		
-		count = adminService.isCanBackCount();
-		
+//		count = adminService.isCanBackCount();
+		count = true;
 		backCountBean = adminService.getBackCountBean();
 		
 		super.initPage(adminService.getMtfhtjPageList(super.getToPage(), 30));
@@ -33,10 +35,14 @@ public class BackCountAction extends ALDAdminPageActionSupport<Mtfhtj> {
 		return SUCCESS;
 	}
 	
-	
+	private String date;
 	public String backCount(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.backCount(new Date());
+		if(Strings.isNullOrEmpty(date)){
+			return SUCCESS;
+		}
+		Date dateDay = DateUtils.StringToDate(date,"yyyy-MM-dd");
+		adminService.backCount(dateDay);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -55,5 +61,13 @@ public class BackCountAction extends ALDAdminPageActionSupport<Mtfhtj> {
 
 	public void setBackCountBean(BackCountBean backCountBean) {
 		this.backCountBean = backCountBean;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 }

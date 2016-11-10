@@ -985,7 +985,7 @@ public class AdminService {
 	}
 	
 	public IPage<Mtfhtj> getMtfhtjPageList(int pageIndex,int pageSize){
-		return mtfhtjDao.getPageList(pageIndex, pageSize, "order by tjid desc");
+		return mtfhtjDao.getPageList(pageIndex, pageSize, "order by fhdate desc");
 	}
 	
 	public boolean isCanBackCount(){
@@ -1174,9 +1174,9 @@ public class AdminService {
 	 * 执行计算
 	 */
 	public void backCount(Date date){
-		if(!isCanBackCount()){
-			throw new ServiceException(1, "还没有到结算时间！");
-		}
+//		if(!isCanBackCount()){
+//			throw new ServiceException(1, "还没有到结算时间！");
+//		}
 //		String todayStr = DateUtils.getDate(date);
 //		String todayStart = todayStr+" 00:00:00";
 //		IPage<Sgxt> page = null;
