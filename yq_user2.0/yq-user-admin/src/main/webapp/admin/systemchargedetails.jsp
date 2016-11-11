@@ -16,7 +16,7 @@
     <tr>
       <td width="100%" height="22" background="images/admin_bg_1.gif"> 
         <p align="center" style="margin-top: 0; margin-bottom: 0">
-		<font color="#000000" style="font-size: 11pt" face="宋体"><strong>系 统 充 值 日 志 记 录 明 细</strong></font></td> 
+		<font color="#000000" style="font-size: 11pt" face="宋体"><strong>备 用 报 单 币 记 录 明 细</strong></font></td> 
   </tr> 
    
 
@@ -59,7 +59,7 @@
           </tr>
          </s:iterator>
             </table> 
-</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="startDate1,${startDate1},endDate1,${endDate1}"/>
+</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="startDate1,${startDate1},endDate1,${endDate1},zuser,${zuser}"/>
 </font> 
 </tr> 
 </table> 

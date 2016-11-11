@@ -27,7 +27,7 @@ public class SysBiAction extends ALDAdminPageActionSupport<SysBiLog> {
 	private String endDate1;
 	public String execute(){
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
-		super.initPage(logService.getSysBiLogPageList(zuser,startDate1,endDate1,super.getToPage(), 30));
+		super.initPage(logService.getSysBiLogPageList(zuser,startDate1,endDate1,super.getToPage(), 20));
 		return SUCCESS;
 	}
 	
