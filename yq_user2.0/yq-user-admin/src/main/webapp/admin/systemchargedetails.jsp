@@ -40,7 +40,7 @@
           <td width="71" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font face="宋体" color="#000000" style="font-weight:700" size="2">充值时间</font></td>
 		  <td width="178" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
-			<font color="#000000" style="font-weight:700" face="宋体" size="2">操作者</font></td>
+			<font color="#000000" style="font-weight:700" face="宋体" size="2">被充值用户</font></td>
           </tr>
           <s:iterator var="data" value="dataList">	
           <tr> 

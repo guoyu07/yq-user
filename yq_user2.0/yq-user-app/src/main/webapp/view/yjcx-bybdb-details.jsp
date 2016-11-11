@@ -33,7 +33,7 @@
 								<th>改变数量</th>
 								<th>改变后数量</th>
 								<th>时间</th>
-								<th>操作用户</th>
+								<th>被充值用户</th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>

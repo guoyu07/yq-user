@@ -1922,7 +1922,8 @@ public class UserService {
 	 * @param toUser
 	 * @param amount
 	 */
-	
+	//转出折扣为0.9的vip用户名
+	private static final String[] ration_0_9_user = new String[]{"qaz363363b","lyl5577a","qal999999a","cmj999999a","gyc363363a","csp5218a"};
 	@Transactional
 	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount){
 		if(!fromUser.equals("300fhk")&&!fromUser.equals("xtgc001")){//公司账号转不限制金额
@@ -2024,7 +2025,20 @@ public class UserService {
 //		datePay.setRation(0.95);
 //		
 //		logService.addDatePay(datePay);
-		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 0, null, 0.95)){
+		
+		double ration = 1;
+		//如果转出目标用户不是vip  则折扣为1  否则为0.95(除开那些固定用户)
+		if(toGcUser.getVip()!=0){
+			ration = 0.95;
+			for(int i=0;i<ration_0_9_user.length;i++){
+				if(fromUser.equals(ration_0_9_user[i])){
+					ration = 0.9;
+					break;
+				}
+			}
+		}
+		
+		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 0, null, ration)){
 			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
@@ -5155,7 +5169,7 @@ public class UserService {
 			sysBi.setCurrentamount(gcuser.getSyep()-byBdb);
 			sysBi.setRechargedate(new Date());
 			sysBi.setAmount(-byBdb);
-			sysBi.setOperator(userName);
+			sysBi.setOperator(toUser);
 			sysBiLogDao.add(sysBi);
 	   }
 	   
