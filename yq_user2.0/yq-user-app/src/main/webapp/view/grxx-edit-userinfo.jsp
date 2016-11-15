@@ -37,6 +37,7 @@ function checkdate()  {
   if (Form.provinceName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145275757'/>!");      return false;    } 
   if (Form.cityName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145519509'/>!");      return false;    }
   if (Form.areaName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145527167'/>!");      return false;    } 
+  if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");      return false;    } 
   if (Form.secondPassword.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1544222851'/>！");  Form.secondPassword.focus();      return false;    }
   if (Form.idCard.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1745964948'/>！");  Form.idCard.focus();      return false;    }
  
@@ -185,15 +186,25 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/></option>
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/></option>
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/></option>
+							<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
 							</select></p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799409753'/>：</label><input type="text" name="card" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="19" value="${gcuser.card}" /></p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1010247606'/>：</label>${gcuser.call}</p>
+							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1010247606'/>：</label>
+							${gcuser.call}<label><select  id="areaCode" name="areaCode">
+							<option selected= "selected" value="${interRegionCode.region_code}">${interRegionCode.country_name}</option>
+							   <s:iterator  var="data" value="areaCodeList">
+									<option  value="${data.region_code}">${data.country_name}</option>
+								</s:iterator>
+							</select></label></p>
+							<%-- <p><label><s:text name='International_area_code'/>：</label>
+							</p> --%>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</label>${gcuser.qq}</p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1768474821'/>：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><select name="provinceName" OnChange="ChangeProvince(document.getElementById('provinceName').options[document.getElementById('provinceName').selectedIndex].value);" id="provinceName">
                       		<option selected= "selected" value="${gcuser.addsheng}">${gcuser.addsheng}</option>
 							<s:iterator var="data" value="provinceList">
 							                      <option value="${data.b}">${data.b}</option>
 							</s:iterator>
+							<option value="国外">国外</option>
                     </select>
 					 <select name="cityName" onChange="ChangeCity(document.getElementById('cityName').options[document.getElementById('cityName').selectedIndex].value);" id="cityName">
                       <option selected="selected" value="${gcuser.addshi}">${gcuser.addshi}</option>

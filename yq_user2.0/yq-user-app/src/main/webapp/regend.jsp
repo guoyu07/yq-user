@@ -7,6 +7,7 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='regend.jsp.regend.jsp.-1815722160'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-889663866'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-1989997891'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='notinternationalareacode'/>');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

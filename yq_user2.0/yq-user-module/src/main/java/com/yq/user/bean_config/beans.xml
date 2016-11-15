@@ -13,6 +13,8 @@
        <bean id="guserDao" class="com.yq.user.dao.GcuserDao"></bean>
        <!-- 省份常量信息表 -->
        <bean id="provinceDao" class="com.yq.user.dao.ProvinceDao"></bean>
+        <!-- 国际区域码信息表 -->
+       <bean id="interRegionCodeDao" class="com.yq.user.dao.InterRegionCodeDao"></bean>
        <!-- 被禁止用户信息表 -->
        <bean id="tduserDao" class="com.yq.user.dao.TduserDao"></bean>
        <!-- 注册账号的时候 会将用户信息插入该表中  -->
@@ -60,6 +62,9 @@
        <bean id="userDailyGainLogDao" class="com.yq.user.dao.UserDailyGainLogDao"></bean>
        
        <bean id="mallOrderDao" class="com.yq.user.dao.MallOrderDao"></bean>
+       
+       <!-- 玩家属性 -->
+       <bean id="userProperty" class="com.yq.user.dao.UserPropertyDao"></bean>
        
        
        <!-- 用户数据service -->

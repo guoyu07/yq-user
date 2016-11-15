@@ -96,6 +96,7 @@ import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
 import com.yq.user.dao.UserExtinfoDao;
 import com.yq.user.dao.UserPerformanceDao;
+import com.yq.user.dao.UserPropertyDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
@@ -170,7 +171,8 @@ public class AdminService {
 	private UserVipLogDao userVipLogDao;
 	@Autowired
 	private SysBiLogDao sysBiLogDao;
-	
+	@Autowired
+	private UserPropertyDao userPropertyDao;
 	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -399,7 +401,7 @@ public class AdminService {
 	 * @return
 	 */
 	@Transactional
-	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk){
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,int areaCode){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Date date = null;
 		if(!Strings.isNullOrEmpty(pwdate)){
@@ -425,6 +427,9 @@ public class AdminService {
 			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
 		}
 		
+		if(!userPropertyDao.updatePorpertyByName(userName,areaCode)){
+			throw new ServiceException(10, "此国际编码不存在");
+		}
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
 			//写身份证和名字修改日志

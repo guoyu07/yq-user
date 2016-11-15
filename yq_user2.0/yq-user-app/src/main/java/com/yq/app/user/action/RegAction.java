@@ -5,7 +5,9 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.Province;
+import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.ProvinceDao;
 import com.yq.user.service.UserService;
 
@@ -13,6 +15,8 @@ public class RegAction extends ALDAdminActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private List<Province> provinceList = Lists.newArrayList();
+	
+	private List<InterRegionCode> areaCodeList = Lists.newArrayList();
 	
  	private int status;
  	//用户名-->username
@@ -46,25 +50,30 @@ public class RegAction extends ALDAdminActionSupport {
  	
  	private int lan;
  	
+ 	private int areaCode;
+ 	
  	
  	private String tag;
 	public String execute() {
 		if(step==0){
 			return "input1";
 		}else if(step==1){
+			InterRegionCodeDao interRegionCodeDao = ServiceCacheFactory.getServiceCache().getService(InterRegionCodeDao.class); 
+			areaCodeList = interRegionCodeDao.getAllList();
 			return "input2";
 		}else if(step==2){
 			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-			int result = userService.checkNameAndIdCardAndUpUser(ggname, gguserid, upvip,lan);
+			int result = userService.checkNameAndIdCardAndUpUser(ggname, gguserid, upvip,lan,areaCode);
 			super.setErroCodeNum(result);
 			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 			provinceList = provinceDao.getProvinceList();
+			
 			return "input3";
 		}else{
 			//开启校验
 			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 			gguser = gguser.toLowerCase();
-			int result = userService.reg(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName,lan);
+			int result = userService.reg(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName,lan,areaCode);
 			//开始添加账号
 			super.setErroCodeNum(result);
 			return SUCCESS;
@@ -188,4 +197,18 @@ public class RegAction extends ALDAdminActionSupport {
 	public void setLan(int lan) {
 		this.lan = lan;
 	}
+	public List<InterRegionCode> getAreaCodeList() {
+		return areaCodeList;
+	}
+	public void setAreaCodeList(List<InterRegionCode> areaCodeList) {
+		this.areaCodeList = areaCodeList;
+	}
+	public int getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}
+	
+	
 }

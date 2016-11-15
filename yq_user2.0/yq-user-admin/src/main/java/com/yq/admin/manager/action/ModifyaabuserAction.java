@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.struts2.ServletActionContext;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
@@ -15,7 +16,11 @@ import com.yq.cw.service.CwService;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.Sgxt;
+import com.yq.user.bo.UserProperty;
+import com.yq.user.dao.InterRegionCodeDao;
+import com.yq.user.dao.UserPropertyDao;
 import com.yq.user.service.UserService;
 
 public class ModifyaabuserAction extends ALDAdminActionSupport {
@@ -47,7 +52,9 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private String updateAllDown;
 	
 	private List<VipDownTemp> vipDownTempList;
-	
+	private List<InterRegionCode> areaCodeList = Lists.newArrayList();
+	private InterRegionCode interRegionCode;
+	private int areaCode;
 	private String md5pass;
 	private String sign;
 	private int test;
@@ -56,11 +63,17 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin4")&&!super.getUserName().equals("admin5")){
 			return INPUT;
 		}
+		
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		fcxt = adminService.getAdminUser(super.getUserName());
 		if(status==0){
 			UserService userService = ServiceCacheFactory.getService(UserService.class);
 			gcuser = userService.getUserByUserName(userid);
+			InterRegionCodeDao interRegionCodeDao = ServiceCacheFactory.getServiceCache().getService(InterRegionCodeDao.class); 
+			areaCodeList = interRegionCodeDao.getAllList();
+			UserPropertyDao userPropertyDao=ServiceCacheFactory.getServiceCache().getService(UserPropertyDao.class);
+			UserProperty userporperty = userPropertyDao.getPorpertyByName(gcuser.getUsername());
+			interRegionCode = interRegionCodeDao.getInterCodeByRegionCode(userporperty.getRegion_code());
 			try {
 				String signStr = gcuser.getUsername()+KEY+gcuser.getPassword();
 				sign = MD5Security.code(signStr,32).toLowerCase();
@@ -75,7 +88,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 			
 			return INPUT;
 		}
-		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown);
+		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -449,6 +462,37 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	public void setTest(int test) {
 		this.test = test;
 	}
+
+
+	public List<InterRegionCode> getAreaCodeList() {
+		return areaCodeList;
+	}
+
+
+	public void setAreaCodeList(List<InterRegionCode> areaCodeList) {
+		this.areaCodeList = areaCodeList;
+	}
+
+
+	public InterRegionCode getInterRegionCode() {
+		return interRegionCode;
+	}
+
+
+	public void setInterRegionCode(InterRegionCode interRegionCode) {
+		this.interRegionCode = interRegionCode;
+	}
+
+
+	public int getAreaCode() {
+		return areaCode;
+	}
+
+
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}
+	
 	
 	
 }

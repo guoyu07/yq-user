@@ -57,6 +57,7 @@ import com.yq.user.bo.Txifok;
 import com.yq.user.bo.Txpay;
 import com.yq.user.bo.TxpayIndex;
 import com.yq.user.bo.UserExtinfo;
+import com.yq.user.bo.UserProperty;
 import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.UserScoresLogForExcel;
 import com.yq.user.bo.Vipcjgl;
@@ -76,6 +77,7 @@ import com.yq.user.dao.EptzbDao;
 import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
+import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.JbkDao;
 import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.JftzbDao;
@@ -88,6 +90,7 @@ import com.yq.user.dao.TxPayDao;
 import com.yq.user.dao.TxifokDao;
 import com.yq.user.dao.UserDailyGainLogDao;
 import com.yq.user.dao.UserExtinfoDao;
+import com.yq.user.dao.UserPropertyDao;
 import com.yq.user.dao.UserScoresLogDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
@@ -161,6 +164,10 @@ public class UserService {
 	
 	@Autowired
 	private SysBiLogDao sysBiLogDao;
+	@Autowired
+	private InterRegionCodeDao interRegionCodeDao;
+	@Autowired
+	private UserPropertyDao userPropertyDao;
     
   //用户id与UserMapper的映射map
 //  	private Cache<String,Session> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(20000).build();
@@ -335,7 +342,7 @@ public class UserService {
     }
     
     
-    public int checkNameAndIdCardAndUpUser(String ggname,String gguserid,String upvip,int lan){
+    public int checkNameAndIdCardAndUpUser(String ggname,String gguserid,String upvip,int lan, int areaCode){
     	if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
 			return 2;//推荐人不存在
 		}
@@ -349,6 +356,11 @@ public class UserService {
 		if(list!=null&&list.size()>0){
 			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！
 		}
+		
+		if(!interRegionCodeDao.isHasByRegioncode(areaCode)){
+			return 8;
+		}
+		
 		return 0;
     }
 	/**
@@ -368,7 +380,7 @@ public class UserService {
 	 * @param areaName
 	 * @return
 	 */
-	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan){
+	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan, int areaCode){
 		gguser = gguser.trim();
 		ggname = ggname.trim();
 		gguserid = gguserid.trim();
@@ -427,6 +439,16 @@ public class UserService {
 			user.setDqu(Integer.valueOf(province.getAreaNum()));
 			user.setAdd9dqu(province.getAreaName());
 		}
+	
+		UserProperty userproperty = new UserProperty();
+		userproperty.setRegion_code(areaCode);
+		userproperty.setUsername(ggname);
+		//增加玩家区域码
+		userPropertyDao.insertUserProperty(userproperty);
+		
+		
+		
+		
 		if(!gcuserDao.addUser(user)){
 			return 7;//注册失败
 		}
@@ -438,6 +460,9 @@ public class UserService {
 		txifok.setName(ggname);
 		txifok.setCall(ggcall);
 		txifokDao.add(txifok);
+		
+		
+		
 		
 		return 0;
 	}
@@ -4919,11 +4944,12 @@ public class UserService {
 	 * @param provinceName	开户行
 	 * @param passowrd		登录密码
 	 * @param remoteAddr	ip
+	 * @param areaCode		手机国际区域码
 	 * @return
 	 */
-   public String updateUser(String userName, String newSecondPassword1, String newSecondPassword2, String secondPassword,
+public String updateUser(String userName, String newSecondPassword1, String newSecondPassword2, String secondPassword,
 			String card, String idCard, String bank, String smsCode, String provinceName, String provinceName2,
-			String cityName, String areaName, String newPassWord1, String newPassWord2, String remoteAddr) {
+			String cityName, String areaName, String newPassWord1, String newPassWord2, String remoteAddr, int areaCode) {
 	    Gcuser guser = gcuserDao.getUser(userName);
 		if(guser==null){
 			throw new ServiceException(1, "用户不存在!");
@@ -4944,7 +4970,9 @@ public class UserService {
 		boolean result = gcuserDao.updateUser(guser.getName(), newSecondPassword1, card, idCard, bank, smsCode, provinceName, cityName, areaName, newPassWord1);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", remoteAddr);
+			userPropertyDao.updatePorpertyByName(userName,areaCode);
 		}
+		
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		
 		return "success";

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('国际编码不存在！');location.href='/admin/modifyaabuser?userid=${userid}';</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('用户资料修改成功！');location.href='/admin/modifyaabuser?userid=${userid}';</script></c:if>
 
 <html><head><title>会员资料查看</title>
@@ -102,7 +103,16 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
         <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=12 name="qq" value="${gcuser.qq}" size="30" style="background-color: #E1FFF3"></span></font><font style="font-size: 11pt"></font></td>
       </tr>
        <tr>
-        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">电话号码：</font></td>
+        <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">电话号码：</font>
+        <select  id="areaCode" name="areaCode">
+							<option selected= "selected" value="${interRegionCode.region_code}">${interRegionCode.country_name}</option>
+							   <s:iterator  var="data" value="areaCodeList">
+									<option  value="${data.region_code}">${data.country_name}</option>
+								</s:iterator>
+		</select>
+		</td>
+        <!-- <td align="right" width="10%" height="30">
+							</td> -->
         <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" maxlength=12 name="call" value="${gcuser.call}" size="22" style="padding:0; background-color: #FFFFFF; color:#0000FF">&nbsp;<b>继承人：</b><input type="text" name="jcname" size="10" value="${gcuser.jcname}"></span></font></td>
       </tr>
       <tr>

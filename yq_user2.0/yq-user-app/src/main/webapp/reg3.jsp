@@ -4,6 +4,7 @@
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.-1243798858'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-834832388'/>！！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.912511120'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='notinternationalareacode'/>');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -202,6 +203,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 					<input type="hidden" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa3}">
 					<input type="hidden" name="ggname" size="20" maxlength="4" onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" value="${ggname}">
 					<input type="hidden" name="gguserid" size="20" maxlength="18" value="${gguserid}">
+					<input type="hidden" name="areaCode" size="20" maxlength="18" value="${areaCode}">
 					<input type="hidden" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11" value="${ggcall}">
 					<input type="hidden" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10" value="${ggqq}">
 					<input type="hidden" onKeyUp="value=value.replace(/[\W]/g,'')" name="upvip" size="20" value="${upvip}">

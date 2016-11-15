@@ -10,14 +10,19 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.Province;
+import com.yq.user.bo.UserProperty;
+import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.ProvinceDao;
+import com.yq.user.dao.UserPropertyDao;
 import com.yq.user.service.UserService;
 
 public class UpdateUserInfoAction extends ALDAdminActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private List<Province> provinceList = Lists.newArrayList();
+	private List<InterRegionCode> areaCodeList = Lists.newArrayList();
 	
  	private int status;
  	
@@ -55,6 +60,9 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
  	//电话号码-->call
  	private String call;
  	
+ 	private InterRegionCode interRegionCode;
+ 	
+ 	private int areaCode;
  
 	public String execute() {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -62,8 +70,13 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 		if(status==0){
 			ProvinceDao provinceDao = ServiceCacheFactory.getServiceCache().getService(ProvinceDao.class); 
 			provinceList = provinceDao.getProvinceList();
-			
+			InterRegionCodeDao interRegionCodeDao = ServiceCacheFactory.getServiceCache().getService(InterRegionCodeDao.class); 
+			areaCodeList = interRegionCodeDao.getAllList();
 			gcuser = userService.getUserByUserName(userName);
+			
+			UserPropertyDao userPropertyDao=ServiceCacheFactory.getServiceCache().getService(UserPropertyDao.class);
+			UserProperty userporperty = userPropertyDao.getPorpertyByName(userName);
+			interRegionCode = interRegionCodeDao.getInterCodeByRegionCode(userporperty.getRegion_code());
 			
 			if(!Strings.isNullOrEmpty(gcuser.getCall())){
 				int callLenght = gcuser.getCall().length();
@@ -82,7 +95,7 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 		}if(status==2){//用户自己修改二级密码业务
 			if(!Strings.isNullOrEmpty(userName)){
 				//开始更新资料操作
-				userService.updateUser(userName, newSecondPassword1, newSecondPassword2, secondPassword, card, idCard, bank, smsCode, provinceName, provinceName, cityName, areaName, newPassWord1, newPassWord2, ServletActionContext.getRequest().getRemoteAddr());
+				userService.updateUser(userName, newSecondPassword1, newSecondPassword2, secondPassword, card, idCard, bank, smsCode, provinceName, provinceName, cityName, areaName, newPassWord1, newPassWord2, ServletActionContext.getRequest().getRemoteAddr(),areaCode);
 				return SUCCESS;
 			}else{
 				super.setErroCodeNum(3000);//有信息为空
@@ -250,5 +263,36 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 	public void setCall(String call) {
 		this.call = call;
 	}
+
+
+
+	public List<InterRegionCode> getAreaCodeList() {
+		return areaCodeList;
+	}
+
+
+
+	public void setAreaCodeList(List<InterRegionCode> areaCodeList) {
+		this.areaCodeList = areaCodeList;
+	}
+
+
+
+	public InterRegionCode getInterRegionCode() {
+		return interRegionCode;
+	}
+
+
+
+	public void setInterRegionCode(InterRegionCode interRegionCode) {
+		this.interRegionCode = interRegionCode;
+	}
+
+
+
+
+
+	
+	
 	
 }
