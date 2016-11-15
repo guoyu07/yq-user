@@ -36,6 +36,7 @@ public class UserPropertyDao {
      * @return
      */
     public int insertUserProperty(UserProperty userproperty){
+    	
     	return jdbc.insert(userproperty);
     }
 
@@ -73,5 +74,22 @@ public class UserPropertyDao {
 		return jdbc.update(sql, sqlparameter)>0;
 	}
     
+	
+	/**
+	 * 是否有同名记录
+	 * @param userName
+	 * @return
+	 */
+	public boolean isHasUserpropertyByName(String userName){
+		
+		String sql = "select * from  "+table+" where username=?";
+		SqlParameter sqlparameter = new SqlParameter();
+		sqlparameter.setString(userName);
+		if(null!=jdbc.get(sql, UserProperty.class, sqlparameter)){
+			return true;
+		}
+		return false;
+		
+	}
     
 }

@@ -511,6 +511,18 @@ public class UserService {
 		txifok.setCall(user.getCall());
 		txifokDao.add(txifok);
 		
+		
+		UserPropertyDao userPropertyDao=ServiceCacheFactory.getServiceCache().getService(UserPropertyDao.class);
+		UserProperty userporperty = userPropertyDao.getPorpertyByName(oldUserName);
+		UserProperty newuserporperty=new UserProperty();
+		newuserporperty.setRegion_code(userporperty.getRegion_code());
+		newuserporperty.setUsername(newUserName);
+		if(userPropertyDao.isHasUserpropertyByName(newUserName)){
+			throw new ServiceException(1, "此用户名已有人使用！请更换！");
+		}
+		userPropertyDao.insertUserProperty(newuserporperty);
+		
+		
 	}
 	
 	/**
