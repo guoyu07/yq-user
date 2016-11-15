@@ -11,7 +11,7 @@ import com.yq.user.bo.UserProperty;
 /**
  * @author 作者: HuHua
  * @version 2016年11月15日
- * 类说明 
+ * 类说明   玩家属性Dao，以后玩家属性扩展字段就在此进行增、删、改、查
  */
 public class UserPropertyDao {
 	
@@ -65,7 +65,7 @@ public class UserPropertyDao {
 	 * @param areaCode
 	 * @return
 	 */
-	public boolean updatePorpertyByName(String userName, int areaCode) {
+	public boolean updateUserAreaCodeByName(String userName, int areaCode) {
 		String sql = "update "+table+" set region_code=? where  username=? ";//update user_property set region_code='100' where  username='william123'
 		SqlParameter sqlparameter = new SqlParameter();
 		sqlparameter.setInt(areaCode);

@@ -427,7 +427,7 @@ public class AdminService {
 			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
 		}
 		
-		if(!userPropertyDao.updatePorpertyByName(userName,areaCode)){
+		if(!userPropertyDao.updateUserAreaCodeByName(userName,areaCode)){
 			throw new ServiceException(10, "此国际编码不存在");
 		}
 		

@@ -4970,7 +4970,7 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		boolean result = gcuserDao.updateUser(guser.getName(), newSecondPassword1, card, idCard, bank, smsCode, provinceName, cityName, areaName, newPassWord1);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", remoteAddr);
-			userPropertyDao.updatePorpertyByName(userName,areaCode);
+			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
 		}
 		
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
