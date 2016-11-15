@@ -128,7 +128,7 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 			
 			if(!Strings.isNullOrEmpty(userName)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)){
 				//开始更新资料操作
-				userService.updateUser(userName, guser.getName(), idCard, MD5Security.md5_16(newPassWord1), card, bank, provinceName, cityName, areaName, ServletActionContext.getRequest().getRemoteAddr());
+				userService.updateUser(userName, guser.getName(), idCard, MD5Security.md5_16(newPassWord1), card, bank, provinceName, cityName, areaName, ServletActionContext.getRequest().getRemoteAddr(), areaCode);
 				return SUCCESS;
 			}else{
 				super.setErroCodeNum(3000);//有信息为空
@@ -286,6 +286,18 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 
 	public void setInterRegionCode(InterRegionCode interRegionCode) {
 		this.interRegionCode = interRegionCode;
+	}
+
+
+
+	public int getAreaCode() {
+		return areaCode;
+	}
+
+
+
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
 	}
 
 

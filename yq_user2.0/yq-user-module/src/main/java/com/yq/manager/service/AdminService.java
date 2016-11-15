@@ -20,7 +20,6 @@ import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.config.ConfigLoader;
-import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
@@ -88,6 +87,7 @@ import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcfhDao;
 import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
+import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.SysBiLogDao;
@@ -173,7 +173,8 @@ public class AdminService {
 	private SysBiLogDao sysBiLogDao;
 	@Autowired
 	private UserPropertyDao userPropertyDao;
-	
+	@Autowired
+	private InterRegionCodeDao interRegionCodeDao;	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
@@ -427,8 +428,10 @@ public class AdminService {
 			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
 		}
 		
-		if(!userPropertyDao.updateUserAreaCodeByName(userName,areaCode)){
-			throw new ServiceException(10, "此国际编码不存在");
+		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
+			if(!userPropertyDao.updateUserAreaCodeByName(userName,areaCode)){
+				throw new ServiceException(10, "此国际编码不存在");
+			}
 		}
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){

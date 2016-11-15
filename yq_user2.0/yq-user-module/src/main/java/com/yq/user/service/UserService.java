@@ -573,10 +573,13 @@ public class UserService {
 	 * @param call
 	 * @return
 	 */
-	public boolean updateUser(String userName,String name, String idCard, String password,  String card, String bank,String  addsheng,String addshi,String addqu,String ip){
+	public boolean updateUser(String userName,String name, String idCard, String password,  String card, String bank,String  addsheng,String addshi,String addqu,String ip, int areaCode){
 		boolean result =  gcuserDao.updateUser(name, idCard, password, card, bank, addsheng, addshi, addqu);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", ip);
+		}
+		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
+			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
 		}
 		return result;
 	}
@@ -4970,8 +4973,11 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		boolean result = gcuserDao.updateUser(guser.getName(), newSecondPassword1, card, idCard, bank, smsCode, provinceName, cityName, areaName, newPassWord1);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", remoteAddr);
+		}
+		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
 			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
 		}
+
 		
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		
