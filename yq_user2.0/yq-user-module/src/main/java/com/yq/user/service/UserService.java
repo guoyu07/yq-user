@@ -4028,6 +4028,11 @@ public class UserService {
 	private static final char[] chars = new char[]{'0','1','2','3','4','5','6','7','8','9'};
 	public void sendSmsMsg(String userName){
 		Gcuser gcuser = gcuserDao.getUser(userName);
+		UserProperty p = userPropertyDao.getPorpertyByName(userName);
+		if(p!=null&&p.getRegion_code()!=86){
+			LogSystem.warn("因为是国外号码，不发送通知短信"+userName);
+			return;
+		}
 		Map<String,String> param = new HashMap<String,String>();
 		String randomString = RandomStringUtils.random(6, chars);
 		param.put("code", randomString);
@@ -4049,6 +4054,11 @@ public class UserService {
 	private static final String[] smsCode = new String[]{"WKkt32","BlQ9X","R630D1"};
 	public void sendYbSaleSmsMsg(String userName,int code){
 		Gcuser gcuser = gcuserDao.getUser(userName);
+		UserProperty p = userPropertyDao.getPorpertyByName(userName);
+		if(p!=null&&p.getRegion_code()!=86){
+			LogSystem.warn("因为是国外号码，不发送通知短信"+userName);
+			return;
+		}
 			    try {
 			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), smsCode[code], new HashMap<String,String>())){
 			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
@@ -4067,6 +4077,11 @@ public class UserService {
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser==null){
 			LogSystem.warn("发送短信时用户找不到,="+userName);
+			return;
+		}
+		UserProperty p = userPropertyDao.getPorpertyByName(userName);
+		if(p!=null&&p.getRegion_code()!=86){
+			LogSystem.warn("因为是国外号码，不发送通知短信"+userName);
 			return;
 		}
 		String name = "";
@@ -4098,25 +4113,46 @@ public class UserService {
 	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
-		Map<String,String> param = new HashMap<String,String>();
 		String randomString = RandomStringUtils.random(6, chars);
-		param.put("code", randomString);
-		param.put("userName", userName);
-		param.put("op", OP_STR.length>op?OP_STR[op]:"");
-		if(gcuserDao.updateSmsCode(userName, randomString)){
-			    try {
-			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
-			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
-			    	}
-				} catch (Exception e) {
-					LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
-					throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
-				}
-				
+		UserProperty p = userPropertyDao.getPorpertyByName(userName);
+		if(p==null||p.getRegion_code()==86){
+			Map<String,String> param = new HashMap<String,String>();
+			param.put("code", randomString);
+			param.put("userName", userName);
+			param.put("op", OP_STR.length>op?OP_STR[op]:"");
+			if(gcuserDao.updateSmsCode(userName, randomString)){
+				    try {
+				    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
+				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+				    	}
+					} catch (Exception e) {
+						LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+						throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+					}
+					
+			}else{
+				throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			}
 		}else{
-			throw new ServiceException(3000, "发送短信发生错误,更新错误");
+            Map<String,String> param = new HashMap<String,String>();
+			param.put("code", randomString);
+			if(gcuserDao.updateSmsCode(userName, randomString)){
+				    try {
+				    	if(!SubMsgSendUtils.sendMessage(p.getRegion_code()+gcuser.getCall(), "742m76", param)){
+				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+				    	}
+					} catch (Exception e) {
+						LogSystem.error(e, "发送短信发生错误，phone="+p.getRegion_code()+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+						throw new ServiceException(3000, "发送短信发生错误，phone="+p.getRegion_code()+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+					}
+					
+			}else{
+				throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			}
 		}
 	}
+	
+	
 	/**
 	 * 查询所有玩家分页列表
 	 * @param pageIndex
@@ -5225,5 +5261,4 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	   //加报单币
 	   this.updateSybdb(toUser, addBdb, userName+"-"+czb+"-充值币-"+byBdb+"备用报单币-"+yb+"一币转"+addBdb+"报单币");
    }
-
 }
