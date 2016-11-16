@@ -214,6 +214,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 										<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option>
 										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
+										<option value="<s:text name='alipay'/>"><s:text name='alipay'/></option>
 						</select>
 					 	<p><label><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label><input type="text" name="ggcard" onKeyUp="value=value.replace(/[^\d]/g,'')" size="19" maxlength="20"></p>
 						<p class="bwky">

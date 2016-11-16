@@ -53,12 +53,6 @@ public class InterRegionCodeDao {
 	 * @return
 	 */
 	public InterRegionCode getInterCodeByRegionCode(int areaCode) {
-		if(areaCode==86){
-			InterRegionCode inter=new InterRegionCode();
-			inter.setRegion_code(86);
-			inter.setCountry_name("中国");
-			return inter;
-		}
 		String sql = "select * from "+table+" where region_code = ? ";
 		SqlParameter sqlParameter = SqlParameter.Instance();
 		sqlParameter.withInt(areaCode);

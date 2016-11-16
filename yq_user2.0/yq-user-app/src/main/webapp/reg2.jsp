@@ -112,7 +112,7 @@
 						<p><label><s:text name='reg.jsp.reg.jsp.7501689'/>：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span><s:text name="pleasecontact"></s:text></span></c:if><c:if test="${lan==1}"><span><s:text name="overplayer"></s:text></span></c:if></p>
 						<p class="bwky"><label><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
 						<input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"><label><select style="background: #ad9384; " id="areaCode" name="areaCode">
-							   <option selected= "selected" value="86">中国</option>
+							   <option selected= "selected" value="86"><s:text name='china'/></option>
 							   <s:iterator var="data" value="areaCodeList">
 									<option  value="${data.region_code}">${data.country_name}</option>
 								</s:iterator>
