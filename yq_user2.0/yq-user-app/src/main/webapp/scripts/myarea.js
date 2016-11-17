@@ -59,3 +59,5 @@ function AmendCity(ProvinceID,CityID,AreaID)
 			{document.getElementById("areaName").options[i].selected=true;}
 	}
 }
+
+

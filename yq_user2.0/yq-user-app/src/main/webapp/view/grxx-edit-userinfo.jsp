@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/css/common${SESSION_LOCALE}.css" />
 	<script type="text/javascript" src="/images/jquery.min.js"></script>
 	<script language="javascript" src="/scripts/myarea.js"></script>
+	<script src="/scripts/areacode.js"></script>
 	
 	<script language="JavaScript"> 
 function CheckIfEnglish( str )
@@ -37,7 +38,7 @@ function checkdate()  {
   if (Form.provinceName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145275757'/>!");      return false;    } 
   if (Form.cityName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145519509'/>!");      return false;    }
   if (Form.areaName.value==0) {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-145527167'/>!");      return false;    } 
-  if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");      return false;    } 
+  /* if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");      return false;    } */ 
   if (Form.secondPassword.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1544222851'/>！");  Form.secondPassword.focus();      return false;    }
   if (Form.idCard.value=="") {      alert("<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-1745964948'/>！");  Form.idCard.focus();      return false;    }
  
@@ -191,14 +192,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							</select></p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799409753'/>：</label><input type="text" name="card" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="19" value="${gcuser.card}" /></p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1010247606'/>：</label>
-							${gcuser.call}<label><select  id="areaCode" name="areaCode">
-							<option selected= "selected" value="${interRegionCode.region_code}">${interRegionCode.country_name}</option>
-							   <s:iterator  var="data" value="areaCodeList">
-									<option  value="${data.region_code}">${data.country_name}</option>
-								</s:iterator>
-							</select></label></p>
-							<%-- <p><label><s:text name='International_area_code'/>：</label>
-							</p> --%>
+							${interRegionCode.country_name}${gcuser.call}</p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</label>${gcuser.qq}</p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1768474821'/>：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><select name="provinceName" OnChange="ChangeProvince(document.getElementById('provinceName').options[document.getElementById('provinceName').selectedIndex].value);" id="provinceName">
                       		<option selected= "selected" value="${gcuser.addsheng}">${gcuser.addsheng}</option>

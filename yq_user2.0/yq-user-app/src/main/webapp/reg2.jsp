@@ -9,10 +9,15 @@
 	<link rel="stylesheet" href="/css/select.css" />
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
-	<script src="/scripts/area.js"></script>
+	<!-- <script src="/scripts/area.js"></script> -->
+	<script src="/scripts/location.js"></script>
 	<script src="/scripts/select2.js"></script>
 	<script src="/scripts/select2_locale_zh-CN.js"></script>
 	<script language="javascript" src="/js/ajax.js"></script>
+	<!-- <script language="javascript" src="scripts/myarea.js"></script> -->
+	<script src="/scripts/areacode.js"></script>
+	<script language="javascript" src="scripts/myarea2.js"></script>
+	<script language="javascript" src="scripts/locationarea.js"></script>
 <script language="JavaScript">
 	function CheckIfEnglish(str) {
 		if (/[a-z]/.test(str) && /[0-9]/.test(str)) {
@@ -73,6 +78,7 @@
 		  if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");     return false;    }
 		  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
 		  if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
+		  if (Form.areaCode.value==0) {      alert("<s:text name='emptyinternationalareacode'/>!");      return ;    }
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
 		//		+ Form.ggpa2.value + "ggpa3=" + Form.ggpa3.value;
 		Form.submit();
@@ -110,15 +116,16 @@
 					    <input type="hidden" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa3}">
 						<p><label><s:text name='reg.jsp.reg.jsp.734362'/>：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}"> onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if> ><span><s:text name="idcardmakesure"></s:text></span></p>
 						<p><label><s:text name='reg.jsp.reg.jsp.7501689'/>：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span><s:text name="pleasecontact"></s:text></span></c:if><c:if test="${lan==1}"><span><s:text name="overplayer"></s:text></span></c:if></p>
-						<p class="bwky"><label><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
-						<input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"><label><select style="background: #ad9384; " id="areaCode" name="areaCode">
-							   <option selected= "selected" value="86"><s:text name='china'/></option>
+						<p class="bwky">
+						<label><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
+						<select style="width:220px;" id="loc_areaCode" name="areaCode" >
 							   <s:iterator var="data" value="areaCodeList">
 									<option  value="${data.region_code}">${data.country_name}</option>
 								</s:iterator>
-							</select></label>
-						<%-- <s:text name='International_area_code'/>： --%>
-							</p>
+								<option selected= "selected" value="86"><s:text name='china'/></option>
+							</select>
+						<label><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"></label>
+						</p>
 						<p><label>QQ：</label><input type="text" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10"></p>
 						<p><label><s:text name='reg.jsp.reg.jsp.25579282'/>：</label><input type="text"  name="upvip" size="20" value="${tag}"></p>
 						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>

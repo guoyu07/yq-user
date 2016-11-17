@@ -361,6 +361,12 @@ public class UserService {
 			return 8;
 		}
 		
+
+		if(areaCode==0){
+			return 9;//国际区域码不存在！请重新选择！
+		}
+		
+		
 		return 0;
     }
 	/**
@@ -430,7 +436,6 @@ public class UserService {
 		user.setAddqu(areaName);
 		user.setCxt(5);//信用初始为5
 		user.setRegtime(new Date());
-		
 		if(lan!=0){
 			user.setGwuid(1);
 		}
@@ -440,6 +445,10 @@ public class UserService {
 			user.setAdd9dqu(province.getAreaName());
 		}
 	
+		if(areaCode==0){
+			return 9;//国际区域码不存在！请重新选择！
+		}
+		
 		UserProperty userproperty = new UserProperty();
 		userproperty.setRegion_code(areaCode);
 		userproperty.setUsername(gguser);
@@ -590,9 +599,9 @@ public class UserService {
 		if(result){
 			addUserDateIpLog(userName, "更新资料", ip);
 		}
-		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
+		/*if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
 			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
-		}
+		}*/
 		return result;
 	}
 	
@@ -5022,10 +5031,10 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		if(result){
 			addUserDateIpLog(userName, "更新资料", remoteAddr);
 		}
-		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
+		/*if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
 			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
 		}
-
+*/
 		
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		
