@@ -72,11 +72,18 @@
 		  if (Form.gguserid.value.length<18) {      alert("<s:text name='reg.jsp.reg.jsp.1683299853'/>!"); Form.gguserid.focus();     return false;    } 
 		  if (Form.gguserid.value.length>18) {      alert("<s:text name='reg.jsp.reg.jsp.1428610724'/>!"); Form.gguserid.focus();     return false;    }    
 		  </c:if>
-		  
+		  <c:if test="${lan==1}">
+		  if (Form.gguserid.value.length<7) {      alert("<s:text name='passport1683299853'/>!"); Form.gguserid.focus();     return false;    } 
+		  if (Form.gguserid.value.length>18) {      alert("<s:text name='passport1428610724'/>!"); Form.gguserid.focus();     return false;    }    
+		  </c:if>
 		  if (Form.ggcall.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>!");  Form.ggcall.focus();      return false;    }
 		  <c:if test="${lan==0}">
 		  if (Form.ggcall.value.length<11) {      alert("<s:text name='reg.jsp.reg.jsp.-415194682'/>!"); Form.ggcall.focus();     return false;    } 
 		  if (Form.ggcall.value.length>11) {      alert("<s:text name='reg.jsp.reg.jsp.-669883811'/>!"); Form.ggcall.focus();     return false;    }
+		  </c:if>
+		  <c:if test="${lan==1}">
+		  if (Form.ggcall.value.length<5) {      alert("<s:text name='call415194682'/>!"); Form.ggcall.focus();     return false;    } 
+		  if (Form.ggcall.value.length>15) {      alert("<s:text name='call669883811'/>!"); Form.ggcall.focus();     return false;    }
 		  </c:if>
 		  if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");     return false;    }
 		  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
