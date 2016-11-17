@@ -442,7 +442,7 @@ public class UserService {
 	
 		UserProperty userproperty = new UserProperty();
 		userproperty.setRegion_code(areaCode);
-		userproperty.setUsername(ggname);
+		userproperty.setUsername(gguser);
 		//增加玩家区域码
 		userPropertyDao.insertUserProperty(userproperty);
 		
