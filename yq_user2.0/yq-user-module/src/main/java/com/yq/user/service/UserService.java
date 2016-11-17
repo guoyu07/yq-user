@@ -4138,7 +4138,7 @@ public class UserService {
 			param.put("code", randomString);
 			if(gcuserDao.updateSmsCode(userName, randomString)){
 				    try {
-				    	if(!SubMsgSendUtils.sendMessage(p.getRegion_code()+gcuser.getCall(), "742m76", param)){
+				    	if(!SubMsgSendUtils.sendInternationalMessage(p.getRegion_code()+"", gcuser.getCall(), "742m76", param)){
 				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
 				    	}
 					} catch (Exception e) {
