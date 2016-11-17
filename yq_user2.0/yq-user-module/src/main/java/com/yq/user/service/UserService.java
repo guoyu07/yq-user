@@ -357,13 +357,8 @@ public class UserService {
 			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！
 		}
 		
-		if(!interRegionCodeDao.isHasByRegioncode(areaCode)){
+		if(areaCode==0||!interRegionCodeDao.isHasByRegioncode(areaCode)){
 			return 8;
-		}
-		
-
-		if(areaCode==0){
-			return 9;//国际区域码不存在！请重新选择！
 		}
 		
 		
@@ -444,8 +439,8 @@ public class UserService {
 			user.setDqu(Integer.valueOf(province.getAreaNum()));
 			user.setAdd9dqu(province.getAreaName());
 		}
-	
-		if(areaCode==0){
+
+		if(areaCode==0||!interRegionCodeDao.isHasByRegioncode(areaCode)){
 			return 9;//国际区域码不存在！请重新选择！
 		}
 		
