@@ -9,13 +9,13 @@
 	<link rel="stylesheet" href="/css/select.css" />
 	<script src="/scripts/jquery.js"></script>
 	<script src="/scripts/common.js"></script>
-	<!-- <script src="/scripts/area.js"></script> -->
-	<script src="/scripts/location.js"></script>
+	<script src="/scripts/areacode${lan}.js"></script>
+	<script src="/scripts/location${lan}.js"></script>
 	<script src="/scripts/select2.js"></script>
 	<script src="/scripts/select2_locale_zh-CN.js"></script>
 	<script language="javascript" src="/js/ajax.js"></script>
-	<script language="javascript" src="scripts/myarea.js"></script>
-	<script src="/scripts/areacode.js"></script>
+	<script language="javascript" src="scripts/myarea${lan}.js"></script>
+	<script src="/scripts/areacode${lan}.js"></script>
 <script language="JavaScript">
 	function CheckIfEnglish(str) {
 		if (/[a-z]/.test(str) && /[0-9]/.test(str)) {
@@ -92,6 +92,10 @@
 		  if (Form.gguserid.value.length<7) {      alert("<s:text name='passport1683299853'/>!"); Form.gguserid.focus();     return false;    } 
 		  if (Form.gguserid.value.length>18) {      alert("<s:text name='passport1428610724'/>!"); Form.gguserid.focus();     return false;    }
 		  }
+		  var tmp="中国";
+		  if(tmp==$("#loc_areaCode").find("option:selected").text()){
+			  Form.areaCode.value=86;
+		  }
 		  if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");     return false;    }
 		  if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
 		  if (Form.areaCode.value==0) {      alert("<s:text name='emptyinternationalareacode'/>!");      return ;    }
@@ -159,12 +163,13 @@
 								</s:iterator>
 								</c:if>
 								<c:if test="${lan==0}"> 
+								<c:if test="${lan==0}"> <option selected="selected" value="86">中国</option></c:if>
 								<s:iterator var="data" value="areaCodeList">
 									<option value="${data.region_code}">${data.country_name}</option>
 								</s:iterator>
 								
 								</c:if>
-								<c:if test="${lan==0}"> <option selected="selected" value="86">中国</option></c:if>
+								
 						</select>
 						<label><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"></label>
 						</p>
