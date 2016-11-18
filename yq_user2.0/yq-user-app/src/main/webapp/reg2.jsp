@@ -14,10 +14,8 @@
 	<script src="/scripts/select2.js"></script>
 	<script src="/scripts/select2_locale_zh-CN.js"></script>
 	<script language="javascript" src="/js/ajax.js"></script>
-	<!-- <script language="javascript" src="scripts/myarea.js"></script> -->
+	<script language="javascript" src="scripts/myarea.js"></script>
 	<script src="/scripts/areacode.js"></script>
-	<script language="javascript" src="scripts/myarea2.js"></script>
-	<script language="javascript" src="scripts/locationarea.js"></script>
 <script language="JavaScript">
 	function CheckIfEnglish(str) {
 		if (/[a-z]/.test(str) && /[0-9]/.test(str)) {
@@ -128,7 +126,7 @@
 						<p><label> <c:if test="${lan==1}"><s:text name='passport'/></c:if><c:if test="${lan==0}"><s:text name='reg.jsp.reg.jsp.7501689'/></c:if>：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span><s:text name="pleasecontact"></s:text></span></c:if><c:if test="${lan==1}"><span><s:text name="overplayer"></s:text></span></c:if></p>
 						<p class="bwky">
 						<label><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
-						<select style="width:220px;" id="loc_areaCode" name="areaCode" >
+						<select style="width:220px;" id="loc_areaCode" name="areaCode" onChange="ChangeAreaCode(document.getElementById('loc_areaCode').options[document.getElementById('loc_areaCode').selectedIndex].value);">
 							   <s:iterator var="data" value="areaCodeList">
 									<option  value="${data.region_code}">${data.country_name}</option>
 								</s:iterator>

@@ -59,5 +59,18 @@ function AmendCity(ProvinceID,CityID,AreaID)
 			{document.getElementById("areaName").options[i].selected=true;}
 	}
 }
-
+function ChangeAreaCode(subid){
+	document.getElementById("areaCode").length = 0; 
+	var subid=subid;
+	var i;
+	document.getElementById("areaCode").options[0] = new Option('==请选择区域==','0');
+	for (i=0;i < subCity.length; i++)
+	{
+	 alert("subid="+subid);
+		if (subCity[i][1] == subid)
+		{ 
+			document.getElementById("areaCode").options[document.getElementById("areaCode").length] = new Option(subCity[i][0], subCity[i][2]);
+		} 
+	}
+	}
 
