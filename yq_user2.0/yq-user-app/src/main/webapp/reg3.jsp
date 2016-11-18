@@ -79,9 +79,6 @@
 				  alert("<s:text name='Banks.can.only.be.numbers'/>!");
 				  Form.ggcard.focus(); return;
 			  }
-			 /*  var pattern = /\D/ig;
-			  var str = "";// your string
-			  pattern.test(str); */
 		  }
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
 		//		+ Form.ggpa2.value + "ggpa3=" + Form.ggpa3.value;
