@@ -71,6 +71,18 @@
 		 if (Form.provinceName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924286904'/>!");      return ;    }
 		  if (Form.cityName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924280505'/>!");      return ;    }
 		  if (Form.areaName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1280507619'/>!");      return ;    }
+		  if (Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.-453899062'/>"||Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.1781968004'/>"||Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.691148048'/>"||Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.1019445992'/>")
+		  {
+			  var t=$("#gcard").val();
+			  var z= /^[0-9]*$/;
+			  if(!z.test(t)){
+				  alert("<s:text name='Banks.can.only.be.numbers'/>!");
+				  Form.ggcard.focus(); return;
+			  }
+			 /*  var pattern = /\D/ig;
+			  var str = "";// your string
+			  pattern.test(str); */
+		  }
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
 		//		+ Form.ggpa2.value + "ggpa3=" + Form.ggpa3.value;
 		Form.submit();
@@ -123,6 +135,11 @@
 </script>
 
 <script language="javascript" type="text/javascript">
+/* <option value="<s:text name='reg.jsp.reg.jsp.-453899062'/>"><s:text name='reg.jsp.reg.jsp.-453899062'/></option>
+<option value="<s:text name='reg.jsp.reg.jsp.1781968004'/>"><s:text name='reg.jsp.reg.jsp.1781968004'/></option>
+<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
+<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option> */
+ 
 <!--
 function ChangeProvince(subid)
 {
@@ -209,7 +226,8 @@ function AmendCity(ProvinceID,CityID,AreaID)
 					<input type="hidden" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10" value="${ggqq}">
 					<input type="hidden" onKeyUp="value=value.replace(/[\W]/g,'')" name="upvip" size="20" value="${upvip}">
 					<div class="fbox founbox3">
-						<p><label><s:text name='reg.jsp.reg.jsp.799485150'/>：</label><select id="loc_bank" style="width:350px;" name="ggbank">
+						<p><label><s:text name='reg.jsp.reg.jsp.799485150'/>：</label>
+						<select id="loc_bank" style="width:350px;" name="ggbank"><!--  ONCHANGE="CHECKBANK(DOCUMENT.GETELEMENTBYID('LOC_BANK').OPTIONS[DOCUMENT.GETELEMENTBYID('LOC_BANK').SELECTEDINDEX].VALUE)" -->
 										<option value="<s:text name='reg.jsp.reg.jsp.-453899062'/>"><s:text name='reg.jsp.reg.jsp.-453899062'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.1781968004'/>"><s:text name='reg.jsp.reg.jsp.1781968004'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
@@ -217,7 +235,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
 										<option value="<s:text name='alipay'/>"><s:text name='alipay'/></option>
 						</select>
-					 	<p><label><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label><input type="text" name="ggcard" onKeyUp="value=value.replace(/[^\d]/g,'')" size="19" maxlength="20"></p>
+					 	<p><label ><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label> <input id="gcard"  type="text" name="ggcard"  size="19" maxlength="20"></p><!-- value==value.replace(/[^\d]/g,'') -->
 						<p class="bwky">
 							<label><s:text name='reg.jsp.reg.jsp.-1009112269'/>：</label>
 							<select style="width:220px;" id="loc_province" name="provinceName" onChange="ChangeProvince(document.getElementById('loc_province').options[document.getElementById('loc_province').selectedIndex].value);">
