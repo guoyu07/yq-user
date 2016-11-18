@@ -65,12 +65,14 @@
 	//-->
 	
 
-	function checkdate1() {
+	function checkdate1(lan) {
 		 if (Form.ggbank.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1996388245'/>!");   Form.ggbank.focus();     return ;    }  
 		  if (Form.ggcard.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-998560219'/>!");  Form.ggcard.focus();      return ;    }  
-		 if (Form.provinceName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924286904'/>!");      return ;    }
-		  if (Form.cityName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924280505'/>!");      return ;    }
-		  if (Form.areaName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1280507619'/>!");      return ;    }
+		  if(lan==0){
+			  if (Form.provinceName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924286904'/>!");      return ;    }
+			  if (Form.cityName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1924280505'/>!");      return ;    }
+			  if (Form.areaName.value==0) {      alert("<s:text name='reg.jsp.reg.jsp.1280507619'/>!");      return ;    }
+		 }
 		  if (Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.-453899062'/>"||Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.1781968004'/>"||Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.691148048'/>"||Form.ggbank.value=="<s:text name='reg.jsp.reg.jsp.1019445992'/>")
 		  {
 			  var t=$("#gcard").val();
@@ -229,24 +231,29 @@ function AmendCity(ProvinceID,CityID,AreaID)
 										<option value="<s:text name='reg.jsp.reg.jsp.1781968004'/>"><s:text name='reg.jsp.reg.jsp.1781968004'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option>
+										<c:if test="${lan!=0}">
 										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
 										<option value="<s:text name='alipay'/>"><s:text name='alipay'/></option>
+										</c:if>
 						</select>
 					 	<p><label ><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label> <input id="gcard"  type="text" name="ggcard"  size="19" maxlength="20"></p><!-- value==value.replace(/[^\d]/g,'') -->
 						<p class="bwky">
-							<label><s:text name='reg.jsp.reg.jsp.-1009112269'/>：</label>
-							<select style="width:220px;" id="loc_province" name="provinceName" onChange="ChangeProvince(document.getElementById('loc_province').options[document.getElementById('loc_province').selectedIndex].value);">
-							   <s:iterator var="data" value="provinceList">
-									<option value="${data.b}">${data.b}</option>
-								</s:iterator>
-								<option value="国外">国外</option>
-							</select>
+							<c:if test="${lan!=1}"><label><s:text name='reg.jsp.reg.jsp.-1009112269'/>：</label>
+							
+								<select style="width:220px;" id="loc_province" name="provinceName" onChange="ChangeProvince(document.getElementById('loc_province').options[document.getElementById('loc_province').selectedIndex].value);">
+								   <s:iterator var="data" value="provinceList">
+										<option value="${data.b}">${data.b}</option>
+									</s:iterator>
+									<option value="国外">国外</option>
+								</select>
+							
 							<select style="width:220px;" id="loc_city" name="cityName" onChange="ChangeCity(document.getElementById('loc_city').options[document.getElementById('loc_city').selectedIndex].value);">
 							</select>
 							<select style="width:220px;" id="loc_town" name="areaName" onChange="ChangeArea(document.getElementById('loc_town').options[document.getElementById('loc_town').selectedIndex].value);">
 							</select>
+							</c:if>
 						</p>
-						<p class="z-tc"><a class="newbut" id="xyb" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
+						<p class="z-tc"><a class="newbut" id="xyb" href="#" onClick="checkdate1(${lan});"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
 					</div>
 					
 				 </form>

@@ -28,8 +28,8 @@
 					</div>
 					<div class="content-form new3-top">
 						  <p><s:text name="viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1226774048"></s:text>：<b>${id}</b> <s:text name="viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1226774048a"></s:text>:<b>${pdpa}</b> <s:text name="viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1226774048b"></s:text>:<b>${fwid}</b>  <s:text name="viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1226774048c"></s:text>:<b>${ejbk.bf2}0</b></p>
-						  <p><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-426269472'/>！</p>
-						  <p><a onClick="return confirm('<s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1035441473'/>？')" href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}"><button class="but1"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1035441473a'/></button></a></p>
+						  <%-- <p><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-426269472'/>！</p> --%>
+						  <p><a <%-- onClick="return confirm('<s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1035441473'/>？')"  --%>href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}"><button class="but1"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.-1035441473a'/></button></a></p>
 					</div>
 				</div>
 			</div>

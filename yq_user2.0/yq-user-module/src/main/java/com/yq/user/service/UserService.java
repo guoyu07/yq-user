@@ -411,8 +411,15 @@ public class UserService {
 		if(isForbidNameOrID(ggname, gguserid)){
 			return 5;//禁用账号
 		}
-		if(Strings.isNullOrEmpty(provinceName)||provinceName.equals("0")||Strings.isNullOrEmpty(cityName)||cityName.equals("0")||Strings.isNullOrEmpty(areaName)||areaName.equals("0")){
-			return 6;//所在地区不全！请重新选择！
+		
+		if(lan==0){
+			if(Strings.isNullOrEmpty(provinceName)||provinceName.equals("0")||Strings.isNullOrEmpty(cityName)||cityName.equals("0")||Strings.isNullOrEmpty(areaName)||areaName.equals("0")){
+				return 6;//所在地区不全！请重新选择！
+			}
+		}else if(lan==1){
+			provinceName="国外";
+			cityName="其他";
+			areaName="其他";
 		}
 		Province province = provinceDao.getProvinceByB(provinceName);
 		Gcuser user = new Gcuser();

@@ -59,32 +59,40 @@
 	//-->
 	
 
-	function checkdate1() {
+	function checkdate1(lan) {
 		  if (Form.ggname.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.164342206'/>!");  Form.ggname.focus();    return false;    } 
-		  <c:if test="${lan==0}">
-		  if (Form.ggname.value.length<2) {      alert("<s:text name='reg.jsp.reg.jsp.815297593'/>!");   Form.ggname.focus();     return false;    } 
-		  if (Form.ggname.value.length>8) {      alert("<s:text name='reg.jsp.reg.jsp.560668046'/>!");   Form.ggname.focus();     return false;    }
-		  </c:if>
+		  if(lan==0){
+			  if (Form.ggname.value.length<2) {      alert("<s:text name='reg.jsp.reg.jsp.815297593'/>!");   Form.ggname.focus();     return false;    } 
+			  if (Form.ggname.value.length>8) {      alert("<s:text name='reg.jsp.reg.jsp.560668046'/>!");   Form.ggname.focus();     return false;    }
+		  }
 		  if (Form.gguserid.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-1745964948'/>!");  Form.gguserid.focus();      return false;    }
-		  <c:if test="${lan==0}">
-		  if (Form.gguserid.value.length<18) {      alert("<s:text name='reg.jsp.reg.jsp.1683299853'/>!"); Form.gguserid.focus();     return false;    } 
-		  if (Form.gguserid.value.length>18) {      alert("<s:text name='reg.jsp.reg.jsp.1428610724'/>!"); Form.gguserid.focus();     return false;    }    
-		  </c:if>
-		  <c:if test="${lan==1}">
-		  if (Form.gguserid.value.length<7) {      alert("<s:text name='passport1683299853'/>!"); Form.gguserid.focus();     return false;    } 
-		  if (Form.gguserid.value.length>18) {      alert("<s:text name='passport1428610724'/>!"); Form.gguserid.focus();     return false;    }    
-		  </c:if>
+		  if(lan==0){
+			  if (Form.ggcall.value.length<11) {      alert("<s:text name='reg.jsp.reg.jsp.-415194682'/>!"); Form.ggcall.focus();     return false;    } 
+			  if (Form.ggcall.value.length>11) {      alert("<s:text name='reg.jsp.reg.jsp.-669883811'/>!"); Form.ggcall.focus();     return false;    }
+			  if (Form.gguserid.value.length<18) {      alert("<s:text name='reg.jsp.reg.jsp.1683299853'/>!"); Form.gguserid.focus();     return false;    } 
+			  if (Form.gguserid.value.length>18) {      alert("<s:text name='reg.jsp.reg.jsp.1428610724'/>!"); Form.gguserid.focus();     return false;    }    
+			  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
+		  
+		  }
 		  if (Form.ggcall.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>!");  Form.ggcall.focus();      return false;    }
-		  <c:if test="${lan==0}">
-		  if (Form.ggcall.value.length<11) {      alert("<s:text name='reg.jsp.reg.jsp.-415194682'/>!"); Form.ggcall.focus();     return false;    } 
-		  if (Form.ggcall.value.length>11) {      alert("<s:text name='reg.jsp.reg.jsp.-669883811'/>!"); Form.ggcall.focus();     return false;    }
-		  </c:if>
-		  <c:if test="${lan==1}">
+		  if(lan==1){
+		  if (Form.ggqq.value=="") {      alert("<s:text name='emailbox.cannot.be.empty'/>!");  Form.ggqq.focus();    return false;    }
+		  var temp = Form.ggqq.value;
+	        //对电子邮件的验证
+	        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	        if(!myreg.test(temp))
+	        {
+	             alert('<s:text name='Please_enter_a_valid_email_address'/>!');
+	             Form.ggqq.value.focus();
+	             return false;
+	        }
+		  
 		  if (Form.ggcall.value.length<5) {      alert("<s:text name='call415194682'/>!"); Form.ggcall.focus();     return false;    } 
 		  if (Form.ggcall.value.length>15) {      alert("<s:text name='call669883811'/>!"); Form.ggcall.focus();     return false;    }
-		  </c:if>
+		  if (Form.gguserid.value.length<7) {      alert("<s:text name='passport1683299853'/>!"); Form.gguserid.focus();     return false;    } 
+		  if (Form.gguserid.value.length>18) {      alert("<s:text name='passport1428610724'/>!"); Form.gguserid.focus();     return false;    }
+		  }
 		  if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");     return false;    }
-		  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
 		  if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
 		  if (Form.areaCode.value==0) {      alert("<s:text name='emptyinternationalareacode'/>!");      return ;    }
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
@@ -92,6 +100,21 @@
 		Form.submit();
 		return;
 	}
+	
+	/* function checkemail(){
+		  var temp = document.getElementById("email");
+	        //对电子邮件的验证
+	        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	        if(!myreg.test(temp.value))
+	        {
+	        	 alert("<s:text name='Please.enter.email.address'/>!"); 
+	             document.getElementById("email").focus();
+	             return false;
+	        }
+	} */
+
+  
+	 
 </script>
 </head>
 <body>
@@ -123,20 +146,33 @@
 					    <input type="hidden" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa2}">
 					    <input type="hidden" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa3}">
 						<p><label><s:text name='reg.jsp.reg.jsp.734362'/>：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}"> onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if> ><span><s:text name="idcardmakesure"></s:text></span></p>
-						<p><label> <c:if test="${lan==1}"><s:text name='passport'/></c:if><c:if test="${lan==0}"><s:text name='reg.jsp.reg.jsp.7501689'/></c:if>：</label><input type="text" name="gguserid" size="20" maxlength="18"><c:if test="${lan==0}"><span><s:text name="pleasecontact"></s:text></span></c:if><c:if test="${lan==1}"><span><s:text name="overplayer"></s:text></span></c:if></p>
+						<p> 
+						<c:if test="${lan==1}"><label><s:text name='passport'/>：</label><input id="idcard" type="text" name="gguserid" size="20" maxlength="18"><span><s:text name="Passport_information_same"></s:text></span></c:if>
+						<c:if test="${lan==0}"><label><s:text name='reg.jsp.reg.jsp.7501689'/>：</label><input id="passp" type="text" name="gguserid" size="20" maxlength="18"><span><s:text name="pleasecontact"></s:text></span></c:if>
+						</p>
 						<p class="bwky">
 						<label><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
 						<select style="width:220px;" id="loc_areaCode" name="areaCode" onChange="ChangeAreaCode(document.getElementById('loc_areaCode').options[document.getElementById('loc_areaCode').selectedIndex].value);">
-							   <s:iterator var="data" value="areaCodeList">
-									<option  value="${data.region_code}">${data.country_name}</option>
+							  	<c:if test="${lan==1}"> 
+							  	<s:iterator var="data" value="areaCodeList">
+									<c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
 								</s:iterator>
-								<option selected= "selected" value="86"><s:text name='china'/></option>
-							</select>
+								</c:if>
+								<c:if test="${lan==0}"> 
+								<s:iterator var="data" value="areaCodeList">
+									<option value="${data.region_code}">${data.country_name}</option>
+								</s:iterator>
+								
+								</c:if>
+								<c:if test="${lan==0}"> <option selected="selected" value="86">中国</option></c:if>
+						</select>
 						<label><input type="text" name="ggcall" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="11"></label>
 						</p>
-						<p><label>QQ：</label><input type="text" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10"></p>
+						<p>
+						<c:if test="${lan==1}"><label>Email：</label></c:if><c:if test="${lan==1}"><input type="text" id="qqid" name="ggqq" size="100" maxlength="50"></c:if>
+						<c:if test="${lan==0}"><label>QQ：</label></c:if><c:if test="${lan==0}"><input id="email" id="emailid" type="text" name="ggqq" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="10"></c:if></p>
 						<p><label><s:text name='reg.jsp.reg.jsp.25579282'/>：</label><input type="text"  name="upvip" size="20" value="${tag}"></p>
-						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
+						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1(${lan});"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
 					</div>
 				 </form>
 		</div>
