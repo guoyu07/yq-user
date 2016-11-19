@@ -15,7 +15,7 @@
 	<script src="/scripts/select2_locale_zh-CN.js"></script>
 	<script language="javascript" src="/js/ajax.js"></script>
 	<script language="javascript" src="scripts/myarea${lan}.js"></script>
-	<script src="/scripts/areacode${lan}.js"></script>
+	<script src="/scripts/areacode${SESSION_LOCALE}${lan}.js"></script>
 <script language="JavaScript">
 	function CheckIfEnglish(str) {
 		if (/[a-z]/.test(str) && /[0-9]/.test(str)) {
@@ -145,13 +145,35 @@
 						<select style="width:220px;" id="loc_areaCode" name="areaCode" onChange="ChangeAreaCode(document.getElementById('loc_areaCode').options[document.getElementById('loc_areaCode').selectedIndex].value);">
 							  	<c:if test="${lan==1}"> 
 							  	<s:iterator var="data" value="areaCodeList">
-									<c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
+							  	<c:choose>  
+									<c:when test="${SESSION_LOCALE=='en_US'}"> 
+										<c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.en_name}</option></c:if>
+					   				</c:when>
+					   				<c:when test="${SESSION_LOCALE=='zh_CN'}"> 
+					   				  <c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
+				   					</c:when>  
+									<c:otherwise>
+										<option value="${data.region_code}">${data.country_name}</option>
+					   				</c:otherwise> 
+				   				</c:choose>
+									
 								</s:iterator>
 								</c:if>
 								<c:if test="${lan==0}"> 
-								<s:iterator var="data" value="areaCodeList">
-									<option value="${data.region_code}">${data.country_name}</option>
-								</s:iterator>
+								
+									<s:iterator var="data" value="areaCodeList">
+										<c:choose>  
+										<c:when test="${SESSION_LOCALE=='en_US'}"> 
+											<c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.en_name}</option></c:if>
+						   				</c:when>
+						   				<c:when test="${SESSION_LOCALE=='zh_CN'}"> 
+						   				  <c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
+					   					</c:when>  
+										<c:otherwise>
+											<option value="${data.region_code}">${data.country_name}</option>
+						   				</c:otherwise> 
+					   					</c:choose>
+									</s:iterator>
 								
 								</c:if>
 								
