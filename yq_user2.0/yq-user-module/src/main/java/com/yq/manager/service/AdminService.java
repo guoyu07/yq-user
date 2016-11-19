@@ -429,9 +429,7 @@ public class AdminService {
 		}
 		
 		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
-			if(!userPropertyDao.updateUserAreaCodeByName(userName,areaCode)){
-				throw new ServiceException(10, "此国际编码不存在");
-			}
+			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
 		}
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){

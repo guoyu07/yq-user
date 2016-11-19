@@ -66,7 +66,7 @@ public class UserPropertyDao {
 	 * @return
 	 */
 	public boolean updateUserAreaCodeByName(String userName, int areaCode) {
-		String sql = "update "+table+" set region_code=? where  username=? ";//update user_property set region_code='100' where  username='william123'
+		String sql = "update "+table+" set region_code=? where  username=? ";
 		SqlParameter sqlparameter = new SqlParameter();
 		sqlparameter.setInt(areaCode);
 		sqlparameter.setString(userName);
@@ -81,7 +81,7 @@ public class UserPropertyDao {
 	 */
 	public boolean isHasUserpropertyByName(String userName){
 		
-		String sql = "select * from  "+table+" where username=?";
+		String sql = "select * from  "+table+" where username=?  limit 1 ";
 		SqlParameter sqlparameter = new SqlParameter();
 		sqlparameter.setString(userName);
 		if(null!=jdbc.get(sql, UserProperty.class, sqlparameter)){
