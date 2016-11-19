@@ -47,7 +47,7 @@ public class UserPropertyDao {
 	 * @return
 	 */
 	public UserProperty getPorpertyByName(String userName) {
-		String sql = "select * from  "+table+" where username=?";
+		String sql = "select * from  "+table+" where username=? limit 1 ";
 		SqlParameter sqlparameter = new SqlParameter();
 		sqlparameter.setString(userName);
 		userproperty = jdbc.get(sql, UserProperty.class, sqlparameter);
@@ -55,9 +55,8 @@ public class UserPropertyDao {
 			userproperty = new UserProperty();
 			userproperty.setRegion_code(86);
 			userproperty.setUsername(userName);
-			insertUserProperty(userproperty);
 		}
-		return jdbc.get(sql, UserProperty.class, sqlparameter);
+		return userproperty;
 	}
     
 	/**
