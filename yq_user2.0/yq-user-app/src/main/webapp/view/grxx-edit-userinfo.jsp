@@ -193,7 +193,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799409753'/>：</label><input type="text" name="card" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="19" value="${gcuser.card}" /></p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1010247606'/>：</label>
 							${interRegionCode.country_name}${gcuser.call}</p>
-							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</label>${gcuser.qq}</p>
+							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/> QQ/Email：</label>${gcuser.qq}</p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1768474821'/>：</label><span  style="width:600px; display: inline-block;margin-right:-600px;"><select name="provinceName" OnChange="ChangeProvince(document.getElementById('provinceName').options[document.getElementById('provinceName').selectedIndex].value);" id="provinceName">
                       		<option selected= "selected" value="${gcuser.addsheng}">${gcuser.addsheng}</option>
 							<s:iterator var="data" value="provinceList">
