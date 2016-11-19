@@ -105,20 +105,6 @@
 		return;
 	}
 	
-	/* function checkemail(){
-		  var temp = document.getElementById("email");
-	        //对电子邮件的验证
-	        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-	        if(!myreg.test(temp.value))
-	        {
-	        	 alert("<s:text name='Please.enter.email.address'/>!"); 
-	             document.getElementById("email").focus();
-	             return false;
-	        }
-	} */
-
-  
-	 
 </script>
 </head>
 <body>
@@ -163,7 +149,6 @@
 								</s:iterator>
 								</c:if>
 								<c:if test="${lan==0}"> 
-								<c:if test="${lan==0}"> <option selected="selected" value="86">中国</option></c:if>
 								<s:iterator var="data" value="areaCodeList">
 									<option value="${data.region_code}">${data.country_name}</option>
 								</s:iterator>
