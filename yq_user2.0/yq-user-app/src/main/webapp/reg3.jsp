@@ -228,13 +228,15 @@ function AmendCity(ProvinceID,CityID,AreaID)
 					<div class="fbox founbox3">
 						<p><label><s:text name='reg.jsp.reg.jsp.799485150'/>：</label>
 						<select id="loc_bank" style="width:350px;" name="ggbank"><!--  ONCHANGE="CHECKBANK(DOCUMENT.GETELEMENTBYID('LOC_BANK').OPTIONS[DOCUMENT.GETELEMENTBYID('LOC_BANK').SELECTEDINDEX].VALUE)" -->
+										<c:if test="${lan==0}">
 										<option value="<s:text name='reg.jsp.reg.jsp.-453899062'/>"><s:text name='reg.jsp.reg.jsp.-453899062'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.1781968004'/>"><s:text name='reg.jsp.reg.jsp.1781968004'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.691148048'/>"><s:text name='reg.jsp.reg.jsp.691148048'/></option>
 										<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option>
-										<c:if test="${lan!=0}">
+										</c:if>
+										<c:if test="${lan==1}">
 										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
-										<option value="<s:text name='alipay'/>"><s:text name='alipay'/></option>
+										<%-- <option value="<s:text name='alipay'/>"><s:text name='alipay'/></option> --%>
 										</c:if>
 						</select>
 					 	<p><label ><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label> <input id="gcard"  type="text" name="ggcard"  size="19" maxlength="20"></p><!-- value==value.replace(/[^\d]/g,'') -->
