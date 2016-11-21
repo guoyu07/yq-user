@@ -136,8 +136,8 @@
 					    <input type="hidden" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" value="${ggpa3}">
 						<p><label><s:text name='reg.jsp.reg.jsp.734362'/>：</label><input type="text" name="ggname" size="20" maxlength="20" <c:if test="${lan==0}"> onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"</c:if> ><span><s:text name="idcardmakesure"></s:text></span></p>
 						<p> 
-						<c:if test="${lan==1}"><label><s:text name='passport'/>：</label><input id="idcard" type="text" name="gguserid" size="20" maxlength="18"><span><s:text name="Passport_information_same"></s:text></span></c:if>
-						<c:if test="${lan==0}"><label><s:text name='reg.jsp.reg.jsp.7501689'/>：</label><input id="passp" type="text" name="gguserid" size="20" maxlength="18"><span><s:text name="pleasecontact"></s:text></span></c:if>
+						<c:if test="${lan==1}"><label><s:text name='passport'/>：</label><input id="passp" type="text" name="gguserid" size="20" maxlength="15"><span><s:text name="Passport_information_same"></s:text></span></c:if>
+						<c:if test="${lan==0}"><label><s:text name='reg.jsp.reg.jsp.7501689'/>：</label><input id="idcard" type="text" name="gguserid" size="20" maxlength="18"><span><s:text name="pleasecontact"></s:text></span></c:if>
 						</p>
 						<p class="bwky">
 						<label><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
