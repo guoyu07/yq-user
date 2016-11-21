@@ -1,7 +1,7 @@
 function showLocation(province , city , town , bank , areacode) {
 	
 	var loc	= new Location();
-	var title	= ['=请选择省份=' , '=请选择城市=' , '=请选择地区=','=请选择银行=','=Select area='];
+	var title	= ['=请选择省份=' , '=请选择城市=' , '=请选择地区=','=请选择银行=','China'];
 	$.each(title , function(k , v) {
 		title[k]	= '<option value="" selected="selected">'+v+'</option>';
 	})

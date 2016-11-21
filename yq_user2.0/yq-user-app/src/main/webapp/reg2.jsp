@@ -72,10 +72,10 @@
 			  if (Form.gguserid.value.length<18) {      alert("<s:text name='reg.jsp.reg.jsp.1683299853'/>!"); Form.gguserid.focus();     return false;    } 
 			  if (Form.gguserid.value.length>18) {      alert("<s:text name='reg.jsp.reg.jsp.1428610724'/>!"); Form.gguserid.focus();     return false;    }    
 			  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
-			  var tmp="中国";
-			  if(tmp==$("#loc_areaCode").find("option:selected").text()){
+			  if("中国"==$("#loc_areaCode").find("option:selected").text()||"China"==$("#loc_areaCode").find("option:selected").text()){
 				  Form.areaCode.value=86;
 			  }
+			  
 		  }
 		  if (Form.ggcall.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>!");  Form.ggcall.focus();      return false;    }
 		  if(lan==1){
@@ -93,12 +93,11 @@
 			  if (Form.ggcall.value.length<5) {      alert("<s:text name='call415194682'/>!"); Form.ggcall.focus();     return false;    } 
 			  if (Form.ggcall.value.length>15) {      alert("<s:text name='call669883811'/>!"); Form.ggcall.focus();     return false;    }
 			  if (Form.gguserid.value.length<7) {      alert("<s:text name='passport1683299853'/>!"); Form.gguserid.focus();     return false;    } 
-			  if (Form.gguserid.value.length>18) {      alert("<s:text name='passport1428610724'/>!"); Form.gguserid.focus();     return false;    }
+			  if (Form.gguserid.value.length>15) {      alert("<s:text name='passport1428610724'/>!"); Form.gguserid.focus();     return false;    }
 		  }
 		  
-		  if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");     return false;    }
-		  if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
-		  if (Form.areaCode.value==0) {      alert("<s:text name='emptyinternationalareacode'/>!");      return ;    }
+		 if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");     return false;    } 
+		 if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
 		//		+ Form.ggpa2.value + "ggpa3=" + Form.ggpa3.value;
 		Form.submit();
@@ -153,7 +152,7 @@
 					   				  <c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
 				   					</c:when>  
 									<c:otherwise>
-										<option value="${data.region_code}">${data.country_name}</option>
+									  <c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
 					   				</c:otherwise> 
 				   				</c:choose>
 									
@@ -164,10 +163,10 @@
 									<s:iterator var="data" value="areaCodeList">
 										<c:choose>  
 										<c:when test="${SESSION_LOCALE=='en_US'}"> 
-											<c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.en_name}</option></c:if>
+											<option value="${data.region_code}">${data.en_name}</option>
 						   				</c:when>
 						   				<c:when test="${SESSION_LOCALE=='zh_CN'}"> 
-						   				  <c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
+						   				  <option value="${data.region_code}">${data.country_name}</option>
 					   					</c:when>  
 										<c:otherwise>
 											<option value="${data.region_code}">${data.country_name}</option>

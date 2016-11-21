@@ -5,7 +5,8 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='reg.jsp.reg.jsp.-834832388'/>！！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='reg3.jsp.reg3.jsp.912511120'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='notinternationalareacode'/>');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='emptyinternationalareacode'/>！');history.go(-1);history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='emptyinternationalareacode'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='Overseasnotchina'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

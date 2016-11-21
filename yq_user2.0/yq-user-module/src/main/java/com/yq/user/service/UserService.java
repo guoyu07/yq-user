@@ -360,7 +360,9 @@ public class UserService {
 		if(areaCode==0||!interRegionCodeDao.isHasByRegioncode(areaCode)){
 			return 8;
 		}
-		
+		if(lan==1&&areaCode==86){
+			return 10;//海外注册只能是非中国号码
+		}
 		
 		return 0;
     }
@@ -417,6 +419,10 @@ public class UserService {
 				return 6;//所在地区不全！请重新选择！
 			}
 		}else if(lan==1){
+			if(areaCode==86){
+				return 10;//海外注册只能是非中国手机号码
+			}
+			
 			provinceName="国外";
 			cityName="其他";
 			areaName="其他";
