@@ -49,7 +49,7 @@ function checkdate()  {
 	$.post("/sms?op=11&toUserName="+Form.user.value, data, function(response) {
 		$("#btn").removeAttr("disabled");
 		if (response.erroCodeNum!=0) { alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1886666017'/>"); return false; }
-		settime($("#btn"));
+		settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 		alert("<s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.1886721436'/>");
 	});
 	return false;
@@ -117,7 +117,7 @@ function checkdate1()  {
 					<div class="content-title">
 						<span>${gcuser.name}</span>
 					</div>
-					<div class="content-form">				 
+					<div class="content-form" style="overflow-x: auto; height: 592px;">				 
 						<p class="f-tk c-g"><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.871323142'/>：<span class="c-r">${gcuser.name}</span></p>
 						<p class="z-b" style="padding-left:70px;"><s:text name='viewgrxx-shopmanager.jsp.grxx-shopmanager.jsp.-535714675'/>：：<b class="c-r">${gcuser.username}</b></p>
 						<form class="form form4 e6b" method="post" action="" id="Form" name="Form" onSubmit="return checkdate1()">
@@ -140,5 +140,5 @@ function checkdate1()  {
 </body>
 </html>
 <script type="text/javascript">
-btnStatus($("#btn"));
+btnStatus($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 </script>

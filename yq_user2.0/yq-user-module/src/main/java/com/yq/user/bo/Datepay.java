@@ -29,7 +29,7 @@ public class Datepay{
 	private int newbz;
 	private int txbz;
 	private double ration;
-	
+	private int origintype;		//途径
 	
 	public void setUsername(String username){
 	this.username=username;
@@ -151,5 +151,12 @@ public class Datepay{
 	public void setRation(double ration) {
 		this.ration = ration;
 	}
+	public int getOrigintype() {
+		return origintype;
+	}
+	public void setOrigintype(int origintype) {
+		this.origintype = origintype;
+	}
+	
 }
 

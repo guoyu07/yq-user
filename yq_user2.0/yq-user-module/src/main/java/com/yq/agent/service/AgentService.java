@@ -295,7 +295,7 @@ public class AgentService {
 			throw new ServiceException(7, "二级密码错误！");
 		}
 		//支付指定的yb
-		boolean result = userService.changeYb(payUserName, -agentOrder.getAmount(),orderId+"-"+agentOrder.getProductDesc(), YbChangeType.AGENT_REDUCE, null, 0);
+		boolean result = userService.changeYb(payUserName, -agentOrder.getAmount(),orderId+"-"+agentOrder.getProductDesc(), YbChangeType.AGENT_REDUCE, null, 0, YbChangeType.APPUSE);
 		if(result){
 			if(!agentOrderDao.updateStatusToSuccess(orderId, payUserName.trim(), new Date())){
 				throw new ServiceException(4, "订单不存在或该订单已失效！");

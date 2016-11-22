@@ -511,6 +511,7 @@ public class AdminService {
 			datepay.setSyjz(amount);
 			datepay.setPay(gcuser.getPay());
 			datepay.setJydb(gcuser.getJydb());
+			datepay.setOrigintype(YbChangeType.SYSTEM_CHONZHI);
 			logService.addDatePay(datepay);
 		}
 		if(!result){
@@ -1130,6 +1131,7 @@ public class AdminService {
 			datepay.setJydb(gcuser.getJydb());
 			datepay.setBz(fcxt.getPayadd());
 			datepay.setNewbz(1);
+			datepay.setOrigintype(YbChangeType.BALANCE_AWARD);
 			logService.addDatePay(datepay);
 			
 			if(gcuser.getCxt()<3&&(gcuser.getCxdate()!=null&&gcuser.getCxdate().getTime()>System.currentTimeMillis())){
@@ -1142,6 +1144,7 @@ public class AdminService {
 				datepay2.setJydb(gcuser.getJydb());
 				datepay2.setBz(fcxt.getPayadd());
 				datepay2.setNewbz(1);
+				datepay.setOrigintype(YbChangeType.BALANCE_AWARD_REDUCE);
 				logService.addDatePay(datepay2);
 			}
 			
@@ -1157,6 +1160,7 @@ public class AdminService {
 				datepay3.setSyjz(addNum);
 				datepay3.setJydb(upUser.getJydb());
 				datepay3.setNewbz(8);
+				datepay.setOrigintype(YbChangeType.COUNSELING_AWARD);
 				logService.addDatePay(datepay3);
 				
 				if(upUser.getCxt()<2&&(gcuser.getCxdate()!=null&&upUser.getCxdate().getTime()>System.currentTimeMillis())){
@@ -1169,6 +1173,7 @@ public class AdminService {
 					datepay4.setJydb(upUser.getJydb());
 					datepay4.setBz(fcxt.getPayadd());
 					datepay4.setNewbz(8);
+					datepay.setOrigintype(YbChangeType.COUNSELING_AWARD_REDUCE);
 					logService.addDatePay(datepay4);
 				}
 			}
@@ -1350,7 +1355,7 @@ public class AdminService {
 			}
 			gcuserDao.updateCjtj(toUserName, amount);
 			
-			if(!userService.changeYb(toUserName, -9*amount, "转为报单币", 0, null,0)){
+			if(!userService.changeYb(toUserName, -9*amount, "转为报单币", 0, null,0,YbChangeType.CUSTOMSERVICERECHARGETOUSER)){
 				throw new ServiceException(3, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 			}
 			userService.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效");
@@ -1504,6 +1509,7 @@ public class AdminService {
 			datePay.setRegid("系统");
 			datePay.setNewbz(0);
 			datePay.setAbdate(new Date());
+			datePay.setOrigintype(YbChangeType.SYSTEM_BUTIE);
 			logService.addDatePay(datePay);
 		}
 	}
@@ -3098,6 +3104,7 @@ public class AdminService {
 			datePay.setNewbz(YbChangeType.ADMIN_ORDER_CANCEL);
 			datePay.setTxbz(1); 
 			datePay.setAbdate(new Date());
+			datePay.setOrigintype(YbChangeType.SYSTEM_TIXIANTUIHUI);
 			logService.addDatePay(datePay);
 			
 			if(!txPayDao.updateByPayid(payid, 0, new Date(), "已经转账", new Date(), resionMassage, ip)){
