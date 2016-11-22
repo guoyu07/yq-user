@@ -145,7 +145,7 @@
 				<p><input type="text" name="validcode" class="key" /><span class="nbkey"><img src="/VerifyCode.jsp" title="<s:text name='Clickrefresh'/>" onclick="this.src='/VerifyCode.jsp?'+Math.random()"></span></p>
 				<!-- <input type="checkbox" /><span>记住账号</span>--> <p class="pab">  <a href="#" onClick="checkReg();"><s:text name='Forget_password'/></a></p><!-- onClick="forgetpasswd();" --> 
 				<p><button class="log" onClick="logins();"></button></p>
-				<label><a class="restyle" href="/reg"><s:text  name='reg.jsp.reg.jsp.-1179328136'/></a></label><label><a style="position: absolute;top: 10px;left: 570px;isplay: inline-block;width: 280px;font-size: 18px;text-decoration: underline;"  href="/reg?lan=1"><s:text  name='Overseas.passport.registration'/></a></label>
+				<label><a class="restyle" href="/reg"><s:text  name='reg.jsp.reg.jsp.-1179328136'/></a></label><label><a style="position: absolute;top: 10px;left: 550px;isplay: inline-block;width: 280px;font-size: 18px;text-decoration: underline;"  href="/reg?lan=1"><s:text  name='Overseas.passport.registration'/></a></label>
 			</form>
 		</div>
 		<div class="d-tips">
