@@ -13,6 +13,7 @@ public class ALDAdminActionSupport extends BaseActionSupport {
 		return super.getCode();
 	}
 
+	private String redirectBaseUrl;
 	public void setErroCodeNum(int erroCodeNum) {
 		super.setCode(erroCodeNum);
 	}
@@ -25,5 +26,11 @@ public class ALDAdminActionSupport extends BaseActionSupport {
 		super.setDesc(erroDescrip);
 	}
 
-	
+	public String getRedirectBaseUrl() {
+		return redirectBaseUrl;
+	}
+
+	public void setRedirectBaseUrl(String redirectBaseUrl) {
+		this.redirectBaseUrl = redirectBaseUrl;
+	}
 }

@@ -2,6 +2,7 @@ package com.yq.common.interceptor;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+import com.sr178.game.framework.config.ConfigLoader;
 import com.yq.common.action.ALDAdminActionSupport;
 
 public class NoLoginInterceptor extends AbstractInterceptor {
@@ -21,6 +22,7 @@ public class NoLoginInterceptor extends AbstractInterceptor {
 			if(aldAction.getErrorResult()==null){
 				aldAction.setErrorResult("success");
 			}
+			aldAction.setRedirectBaseUrl(ConfigLoader.getStringValue("redirect_base_url"));
 			return invocation.invoke();
 		}else{
 			//不支持这种方式 直接中断

@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
@@ -45,6 +46,7 @@ public class UserInterceptor extends AbstractInterceptor {
 				aldAction = (ALDAdminActionSupport) obj;
 				aldAction.setUserSession(userSession);
 				aldAction.setUserName(userName);
+				aldAction.setRedirectBaseUrl(ConfigLoader.getStringValue("redirect_base_url"));
 			} else {
 				String className = obj.getClass().getCanonicalName();
 				throw new RuntimeException("ACTION继承的类非ALDAdminActionSupport"+className);

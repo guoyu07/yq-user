@@ -28,7 +28,7 @@
 			<result name="success">view/zhgl-tmzhlist.jsp</result>
 		</action>
 		<action name="relogin" class="com.yq.app.user.action.ReLoginAction">
-			<result name="success" type="redirect">/manager</result>
+			<result name="success" type="redirect">${redirectBaseUrl}/manager</result>
 		</action>
 		<action name="datepay" class="com.yq.app.user.action.DatePayAction">
 			<result name="success">view/yblc-details.jsp</result>
@@ -99,7 +99,7 @@
 		</action>
 		<action name="bdreg" class="com.yq.app.user.action.BdRegAction">
 			<result name="success">view/yjcx-choose-empty-sure.jsp</result>
-			<result name="sgks01" type="redirect">sgks01?myup=${up}&amp;lb=1</result>
+			<result name="sgks01" type="redirect">${redirectBaseUrl}/sgks01?myup=${up}&amp;lb=1</result>
 		</action>
 
 		<action name="vipup" class="com.yq.app.user.action.VipUpAction">
@@ -115,12 +115,12 @@
 
 		<action name="bdbzz" class="com.yq.app.user.action.BdbZzAction" >
 			<result name="success">view/yjcx-bdb-zz.jsp</result>
-			<result name="bdbdate" type="redirect">bdbdate</result>
+			<result name="bdbdate" type="redirect">${redirectBaseUrl}/bdbdate</result>
 		</action>
 		
 		<action name="bdbcz" class="com.yq.app.user.action.BdbZzAction" method="bdbcz">
 			<result name="success">view/yjcx-bdb-cz.jsp</result>
-			<result name="bdbdate" type="redirect">bdbdate</result>
+			<result name="bdbdate" type="redirect">${redirectBaseUrl}/bdbdate</result>
 		</action>
 
 		<action name="tgdown" class="com.yq.app.user.action.TgdownAction">
@@ -391,10 +391,10 @@
 		</action>
 		<action name="adminlogin" class="com.yq.app.user.action.ManagerLogin">
 			<result name="success" type="redirect">
-				/manager
+				${redirectBaseUrl}/manager
 			</result>
 			<result name="upuser" type="redirect">
-				/updateuser
+				${redirectBaseUrl}/updateuser
 			</result>
 		</action>
 		<action name="reg" class="com.yq.app.user.action.RegAction">
@@ -451,11 +451,11 @@
 		<global-results>
 			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
 			<result name="nologin" type="redirect">
-				/index.jsp
+				${redirectBaseUrl}/index.jsp
 			</result>
 			<!-- 更新资料界面 -->
 			<result name="upuserg" type="redirect">
-				/updateuser
+				${redirectBaseUrl}/updateuser
 			</result>
 
 			<result name="glober_alert">
