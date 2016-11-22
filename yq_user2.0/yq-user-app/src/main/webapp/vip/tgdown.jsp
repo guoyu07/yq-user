@@ -5,7 +5,7 @@
 </head>
 
 <div align="center">
-  <p align="left"><s:text name="viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253"></s:text>QQ：<font color="#FF0000">${up.qq}</font><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${up.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${up.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font color="#FF0000"></font> <s:text name='phone'/>：<font color="#FF0000">${up.call}</font><font color="#0000FF"> ${upName}<s:text name='mr_ms'/></font></p>
+  <p align="left"><s:text name="viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253"></s:text>QQ：<font color="#FF0000">${up.qq}</font><a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=${up.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${up.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font color="#FF0000"></font> <s:text name='phone'/>：<font color="#FF0000">${up.call}</font><font color="#0000FF"> ${upName}<s:text name='mr_ms'/></font></p>
   <table border="1" cellspacing="0" width="100%" style="border-collapse: collapse" bordercolor="#006699" cellpadding="0" height="108">
     <tr>
       <td width="100%" height="25" background="images/admin_bg_1.gif"> 
@@ -28,7 +28,7 @@
           <s:iterator var="data" value="dataList">
           <tr> 
           <td height="23" width="148" align="center"><p><font color="#000000" size="2">${data.username}</font></td>
-          <td valign="middle" align="left" width="168"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font size="2" color="#000000">${data.qq}</font></td>
+          <td valign="middle" align="left" width="168"><a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font size="2" color="#000000">${data.qq}</font></td>
           <td valign="middle" align="center" width="202"><font color="#000000" size="2">${data.regtime}</font></td>
           <td valign="middle" align="center" width="116"><b><font color="#FF0000" size="2">${data.cjtj}</font></b></td>
           <td valign="middle" align="center" width="217"><font color="#000000" size="2">${data.gmdate}</font></td>

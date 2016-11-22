@@ -27,7 +27,7 @@
 						<span><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.777812136'/></span>
 					</div>
 					<div class="a-kh">
-						<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253'/> QQ:${up.qq} <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${up.qq}&site=qq&menu=yes"> <s:text name='viewservice.jsp.service.jsp.488997268'/></a>　<s:text name="phone"></s:text>：${up.call}  ${upName}<s:text name="mr_ms"></s:text>
+						<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-1775315253'/> QQ:${up.qq} <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=${up.qq}&site=qq&menu=yes"> <s:text name='viewservice.jsp.service.jsp.488997268'/></a>　<s:text name="phone"></s:text>：${up.call}  ${upName}<s:text name="mr_ms"></s:text>
 					</div>
 					<div class="content-table">
 						<table>
@@ -46,7 +46,7 @@
 								<td>
 								<c:choose>
 									<c:when test="${fn:contains(data.qq,'@')!=true}">
-											<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font size="2" color="#000000">${data.qq}</font>
+											<a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=${data.qq}&site=qq&menu=yes"><font size="2"><img border="0" src="http://wpa.qq.com/pa?p=2:${data.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></font></a><font size="2" color="#000000">${data.qq}</font>
 									</c:when>
 									<c:otherwise>
 											<a target="_blank" href="mailto:${data.qq}"><font size="2"><img border="0" src="image/eamil.png" alt="<s:text name='sendemail'/>" title="<s:text name='sendemail'/>"></font></a><font size="2" color="#000000">${data.qq}</font>

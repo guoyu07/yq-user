@@ -64,7 +64,7 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<td align="right" width="32%"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：</td>
-			<td width="66%"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a>${gcuserup.qq}</td>
+			<td width="66%"><a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a>${gcuserup.qq}</td>
 		</tr>
 		<tr>
 			<td align="right" width="32%"><s:text name='vipvipup.jsp.vipup.jsp.1010407087'/>：</td>

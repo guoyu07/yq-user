@@ -29,7 +29,7 @@
 						<div class="service">
 						<p><s:text name='viewservice.jsp.service.jsp.858879560'/>：	${upuname}***</p>
 						<p><s:text name='viewservice.jsp.service.jsp.1003555'/>：	${gcuserup.vipuser}</p>
-						<p><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a>${gcuserup.qq}</p>
+						<p><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ：	<a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="<s:text name='viewservice.jsp.service.jsp.488997268'/>" title="<s:text name='viewservice.jsp.service.jsp.488997268'/>"></a>${gcuserup.qq}</p>
 						<p><s:text name='viewservice.jsp.service.jsp.1010407087'/>：	${gcuserup.call}</p>
 						<c:if test="${not empty gcuserup.vipgh}">
 						  <p><s:text name='reg.jsp.reg.jsp.-453899062'/>:${gcuserup.vipgh}</p>
