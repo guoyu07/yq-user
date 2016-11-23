@@ -1,6 +1,7 @@
 package com.yq.common.utils;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,7 +11,22 @@ import java.util.List;
 import java.util.Map;
 
 public class DateUtils {
+    public final static String 			 YYYY_MM_DD_HH_MM_SS_FM = "yyyy-MM-dd HH:mm:ss";
+    
+  
+    // 一天=86400000(24*60*60*1000)毫秒(MSEL)millisecond
+    public final static long             DAY_MSELS              = 86400000;
+    public final static String			 YYYY_MM_DD_SDF         = "yyyy-MM-dd";
+    
+    // 存放不同的日期模版格式的sdf的map
+    private static Map<String, ThreadLocal<SimpleDateFormat>> sdfMap = new HashMap<String, ThreadLocal<SimpleDateFormat>>();
 
+    
+    /** 锁对象 */
+    private static final Object lockObj = new Object();
+    
+    
+    
 	/**
 	 * 获取SimpleDateFormat
 	 * @param parttern 日期格式
@@ -651,4 +667,110 @@ public class DateUtils {
 		diff = diff / (24 * 60 * 60 * 1000);
 		return (int) diff;
 	}
+	
+	 @SuppressWarnings("unchecked")
+	public final static java.util.List separateDateStr(String startDate, String endDate, long step, String pattern) {
+	        java.util.List rtn = separateDate(startDate, endDate, step);
+	        int size = rtn.size();
+	        for (int i = 0; i < size; i++) {
+	            rtn.set(i, getSdf(pattern).format(rtn.get(i)));
+	        }
+	        return rtn;
+	 }
+	 
+	 public final static java.util.List<Date> separateDate(String startDate, String endDate, long step) {
+	        Date d1 = parse(startDate);
+	        Date d2 = parse(endDate);
+	        long start = d1.getTime();
+	        long end = d2.getTime();
+	        if (start > end) {
+	            throw new IllegalArgumentException("开始日期（" + startDate + "）晚于结束日期（" + endDate + "）");
+	        }
+	        java.util.List<Date> rtn = new java.util.ArrayList<Date>();
+	        long tmp = start;
+	        while (end > tmp + step) {
+	            rtn.add(new Date(tmp));
+	            tmp += step;
+	        }
+	        rtn.add(new Date(tmp));
+	        return rtn;
+	    }
+	 
+	 /**
+	     * 返回一个ThreadLocal的sdf, 每个线程只会new一次sdf
+	     * @author jian_xie
+	     */
+	    private static SimpleDateFormat getSdf(final String pattern){
+	    	ThreadLocal<SimpleDateFormat> t1 = sdfMap.get(pattern);
+	    	// 此处的双重判断和同步是为了防止sdfmap这个单例被多次重复的sdf
+	    	if(t1 == null){
+	    		synchronized (lockObj) {
+					t1 = sdfMap.get(pattern);
+					if(t1 == null){
+						t1 = new ThreadLocal<SimpleDateFormat>(){
+							@Override
+							protected SimpleDateFormat initialValue() {
+								return new SimpleDateFormat(pattern);
+							}						
+						};
+						sdfMap.put(pattern, t1);
+					}
+				}
+	    	}
+	    	return t1.get();
+	    }
+	    
+	    /**
+	     * 将一个字符串格式化为一个java.util.Date对象
+	     * 
+	     * @param obj   Object
+	     * @return      Date
+	     */
+	    public static Date parse(Object obj) {
+	        try {
+	            String dateString;
+	            if (obj == null || (dateString = obj.toString().trim()).equals("")) {
+	                return null;
+	            }
+	            if (dateString.length() <= 10) {
+	                dateString += " 00:00:00";
+	            }
+	            return getSdf(YYYY_MM_DD_HH_MM_SS_FM).parse(dateString);
+	        } catch (ParseException ex) {
+	            ex.printStackTrace();
+	            return null;
+	        }
+	    }
+	    
+	    
+	    public static void main(String[] args) {
+	    	List<String> datelist = DateUtils.separateDateStr("2016-11-23", "2016-12-26", DateUtils.DAY_MSELS, DateUtils.YYYY_MM_DD_SDF);
+	    	for (int i = 0; i < datelist.size(); i++) {
+	    		System.out.println("datelist="+datelist.get(i));
+			}
+	    	
+	    }
+	    
+	    
+	    /**
+	     * 比较日期字符串大小 如果d1>d2返回1 如果d1=d2返回0 如果d1<d2返回-1
+	     * 
+	     * @param d1    日期一
+	     * @param d2    日期二
+	     */
+	    public static int compareDateStr(String d1, String d2) {
+	        Date date1 = parse(d1);
+	        Date date2 = parse(d2);
+	        return new Long(date1.getTime()).compareTo(new Long(date2.getTime()));
+	    }
+	    
+	    /**
+	     * 比较日期大小 如果d1>d2返回1 如果d1=d2返回0 如果d1<d2返回-1
+	     * 
+	     * @param d1    日期一
+	     * @param d2    日期二
+	     */
+	    public static int compareDate(Date date1, Date date2) {
+	        return new Long(date1.getTime()).compareTo(new Long(date2.getTime()));
+	    }
 }

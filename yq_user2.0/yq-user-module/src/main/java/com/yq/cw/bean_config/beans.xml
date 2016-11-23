@@ -15,4 +15,6 @@
        <bean id="cwUserDao" class="com.yq.cw.dao.CwUserDao"></bean>
        
        <bean id="vipDownTempDao" class="com.yq.cw.dao.VipDownTempDao"></bean>
+       
+       <bean id="confYbchangetype" class="com.yq.cw.dao.ConfYbChangeTypeDao"></bean>
 </beans>

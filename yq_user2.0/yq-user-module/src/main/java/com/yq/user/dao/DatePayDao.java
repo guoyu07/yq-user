@@ -11,6 +11,7 @@ import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.cw.bean.DatepayCw;
 import com.yq.cw.bean.DatepayForDc;
+import com.yq.cw.bo.ConfYbChangeType;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
 
@@ -337,6 +338,46 @@ public class DatePayDao {
 	public boolean updateRecordByQlid(int id){
 		String sql = "update "+table+" set regid=CONCAT(regid,'-已重置'),txbz=0 where id=? and txbz=1";
 		return jdbc.update(sql, SqlParameter.Instance().withInt(id))>0;
+	}
+
+	public List<DatepayCw> getListByVipUserNameAndDate(String searchUserName, String startTime, String endTime) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from "+table+" where username = ?");
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(searchUserName);
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			sql.append(" and abdate between ? and ?");
+			sqlParameter.setString(startTime);
+			sqlParameter.setString(endTime);
+		}
+		sql.append(" order by id asc");
+		return this.jdbc.getList(sql.toString(), DatepayCw.class, sqlParameter);
+	}
+
+	public Double getSumSyjz(String searchUserName, String startDate, String endDate, ConfYbChangeType origintype) {
+		String sql = "select sum(syjz) from "+table+" where username = ? and origintype = ? ";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(searchUserName);
+		sqlParameter.setInt(origintype.getOrigintype());
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		return jdbc.getDouble(sql, sqlParameter);
+	}
+
+	public Double getSumjc(String searchUserName, String startDate, String endDate, ConfYbChangeType origintype) {
+		String sql = "select sum(jc) from "+table+" where username = ? and origintype = ? ";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(searchUserName);
+		sqlParameter.setInt(origintype.getOrigintype());
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql = sql +" and abdate between ? and ?";
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		return jdbc.getDouble(sql, sqlParameter);
 	}
 	
 }

@@ -24,10 +24,6 @@ public class YbChangeType {
 	public static final int ADMIN_ORDER_CANCEL 	= 2007;		//管理员撤销获得
 	
 	public static final int ADMIN_ORDER_RESET 	= 2008;		//管理员重置订单
-	
-	
-	
-
 
 	/**
 	 * 系统补贴
@@ -216,12 +212,12 @@ public class YbChangeType {
 
 
 	/**
-	 * 账户商家ZXZ888获得
+	 * 购物卖家手续费
 	 * */
 	public static final int MALL_ZXZ888 = 133;
 	
 	/**
-	 * 账户商家ZXZ888A获得
+	 * 购物临时存放
 	 * */
 	public static final int MALL_ZXZ888A = 134;
 

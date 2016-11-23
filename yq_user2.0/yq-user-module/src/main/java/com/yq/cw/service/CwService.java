@@ -1,5 +1,6 @@
 package com.yq.cw.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -10,19 +11,26 @@ import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
+import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
+import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.module.web.session.Session;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
 import com.yq.cw.bean.DatepayCw;
 import com.yq.cw.bean.DatepayForDc;
+import com.yq.cw.bean.DayOfYb;
+import com.yq.cw.bean.SearchDayOfYb;
 import com.yq.cw.bean.StatBean;
 import com.yq.cw.bean.VipCjbLogBean;
 import com.yq.cw.bean.VipCjglForDc;
 import com.yq.cw.bean.VipSearchLogBean;
+import com.yq.cw.bo.ConfYbChangeType;
 import com.yq.cw.bo.CwUser;
 import com.yq.cw.bo.VipDownTemp;
+import com.yq.cw.dao.ConfYbChangeTypeDao;
 import com.yq.cw.dao.CwUserDao;
 import com.yq.cw.dao.VipDownTempDao;
 import com.yq.manager.service.AdminService;
@@ -35,6 +43,7 @@ import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.VipcjglDao;
 import com.yq.user.service.LogService;
+import com.yq.user.service.UserService;
 
 public class CwService {
 	
@@ -57,6 +66,9 @@ public class CwService {
   	private SgxtDao sgxtDao;
   	@Autowired
   	private VipDownTempDao vipDownTempDao;
+  	@Autowired
+  	private ConfYbChangeTypeDao confYbChangeTypeDao;
+  	
   	
   	private Cache<String,List<String>> downVipList = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
@@ -371,6 +383,81 @@ public class CwService {
 	 */
 	public List<VipDownTemp> getDownVipList(String userName){
 		return vipDownTempDao.getDownVipList(userName);
+	}
+	
+	
+	public SearchDayOfYb getSearchDayOfYb(String searchUserName, String startTime, String endTime) {
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+	    Gcuser gcuser = userService.getUserByUserName(searchUserName);
+	   
+	    if(Strings.isNullOrEmpty(startTime)||Strings.isNullOrEmpty(endTime)){
+	    	throw new ServiceException(4,"开始时间或结束时间不能为空！");
+	    }
+	    if(gcuser==null){
+			throw new ServiceException(1,"玩家不存在！");
+		}
+		if(DateUtils.compareDateStr(startTime,endTime)==1){
+			throw new ServiceException(2,"结束时间要大于开始时间！");
+		}
+		if(searchUserName==null){
+			throw new ServiceException(3,"玩家不能为空！");
+		}
+		
+		SearchDayOfYb result = new SearchDayOfYb();
+		Vipcjgl vipcjgl =  vipcjglDao.getOneBeforeTime(searchUserName, endTime);
+		
+		//期初结余
+		if(vipcjgl!=null){
+			result.setStartNum(vipcjgl.getSycjb());
+		}
+		result.setDayofybList(getDayOfYbList(searchUserName, startTime, endTime));
+		return result;
+	}
+	
+	
+	/**
+	 * 得到玩家一币日志列表
+	 * @param searchUserName
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<DayOfYb> getDayOfYbList(String searchUserName, String startTime, String endTime) {
+		
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+	    Gcuser gcuser = userService.getUserByUserName(searchUserName);
+		
+		 if(Strings.isNullOrEmpty(startTime)||Strings.isNullOrEmpty(endTime)){
+		    	throw new ServiceException(4,"开始时间或结束时间不能为空！");
+		    }
+		    if(gcuser==null){
+				throw new ServiceException(1,"玩家不存在！");
+			}
+			if(DateUtils.compareDateStr(startTime,endTime)==1){
+				throw new ServiceException(2,"结束时间要大于开始时间！");
+			}
+			if(searchUserName==null){
+				throw new ServiceException(3,"玩家不能为空！");
+			}
+		
+		List<ConfYbChangeType> origintypeList=confYbChangeTypeDao.getAllList();
+		List<String> datelist = DateUtils.separateDateStr(startTime, endTime, DateUtils.DAY_MSELS, DateUtils.YYYY_MM_DD_SDF);
+		List<DayOfYb> dayOfYbList = new ArrayList();
+		DayOfYb dayofyb= null;
+		for (int i = 0; i < datelist.size(); i++) {
+			String today = datelist.get(i);
+			String startDate =today + " 00:00:00";
+			String endDate = today + " 23:59:59";
+			for (ConfYbChangeType origintype : origintypeList) {
+				dayofyb= new DayOfYb();
+				dayofyb.setDate(today);
+				dayofyb.setOrigin(origintype.getOrigin());
+				dayofyb.setIn(datePayDao.getSumSyjz(searchUserName, startDate, endDate,origintype));
+				dayofyb.setOut(datePayDao.getSumjc(searchUserName, startDate, endDate,origintype));
+				dayOfYbList.add(dayofyb);
+			}
+		}
+		return dayOfYbList;
 	}
 	
 }
