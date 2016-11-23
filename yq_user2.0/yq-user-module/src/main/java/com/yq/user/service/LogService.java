@@ -284,4 +284,9 @@ public class LogService {
 		return sysBiLogDao.getList(zuser, startTime, endTime);
 	}
 	
+	public List<DatepayCw> getCwDatePayLisByVipUserNameAndDate(String searchUserName, String startTime,String endTime) {
+		return datePayDao.getListByVipUserNameAndDate(searchUserName, startTime, endTime);
+		
+	}
+	
 }

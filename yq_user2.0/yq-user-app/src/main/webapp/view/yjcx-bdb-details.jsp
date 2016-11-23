@@ -25,7 +25,7 @@
 				<div class="content-box">
 					<div class="content-title">
 						<span><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1143349315'/></span>
-						<p class="r-link"><c:if test="${type==0}">转账日志</c:if><c:if test="${type!=0}"><a href="bdbdate?type=0">转账日志</a></c:if>|<c:if test="${type==1}">报单日志</c:if><c:if test="${type!=1}"><a href="bdbdate?type=1">报单日志</a></c:if></p>
+						<p class="r-link"><c:if test="${type==0}"><s:text name='Transfer_log'/></c:if><c:if test="${type!=0}"><a href="bdbdate?type=0"><s:text name='Transfer_log'/></a></c:if>|<c:if test="${type==1}"><s:text name='declaration_coin_log'/></c:if><c:if test="${type!=1}"><a href="bdbdate?type=1"><s:text name='declaration_coin_log'/></a></c:if></p>
 					</div>
 					<div class="content-table">
 						<table>
