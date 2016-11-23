@@ -50,6 +50,7 @@ public class CwService {
   	private Cache<String,Session> cwUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
 
   	private static final String ADMIN = "cwadmin";
+  	private static final String originTypeKey="originType_Key";
   	@Autowired
   	private CwUserDao cwUserDao;
   	@Autowired
@@ -72,6 +73,10 @@ public class CwService {
   	
   	private Cache<String,List<String>> downVipList = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
+  	private Cache<String,List<ConfYbChangeType>> confOriginTypeList = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
+  	
+  	
+  	
   	public Session getLoginCwUserName(String sessionId){
   		Session cwSession = cwUserMap.getIfPresent(sessionId);
   		return cwSession;
@@ -91,6 +96,8 @@ public class CwService {
 			cwUserMap.put(sessionId, cwSession);
 			List<String> downList = getNowDownVipList(userName);
 			downVipList.put(userName, downList);
+			List<ConfYbChangeType> origintypeList=confYbChangeTypeDao.getAllList();
+			confOriginTypeList.put(originTypeKey, origintypeList);
 			return true;
 		}else{
 			//普通vip登录
@@ -414,7 +421,14 @@ public class CwService {
 		return result;
 	}
 	
-	
+	/**
+	 * 从缓存中获取
+	 * @param userName
+	 * @return
+	 */
+	public List<ConfYbChangeType> getOrigintypeList(){
+		return confOriginTypeList.getIfPresent(originTypeKey);
+	}
 	/**
 	 * 得到玩家一币日志列表
 	 * @param searchUserName
@@ -440,7 +454,7 @@ public class CwService {
 				throw new ServiceException(3,"玩家不能为空！");
 			}
 		
-		List<ConfYbChangeType> origintypeList=confYbChangeTypeDao.getAllList();
+		List<ConfYbChangeType> origintypeList = this.getOrigintypeList();//confYbChangeTypeDao.getAllList();
 		List<String> datelist = DateUtils.separateDateStr(startTime, endTime, DateUtils.DAY_MSELS, DateUtils.YYYY_MM_DD_SDF);
 		List<DayOfYb> dayOfYbList = new ArrayList();
 		DayOfYb dayofyb= null;
