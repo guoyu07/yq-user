@@ -43,24 +43,27 @@
               <td width="99px" align="center" height="27" bgcolor="#FFE1FF"></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"></td>
+              <td width="95" align="center" height="27" bgcolor="#FFE1FF"></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF">${dayofyb.startNum}</td>
             </tr>
             <tr> 
               <td width="99" align="center" height="27" bgcolor="#FFE1FF"><font face="宋体" color="#000000" size="2">充值时间</font></td>
-              <td width="99px" align="center" height="27" bgcolor="#FFE1FF"><font face="宋体" color="#000000" size="2"><strong style="font-weight: 100">操作说明</strong></font></td>
+              <td width="99px" align="center" height="27" bgcolor="#FFE1FF"><font face="宋体" color="#000000" size="2"><strong style="font-weight: 100">摘要</strong></font></td>
               <td width="97" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000" face="宋体" size="2"> <strong style="font-weight: 400">收入</strong></font></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2">支出</font></td>
-              <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2"></font></td>
+              <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2">单价</font></td>
+              <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2">金额</font></td>
             </tr>
               <s:iterator var="data" value="dayofyb.dayofybList">
               <c:set var="sr" value="0"></c:set>
               <c:set var="zc" value="0"></c:set>
-                   <tr> 
+              <tr> 
               <td valign="middle" align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2">${data.date}</font></td>
               <td height="31" width="120" align="center"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2">${data.origin}</font> </td>
               <td valign="middle" align="center"  bgcolor="#E8E8FF"><font color="#FF0000" face="宋体" size="2"><c:if test="${data.in!=0}">${data.in}</c:if></font></td>
               <td valign="middle" align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2"><c:if test="${data.out!=0}">${data.out}</c:if></font></td>
-              <td valign="middle" colspan="2" align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2"></font></td>
+              <td valign="middle" align="center" align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2"><c:if test="${data.price!=0}">${data.price}</c:if></font></td>
+              <td valign="middle"  align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2"><c:if test="${data.jine!=0}">${data.jine}</c:if></font></td>
               </tr>
               </s:iterator>
             </table> 

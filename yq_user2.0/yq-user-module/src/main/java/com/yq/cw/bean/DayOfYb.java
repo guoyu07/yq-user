@@ -6,9 +6,14 @@ public class DayOfYb {
 	
 	private String origin;
 	
+	private double price;
+	
 	private double in;
 	
 	private double out;
+	
+	private double jine;
+	
 	public String getDate() {
 		return date;
 	}
@@ -40,6 +45,22 @@ public class DayOfYb {
 	public void setOut(double out) {
 		this.out = out;
 	}
-	
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getJine() {
+		return jine;
+	}
+
+	public void setJine(double jine) {
+		this.jine = jine;
+	}
+	
+	
 }

@@ -453,7 +453,6 @@ public class CwService {
 			if(searchUserName==null){
 				throw new ServiceException(3,"玩家不能为空！");
 			}
-		
 		List<ConfYbChangeType> origintypeList = this.getOrigintypeList();//confYbChangeTypeDao.getAllList();
 		List<String> datelist = DateUtils.separateDateStr(startTime, endTime, DateUtils.DAY_MSELS, DateUtils.YYYY_MM_DD_SDF);
 		List<DayOfYb> dayOfYbList = new ArrayList();
@@ -463,12 +462,40 @@ public class CwService {
 			String startDate =today + " 00:00:00";
 			String endDate = today + " 23:59:59";
 			for (ConfYbChangeType origintype : origintypeList) {
-				dayofyb= new DayOfYb();
-				dayofyb.setDate(today);
-				dayofyb.setOrigin(origintype.getOrigin());
-				dayofyb.setIn(datePayDao.getSumSyjz(searchUserName, startDate, endDate,origintype));
-				dayofyb.setOut(datePayDao.getSumjc(searchUserName, startDate, endDate,origintype));
-				dayOfYbList.add(dayofyb);
+				List<Double> priceList  =	datePayDao.getpriceList(searchUserName, startDate, endDate,origintype);
+				double in = datePayDao.getSumSyjz(searchUserName, startDate, endDate,origintype);
+				double out = datePayDao.getSumjc(searchUserName, startDate, endDate,origintype);
+				if (!priceList.isEmpty()) {
+					for (int j = 0; j < priceList.size(); j++) {
+						dayofyb= new DayOfYb();
+						dayofyb.setDate(today);
+						dayofyb.setOrigin(origintype.getOrigin());
+						dayofyb.setIn(in);
+						dayofyb.setOut(out);
+						dayofyb.setPrice(priceList.get(j));
+						if(in!=0){
+							dayofyb.setJine(in*priceList.get(j));
+						}
+						if(out!=0){
+							dayofyb.setJine(out*priceList.get(j));
+						}
+						dayOfYbList.add(dayofyb);
+					}
+				}else {
+					dayofyb= new DayOfYb();
+					dayofyb.setDate(today);
+					dayofyb.setOrigin(origintype.getOrigin());
+					dayofyb.setIn(in);
+					dayofyb.setOut(out);
+					dayofyb.setPrice(0d);
+					if(in!=0){
+						dayofyb.setJine(in);
+					}
+					if(out!=0){
+						dayofyb.setJine(out);
+					}
+					dayOfYbList.add(dayofyb);
+				}
 			}
 		}
 		return dayOfYbList;

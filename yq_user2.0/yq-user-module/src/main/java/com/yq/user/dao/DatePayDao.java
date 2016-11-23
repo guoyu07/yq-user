@@ -1,7 +1,10 @@
 package com.yq.user.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,6 +12,7 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.game.framework.exception.ServiceException;
 import com.yq.cw.bean.DatepayCw;
 import com.yq.cw.bean.DatepayForDc;
 import com.yq.cw.bo.ConfYbChangeType;
@@ -355,29 +359,46 @@ public class DatePayDao {
 	}
 
 	public Double getSumSyjz(String searchUserName, String startDate, String endDate, ConfYbChangeType origintype) {
-		String sql = "select sum(syjz) from "+table+" where username = ? and origintype = ? ";
+		StringBuilder sql = new StringBuilder();
+		sql.append("select sum(syjz) from "+table+" where username = ? and origintype = ? ");
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(searchUserName);
 		sqlParameter.setInt(origintype.getOrigintype());
 		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
-			sql = sql +" and abdate between ? and ?";
+			sql.append(" and abdate between ? and ?");
 			sqlParameter.setString(startDate);
 			sqlParameter.setString(endDate);
 		}
-		return jdbc.getDouble(sql, sqlParameter);
+		return jdbc.getDouble(sql.toString(), sqlParameter);
 	}
 
 	public Double getSumjc(String searchUserName, String startDate, String endDate, ConfYbChangeType origintype) {
-		String sql = "select sum(jc) from "+table+" where username = ? and origintype = ? ";
+		StringBuilder sql = new StringBuilder();
+		sql.append("select sum(jc) from "+table+" where username = ? and origintype = ? ");
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(searchUserName);
 		sqlParameter.setInt(origintype.getOrigintype());
 		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
-			sql = sql +" and abdate between ? and ?";
+			sql.append(" and abdate between ? and ?");
 			sqlParameter.setString(startDate);
 			sqlParameter.setString(endDate);
 		}
-		return jdbc.getDouble(sql, sqlParameter);
+		return jdbc.getDouble(sql.toString(), sqlParameter);
+	}
+
+	public List<Double> getpriceList(String searchUserName, String startDate, String endDate, ConfYbChangeType origintype) {
+		List<Double> result= new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select ration from "+table+" where username = ? and origintype = ?  and abdate between ? and ?  GROUP BY ration ");
+		List rows = jdbc.getJdbcTemplate().queryForList(sql.toString(),searchUserName,origintype.getOrigintype(),startDate,endDate);
+		Iterator it = rows.iterator();  
+		while(it.hasNext()) {  
+			 Map rationMap = (Map) it.next();  
+			 if((Double) rationMap.get("ration")>0){
+				 result.add((Double) rationMap.get("ration"));
+			 }
+		}  
+		return result;
 	}
 	
 }
