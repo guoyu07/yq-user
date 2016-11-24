@@ -1730,7 +1730,12 @@ public class UserService {
 		}
 		
 		
+		
 		Gcuser gcuser = this.gcuserDao.getUser(userName);
+		
+		if(gcuser.getVip()!=3){
+			throw new ServiceException(10, "VIP账户不可提现！");
+		}
 		
 		int txqpay = gcuser.getPay();
 		
