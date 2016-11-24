@@ -10,9 +10,21 @@ public class DayOfYb {
 	
 	private double in;
 	
+	private double inprice;
+	
+	private double injine;
+	
 	private double out;
 	
+	private double outprice;
+	
+	private double outjine;
+	
 	private double jine;
+	
+	private String desc;
+	
+	private double pay;
 	
 	public String getDate() {
 		return date;
@@ -61,6 +73,55 @@ public class DayOfYb {
 	public void setJine(double jine) {
 		this.jine = jine;
 	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public double getInjine() {
+		return injine;
+	}
+
+	public void setInjine(double injine) {
+		this.injine = injine;
+	}
+
+	public double getOutjine() {
+		return outjine;
+	}
+
+	public void setOutjine(double outjine) {
+		this.outjine = outjine;
+	}
+
+	public double getPay() {
+		return pay;
+	}
+
+	public void setPay(double pay) {
+		this.pay = pay;
+	}
+
+	public double getInprice() {
+		return inprice;
+	}
+
+	public void setInprice(double inprice) {
+		this.inprice = inprice;
+	}
+
+	public double getOutprice() {
+		return outprice;
+	}
+
+	public void setOutprice(double outprice) {
+		this.outprice = outprice;
+	}
+	
 	
 	
 }
