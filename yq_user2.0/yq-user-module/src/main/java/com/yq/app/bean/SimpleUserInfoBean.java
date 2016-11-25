@@ -40,7 +40,7 @@ public class SimpleUserInfoBean {
 			simp.setName(gcuser.getName());
 			simp.setUserName(gcuser.getUsername());
 			simp.setYb(gcuser.getPay());
-			simp.setScores(gcuser.getScores());
+			simp.setScores(gcuser.getJyg());
 		}
 		return simp;
 	}
