@@ -471,15 +471,12 @@ public class CwService {
 		}
 		Map<String,List<Object>> map  =	datePayDao.getpriceList(searchUserName, startTime, endTime);//TODO 此处暂时这样写
 		List<Object> priceList = map.get("ration");
-		System.out.println("priceList.size()="+priceList.size());
 		for (int i = 0; i < datelist.size(); i++) {
 			String today = datelist.get(i);
 			String startDate =today + " 00:00:00";
 			String endDate = today + " 23:59:59";
 			for (ConfYbChangeType origintype : origintypeList) {
-				
 				List<Object> regidList  =	datePayDao.getDescList(searchUserName, startDate, endDate,origintype);
-				
 				if (!priceList.isEmpty()) {
 					for (int j = 0; j < priceList.size(); j++) {
 						if((Double)priceList.get(j)!=0){
