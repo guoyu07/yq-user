@@ -16,7 +16,7 @@
  
  
    <table border="0" cellspacing="0" width="100%" cellpadding="0" height="108">
-   <tr><td align="left"><a href="cwindex">一币日志查询</a>|<a href="cjblog">充值币日志查询</a>|<a href="dcdata">导出数据</a>|<a href="dayofyb">一币收付日记账</a></td></tr>
+   <tr><td align="left"><jsp:include page="commonhead.jsp"/></td></tr>
    <tr><td align="center"><font color='red'>注意:单次导出数据量不要过大，如出现导出报错，请主动缩短导出日期！</font></td></tr>
        <tr>
       <td width="100%" height="25"> 

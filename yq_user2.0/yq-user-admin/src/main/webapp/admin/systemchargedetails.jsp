@@ -47,7 +47,7 @@
           <td height="29" width="69" align="center"><b>
 			<font color="#FF0000" size="2">${data.id}</font></b></td>
           <td height="29" width="123" align="center"><p style="margin-top: 0; margin-bottom: 0">
-			<font color="#000000" face="宋体" size="2">${data.username}</font></td>
+			<font color="#000000" face="宋体" size="2">${data.operator}</font></td>
           <td valign="middle" width="67" align="center"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" face="宋体" size="2">${data.amount}</font></td>
           <td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
@@ -55,7 +55,7 @@
 		 <td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
 			<font size="2" face="宋体">${data.rechargedate}</font></td>
 		 <td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
-			<font size="2" face="宋体">${data.operator}</font></td>
+			<font size="2" face="宋体">${data.username}</font></td>
           </tr>
          </s:iterator>
             </table> 

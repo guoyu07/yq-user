@@ -22,11 +22,21 @@
 		
 		<action name="outExcelForCjb" class="com.yq.admin.cw.action.VipOutExcelAction" method="outExcelForVipCjb">
 		</action>
-		
+		<!-- 一币日志收付明细 -->
 		<action name="dayofyb" class="com.yq.admin.cw.action.CwSearchVipDayOfYbAction" method="dayofyb">
 		   <result name="success" >/cw/searchvipdayofyb.jsp</result>
 		</action>
 		<action name="dayofyboutexcel" class="com.yq.admin.cw.action.CwSearchVipDayOfYbAction" method="dayofyboutexcel">
+		</action>
+		
+		<!-- 备用保单币收付明细 -->
+		<action name="bdblog" class="com.yq.admin.cw.action.CWBdblogAction">
+			<result name="success">/cw/searchvipbdblog.jsp</result>
+		</action>
+		<action name="searchbdblog" class="com.yq.admin.cw.action.CWBdblogAction" method="searchbdblog">
+			<result name="success">/cw/searchvipbdblog.jsp</result>
+		</action>
+		<action name="bdboutExcel" class="com.yq.admin.cw.action.CWBdblogAction" method="bdboutExcel">
 		</action>
 		
 		

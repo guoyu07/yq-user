@@ -1,14 +1,20 @@
 package com.yq.user.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.base.Strings;
-import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.exception.ServiceException;
+import com.yq.common.utils.DateUtils;
+import com.yq.cw.bean.BDBExcelData;
+import com.yq.cw.bean.ClientBdblog;
 import com.yq.cw.bean.DatepayCw;
+import com.yq.cw.bean.VipSearchBdbLogBean;
 import com.yq.manager.dao.JbkzjDao;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Datecj;
@@ -17,6 +23,7 @@ import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
 import com.yq.user.bo.Dldate;
 import com.yq.user.bo.Gcfh;
+import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Jbkzj;
 import com.yq.user.bo.SysBiLog;
 import com.yq.user.dao.BdbDateDao;
@@ -288,5 +295,107 @@ public class LogService {
 		return datePayDao.getListByVipUserNameAndDate(searchUserName, startTime, endTime);
 		
 	}
+	
+	/**
+	 * @param zuser
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<ClientBdblog> getClientBdblogList(String zuser, String startTime, String endTime) {
+		List<ClientBdblog> clientBdblogList= new ArrayList<>();
+		
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+	    Gcuser gcuser = userService.getUserByUserName(zuser);
+	   
+	    if(Strings.isNullOrEmpty(startTime)||Strings.isNullOrEmpty(endTime)){
+	    	throw new ServiceException(4,"开始时间或结束时间不能为空！");
+	    }
+	    if(gcuser==null){
+			throw new ServiceException(1,"玩家不存在！");
+		}
+		if(DateUtils.compareDateStr(startTime,endTime)==1){
+			throw new ServiceException(2,"结束时间要大于开始时间！");
+		}
+		if(zuser==null){
+			throw new ServiceException(3,"玩家不能为空！");
+		}
+		
+		List<ClientBdblog> sysbiList = sysBiLogDao.getClientBdblogListByUsername(zuser, startTime, endTime);
+		List<ClientBdblog> sysbiList2 = sysBiLogDao.getListByOperaterName(zuser, startTime, endTime);
+		sysbiList.addAll(sysbiList2);
+		for (int i = 0; i < sysbiList.size(); i++) {
+			ClientBdblog clientsysBiLog = sysbiList.get(i);
+			 if(!"系统".equals(clientsysBiLog.getOperator())){
+				 clientsysBiLog.setUsername(clientsysBiLog.getOperator());
+				 clientsysBiLog.setOperator(clientsysBiLog.getUsername());
+			 }else{
+				 clientsysBiLog.setUsername(clientsysBiLog.getUsername());
+				 clientsysBiLog.setOperator(clientsysBiLog.getOperator());
+			 }
+			 
+			 if(clientsysBiLog.getAmount() < 0 && !"系统".equals(clientsysBiLog.getOperator())){
+				 clientsysBiLog.setOutjine(clientsysBiLog.getAmount());
+				 clientsysBiLog.setServicefee(0.05);
+			 }else{
+				 clientsysBiLog.setInjine(clientsysBiLog.getAmount());
+				 clientsysBiLog.setServicefee(0);
+			 }
+			 clientsysBiLog.setAmount(clientsysBiLog.getAmount() < 0 ? -clientsysBiLog.getAmount() : clientsysBiLog.getAmount());
+			 clientsysBiLog.setServicefeejine(clientsysBiLog.getServicefee()*clientsysBiLog.getAmount());
+			 clientsysBiLog.setCurrentamount(clientsysBiLog.getCurrentamount());
+			 clientsysBiLog.setRechargedate(clientsysBiLog.getRechargedate());
+			 clientBdblogList.add(clientsysBiLog);
+		}
+		return clientBdblogList;
+	}
+	
+	
+	/**
+	 * @param zuser
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<BDBExcelData> getClientBdblogListexcel(String zuser, String startTime, String endTime) {
+		List<BDBExcelData> clientBdblogList= new ArrayList<>();
+		
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+	    Gcuser gcuser = userService.getUserByUserName(zuser);
+	   
+	    if(Strings.isNullOrEmpty(startTime)||Strings.isNullOrEmpty(endTime)){
+	    	throw new ServiceException(4,"开始时间或结束时间不能为空！");
+	    }
+	    if(gcuser==null){
+			throw new ServiceException(1,"玩家不存在！");
+		}
+		if(DateUtils.compareDateStr(startTime,endTime)==1){
+			throw new ServiceException(2,"结束时间要大于开始时间！");
+		}
+		if(zuser==null){
+			throw new ServiceException(3,"玩家不能为空！");
+		}
+		
+		List<ClientBdblog> sysbiList = sysBiLogDao.getClientBdblogListByUsername(zuser, startTime, endTime);
+		List<ClientBdblog> sysbiList2 = sysBiLogDao.getListByOperaterName(zuser, startTime, endTime);
+		sysbiList.addAll(sysbiList2);
+		for (int i = 0; i < sysbiList.size(); i++) {
+			BDBExcelData result = new BDBExcelData();
+			ClientBdblog clientsysBiLog = sysbiList.get(i);
+			 if(!"系统".equals(clientsysBiLog.getOperator())){
+				 result.setUsername(clientsysBiLog.getOperator());
+				 result.setOperator(clientsysBiLog.getUsername());
+			 }else{
+				 result.setUsername(clientsysBiLog.getUsername());
+				 result.setOperator(clientsysBiLog.getOperator());
+			 }
+			 result.setJine(clientsysBiLog.getAmount() < 0 ? -clientsysBiLog.getAmount() : clientsysBiLog.getAmount());
+			 result.setCurrentamount(clientsysBiLog.getCurrentamount());
+			 result.setRechargedate(clientsysBiLog.getRechargedate());
+			 clientBdblogList.add(result);
+		}
+		 return clientBdblogList;
+	}
+	
 	
 }
