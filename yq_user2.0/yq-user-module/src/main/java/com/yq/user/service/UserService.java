@@ -1051,7 +1051,7 @@ public class UserService {
 //						return SUCCESS;
 				}
 				gcuserDao.updateSmsCode(operatorUser.getUsername(), Global.INIT_SMS_CODE);
-				if(!this.changeYb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0,null,0, YbChangeType.KAIHU)){
+				if(!this.changeYb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0,null,0, YbChangeType.KAIHU_REDUCE)){
 					throw new ServiceException(7,"一币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
 			}
@@ -1107,7 +1107,7 @@ public class UserService {
 			datePay.setJydb(upuser.getJydb());
 			datePay.setNewbz(9);
 			datePay.setAbdate(new Date());
-			datePay.setOrigintype(YbChangeType.KAIHU);
+			datePay.setOrigintype(YbChangeType.KAIHU_ADD);
 			logService.addDatePay(datePay);
 			
 			

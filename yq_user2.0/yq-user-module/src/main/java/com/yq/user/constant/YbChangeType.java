@@ -73,9 +73,14 @@ public class YbChangeType {
 	
 	
 	/**
-	 * 开户
+	 * 开户消耗
 	 */
-	public static final int  KAIHU = 109;
+	public static final int  KAIHU_REDUCE = 109;
+	
+	/**
+	 * 开户获得
+	 */
+	public static final int  KAIHU_ADD = 10900;
 	
 	/**
 	 * 撤销一币卖出
@@ -160,7 +165,7 @@ public class YbChangeType {
 	public static final int MALLTUIKUAN = 122;
 	
 	/**
-	 * 商城还款
+	 * 冲销销售一币
 	 **/
 	public static final int MALLHUANKUAN = 123;
 

@@ -2,8 +2,10 @@ package com.yq.cw.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
-import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
@@ -27,7 +28,6 @@ import com.yq.cw.bean.SearchDayOfYb;
 import com.yq.cw.bean.StatBean;
 import com.yq.cw.bean.VipCjbLogBean;
 import com.yq.cw.bean.VipCjglForDc;
-import com.yq.cw.bean.VipSearchBdbLogBean;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.bo.ConfYbChangeType;
 import com.yq.cw.bo.CwUser;
@@ -436,7 +436,7 @@ public class CwService {
 		return confOriginTypeList.getIfPresent(originTypeKey);
 	}
 	/**
-	 * 得到玩家一币日志列表
+	 * TODO 得到玩家一币日志列表
 	 * @param searchUserName
 	 * @param startTime
 	 * @param endTime
@@ -463,19 +463,117 @@ public class CwService {
 		List<String> datelist = DateUtils.separateDateStr(startTime, endTime, DateUtils.DAY_MSELS, DateUtils.YYYY_MM_DD_SDF);
 		List<DayOfYb> dayOfYbList = new ArrayList();
 		DayOfYb dayofyb= null;
-		Datepay datepay =  datePayDao.getDateLastDatePay(searchUserName, startTime);
-		int startNum=0;
-		//期初结余
-		if(datepay!=null){
-			startNum = datepay.getPay();
-		}
-		Map<String,List<Object>> map  =	datePayDao.getpriceList(searchUserName, startTime, endTime);//TODO 此处暂时这样写
-		List<Object> priceList = map.get("ration");
+		
 		for (int i = 0; i < datelist.size(); i++) {
 			String today = datelist.get(i);
 			String startDate =today + " 00:00:00";
 			String endDate = today + " 23:59:59";
+			
+			List<Datepay> datepayList=datePayDao.getDatePayList(searchUserName, startDate, endDate);
+			
+			Datepay startNumdatepay =  datePayDao.getDateLastDatePay(searchUserName, startDate);
+			int startNum=0;
+			//期初结余
+			if(startNumdatepay!=null){
+				startNum = startNumdatepay.getPay();
+			}
+			
+			Set<Double> priceList = new HashSet<>();
+			for (Datepay datepay : datepayList) {
+				priceList.add(datepay.getRation());
+			}
+			
 			for (ConfYbChangeType origintype : origintypeList) {
+				int index=0;
+				double in = 0;
+				double out = 0;
+				double otherin = 0;
+				double otherout = 0;
+				for (Datepay datepay : datepayList) {//这是一个计算总共的循环
+					if(datepay.getOrigintype()==origintype.getOrigintype()){
+						if(datepay.getJc()!=0){
+							out =+datepay.getJc(); 
+						}
+						if(datepay.getSyjz()!=0){
+							in =+datepay.getSyjz();
+						}
+					}
+					if(datepay.getOrigintype()==0){
+						if(datepay.getJc()!=0){
+							otherout =+datepay.getJc(); 
+						}
+						if(datepay.getSyjz()!=0){
+							otherin =+datepay.getSyjz();
+						}
+					}
+				}
+				
+				for (Datepay datepay : datepayList) {//这是一个创建dayofyb的循环
+					if(datepay.getOrigintype()==origintype.getOrigintype()){
+						//分类不同价格
+						
+						for (Double price : priceList) {
+							if(price==datepay.getRation()){//统计同种价格的金额
+								dayofyb= new DayOfYb();
+								dayofyb.setDate(today);
+								dayofyb.setOrigin(origintype.getOrigin());
+								dayofyb.setDesc(datepay.getRegid());
+								if(in!=0){
+									/*double samepriceInjine=0;
+									double samepriceOutjine=0;*/
+									dayofyb.setIn(in);
+									dayofyb.setInprice(price);
+									/*if(datepay.getRation()==0){
+										dayofyb.setInjine(in);
+									}else{
+										for (Datepay datepay1 : datepayList) {
+											if(datepay.getOrigintype()==origintype.getOrigintype()){
+												for (Double price1 : priceList) {
+													if(price1==datepay.getRation()){
+														samepriceInjine=+price1*datepay1.getSyjz();
+													}
+												}
+											}
+										}
+									}*/
+									
+									
+								}
+								if(out!=0){
+									dayofyb.setOut(out);
+									dayofyb.setOutprice(price);
+									/*if(datepay.getRation()==0){
+										dayofyb.setOutjine(out);
+									}else{
+										dayofyb.setOutjine(out*price);
+									}*/
+								}
+								dayofyb.setPay(startNum+in-out);
+								dayofyb.setInjine(datePayDao.getSumSyjz(searchUserName, startDate, endDate, origintype,price));
+								dayofyb.setOutjine(datePayDao.getSumjc(searchUserName, startDate, endDate, origintype,price));
+								dayOfYbList.add(dayofyb);
+							}
+						}
+						
+					} /*else if(datepay.getOrigintype()==0){
+						dayofyb= new DayOfYb();
+						dayofyb.setDate(today);
+						dayofyb.setPay(startNum+in-out);
+						dayofyb.setInjine(datePayDao.getSumSyjz(searchUserName, startDate, endDate, origintype,0d));
+						dayofyb.setOutjine(datePayDao.getSumjc(searchUserName, startDate, endDate, origintype,0d));
+						dayOfYbList.add(dayofyb);
+						
+					}*/
+				}
+					
+				if(dayofyb!=null){
+					startNum=(int) dayofyb.getPay();
+				}
+				
+				
+			}
+			
+			/*for (ConfYbChangeType origintype : origintypeList) {
 				List<Object> regidList  =	datePayDao.getDescList(searchUserName, startDate, endDate,origintype);
 				if (!priceList.isEmpty()) {
 					for (int j = 0; j < priceList.size(); j++) {
@@ -526,27 +624,8 @@ public class CwService {
 						dayofyb.setDesc((String) regidList.get(0));
 					}
 					dayOfYbList.add(dayofyb);
-				}/*else {
-					dayofyb= new DayOfYb();
-					dayofyb.setDate(today);
-					dayofyb.setOrigin(origintype.getOrigin());
-					dayofyb.setPrice(0d);
-					if(in!=0){
-						dayofyb.setIn(0d);
-						dayofyb.setInjine(in);
-						dayofyb.setPay(startNum+in);
-					}
-					if(out!=0){
-						dayofyb.setOut(0d);
-						dayofyb.setOutjine(out);
-						dayofyb.setPay(startNum-out);
-					}
-					if(!regidList.isEmpty()){
-						dayofyb.setDesc((String) regidList.get(0));
-					}
-					dayOfYbList.add(dayofyb);
-				}*/
-			}
+				}
+			}*/
 		}
 		return dayOfYbList;
 	}
