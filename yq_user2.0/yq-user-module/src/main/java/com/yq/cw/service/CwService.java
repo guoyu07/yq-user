@@ -436,7 +436,7 @@ public class CwService {
 		return confOriginTypeList.getIfPresent(originTypeKey);
 	}
 	/**
-	 * TODO 得到玩家一币日志列表
+	 * 得到玩家一币日志列表
 	 * @param searchUserName
 	 * @param startTime
 	 * @param endTime
@@ -484,13 +484,12 @@ public class CwService {
 			}
 			
 			for (ConfYbChangeType origintype : origintypeList) {
-				int index=0;
 				double in = 0;
 				double out = 0;
 				double otherin = 0;
 				double otherout = 0;
 				for (Datepay datepay : datepayList) {//这是一个计算总共的循环
-					if(datepay.getOrigintype()==origintype.getOrigintype()){
+					if(datepay.getOrigintype()==origintype.getOrigintype()&&origintype.getOrigintype()!=0){
 						if(datepay.getJc()!=0){
 							out =+datepay.getJc(); 
 						}
@@ -509,9 +508,8 @@ public class CwService {
 				}
 				
 				for (Datepay datepay : datepayList) {//这是一个创建dayofyb的循环
-					if(datepay.getOrigintype()==origintype.getOrigintype()){
+					if(datepay.getOrigintype()==origintype.getOrigintype()&&origintype.getOrigintype()!=0){
 						//分类不同价格
-						
 						for (Double price : priceList) {
 							if(price==datepay.getRation()){//统计同种价格的金额
 								dayofyb= new DayOfYb();
@@ -519,53 +517,43 @@ public class CwService {
 								dayofyb.setOrigin(origintype.getOrigin());
 								dayofyb.setDesc(datepay.getRegid());
 								if(in!=0){
-									/*double samepriceInjine=0;
-									double samepriceOutjine=0;*/
 									dayofyb.setIn(in);
 									dayofyb.setInprice(price);
-									/*if(datepay.getRation()==0){
-										dayofyb.setInjine(in);
+									if(price!=0){
+										dayofyb.setInjine(in*price);
 									}else{
-										for (Datepay datepay1 : datepayList) {
-											if(datepay.getOrigintype()==origintype.getOrigintype()){
-												for (Double price1 : priceList) {
-													if(price1==datepay.getRation()){
-														samepriceInjine=+price1*datepay1.getSyjz();
-													}
-												}
-											}
-										}
-									}*/
-									
+										dayofyb.setInjine(in);
+									}
 									
 								}
 								if(out!=0){
 									dayofyb.setOut(out);
 									dayofyb.setOutprice(price);
-									/*if(datepay.getRation()==0){
-										dayofyb.setOutjine(out);
-									}else{
+									if(price!=0){
 										dayofyb.setOutjine(out*price);
-									}*/
+									}else{
+										dayofyb.setOutjine(out);
+									}
 								}
 								dayofyb.setPay(startNum+in-out);
-								dayofyb.setInjine(datePayDao.getSumSyjz(searchUserName, startDate, endDate, origintype,price));
-								dayofyb.setOutjine(datePayDao.getSumjc(searchUserName, startDate, endDate, origintype,price));
 								dayOfYbList.add(dayofyb);
 							}
 						}
 						
-					} /*else if(datepay.getOrigintype()==0){
-						dayofyb= new DayOfYb();
-						dayofyb.setDate(today);
-						dayofyb.setPay(startNum+in-out);
-						dayofyb.setInjine(datePayDao.getSumSyjz(searchUserName, startDate, endDate, origintype,0d));
-						dayofyb.setOutjine(datePayDao.getSumjc(searchUserName, startDate, endDate, origintype,0d));
-						dayOfYbList.add(dayofyb);
-						
-					}*/
+					}
+					
 				}
 					
+				if(origintype.getOrigintype()==0){
+					dayofyb= new DayOfYb();
+					dayofyb.setOrigin("其他");
+					dayofyb.setDesc("其他");
+					dayofyb.setDate(today);
+					dayofyb.setPay(startNum+otherin-otherout);
+					dayofyb.setIn(otherin);
+					dayofyb.setOut(otherout);
+					dayOfYbList.add(dayofyb);
+				}
 				if(dayofyb!=null){
 					startNum=(int) dayofyb.getPay();
 				}
@@ -573,59 +561,6 @@ public class CwService {
 				
 			}
 			
-			/*for (ConfYbChangeType origintype : origintypeList) {
-				List<Object> regidList  =	datePayDao.getDescList(searchUserName, startDate, endDate,origintype);
-				if (!priceList.isEmpty()) {
-					for (int j = 0; j < priceList.size(); j++) {
-						if((Double)priceList.get(j)!=0){
-							double in = datePayDao.getSumSyjz(searchUserName, startDate, endDate,origintype,(Double)priceList.get(j));
-							double out = datePayDao.getSumjc(searchUserName, startDate, endDate,origintype,(Double)priceList.get(j));
-							dayofyb= new DayOfYb();
-							dayofyb.setDate(today);
-							dayofyb.setOrigin(origintype.getOrigin());
-							if(in!=0){
-								dayofyb.setIn(in);
-								dayofyb.setInprice((Double)priceList.get(j));
-								dayofyb.setInjine(in*(Double)priceList.get(j));
-								dayofyb.setPay(startNum+in);
-							}
-							if(out!=0){
-								dayofyb.setOut(out);
-								dayofyb.setOutprice((Double)priceList.get(j));
-								dayofyb.setOutjine(out*(Double)priceList.get(j));
-								dayofyb.setPay(startNum-out);
-							}
-							if(!regidList.isEmpty()){
-								dayofyb.setDesc((String) regidList.get(0));
-							}
-							dayOfYbList.add(dayofyb);
-						}
-					}
-				}else{
-					double in = datePayDao.getSumSyjz(searchUserName, startDate, endDate,origintype,0d);
-					double out = datePayDao.getSumjc(searchUserName, startDate, endDate,origintype,0d);
-					dayofyb= new DayOfYb();
-					dayofyb.setDate(today);
-					dayofyb.setOrigin(origintype.getOrigin());
-					dayofyb.setPrice(0d);
-					if(in!=0){
-						dayofyb.setIn(in);
-						dayofyb.setInprice(0d);
-						dayofyb.setInjine(in);
-						dayofyb.setPay(startNum+in);
-					}
-					if(out!=0){
-						dayofyb.setOut(out);
-						dayofyb.setOutprice(0d);
-						dayofyb.setOutjine(out);
-						dayofyb.setPay(startNum-out);
-					}
-					if(!regidList.isEmpty()){
-						dayofyb.setDesc((String) regidList.get(0));
-					}
-					dayOfYbList.add(dayofyb);
-				}
-			}*/
 		}
 		return dayOfYbList;
 	}

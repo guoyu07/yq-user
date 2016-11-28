@@ -65,20 +65,18 @@
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"></td>
-              <td width="95" align="center" height="27" bgcolor="#FFE1FF"></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF">${dayofyb.startNum}</td>
             </tr>
             <tr> 
               <td width="99" align="center" height="27" bgcolor="#FFE1FF"><font face="宋体" color="#000000" size="2">充值时间</font></td>
               <td width="99px" align="center" height="27" bgcolor="#FFE1FF"><font face="宋体" color="#000000" size="2"><strong style="font-weight: 100">摘要</strong></font></td>
-              <td width="99px" align="center" height="27" bgcolor="#FFE1FF"><font face="宋体" color="#000000" size="2"><strong style="font-weight: 100">备注</strong></font></td>
+              <td width="99px" align="center" height="27" bgcolor="#FFE1FF"><font face="宋体" color="#000000" size="2"><strong style="font-weight: 100">备注(参考)</strong></font></td>
               <td width="97" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000" face="宋体" size="2"> <strong style="font-weight: 400">收入数量</strong></font></td>
               <td width="97" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000" face="宋体" size="2"> <strong style="font-weight: 400">收入单价</strong></font></td>
               <td width="97" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000" face="宋体" size="2"> <strong style="font-weight: 400">收入金额</strong></font></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2">支出数量</font></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2">支出单价</font></td>
               <td width="97" align="center" height="27" bgcolor="#FFE1FF"><font color="#FF0000" face="宋体" size="2"> <strong style="font-weight: 400">支出金额</strong></font></td>
-              <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2">单价</font></td>
               <td width="95" align="center" height="27" bgcolor="#FFE1FF"><font color="#000000" face="宋体" size="2">结余</font></td>
             </tr>
               <s:iterator var="data" value="dayofyb.dayofybList">
@@ -94,7 +92,6 @@
               <td valign="middle" align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2"><c:if test="${data.out!=0}">${data.out}</c:if></font></td>
               <td valign="middle" align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2"><c:if test="${data.outprice!=0}">${data.outprice}</c:if></font></td>
               <td valign="middle" align="center"  bgcolor="#E8E8FF"><font color="#FF0000" face="宋体" size="2"><c:if test="${data.outjine!=0}">${data.outjine}</c:if></font></td>
-              <td valign="middle" align="center" align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2"><c:if test="${data.price!=0}">${data.price}</c:if></font></td>
               <td valign="middle"  align="center" width="95"  bgcolor="#E8E8FF"><font color="#000000" face="宋体" size="2">${data.pay}</font></td>
               </tr>
               </s:iterator>

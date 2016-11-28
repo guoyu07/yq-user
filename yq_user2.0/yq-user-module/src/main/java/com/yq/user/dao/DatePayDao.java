@@ -422,9 +422,10 @@ public class DatePayDao {
 
 	public double getSumSyjz(String searchUserName, String startDate, String endDate, ConfYbChangeType origintype,
 			Double price) {
-		String sql = "select sum(syjz) from "+table+" where username = ? and ration = ? ";
+		String sql = "select sum(syjz*ration) from "+table+" where username = ? and origintype=? and ration = ? ";
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(searchUserName);
+		sqlParameter.setInt(origintype.getOrigintype());
 		sqlParameter.setDouble(price);
 		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
 			sql = sql +" and abdate between ? and ?";
@@ -436,9 +437,10 @@ public class DatePayDao {
 
 	public double getSumjc(String searchUserName, String startDate, String endDate, ConfYbChangeType origintype,
 			Double price) {
-		String sql = "select sum(jc) from "+table+" where username = ? and ration = ? ";
+		String sql = "select sum(jc*ration) from "+table+" where username = ? and origintype=? and ration = ? ";
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(searchUserName);
+		sqlParameter.setInt(origintype.getOrigintype());
 		sqlParameter.setDouble(price);
 		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
 			sql = sql +" and abdate between ? and ?";
@@ -446,6 +448,25 @@ public class DatePayDao {
 			sqlParameter.setString(endDate);
 		}
 		return jdbc.getDouble(sql, sqlParameter);
+	}
+
+	public List<Datepay> getDatePayList(String searchUserName, String startDate, String endDate) {
+		List<Datepay> datepayList= new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select jc,syjz,regid,ration,origintype from "+table+" where username = ? and abdate between ? and ?  GROUP BY regid ");
+		List rows = jdbc.getJdbcTemplate().queryForList(sql.toString(),searchUserName,startDate,endDate);
+		Iterator it = rows.iterator();  
+		while(it.hasNext()) {  
+			 Map map = (Map) it.next();
+			 Datepay datepay = new Datepay();
+			 datepay.setJc((int)map.get("jc"));
+			 datepay.setSyjz((int)map.get("syjz"));
+			 datepay.setRation((double)map.get("ration"));
+			 datepay.setRegid((String)map.get("regid"));
+			 datepay.setOrigintype((int)map.get("origintype"));
+			 datepayList.add(datepay);
+		}  
+		return datepayList;
 	}
 	
 }

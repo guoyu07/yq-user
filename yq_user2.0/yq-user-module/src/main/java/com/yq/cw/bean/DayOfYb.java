@@ -6,7 +6,7 @@ public class DayOfYb {
 	
 	private String origin;
 	
-	private double price;
+	private String desc;
 	
 	private double in;
 	
@@ -20,9 +20,6 @@ public class DayOfYb {
 	
 	private double outjine;
 	
-	private double jine;
-	
-	private String desc;
 	
 	private double pay;
 	
@@ -56,22 +53,6 @@ public class DayOfYb {
 
 	public void setOut(double out) {
 		this.out = out;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public double getJine() {
-		return jine;
-	}
-
-	public void setJine(double jine) {
-		this.jine = jine;
 	}
 
 	public String getDesc() {
