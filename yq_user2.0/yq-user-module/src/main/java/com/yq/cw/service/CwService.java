@@ -26,6 +26,7 @@ import com.yq.cw.bean.StatBean;
 import com.yq.cw.bean.VipCjbLogBean;
 import com.yq.cw.bean.VipCjglForDc;
 import com.yq.cw.bean.VipSearchLogBean;
+import com.yq.cw.bean.VipServiceFee;
 import com.yq.cw.bo.ConfYbChangeType;
 import com.yq.cw.bo.CwUser;
 import com.yq.cw.bo.VipDownTemp;
@@ -37,6 +38,7 @@ import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.Vipcjgl;
+import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.SgxtDao;
@@ -478,7 +480,7 @@ public class CwService {
 			for (ConfYbChangeType origintype : origintypeList) {
 				
 				if(origintype.getOrigintype()!=0){
-					List<DayOfYb> datepayList=datePayDao.getDatePayList(searchUserName, startDate, endDate, origintype.getOrigintype());
+					List<DayOfYb> datepayList=datePayDao.getDayOfYbList(searchUserName, startDate, endDate, origintype.getOrigintype());
 					
 					for (DayOfYb getdayofyb : datepayList) {
 						double in = getdayofyb.getIn();
@@ -514,7 +516,7 @@ public class CwService {
 					}
 				}
 				if(origintype.getOrigintype()==0){
-					List<DayOfYb> datepayList=datePayDao.getDatePayList(searchUserName, startDate, endDate, 0);
+					List<DayOfYb> datepayList=datePayDao.getDayOfYbList(searchUserName, startDate, endDate, 0);
 					for (DayOfYb getdayofyb : datepayList) {
 						otherin=+getdayofyb.getIn();
 						otherout=+getdayofyb.getOut();
@@ -539,6 +541,61 @@ public class CwService {
 			
 		}
 		return dayOfYbList;
+	}
+	
+	public List<VipServiceFee> getByserviceFeeList(String searchUserName, String startTime, String endTime) {
+
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+	    Gcuser gcuser = userService.getUserByUserName(searchUserName);
+		
+	    if(Strings.isNullOrEmpty(startTime)||Strings.isNullOrEmpty(endTime)){
+		    	throw new ServiceException(4,"开始时间或结束时间不能为空！");
+	    }
+	    if(gcuser==null){
+			throw new ServiceException(1,"玩家不存在！");
+		}
+		if(DateUtils.compareDateStr(startTime,endTime)==1){
+			throw new ServiceException(2,"结束时间要大于开始时间！");
+		}
+		if(searchUserName==null){
+			throw new ServiceException(3,"玩家不能为空！");
+		}
+		String startDate =startTime + " 00:00:00";
+		String endDate = endTime + " 23:59:59";
+		
+		
+		List<VipServiceFee> result = Lists.newArrayList();
+		VipServiceFee vipfee=null;
+		List<VipDownTemp> vipdown=vipDownTempDao.getDownVipList(searchUserName);
+		for (VipDownTemp vipDownTemp : vipdown) {
+			List<Datepay> datepayList = datePayDao.getSaleYbBeiYongList(vipDownTemp.getDownVip(), startDate, endDate, YbChangeType.ZHUANRU);
+			for (Datepay datepay : datepayList) {
+				  Gcuser vipDown = userService.getUserByUserName(vipDownTemp.getDownVip());
+				  if(datepay.getJc()!=0){
+					  if(vipDown.getVip()==2){
+						vipfee = new VipServiceFee();
+						vipfee.setUsername(datepay.getUsername());
+						vipfee.setDate(datepay.getAbdate());
+						vipfee.setDesc(datepay.getRegid());
+						vipfee.setIn(datepay.getJc());
+						vipfee.setServicefee(0);
+						vipfee.setServicejine(0);
+						result.add(vipfee);
+					  }else{
+						vipfee = new VipServiceFee();
+						vipfee.setUsername(datepay.getUsername());
+						vipfee.setDate(datepay.getAbdate());
+						vipfee.setDesc(datepay.getRegid());
+						vipfee.setIn(datepay.getJc());
+						vipfee.setServicefee(0.05);
+						vipfee.setServicejine(datepay.getJc()*0.05);
+						result.add(vipfee);
+					  }
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 }

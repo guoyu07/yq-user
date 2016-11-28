@@ -16,6 +16,7 @@ import com.yq.cw.bean.DayOfYb;
 import com.yq.cw.bean.SearchDayOfYb;
 import com.yq.cw.bean.VipSearchBdbLogBean;
 import com.yq.cw.bean.VipSearchLogBean;
+import com.yq.cw.bean.VipServiceFee;
 import com.yq.cw.service.CwService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -39,7 +40,7 @@ public class CwSearchVipDayOfYbAction extends ALDAdminPageActionSupport<SearchDa
 	
 	private SearchDayOfYb dayofyb;
 	
-	//private VipSearchBdbLogBean bdbLogbean;
+	private List<VipServiceFee> vipserviceFeeList;
 	
 	public String dayofyb(){
 		CwService cwService = ServiceCacheFactory.getService(CwService.class);
@@ -76,7 +77,40 @@ public class CwSearchVipDayOfYbAction extends ALDAdminPageActionSupport<SearchDa
 		return null;
 	}
 
-
+	public String ybservicefee(){
+		CwService cwService = ServiceCacheFactory.getService(CwService.class);
+		vipList = cwService.getMyDownVip(super.getUserName());
+		if (status == 1) {
+			UserService userService = ServiceCacheFactory.getService(UserService.class);
+		    gcuser = userService.getUserByUserName(searchUserName);
+		    vipserviceFeeList = cwService.getByserviceFeeList(searchUserName,startTime,endTime);
+		}
+		return SUCCESS;
+		
+	}
+	
+	public String yibiservicerfeeExcel(){
+		String queryStartDate = null;
+		String queryEndDatet = null;
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			queryStartDate = startTime+" 00:00:00";
+			queryEndDatet = endTime + " 23:59:59";
+		}
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String path = ServletActionContext.getServletContext().getRealPath("/");
+		String descDirectoryPath = null;
+		if(searchUserName!=null){
+			descDirectoryPath=path + "/temp/"+searchUserName+"-ybservicefee.xls";
+		}else{
+			descDirectoryPath=path + "/temp/"+startTime+"~"+endTime+"-ybservicefee.xls";
+		}
+		String[] headers ={ "用户名", "时间", "操作详情", "支出", "服务费", "服务费金额"};
+		List<VipServiceFee> data = ServiceCacheFactory.getService(CwService.class).getByserviceFeeList(searchUserName, queryStartDate, queryEndDatet);
+		writeExcel(descDirectoryPath.toString(), "用户"+searchUserName+"的一币服务费明细", headers, data, "yyyy-MM-dd hh:mm:ss");
+		download(descDirectoryPath.toString(), response);
+		return null;
+		
+	}
 
 	public SearchDayOfYb getDayofyb() {
 		return dayofyb;
@@ -194,6 +228,16 @@ public class CwSearchVipDayOfYbAction extends ALDAdminPageActionSupport<SearchDa
 
 	public void setBean(VipSearchLogBean bean) {
 		this.bean = bean;
+	}
+
+
+	public List<VipServiceFee> getVipserviceFeeList() {
+		return vipserviceFeeList;
+	}
+
+
+	public void setVipserviceFeeList(List<VipServiceFee> vipserviceFeeList) {
+		this.vipserviceFeeList = vipserviceFeeList;
 	}
 	
 	

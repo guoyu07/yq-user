@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="cwindex">一币日志查询</a>|<a href="cjblog">充值币日志查询</a>|<a href="dcdata">导出数据</a>|<a href="dayofyb">一币收付日记账</a>|<a href="bdblog">备用报单币收付日记账</a>
+<a href="cwindex">一币日志查询</a>|<a href="cjblog">充值币日志查询</a>|<a href="dcdata">导出数据</a>|<a href="dayofyb">一币收付日记账</a>|<a href="bdblog">备用报单币收付日记账</a>|<a href="ybservicefee">一币服务费明细表</a>
 </body>
 </html>

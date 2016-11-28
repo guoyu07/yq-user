@@ -20,6 +20,7 @@ import com.yq.cw.bean.DayOfYb;
 import com.yq.cw.bo.ConfYbChangeType;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
+import com.yq.user.constant.YbChangeType;
 
 public class DatePayDao {
 
@@ -451,7 +452,7 @@ public class DatePayDao {
 		return jdbc.getDouble(sql, sqlParameter);
 	}
 
-	public List<DayOfYb> getDatePayList(String searchUserName, String startDate, String endDate,int origintype) {
+	public List<DayOfYb> getDayOfYbList(String searchUserName, String startDate, String endDate,int origintype) {
 		List<DayOfYb> datepayList= new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append("select sum(dp.jc) as jcsum,sum(dp.syjz) as syjzsum,dp.regid,dp.ration from "+table+" dp  where (dp.jc != 0 or dp.syjz!=0) and  dp.username = ?  and dp.abdate between ? and ? and dp.origintype=? GROUP BY dp.ration ");
@@ -470,6 +471,29 @@ public class DatePayDao {
 			 datepayList.add(datepay);
 		}  
 		return datepayList;
+	}
+
+	/**
+	 * 得到一币备用日志
+	 * @param searchUserName
+	 * @param startDate
+	 * @param endDate
+	 * @param zhuanru
+	 * @return
+	 */
+	public List<Datepay> getSaleYbBeiYongList(String searchUserName, String startDate, String endDate, int zhuanru) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from "+table+" where username = ?");
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(searchUserName);
+		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
+			sql.append(" and abdate between ? and ?");
+			sqlParameter.setString(startDate);
+			sqlParameter.setString(endDate);
+		}
+		sql.append(" and (origintype ="+YbChangeType.VIP_RECHARGEBAODANBI+" or origintype ="+YbChangeType.ZHUANCHU+" )  order by id asc");
+		return this.jdbc.getList(sql.toString(), Datepay.class, sqlParameter);
+		
 	}
 	
 }

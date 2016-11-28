@@ -133,7 +133,6 @@ public class YbChangeType {
 	 * */
 	public static final int CUSTOMSERVICERECHARGETOUSER = 117;
 
-
 	/**
 	 * 转给同名账户
 	 * */
@@ -143,17 +142,6 @@ public class YbChangeType {
 	 * 收到同名账户
 	 * */
 	public static final int ZHUANRU_SAMENAME = 119;
-	
-	/**
-	 * 销售一币
-	 * */
-	public static final int ZHUANCHU = 11800;
-	
-	/**
-	 * 转入（认购一币）
-	 * */
-	public static final int ZHUANRU = 11801;
-
 
 	/**
 	 * 竞猜投注
@@ -166,7 +154,7 @@ public class YbChangeType {
 	public static final int PRODUCTBUY = 121;
 
 	/**
-	 * 商城退款
+	 * 退款
 	 **/
 	public static final int MALLTUIKUAN = 122;
 	
@@ -277,10 +265,21 @@ public class YbChangeType {
 	ticket_expenditure=票务支出
 	business_income=商户收入*/
 	
+	/**
+	 * 开户获得
+	 */
+	public static final int  KAIHU_ADD = 141;
 	
 	
+	/**
+	 * 销售一币
+	 * */
+	public static final int ZHUANCHU = 142;
 	
-	
+	/**
+	 * 转入（认购一币）
+	 * */
+	public static final int ZHUANRU = 143;
 	
 	
 }

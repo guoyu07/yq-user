@@ -28,6 +28,12 @@
 		</action>
 		<action name="dayofyboutexcel" class="com.yq.admin.cw.action.CwSearchVipDayOfYbAction" method="dayofyboutexcel">
 		</action>
+		<action name="ybservicefee" class="com.yq.admin.cw.action.CwSearchVipDayOfYbAction" method="ybservicefee">
+			<result name="success" >/cw/searchvipybservicefee.jsp</result>
+		</action>
+		<action name="yibiservicerfeeExcel" class="com.yq.admin.cw.action.CwSearchVipDayOfYbAction" method="yibiservicerfeeExcel">
+		</action>
+		
 		
 		<!-- 备用保单币收付明细 -->
 		<action name="bdblog" class="com.yq.admin.cw.action.CWBdblogAction">
