@@ -93,7 +93,7 @@ public class YbChangeType {
 	public static final int  YBSALE = 111;
 	
 	/**
-	 * 捐赠一币
+	 * 爱心捐赠
 	 */
 	public static final int DONATEYB = 112;
 	

@@ -2,10 +2,7 @@ package com.yq.cw.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -461,15 +458,13 @@ public class CwService {
 		}
 		List<ConfYbChangeType> origintypeList = this.getOrigintypeList();
 		List<String> datelist = DateUtils.separateDateStr(startTime, endTime, DateUtils.DAY_MSELS, DateUtils.YYYY_MM_DD_SDF);
-		List<DayOfYb> dayOfYbList = new ArrayList();
+		List<DayOfYb> dayOfYbList = new ArrayList<DayOfYb>();
 		DayOfYb dayofyb= null;
 		
 		for (int i = 0; i < datelist.size(); i++) {
 			String today = datelist.get(i);
 			String startDate =today + " 00:00:00";
 			String endDate = today + " 23:59:59";
-			
-			List<Datepay> datepayList=datePayDao.getDatePayList(searchUserName, startDate, endDate);
 			
 			Datepay startNumdatepay =  datePayDao.getDateLastDatePay(searchUserName, startDate);
 			int startNum=0;
@@ -478,86 +473,67 @@ public class CwService {
 				startNum = startNumdatepay.getPay();
 			}
 			
-			Set<Double> priceList = new HashSet<>();
-			for (Datepay datepay : datepayList) {
-				priceList.add(datepay.getRation());
-			}
-			
+			double otherin = 0;
+			double otherout = 0;
 			for (ConfYbChangeType origintype : origintypeList) {
-				double in = 0;
-				double out = 0;
-				double otherin = 0;
-				double otherout = 0;
-				for (Datepay datepay : datepayList) {//这是一个计算总共的循环
-					if(datepay.getOrigintype()==origintype.getOrigintype()&&origintype.getOrigintype()!=0){
-						if(datepay.getJc()!=0){
-							out =+datepay.getJc(); 
-						}
-						if(datepay.getSyjz()!=0){
-							in =+datepay.getSyjz();
-						}
-					}
-					if(datepay.getOrigintype()==0){
-						if(datepay.getJc()!=0){
-							otherout =+datepay.getJc(); 
-						}
-						if(datepay.getSyjz()!=0){
-							otherin =+datepay.getSyjz();
-						}
-					}
-				}
 				
-				for (Datepay datepay : datepayList) {//这是一个创建dayofyb的循环
-					if(datepay.getOrigintype()==origintype.getOrigintype()&&origintype.getOrigintype()!=0){
-						//分类不同价格
-						for (Double price : priceList) {
-							if(price==datepay.getRation()){//统计同种价格的金额
-								dayofyb= new DayOfYb();
-								dayofyb.setDate(today);
-								dayofyb.setOrigin(origintype.getOrigin());
-								dayofyb.setDesc(datepay.getRegid());
-								if(in!=0){
-									dayofyb.setIn(in);
-									dayofyb.setInprice(price);
-									if(price!=0){
-										dayofyb.setInjine(in*price);
-									}else{
-										dayofyb.setInjine(in);
-									}
-									
-								}
-								if(out!=0){
-									dayofyb.setOut(out);
-									dayofyb.setOutprice(price);
-									if(price!=0){
-										dayofyb.setOutjine(out*price);
-									}else{
-										dayofyb.setOutjine(out);
-									}
-								}
-								dayofyb.setPay(startNum+in-out);
-								dayOfYbList.add(dayofyb);
+				if(origintype.getOrigintype()!=0){
+					List<DayOfYb> datepayList=datePayDao.getDatePayList(searchUserName, startDate, endDate, origintype.getOrigintype());
+					
+					for (DayOfYb getdayofyb : datepayList) {
+						double in = getdayofyb.getIn();
+						double out = getdayofyb.getOut();
+						dayofyb= new DayOfYb();
+						dayofyb.setDate(today);
+						dayofyb.setOrigin(origintype.getOrigin());
+						dayofyb.setDesc(getdayofyb.getDesc());
+						if(in!=0){
+							dayofyb.setIn(in);
+							dayofyb.setInprice(getdayofyb.getInprice());
+							if(getdayofyb.getInprice()!=0){
+								dayofyb.setInjine(in*getdayofyb.getInprice());
+							}else{
+								dayofyb.setInjine(in);
+							}
+							
+						}
+						if(out!=0){
+							dayofyb.setOut(out);
+							dayofyb.setOutprice(getdayofyb.getOutprice());
+							if(getdayofyb.getOutprice()!=0){
+								dayofyb.setOutjine(out*getdayofyb.getOutprice());
+							}else{
+								dayofyb.setOutjine(out);
 							}
 						}
-						
+						dayofyb.setPay(startNum+in-out);
+						dayOfYbList.add(dayofyb);
+						if(dayofyb!=null){
+							startNum=(int) dayofyb.getPay();
+						}
+					}
+				}
+				if(origintype.getOrigintype()==0){
+					List<DayOfYb> datepayList=datePayDao.getDatePayList(searchUserName, startDate, endDate, 0);
+					for (DayOfYb getdayofyb : datepayList) {
+						otherin=+getdayofyb.getIn();
+						otherout=+getdayofyb.getOut();
 					}
 					
-				}
-					
-				if(origintype.getOrigintype()==0){
 					dayofyb= new DayOfYb();
-					dayofyb.setOrigin("其他");
-					dayofyb.setDesc("其他");
+					if(otherin==0&&otherout==0){
+						dayofyb.setOrigin(today+"_结余数");
+						dayofyb.setDesc("其他");
+					}else{
+						dayofyb.setOrigin("其他");
+						dayofyb.setDesc("其他");
+					}
 					dayofyb.setDate(today);
 					dayofyb.setPay(startNum+otherin-otherout);
 					dayofyb.setIn(otherin);
 					dayofyb.setOut(otherout);
 					dayOfYbList.add(dayofyb);
 				}
-				if(dayofyb!=null){
-					startNum=(int) dayofyb.getPay();
-				}
-				
 				
 			}
 			

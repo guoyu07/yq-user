@@ -20,7 +20,6 @@ public class DayOfYb {
 	
 	private double outjine;
 	
-	
 	private double pay;
 	
 	public String getDate() {

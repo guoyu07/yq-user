@@ -1,5 +1,6 @@
 package com.yq.user.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,9 +14,9 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
-import com.sr178.game.framework.exception.ServiceException;
 import com.yq.cw.bean.DatepayCw;
 import com.yq.cw.bean.DatepayForDc;
+import com.yq.cw.bean.DayOfYb;
 import com.yq.cw.bo.ConfYbChangeType;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
@@ -450,20 +451,22 @@ public class DatePayDao {
 		return jdbc.getDouble(sql, sqlParameter);
 	}
 
-	public List<Datepay> getDatePayList(String searchUserName, String startDate, String endDate) {
-		List<Datepay> datepayList= new ArrayList<>();
+	public List<DayOfYb> getDatePayList(String searchUserName, String startDate, String endDate,int origintype) {
+		List<DayOfYb> datepayList= new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
-		sql.append("select jc,syjz,regid,ration,origintype from "+table+" where username = ? and abdate between ? and ?  GROUP BY regid ");
-		List rows = jdbc.getJdbcTemplate().queryForList(sql.toString(),searchUserName,startDate,endDate);
+		sql.append("select sum(dp.jc) as jcsum,sum(dp.syjz) as syjzsum,dp.regid,dp.ration from "+table+" dp  where (dp.jc != 0 or dp.syjz!=0) and  dp.username = ?  and dp.abdate between ? and ? and dp.origintype=? GROUP BY dp.ration ");
+		List rows = jdbc.getJdbcTemplate().queryForList(sql.toString(),searchUserName,startDate,endDate,origintype);
 		Iterator it = rows.iterator();  
 		while(it.hasNext()) {  
 			 Map map = (Map) it.next();
-			 Datepay datepay = new Datepay();
-			 datepay.setJc((int)map.get("jc"));
-			 datepay.setSyjz((int)map.get("syjz"));
-			 datepay.setRation((double)map.get("ration"));
-			 datepay.setRegid((String)map.get("regid"));
-			 datepay.setOrigintype((int)map.get("origintype"));
+			 DayOfYb datepay = new DayOfYb();
+			 BigDecimal jcsum = new BigDecimal(map.get("jcsum").toString());   
+			 BigDecimal syjzsum = new BigDecimal(map.get("syjzsum").toString()); 
+			 datepay.setOut(jcsum.doubleValue());
+			 datepay.setIn(syjzsum.doubleValue());
+			 datepay.setInprice((double)map.get("ration"));
+			 datepay.setOutprice((double)map.get("ration"));
+			 datepay.setDesc((String)map.get("regid"));
 			 datepayList.add(datepay);
 		}  
 		return datepayList;
