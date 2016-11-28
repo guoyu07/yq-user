@@ -63,6 +63,7 @@ import com.yq.user.bo.UserScoresLogForExcel;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
+import com.yq.user.constant.BDBChangeType;
 import com.yq.user.constant.GpjyChangeType;
 import com.yq.user.constant.ScoresChangeType;
 import com.yq.user.constant.YbChangeType;
@@ -1041,7 +1042,7 @@ public class UserService {
 			
 
 			if(cjpay>=9000){//使用报单币开户
-				if(!updateSybdb(userName, -cjpay, "给"+bduser+"开户"+cjpay)){
+				if(!updateSybdb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0)){
 					throw new ServiceException(6,"报单币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
 			}else{
@@ -1277,7 +1278,7 @@ public class UserService {
 	 * @param desc
 	 * @return
 	 */
-	public boolean updateSybdb(String userName,int changeNum,String desc){
+	public boolean updateSybdb(String userName,int changeNum,String desc,int originType){
 		if(changeNum>=0){
 			boolean result = gcuserDao.addSybdb(userName, changeNum);
 			if(result){
@@ -1288,6 +1289,7 @@ public class UserService {
 				bdbdate.setSy(changeNum);
 				bdbdate.setSybdb(gcuser.getSybdb());
 				bdbdate.setLjbdb(gcuser.getLjbdb());
+				bdbdate.setOrigintype(originType);
 				bdbDateDao.add(bdbdate);
 			}
 			return result;
@@ -1302,6 +1304,7 @@ public class UserService {
 				bdbdate.setJc(changeNum);
 				bdbdate.setSybdb(gcuser.getSybdb());
 				bdbdate.setLjbdb(gcuser.getLjbdb());
+				bdbdate.setOrigintype(originType);
 				bdbDateDao.add(bdbdate);
 			}
 			return result;
@@ -1384,11 +1387,11 @@ public class UserService {
 		}
 		
 		//减被转者的报单币
-		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser)){
+		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser,0)){
 			throw new ServiceException(6, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
 		}
 		
-		this.updateSybdb(toUser, amount, "收到-服务中心"+fromUser.substring(0,2)+"***");
+		this.updateSybdb(toUser, amount, "收到-服务中心"+fromUser.substring(0,2)+"***",0);
 		
 		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
 		
@@ -1401,7 +1404,11 @@ public class UserService {
 	 * @param amount
 	 */
 	@Transactional
-	public void trasferBdbByAdmin(String fromUser,String toUser,int amount){
+	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,String remark){
+		
+		if(!"zbdb8989".equals(oppass)){
+			throw new ServiceException(6, "操作密码不正确！");
+		}
 		Gcuser from = gcuserDao.getUser(fromUser);
 		
 		if(from==null){
@@ -1425,11 +1432,11 @@ public class UserService {
 		}
 		
 		//减被转者的报单币
-		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser)){
+		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_REDUCE)){
 			throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
 		}
 		
-		this.updateSybdb(toUser, amount, "收到-"+fromUser);
+		this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_ADD);
 		
 	}
 	
@@ -1448,7 +1455,7 @@ public class UserService {
 		if(to==null){
 			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
 		}
-		this.updateSybdb(toUser, amount, "收到-系统");
+		this.updateSybdb(toUser, amount, "收到-系统",0);
 	}
 	
 	@Transactional
@@ -4273,7 +4280,7 @@ public class UserService {
 		if(!this.changeYb(toUserName, -9*amount, "转为报单币v", 0, null,0,YbChangeType.VIPDOWNRECHARGE)){
 			throw new ServiceException(6, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 		}
-		this.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v");
+		this.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v",0);
 	}
 	/**
 	 * 获取一币支付订单信息
@@ -5302,6 +5309,6 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		   throw new ServiceException(7,"一币不足！");
 	   }
 	   //加报单币
-	   this.updateSybdb(toUser, addBdb, userName+"-"+czb+"-充值币-"+byBdb+"备用报单币-"+yb+"一币转"+addBdb+"报单币");
+	   this.updateSybdb(toUser, addBdb, userName+"-"+czb+"-充值币-"+byBdb+"备用报单币-"+yb+"一币转"+addBdb+"报单币",0);
    }
 }

@@ -5,6 +5,7 @@
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('转出用户名报单币不能大于剩余报单币 ！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('接收的用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('转出用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('操作密码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('bdbjzpay');</script></c:if>
 <html>
 <head>
@@ -16,6 +17,8 @@
   if (Form.jzpay.value<5000) {      alert("转账的金额必须大于5000!");      return false;    } 
   if (Form.syuser.value=="") {      alert("请填写接收用户名!");      return false;    }
   if (Form.jcname.value==Form.syuser.value) {      alert("不能转给自己!");      return false;    }
+  if (Form.oppass.value=="") {      alert("操作密码不能为空!");  Form.oppass.focus;   return false;    }
+  if (Form.remark.value=="") {      alert("请选择备注!");  Form.oppass.focus;   return false;    }
   if (!chkinteger(Form.jzpay.value)){
 	alert('转账金额只能为整字!');
 	document.Form.jzpay.focus;
@@ -88,6 +91,19 @@ return (allValid);
       <TD align=middle bgColor=#ffffff width="169" height="41"><b><p align="right">
 		<font face="Tahoma" style="font-size: 11pt">接收用户名：</font></TD>
       <TD align=middle bgColor=#ffffff width="274" height="41"><p align="left">&nbsp;<input type="text" name="syuser" size="15"><font color="#FF0000" size="3"> **</font></TD>
+    </TR>
+     <TR class=content> 
+      <TD align=middle bgColor=#ffffff width="169" height="41"><b><p align="right">
+		<font face="Tahoma" style="font-size: 11pt">操作密码：</font></TD>
+      <TD align=middle bgColor=#ffffff width="274" height="41"><p align="left">&nbsp;<input type="text" name="oppass" size="15"><font color="#FF0000" size="3"> **</font></TD>
+    </TR>
+     <TR class=content> 
+      <TD align=middle bgColor=#ffffff width="169" height="41"><b><p align="right">
+		<font face="Tahoma" style="font-size: 11pt">备注：</font></TD>
+      <TD align=middle bgColor=#ffffff width="274" height="41"><p align="left">&nbsp;
+      <select style="width:130px;" id="remark" name="remark" >
+      <option value="转错">转错</option>
+      </select><!-- <input type="text" name="remark" size="15" maxlength="10"> <font color="#FF0000" size="3">*不超过10字。*</font>--></TD>
     </TR>
     <TR class=content> 
       <TD colSpan=2 align=middle bgColor=#ffffff width="439" height="32"> 

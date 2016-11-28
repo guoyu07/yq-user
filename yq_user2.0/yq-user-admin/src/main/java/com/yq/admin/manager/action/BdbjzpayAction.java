@@ -19,6 +19,8 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 	private int jzpay;
 	private String uid;
 	private Gcuser gcuser;
+	private String oppass;
+	private String remark;
 	
 	public String execute(){
 		if(status==0){
@@ -28,7 +30,7 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
             return INPUT;
         }
 		UserService userService  = ServiceCacheFactory.getService(UserService.class);
-		userService.trasferBdbByAdmin(jcname, syuser, jzpay);
+		userService.trasferBdbByAdmin(jcname, syuser, jzpay, oppass,remark);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -107,4 +109,25 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 	public void setGcuser(Gcuser gcuser) {
 		this.gcuser = gcuser;
 	}
+
+
+	public String getOppass() {
+		return oppass;
+	}
+
+
+	public void setOppass(String oppass) {
+		this.oppass = oppass;
+	}
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
 }

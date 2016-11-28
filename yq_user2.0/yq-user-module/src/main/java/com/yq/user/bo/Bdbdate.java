@@ -19,6 +19,8 @@ public class Bdbdate{
 	private int bq;
 	private Date bfdate;
 	private String bz;
+	private int origintype;
+	
 	public void setId(Integer id){
 	this.id=id;
 	}
@@ -91,5 +93,13 @@ public class Bdbdate{
 	public String getBz(){
 		return bz;
 	}
+	public int getOrigintype() {
+		return origintype;
+	}
+	public void setOrigintype(int origintype) {
+		this.origintype = origintype;
+	}
+	
+	
 }
 
