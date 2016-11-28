@@ -77,10 +77,6 @@ public class YbChangeType {
 	 */
 	public static final int  KAIHU_REDUCE = 109;
 	
-	/**
-	 * 开户获得
-	 */
-	public static final int  KAIHU_ADD = 10900;
 	
 	/**
 	 * 撤销一币卖出
@@ -110,7 +106,7 @@ public class YbChangeType {
 	
 	/**
 	 * 
-	 * 消费一币:
+	 * 消费一币(系统):
 		<option value="报单支出">报单</option>
 		<option value="消费支出">消费</option>
 		<option value="转户">转户</option>
@@ -139,14 +135,24 @@ public class YbChangeType {
 
 
 	/**
-	 * 转出
+	 * 转给同名账户
 	 * */
-	public static final int ZHUANCHU = 118;
+	public static final int ZHUANCHU_SAMENAME = 118;
 	
 	/**
-	 * 转入
+	 * 收到同名账户
 	 * */
-	public static final int ZHUANRU = 119;
+	public static final int ZHUANRU_SAMENAME = 119;
+	
+	/**
+	 * 销售一币
+	 * */
+	public static final int ZHUANCHU = 11800;
+	
+	/**
+	 * 转入（认购一币）
+	 * */
+	public static final int ZHUANRU = 11801;
 
 
 	/**
@@ -201,7 +207,7 @@ public class YbChangeType {
 	public static final int HUANGOU = 129;
 
 	/**
-	 * 商城支付
+	 * 商户消费
 	 * */
 	public static final int MALL_BUY_TAX_300FHK = 130;
 	
@@ -252,7 +258,7 @@ public class YbChangeType {
 	public static final int TRAIN_ELOQUENCE = 139;
 
 	/**
-	 * 大vip充值保单币
+	 * 销售一币（备用）
 	 * */
 	public static final int VIP_RECHARGEBAODANBI = 140;
 	

@@ -1524,10 +1524,10 @@ public class UserService {
 	 * @param amount
 	 */
 	private void trasferYb(String fromUser,String toUser,int amount){
-		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 6,null,0,YbChangeType.ZHUANCHU)){
+		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 6,null,0,YbChangeType.ZHUANCHU_SAMENAME)){
 			throw new ServiceException(100, "Yb不足");
 		}
-		this.changeYb(toUser, amount, "收到-"+fromUser, 6,null,0,YbChangeType.ZHUANRU);
+		this.changeYb(toUser, amount, "收到-"+fromUser, 6,null,0,YbChangeType.ZHUANRU_SAMENAME);
 	}
 	
 	/**
