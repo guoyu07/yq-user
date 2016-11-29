@@ -491,7 +491,7 @@ public class DatePayDao {
 			sqlParameter.setString(startDate);
 			sqlParameter.setString(endDate);
 		}
-		sql.append(" and (origintype ="+YbChangeType.VIP_RECHARGEBAODANBI+" or origintype ="+YbChangeType.ZHUANCHU+" )  order by id asc");
+		sql.append(" and (origintype ="+YbChangeType.KAIHU_ADD+" or origintype ="+YbChangeType.ZHUANCHU+" )  order by id asc");
 		return this.jdbc.getList(sql.toString(), Datepay.class, sqlParameter);
 		
 	}
