@@ -26,7 +26,7 @@ public class YbChangeType {
 	public static final int ADMIN_ORDER_RESET 	= 2008;		//管理员重置订单
 
 	/**
-	 * 系统补贴
+	 * 系统(一币补贴)
 	 */
 	public static final int SYSTEM_BUTIE = 100;
 
@@ -277,9 +277,39 @@ public class YbChangeType {
 	public static final int ZHUANCHU = 142;
 	
 	/**
-	 * 转入（认购一币）
+	 * 转入（认购一币&服务中心）
 	 * */
 	public static final int ZHUANRU = 143;
+	
+	/**
+	 * 认购一币
+	 * 
+	 * */
+	public static final int RENGOUYB = 144;
+
+	/**
+	 * 系統回收
+	 * 
+	 */
+	public static final int SYSRECYCLE = 145;
+	
+	/**
+	 * 
+	 * 消费一币获得(系统):
+		<option value="报单支出">报单</option>
+		<option value="消费支出">消费</option>
+		<option value="转户">转户</option>
+		<option value="培训费">培训费</option>
+		<option value="培训费">门票费</option>
+		<option value="培训费">杂志费</option>
+		<option value="商城业务">商城业务</option>
+		<option value="报纸费">报纸费</option>
+		<option value="提车手续费">提车手续费</option>
+		<option value="爱心捐助">爱心捐助</option>
+		<option value="培训餐费">培训餐费</option>
+		<option value="-1">自定义</option>
+	*/
+	public static final int SYSTEM_CONSUMEYB_ADD = 146;
 	
 	
 }

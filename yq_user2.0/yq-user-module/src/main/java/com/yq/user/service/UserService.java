@@ -818,7 +818,7 @@ public class UserService {
 				datePay.setRegid(desc);
 				datePay.setNewbz(newzBz);
 				datePay.setAbdate(new Date());
-				datePay.setOrigintype(YbChangeType.SYSTEM_CONSUMEYB);
+				datePay.setOrigintype(YbChangeType.SYSTEM_CONSUMEYB_ADD);
 				logService.addDatePay(datePay);
 			}
 			return result;
@@ -2375,6 +2375,7 @@ public class UserService {
 		}else{
 			datepay.setRation(0.9);
 		}
+		datepay.setOrigintype(YbChangeType.RENGOUYB);
 		datePayDao.addDatePay(datepay);
 		//更新所有同名账户状态为已支付状态
 		gcuserDao.updatePayOk(gcuser.getName(), gcuser.getUserid(), 0);
@@ -2412,7 +2413,7 @@ public class UserService {
 		}else{
 			datepay.setRation(0.9);
 		}
-		
+		datepay.setOrigintype(YbChangeType.RENGOUYB);
 		datePayDao.addDatePay(datepay);
 		//更新所有同名账户状态为已支付状态
 //		Gcuser gcuser = gcuserDao.getUser(txpay.getPayusername());
@@ -3382,6 +3383,7 @@ public class UserService {
 		datePay2.setJyjz(mc30);
 		datePay2.setRegid("卖出" + buyCount + "积分单价" + mcdj + "到" + userName);
 		datePay2.setAbdate(new Date());
+		datePay2.setOrigintype(YbChangeType.JF_SELL);
 		logService.addDatePay(datePay2);
 
 		//增加一条卖出成功的记录（作为卖出数量的）
@@ -3890,6 +3892,7 @@ public class UserService {
 		datePay2.setJyjz(mc30);
 		datePay2.setRegid("卖出" + gpjy1.getMcsl() + "积分单价" + mcdj + "到" + userName);
 		datePay2.setAbdate(new Date());
+		datePay2.setOrigintype(YbChangeType.JF_SELL);
 		logService.addDatePay(datePay2);
 
 		fcxtDao.update(2,gpjy1.getMcsl().intValue());

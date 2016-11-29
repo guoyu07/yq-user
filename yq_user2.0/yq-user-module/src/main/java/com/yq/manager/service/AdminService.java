@@ -1931,6 +1931,7 @@ public class AdminService {
 		datepay.setPay(pay);
 		datepay.setJydb(jydb);
 		datepay.setRegid(regId);
+		datepay.setOrigintype(YbChangeType.SYSRECYCLE);
 		return datePayDao.addDatePay(datepay);
 	}
 	
