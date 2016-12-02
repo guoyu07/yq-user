@@ -323,29 +323,43 @@ public class LogService {
 		
 		List<ClientBdblog> sysbiList = sysBiLogDao.getClientBdblogListByUsername(zuser, startTime, endTime);
 		List<ClientBdblog> sysbiList2 = sysBiLogDao.getListByOperaterName(zuser, startTime, endTime);
-		sysbiList.addAll(sysbiList2);
 		for (int i = 0; i < sysbiList.size(); i++) {
 			ClientBdblog clientsysBiLog = sysbiList.get(i);
-			 if(!"系统".equals(clientsysBiLog.getOperator())){
-				 clientsysBiLog.setUsername(clientsysBiLog.getOperator());
-				 clientsysBiLog.setOperator(clientsysBiLog.getUsername());
+			ClientBdblog tempclientsysBiLog = new ClientBdblog();
+			 if(clientsysBiLog.getAmount() < 0 ){
+				 tempclientsysBiLog.setUsername(clientsysBiLog.getOperator());
+				 tempclientsysBiLog.setOperator(clientsysBiLog.getUsername());
+				 tempclientsysBiLog.setOut(clientsysBiLog.getAmount());
+				 tempclientsysBiLog.setServicefee(0.05);
 			 }else{
-				 clientsysBiLog.setUsername(clientsysBiLog.getUsername());
-				 clientsysBiLog.setOperator(clientsysBiLog.getOperator());
+				 tempclientsysBiLog.setIn(clientsysBiLog.getAmount());
+				 tempclientsysBiLog.setServicefee(0);
+				 tempclientsysBiLog.setUsername(clientsysBiLog.getUsername());
+				 tempclientsysBiLog.setOperator(clientsysBiLog.getOperator());
 			 }
-			 
-			 if(clientsysBiLog.getAmount() < 0 && !"系统".equals(clientsysBiLog.getOperator())){
-				 clientsysBiLog.setOutjine(clientsysBiLog.getAmount());
-				 clientsysBiLog.setServicefee(0.05);
+			 tempclientsysBiLog.setAmount(clientsysBiLog.getAmount() < 0 ? -clientsysBiLog.getAmount() : clientsysBiLog.getAmount());
+			 if(tempclientsysBiLog.getOut()<0){
+				 tempclientsysBiLog.setServicefeejine(tempclientsysBiLog.getServicefee()*tempclientsysBiLog.getAmount());
 			 }else{
-				 clientsysBiLog.setInjine(clientsysBiLog.getAmount());
-				 clientsysBiLog.setServicefee(0);
+				 tempclientsysBiLog.setServicefeejine(0);
 			 }
-			 clientsysBiLog.setAmount(clientsysBiLog.getAmount() < 0 ? -clientsysBiLog.getAmount() : clientsysBiLog.getAmount());
-			 clientsysBiLog.setServicefeejine(clientsysBiLog.getServicefee()*clientsysBiLog.getAmount());
-			 clientsysBiLog.setCurrentamount(clientsysBiLog.getCurrentamount());
-			 clientsysBiLog.setRechargedate(clientsysBiLog.getRechargedate());
-			 clientBdblogList.add(clientsysBiLog);
+			 tempclientsysBiLog.setCurrentamount(clientsysBiLog.getCurrentamount());
+			 tempclientsysBiLog.setRechargedate(clientsysBiLog.getRechargedate());
+			 clientBdblogList.add(tempclientsysBiLog);
+		}
+		
+		for (int i = 0; i < sysbiList2.size(); i++) {//如果以后大vip可以给大vip充值
+			ClientBdblog clientsysBiLog = sysbiList2.get(i);
+			ClientBdblog tempclientsysBiLog = new ClientBdblog();
+			 tempclientsysBiLog.setIn(-clientsysBiLog.getAmount());
+			 tempclientsysBiLog.setServicefee(0);
+			 tempclientsysBiLog.setUsername(clientsysBiLog.getOperator());
+			 tempclientsysBiLog.setOperator(clientsysBiLog.getUsername());
+			 tempclientsysBiLog.setAmount(clientsysBiLog.getAmount() < 0 ? -clientsysBiLog.getAmount() : clientsysBiLog.getAmount());
+			 tempclientsysBiLog.setCurrentamount(clientsysBiLog.getCurrentamount());
+			 tempclientsysBiLog.setRechargedate(clientsysBiLog.getRechargedate());
+			 clientBdblogList.add(tempclientsysBiLog);
+			
 		}
 		return clientBdblogList;
 	}

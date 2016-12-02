@@ -76,9 +76,9 @@
 		          <td height="29" width="123" align="center" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 					<font color="#000000" face="宋体" size="2">${data.operator}</font></td>
 					<td valign="middle" align="center" width="71" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
-					<font size="2" face="宋体">${data.outjine}</font></td>
+					<font size="2" face="宋体">${data.out}</font></td>
 					<td valign="middle" align="center" width="71" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
-					<font size="2" face="宋体">${data.injine}</font></td>
+					<font size="2" face="宋体">${data.in}</font></td>
 					<td valign="middle" align="center" width="71" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 					<font size="2" face="宋体">${data.servicefee}</font></td>
 		          <td valign="middle" align="center" width="71" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">

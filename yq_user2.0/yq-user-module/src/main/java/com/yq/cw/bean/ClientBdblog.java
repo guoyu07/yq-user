@@ -11,9 +11,9 @@ public class ClientBdblog extends SysBiLog{
 	
 	private String operator; 				
 	
-	private double injine;
+	private double in;
 	
-	private double outjine;
+	private double out;
 
 	private double servicefee;
 	
@@ -33,22 +33,8 @@ public class ClientBdblog extends SysBiLog{
 		this.username = username;
 	}
 
-	public double getInjine() {
-		return injine;
-	}
-
-	public void setInjine(double injine) {
-		this.injine = injine;
-	}
-
-	public double getOutjine() {
-		return outjine;
-	}
-
-	public void setOutjine(double outjine) {
-		this.outjine = outjine;
-	}
-
+	
+	
 	public double getServicefee() {
 		return servicefee;
 	}
@@ -88,5 +74,23 @@ public class ClientBdblog extends SysBiLog{
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
+
+	public double getIn() {
+		return in;
+	}
+
+	public void setIn(double in) {
+		this.in = in;
+	}
+
+	public double getOut() {
+		return out;
+	}
+
+	public void setOut(double out) {
+		this.out = out;
+	}
+	
+	
 	
 }
