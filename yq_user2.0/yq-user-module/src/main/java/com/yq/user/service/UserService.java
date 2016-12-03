@@ -4104,7 +4104,8 @@ public class UserService {
 		}
 	}
 	                                                       
-	private static final String[] smsCode = new String[]{"WKkt32","BlQ9X","R630D1"};
+//	private static final String[] smsCode = new String[]{"WKkt32","BlQ9X","R630D1"};
+	private static final String[] smsCode = new String[]{"T2j2u8","O4hH6w","5X0S2l"};
 	public void sendYbSaleSmsMsg(String userName,int code){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		UserProperty p = userPropertyDao.getPorpertyByName(userName);
@@ -4113,7 +4114,9 @@ public class UserService {
 			return;
 		}
 			    try {
-			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), smsCode[code], new HashMap<String,String>())){
+			    	Map<String,String> param = new HashMap<String,String>();
+			    	param.put("userName", userName);
+			    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), smsCode[code], param)){
 			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
 			    	}
 				} catch (Exception e) {

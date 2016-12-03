@@ -9,6 +9,7 @@ import com.yq.cw.service.CwService;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.scheduler.SendChargeMsgScheduler;
+import com.yq.user.service.UserService;
 
 public class AdminServiceTest extends DaoTest{
 
@@ -21,6 +22,9 @@ public class AdminServiceTest extends DaoTest{
 //		adminService.executeSynNameSql();
 //		adminService.managequeren();
 //		final UserService userService = ServiceCacheFactory.getService(UserService.class);
+//		userService.sendYbSaleSmsMsg("dogdog7788", 0);
+//		userService.sendYbSaleSmsMsg("dogdog7788", 1);
+//		userService.sendYbSaleSmsMsg("dogdog7788", 2);
 //		
 //		
 //		new Thread(new Runnable() {
