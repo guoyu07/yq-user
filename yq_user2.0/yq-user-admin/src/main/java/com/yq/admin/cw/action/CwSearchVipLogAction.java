@@ -3,13 +3,19 @@ package com.yq.admin.cw.action;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.cw.bean.VipCjbLogBean;
+import com.yq.cw.bean.VipCjbOfDay;
 import com.yq.cw.bean.VipSearchLogBean;
+import com.yq.cw.bean.VipServiceFee;
 import com.yq.cw.service.CwService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -19,6 +25,7 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private String startTime;
+	private String endTime;
 	private List<String> vipList;
 	private String searchUserName;
 	private int status;
@@ -71,6 +78,44 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 		
 		return SUCCESS;
 	}
+	
+	private List<VipCjbOfDay> cjbOfDayList;
+	public String czbofday(){
+		CwService cwService = ServiceCacheFactory.getService(CwService.class);
+		vipList = cwService.getMyDownVip(super.getUserName());
+		if (status == 1) {
+			CwService cwServuce = ServiceCacheFactory.getService(CwService.class);
+			cjbOfDayList = cwServuce.vipCjbOfDayList(searchUserName, startTime, endTime);
+		}
+		
+		return SUCCESS;
+	}
+	
+	
+	public String czbofdayexcel(){
+		
+		String queryStartDate = null;
+		String queryEndDatet = null;
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			queryStartDate = startTime+" 00:00:00";
+			queryEndDatet = endTime + " 23:59:59";
+		}
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String path = ServletActionContext.getServletContext().getRealPath("/");
+		String descDirectoryPath = null;
+		if(searchUserName!=null){
+			descDirectoryPath=path + "/temp/"+searchUserName+"-czbofday.xls";
+		}else{
+			descDirectoryPath=path + "/temp/"+startTime+"~"+endTime+"-czbofday.xls";
+		}
+		String[] headers ={"时间", "备注(收入)", "收入", "支出"};
+		List<VipCjbOfDay> data = ServiceCacheFactory.getService(CwService.class).vipCjbOfDayList(searchUserName, queryStartDate, queryEndDatet);
+		writeExcel(descDirectoryPath.toString(), "用户"+searchUserName+"的充值币日明细", headers, data, "yyyy-MM-dd hh:mm:ss");
+		download(descDirectoryPath.toString(), response);
+		return null;
+		
+	}
+	
 	public String getStartTime() {
 		return startTime;
 	}
@@ -125,4 +170,28 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 	public void setCjbBean(VipCjbLogBean cjbBean) {
 		this.cjbBean = cjbBean;
 	}
+
+
+
+	public List<VipCjbOfDay> getCjbOfDayList() {
+		return cjbOfDayList;
+	}
+
+
+	public void setCjbOfDayList(List<VipCjbOfDay> cjbOfDayList) {
+		this.cjbOfDayList = cjbOfDayList;
+	}
+
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	
+	
+	
 }

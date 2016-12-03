@@ -350,15 +350,17 @@ public class LogService {
 		
 		for (int i = 0; i < sysbiList2.size(); i++) {//如果以后大vip可以给大vip充值
 			ClientBdblog clientsysBiLog = sysbiList2.get(i);
-			ClientBdblog tempclientsysBiLog = new ClientBdblog();
-			 tempclientsysBiLog.setIn(-clientsysBiLog.getAmount());
-			 tempclientsysBiLog.setServicefee(0);
-			 tempclientsysBiLog.setUsername(clientsysBiLog.getOperator());
-			 tempclientsysBiLog.setOperator(clientsysBiLog.getUsername());
-			 tempclientsysBiLog.setAmount(clientsysBiLog.getAmount() < 0 ? -clientsysBiLog.getAmount() : clientsysBiLog.getAmount());
-			 tempclientsysBiLog.setCurrentamount(clientsysBiLog.getCurrentamount());
-			 tempclientsysBiLog.setRechargedate(clientsysBiLog.getRechargedate());
-			 clientBdblogList.add(tempclientsysBiLog);
+			if(!clientsysBiLog.getOperator().equals(clientsysBiLog.getUsername())){
+				ClientBdblog tempclientsysBiLog = new ClientBdblog();
+				 tempclientsysBiLog.setIn(-clientsysBiLog.getAmount());
+				 tempclientsysBiLog.setServicefee(0);
+				 tempclientsysBiLog.setUsername(clientsysBiLog.getOperator());
+				 tempclientsysBiLog.setOperator(clientsysBiLog.getUsername());
+				 tempclientsysBiLog.setAmount(clientsysBiLog.getAmount() < 0 ? -clientsysBiLog.getAmount() : clientsysBiLog.getAmount());
+				 tempclientsysBiLog.setCurrentamount(clientsysBiLog.getCurrentamount());
+				 tempclientsysBiLog.setRechargedate(clientsysBiLog.getRechargedate());
+				 clientBdblogList.add(tempclientsysBiLog);
+			}
 			
 		}
 		return clientBdblogList;

@@ -24,6 +24,7 @@ import com.yq.cw.bean.DayOfYb;
 import com.yq.cw.bean.SearchDayOfYb;
 import com.yq.cw.bean.StatBean;
 import com.yq.cw.bean.VipCjbLogBean;
+import com.yq.cw.bean.VipCjbOfDay;
 import com.yq.cw.bean.VipCjglForDc;
 import com.yq.cw.bean.VipSearchLogBean;
 import com.yq.cw.bean.VipServiceFee;
@@ -596,6 +597,52 @@ public class CwService {
 		}
 		
 		return result;
+	}
+	
+	public List<VipCjbOfDay> vipCjbOfDayList(String searchUserName, String startTime, String endTime) {
+		
+		
+
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+	    Gcuser gcuser = userService.getUserByUserName(searchUserName);
+		
+	    if(searchUserName==null){
+			throw new ServiceException(3,"玩家不能为空！");
+		}
+	    
+	    if(Strings.isNullOrEmpty(startTime)||Strings.isNullOrEmpty(endTime)){
+		    	throw new ServiceException(4,"开始时间或结束时间不能为空！");
+	    }
+	    if(gcuser==null){
+			throw new ServiceException(1,"玩家不存在！");
+		}
+		if(DateUtils.compareDateStr(startTime,endTime)==1){
+			throw new ServiceException(2,"结束时间要大于开始时间！");
+		}
+		
+		
+		List<String> datelist = DateUtils.separateDateStr(startTime, endTime, DateUtils.DAY_MSELS, DateUtils.YYYY_MM_DD_SDF);
+		List<VipCjbOfDay> dayOfYbList = new ArrayList<VipCjbOfDay>();
+		
+		for (int i = 0; i < datelist.size(); i++) {
+			String today = datelist.get(i);
+			String startDate =today + " 00:00:00";
+			String endDate = today + " 23:59:59";
+			double zc = vipcjglDao.getSumVipZc(searchUserName, startDate, endDate);
+			double sr = vipcjglDao.getSumVipSr(searchUserName, startDate, endDate);
+			if(zc!=0||sr!=0){
+				VipCjbOfDay vipCjbOfDay= new VipCjbOfDay();
+				vipCjbOfDay.setDate(today);
+				vipCjbOfDay.setSrCount(sr);
+				vipCjbOfDay.setZcCount(zc);
+				if(zc!=0){
+					vipCjbOfDay.setSrdesc("充值");
+				}
+				dayOfYbList.add(vipCjbOfDay);
+			}
+			
+		}
+		return dayOfYbList;
 	}
 	
 }
