@@ -630,16 +630,21 @@ public class CwService {
 			String endDate = today + " 23:59:59";
 			double zc = vipcjglDao.getSumVipZc(searchUserName, startDate, endDate);
 			double sr = vipcjglDao.getSumVipSr(searchUserName, startDate, endDate);
-			if(zc!=0||sr!=0){
+			if(sr!=0){
 				VipCjbOfDay vipCjbOfDay= new VipCjbOfDay();
 				vipCjbOfDay.setDate(today);
 				vipCjbOfDay.setSrCount(sr);
-				vipCjbOfDay.setZcCount(zc);
-				if(zc!=0){
-					vipCjbOfDay.setSrdesc("充值");
-				}
+				vipCjbOfDay.setSrdesc("认购充值币");
 				dayOfYbList.add(vipCjbOfDay);
 			}
+			if(zc!=0){
+				VipCjbOfDay vipCjbOfDay= new VipCjbOfDay();
+				vipCjbOfDay.setDate(today);
+				vipCjbOfDay.setZcCount(zc);
+				vipCjbOfDay.setSrdesc("销售充值币");
+				dayOfYbList.add(vipCjbOfDay);
+			}
+				
 			
 		}
 		return dayOfYbList;

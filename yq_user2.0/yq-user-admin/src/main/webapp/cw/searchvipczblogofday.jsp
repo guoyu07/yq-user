@@ -80,8 +80,8 @@
               </c:if>
               </font></td> --%>
               <td valign="middle" align="center"><font color="#FF0000" face="宋体" size="2">${data.srdesc}</font></td>
-              <td valign="middle" align="center" width="95"><font color="#000000" face="宋体" size="2">${data.zcCount}</font></td>
               <td valign="middle" align="center" width="95"><font color="#000000" face="宋体" size="2">${data.srCount}</font></td>
+              <td valign="middle" align="center" width="95"><font color="#000000" face="宋体" size="2">${data.zcCount}</font></td>
               </tr>
               </s:iterator>
             </table> 
