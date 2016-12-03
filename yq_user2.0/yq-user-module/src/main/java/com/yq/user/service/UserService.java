@@ -5287,7 +5287,7 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		   throw new ServiceException(5,"充值币不足！");
 	   }else{
 			Vipcjgl vipcjgl = new Vipcjgl();
-			vipcjgl.setCjuser(userName);
+			vipcjgl.setCjuser(toUser);
 			vipcjgl.setCjjo(czb);
 			vipcjgl.setSycjb(gcuser.getVipcjcjb()-czb);
 			vipcjgl.setVipuser(userName);
