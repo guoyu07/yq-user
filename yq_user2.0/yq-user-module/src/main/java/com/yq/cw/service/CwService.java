@@ -493,21 +493,23 @@ public class CwService {
 						if(in!=0){
 							dayofyb.setIn(in);
 							dayofyb.setInprice(getdayofyb.getInprice());
-							if(getdayofyb.getInprice()!=0){
+							dayofyb.setInjine(in*getdayofyb.getInprice());
+							/*if(getdayofyb.getInprice()!=0){
 								dayofyb.setInjine(in*getdayofyb.getInprice());
 							}else{
 								dayofyb.setInjine(in);
-							}
+							}*/
 							
 						}
 						if(out!=0){
 							dayofyb.setOut(out);
 							dayofyb.setOutprice(getdayofyb.getOutprice());
-							if(getdayofyb.getOutprice()!=0){
+							dayofyb.setOutjine(out*getdayofyb.getOutprice());
+							/*if(getdayofyb.getOutprice()!=0){
 								dayofyb.setOutjine(out*getdayofyb.getOutprice());
 							}else{
 								dayofyb.setOutjine(out);
-							}
+							}*/
 						}
 						dayofyb.setPay(startNum+in-out);
 						dayOfYbList.add(dayofyb);
