@@ -40,7 +40,7 @@
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="73">
 	<p align="center" style="line-height: 150%; margin-top: 0; margin-bottom: 0">
-	<b><span style="font-size: 11pt">VIP(${searchUserName})(${gcuser.name})<%-- (报单=${gcuser.sjb}) --%>一币日志明细</span></b><span style="font-size: 11pt"></span></p>
+	<b><span style="font-size: 11pt">VIP(${searchUserName})(${gcuser.name})<%-- (报单=${gcuser.sjb}) --%>一币收付日记账</span></b><span style="font-size: 11pt"></span></p>
 	<p>
 	<form method="post" name="Form" action="dayofyb?status=1">
 	<select name="searchUserName">
