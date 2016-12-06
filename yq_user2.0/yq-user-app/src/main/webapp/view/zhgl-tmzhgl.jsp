@@ -32,8 +32,12 @@ function CheckAll(form) {
  function cf(){
 	 if(form.tp.value==0){
 		 return confirm('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-474644738'/>?');
-	 }else{
+	 }
+	 if(form.tp.value==1){
 		 return confirm('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-1733349801'/>?');
+	 }
+	 if(form.tp.value==2){
+		 return confirm('<s:text name='querenbaodanbishuliang'/>?');
 	 }
  }
 </script>
@@ -75,8 +79,9 @@ function CheckAll(form) {
 								<td><input type="checkbox" name="fromUsers" value="${data.username}"></td>
 								<td>${data.username}</td>
 								<td>${data.name}</td>
-								<td><input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></td>
-								<td>${data.scores}<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.35660508'/></td>
+								<td><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>:<input type="hidden" name="tpay" size="10" value="${data.pay}" readonly>${data.pay}</td>
+								<td><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.35660508'/>:${data.scores}</td>
+								<td><s:text name='viewlinks.html.links.html.-1788801323'/>:${data.sybdb}</td>
 							</tr>
 						</s:iterator>
 						</table>
