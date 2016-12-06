@@ -1430,13 +1430,28 @@ public class UserService {
 		if(to==null){
 			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
 		}
-		
-		//减被转者的报单币
-		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_REDUCE)){
-			throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		if("转错".equals(remark)){
+			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_REDUCE)){
+				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+			}
+			
+			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_ADD);
 		}
-		
-		this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_ADD);
+		if("VIP充值错误转回".equals(remark)){
+			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_VIPRECHARGE_REDUCE)){
+				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+			}
+			
+			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_VIPRECHARGE_ADD);
+			
+		}
+		if("宿舍押金".equals(remark)){
+			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_DEPOSIT_REDUCE)){
+				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+			}
+			
+			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_DEPOSIT_ADD);
+		}
 		
 	}
 	
@@ -1565,6 +1580,75 @@ public class UserService {
 				trasferYb(fromUser,toUser,user.getPay());
 			}
 		}
+	}
+	
+	
+	/**
+	 * 批量转入报单币
+	 * 
+	 * @param fromUsers
+	 * @param toUser
+	 * @param password3
+	 */
+	@Transactional
+	public void batchtrasferBdb(List<String> fromUsers,String toUser,String password3){
+		Gcuser gcuser = gcuserDao.getUser(toUser);
+		if(!gcuser.getPassword3().equals(password3)){
+			throw new ServiceException(1, "二级密码错误，请检查输入是否正确！");
+		}
+		
+		for(String fromUser: fromUsers){
+			Gcuser user = gcuserDao.getUser(fromUser);
+			if(user==null){
+				throw new ServiceException(4, "用户不存在");
+			}
+			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().trim().toLowerCase().equals(user.getUserid().trim().toLowerCase())){
+				throw new ServiceException(5, "非同名用户,不能转,from name=["+user.getName()+"]，userid=["+user.getUserid().toLowerCase()+"],to name=["+gcuser.getName()+"],userId=["+gcuser.getUserid().toLowerCase()+"],名字判断=["+(gcuser.getName().equals(user.getName()))+"],身份证判断=["+(gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase()))+"]");
+			}
+			if(user.getSybdb()>0&&!fromUser.equals(toUser)){
+				trasferBdb(fromUser,toUser,user.getSybdb());
+			}
+		}
+	}
+	
+	
+	/**
+	 * 报单币转账
+	 * @param fromUser
+	 * @param toUser
+	 * @param amount
+	 */
+	@Transactional
+	public void trasferBdb(String fromUser,String toUser,int amount){
+		Gcuser from = gcuserDao.getUser(fromUser);
+		if(from.getVip()==0){
+			throw new ServiceException(1, "vip用户才能玩这个功能！");
+		}
+		
+		if(fromUser.equals(toUser)){
+			throw new ServiceException(3, "不能转给自己！");
+		}
+		if(amount<=0){
+			throw new ServiceException(5, "转账金额不能小于0");
+		}
+		
+		if(from.getSybdb()<amount){
+			throw new ServiceException(6, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		}
+		Gcuser to = gcuserDao.getUser(toUser);
+		if(to==null){
+			throw new ServiceException(7, "接收的用户名不存在，请检查输入是否正确！");
+		}
+		
+		//减被转者的报单币
+		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser,0)){
+			throw new ServiceException(6, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		}
+		
+		this.updateSybdb(toUser, amount, "收到-服务中心"+fromUser.substring(0,2)+"***",0);
+		
+		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
+		
 	}
 	
 	
