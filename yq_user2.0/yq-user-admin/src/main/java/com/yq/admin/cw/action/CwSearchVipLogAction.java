@@ -108,7 +108,7 @@ public class CwSearchVipLogAction extends ALDAdminActionSupport {
 		}else{
 			descDirectoryPath=path + "/temp/"+startTime+"~"+endTime+"-czbofday.xls";
 		}
-		String[] headers ={"时间", "备注(收入)", "收入", "支出"};
+		String[] headers ={"时间", "备注(收入)", "支出", "收入"};
 		List<VipCjbOfDay> data = ServiceCacheFactory.getService(CwService.class).vipCjbOfDayList(searchUserName, queryStartDate, queryEndDatet);
 		writeExcel(descDirectoryPath.toString(), "用户"+searchUserName+"的充值币日明细", headers, data, "yyyy-MM-dd hh:mm:ss");
 		download(descDirectoryPath.toString(), response);
