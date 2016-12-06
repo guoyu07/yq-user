@@ -90,6 +90,7 @@
 			Form.ggpa3.focus();
 			return;
 		}
+		
 		if (!CheckIfEnglish(Form.ggpa3.value)) {
 			alert("<s:text name='reg1.jsp.reg1.jsp.-1932694410'/>");
 			Form.ggpa3.focus();
@@ -103,6 +104,16 @@
 		if (Form.ggpa3.value.length > 20) {
 			alert("<s:text name='reg.jsp.reg.jsp.653975038'/>!");
 			Form.ggpa3.focus();
+			return;
+		}
+		if (Form.ggpa32.value == "") {
+			alert("<s:text name='confirmsecondarypasswordnnotempty'/>!");
+			Form.ggpa32.focus();
+			return;
+		}
+		if (Form.ggpa32.value != Form.ggpa3.value) {
+			alert("<s:text name='diffrientscendpassward'/>!");
+			Form.ggpa32.focus();
 			return;
 		}
 		if (!Form.sfz.checked) {
@@ -144,6 +155,7 @@
 						<p><label><s:text name='reg.jsp.reg.jsp.626784226'/>：</label><input type="password" name="ggpa1" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label><s:text name='reg1.jsp.reg1.jsp.1449504216'/>：</label><input type="password" name="ggpa2" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" ></p>
 						<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><input type="password" name="ggpa3" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
+						<p><label><s:text name='confirmsecondarypassword'/>：</label><input type="password" name="ggpa32" size="20" onKeyUp="value=value.replace(/[\W]/g,'')" maxlength="20"></p>
 						<p class="tyxy"><input type="checkbox" checked="checked" name="sfz"><s:text name='reg1.jsp.reg1.jsp.-2094390242'/><a href="javascript:openwindow('sfz${SESSION_LOCALE}.html')"><s:text name='reg1.jsp.reg1.jsp.-2094390242a'/></a></p>
 						<p class="z-tc"><a class="newbut" href="#" onClick="checkdate1();"><s:text name='reg1.jsp.reg1.jsp.19846320'/></a></p>
 					</div>

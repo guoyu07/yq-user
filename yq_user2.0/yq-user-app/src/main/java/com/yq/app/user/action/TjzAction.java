@@ -20,7 +20,7 @@ public class TjzAction extends ALDAdminPageActionSupport<Gcuser> {
 	
 	private String pa2j;
 	
-	private int tp;//0  转一币  1转购物券
+	private int tp;//0  转一币  1转购物券 2保单币
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -36,8 +36,10 @@ public class TjzAction extends ALDAdminPageActionSupport<Gcuser> {
 			}
 			if(tp==0){
 				userService.batchTrasferYb(fromUsers, super.getUserName(), pa2j);
-			}else{
+			}else if(tp==1){
 				userService.batchTrasferScores(fromUsers, super.getUserName(), pa2j);
+			}else if(tp==2){
+				userService.batchtrasferBdb(fromUsers, super.getUserName(), pa2j);
 			}
 			super.setErroCodeNum(10);
 		}

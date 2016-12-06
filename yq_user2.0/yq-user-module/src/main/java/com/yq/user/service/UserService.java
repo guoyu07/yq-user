@@ -1597,6 +1597,14 @@ public class UserService {
 			throw new ServiceException(1, "二级密码错误，请检查输入是否正确！");
 		}
 		
+		if(gcuser.getJygt1()==2 || gcuser.getDbt1()==2){
+			throw new ServiceException(3, "操作错误，请检查输入是否正确！");
+		}
+		
+		if(gcuser.getSjb()==0){
+			throw new ServiceException(7, "非双区用户不能进行该操作！");
+		}
+		
 		for(String fromUser: fromUsers){
 			Gcuser user = gcuserDao.getUser(fromUser);
 			if(user==null){
@@ -1629,7 +1637,7 @@ public class UserService {
 			throw new ServiceException(3, "不能转给自己！");
 		}
 		if(amount<=0){
-			throw new ServiceException(5, "转账金额不能小于0");
+			throw new ServiceException(13, "转账保单币小于0");
 		}
 		
 		if(from.getSybdb()<amount){
@@ -1637,15 +1645,15 @@ public class UserService {
 		}
 		Gcuser to = gcuserDao.getUser(toUser);
 		if(to==null){
-			throw new ServiceException(7, "接收的用户名不存在，请检查输入是否正确！");
+			throw new ServiceException(12, "接收的用户名不存在，请检查输入是否正确！");
 		}
 		
 		//减被转者的报单币
-		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser,0)){
-			throw new ServiceException(6, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
+		if(!this.updateSybdb(fromUser, -amount, "批量转给-"+toUser,0)){
+			throw new ServiceException(11, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
 		}
 		
-		this.updateSybdb(toUser, amount, "收到-服务中心"+fromUser.substring(0,2)+"***",0);
+		this.updateSybdb(toUser, amount, "批量获得-"+fromUser.substring(0,2)+"***",0);
 		
 		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
 		

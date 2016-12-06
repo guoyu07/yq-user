@@ -187,7 +187,11 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/></option>
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/></option>
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1019445992'/></option>
-							<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
+							<c:choose>  
+									<c:when test="${SESSION_LOCALE=='en_US'}"> 
+										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
+					   				</c:when>
+				   			</c:choose>
 							<%-- <option value="<s:text name='alipay'/>"><s:text name='alipay'/></option> --%>
 							</select></p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799409753'/>：</label><input type="text" name="card" onKeyUp="value=value.replace(/[^\d]/g,'')" size="20" maxlength="19" value="${gcuser.card}" /></p>
