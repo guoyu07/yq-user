@@ -85,6 +85,7 @@ return (allValid);
 				<option value="30000">--3万--</option>
 				<option value="50000">--5万--</option>
 				<option value="100000">--10万--</option>
+				<option value="500000">--50万--</option>
 				</select> **</font></TD>
     </TR>
     <TR class=content> 
@@ -103,6 +104,8 @@ return (allValid);
       <TD align=middle bgColor=#ffffff width="274" height="41"><p align="left">&nbsp;
       <select style="width:130px;" id="remark" name="remark" >
       <option value="转错">转错</option>
+      <option value="VIP充值错误转回">VIP充值错误转回</option>
+      <option value="宿舍押金">宿舍押金</option>
       </select><!-- <input type="text" name="remark" size="15" maxlength="10"> <font color="#FF0000" size="3">*不超过10字。*</font>--></TD>
     </TR>
     <TR class=content> 
