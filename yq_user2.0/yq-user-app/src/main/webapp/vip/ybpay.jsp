@@ -28,6 +28,12 @@ function checkdate()  {
     $("#btn").attr("disabled","disabled");
 	var data = $("#Form").serialize();
 	$.post("/sms2?op=7&status=8&toUserName="+Form.user.value, data, function(response) {
+		if(response.erroCodeNum==1){
+			alert('<s:text name='dones.not.exist.username'/>！');
+			$("#btn").attr("disabled",false);
+			Form.user.focus();  return false;
+			
+		}
 		if(response.erroCodeNum==2){
 			alert('<s:text name='Enter_phone_number_error'/>！');
 			$("#btn").attr("disabled",false);
