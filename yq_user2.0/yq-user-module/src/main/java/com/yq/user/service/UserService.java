@@ -1366,6 +1366,11 @@ public class UserService {
 			throw new ServiceException(2, "二级密码不正确");
 		}
 		
+		Gcuser to = gcuserDao.getUser(toUser);
+		if(to==null){
+			throw new ServiceException(7, "接收的用户名不存在，请检查输入是否正确！");
+		}
+		
 		if(fromUser.equals(toUser)){
 			throw new ServiceException(3, "不能转给自己！");
 		}
@@ -1373,7 +1378,40 @@ public class UserService {
 			if(zuoMingxiDao.get(fromUser, toUser)==null&&youMingXiDao.get(fromUser, toUser)==null){
 				throw new ServiceException(4, "只能转给自己团队的并已进入双区的玩家！");
 			}
+			//自己是大vip 则可以给其下的小vip转
+			if(from.getVip()==2){
+				if(to.getVip()==3){//对象是其下的小vip可以转  不做处理
+					
+				}else if(to.getVip()==2){//对象是其下的大vip 不能转
+					throw new ServiceException(12, "该玩家是大vip！您不能转给他！");
+				}else if(to.getVip()==0){//对象是其下的普通用户 则判断该用户的上级vip是否为他
+					String vip = this.findMyUpVipName(toUser);
+					//被转者如果为普通用户 如果其上级vip不是转出者 不可以转
+					if(!vip.equals(fromUser)){
+						throw new ServiceException(11, "该玩家的上级vip不是您！您不能转给他！");
+					}
+				}else{
+					throw new ServiceException(13, to.getUsername()+"不可识别的vip标示"+to.getVip());
+				}
+			}else if(from.getVip()==3){//自己是小vip
+				if(to.getVip()==2){//对象是大vip  无论隔几层都不能转
+					throw new ServiceException(12, "该玩家是大vip！您不能转给他！");
+				}else if(to.getVip()==3){
+					throw new ServiceException(14, "您只是小vip！不能转给您团队下的小vip！");
+				}else if(to.getVip()==0){
+					String vip = this.findMyUpVipName(toUser);
+					//被转者如果为普通用户 如果其上级vip不是转出者 不可以转
+					if(!vip.equals(fromUser)){
+						throw new ServiceException(11, "该玩家的上级vip不是您！您不能转给他！");
+					}
+				}else{
+					throw new ServiceException(13, to.getUsername()+"不可识别的vip标示"+to.getVip());
+				}
+			}else{
+				throw new ServiceException(10, "该功能vip才能使用！");
+			}
 		}
+		
 		if(amount<=0){
 			throw new ServiceException(5, "转账金额不能小于0");
 		}
@@ -1381,10 +1419,8 @@ public class UserService {
 		if(from.getSybdb()<amount){
 			throw new ServiceException(6, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
 		}
-		Gcuser to = gcuserDao.getUser(toUser);
-		if(to==null){
-			throw new ServiceException(7, "接收的用户名不存在，请检查输入是否正确！");
-		}
+		
+
 		
 		//减被转者的报单币
 		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser,0)){
