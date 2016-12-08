@@ -3868,7 +3868,7 @@ public class UserService {
 		datePay2.setJyjz(mc30);
 		datePay2.setRegid("卖出" + gpjy1.getMcsl() + "积分单价" + mcdj + "到" + userName);
 		datePay2.setAbdate(new Date());
-		datePay1.setOrigintype(YbChangeType.JF_SELL);
+		datePay2.setOrigintype(YbChangeType.JF_SELL);
 		logService.addDatePay(datePay2);
 
 		fcxtDao.update(2,gpjy1.getMcsl().intValue());
