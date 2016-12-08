@@ -563,5 +563,17 @@ public class GpjyDao {
 		String sql="select * from "+table+" where username = ? and  ISNULL(cgdate) order by id desc";
 		return this.jdbc.getListPage(sql, Gpjy.class, SqlParameter.Instance().withString(userName), pageSize, pageIndex);
 	}
+
+	
+	
+	/**  
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Gpjy> getMcPageForSystemOrderByPay(int pageSize) {
+		String sql="select * from "+table+" where id in(select t.id from (select id from gpjy_index_mc order by pay asc limit "+pageSize+")t )";
+		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
+		return list;
+	}
 	
 }

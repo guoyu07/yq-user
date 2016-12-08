@@ -687,7 +687,12 @@
 		    <result name="success">
 		      /admin/salejf.jsp
 		    </result>
-		</action>		
+		</action>	
+		<action name="buyjf" class="com.yq.admin.manager.action.AutoJfBuyAction" method="dealJfMcByAdmin">
+			<result name="success">
+				/admin/buyjf.jsp
+			</result>
+		</action>	
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
