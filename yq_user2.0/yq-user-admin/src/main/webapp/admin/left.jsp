@@ -152,7 +152,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 </tr>
 <tr>
 <td style="display:" id='submenu3'>
-<div class=sec_menu style="width:158px; height:200px">
+<div class=sec_menu style="width:158px; height:230px">
             <table cellpadding=0 cellspacing=0 align=center width=150 height="93">
             <c:if test="${fcxt.id==1}">
               <tr> 
