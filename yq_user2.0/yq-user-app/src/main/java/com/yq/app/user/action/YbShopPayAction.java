@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -196,6 +197,64 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	}
 	
 	
+	/**
+	 * 
+	 * 查询订单信息状态
+	 * 
+	 * */
+	private int statusCode;
+	
+	private String msg;
+	private String rc;
+	public String mallorder(){
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+		Map<Integer, String> map = userService.getUserMallOrderStatus(user, pa01, order, pa02, this.sign);
+		for(Map.Entry<Integer, String> entry: map.entrySet()) {
+			 statusCode = Integer.parseInt(entry.getKey().toString());
+			 msg = entry.getValue();
+			 rc= entry.getKey()+"";
+			 sn=MD5Security.md5_16(order+"$@@$"+statusCode+msg+rc);
+		}
+		return SUCCESS;
+	}
+	
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+
+
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
+
+
+	public String getMsg() {
+		return msg;
+	}
+
+
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+
+
+	public String getRc() {
+		return rc;
+	}
+
+
+
+	public void setRc(String rc) {
+		this.rc = rc;
+	}
+
+
+
 	/**
 	 * 回调机票服务器
 	 */

@@ -415,6 +415,12 @@
 			method="ybpay">
 			<result name="success">vip/ybpay.jsp</result>
 		</action>
+		<action name="mallorder" class="com.yq.app.user.action.YbShopPayAction"
+			method="mallorder">
+			<result name="success" type="json" >
+			<param name="includeProperties">statusCode,msg,rc,sn</param>
+			</result>
+		</action>
 		<action name="hgybsh" class="com.yq.app.user.action.YbShopPayAction"
 			method="hgybsh">
 			<result name="success">vip/hgyb.jsp</result>

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -5445,4 +5446,46 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	   //加报单币
 	   this.updateSybdb(toUser, addBdb, userName+"-"+czb+"-充值币-"+byBdb+"备用报单币-"+yb+"一币转"+addBdb+"报单币",0);
    }
+
+	
+	/**
+	 * 获得玩家订单信息状态
+	 * @param user
+	 * @param pa01
+	 * @param order
+	 * @param pa02
+	 * @param sign
+	 * @return
+	 */
+	public Map<Integer,String> getUserMallOrderStatus(String user, String pa01, String order, String pa02,String sign) {
+		Map<Integer,String> map=new ConcurrentHashMap<>();
+		MallOrder mallOrder = mallOrderDao.get(new SqlParamBean("order_id", order));
+		if(mallOrder==null){
+			 map.put(2, "订单号不存在");
+			 return map;
+		}
+		
+		if(sign==null){
+			 map.put(4, "签名不能为空");
+			 return map;
+		}
+		String signStr= order+"yc$shop@Sfie68";
+		String mySign;
+		try {
+			mySign = MD5Security.code(signStr,32).toLowerCase();
+			 if(!sign.equals(mySign)){
+				 map=new HashMap<>();
+				 LogSystem.warn("md5校验失败，收到的key=["+signStr+"],md5后的值为["+mySign+"],收到的sing=["+sign+"]");
+				 map.put(3, "签名无效");
+				 return map;
+			 }
+		} catch (Exception e) {
+			 LogSystem.error(e, "md5加密失败");
+			 map.put(3, "签名无效");
+			 return map;
+		 }
+		
+		map.put(mallOrder.getStatus(), "成功");
+		return map;
+	}
 }

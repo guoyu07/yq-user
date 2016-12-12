@@ -84,7 +84,6 @@
 	</properties>
 
 	<dependencies>
-		 
   	    <dependency>
             <groupId>com.sr178.module</groupId>
             <artifactId>module-web</artifactId>
