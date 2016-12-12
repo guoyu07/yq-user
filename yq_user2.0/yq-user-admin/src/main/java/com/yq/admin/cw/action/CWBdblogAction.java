@@ -73,7 +73,7 @@ public class CWBdblogAction extends ALDAdminPageActionSupport<SysBiLog> {
 		}else{
 			descDirectoryPath=path + "/temp/"+startTime+"~"+endTime+"-bdb.xls";
 		}
-		String[] headers ={ "充值用户", "被充值的用户", "收入", "支出","服务费","服务费金额", "用户当前数量", "充值时间"};
+		String[] headers ={ "被充值的用户", "充值用户",  "收入", "支出","服务费","服务费金额", "用户当前数量", "充值时间"};
 		List<ClientBdblog> data = ServiceCacheFactory.getServiceCache().getService(LogService.class).getClientBdblogList(searchUserName,queryStartDate,queryEndDatet);
 		writeExcel(descDirectoryPath.toString(), "用户"+searchUserName+"保单币充值明细", headers, data, "yyyy-MM-dd hh:mm:ss");
 		download(descDirectoryPath.toString(), response);
