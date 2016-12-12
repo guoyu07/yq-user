@@ -71,6 +71,7 @@ import com.yq.user.bo.Txpay;
 import com.yq.user.bo.TxpayIndex;
 import com.yq.user.bo.UserExtinfo;
 import com.yq.user.bo.UserPerformance;
+import com.yq.user.bo.UserProperty;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.bo.Vipxtgc;
 import com.yq.user.bo.YouMingxi;
@@ -429,7 +430,15 @@ public class AdminService {
 		}
 		
 		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
-			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
+			if(userPropertyDao.isHasUserpropertyByName(userName)){
+				userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
+			}else{
+				UserProperty userproperty= new UserProperty();
+				userproperty.setRegion_code(areaCode);
+				userproperty.setUsername(userName);
+				userPropertyDao.insertUserProperty(userproperty);
+			}
+			
 		}
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
