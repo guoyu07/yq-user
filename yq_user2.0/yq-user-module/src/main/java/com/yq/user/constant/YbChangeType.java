@@ -67,7 +67,7 @@ public class YbChangeType {
 	public static final int  CONSUMPTION=107;
 	
 	/**
-	 * 积分卖出获得
+	 * 卖出积分所得
 	 */
 	public static final int  JF_SELL = 108;
 	
@@ -310,6 +310,14 @@ public class YbChangeType {
 		<option value="-1">自定义</option>
 	*/
 	public static final int SYSTEM_CONSUMEYB_ADD = 146;
+	
+	/**
+	 * 
+	 * 月分红
+	 * 
+	 * */
+	public static final int MONTH_SHAREMONEY = 99;
+	
 	
 	
 }

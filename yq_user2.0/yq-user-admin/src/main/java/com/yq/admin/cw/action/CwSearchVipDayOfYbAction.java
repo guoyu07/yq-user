@@ -70,7 +70,7 @@ public class CwSearchVipDayOfYbAction extends ALDAdminPageActionSupport<SearchDa
 		}else{
 			descDirectoryPath=path + "/temp/"+startTime+"~"+endTime+"-dayofyb.xls";
 		}
-		String[] headers ={ "时间", "摘要", "备注（参考）", "收入数量", "收入单价", "收入金额", "支出数量","支出单价", "支出金额", "结余"};
+		String[] headers ={ "时间", "摘要", "备注（参考）", "收入数量", "收入单价", "收入金额", "支出数量","支出单价", "支出金额"/*, "结余"*/};
 		List<DayOfYb> data = ServiceCacheFactory.getService(CwService.class).getDayOfYbList(searchUserName, queryStartDate, queryEndDatet);
 		writeExcel(descDirectoryPath.toString(), "用户"+searchUserName+"的一币日记明细", headers, data, "yyyy-MM-dd hh:mm:ss");
 		download(descDirectoryPath.toString(), response);

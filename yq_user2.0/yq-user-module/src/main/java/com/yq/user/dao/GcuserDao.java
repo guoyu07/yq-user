@@ -16,6 +16,7 @@ import com.yq.common.utils.MD5Security;
 import com.yq.user.bean.TopReward;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
+import com.yq.user.constant.YbChangeType;
 
 public class GcuserDao {
 	@Autowired
@@ -1105,7 +1106,7 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter);
 	}
 	public int insertMemberShareDatepayLogDyDate(Date regTime,String ration){
-		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0,0,99 from gcuser u where gdgc>0 and sjb>0 and regtime>?";
+		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0,0,"+YbChangeType.MONTH_SHAREMONEY+" from gcuser u where gdgc>0 and sjb>0 and regtime>?";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(regTime);
 		return this.jdbc.update(sql, parameter);
@@ -1129,7 +1130,7 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter);
 	}
 	public int insertMemberShareDatepayLogXyDate(Date regTime,String ration){
-		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0,0,99 from gcuser u where gdgc>0 and sjb>0 and regtime<?";
+		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0,0,"+YbChangeType.MONTH_SHAREMONEY+" from gcuser u where gdgc>0 and sjb>0 and regtime<?";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(regTime);
 		return this.jdbc.update(sql, parameter);
@@ -1144,7 +1145,7 @@ public class GcuserDao {
 		return this.jdbc.update(sql, null);
 	}
 	public int insertCommonShareDatepayLogXyDate(String ration){
-		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0,0,99 from gcuser u where u.gdgc>0 and u.sjb=0";
+		String sql = "insert into datepay select null,u.username,u.gdgc*"+ration+",0,0,0,0,u.pay,u.jydb,now(),'月分红-每点"+ration+"',0,0,0,0,0,"+YbChangeType.MONTH_SHAREMONEY+" from gcuser u where u.gdgc>0 and u.sjb=0";
 		return this.jdbc.update(sql, null);
 	}
 	

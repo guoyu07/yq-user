@@ -480,7 +480,7 @@ public class CwService {
 			double otherout = 0;
 			for (ConfYbChangeType origintype : origintypeList) {
 				
-				if(origintype.getOrigintype()!=0){
+				if(origintype.getOrigintype()!=0 || YbChangeType.MALLHUANKUAN!=origintype.getOrigintype()){
 					List<DayOfYb> datepayList=datePayDao.getDayOfYbList(searchUserName, startDate, endDate, origintype.getOrigintype());
 					
 					for (DayOfYb getdayofyb : datepayList) {
@@ -517,27 +517,30 @@ public class CwService {
 							startNum=(int) dayofyb.getPay();
 						}
 					}
-				}
-				if(origintype.getOrigintype()==0){
+				}else{
 					List<DayOfYb> datepayList=datePayDao.getDayOfYbList(searchUserName, startDate, endDate, 0);
 					for (DayOfYb getdayofyb : datepayList) {
-						otherin=+getdayofyb.getIn();
-						otherout=+getdayofyb.getOut();
+						dayofyb= new DayOfYb();
+						otherin=getdayofyb.getIn();
+						otherout=getdayofyb.getOut();
+						dayofyb.setOrigin("其他");
+						dayofyb.setDesc(getdayofyb.getDesc());
+						dayofyb.setDate(today);
+						dayofyb.setPay(startNum+otherin-otherout);
+						dayofyb.setIn(otherin);
+						dayofyb.setOut(otherout);
+						dayOfYbList.add(dayofyb);
 					}
 					
-					dayofyb= new DayOfYb();
-					if(otherin==0&&otherout==0){
+					
+					/*if(otherin!=0&&otherout!=0){
 						dayofyb.setOrigin(today+"_结余数");
 						dayofyb.setDesc("其他");
 					}else{
 						dayofyb.setOrigin("其他");
 						dayofyb.setDesc("其他");
-					}
-					dayofyb.setDate(today);
-					dayofyb.setPay(startNum+otherin-otherout);
-					dayofyb.setIn(otherin);
-					dayofyb.setOut(otherout);
-					dayOfYbList.add(dayofyb);
+					}*/
+					
 				}
 				
 			}
