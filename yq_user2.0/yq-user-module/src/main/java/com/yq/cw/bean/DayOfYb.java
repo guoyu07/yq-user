@@ -20,7 +20,7 @@ public class DayOfYb {
 	
 	private double outjine;
 	
-	private double pay;
+	//private double pay;
 	
 	public String getDate() {
 		return date;
@@ -78,13 +78,13 @@ public class DayOfYb {
 		this.outjine = outjine;
 	}
 
-	public double getPay() {
+	/*public double getPay() {
 		return pay;
 	}
 
 	public void setPay(double pay) {
 		this.pay = pay;
-	}
+	}*/
 
 	public double getInprice() {
 		return inprice;

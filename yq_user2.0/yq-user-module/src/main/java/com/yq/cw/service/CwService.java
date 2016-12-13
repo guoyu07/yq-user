@@ -511,14 +511,14 @@ public class CwService {
 								dayofyb.setOutjine(out);
 							}*/
 						}
-						dayofyb.setPay(startNum+in-out);
+						//dayofyb.setPay(startNum+in-out);
 						dayOfYbList.add(dayofyb);
-						if(dayofyb!=null){
+						/*if(dayofyb!=null){
 							startNum=(int) dayofyb.getPay();
-						}
+						}*/
 					}
 				}else{
-					List<DayOfYb> datepayList=datePayDao.getDayOfYbList(searchUserName, startDate, endDate, 0);
+					List<DayOfYb> datepayList=datePayDao.getDayOfYbList(searchUserName, startDate, endDate, origintype.getOrigintype());
 					for (DayOfYb getdayofyb : datepayList) {
 						dayofyb= new DayOfYb();
 						otherin=getdayofyb.getIn();
@@ -526,10 +526,10 @@ public class CwService {
 						dayofyb.setOrigin("其他");
 						dayofyb.setDesc(getdayofyb.getDesc());
 						dayofyb.setDate(today);
-						dayofyb.setPay(startNum+otherin-otherout);
+						//dayofyb.setPay(startNum+otherin-otherout);
 						dayofyb.setIn(otherin);
 						dayofyb.setOut(otherout);
-						dayOfYbList.add(dayofyb);
+						//dayOfYbList.add(dayofyb);
 					}
 					
 					
