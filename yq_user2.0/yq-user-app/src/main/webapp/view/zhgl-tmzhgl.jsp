@@ -11,6 +11,7 @@
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('<s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.594399145'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==12}"><script language=javascript>alert('<s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.1926370358'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==13}"><script language=javascript>alert('<s:text name='Transferpolicycurrencylessthan0'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==14}"><script language=javascript>alert('<s:text name='Cannotgiveoneselfto'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==100}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-1964813948'/>');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==101}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.573081321'/>');history.go(-1);</script></c:if>
 <!DOCTYPE html>

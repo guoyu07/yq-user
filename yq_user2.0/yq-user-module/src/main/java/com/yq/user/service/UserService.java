@@ -1666,12 +1666,9 @@ public class UserService {
 	@Transactional
 	public void trasferBdb(String fromUser,String toUser,int amount){
 		Gcuser from = gcuserDao.getUser(fromUser);
-		if(from.getVip()==0){
-			throw new ServiceException(1, "vip用户才能玩这个功能！");
-		}
 		
 		if(fromUser.equals(toUser)){
-			throw new ServiceException(3, "不能转给自己！");
+			throw new ServiceException(14, "不能转给自己！");
 		}
 		if(amount<=0){
 			throw new ServiceException(13, "转账保单币小于0");
@@ -1692,7 +1689,6 @@ public class UserService {
 		
 		this.updateSybdb(toUser, amount, "批量获得-"+fromUser.substring(0,2)+"***",0);
 		
-		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
 		
 	}
 	
