@@ -49,6 +49,7 @@ import com.yq.manager.dao.PointsChangeLogDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.manager.dao.UserVipLogDao;
 import com.yq.user.bean.TopReward;
+import com.yq.user.bo.AbsModifyUserLog;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Cpuser;
@@ -62,6 +63,7 @@ import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.ModifyUserLog;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.Sgtj;
@@ -454,6 +456,7 @@ public class AdminService {
 		
 		//增加用户更新日志 
 		ModifyUserLog modifyUserLog = new ModifyUserLog(userName, password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password, date, cxt, areaCode, gcuser.getUsername(), gcuser.getPassword3(), gcuser.getCard(), gcuser.getBank(), gcuser.getName(), gcuser.getCall(), gcuser.getEmail(), gcuser.getQq(), gcuser.getUserid(), gcuser.getPayok(), gcuser.getJcname(), gcuser.getJcuserid(), gcuser.getPassword(), gcuser.getPwdate(), gcuser.getCxt(), oldareaCode, new Date(), operator);
+		
 		modifyUserLogDao.addDatePay(modifyUserLog);
 		
 		
@@ -3384,8 +3387,31 @@ public class AdminService {
 		
 	}
 	
-	public IPage<ModifyUserLog> getModifyUserLogByUsername(String user,int pageSize, int pageIndex) {
-		return modifyUserLogDao.getPageByUsername(user,pageSize,pageIndex);
+	public List<AbsModifyUserLog> getModifyUserLogByUsername(String user,int pageSize, int pageIndex) {
+		IPage<AbsModifyUserLog> page= modifyUserLogDao.getPageByUsername(user,pageSize,pageIndex);
+		Collection<AbsModifyUserLog> tempList = page.getData();
+		List<AbsModifyUserLog> result=new ArrayList<>();
+		for (AbsModifyUserLog date : tempList) {
+			date.setCountryName(interRegionCodeDao.getInterCodeByRegionCode(date.getAreacode()).getCountry_name());
+			date.setOldCountryName(interRegionCodeDao.getInterCodeByRegionCode(date.getOldareacode()).getCountry_name());
+			result.add(date);
+		}
+		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

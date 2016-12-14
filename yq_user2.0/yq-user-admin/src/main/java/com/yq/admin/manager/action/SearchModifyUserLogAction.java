@@ -1,9 +1,11 @@
 package com.yq.admin.manager.action;
 
-import com.sr178.common.jdbc.bean.IPage;
+import java.util.List;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.manager.service.AdminService;
+import com.yq.user.bo.AbsModifyUserLog;
 import com.yq.user.bo.ModifyUserLog;
 
 public class SearchModifyUserLogAction extends ALDAdminPageActionSupport<ModifyUserLog> {
@@ -13,13 +15,31 @@ public class SearchModifyUserLogAction extends ALDAdminPageActionSupport<ModifyU
 	private String zuser;
 	private int indexsize;
 	private int status;
+	private List<AbsModifyUserLog> listdata;
 	public String searchmodifyuserlog(){
 		if(status==1){
 			AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-			super.initPage(adminService.getModifyUserLogByUsername(zuser,10, super.getToPage()));
+			listdata=adminService.getModifyUserLogByUsername(zuser,10, super.getToPage());
 		}
 		return SUCCESS;
 	}
+
+
+
+
+	public List<AbsModifyUserLog> getListdata() {
+		return listdata;
+	}
+
+
+
+
+	public void setListdata(List<AbsModifyUserLog> listdata) {
+		this.listdata = listdata;
+	}
+
+
+
 
 	public String getZuser() {
 		return zuser;

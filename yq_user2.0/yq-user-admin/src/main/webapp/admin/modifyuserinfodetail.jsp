@@ -97,7 +97,7 @@
 			<font color="#000000" style="font-weight:700" face="宋体" size="2">操作人</font></td>
 			
           </tr>
-          <s:iterator var="data" value="dataList">	
+          <s:iterator var="data" value="listdata">	
           <tr> 
           <td height="29" width="69" align="center"><b>
 			<font color="#FF0000" size="2">${data.username}</font></b></td>
@@ -158,9 +158,9 @@
 			<td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
 			<font size="2" face="宋体"><c:choose><c:when test="${data.oldcxt!=data.cxt}"><font color="#FF0000" size="2">${data.cxt}</font></c:when><c:otherwise>${data.cxt}</c:otherwise></c:choose></font></td>
 			 <td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
-			<font size="2" face="宋体">${data.oldareacode}</font></td>
+			<font size="2" face="宋体">${data.oldCountryName}</font></td>
 			<td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
-			<font size="2" face="宋体"><c:choose><c:when test="${data.oldareacode!=data.areacode}"><font color="#FF0000" size="2">${data.areacode}</font></c:when><c:otherwise>${data.areacode}</c:otherwise></c:choose></font></td>
+			<font size="2" face="宋体"><c:choose><c:when test="${data.oldareacode!=data.areacode}"><font color="#FF0000" size="2">${data.countryName}</font></c:when><c:otherwise>${data.countryName}</c:otherwise></c:choose></font></td>
 			 <td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
 			<font size="2" face="宋体">${data.operatedate}</font></td>
 			<td valign="middle" align="center" width="71"><p style="margin-top: 0; margin-bottom: 0">
@@ -169,7 +169,7 @@
           </tr>
          </s:iterator>
             </table> 
-</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="zuser,${zuser},status,1"/>
+</div><font face="宋体" style="font-size: 11pt"><%-- <aldtags:pageTag paraStr="zuser,${zuser},status,1"/> --%>
 </font> 
 </tr> 
 </table> 
