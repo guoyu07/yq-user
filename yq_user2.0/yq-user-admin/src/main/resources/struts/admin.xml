@@ -156,6 +156,12 @@
 		    </result>
 		    
 		</action>
+		<action name="searchmodifyuserlog" class="com.yq.admin.manager.action.SearchModifyUserLogAction" method="searchmodifyuserlog">
+		    <result name="success">
+		       modifyuserinfodetail.jsp
+		    </result>
+		</action>
+		
 		
 		<action name="resetAchievement" class="com.yq.admin.manager.action.AchievementAction">
 		  <result name="success" type="json" />
