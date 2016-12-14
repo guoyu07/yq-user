@@ -104,7 +104,7 @@ eval("submenu" + sid + ".style.display=\"none\";");
 </tr>
 <tr>
 <td style="display:" id='submenu6'>
-<div class=sec_menu style="width:158px; height:182px">
+<div class=sec_menu style="width:158px; height:227px">
 <table cellpadding=0 cellspacing=0 align=center width=150 height="167">
 <tr>
 <td height=20>☉   <font color="#BB0000" style="font-size: 11pt"><a target="BoardList" href="/admin/fhjl"><font color="#000000">每期记录</font></a></font></td>
@@ -139,6 +139,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <td height=20>☉  <a href="/admin/gaiuser" target="BoardList">用户信息修改日志</a></td> 
 </tr>
 </c:if>
+<tr>
+<td height=20>☉  <a href="/admin/searchmodifyuserlog" target="BoardList">搜索用户信息修改日志详情</a></td> 
+</tr>
 </table>
 </div>
 </td>

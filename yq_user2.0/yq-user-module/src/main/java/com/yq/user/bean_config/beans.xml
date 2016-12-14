@@ -65,6 +65,8 @@
        
        <!-- 玩家属性 -->
        <bean id="userProperty" class="com.yq.user.dao.UserPropertyDao"></bean>
+        <!-- 修改玩家信息日志 -->
+       <bean id="modifyUserLog" class="com.yq.user.dao.ModifyUserLogDao"></bean>
        
        
        <!-- 用户数据service -->

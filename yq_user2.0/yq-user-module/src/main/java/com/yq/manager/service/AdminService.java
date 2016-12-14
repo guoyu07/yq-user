@@ -62,6 +62,7 @@ import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.ModifyUserLog;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.Sgtj;
 import com.yq.user.bo.Sgxt;
@@ -90,6 +91,7 @@ import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.JfcpDao;
+import com.yq.user.dao.ModifyUserLogDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.SysBiLogDao;
 import com.yq.user.dao.TduserDao;
@@ -176,6 +178,8 @@ public class AdminService {
 	private UserPropertyDao userPropertyDao;
 	@Autowired
 	private InterRegionCodeDao interRegionCodeDao;	
+	@Autowired
+	private ModifyUserLogDao modifyUserLogDao;
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
@@ -400,10 +404,16 @@ public class AdminService {
 	 * @param jcname
 	 * @param jcuserid
 	 * @param password
+	 * @param pwdate
+	 * @param cxt
+	 * @param ip
+	 * @param updateDownPayOk
+	 * @param areaCode
+	 * @param operator
 	 * @return
 	 */
 	@Transactional
-	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,int areaCode){
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,int areaCode,String operator){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Date date = null;
 		if(!Strings.isNullOrEmpty(pwdate)){
@@ -428,9 +438,10 @@ public class AdminService {
 		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
 			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
 		}
-		
+		int oldareaCode=86;
 		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
 			if(userPropertyDao.isHasUserpropertyByName(userName)){
+				oldareaCode =userPropertyDao.getPorpertyByName(userName).getRegion_code();
 				userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
 			}else{
 				UserProperty userproperty= new UserProperty();
@@ -440,6 +451,11 @@ public class AdminService {
 			}
 			
 		}
+		
+		//增加用户更新日志 
+		ModifyUserLog modifyUserLog = new ModifyUserLog(userName, password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password, date, cxt, areaCode, gcuser.getUsername(), gcuser.getPassword3(), gcuser.getCard(), gcuser.getBank(), gcuser.getName(), gcuser.getCall(), gcuser.getEmail(), gcuser.getQq(), gcuser.getUserid(), gcuser.getPayok(), gcuser.getJcname(), gcuser.getJcuserid(), gcuser.getPassword(), gcuser.getPwdate(), gcuser.getCxt(), oldareaCode, new Date(), operator);
+		modifyUserLogDao.addDatePay(modifyUserLog);
+		
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
 			//写身份证和名字修改日志
@@ -3366,6 +3382,10 @@ public class AdminService {
 		//不知道干嘛的...
 		fcxtDao.update(2,gpjy1.getMcsl().intValue());
 		
+	}
+	
+	public IPage<ModifyUserLog> getModifyUserLogByUsername(String user,int pageSize, int pageIndex) {
+		return modifyUserLogDao.getPageByUsername(user,pageSize,pageIndex);
 	}
 	
 }

@@ -88,7 +88,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 			
 			return INPUT;
 		}
-		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode);
+		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode,super.getUserName());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
