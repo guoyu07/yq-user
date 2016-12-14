@@ -1683,11 +1683,11 @@ public class UserService {
 		}
 		
 		//减被转者的报单币
-		if(!this.updateSybdb(fromUser, -amount, "批量转给-"+toUser,0)){
+		if(!this.updateSybdb(fromUser, -amount, "批量转给-"+toUser,BDBChangeType.TRASFERBDB_REDUCE)){
 			throw new ServiceException(11, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
 		}
 		
-		this.updateSybdb(toUser, amount, "批量获得-"+fromUser.substring(0,2)+"***",0);
+		this.updateSybdb(toUser, amount, "批量获得-"+fromUser,BDBChangeType.TRASFERBDB_ADD);
 		
 		
 	}

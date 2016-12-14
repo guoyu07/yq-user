@@ -31,6 +31,16 @@ public class BDBChangeType {
 	 * 宿舍押金增加
 	 * */
 	public static final int BDB_ZUANCUO_SYSTEM_DEPOSIT_ADD = 3005;  
+	
+	/**
+	 * 保单币批量转入
+	 * */
+	public static final int TRASFERBDB_ADD = 3006;
+	
+	/**
+	 * 保单币批量转出
+	 * */
+	public static final int TRASFERBDB_REDUCE = 3007;
 
 
 }
