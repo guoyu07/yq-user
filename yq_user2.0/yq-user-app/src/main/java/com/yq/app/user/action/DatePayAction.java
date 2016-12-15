@@ -35,6 +35,7 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		return SUCCESS;
 	}
 	
+	
 	public Gcuser getGcuser(){
 		return gcuser;
 	}
@@ -48,4 +49,10 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 	public void setLb(Integer lb) {
 		this.lb = lb;
 	}
+
+	public void setGcuser(Gcuser gcuser) {
+		this.gcuser = gcuser;
+	}
+	
+	
 }

@@ -7,6 +7,7 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.dao.YqDaoBase;
+import com.yq.user.bo.Datepay;
 import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.UserScoresLogForExcel;
 
@@ -39,5 +40,14 @@ public class UserScoresLogDao extends YqDaoBase<UserScoresLog>{
 		}
 		sql = sql + " order by id desc";
 		return super.getJdbc().getList(sql, UserScoresLogForExcel.class, parameter);
+	}
+
+	public List<UserScoresLog> getUserScoresLogByMallOrderList(String userName, String orderId) {
+		StringBuilder sql=new StringBuilder();
+		sql.append("select * from "+super.getTable()+" where user_name = ? and param like '%"+orderId+"%'");
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		sql.append(" order by created_time desc ");
+		return super.getJdbc().getList(sql.toString(), UserScoresLog.class, sqlParameter);
 	}
 }

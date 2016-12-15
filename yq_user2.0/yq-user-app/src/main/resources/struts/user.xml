@@ -33,8 +33,14 @@
 		<action name="datepay" class="com.yq.app.user.action.DatePayAction">
 			<result name="success">view/yblc-details.jsp</result>
 		</action>
+		<action name="datepayfororder" class="com.yq.app.user.action.DatePayForMallOrderAction">
+			<result name="success">view/yblc-mallorder-details.jsp</result>
+		</action>
 		<action name="userscoreslog" class="com.yq.app.user.action.UserScoresLogAction">
 			<result name="success">view/yblc-userscoreslog.jsp</result>
+		</action>
+		<action name="usermallorderscoreslog" class="com.yq.app.user.action.UserMallorderScoresLogAction">
+			<result name="success">view/yblc-mallordercores.jsp</result>
 		</action>
 		<action name="userscoreslogoutExcel" class="com.yq.app.user.action.UserScoresLogAction"
 			method="outExcel">

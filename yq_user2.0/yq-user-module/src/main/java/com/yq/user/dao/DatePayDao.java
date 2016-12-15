@@ -495,5 +495,18 @@ public class DatePayDao {
 		return this.jdbc.getList(sql.toString(), Datepay.class, sqlParameter);
 		
 	}
+
+	public List<Datepay> getListByMallorder(String username, String orderId) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from "+table+" where username = ? and regid like '%"+orderId+"%'");
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(username);
+		sql.append(" order by id desc ");
+		return this.jdbc.getList(sql.toString(), Datepay.class, sqlParameter);
+	}
+	
+	
+	
+	
 	
 }

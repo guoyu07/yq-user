@@ -10,8 +10,9 @@
 	  function jump(lb){
 		  location.replace('datepay?lb='+lb);
 		  return;
-	  }
+	  };
 	
+	  
 	</script>
 </head>
 <body>
@@ -33,29 +34,25 @@
 					<div class="content-title">
 						<span><s:text name='viewlinks.html.links.html.1846650039'/></span>
 						<p class="r-link">
-						  
+						 <a href="datepayfororder"><font color="red"><s:text name='mallorderquery'/></font></a>&nbsp;&nbsp;&nbsp;
 						    <select size="1" name="lb" id="lb" onChange="jump(document.getElementById('lb').options[document.getElementById('lb').selectedIndex].value);">
 								<option value="0" <c:if test="${empty lb or lb==0}">selected</c:if>><s:text name="all"></s:text></option>
-								<option value="1" <c:if test="${lb==1}">selected</c:if>><s:text name="promotion_award"></s:text></option>
-								<option value="2" <c:if test="${lb==2}">selected</c:if>><s:text name="balance_award"></s:text></option>
-								<option value="3" <c:if test="${lb==3}">selected</c:if>><s:text name="counseling_award"></s:text></option>
-								<option value="4" <c:if test="${lb==4}">selected</c:if>><s:text name="integral_sell"></s:text></option>
-								<option value="5" <c:if test="${lb==5}">selected</c:if>><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/> <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></option>
-								<option value="6" <c:if test="${lb==6}">selected</c:if>><s:text name="subscription"></s:text> <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></option>
-								<option value="7" <c:if test="${lb==7}">selected</c:if>><s:text name="namesake_Huzhuan"></s:text></option>
-								<option value="8" <c:if test="${lb==8}">selected</c:if>><s:text name="VIP_transfer_income"></s:text></option>
-								<option value="9" <c:if test="${lb==9}">selected</c:if>><s:text name="management_transfer_income"></s:text></option>
-								<option value="10" <c:if test="${lb==10}">selected</c:if>><s:text name="changes_in_management"></s:text></option>
-								<option value="11" <c:if test="${lb==11}">selected</c:if>><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/> <s:text name='redemption'/></option>
+								<option value="1" <c:if test="${lb==1}">selected</c:if>><s:text name="promotion_award"><!-- 推广奖 --></s:text></option>
+								<option value="2" <c:if test="${lb==2}">selected</c:if>><s:text name="balance_award"><!-- 平衡奖 --></s:text></option>
+								<option value="3" <c:if test="${lb==3}">selected</c:if>><s:text name="counseling_award"><!-- 辅导奖 --></s:text></option>
+								<option value="4" <c:if test="${lb==4}">selected</c:if>><s:text name="integral_sell"><!-- 积分卖出 --></s:text></option>
+								<option value="5" <c:if test="${lb==5}">selected</c:if>><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/> <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><!-- 卖出一币 --></option>
+								<option value="6" <c:if test="${lb==6}">selected</c:if>><s:text name="subscription"></s:text> <s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/><!-- 认购一币 --></option>
+								<option value="7" <c:if test="${lb==7}">selected</c:if>><s:text name="namesake_Huzhuan"><!-- 同名互转 --></s:text></option>
+								<option value="8" <c:if test="${lb==8}">selected</c:if>><s:text name="VIP_transfer_income"><!-- VIP转收 --></s:text></option>
+								<option value="9" <c:if test="${lb==9}">selected</c:if>><s:text name="management_transfer_income"><!-- 管理转收 --></s:text></option>
+								<option value="10" <c:if test="${lb==10}">selected</c:if>><s:text name="changes_in_management"><!-- 管理增减 --></s:text></option>
 								<option value="12" <c:if test="${lb==12}">selected</c:if>><s:text name='commodity_revenues'/></option>
-								<option value="13" <c:if test="${lb==13}">selected</c:if>><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/> <s:text name='consumption'/></option>
-								<option value="14" <c:if test="${lb==14}">selected</c:if>><s:text name='ticket_expenditure'/></option>
-								<option value="15" <c:if test="${lb==15}">selected</c:if>><s:text name='business_income'/></option>
-								<option value="16" <c:if test="${lb==16}">selected</c:if>><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.1102075283'/></option>
-								<option value="17" <c:if test="${lb==17}">selected</c:if>><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/> <s:text name='quiz'/></option>
-								<option value="18" <c:if test="${lb==18}">selected</c:if>><s:text name='vipadmin_menu.jsp.admin_menu.jsp.618812044'/></option>
-								<option value="19" <c:if test="${lb==19}">selected</c:if>><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/> <s:text name='game'/></option>
-								<option value="20" <c:if test="${lb==20}">selected</c:if>><s:text name='Trading_violations'/></option>
+								<option value="13" <c:if test="${lb==13}">selected</c:if>><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/> <s:text name='consumption'/><!-- 一币消费 --></option>
+								<option value="14" <c:if test="${lb==14}">selected</c:if>><s:text name='ticket_expenditure'/><!-- 票务支出 --></option>
+								<option value="15" <c:if test="${lb==15}">selected</c:if>><s:text name='business_income'/><!-- 商户收入 --></option>
+								<option value="16" <c:if test="${lb==16}">selected</c:if>><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.1102075283'/><!-- 话费充值 --></option>
+								<option value="20" <c:if test="${lb==20}">selected</c:if>><s:text name='Trading_violations'/><!-- 交易违规 --></option>
 								</select>
 							<!-- <a href="/datepay"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1029202'/>奖金</a>|
 							<a href="/datepay?lb=9">推广部分</a>|

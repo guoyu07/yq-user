@@ -32,6 +32,7 @@ import com.yq.user.dao.DatecjDao;
 import com.yq.user.dao.DateipDao;
 import com.yq.user.dao.DldateDao;
 import com.yq.user.dao.GcfhDao;
+import com.yq.user.dao.MallOrderDao;
 import com.yq.user.dao.SysBiLogDao;
 
 public class LogService {
@@ -411,6 +412,9 @@ public class LogService {
 			 clientBdblogList.add(result);
 		}
 		 return clientBdblogList;
+	}
+	public List<Datepay> getDatePayListByMallorder(String username, String orderId) {
+		return datePayDao.getListByMallorder(username, orderId);
 	}
 	
 	

@@ -4612,7 +4612,7 @@ public class UserService {
     			    }
         			//如果商户是zxz888那么直接进该商家账户  不进入中转站
         			if(shopBean.getShopper().equals("zxz888")){
-        				if(!this.changeYb(shopBean.getShopper(), addYb, shopBean.getShopperOrder()+"-商场卖出商品", YbChangeType.SHOP_SALE_ADD_SELF, null,0, YbChangeType.MALL_ZXZ888)){
+        				if(!this.changeYb(shopBean.getShopper(), addYb, shopBean.getShopperOrder()+"-商场卖出商品", YbChangeType.SHOP_SALE_ADD_SELF, null,0, YbChangeType.SHOP_SALE_ADD_SELF)){
         					   throw new ServiceException(3000, "商户不存在"+shopBean.getShopper());
         				  }
         				orderYb  = addYb;
@@ -5483,5 +5483,23 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		
 		map.put(mallOrder.getStatus(), "成功");
 		return map;
+	}
+
+	/**
+	 * 查看玩家是否含有此订单id
+	 * @param username
+	 * @param orderId
+	 * @return
+	 */
+	public boolean isHasMallorderByorder(String username, String orderId) {
+		if(!mallOrderDao.isHasMallorderByorder(username,orderId)){
+			throw new ServiceException(1,"用户订单不存在！");
+		}else{
+			return true;
+		}
+	}
+
+	public List<UserScoresLog> getUserScoresLogByMallOrderList(String userName, String orderId) {
+		return userScoresLogDao.getUserScoresLogByMallOrderList(userName, orderId);
 	}
 }
