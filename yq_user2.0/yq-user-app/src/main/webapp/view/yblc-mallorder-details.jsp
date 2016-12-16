@@ -57,7 +57,7 @@
 							</tr>
 							<s:iterator var="data" value="datepaylist">
 							<tr>
-								<td>${gcuser.username}</td>
+								<td>${data.username}</td>
 								<td>${data.syjz}</td>
 								<td><c:if test="${data.jc>0}">-${data.jc}</c:if><c:if test="${data.jc<=0}">${data.jc}</c:if></td>
 								<td>${data.jyjz}</td>
