@@ -18,6 +18,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.common.jdbc.bean.Page;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.exception.ServiceException;
@@ -3387,8 +3388,15 @@ public class AdminService {
 		
 	}
 	
-	public List<AbsModifyUserLog> getModifyUserLogByUsername(String user,int pageSize, int pageIndex) {
-		IPage<AbsModifyUserLog> page= modifyUserLogDao.getPageByUsername(user,pageSize,pageIndex);
+	/**
+	 * 得到分页记录列表
+	 * @param user
+	 * @param pageSize
+	 * @param pageIndex
+	 * @return
+	 */
+	public IPage<AbsModifyUserLog> getModifyUserLogPageListByUsername(String user,int pageSize, int pageIndex) {
+		IPage<AbsModifyUserLog> page= modifyUserLogDao.getPageList(user,pageSize,pageIndex);
 		Collection<AbsModifyUserLog> tempList = page.getData();
 		List<AbsModifyUserLog> result=new ArrayList<>();
 		for (AbsModifyUserLog date : tempList) {
@@ -3396,7 +3404,7 @@ public class AdminService {
 			date.setOldCountryName(interRegionCodeDao.getInterCodeByRegionCode(date.getOldareacode()).getCountry_name());
 			result.add(date);
 		}
-		return result;
+		return new Page<AbsModifyUserLog>(result, page.getTotalSize(), pageSize, pageIndex);
 	}
 	
 	

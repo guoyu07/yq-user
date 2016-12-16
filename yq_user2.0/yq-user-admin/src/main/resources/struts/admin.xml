@@ -156,7 +156,7 @@
 		    </result>
 		    
 		</action>
-		<action name="searchmodifyuserlog" class="com.yq.admin.manager.action.SearchModifyUserLogAction" method="searchmodifyuserlog">
+		<action name="searchmodifyuserlog" class="com.yq.admin.manager.action.SearchModifyUserLogAction">
 		    <result name="success">
 		       modifyuserinfodetail.jsp
 		    </result>

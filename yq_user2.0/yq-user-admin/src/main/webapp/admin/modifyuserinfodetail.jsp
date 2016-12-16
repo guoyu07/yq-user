@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<title>充值记录</title>
+<title>玩 家 信 息 修 改 记 录 详 情</title>
 <script type="text/javascript" src="/scripts/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="/scripts/jquery.datetimepicker.css"/>
 <script src="/scripts/jquery.datetimepicker.js"></script>
@@ -22,7 +22,7 @@
 
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="87" bgcolor="#C3DAF9">
-    <form method="POST" action="searchmodifyuserlog?status=1" name="Form" id="Form">
+    <form method="POST" action="searchmodifyuserlog" name="Form" id="Form">
 	<p align="center">用户：<input name="zuser" id="zuser" type="text" value="${zuser}"/>
 		 	<%-- 开始日期:<input name="startDate1" id="startDate1" type="text" value="${startDate1}"/>结束日期:<input name="endDate1" id="endDate1" type="text" value="${endDate1}"/> --%><input type="submit" value="查询" name="B1"><!-- <input type="button" onClick="exportExcel()" value="导出excel"/> --><br>
     </form>
@@ -97,7 +97,7 @@
 			<font color="#000000" style="font-weight:700" face="宋体" size="2">操作人</font></td>
 			
           </tr>
-          <s:iterator var="data" value="listdata">	
+          <s:iterator var="data" value="dataList">	
           <tr> 
           <td height="29" width="69" align="center"><b>
 			<font color="#FF0000" size="2">${data.username}</font></b></td>
@@ -169,13 +169,13 @@
           </tr>
          </s:iterator>
             </table> 
-</div><font face="宋体" style="font-size: 11pt"><%-- <aldtags:pageTag paraStr="zuser,${zuser},status,1"/> --%>
+</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="zuser,${zuser}"/>
 </font> 
 </tr> 
 </table> 
 </div> 
 </html> 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 		$('#startDate1').datetimepicker({
 			yearOffset : 0,
 			lang : 'ch',
@@ -195,4 +195,4 @@
 		//		minDate:'1970/01/01', // yesterday is minimum date
 		//		maxDate:'+1970/01/02' // and tommorow is maximum date calendar
 		});
-	</script>
+	</script> -->
