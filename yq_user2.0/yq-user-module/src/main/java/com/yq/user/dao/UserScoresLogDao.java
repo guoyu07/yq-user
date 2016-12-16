@@ -44,10 +44,9 @@ public class UserScoresLogDao extends YqDaoBase<UserScoresLog>{
 
 	public List<UserScoresLog> getUserScoresLogByMallOrderList(String userName, String orderId) {
 		StringBuilder sql=new StringBuilder();
-		sql.append("select * from "+super.getTable()+" where user_name = ? and param = ?");
+		sql.append("select * from "+super.getTable()+" where user_name = ? and param like '%"+orderId+"%'");
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(userName);
-		sqlParameter.setString(orderId);
 		sql.append(" order by created_time desc ");
 		return super.getJdbc().getList(sql.toString(), UserScoresLog.class, sqlParameter);
 	}
