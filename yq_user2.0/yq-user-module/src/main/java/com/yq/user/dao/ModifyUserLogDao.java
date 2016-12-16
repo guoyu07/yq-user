@@ -2,8 +2,6 @@ package com.yq.user.dao;
 
 import java.util.Date;
 
-import org.apache.commons.lang.text.StrBuilder;
-import org.hamcrest.core.IsNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.common.base.Strings;
@@ -21,7 +19,7 @@ public class ModifyUserLogDao {
 	
 	private static final String table = "modify_user_log";
 	
-	public int addDatePay(ModifyUserLog modifyUserLog){
+	public int add(ModifyUserLog modifyUserLog){
 		if(modifyUserLog.getOperatedate()==null){
 			modifyUserLog.setOperatedate(new Date());
 		}

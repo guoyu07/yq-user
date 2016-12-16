@@ -47,7 +47,7 @@
           </tr>
          </s:iterator>
          </table> 
-</div><aldtags:pageTag/>
+</div><aldtags:pageTag paraStr="zuser,${zuser},status,${status}"/>
 </font> 
 </tr> 
 </table> 

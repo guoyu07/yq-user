@@ -458,7 +458,7 @@ public class AdminService {
 		//增加用户更新日志 
 		ModifyUserLog modifyUserLog = new ModifyUserLog(userName, password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password, date, cxt, areaCode, gcuser.getUsername(), gcuser.getPassword3(), gcuser.getCard(), gcuser.getBank(), gcuser.getName(), gcuser.getCall(), gcuser.getEmail(), gcuser.getQq(), gcuser.getUserid(), gcuser.getPayok(), gcuser.getJcname(), gcuser.getJcuserid(), gcuser.getPassword(), gcuser.getPwdate(), gcuser.getCxt(), oldareaCode, new Date(), operator);
 		
-		modifyUserLogDao.addDatePay(modifyUserLog);
+		modifyUserLogDao.add(modifyUserLog);
 		
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
