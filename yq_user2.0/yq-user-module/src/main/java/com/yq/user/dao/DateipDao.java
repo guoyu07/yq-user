@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
@@ -47,22 +48,16 @@ public class DateipDao {
 		
 	}
 	
-	public IPage<Dateip> getAllPageList(int pageIndex,int pageSize){
-		String sql = "select * from "+table+" order by id desc";
+	public IPage<Dateip> getAllPageList(String username, int pageIndex,int pageSize){
+		StringBuilder sql= new StringBuilder();
+		sql.append("select * from "+table+" where 1=1 ");
 		SqlParameter parameter = new SqlParameter();
-		return jdbc.getListPage(sql, Dateip.class, parameter, pageSize, pageIndex);
+		if(!Strings.isNullOrEmpty(username)){
+			sql.append(" and user = ?");
+			parameter.setString(username);
+		}
+		sql.append(" order by id desc");
+		return jdbc.getListPage(sql.toString(), Dateip.class, parameter, pageSize, pageIndex);
 	}
 	
-	public int getCountId(){
-		String sql = "select count(id) from "+table;
-		return jdbc.getInt(sql, null);
-	}
-	
-	public int getCountByTime(String startTime,String endTime){
-		String sql = "select count(id) from "+table+" where dldate between ? and ?";
-		SqlParameter parameter = new SqlParameter();
-		parameter.setString(startTime);
-		parameter.setString(endTime);
-		return jdbc.getInt(sql, parameter);
-	}
 }

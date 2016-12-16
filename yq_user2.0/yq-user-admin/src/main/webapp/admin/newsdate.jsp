@@ -1,17 +1,35 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <title>登录日志</title>
+<script type="text/javascript">
+	function checkname(){
+		if(Form.zuser.value==""){
+			alert("请输入用户名！");
+			Form.zuser.focus;
+			return;
+		}
+	}
+		
+
+
+
+</script>
 
 <div align="center">
 
   <table border="1" cellspacing="0" width="100%" style="border-collapse: collapse" bordercolor="#006699" cellpadding="0" height="108">
     <tr>
-      <td width="100%" height="22" background="images/admin_bg_1.gif"><p align="center" style="margin-top: 0; margin-bottom: 0; line-height:150%"><font color="#000000" style="font-size: 11pt" face="宋体"><strong>登 录 记 录 明 细</strong></font>
-      <p align="center" style="margin-top: 0; margin-bottom: 0; line-height:150%"><strong><font face="宋体" style="font-size: 11pt">（累计：<font color="#800080">${bean.rslj}</font>）（今天：<font color="#800080">${bean.rsjt}</font>）（昨天：<font color="#800080">${bean.rszt}</font>）（前天：<font color="#800080">${bean.rsqt}</font>）（大前天：<font color="#800080">${bean.rsdqt}</font>）</font></strong></td> 
-  </tr>
+      <td width="100%" height="22" background="images/admin_bg_1.gif"> 
+        <p align="center" style="margin-top: 0; margin-bottom: 0">
+		<font color="#000000" style="font-size: 11pt" face="宋体"><strong>登 录 日 志  明 细</strong></font></td> 
+  </tr> 
+
   <tr> 
-    <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="87" bgcolor="#C3DAF9"><font face="宋体" style="font-size: 11pt"><br> 
-</font><font face="宋体" style="font-size: 11pt"><div align="center">    
+    <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="87" bgcolor="#C3DAF9">
+    <form method="POST" action="newsdate?status=1" name="Form" id="Form">
+	<p align="center">用户：<input name="zuser" id="zuser" type="text" /><input type="submit" onclick="checkname()" value="查询" name="B1"><br>
+    </form>
+ <div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="57" id="table1"><tr>
           <td width="230" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0"><font face="宋体" color="#000000" size="2"><strong>用户名</strong></font></td>
           <td width="374" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0"><font color="#000000" style="font-weight:700" face="宋体" size="2">最近登录时间</font></td>

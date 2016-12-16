@@ -1297,36 +1297,14 @@ public class AdminService {
 		return result;
 	}
 	
-	public NewsDateBean getNewsDateBean(){
-		NewsDateBean result = new NewsDateBean();
-		result.setRslj(dateipDao.getCountId());
-		String todayStr = DateUtils.getDate(new Date());
-		String todayStart = todayStr+" 00:00:00";
-		String todayEnd = todayStr+" 23:59:59";
-		result.setRsjt(dateipDao.getCountByTime(todayStart, todayEnd));
-		String yesterdayStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -1));
-		String yesterdayStart = yesterdayStr+" 00:00:00";
-		String yesterdayEnd = yesterdayStr+" 23:59:59";
-		result.setRszt(dateipDao.getCountByTime(yesterdayStart, yesterdayEnd));
-		String qtStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -2));
-		String qtStart = qtStr+" 00:00:00";
-		String qtEnd = qtStr+" 23:59:59";
-		result.setRsqt(dateipDao.getCountByTime(qtStart, qtEnd));
-		String dqtStr =  DateUtils.getDate(DateUtils.addDay(new Date(), -3));
-		String dqtStart = dqtStr+" 00:00:00";
-		String dqtEnd = dqtStr+" 23:59:59";
-		result.setRsdqt(dateipDao.getCountByTime(dqtStart, dqtEnd));
-		return result;
-		
-	}
 	/**
-	 * 所有的登录日志
+	 * 根据玩家查询所有的登录日志
 	 * @param pageIndex
 	 * @param pageSize
 	 * @return
 	 */
-	public IPage<Dateip> getAllDateIp(int pageIndex,int pageSize){
-		return dateipDao.getAllPageList(pageIndex, pageSize);
+	public IPage<Dateip> getAllDateIp(String username, int pageIndex,int pageSize){
+		return dateipDao.getAllPageList(username, pageIndex, pageSize);
 	}
 	
 	public IPage<Cpuser> getCpuserPageList(int pageIndex,int pageSize){
