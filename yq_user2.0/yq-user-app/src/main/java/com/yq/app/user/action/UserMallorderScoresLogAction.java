@@ -18,9 +18,9 @@ public class UserMallorderScoresLogAction extends ALDAdminActionSupport{
 	public String execute() {
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		if(status==1){
-			if(userService.isHasMallorderByorder(super.getUserName(),orderId)){
+			//if(userService.isHasMallorderByorder(super.getUserName(),orderId)){
 				userScoresLoglist = userService.getUserScoresLogByMallOrderList(super.getUserName(),orderId);
-			}
+			//}
 		}
 		return SUCCESS;
 	}

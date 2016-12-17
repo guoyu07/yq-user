@@ -11,8 +11,9 @@ public class UserScoresLog {
 	private int nowNum;
 	private int changeType;
 	private double ration;
-	private String param;
+	private String param;	
 	private Date createdTime;
+	private String orderId;	//订单id
 	
 	public Integer getId() {
 		return id;
@@ -70,4 +71,12 @@ public class UserScoresLog {
 	public void setParam(String param) {
 		this.param = param;
 	}
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+	
+	
 }

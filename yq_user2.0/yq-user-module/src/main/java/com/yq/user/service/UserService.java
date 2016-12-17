@@ -739,9 +739,14 @@ public class UserService {
 	 * 修改购物卷
 	 * @param username
 	 * @param changeNum
+	 * @param changeType
+	 * @param ration
+	 * @param fromUser
+	 * @param param
+	 * @param orderId 订单id
 	 * @return
 	 */
-	public boolean changeScores(String username,int changeNum,int changeType,double ration,String fromUser,String param){
+	public boolean changeScores(String username,int changeNum,int changeType,double ration,String fromUser,String param,String orderId){
 		if(changeNum>0){
 			boolean result = gcuserDao.addScore(username, changeNum);
 			if(result){
@@ -755,6 +760,7 @@ public class UserService {
 				t.setRation(ration);
 				t.setFromUser(fromUser);
 				t.setParam(param);
+				t.setOrderId(orderId);
 				userScoresLogDao.add(t);
 			}
 			return result;
@@ -771,6 +777,7 @@ public class UserService {
 				t.setRation(ration);
 				t.setFromUser(fromUser);
 				t.setParam(param);
+				t.setOrderId(orderId);
 				userScoresLogDao.add(t);
 			}
 			return result;
@@ -1062,7 +1069,7 @@ public class UserService {
 			updateJB(bduser,zjjb,"消费"+cjpay+"送"+zjjb+"金币-"+userName+"");
 //			if(this.isOpenScores()){
 				if(scores>0){
-					this.changeScores(bduser, scores,ScoresChangeType.SYSTEM_GIVE,0,"0","");
+					this.changeScores(bduser, scores,ScoresChangeType.SYSTEM_GIVE,0,"0","","");
 				}
 //			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
@@ -1564,10 +1571,10 @@ public class UserService {
 	 * @param amount
 	 */
 	private void trasferScores(String fromUser,String toUser,int amount){
-		if(!this.changeScores(fromUser,-amount,ScoresChangeType.THE_SAME_USER_TRANSFER_REDUCE,0,toUser,"")){
+		if(!this.changeScores(fromUser,-amount,ScoresChangeType.THE_SAME_USER_TRANSFER_REDUCE,0,toUser,"","")){
 			throw new ServiceException(101, "购物券不足");
 		}
-		this.changeScores(toUser, amount, ScoresChangeType.THE_SAME_USER_TRANSFER,0,fromUser,"");
+		this.changeScores(toUser, amount, ScoresChangeType.THE_SAME_USER_TRANSFER,0,fromUser,"","");
 	}
 	/**
 	 * yb转账
@@ -2104,10 +2111,10 @@ public class UserService {
 			throw new ServiceException(6, "您好，您转账购物券不能大于您剩余的购物券 "+gcuser.getPay()+" ，谢谢！");
 		}
 		
-		if(!this.changeScores(fromUser, -amount, ScoresChangeType.MALL_BACK_REDUCE, 0d, toUser, yy+"-"+orderId)){
+		if(!this.changeScores(fromUser, -amount, ScoresChangeType.MALL_BACK_REDUCE, 0d, toUser, yy+"-"+orderId,orderId)){
 			throw new ServiceException(6, "您好，您转账购物券不能大于您剩余购物券 "+gcuser.getPay()+" ，谢谢！");
 		}
-		if(!this.changeScores(toUser, amount, ScoresChangeType.MALL_BACK_ADD,0d, fromUser, yy+"-"+orderId)){
+		if(!this.changeScores(toUser, amount, ScoresChangeType.MALL_BACK_ADD,0d, fromUser, yy+"-"+orderId,orderId)){
 			throw new ServiceException(3000, "未知错误！");
 		}
 	}
@@ -4530,7 +4537,7 @@ public class UserService {
 			if(log!=null){
 				throw new ServiceException(1, "订单重复提交！order="+order+",username="+user);
 			}
-			if(!this.changeScores(user, -scores,ScoresChangeType.MALL_BUY,0,"0",order)){
+			if(!this.changeScores(user, -scores,ScoresChangeType.MALL_BUY,0,"0",order,order)){
 				throw new ServiceException(9, "您的购物卷余额不足，请检查输入是否正确！");
 			}
 		}
@@ -4580,7 +4587,7 @@ public class UserService {
                 	int otherScoresNum = addScores;//成本购物券
                 	
                 	if(rationScoresNum>0){
-	                	if(!this.changeScores(BUY_RATION_USER, rationScoresNum,ScoresChangeType.MALL_RATION_ADD,0,user,"购物"+shopBean.getShopperOrder())){
+	                	if(!this.changeScores(BUY_RATION_USER, rationScoresNum,ScoresChangeType.MALL_RATION_ADD,0,user,"购物"+shopBean.getShopperOrder(),shopBean.getShopperOrder())){
 	                		throw new ServiceException(3000, "商户不存在"+BUY_RATION_USER);
 	                	}
                 	}
@@ -4588,11 +4595,11 @@ public class UserService {
                 	if(otherScoresNum>0){
                 		//如果商户是zxz888那么直接进该商家账户  不进入中转站
                 		if(shopBean.getShopper().equals("zxz888")){
-                			if(!this.changeScores("zxz888", otherScoresNum,ScoresChangeType.MALL_SALE,0,user,"购物"+shopBean.getShopperOrder())){
+                			if(!this.changeScores("zxz888", otherScoresNum,ScoresChangeType.MALL_SALE,0,user,"购物"+shopBean.getShopperOrder(),shopBean.getShopperOrder())){
                         		throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
                         	}
                 		}else{
-                			if(!this.changeScores(SHOPP_USER, otherScoresNum,ScoresChangeType.MALL_TEMP_ADD,0,user,"购物"+shopBean.getShopperOrder())){
+                			if(!this.changeScores(SHOPP_USER, otherScoresNum,ScoresChangeType.MALL_TEMP_ADD,0,user,"购物"+shopBean.getShopperOrder(),shopBean.getShopperOrder())){
                         		throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
                         	}
                 		}
@@ -4672,15 +4679,15 @@ public class UserService {
 				}
 				
 				if(mallOrder.getOrderScores()>0){
-					if(!this.changeScores(SHOPP_USER, -mallOrder.getOrderScores(),ScoresChangeType.MALL_TEMP_ADD_REDUCE,0,mallOrder.getOrderUser(),mallOrder.getOrderId())){
+					if(!this.changeScores(SHOPP_USER, -mallOrder.getOrderScores(),ScoresChangeType.MALL_TEMP_ADD_REDUCE,0,mallOrder.getOrderUser(),mallOrder.getOrderId(),mallOrder.getOrderId())){
                 		throw new ServiceException(3000, "商户不存在"+SHOPP_USER);
                 	}
-					if(!this.changeScores(mallOrder.getOrderUser(),mallOrder.getOrderScores(),ScoresChangeType.MALL_SALE,0,SHOPP_USER,mallOrder.getOrderId())){
+					if(!this.changeScores(mallOrder.getOrderUser(),mallOrder.getOrderScores(),ScoresChangeType.MALL_SALE,0,SHOPP_USER,mallOrder.getOrderId(),mallOrder.getOrderId())){
                 		throw new ServiceException(3000, "商户不存在"+mallOrder.getOrderUser());
                 	}
 				}
 			}else{
-//				throw new ServiceException(1, "不存在的订单号,或重复处理！"+mallOrder.getOrderId());
+//				 throw new ServiceException(1, "不存在的订单号,或重复处理！"+mallOrder.getOrderId());
 			}
 		}
 	}

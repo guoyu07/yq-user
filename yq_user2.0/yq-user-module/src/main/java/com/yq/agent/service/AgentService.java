@@ -257,7 +257,7 @@ public class AgentService {
 			throw new ServiceException(9,"商户购物券不足！");
 		}
 		//给目标用户加购物券
-		if(!userService.changeScores(toUserName, amount, ScoresChangeType.APP_ADD, 0, fromAgentName, appId)){
+		if(!userService.changeScores(toUserName, amount, ScoresChangeType.APP_ADD, 0, fromAgentName, appId,"")){
 			throw new ServiceException(4,"用户不存在");
 		}
 	}
