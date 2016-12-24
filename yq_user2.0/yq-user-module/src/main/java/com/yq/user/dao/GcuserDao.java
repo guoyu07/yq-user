@@ -1035,7 +1035,7 @@ public class GcuserDao {
 	}
 	
 	public int updateJfChaifen(String beishu,Date date){
-		String sql = "update "+table+" set jyg=floor(jyg*"+beishu+"),cfa=cfa+1,cfb=cfb+"+beishu+",cfc=cfc+1 where regtime>? and jyg>0 and name<>'公司'";
+		String sql = "update "+table+" set jyg=floor(jyg*"+beishu+"),cfa=cfa+1,cfb=cfb*"+beishu+",cfc=cfc+1 where regtime>? and jyg>0 and name<>'公司'";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(date);
 		System.out.println(sql);
