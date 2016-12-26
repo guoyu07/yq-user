@@ -98,7 +98,7 @@
 				</div>
 				<div class="content-box2 mt10">
 					<div class="content-title">
-						<span><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1696499005'/></span>
+						<span><s:text name='sell.1696499005'/></span>
 					</div>
 					<c:if test="${empty dataList}">
 						<div class="content-tisp">
