@@ -65,9 +65,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
               <tr> 
                 <td height=20>☉  <a href="/admin/rechargedetail" target="BoardList"><font color="#000000">VIP充值币记录明细</font></a></td>
               </tr>
-              <tr> 
+              <!-- <tr> 
                 <td height=20>☉  <a href="/admin/goldcardmanager" target="BoardList"><font color="#000000">金币卡--管理</font></a></td>
-              </tr>
+              </tr> -->
               <tr> 
                 <td height=20>☉  <a href="/admin/viptrasferdetail" target="BoardList"><font color="#000000">VIP转账明细</font></a></td>
               </tr>
@@ -106,9 +106,9 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <td style="display:" id='submenu6'>
 <div class=sec_menu style="width:158px; height:227px">
 <table cellpadding=0 cellspacing=0 align=center width=150 height="167">
-<tr>
+<!-- <tr>
 <td height=20>☉   <font color="#BB0000" style="font-size: 11pt"><a target="BoardList" href="/admin/fhjl"><font color="#000000">每期记录</font></a></font></td>
-</tr>
+</tr> -->
 <tr> 
 <td height=20>☉  <a href="/admin/searchuser"  target="BoardList"><font color="#FF0000">搜索会员</font></a></td>
 </tr>
@@ -158,23 +158,23 @@ eval("submenu" + sid + ".style.display=\"none\";");
 <div class=sec_menu style="width:158px; height:230px">
             <table cellpadding=0 cellspacing=0 align=center width=150 height="93">
             <c:if test="${fcxt.id==1}">
-              <tr> 
+              <!-- <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="cgcp"><font color="#0000FF">抢购管理</font></a></font></td>
               </tr>
-             <!--  <tr> 
+              <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="vip545.asp"><font color="#000000">设置交易股价</font></a></font></td>
               </tr> 
               <tr> 
                 <td height=20>☉  <font color="#800000"><b><a target="BoardList" href="/admin/adslist"><font color="#000000">公告管理</font></a></b><font color="#000000"> | 
                 </font><b><a target="BoardList" href="/admin/addnotice"><font color="#000000">添加公告</font></a></b></font></td>
-              </tr>-->
+              </tr>
               <tr> 
                 <td height=20>☉  <font color="#FF0000"><a target="BoardList" href="doubleareacount"><font color="#000000">双区结算</font></a></font></td>
-              </tr>
+              </tr> -->
               
-				<tr>
+				<!-- <tr>
 				<td height=20>☉  <a href="/admin/adminbduser" target="BoardList">双区玩家开户</a></td> 
-				</tr>
+				</tr> -->
 				<tr>
 				<td height=20>☉  <a href="/admin/telpayhander" target="BoardList">手动充话费</a></td> 
 				</tr>
