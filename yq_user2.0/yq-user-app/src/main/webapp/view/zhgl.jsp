@@ -25,7 +25,7 @@ if(fcxt!=null){
 						<li><a href="/datepay?lb=8"><s:text name='viewshop.html.shop.html.994834486'/></a>：<span class="c-z"><%=gcuserJflc.getJypay()%></span></li>
 						<li><a href="/datepay?lb=2"><s:text name='viewshop.html.shop.html.-1892736228'/></a>：<span class="c-g"><%=gcuserJflc.getRgpay()%></span></li>
 						<li><a href="/datepay?lb=3"><s:text name='viewyjcx-game.jsp.yjcx-game.jsp.1029202'/><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></a>：<span class="c-b"><%=gcuserJflc.getMcpay()%></span></li>
-						<li><s:text name='viewzhgl.jsp.zhgl.jsp.649202784'/>:<span class="c-z"><%=gcuserJflc.getJydb()%></span></li>
+						<li><s:text name='viewzhgl.jsp.zhgl.jsp.649202784'/>：<span class="c-z"><%=gcuserJflc.getJydb()%></span></li>
 						<li><s:text name='viewzhgl.jsp.zhgl.jsp.950786681'/>：<span class="c-r"><%=ajygj%></span></li>
 						<li><s:text name='viewshop.html.shop.html.950947478'/>：<span class="c-g"><%=gcuserJflc.getJyg()%></span></li>
 						<li><s:text name='viewjflc.jsp.jflc.jsp.-1002641178'/>：<span class="c-z"><%=gcuserJflc.getCfa()%></span></li>
