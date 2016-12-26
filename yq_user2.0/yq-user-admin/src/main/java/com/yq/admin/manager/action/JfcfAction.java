@@ -97,6 +97,20 @@ public class JfcfAction extends ALDAdminActionSupport {
     	super.setErroCodeNum(2001);
 		return SUCCESS;
 	}
+     
+     
+     public String resetcfb(){
+    	final AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+    	 new Thread(new Runnable() {
+ 			@Override
+ 			public void run() {
+ 				adminService.resetCfb();
+ 			}
+ 		}).start();
+    	 
+    	super.setErroCodeNum(2001);
+		return SUCCESS;
+	}
 
 	public boolean getClose() {
 		return close;

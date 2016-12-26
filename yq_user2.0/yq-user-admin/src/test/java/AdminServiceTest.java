@@ -15,6 +15,7 @@ public class AdminServiceTest extends DaoTest{
 
 	public void testWay(){
 //		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+//		adminService.resetCfb();
 //		adminService.managequeren();
 //		adminService.man123();
 //		adminService.resetZaqAndZbq();

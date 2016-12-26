@@ -1,5 +1,6 @@
 package com.yq.manager.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -2583,6 +2584,51 @@ public class AdminService {
 		gcuserDao.updateJygdateAndJygt1("<=50000", 1, null, 0);
 	}
 	
+	
+	/**
+	 * 重置cfb
+	 */
+	
+	public void resetCfb(){
+		int maxId = gcuserDao.getMaxId();
+		int startId = 1;
+		int endId = 500;
+		int cap = 500;
+		List<Gcuser> list = null;
+		while(true){
+			long start = System.currentTimeMillis();
+			LogSystem.info("开始执行充值cfb--执行id号为：start="+startId+",end="+endId+",最大Id为="+maxId);
+			list = gcuserDao.getByIdDistanceForResetCfb(startId, endId);
+			if(list!=null&&list.size()>0){
+				LogSystem.info("总数目为"+list.size());
+				for(Gcuser gcuser:list){
+					if(gcuser.getCfa()<=10){
+						double cfb = getBs(gcuser.getCfa());
+						gcuserDao.updateCfb(gcuser.getUsername(), cfb);
+					}
+				}
+			}
+			long end = System.currentTimeMillis();
+			LogSystem.info("完毕充值cfb--执行id号为：start="+startId+",end="+endId+"执行时间为="+(end-start)/1000+"秒");
+			if(endId>=maxId){
+				break;
+			}
+			startId = endId+1;
+			endId = endId+cap;
+		}
+	}
+	
+	private static final double[] bs = new double[]{2.30,1.60,1.80,1.79,1.23,1.46,1.31,1.29,1.58,1.50};
+	public static double getBs(int cfc){
+		double result = 1;
+		for(int i=0;i<cfc;i++){
+			result = result*bs[i];
+		}
+		BigDecimal   b   =   new   BigDecimal(result);
+		double   f1   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();
+		return f1;
+	}
+	
 	private void addGpjyForChaiFeng(String clname,int mcsl,double jyg){
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(clname);
@@ -3078,10 +3124,10 @@ public class AdminService {
 		}
 		return result;
 	}
-	public static void main(String[] args) {
-		String str = "0.820000000000";
-		System.out.println(StringUtils.substring(str, 0, 5));
-	}
+//	public static void main(String[] args) {
+//		String str = "0.820000000000";
+//		System.out.println(StringUtils.substring(str, 0, 5));
+//	}
 	
 	/**
 	 * 撤销卖出一币
@@ -3384,16 +3430,6 @@ public class AdminService {
 		}
 		return new Page<AbsModifyUserLog>(result, page.getTotalSize(), pageSize, pageIndex);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

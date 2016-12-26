@@ -595,7 +595,11 @@
 		        jfcf.jsp
 		    </result>
 		</action>	
-		
+				<action name="resetcfb" class="com.yq.admin.manager.action.JfcfAction" method="resetcfb">
+		    <result name="success">
+		        jfcf.jsp
+		    </result>
+		</action>			
 		<action name="userper" class="com.yq.admin.manager.action.PerformanceSearchAction">
 		    <result name="success">
 		      userper.jsp

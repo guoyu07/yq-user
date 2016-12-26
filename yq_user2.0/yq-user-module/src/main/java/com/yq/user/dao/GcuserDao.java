@@ -1060,6 +1060,22 @@ public class GcuserDao {
 		return this.jdbc.getList(sql, Gcuser.class,parameter);
 	} 
 	
+	public List<Gcuser> getByIdDistanceForResetCfb(int startId,int endId){
+		String sql = "select id,username,cfa,cfb from "+table+" where cfa>0  and id>=? and id<=? order by id asc";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(startId);
+		parameter.setInt(endId);
+		return this.jdbc.getList(sql, Gcuser.class,parameter);
+	} 
+	
+	public boolean updateCfb(String userName,double cfb){
+		String sql = "update "+table+" set cfb=?  where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setDouble(cfb);
+		parameter.setString(userName);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
 	public boolean resetCfc(String userName,int jyg){
 		String sql = "update "+table+" set jyg=?,cfc=0,jygdate=null where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();

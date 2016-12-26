@@ -1,11 +1,6 @@
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-
-import cn.submsg.client.util.SubMsgSendUtils;
 
 
 public class YqUserAdminRun {
@@ -28,7 +23,11 @@ public class YqUserAdminRun {
 	
 //	public static void smsSend(){
 //		Map<String,String> param = new HashMap<String,String>();
-//		param.put("code", "1234567");
-//		SubMsgSendUtils.sendMessage("15919820372", "aGTtt3", param);
+//		param.put("name", "刘");
+//		param.put("numStr", "20000元(贰万圆整)");
+//		param.put("userName", "ljy5656a");
+//		param.put("date", "2016/12/15");
+//		SubMsgSendUtils.sendMessage("13620623424", "sUb981", param);
 //	}
+	
 }
