@@ -3707,55 +3707,56 @@ public class UserService {
 	 */
 	@Transactional
 	public void cancelSale(String userName,int orderId,String pa3){
-		Gcuser gcuser = gcuserDao.getUser(userName);
-		checkJfIsOpen();
-		if(!pa3.equals(gcuser.getPassword3())){
-			throw new ServiceException(1,"二级密码不正确");
-		}
-		
-		Gpjy gpjy1 = gpjyDao.getById(orderId);
-		double mcsl=gpjy1.getMcsl();
-		
-		if(!gpjy1.getUsername().equals(userName)||gpjy1.getNewjy()==3){
-			throw new ServiceException(3000,"非法操作");
-		}
-		
-		if(!gcuserDao.updateJyg(userName, -(int)mcsl)){
-			throw new ServiceException(3000,"更新积分失败");
-		}
-		
-		if(!gcuserDao.resetStopjyg(userName)){
-			throw new ServiceException(3000,"更新失败");
-		}
-		
-		if(!gpjyDao.updateJy(1, orderId)){
-			throw new ServiceException(2,"该积分交易进行中或已经由它人交易成功了，不能撒消，请选择其它交易！");
-		}
-		
-		if(!gpjyDao.updateBz(orderId, "已撒单")){
-			throw new ServiceException(3000,"更新失败");
-		}
-		
-		if(!gpjyDao.updateCgdate(orderId)){
-			throw new ServiceException(3000,"更新失败");
-		}
-		
-		if(!gpjyDao.updateDqdate(orderId)){
-			throw new ServiceException(3000,"更新失败");
-		}
-		
-		gpjyDao.deleteIndex(orderId);
-		
-		gcuser = gcuserDao.getUser(userName);
-		
-		Gpjy gpjy = new Gpjy();
-		gpjy.setUsername(userName);
-		gpjy.setMysl(mcsl);
-		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
-		gpjy.setBz("撒单成功");
-		gpjy.setCgdate(new Date());
-		gpjy.setJy(1);
-		gpjyDao.add(gpjy);
+		throw new ServiceException(3000,"非法操作");
+//		Gcuser gcuser = gcuserDao.getUser(userName);
+//		checkJfIsOpen();
+//		if(!pa3.equals(gcuser.getPassword3())){
+//			throw new ServiceException(1,"二级密码不正确");
+//		}
+//		
+//		Gpjy gpjy1 = gpjyDao.getById(orderId);
+//		double mcsl=gpjy1.getMcsl();
+//		
+//		if(!gpjy1.getUsername().equals(userName)||gpjy1.getNewjy()==3){
+//			throw new ServiceException(3000,"非法操作");
+//		}
+//		
+//		if(!gcuserDao.updateJyg(userName, -(int)mcsl)){
+//			throw new ServiceException(3000,"更新积分失败");
+//		}
+//		
+//		if(!gcuserDao.resetStopjyg(userName)){
+//			throw new ServiceException(3000,"更新失败");
+//		}
+//		
+//		if(!gpjyDao.updateJy(1, orderId)){
+//			throw new ServiceException(2,"该积分交易进行中或已经由它人交易成功了，不能撒消，请选择其它交易！");
+//		}
+//		
+//		if(!gpjyDao.updateBz(orderId, "已撒单")){
+//			throw new ServiceException(3000,"更新失败");
+//		}
+//		
+//		if(!gpjyDao.updateCgdate(orderId)){
+//			throw new ServiceException(3000,"更新失败");
+//		}
+//		
+//		if(!gpjyDao.updateDqdate(orderId)){
+//			throw new ServiceException(3000,"更新失败");
+//		}
+//		
+//		gpjyDao.deleteIndex(orderId);
+//		
+//		gcuser = gcuserDao.getUser(userName);
+//		
+//		Gpjy gpjy = new Gpjy();
+//		gpjy.setUsername(userName);
+//		gpjy.setMysl(mcsl);
+//		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
+//		gpjy.setBz("撒单成功");
+//		gpjy.setCgdate(new Date());
+//		gpjy.setJy(1);
+//		gpjyDao.add(gpjy);
 	}
 	
 	

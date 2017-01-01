@@ -125,7 +125,7 @@
 								<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
 								<td>${data.pay}</td>
 			                    <td><a href="/diyjygj?sgid=${data.id}"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.635139184'/></a></td>
-			                    <td><c:if test="${data.newjy!=3}"><a href="qxyjg?qxid=${data.id}" style="text-decoration: none"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.836270'/></a></c:if></td>
+			                    <td></td>
 							</tr>
 							</s:iterator>
 						</table>
