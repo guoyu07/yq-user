@@ -1,4 +1,6 @@
+import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.testcore.ActionTest;
+import com.yq.user.service.UserService;
 
 
 public class AdminServiceTest extends ActionTest{
@@ -10,6 +12,7 @@ public class AdminServiceTest extends ActionTest{
 //		adminService.executeSynNameSql();
 //		adminService.managequeren();
 //		final UserService userService = ServiceCacheFactory.getService(UserService.class);
+//		userService.saleYb("dogdog7788", "222222", 1000, "000000", "1111");
 //		
 //		
 //		new Thread(new Runnable() {
