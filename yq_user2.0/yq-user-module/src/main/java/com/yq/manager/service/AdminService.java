@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,9 @@ import com.yq.common.utils.FileCreatUtil;
 import com.yq.common.utils.Global;
 import com.yq.common.utils.MD5Security;
 import com.yq.cservice.bean.SqDayAddBean;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.dao.AdminOperateLogDao;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.bean.Performance;
 import com.yq.manager.bean.UserPerformanceSearch;
 import com.yq.manager.bean.UserStatBean;
@@ -38,7 +43,6 @@ import com.yq.manager.bean.YbCjbBean;
 import com.yq.manager.bo.BackCountBean;
 import com.yq.manager.bo.DateBean;
 import com.yq.manager.bo.GcfhBean;
-import com.yq.manager.bo.NewsDateBean;
 import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.bo.PointsChangeLog;
 import com.yq.manager.bo.UserVipLog;
@@ -65,7 +69,6 @@ import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
 import com.yq.user.bo.Gpjy;
-import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.ModifyUserLog;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.Sgtj;
@@ -184,6 +187,9 @@ public class AdminService {
 	private InterRegionCodeDao interRegionCodeDao;	
 	@Autowired
 	private ModifyUserLogDao modifyUserLogDao;
+	@Autowired
+	private AdminOperateLogDao adminOperateLogDao;
+	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
@@ -209,6 +215,22 @@ public class AdminService {
 		}else{
 			return false;
 		}
+	}
+	
+	/**
+	 * @param adminUserName
+	 * @param passWord
+	 * @param sessionId
+	 * @return
+	 */
+	public boolean adminUserLogin(String adminUserName, String passWord, HttpSession session, String ip) {
+		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.LOGIN_EVENT, "后台登录");
+		adminOperateLogDao.addLog(log);
+		Fcxt fcxt = fcxtDao.getAdminUser(adminUserName);
+		if(fcxt.getFunction()!=0){
+			throw new ServiceException(405, "功能性账户不提供此处登录");
+		}
+		return adminLogin(adminUserName, passWord, session.getId());
 	}
 	
 	public IPage<Gcfh> getAllGcfhPage(int pageIndex,int pageSize){
@@ -3430,6 +3452,26 @@ public class AdminService {
 		}
 		return new Page<AbsModifyUserLog>(result, page.getTotalSize(), pageSize, pageIndex);
 	}
+	
+	public boolean addFcxt(Fcxt fcxt) {
+		return fcxtDao.addFcxt(fcxt);
+	}
+	
+	public Fcxt getFcxt(String userName) {
+		return fcxtDao.getAdminUser(userName);
+	}
+	
+	public boolean updateFcxtPass(String userName, String pass) {
+		return fcxtDao.updatePss(userName,pass);
+		
+	}
+	public Cache<String, Session> getAdminUserMap() {
+		return adminUserMap;
+	}
+	public void setAdminUserMap(Cache<String, Session> adminUserMap) {
+		this.adminUserMap = adminUserMap;
+	}
+	
 	
 	
 	

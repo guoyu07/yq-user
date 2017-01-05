@@ -9,6 +9,11 @@
 		       manager.jsp
 		    </result>
 		</action>
+		<action name="getResource" class="com.yq.admin.manager.action.AdminManagerAction" method="getResource">
+		     <result name="success">
+		       left2.jsp
+		    </result>
+		</action>
 		<action name="resetUserDownInfo" class="com.yq.admin.manager.action.ResetZYDetailsAction">
 		    <result name="success">
 		      scontent.jsp
@@ -22,8 +27,15 @@
 		
 	    <action name="left" class="com.yq.admin.manager.action.LeftAction">
 		    <result name="success">
-		        left.jsp
+		        left2.jsp
 		    </result>
+		</action>
+		
+		<action name="saveWd" class="com.yq.admin.manager.action.LeftAction" method="saveWd">
+		   <result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
 		</action>
 		
 		<action name="readme" class="com.yq.admin.manager.action.ReadMeAction">
@@ -59,7 +71,6 @@
 		        goldcardmanager.jsp
 		    </result>
 		</action>
-		
 		<action name="gcSendRecord" class="com.yq.admin.manager.action.GoldCardSendRecordAction">
 		    <result name="success">
 		        gcSendRecord.jsp
@@ -71,7 +82,7 @@
 		        outday.jsp
 		    </result>
 		</action>	
-		
+		<!-- 未知模块 -->
 		<action name="sgtjdate" class="com.yq.admin.manager.action.SgtjdateAction">
 		    <result name="success">
 		        sgtjdate.jsp
@@ -105,13 +116,14 @@
 		    <result name="success">
 		        jymy.jsp
 		    </result>
-		</action>			
+		</action>	
+		<!-- 未知模块 -->		
 		<action name="ljsy" class="com.yq.admin.manager.action.LjsyAction">
 		    <result name="success">
 		        ljsy.jsp
 		    </result>
 		</action>
-		
+		<!-- 未知模块 -->		
 		<action name="epjysc" class="com.yq.admin.manager.action.EpjyscAction">
 		    <result name="success">
 		        epjysc.jsp
@@ -123,12 +135,13 @@
 		        fhjl.jsp
 		    </result>
 		</action>	
+		<!-- 未知模块 --><!-- 计算昨日收益 -->		
 		<action name="jsfh" class="com.yq.admin.manager.action.JsfhAction">
 		    <result name="success">
 		        jsfh.jsp
 		    </result>
 		</action>	
-		
+		<!-- 未知模块 --><!-- 双区用户分红 -->
 		<action name="sendfh" class="com.yq.admin.manager.action.SendFhAction">
 		    <result name="success">
 		        jsfh.jsp
@@ -162,7 +175,6 @@
 		    </result>
 		</action>
 		
-		
 		<action name="resetAchievement" class="com.yq.admin.manager.action.AchievementAction">
 		  <result name="success" type="json" />
 		</action>
@@ -183,7 +195,7 @@
                 downVipList.jsp
             </result>
         </action>
-		
+		<!-- 未知模块 -->
 		<action name="usercj" class="com.yq.admin.manager.action.UserCjAction">
 		    <result name="input">
 		        usercj.jsp
@@ -195,7 +207,7 @@
 		        usercj.jsp
 		    </result>
 		</action>
-		
+		<!-- 未知模块 -->
 		<action name="bcgp" class="com.yq.admin.manager.action.BcgpAction">
 		    <result name="input">
 		        bcgp.jsp
@@ -235,7 +247,6 @@
 		</action>	
 		<action name="outputSysBiExcel" class="com.yq.admin.manager.action.SysBiAction" method="outExcel">
 		</action>	
-			
 		<action name="vipcjb" class="com.yq.admin.manager.action.VipcjbAction">
 		    <result name="input">
 		        vipcjb.jsp
@@ -244,7 +255,6 @@
 		        vipcjb_result.jsp
 		    </result>
 		</action>	
-		
 		<action name="epsf" class="com.yq.admin.manager.action.EpsfAction">
 		    <result name="input">
 		        epsf.jsp
@@ -253,7 +263,6 @@
 		        epsf_result.jsp
 		    </result>
 		</action>	
-		
 		<action name="btpay" class="com.yq.admin.manager.action.BtpayAction">
 		    <result name="input">
 		        btpay.jsp
@@ -268,7 +277,7 @@
 		        changearea.jsp
 		    </result>
 		</action>
-		
+		<!-- 未知模块 -->
        <action name="pmcj" class="com.yq.admin.manager.action.PmcjAction">
 		    <result name="input">
 		        pmcj.jsp
@@ -280,28 +289,31 @@
 		        pmcj.jsp
 		    </result>
 		</action>
-		
+		<!-- 未知模块 -->
 		<action name="pmmlt" class="com.yq.admin.manager.action.PmmltAction">
 		    <result name="success">
 		        pmmlt.jsp
 		    </result>
 		</action>
-		
+		<!-- 未知模块 -->
 		<action name="sdup" class="com.yq.admin.manager.action.SdupAction">
 		    <result name="input">
 		        sdup.jsp
 		    </result>
 		</action>	
+		<!-- 未知模块 -->
 		<action name="mlt" class="com.yq.admin.manager.action.MltAction">
 		    <result name="success">
 		        pmmlt.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="bsreg" class="com.yq.admin.manager.action.MltAction" method="bsReg">
 		    <result name="success">
 		        pmmlt.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="sgreg" class="com.yq.admin.manager.action.SgRegAction">
 		    <result name="success">
 		        sgreg.jsp
@@ -336,6 +348,7 @@
 		        backcount.jsp
 		    </result>
 		</action>	
+		<!-- 未知模块 -->
 		<action name="backcount" class="com.yq.admin.manager.action.BackCountAction" method="backCount">
 		    <result name="success">
 		        backcount.jsp
@@ -352,7 +365,7 @@
 		        gpjysc.jsp
 		    </result>
 		</action>
-		
+		<!-- 未知模块 -->
 		<action name="gpjy" class="com.yq.admin.manager.action.GpjyAction">
 		    <result name="success">
 		        gpjy.jsp
@@ -386,11 +399,13 @@
 		        cpcg.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 	   <action name="hfcg" class="com.yq.admin.manager.action.BuyManagerAction" method="recoverGoods">
 		    <result name="success">
 		        cpcg.jsp
 		    </result>
-		</action>	
+		</action>
+		<!-- 未知模块 -->	
 		<action name="fwdate" class="com.yq.admin.manager.action.BuyManagerAction" method="fwdate">
 		    <result name="success">
 		        cpcg.jsp
@@ -405,7 +420,7 @@
 		    <result name="success">
 		        showcontent.jsp
 		    </result>
-		</action>		
+		</action>	
 		<action name="addnotice" class="com.yq.admin.manager.action.NoticeAction" method="add">
 		    <result name="success">
 		        addnotice.jsp
@@ -414,7 +429,6 @@
 		        adslist
 		    </result>
 		</action>
-		
 		<action name="editnotice" class="com.yq.admin.manager.action.NoticeAction" method="edit">
             <result name="success">
 		        editnotice.jsp
@@ -423,6 +437,7 @@
 		        adslist
 		    </result>
 		</action>
+		
 		<action name="doubleareacount" class="com.yq.admin.manager.action.DoubleAreaCountAction">
 		    <result name="input">
 		        doubleareacount.jsp
@@ -431,7 +446,7 @@
 		        doubleareacount.jsp
 		    </result>
 		</action>		
-		
+		<!-- 未知模块 -->
 		<action name="dluser" class="com.yq.admin.manager.action.DluserAction">
 		    <result name="input">
 		        dluser.jsp
@@ -440,21 +455,25 @@
 		        dluser.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="csheng" class="com.yq.admin.manager.action.DluserAction" method="changeShengAdmin">
 		    <result name="success">
 		        dluser.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="cshi" class="com.yq.admin.manager.action.DluserAction" method="changeShiAdmin">
 		    <result name="success">
 		        dluser.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="carea" class="com.yq.admin.manager.action.DluserAction" method="changeAreaAdmin">
 		    <result name="success">
 		        dluser.jsp
 		    </result>
-		</action>			
+		</action>	
+		<!-- 未知模块 -->		
 		<action name="cbigarea" class="com.yq.admin.manager.action.DluserAction" method="changeBigAreaAdmin">
 		    <result name="success">
 		        dluser.jsp
@@ -478,6 +497,7 @@
 		        sqdayadd.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="searchByTime" class="com.yq.admin.manager.action.SqdayAddAction" method="searchByTime">
 		    <result name="success">
 		        sqdayadd.jsp
@@ -538,6 +558,7 @@
 		       tduser.jsp
 		    </result>		    
 		</action>
+		<!-- 未知模块 -->
 		<action name="tduser-transfer" class="com.yq.admin.manager.action.TduserAction" method="transferUser">
 		    <result name="redirect" type="redirect">
 		       tduser?cjpa=${cjpa}
@@ -580,21 +601,25 @@
 		        jfcf.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="djm" class="com.yq.admin.manager.action.JfcfAction" method="dealJfMr">
 		    <result name="success">
 		        jfcf.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 		<action name="cf" class="com.yq.admin.manager.action.JfcfAction" method="chaifeng">
 		    <result name="success">
 		        jfcf.jsp
 		    </result>
 		</action>
+		<!-- 未知模块 -->
 				<action name="dm" class="com.yq.admin.manager.action.JfcfAction" method="cfdm">
 		    <result name="success">
 		        jfcf.jsp
 		    </result>
 		</action>	
+		<!-- 未知模块 -->
 				<action name="resetcfb" class="com.yq.admin.manager.action.JfcfAction" method="resetcfb">
 		    <result name="success">
 		        jfcf.jsp
@@ -610,7 +635,7 @@
 		      userperlist.jsp
 		    </result>
 		</action>
-		
+		<!-- 未知模块 -->
 		<action name="insertuser" class="com.yq.admin.manager.action.InsertPositionAction">
 		    <result name="success">
 		      insertuser.jsp
@@ -647,7 +672,6 @@
 		      /admin/searchfcxt?erroCodeNum=2002
 		    </result>
 		</action>
-		
 		<action name="updateuservip" class="com.yq.admin.manager.action.ModifyaabuserAction" method="updateUserVipInfo">
 		   <result name="input" >
 		      /admin/updateuservip.jsp
@@ -657,14 +681,13 @@
 		    </result>
 		    
 		</action>
-		
 		<action name="updateuserpayok" class="com.yq.admin.manager.action.ModifyaabuserAction" method="updateUserPayOk">
 		    <result name="success">
 		      /admin/updateuserpayok.jsp
 		    </result>
 		</action>
 		
-		
+		<!-- 未知模块 -->
 		<action name="tools" class="com.yq.admin.manager.action.ToolsAction">
 		    <result name="success" type="json">
 		      <param name="includeProperties">erroCodeNum</param>
@@ -682,7 +705,6 @@
                /admin/thesameuserinfo.jsp
             </result>
         </action>
-        
         <action name="toolstheSameUserInfoToExcel" class="com.yq.admin.manager.action.ToolsAction" method="theSameUserInfoToExcel">
             <result name="success" type="json">
               <param name="includeProperties">erroCodeNum</param>
@@ -738,9 +760,8 @@
 		      /admin/editbabyinfo.jsp
 		    </result>
 		</action>
-
 	</package>
-
+	
 
     <package name="adminInterceptor" extends="someInterceptor">
 
@@ -759,6 +780,9 @@
 			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
 			<result name="nologin" type="redirect">
 				/adminindex
+			</result>
+			<result name="noPermission" type="redirect">
+				/manage/noPermission.jsp
 			</result>
 		</global-results>
 	</package>

@@ -1,6 +1,7 @@
 package com.yq.admin.manager.interceptor;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -10,6 +11,8 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.module.web.session.Session;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.Resource;
+import com.yq.manage.service.ManageService;
 import com.yq.manager.service.AdminService;
 
 public class AdminInterceptor extends AbstractInterceptor {
@@ -23,6 +26,8 @@ public class AdminInterceptor extends AbstractInterceptor {
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		AdminService admin = ServiceCacheFactory.getServiceCache()
 				.getService(AdminService.class);
+		ManageService manageService = ServiceCacheFactory.getServiceCache()
+				.getService(ManageService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
 		Session session = admin.getLoginAdminUserName(sessionhttp.getId());
@@ -39,6 +44,19 @@ public class AdminInterceptor extends AbstractInterceptor {
 				aldAction = (ALDAdminActionSupport) obj;
 				aldAction.setUserName(userName);
 				aldAction.setUserSession(session);
+				HttpServletRequest request=ServletActionContext.getRequest();
+				String path=request.getRequestURI();
+				Resource resource = manageService.getResourceByUrl(path);
+				boolean isSecurity = false;
+				if(resource!=null){
+					if(resource.getSecurity()==1){//此功能是否需要验证
+						isSecurity = manageService.isSecurity(userName,resource.getId());
+						if(!isSecurity){
+							return "noPermission"; 
+						}
+					}
+				}
+				
 			} else {
 				String className = obj.getClass().getCanonicalName();
 				throw new RuntimeException("ACTION继承的类非ALDAdminActionSupport"+className);

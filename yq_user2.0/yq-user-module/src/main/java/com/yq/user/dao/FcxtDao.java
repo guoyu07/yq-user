@@ -129,4 +129,18 @@ public class FcxtDao {
 		parameter.setString(value);
 		return jdbc.update(sql, parameter)>0;
 	}
+	
+	public boolean addFcxt(Fcxt fcxt){
+		return jdbc.insert(fcxt)>0;
+	}
+
+	public boolean updatePss(String userName, String pass) {
+		String sql = "update "+table+" set password=?  where adminusername = ?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(pass);
+		parameter.setString(userName);
+		return jdbc.update(sql, parameter)>0;
+	}
+	
+	
 }

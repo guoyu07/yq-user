@@ -7,7 +7,7 @@ import java.util.Date;
 
 
 public class Fcxt{
-	private int id;
+	private int id;						//作为adminId,唯一值
 	private String ncjud;
 	private String adminusername;
 	private String password;
@@ -27,6 +27,23 @@ public class Fcxt{
 	private String cz03;
 	private String cz04;
 	private String cz05;
+	
+	//为整合权限系统管理用户表所添加的字段
+	private int            isOverdue;	//是否是海外用户
+	private Date			  createDate;	//创建日期
+	private String			  createName;	//创建者
+	private Date			  updateDate;	//修改日期
+	private String			  updateName;	//修改者
+	private int				  staffId;		//职员id
+	
+	
+	//是否涉及功能控制账号，设计目的：为不影响之前的功能模块，加入此判断
+	private int function;					//用于区分整合前后功能与用户名的字段  0表示否，1表示是，如之前的admin1，admin2,admin5... 得须设值为：1
+	
+	private String 			  roleName;
+	
+	private String 			  fullName;
+	
 	public void setId(int id){
 	this.id=id;
 	}
@@ -149,5 +166,62 @@ public class Fcxt{
 	public String getCz05(){
 		return cz05;
 	}
+	
+	public int getIsOverdue() {
+		return isOverdue;
+	}
+	public void setIsOverdue(int isOverdue) {
+		this.isOverdue = isOverdue;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public String getCreateName() {
+		return createName;
+	}
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	public String getUpdateName() {
+		return updateName;
+	}
+	public void setUpdateName(String updateName) {
+		this.updateName = updateName;
+	}
+	public int getStaffId() {
+		return staffId;
+	}
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	public int getFunction() {
+		return function;
+	}
+	public void setFunction(int function) {
+		this.function = function;
+	}
+	
+	
 }
 

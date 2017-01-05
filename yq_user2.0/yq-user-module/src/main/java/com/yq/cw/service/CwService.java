@@ -654,5 +654,13 @@ public class CwService {
 		}
 		return dayOfYbList;
 	}
+	public Cache<String, Session> getCwUserMap() {
+		return cwUserMap;
+	}
+	public void setCwUserMap(Cache<String, Session> cwUserMap) {
+		this.cwUserMap = cwUserMap;
+	}
+	
+	
 	
 }
