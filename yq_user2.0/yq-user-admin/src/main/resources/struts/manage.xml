@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+<package name="manage" extends="manageInterceptor" namespace="/manage">
+
+	<action name="manageindex" class="com.yq.admin.manage.action.ManageResourceAction" method="initjoin">
+		   <result name="success" >/manage/index.jsp</result>
+	</action>
+ 
+</package>
+
+	<package name="logout" extends="manageInterceptor" namespace="/logout">
+		<action name="*" class="com.yq.admin.manage.action.LogoutAction" method="{1}">
+			<result name="success" >/manage/login.jsp</result>
+		</action>
+	</package>
+
+	<package name="manageInterceptor" extends="someInterceptor">
+		<interceptors>
+			<!-- 认证拦截器-->
+			<interceptor name="manageInterceptor"
+				class="com.yq.admin.manage.interceptor.ManageInterceptor" />
+			<interceptor-stack name="manageStack">
+				<interceptor-ref name="manageInterceptor" />
+				<interceptor-ref name="someStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="manageStack" />
+			<global-results>
+			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
+			<result name="nologin" type="redirect">
+				/houtailogin
+			</result>
+			<result name="noPermission" type="redirect">
+				/manage/noPermission.jsp
+			</result>
+			
+		</global-results>
+	</package>
+
+
+	<package name="houtailogin" extends="noLoginInterceptor" namespace="/">
+		<action name="houtailogin" class="com.yq.admin.manage.action.AdminLoginAction">
+			<result name="success" >/manage/login.jsp</result>
+			<result name="redirect" type="redirect">/manage/manageindex</result>
+		</action>
+	</package>
+
+
+	<!-- 资源管理 -->
+	<package name="resource" extends="manageInterceptor" namespace="/resource">
+		<action name="*" class="com.yq.admin.manage.action.ResourceAction" method="{1}">
+			<result name="FORM">/manage/resource/resourceForm.jsp</result>
+			<result name="LIST">/manage/resource/resourceList.jsp</result>
+			<result name="AJAX">/manage/resource/resourceListTable.jsp</result>
+		</action>
+		<!-- <action name="listPage" class="com.yq.admin.manage.action.ResourceAction" method="listPage">
+			<result name="LIST">/manage/resource/resourceList.jsp</result>
+			<result name="AJAX">/manage/resource/resourceListTable.jsp</result>
+		</action>
+		<action name="loadTree" class="com.yq.admin.manage.action.ResourceAction" method="loadTree">
+			<result name="success" type="json" />
+		</action>
+		<action name="loadResourceTree" class="com.yq.admin.manage.action.ResourceAction" method="loadResourceTree">
+			<result name="success" type="json" />
+		</action>
+		<action name="form" class="com.yq.admin.manage.action.ResourceAction" method="form">
+			<result name="FORM">/manage/resource/resourceForm.jsp</result>
+		</action>
+		
+		<action name="saveOrUpdateResource" class="com.yq.admin.manage.action.ResourceAction" method="saveOrUpdateResource">
+			<result name="LIST">/manage/resource/resourceList.jsp</result>
+			<result name="AJAX">/manage/resource/resourceListTable.jsp</result>
+		</action>
+		<action name="saveResourcesTree" class="com.yq.admin.manage.action.ResourceAction" method="saveResourcesTree">
+			<result name="success" type="json" />
+		</action> -->
+		
+	</package>
+	
+	<!-- 角色管理 -->
+	<package name="role" extends="manageInterceptor" namespace="/role">
+		<action name="*" class="com.yq.admin.manage.action.RoleAction" method="{1}">
+			<result name="FORM">/manage/role/roleForm.jsp</result>
+			<result name="LIST">/manage/role/roleList.jsp</result>
+			<result name="AJAX">/manage/role/roleListTable.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 部门管理 -->
+	<package name="department" extends="manageInterceptor" namespace="/department">
+		<action name="*" class="com.yq.admin.manage.action.DepartmentAction" method="{1}">
+			<result name="FORM">/manage/department/departmentForm.jsp</result>
+			<result name="LIST">/manage/department/departmentList.jsp</result>
+			<result name="AJAX">/manage/department/departmentListTable.jsp</result>
+			<result name="SUAJAX">/manage/user/userListTable.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 用户管理 -->
+	<package name="user" extends="manageInterceptor" namespace="/user">
+		<action name="*" class="com.yq.admin.manage.action.UserTableAction" method="{1}">
+			<result name="FORM">/manage/user/userForm.jsp</result>
+			<result name="PWD">/manage/user/userPwdForm.jsp</result>
+			<result name="APWD">/admin/userPwdForm.jsp</result>
+			<result name="LIST">/manage/user/userList.jsp</result>
+		 	<result name="AJAX">/manage/user/userListTable.jsp</result> 
+		</action>
+	</package>
+
+
+</struts>
