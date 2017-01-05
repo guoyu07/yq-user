@@ -121,7 +121,7 @@ BORDER-RIGHT: #68bd5b 1px solid; BORDER-TOP: #68bd5b 1px solid; BORDER-LEFT: #68
           <td height="38" width="60" align="center">
           <c:if test="${data.needVerify==1}"><a href="setVerify?verify=0&user=${data.payusername}&page=${toPage}&uid=${uid}&uname=${uname}&riqi=${riqi}" ><font color="green">关闭免审核</font></a></c:if><c:if test="${data.needVerify==0}"><a href="setVerify?verify=1&user=${data.payusername}&page=${toPage}&uid=${uid}&uname=${uname}&riqi=${riqi}" ><font color="red">设置为免审核</font></a></c:if></td>
           <td height="38" width="60" align="center"><input type="button" onclick="writeReson('${data.payid}','${toPage}','${data.payusername}')" value="提现退回" /></td>
-          <td height="38" width="60" align="center"><input type="button" onclick="resetOrder('${data.payid}','${toPage}','${data.payusername}')" value="重置订单" /></td>
+          <td height="38" width="60" align="center"><a  onclick="return confirm('提示：您确定要重置该笔交易吗？ ')" href="javascript:resetOrder('${data.payid}','${toPage}','${data.payusername}')"  >重置订单</a></td>
         	</tr>
          </s:iterator>
      	 </table>
