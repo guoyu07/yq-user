@@ -1,0 +1,133 @@
+@charset "gb2312";
+/*	标准蓝样式表		*/
+body {
+	font-family: "宋体", Helvetica, sans-serif, Arial;
+	font-size:12px;
+	color: #000066;
+	margin: 0px;
+	border: 0px;
+	background-color: #FFFFFF;
+}
+
+/*	form标签0边界	*/
+form {margin: 0px;}
+
+/*	input等标签通用样式	*/
+input, textarea, select {font-family: "宋体", Helvetica, sans-serif, Arial;font-size: 12px;color: #000066;}
+
+/*	input标签为只读时的样式	*/
+input {background-color:expression((this.readOnly  &&  this.readOnly==true)?"#d3d4dc":"");}
+	
+/*	默认单元格样式	*/	
+td, th {font-size:12px;line-height: 140%;}
+
+/*	默认图片边框	*/
+img {border: 0px;}
+
+/*	默认区域	*/
+FIELDSET          {PADDING-RIGHT: 4px 6px; MARGIN: 2px; font-weight:bold;color: #095f9f;font-size:12px;}
+LEGEND            { }
+
+/*	默认链接样式	*/
+a:link {text-decoration:none;color:#002835;}
+a:visited {text-decoration:none;color:#002835;}
+a:hover {text-decoration:none;color: #ff0000;}
+
+/*	目录树的链接样式	*/
+a.font_button:link {font-size:12px;color:#095f9f;}
+a.font_button:visited {font-size:12px;color:#095f9f;}
+a.font_button:hover {font-size:12px;color:#122b61;}
+
+/*	字体加粗	*/
+.font_button {text-decoration: none;vertical-align: bottom;font-weight:bold;color: #095f9f;font-size:12px;}
+
+/*	控制背景图片居中	*/
+.image {background-repeat: no-repeat;background-position: center;}
+
+/*	框架页面TOP背景图片	*/
+.top_bg {background: url(../images/top_bg.gif) repeat-x;}
+
+/*	框架页面TOP渐变背景图片	*/
+.table_bg {background: url(../images/table_bg.gif) no-repeat right}
+
+/*	顶部LOGO样式	*/
+.logo {background: url(../images/logo_t.gif) no-repeat;width: 300px;}
+
+/*	收放菜单按钮外观样式	*/
+.expandbg1 {background: url(../images/ico002.gif) no-repeat;height: 26px;width: 25px;border: 0px;cursor:hand;}
+.expandbg2 {background: url(../images/ico001.gif) no-repeat;height: 26px;width: 25px;border: 0px;cursor:hand;}
+.expandbg3 {background: url(../images/ico004.gif) no-repeat;height: 26px;width: 24px;border: 0px;cursor:hand;}
+
+/*	收放菜单区的一些样式	*/
+.pic10 {background: url(../images/pic010.gif) no-repeat;height: 320px;width: 22px;border: 0px;cursor:hand;}
+.bg001 {background: url(../images/bg001.gif) repeat-y;}
+.bgtitle3 {background: url(../images/bgtitle3.gif) repeat-x;}
+.pic006 {background:#7FB8CC url(../images/pic006.gif) repeat-x;}
+
+/*	按钮样式	*/
+.buttons {background: url(../images/buttons.gif) repeat-x;height:20px;border: 1px solid #032C96;cursor:hand;color:#061878;}
+.buttonv {background: url(../images/buttonv.gif) repeat-x;height:20px;border: 1px solid #D70000;cursor:hand;color:#BC1822;}
+
+/*	按钮外观皮肤样式	*/
+.buttonbg1 {background: url(../images/button1.gif) no-repeat;height: 22px;width: 50px;border: 0px;padding-top: 4px;cursor:hand;}
+.buttonbg2 {background: url(../images/button2.gif) no-repeat;height: 22px;width: 50px;border: 0px;padding-top: 4px;cursor:hand;}
+
+
+/*	功能树表格外观皮肤样式	*/
+.mainnav {background:#C5E7FA url(../images/index08.gif) repeat-x;height:24px;font-size:14px; font-weight:bold;}
+.mainnav td {padding: 2px 4px; cursor:pointer;border: 1px solid #C2D3E7;}
+
+/*	功能树表格外观皮肤样式	*/
+.subnav {background: url(../images/index09.gif) repeat-x;height:24px;font-size:12px;padding: 3px 2px 2px 4px;font-weight:bold; color:#476DA6;}
+/*	功能树表格外观皮肤样式	*/
+.subnav3 {background: url(../images/index13.gif) repeat-x;height:22px;font-size:12px;padding: 3px 2px 2px 4px;}
+/*	功能树表格外观皮肤样式	*/
+.subnav4 {background: url(../images/index14.gif) repeat-x;height:22px;font-size:12px;padding: 3px 2px 2px 4px;}
+/*	功能树表格外观皮肤样式	*/
+.subnav5 {background: url(../images/index14.gif) repeat-x bottom;height:22px;font-size:12px;padding: 3px 2px 2px 4px;}
+.listnav{ vertical-align:top;text-align:left;}
+.listnav ul{
+margin:0px;padding:0px 2px 2px 24px;
+}
+.listnav li{
+line-height:20px;background:url(../images/index14.gif) repeat-x bottom;
+}
+.listnav li a{
+margin:0px;padding:0px;text-align:left;font-size:12px;
+}
+
+/*	功能树外观皮肤样式	*/
+.left_bgcolor {background: url(../images/bg_16.gif) repeat-y;SCROLLBAR-FACE-COLOR: #4891c6; FONT-SIZE: 12px; MARGIN: 0px; SCROLLBAR-HIGHLIGHT-COLOR: #cad7e7; OVERFLOW: hidden; SCROLLBAR-SHADOW-COLOR: #8eaed4; SCROLLBAR-3DLIGHT-COLOR: #8dacd8; SCROLLBAR-ARROW-COLOR: #d9e2ed; SCROLLBAR-TRACK-COLOR: #a0c6e6; SCROLLBAR-DARKSHADOW-COLOR: #2d4778; SCROLLBAR-BASE-COLOR: #2d4778}
+
+/*	TOP帧信息表格外观皮肤样式	*/
+.bg_03 {background: url(../images/bg_03.gif) no-repeat;}
+.bg_04 {background: url(../images/bg_04.gif) repeat-x; padding:3px}
+.bg_06 {background: url(../images/bg_06.gif) no-repeat;}
+
+/*	鼠标移入移出当前焦点区样式	*/
+.ipt_out {background: #fff;height: 24px;border: #0E6346 solid 1px; font-size:14px;}
+.ipt_over {background: #FDE8FE;height: 24px;border:#D70000 solid 1px;color: #0000FF; font-size:14px;}
+
+
+
+
+/**/
+/**/
+/* header *************************/
+
+#header { background:url(../images/home_02.jpg) repeat-x; height:88px; width:100%; padding:0px; }
+#header h1 { display:block; position:absolute; left:300px; top:12px; font-size:20px; color:#666666; display:none; }
+#header .logo { cursor:pointer; width:300px;position:absolute; left:5px; top:0px; }
+/**/
+#header .userinfo { background:url(images/body.gif) 0px 3px no-repeat; position:absolute; top:20px; right:30px; padding-top:5px; padding-bottom:4px; color:#617993; font-weight:normal; padding-left:20px;  line-height:18px; text-align:right;}
+#header .userinfo a:link, .userinfo li a:visited { }
+/**/
+#header .navigation {position:absolute; top:35px;*top:50px; left:500px; height:38px; width:100%; display:block; }
+#header .navigation li {color:#383838;float:left; text-align:center;  height:38px; width:85px; margin-right:2px; cursor:pointer; position:relative; background:url(../images/navi-long.gif) 0 5px repeat-x; list-style:none; }
+#header .navigation li span { position:absolute;  display:none; }/*用于实现阴影效果*/
+#header .navigation .hover {background:url(../images/navi-long.gif) 0 5px repeat-x;   }/*.hover必需放在li.active前*/
+/**/
+#header .navigation li a{ text-decoration:none;margin-left:13px; margin-right:0px; padding-right:13px; padding-top:14px;  display:inline-block;color:#FFF;}
+#header .navigation li.active {  background:url(../images/navi-xz.gif) 0 5px  no-repeat;height:38px; width:85px;float:left; text-align:center;  font-weight:bold;   }
+#header .navigation li.active a, #header .navigation li.active a:link, #header .navigation li.active a:visited, #header .navigation li.active a:hover, #header .navigation li.active a:active {color:#fff;height:24px;}
+

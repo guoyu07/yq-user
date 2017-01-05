@@ -1,0 +1,27 @@
+@charset "utf-8";
+body { margin:0; padding:0; width:100%; background:#ededed url(images/bg.jpg) top repeat-x;}
+html { padding:0; margin:0;}
+
+/* main */
+.main {width:100%; padding:0; margin:0 auto; }
+.resize { width:100%; margin:0 auto;}
+
+/********** slider **********/
+.slider2 {  background: #080808 url(images/bg_slider.gif) top repeat-x;  margin:0 auto; padding:0 0;}
+.slider2_resize { height:100%; width:100%; background: url(images/slider2.jpg) top no-repeat; border:5px solid #e8e8e8; margin:0 auto; padding:0;}
+.slider2_resize h2 { font:normal 27px Arial, Helvetica, sans-serif; color:#d8d8d8; padding:0 0 0 0; margin:0;}
+.slider3_resize { height:100%; width:100%; background: url(images/slider3.jpg) top no-repeat; border:5px solid #e8e8e8; margin:0 auto; padding:0;}
+.slider3_resize h2 { font:normal 27px Arial, Helvetica, sans-serif; color:#d8d8d8; padding:0 0 0 0; margin:0;}
+.slider4_resize { height:100%; width:100%; background: url(images/slider4.jpg) top no-repeat; border:5px solid #e8e8e8; margin:0 auto; padding:0;}
+.slider4_resize h2 { font:normal 27px Arial, Helvetica, sans-serif; color:#d8d8d8; padding:0 0 0 0; margin:0;}
+
+/*simple text*/
+.simple { width:100%; margin:0 auto; padding:0; border:5px solid #e8e8e8;}
+.simple h2 { width:100%; float:left; font:bold 40px Arial, Helvetica, sans-serif; color:#4b4b4b; padding:10px 0 0 30px; margin:0;}
+.simple .text { font:normal 12px Arial, Helvetica, sans-serif; color:#858585; width:200px; float: right; margin:10px 0; padding:0;}
+
+
+.slider h2 { color:#FFF; font:bold 20px Arial, Helvetica, sans-serif; padding:1px; margin:0;}
+.slider p { color:#FFF; font:normal 15px Arial, Helvetica, sans-serif; padding:2px 10px; margin:0;}
+.slider a { color:#FFF; font:normal 15px Arial, Helvetica, sans-serif;}
+.slider div.bot p, .slider div.bot h2 { color:#5b6366;}
