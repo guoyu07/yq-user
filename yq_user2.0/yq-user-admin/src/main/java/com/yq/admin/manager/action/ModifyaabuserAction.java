@@ -60,9 +60,9 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private int test;
 	private static final String KEY="daddewr!@#11";
 	public String execute(){
-		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin4")&&!super.getUserName().equals("admin5")){
+		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin4")&&!super.getUserName().equals("admin5")){
 			return INPUT;
-		}
+		}*/
 		
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		fcxt = adminService.getAdminUser(super.getUserName());
@@ -103,9 +103,9 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	 private String phone;
 	 private String oppass;
 	 public String updateUserVipInfo(){
-			if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+			/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
 				return INPUT;
-			}
+			}*/
 		 AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		 
 		 if(status==0){
@@ -127,9 +127,9 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private String pend;
 	
 	public String updateUserPayOk(){
-		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
 			return INPUT;
-		}
+		}*/
 		if(status==0){
 			 return SUCCESS;
 		 }
@@ -148,9 +148,9 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private int addAq;
 	private int addBq;
 	public String updateUserAqOrBq(){
-		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
 			return INPUT;
-		}
+		}*/
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		if(status==0){
 			 sgxt  = userService.getSgxt(user);
@@ -171,9 +171,9 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	
 	
 	public String queryDownAllVip(){
-		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
 			return INPUT;
-		}
+		}*/
 		vipDownTempList = ServiceCacheFactory.getService(CwService.class).getDownVipList(user);
 		return SUCCESS;
 	}

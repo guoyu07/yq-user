@@ -285,7 +285,7 @@ public class ManageService {
 	}
 
 	/**
-	 * 增加资源
+	 *  增加资源
 	 * @param resoName
 	 * @param resoCode
 	 * @param resoUrl
@@ -307,9 +307,20 @@ public class ManageService {
             resource.setResoClass(resoClass);
             resource.setResourceId(treePid);
             resource.setSecurity(security);
-            Resource newResourceTable=resourceDao.add(resource);
+            int newResourceTableId=resourceDao.add(resource);
             AjaxResult result=new AjaxResult();
-            if(newResourceTable!=null){
+            if(newResourceTableId!=0){
+            	List<Role> roleList = roleDao.getRoleAllList();
+            	for (Role role : roleList) {
+            		if(role.getRoleCode().equals("ROLE_SUPER_ADMIN") || role.getRoleCode().equals("ROLE_ADMIN")){//如果是超级管理员或者是系统管理员，接直接加入他们的角色里面
+            			RoleResource roleResource = new RoleResource();
+                        roleResource.setResourceId(newResourceTableId);
+                        roleResource.setRoleId(role.getId());
+                        if(roleResourceDao.getRoleResource(newResourceTableId,role.getId())==null){
+                        	 roleResourceDao.insert(roleResource);
+                        }
+            		}
+				}
                 result.setSuccess(true);
             }else{
                 result.setFailure(true);

@@ -93,14 +93,14 @@ public class ResourceDao {
           return this.jdbc.get(sql, Resource.class, sqlparam);
 */    }
 
-    public Resource add(Resource resource) {
-         int i = this.jdbc.insert(resource);
+    public int add(Resource resource) {
+         int i = this.jdbc.insertBackKeys(resource);
          boolean flag = i>0;
          if(flag){
  			 delCache(RESOURCE_KEY);
  			 initResourceCache();
  		 }
-         return resource;
+         return i;
     }
 
 

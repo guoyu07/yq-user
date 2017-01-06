@@ -88,7 +88,7 @@ public class RoleResourceDao {
 	}
 	
 	public RoleResource getRoleResource(int resourceId, int roleId) {
-		String sql ="select * from "+table+" rr where rr.resource_id = ? and rr.role_id=?";
+		String sql ="select * from "+table+" rr where rr.resource_id = ? and rr.role_id=? limit 1";
 		SqlParameter sqlparm = new SqlParameter();
 		sqlparm.setInt(resourceId);
 		sqlparm.setInt(roleId);
