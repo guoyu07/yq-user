@@ -10,7 +10,6 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.Page;
-import com.sr178.module.utils.JedisUtils;
 import com.yq.manage.bean.Resource;
 import com.yq.manage.util.CompareResource;
 public class ResourceDao {
@@ -21,10 +20,10 @@ public class ResourceDao {
 	private final static String  table = "resource";
 	
 	/**资源权限缓存键*/
-	private static final String RESOURCE_KEY = "resource_key";
+	//private static final String RESOURCE_KEY = "resource_key";
 	
 	
-	
+	/*
 	private void setCacheList(String key,List<Resource> list){
 		JedisUtils.setList(key, list);
 	}
@@ -35,7 +34,7 @@ public class ResourceDao {
 	
 	private void delCache(String key){
 		JedisUtils.delete(key);
-	}
+	}*/
 
 	/**
 	 * 获得资源（权限列表）
@@ -43,11 +42,13 @@ public class ResourceDao {
 	 * @return
 	 */
 	public List<Resource> getResourceList(){
-		List<Resource> resourceCache = getCacheList(RESOURCE_KEY);
+		/*List<Resource> resourceCache = getCacheList(RESOURCE_KEY);
 		if(resourceCache==null || resourceCache.isEmpty()){
 			return initResourceCache();
 		}
-		return resourceCache;
+		return resourceCache;*/
+		List<Resource> list = findAll();
+		return list;
 	}
 	
 	
@@ -57,22 +58,22 @@ public class ResourceDao {
 	 * 
 	 * @return
 	 */
-	private List<Resource> initResourceCache(){
-		List<Resource> list = findAll();
-		setCacheList(RESOURCE_KEY, list);
-		return list;
-	}
+	/*private List<Resource> initResourceCache(){
+		//List<Resource> list = findAll();
+		//setCacheList(RESOURCE_KEY, list);
+		//return list;
+	}*/
 	
     public int deleteByIds(String ids) {
         String sql="delete from "+table+"  where id in(?)";
         SqlParameter sqlparam = new SqlParameter();
         sqlparam.setString(ids);
         int i = this.jdbc.update(sql, sqlparam);
-        boolean flag = i>0;
+        /*boolean flag = i>0;
         if(flag){
 			 delCache(RESOURCE_KEY);
 			 initResourceCache();
-		 }
+		 }*/
 		 
         return i;
     }
@@ -95,11 +96,11 @@ public class ResourceDao {
 
     public int add(Resource resource) {
          int i = this.jdbc.insertBackKeys(resource);
-         boolean flag = i>0;
+         /*boolean flag = i>0;
          if(flag){
  			 delCache(RESOURCE_KEY);
  			 initResourceCache();
- 		 }
+ 		 }*/
          return i;
     }
 
@@ -164,10 +165,11 @@ public class ResourceDao {
          sqlparam.setString(resourceTable.getResoClass());
          sqlparam.setInt(resourceTable.getSecurity());
          sqlparam.setInt(resourceTable.getId());
-		 if(this.jdbc.update(sql, sqlparam)>0){
+         this.jdbc.update(sql, sqlparam);
+		 /*if(this.jdbc.update(sql, sqlparam)>0){
 			 delCache(RESOURCE_KEY);
 			 initResourceCache();
-		 }
+		 }*/
 		 
 		 return resourceTable;
 	}
@@ -199,15 +201,6 @@ public class ResourceDao {
 	}
 
 	public Resource getByResourceUrl(String path) {
-		/*List<Resource> list = getResourceList();
-    	for (Resource resource : list) {
-			if(path.equals(resource.getResoUrl())){
-				return resource;
-			}
-		}
-    	return null;*/
-		
-		
 		 String sql="select * from "+table+" where reso_url= ? limit 1";
          SqlParameter sqlparam = new SqlParameter();
          sqlparam.setString(path);
