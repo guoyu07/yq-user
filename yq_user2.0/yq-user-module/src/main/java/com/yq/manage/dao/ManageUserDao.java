@@ -10,7 +10,7 @@ import com.yq.manage.bean.ManageUser;
 
 public class ManageUserDao extends YqDaoBase<ManageUser>{
 	
-	private final static String table = "Fcxt";
+	private final static String table = "manage_user";
 	
 	public ManageUser getManageUser(String userName) {
 		String sql = "SELECT * FROM "+ table+" where adminusername = ? limit 1";
@@ -44,10 +44,10 @@ public class ManageUserDao extends YqDaoBase<ManageUser>{
 		 return super.getJdbc().update(sql, sqlparam)>0;
 	}
 
-	/*public void insert(ManageUser user) {
+	public void insert(ManageUser user) {
 		super.getJdbc().insert(user);
 		
-	}*/
+	}
 
 	public ManageUser getByStaffId(int id) {
 		 String sql = "select * from "+ table+" u where staff_id = ? limit 1";
@@ -74,6 +74,14 @@ public class ManageUserDao extends YqDaoBase<ManageUser>{
 	public List<ManageUser> getAllManageUser() {
 		 String sql = "select * from "+ table+" order by id";
 		 return super.getJdbc().getList(sql, ManageUser.class);
+	}
+
+	public ManageUser getByUserNameAndPassword(String userName, String password) {
+		String sql = "SELECT * FROM "+table+" where adminusername=? and password=? limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userName);
+		parameter.setString(password);
+		return super.getJdbc().get(sql, ManageUser.class, parameter);
 	}
 
 	

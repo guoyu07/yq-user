@@ -39,7 +39,6 @@ import com.yq.manage.util.CompareResource;
 import com.yq.manage.util.JqueryZTreeNode;
 import com.yq.manage.util.MyTool;
 import com.yq.manager.service.AdminService;
-import com.yq.user.bo.Fcxt;
 
 /**
  * @author 作者: HuHua
@@ -731,21 +730,19 @@ public class ManageService {
             int staffId = staffDao.insert(staffTable);
             if (staffId != 0) {
             	
-            	Fcxt fcxt = new Fcxt();
-                fcxt.setAdminusername(userTable.getAdminusername());
-                fcxt.setPassword(md5pass);
-                fcxt.setStaffId(staffId);
-            	fcxt.setPassword(md5pass);
-            	fcxt.setIsOverdue(0);// 默认不是海外用户
-            	fcxt.setCreateName(oparetor);
-            	fcxt.setCreateDate(new Date());
-            	fcxt.setFunction(0);
+            	//Fcxt fcxt = new Fcxt();
+            	userTable.setAdminusername(userTable.getAdminusername());
+            	userTable.setPassword(md5pass);
+            	userTable.setStaffId(staffId);
+            	userTable.setPassword(md5pass);
+            	userTable.setIsOverdue(0);// 默认不是海外用户
+            	userTable.setCreateName(oparetor);
+            	userTable.setCreateDate(new Date());
                /* if(adminService.getFcxt(userTable.getAdminusername())==null){
                 	 adminService.addFcxt(fcxt);
                      manageUserDao.insert(userTable);
                 }*/
-                //manageUserDao.insert(userTable);
-                adminService.addFcxt(fcxt);
+                manageUserDao.insert(userTable);
             }
             return true;
         } catch (Exception e) {
@@ -1105,9 +1102,9 @@ public class ManageService {
 			 result.setInfo("用户不存在");
 		 }
 		 boolean flag=manageUserDao.updatePw(pass, user.getId());
-		 AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
+/*		 AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
 		 adminService.updateFcxtPass(user.getAdminusername(),pass);
-        if (flag) {
+*/        if (flag) {
             result.setSuccess(true);
             result.setInfo("成功");
             //TODO 更新成功后需要移除会话
@@ -1203,6 +1200,15 @@ public class ManageService {
 
 
 
+	/**
+	 * 
+	 *  会员中心管理后台密码修改
+	 * 
+	 * @param newPwd
+	 * @param password2
+	 * @param id
+	 * @return
+	 */
 	public boolean savePwd(String newPwd,String password2, int id) {
 		 ManageUser user = manageUserDao.getByUserId(id);
 		 String pass = MD5Security.md5_16(newPwd);
@@ -1220,7 +1226,6 @@ public class ManageService {
 		 }
 		 boolean flag=manageUserDao.updatePw(pass, user.getId());
 		 AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
-		 adminService.updateFcxtPass(user.getAdminusername(),pass);
         if (flag) {
             HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
             adminService.logout(sessionhttp.getId());
@@ -1231,48 +1236,5 @@ public class ManageService {
 		
 	}
 
-	/*public AjaxResult saveDepartmentIds(String parameter, String parameter2) {
-		 AjaxResult ajaxResult = new AjaxResult();
-	        try {
-	            departmentgGameDao.deleteByGameId(Long.valueOf(gameId));
-	            String[] ids = depIds.split(",");
-	            for (String id : ids) {
-	                DepartmentgGame departmentgGame = new DepartmentgGame();
-	                departmentgGame.setDepartment(departmentDao.findById(Long.valueOf(id)));
-	                departmentgGame.setGameChild(gameChildDao.findById(Long.valueOf(gameId)));
-	                departmentgGameDao.insert(departmentgGame);
-	            }
-	            ajaxResult.setSuccess(true);
-	            ajaxResult.setInfo(I18NUtil.returnBundle(session).getString("SuccessfulOperation"));
-	        } catch (NumberFormatException e) {
-	            e.printStackTrace();
-	            ajaxResult.setFailure(true);
-	            ajaxResult.setInfo(I18NUtil.returnBundle(session).getString("OperationFailed"));
-	        }
-	        return ajaxResult;
-	}*/
-
-/*	public Object loadDepTree(String parameter) {
-		 List<ExtTreeNode> treeList = new ArrayList<ExtTreeNode>();
-	        List<Department> list = departmentDao.findAllChildren();
-	        List<DepartmentgGame> departmentgGameList = departmentgGameDao.findByProperty(new String[] { "gameChild.id"}, Long.valueOf(gameId));
-	        if (list != null && list.size() > 0) {
-	            for (Department department : list) {
-	                ExtTreeNode tree = new ExtTreeNode();
-	                tree.setText(department.getDeptName());
-	                tree.setId(department.getId() + "");
-	                tree.setLeaf(true);
-	                for (DepartmentgGame departmentgGame : departmentgGameList) {
-	                    if (departmentgGame.getDepartment().getId() == department.getId()) {
-	                        tree.setChecked("true");
-	                        break;
-	                    }
-	                }
-	                treeList.add(tree);
-	            }
-	        }
-	        return treeList;
-	}*/
-	
 
 }

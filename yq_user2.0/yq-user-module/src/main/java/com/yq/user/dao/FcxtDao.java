@@ -129,7 +129,7 @@ public class FcxtDao {
 		parameter.setString(value);
 		return jdbc.update(sql, parameter)>0;
 	}
-	
+	/*
 	public boolean addFcxt(Fcxt fcxt){
 		return jdbc.insert(fcxt)>0;
 	}
@@ -141,6 +141,6 @@ public class FcxtDao {
 		parameter.setString(userName);
 		return jdbc.update(sql, parameter)>0;
 	}
-	
+	*/
 	
 }

@@ -34,7 +34,9 @@ import com.yq.common.utils.Global;
 import com.yq.common.utils.MD5Security;
 import com.yq.cservice.bean.SqDayAddBean;
 import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.bean.ManageUser;
 import com.yq.manage.dao.AdminOperateLogDao;
+import com.yq.manage.dao.ManageUserDao;
 import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.bean.Performance;
 import com.yq.manager.bean.UserPerformanceSearch;
@@ -189,6 +191,8 @@ public class AdminService {
 	private ModifyUserLogDao modifyUserLogDao;
 	@Autowired
 	private AdminOperateLogDao adminOperateLogDao;
+	@Autowired
+	private ManageUserDao manageDao;
 	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -207,8 +211,8 @@ public class AdminService {
 	 */
 	public boolean adminLogin(String userName,String password,String sessionId){
 		String md5pass = MD5Security.md5_16(password);
-		Fcxt fcxt = fcxtDao.getByUserNameAndPassword(userName, md5pass);
-		if(fcxt!=null){
+		ManageUser admin = manageDao.getByUserNameAndPassword(userName, md5pass);
+		if(admin!=null){
 			Session session = new Session(userName, System.currentTimeMillis(), sessionId);
 			adminUserMap.put(sessionId, session);
 			return true;
@@ -226,10 +230,6 @@ public class AdminService {
 	public boolean adminUserLogin(String adminUserName, String passWord, HttpSession session, String ip) {
 		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.LOGIN_EVENT, "后台登录");
 		adminOperateLogDao.addLog(log);
-		Fcxt fcxt = fcxtDao.getAdminUser(adminUserName);
-		if(fcxt.getFunction()!=0){
-			throw new ServiceException(405, "功能性账户不提供此处登录");
-		}
 		return adminLogin(adminUserName, passWord, session.getId());
 	}
 	
@@ -3453,18 +3453,18 @@ public class AdminService {
 		return new Page<AbsModifyUserLog>(result, page.getTotalSize(), pageSize, pageIndex);
 	}
 	
-	public boolean addFcxt(Fcxt fcxt) {
+	/*public boolean addFcxt(Fcxt fcxt) {
 		return fcxtDao.addFcxt(fcxt);
-	}
+	}*/
 	
 	public Fcxt getFcxt(String userName) {
 		return fcxtDao.getAdminUser(userName);
 	}
 	
-	public boolean updateFcxtPass(String userName, String pass) {
+	/*public boolean updateFcxtPass(String userName, String pass) {
 		return fcxtDao.updatePss(userName,pass);
 		
-	}
+	}*/
 	public Cache<String, Session> getAdminUserMap() {
 		return adminUserMap;
 	}

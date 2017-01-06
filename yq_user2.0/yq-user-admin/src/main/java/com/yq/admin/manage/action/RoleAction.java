@@ -45,7 +45,7 @@ public class RoleAction extends BaseManageAction<Role>  {
 		manageUser = super.getUserName();
 		  // 获得请求对象
         HttpServletRequest request = ServletActionContext.getRequest();
-		super.initPage(manageService.findRolePageList(super.getToPage(),5));
+		super.initPage(manageService.findRolePageList(super.getToPage(),20));
 		staffTable = manageService.getStaffByUserName(manageUser);
 		 /*判断跳转方式 */
 		String ajax = request.getParameter("ajax");
@@ -121,8 +121,6 @@ public class RoleAction extends BaseManageAction<Role>  {
 		request = ServletActionContext.getRequest();
 		manageService = ServiceCacheFactory.getService(ManageService.class);
 		manageService.deleteRoles(request.getParameter("ids"));
-		//GameChild gameChild = (GameChild) request.getSession().getAttribute(Global.LOGIN_CURRENT_GAME_CHILD_OBJECT);
-		//opLog(OperatingLogA.ROLE_LOG + "_" + gameChild.getGameName(), OperatingLogA.ROLE_DELETE, null);
 		return pageList();
 	}
 	
@@ -142,8 +140,6 @@ public class RoleAction extends BaseManageAction<Role>  {
 		}else {
 			JsonUtil.outJson(manageService.loadRoleTree("",paramId),ServletActionContext.getResponse());
 		}
-		//GameChild gameChild = (GameChild) request.getSession().getAttribute(Global.LOGIN_CURRENT_GAME_CHILD_OBJECT);
-		//opLog(OperatingLogA.ROLE_LOG + "_" + gameChild.getGameName(), OperatingLogA.ROLE_RESOURCE_ALLOCATION, null);
 		return null;
 	}
 	
@@ -158,13 +154,11 @@ public class RoleAction extends BaseManageAction<Role>  {
 		HttpServletRequest request=ServletActionContext.getRequest();
 	    String paramId =request.getParameter("paramId");
 	    String node=request.getParameter("node");
-	    //GameChild gameChild = (GameChild) request.getSession().getAttribute(Global.LOGIN_CURRENT_GAME_CHILD_OBJECT);
 		if(StringUtils.hasText(node)){
 			JsonUtil.outJson(manageService.loadAllRoleTree(paramId),ServletActionContext.getResponse());
 		}else {
 			JsonUtil.outJson(manageService.loadAllRoleTree(paramId),ServletActionContext.getResponse());
 		}
-		//opLog(OperatingLogA.ROLE_LOG + "_" + gameChild.getGameName(), OperatingLogA.ROLE_RESOURCE_ALLOCATION, null);
 		return null;
 	}
 	
@@ -213,19 +207,7 @@ public class RoleAction extends BaseManageAction<Role>  {
 		return "TREEPAGEFORWARDBYUSER";
 	}
 	
-	/**
-	 * 人员角色树保存
-	 * @return
-	 * @throws Exception
-	 */
-/*	public String saveRoleUserTree()throws Exception{
-		manageService = ServiceCacheFactory.getService(ManageService.class);
-		JsonUtil.outJson(manageService.saveRoleUserTree(request.getParameter("roleId"),request.getParameter("roleUserCheckId"), request.getSession()),ServletActionContext.getResponse());
-		//GameChild gameChild = (GameChild) this.getSession().getAttribute(Global.LOGIN_CURRENT_GAME_CHILD_OBJECT);
-		//opLog(OperatingLogA.ROLE_LOG + "_" + gameChild.getGameName(), OperatingLogA.USER_TREE_SAVE, null);
-		return null;
-	}
-*/
+
 	public HttpServletRequest getRequest() {
 		return request;
 	}

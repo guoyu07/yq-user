@@ -181,7 +181,6 @@ public class ResourceAction extends BaseManageAction<Resource> {
 	 * @throws Exception
 	 */
 	public String deleteResource() throws Exception{
-		//GameChild gameChild = (GameChild) this.getSession().getAttribute(Globals.LOGIN_CURRENT_GAME_CHILD_OBJECT);
 		HttpServletRequest request=ServletActionContext.getRequest();
 		manageServices = ServiceCacheFactory.getServiceCache().getService(ManageService.class);
 		manageServices.deleteResources(request.getParameter("ids"), request.getSession());
