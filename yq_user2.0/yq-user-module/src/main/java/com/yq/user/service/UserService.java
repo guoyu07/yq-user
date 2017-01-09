@@ -51,6 +51,7 @@ import com.yq.user.bo.Jfcp;
 import com.yq.user.bo.Jfkjdate;
 import com.yq.user.bo.MallOrder;
 import com.yq.user.bo.Province;
+import com.yq.user.bo.SameUserProperty;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.ShopBean;
 import com.yq.user.bo.SysBiLog;
@@ -85,6 +86,7 @@ import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.JftzbDao;
 import com.yq.user.dao.MallOrderDao;
 import com.yq.user.dao.ProvinceDao;
+import com.yq.user.dao.SameUserPropertyDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.SysBiLogDao;
 import com.yq.user.dao.TduserDao;
@@ -170,6 +172,8 @@ public class UserService {
 	private InterRegionCodeDao interRegionCodeDao;
 	@Autowired
 	private UserPropertyDao userPropertyDao;
+	@Autowired
+	private SameUserPropertyDao sameUserPropertyDao;
     
   //用户id与UserMapper的映射map
 //  	private Cache<String,Session> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(20000).build();
@@ -1914,9 +1918,13 @@ public class UserService {
 			throw new ServiceException(1,"发布一币数量有误，请检查输入是否正确！");
 		}
 		
-		
-		
 		Gcuser gcuser = this.gcuserDao.getUser(userName);
+		SameUserProperty sameUserProperty = sameUserPropertyDao.getSameUserProperty(gcuser.getName()+gcuser.getUserid());
+		if(sameUserProperty!=null){
+			if(sameUserProperty.getNoSureTimes()>=4){
+				throw new ServiceException(11,"由于您的账户多次没有确认提现，所以提现已经被关闭！");
+			}
+		}
 		
 		if(gcuser.getVip()!=0){
 			throw new ServiceException(10, "VIP账户不可提现！");
@@ -5002,6 +5010,7 @@ public class UserService {
 		}
 		//2日后没有确认的  扣星
 		List<Txpay> listNoSureReceiveMoney = txPayDao.getAllNoSureReceiveMoneyRecord();
+		//List<Txpay> listNoSureReceiveMoney = txPayDao.getAllNoSureReceiveMoneyRecord1();
 		if(listNoSureReceiveMoney!=null&&listNoSureReceiveMoney.size()>0){
 			for(Txpay txpay:listNoSureReceiveMoney){
 				try {
@@ -5025,6 +5034,17 @@ public class UserService {
 						logService.addDatePay(datePay);
 					}
 					txPayDao.updateClip(txpay.getPayid());
+					String nameUserId = user.getName()+user.getUserid();
+					SameUserProperty sameUserProperty=sameUserPropertyDao.getSameUserProperty(nameUserId);
+					if(sameUserProperty!=null){
+						sameUserPropertyDao.addNoSureTimes(nameUserId);
+					}else{
+						SameUserProperty newsameuserproperty = new SameUserProperty();
+						newsameuserproperty.setNameUserid(nameUserId);
+						newsameuserproperty.setNoSureTimes(1);
+						newsameuserproperty.setLastDate(new Date());
+						sameUserPropertyDao.insertSameUserProperty(newsameuserproperty);
+					}
 					
 				} catch (Exception e) {
 					LogSystem.error(e, "发生错误");

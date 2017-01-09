@@ -109,7 +109,7 @@ public class Gcuser{
 	private int hfcj;
 	private int bz1;
 	private int bz2;
-	private int cxt;
+	private int cxt;	//诚信星
 	private Date cxdate;
 	private int txlb;
 	private int cbuser;

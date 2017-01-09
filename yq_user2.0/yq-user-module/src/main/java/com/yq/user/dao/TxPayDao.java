@@ -185,6 +185,11 @@ public class TxPayDao {
     	return this.jdbc.getList(sql, Txpay.class, SqlParameter.Instance().withString(date));
     }
     
+  /*  public List<Txpay> getAllNoSureReceiveMoneyRecord1(){
+    	String sql = "select * from "+table+" where ep=2 and payonoff='尚未转账' and dfuser<>'' and (clip is null or clip ='')";
+    	return this.jdbc.getList(sql, Txpay.class, null);
+    }*/
+    
     public List<Txpay> getAllNoSureReceiveMoneyRecordAfter5Days(){
     	String date = DateUtils.DateToString(DateUtils.addDay(new Date(), -3), DateStyle.YYYY_MM_DD_HH_MM_SS);
     	String sql = "select * from "+table+" where ep=2 and rgdate<? and payonoff='尚未转账' and dfuser<>'' and clip ='已扣'";
