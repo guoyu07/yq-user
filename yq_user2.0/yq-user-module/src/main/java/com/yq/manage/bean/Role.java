@@ -17,6 +17,8 @@ public class Role {
 	
 	private String roleCode;	//角色码
 	
+	private int roleLevel;		//角色级别（为显示同一个界面不同功能的显示而设计）
+	
 	private String createUser;	//创建者
 	
 	private Date createDate; //创建日期
@@ -110,6 +112,13 @@ public class Role {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+	public int getRoleLevel() {
+		return roleLevel;
+	}
+	public void setRoleLevel(int roleLevel) {
+		this.roleLevel = roleLevel;
+	}
+	
 	
 
 

@@ -1921,7 +1921,7 @@ public class UserService {
 		Gcuser gcuser = this.gcuserDao.getUser(userName);
 		SameUserProperty sameUserProperty = sameUserPropertyDao.getSameUserProperty(gcuser.getName()+gcuser.getUserid());
 		if(sameUserProperty!=null){
-			if(sameUserProperty.getNoSureTimes()>=4){
+			if(sameUserProperty.getNoSureTimes()>4){
 				throw new ServiceException(11,"由于您的账户多次没有确认提现，所以提现已经被关闭！");
 			}
 		}

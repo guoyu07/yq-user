@@ -22,6 +22,7 @@
      <!-- 每日 每隔3小时 整点执行 -->
        <bean id="checkCxtScheduler" class="com.yq.admin.manager.scheduler.CxtCheckScheduler">
           <property name="cronExpression" value="0 0 2,5,8,11,14,17,20,23 * * ?"></property>
+          <!-- <property name="cronExpression" value="0/15 * * * * ?"></property> -->
        </bean>
        <!-- 每日凌晨过1分执行 -->
        <bean id="backCountScheduler" class="com.yq.admin.manager.scheduler.BackCountScheduler">

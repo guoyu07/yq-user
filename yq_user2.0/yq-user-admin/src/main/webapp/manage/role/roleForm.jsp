@@ -97,6 +97,169 @@
 													</td>
 												</tr>
 												<tr>
+												<td width="26%" height="30" align="right" class="left_txt2">
+														角色级别：
+													</td>
+													<td width="5">
+														&nbsp;
+													</td>
+													<td height="30">
+														<select name="roleLevel" id="roleLevel">
+															<c:choose>
+																<c:when test="${info.roleLevel eq '0'}">
+																	<option value="0" selected="selected">
+																		系统管理级别（0）
+																	</option>
+																	<option value="1">
+																		超级管理级别（1）
+																	</option>
+																	<option value="2">
+																		超高级管理级别（2）
+																	</option>
+																	<option value="5">
+																		班长管理级别（5）
+																	</option>
+																	<option value="7">
+																		客服管理级别（7）
+																	</option>
+																	<option value="9">
+																		商城客服（9）
+																	</option>
+																</c:when>
+																<c:when test="${info.roleLevel eq '1'}">
+																	<option value="0">
+																		系统管理级别（0）
+																	</option>
+																	<option value="1" selected="selected">
+																		超级管理级别（1）
+																	</option>
+																	<option value="2">
+																		超高级管理级别（2）
+																	</option>
+																	<option value="5">
+																		班长管理级别（5）
+																	</option>
+																	<option value="7">
+																		客服管理级别（7）
+																	</option>
+																	<option value="9">
+																		商城客服（9）
+																	</option>
+																</c:when>
+																<c:when test="${info.roleLevel eq '2'}">
+																	<option value="0" selected="selected">
+																		系统管理级别（0）
+																	</option>
+																	<option value="1">
+																		超级管理级别（1）
+																	</option>
+																	<option value="2" selected="selected">
+																		超高级管理级别（2）
+																	</option>
+																	<option value="5">
+																		班长管理级别（5）
+																	</option>
+																	<option value="7">
+																		客服管理级别（7）
+																	</option>
+																	<option value="9">
+																		商城客服（9）
+																	</option>
+																</c:when>
+																<c:when test="${info.roleLevel eq '5'}">
+																	<option value="0" selected="selected">
+																		系统管理级别（0）
+																	</option>
+																	<option value="1">
+																		超级管理级别（1）
+																	</option>
+																	<option value="2">
+																		超高级管理级别（2）
+																	</option>
+																	<option value="5" selected="selected">
+																		班长管理级别（5）
+																	</option>
+																	<option value="7">
+																		客服管理级别（7）
+																	</option>
+																	<option value="9">
+																		商城客服（9）
+																	</option>
+																</c:when>
+																<c:when test="${info.roleLevel eq '7'}">
+																	<option value="0">
+																		系统管理级别（0）
+																	</option>
+																	<option value="1">
+																		超级管理级别（1）
+																	</option>
+																	<option value="2">
+																		超高级管理级别（2）
+																	</option>
+																	<option value="5">
+																		班长管理级别（5）
+																	</option>
+																	<option value="7" selected="selected">
+																		客服管理级别（7）
+																	</option>
+																	<option value="9">
+																		商城客服（9）
+																	</option>
+																</c:when>
+																<c:when test="${info.roleLevel eq '9'}">
+																	<option value="0" >
+																		系统管理级别（0）
+																	</option>
+																	<option value="1">
+																		超级管理级别（1）
+																	</option>
+																	<option value="2">
+																		超高级管理级别（2）
+																	</option>
+																	<option value="5">
+																		班长管理级别（5）
+																	</option>
+																	<option value="7">
+																		客服管理级别（7）
+																	</option>
+																	<option value="9" selected="selected">
+																		商城客服（9）
+																	</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="0">
+																		系统管理级别（0）
+																	</option>
+																	<option value="1">
+																		超级管理级别（1）
+																	</option>
+																	<option value="2">
+																		超高级管理级别（2）
+																	</option>
+																	<option value="5">
+																		班长管理级别（5）
+																	</option>
+																	<option value="7">
+																		客服管理级别（7）
+																	</option>
+																	<option value="9">
+																		商城客服（9）
+																	</option>
+																</c:otherwise>
+															</c:choose>
+														</select>
+													</td>
+													<td width="100" align="right">
+														&nbsp;
+													</td>
+													<td width="5">
+														&nbsp;
+													</td>
+													<td height="30">
+														&nbsp;
+													</td>
+												</tr>
+												<tr>
 													<td width="26%" height="30" align="right" class="left_txt2">
 														角色编码：
 													</td>

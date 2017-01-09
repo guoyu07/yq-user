@@ -74,6 +74,9 @@ public class RoleDao {
 			sql.append(",update_date = ? ");
 			sqlparam.setObject(role.getUpdateDate());
 		}
+		sql.append(",role_level = ? ");
+		sqlparam.setInt(role.getRoleLevel());
+		
 		sql.append(" where id = ? ");
 		sqlparam.setInt(role.getId());
 		this.jdbc.update(sql.toString(), sqlparam);

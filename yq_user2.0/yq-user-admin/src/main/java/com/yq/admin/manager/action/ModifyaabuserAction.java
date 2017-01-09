@@ -9,10 +9,11 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
-import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.admin.manage.action.BaseManageAction;
 import com.yq.common.utils.MD5Security;
 import com.yq.cw.bo.VipDownTemp;
 import com.yq.cw.service.CwService;
+import com.yq.manage.bean.Role;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
@@ -23,7 +24,7 @@ import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.UserPropertyDao;
 import com.yq.user.service.UserService;
 
-public class ModifyaabuserAction extends ALDAdminActionSupport {
+public class ModifyaabuserAction extends BaseManageAction<Object> {
 
 	/**
 	 * 
@@ -59,6 +60,10 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	private String sign;
 	private int test;
 	private static final String KEY="daddewr!@#11";
+	
+	//等到当前用户最高角色
+	private Role role;
+	
 	public String execute(){
 		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")&&!super.getUserName().equals("admin3")&&!super.getUserName().equals("admin4")&&!super.getUserName().equals("admin5")){
 			return INPUT;
@@ -66,6 +71,7 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 		
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		fcxt = adminService.getAdminUser(super.getUserName());
+		role = this.getCurrentHighestRole();
 		if(status==0){
 			UserService userService = ServiceCacheFactory.getService(UserService.class);
 			gcuser = userService.getUserByUserName(userid);
@@ -492,7 +498,19 @@ public class ModifyaabuserAction extends ALDAdminActionSupport {
 	public void setAreaCode(int areaCode) {
 		this.areaCode = areaCode;
 	}
+
+
+	public Role getRole() {
+		return role;
+	}
+
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	
+
 	
 	
 }

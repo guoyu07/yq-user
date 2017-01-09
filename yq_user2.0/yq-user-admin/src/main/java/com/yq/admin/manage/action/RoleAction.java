@@ -105,9 +105,9 @@ public class RoleAction extends BaseManageAction<Role>  {
 		manageService = ServiceCacheFactory.getService(ManageService.class);
 		HttpServletRequest request=ServletActionContext.getRequest();
 		if(id!=0){	//如果ID存在说明是更新			
-			manageService.updateRole(id,request.getParameter("roleName"),request.getParameter("roleCode"),request.getParameter("roleDesc"),super.getUserName());
+			manageService.updateRole(id,request.getParameter("roleName"),request.getParameter("roleCode"),request.getParameter("roleLevel"),request.getParameter("roleDesc"),super.getUserName());
 		}else{
-			manageService.saveRole(request.getParameter("roleName"),request.getParameter("roleCode"),request.getParameter("roleDesc"),super.getUserName());
+			manageService.saveRole(request.getParameter("roleName"),request.getParameter("roleCode"),request.getParameter("roleLevel"),request.getParameter("roleDesc"),super.getUserName());
 		}
 		return pageList();
 	}

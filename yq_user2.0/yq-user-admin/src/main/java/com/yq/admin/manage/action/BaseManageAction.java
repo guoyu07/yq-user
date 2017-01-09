@@ -2,6 +2,7 @@ package com.yq.admin.manage.action;
 
 
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import com.yq.manage.bean.Role;
 import com.yq.manage.bean.Staff;
 import com.yq.manage.service.ManageService;
 import com.yq.manage.util.AdminGlobal;
+import com.yq.manage.util.CompareRole;
 
 /**
  * @author 作者: HuHua
@@ -29,6 +31,9 @@ import com.yq.manage.util.AdminGlobal;
 public class BaseManageAction<T> extends ALDAdminPageActionSupport<T> {
 
 	private static final long serialVersionUID = 1L;
+	
+	
+	
 	ManageService manageService = ServiceCacheFactory.getService(ManageService.class);
 	
 	
@@ -211,5 +216,17 @@ public class BaseManageAction<T> extends ALDAdminPageActionSupport<T> {
 	}
 
 
+	/**
+	 * 得到当前用户最高角色，角色等级越小，权重越高
+	 * 
+	 * @return
+	 */
+	public Role getCurrentHighestRole(){
+		 List<Role> list = getCurrentRole();
+		 Role role = Collections.min(list, new CompareRole());
+		 return role;
+	}
+	
+	
     
 }

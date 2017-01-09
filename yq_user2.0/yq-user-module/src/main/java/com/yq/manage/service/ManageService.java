@@ -783,13 +783,14 @@ public class ManageService {
 		return roleDao.findByRoleId(roleId);
 	}
 
-	public AjaxResult updateRole(int id, String roleName, String roleCode, String roleDesc,String oprator) {
+	public AjaxResult updateRole(int id, String roleName, String roleCode, String roleLevel, String roleDesc,String oprator) {
 		 	Role role = roleDao.findByRoleId(id);
             role.setRoleName(roleName);
             role.setRoleCode(roleCode);
             role.setRoleDesc(roleDesc);
             role.setUpdateDate(new Date());
             role.setUpdateUser(oprator);
+            role.setRoleLevel(Integer.parseInt(roleLevel));
             role.setId(id);
             Role newRole = roleDao.update(role);
             AjaxResult result = new AjaxResult();
@@ -802,7 +803,7 @@ public class ManageService {
 	}
 
 	
-	public void saveRole(String roleName, String roleCode, String roleDesc,String oprator) {
+	public void saveRole(String roleName, String roleCode, String roleLevel, String roleDesc,String oprator) {
 		if(roleName==null || roleCode==null || roleDesc==null){
 			return  ;
 		}
@@ -816,6 +817,7 @@ public class ManageService {
             role.setRoleDesc(roleDesc);
             role.setCreateDate(new Date());
             role.setCreateUser(oprator);
+            role.setRoleLevel(Integer.parseInt(roleLevel));
             roleDao.insert(role);
 	}
 
