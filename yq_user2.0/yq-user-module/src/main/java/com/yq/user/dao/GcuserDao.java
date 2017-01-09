@@ -234,6 +234,24 @@ public class GcuserDao {
 	}
 	
 	/**
+	 * 减一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean reduceYbNotReduceVipPay(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay-?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+? where username=? and pay-?>=0";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		parameter.setInt(changeNum);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	/**
 	 * 减一币（可以为负数）
 	 * @param username
 	 * @param changeNum
@@ -312,6 +330,22 @@ public class GcuserDao {
 		String sql = "update "+table+" set pay=pay+?,vippay=vippay+?,cbpay=cbpay+? where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setInt(changeNum);
+		parameter.setString(username);
+		return this.jdbc.update(sql, parameter)>0;
+	}
+	
+	
+	/**
+	 * 加一币
+	 * @param username
+	 * @param changeNum
+	 * @return
+	 */
+	public boolean addYbNotAddVipPay(String username,int changeNum){
+		String sql = "update "+table+" set pay=pay+?,cbpay=cbpay+? where username=? limit 1";
+		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setInt(changeNum);
 		parameter.setString(username);

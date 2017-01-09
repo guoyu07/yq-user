@@ -735,6 +735,49 @@ public class UserService {
 		}
 		return true;
 	}
+	
+	public boolean changeYbNotAddVipPay(String username,int changeNum,String desc,int newzBz,Integer kjqi,double ration, int originType){
+		boolean result = false;
+		if(changeNum<0){
+			result = gcuserDao.reduceYbNotReduceVipPay(username, changeNum*-1);
+			if(result){
+				Gcuser gcuser = gcuserDao.getUser(username);
+				Datepay datePay = new Datepay();
+				datePay.setUsername(username);
+				datePay.setJc(changeNum*-1);
+				datePay.setPay(gcuser.getPay());
+				datePay.setJydb(gcuser.getJydb());
+				datePay.setRegid(desc);
+				datePay.setNewbz(newzBz);
+				if(kjqi!=null){
+					datePay.setKjqi(kjqi);
+				}
+				datePay.setRation(ration);
+				datePay.setAbdate(new Date());
+				datePay.setOrigintype(originType);
+				logService.addDatePay(datePay);
+			}
+			return result;
+		}else if(changeNum>0){
+			result = gcuserDao.addYbNotAddVipPay(username, changeNum);
+			if(result){
+				Gcuser gcuser = gcuserDao.getUser(username);
+				Datepay datePay = new Datepay();
+				datePay.setUsername(gcuser.getUsername());
+				datePay.setSyjz(changeNum);
+				datePay.setPay(gcuser.getPay());
+				datePay.setJydb(gcuser.getJydb());
+				datePay.setRegid(desc);
+				datePay.setNewbz(newzBz);
+				datePay.setAbdate(new Date());
+				datePay.setRation(ration);
+				datePay.setOrigintype(originType);
+				logService.addDatePay(datePay);
+			}
+			return result;
+		}
+		return true;
+	}
 	/**
 	 * 修改购物卷
 	 * @param username
@@ -1583,10 +1626,10 @@ public class UserService {
 	 * @param amount
 	 */
 	private void trasferYb(String fromUser,String toUser,int amount){
-		if(!this.changeYb(fromUser, -amount, "转给-"+toUser, 6,null,0,YbChangeType.ZHUANCHU_SAMENAME)){
+		if(!this.changeYbNotAddVipPay(fromUser, -amount, "转给-"+toUser, 6,null,0,YbChangeType.ZHUANCHU_SAMENAME)){
 			throw new ServiceException(100, "Yb不足");
 		}
-		this.changeYb(toUser, amount, "收到-"+fromUser, 6,null,0,YbChangeType.ZHUANRU_SAMENAME);
+		this.changeYbNotAddVipPay(toUser, amount, "收到-"+fromUser, 6,null,0,YbChangeType.ZHUANRU_SAMENAME);
 	}
 	
 	/**

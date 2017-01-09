@@ -109,6 +109,8 @@ function checkdate1()  {
 								<option value="2000">2000</option>
 								<option value="5000">5000</option>
 								<option value="10000">10000</option>
+								<option value="20000">20000</option>
+								<option value="30000">30000</option>
 								</select></p>
 							<p><label><s:text name='reg.jsp.reg.jsp.630954966'/>：</label><INPUT name="pa3" size=15 type=password></p>
 							<c:if test="${gcuser.ganew!=0}"><p><label><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1451653422'/> name="B2"></span></c:if>
