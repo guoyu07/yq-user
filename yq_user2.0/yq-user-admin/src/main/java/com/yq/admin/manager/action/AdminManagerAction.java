@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.admin.manage.action.BaseManageAction;
+import com.yq.manage.bean.ManageUser;
 import com.yq.manage.bean.Resource;
 import com.yq.manage.service.ManageService;
 import com.yq.manage.util.ComparePlayerResource;
@@ -26,6 +27,7 @@ public class AdminManagerAction extends BaseManageAction<Object> {
     private List<PlayerResource> rootList ;
     
     private int type;
+    private ManageUser user;
 	
 	
 	public String execute(){
@@ -49,7 +51,7 @@ public class AdminManagerAction extends BaseManageAction<Object> {
     public void initResources() {
         HttpServletRequest request = ServletActionContext.getRequest();
         ManageService manageService = ServiceCacheFactory.getService(ManageService.class);
-        
+        user = this.getCurrentLoginUser();
         HashSet<PlayerResource> rootset = new HashSet<>();
         //获取该用户的资源
         List<Resource> list = null;
@@ -144,6 +146,16 @@ public class AdminManagerAction extends BaseManageAction<Object> {
 
 	public void setPlayerloginResourceList(List<PlayerResource> playerloginResourceList) {
 		this.playerloginResourceList = playerloginResourceList;
+	}
+
+
+	public ManageUser getUser() {
+		return user;
+	}
+
+
+	public void setUser(ManageUser user) {
+		this.user = user;
 	}
 
 

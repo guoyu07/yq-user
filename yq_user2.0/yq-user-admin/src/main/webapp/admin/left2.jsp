@@ -77,7 +77,7 @@ a:hover  { color:#428EFF;text-decoration:underline; }
 </tr>
 <tr>
 <td height=25 > 
-&nbsp;<a href="/admin/readme" target="BoardList"><b>首页</b></a> | <a href="/user/toPwdPage.action?status=2" target="BoardList" > <b>修改密码</b></a> | <a href="/admin/logout001" target="_top"><b>退出</b></a></td> 
+&nbsp;<a href="/admin/readme" target="BoardList"><b>首页</b></a> | ${user.adminusername} ${adminusername}<!-- <a href="/user/toPwdPage.action?status=2" target="BoardList" > <b>修改密码</b></a> --> | <a href="/admin/logout001" target="_top"><b>退出</b></a></td> 
 </tr>
 </table>
 &nbsp; 

@@ -1,12 +1,14 @@
 package com.yq.admin.manager.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.yq.admin.manage.action.BaseManageAction;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.ManageUser;
 import com.yq.manage.service.ManageService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.dao.FcxtDao;
 
-public class LeftAction extends ALDAdminActionSupport {
+public class LeftAction extends BaseManageAction<Object> {
 	
 	/**
 	 * 
@@ -14,10 +16,11 @@ public class LeftAction extends ALDAdminActionSupport {
 	private static final long serialVersionUID = 1L;
  
 	private Fcxt fcxt;
+	private ManageUser user;
 	public String execute(){
 		FcxtDao fcxtDao = ServiceCacheFactory.getService(FcxtDao.class);
 		fcxt = fcxtDao.getAdminUser(super.getUserName());
-		
+		user = this.getCurrentLoginUser();
 		return SUCCESS;
 	}
 	  
@@ -63,6 +66,16 @@ public class LeftAction extends ALDAdminActionSupport {
 
 	public void setPassword2(String password2) {
 		this.password2 = password2;
+	}
+
+
+	public ManageUser getUser() {
+		return user;
+	}
+
+
+	public void setUser(ManageUser user) {
+		this.user = user;
 	}
 	
 	
