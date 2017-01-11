@@ -68,10 +68,12 @@
 		<c:if test="${data.jb<=0 && data.sjb<=0 && data.pay<=0 && data.jyg<=0}"><td align="center" width="78">
 		<a href="delusersave?del=${data.username}" style="text-decoration: none"><font color="#FF0000">删除</font></a>
 		</td></c:if>
-		<c:if test="${fcxt.id==1||fcxt.id==2}"><td><a href="editYbSale?user=${data.username}" style="text-decoration: none">修改卖出一币</a></td></c:if>
+		<c:if test="${role.roleLevel<5}"><td><a href="editYbSale?user=${data.username}" style="text-decoration: none">修改卖出一币</a></td></c:if>
+		<c:if test="${role.roleLevel<3}">
 		<td align="center" >
 			<a href="javascript:void(0);" style="text-decoration: none;" onclick="reset('${data.username}')">重置玩家业绩</a></td>
 		</td>
+		</c:if>
 		</tr>
 		</s:iterator>
 	</table>

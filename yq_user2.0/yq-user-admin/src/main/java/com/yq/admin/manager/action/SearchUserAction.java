@@ -1,14 +1,15 @@
 package com.yq.admin.manager.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.admin.manage.action.BaseManageAction;
+import com.yq.manage.bean.Role;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.service.UserService;
 
-public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
+public class SearchUserAction extends BaseManageAction<Gcuser> {
 	/**
 	 * 
 	 */
@@ -22,11 +23,14 @@ public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
 	private Fcxt fcxt;
 	
 	private Sgxt sgxt;
+	
+	//等到当前用户最高角色
+	private Role role;
 	public String execute(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		fcxt = adminService.getAdminUser(super.getUserName());
-		
+		role = this.getCurrentHighestRole();
 		if(status==0){
 			return INPUT;
 		}
@@ -65,6 +69,14 @@ public class SearchUserAction extends ALDAdminPageActionSupport<Gcuser> {
 
 	public void setSgxt(Sgxt sgxt) {
 		this.sgxt = sgxt;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	
