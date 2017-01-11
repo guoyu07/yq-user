@@ -43,9 +43,9 @@ public class ToolsAction extends ALDAdminActionSupport {
 	private String cardNum;
 	private List<UserStatBean> list;
 	public String theSameUserInfo(){
-        if(!super.getUserName().equals("admin1")){
+        /*if(!super.getUserName().equals("admin1")){
             return INPUT;
-        }
+        }*/
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		if(!Strings.isNullOrEmpty(cardNum)){
@@ -56,10 +56,10 @@ public class ToolsAction extends ALDAdminActionSupport {
 	
 	
 	public String theSameUserInfoToExcel(){
-        if(!super.getUserName().equals("admin1")){
+       /* if(!super.getUserName().equals("admin1")){
             return INPUT;
         }
-
+*/
 		if(Strings.isNullOrEmpty(cardNum)){
 			return "thesameuserinfo";
 		}

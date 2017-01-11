@@ -13,9 +13,9 @@ public class GaiuserAction extends ALDAdminPageActionSupport<Tduser> {
 	private static final long serialVersionUID = 1L;
 	private String suser;
 	public String execute(){
-        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+       /* if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
             return INPUT;
-        }
+        }*/
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		super.initPage(adminService.getTduserPage(suser, super.getToPage(), 50));
 		return SUCCESS;
