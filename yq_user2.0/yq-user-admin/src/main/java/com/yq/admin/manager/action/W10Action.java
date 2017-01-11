@@ -15,9 +15,9 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	private String uname;
 	private String riqi;
 	public String execute(){
-        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
+       /* if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
-        }
+        }*/
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
         super.initPage(adminService.getTxpayPage(super.getToPage(), 20,uid,uname,riqi));
@@ -28,9 +28,9 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	private int op;
 	private int page;
 	public String syusers(){
-        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
+        /*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
-        }
+        }*/
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.syusers(payid, op);
@@ -41,10 +41,10 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	private String user;
 	private int verify;
 	public String setVerify(){
-        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
+        /*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
         }
-
+*/
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.setVerifile(user, verify);
 		super.setErroCodeNum(2001);
@@ -54,18 +54,18 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 	private String resionMassage;	
 	private int opstate;
 	public String cancelOrder(){//管理员取消订单
-		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
+		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
-        }
+        }*/
 		ServiceCacheFactory.getService(AdminService.class).cancleYbSale(super.getUserName(), payid, resionMassage, super.ip());
 		super.setErroCodeNum(2002);
 		return SUCCESS;
 	}
 	
 	public String resetOrder(){//重置订单
-		if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
+		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
-        }
+        }*/
 		ServiceCacheFactory.getService(AdminService.class).resetYbOrder(super.getUserName(), payid, opstate, super.ip());
 		super.setErroCodeNum(2003);
 		return SUCCESS;
