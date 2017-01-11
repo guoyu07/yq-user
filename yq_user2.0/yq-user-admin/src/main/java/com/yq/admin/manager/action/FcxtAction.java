@@ -18,9 +18,9 @@ public class FcxtAction extends ALDAdminPageActionSupport<PointsChangeLog> {
 	
 	private int cc;
 	public String execute(){
-        if(!super.getUserName().equals("admin1")){
+       /* if(!super.getUserName().equals("admin1")){
             return INPUT;
-        }
+        }*/
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 			fcxt = adminService.getFcxt(2);
@@ -29,9 +29,9 @@ public class FcxtAction extends ALDAdminPageActionSupport<PointsChangeLog> {
 	}
 	
 	public String updateRation(){
-        if(!super.getUserName().equals("admin1")){
+       /* if(!super.getUserName().equals("admin1")){
             return INPUT;
-        }
+        }*/
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.updateCz04(ration);
@@ -41,9 +41,9 @@ public class FcxtAction extends ALDAdminPageActionSupport<PointsChangeLog> {
 	
 	
 	public String updateCurrentCharge(){
-        if(!super.getUserName().equals("admin1")){
-            return INPUT;
-        }
+//        if(!super.getUserName().equals("admin1")){
+//            return INPUT;
+//        }
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.updateJy5wRation(cc);

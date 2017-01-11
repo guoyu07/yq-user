@@ -26,9 +26,9 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 		if(status==0){
 			return INPUT;
 		}
-        if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
+       /* if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")){
             return INPUT;
-        }
+        }*/
 		UserService userService  = ServiceCacheFactory.getService(UserService.class);
 		userService.trasferBdbByAdmin(jcname, syuser, jzpay, oppass,remark);
 		super.setErroCodeNum(2000);
@@ -37,9 +37,9 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 	
 	
 	public String bdbpay(){
-        if(!super.getUserName().equals("admin1")){
+        /*if(!super.getUserName().equals("admin1")){
             return INPUT;
-        }
+        }*/
 		UserService userService  = ServiceCacheFactory.getService(UserService.class);
 		if(status==0){
 			gcuser = userService.getUserByUserName(uid);

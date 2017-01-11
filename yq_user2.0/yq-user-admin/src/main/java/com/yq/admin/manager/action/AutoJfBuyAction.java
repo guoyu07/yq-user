@@ -27,9 +27,9 @@ public class AutoJfBuyAction extends ALDAdminActionSupport{
 		if(status==0){
 			return SUCCESS;
 		}
-		if(!super.getUserName().equals("admin1")){
+		/*if(!super.getUserName().equals("admin1")){
 			return SUCCESS;
-		}
+		}*/
 		if(!AdminService.mcdealJfLock.get()){
 			if(status==2){
 				super.setErroCodeNum(2002);

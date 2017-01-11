@@ -26,10 +26,10 @@ public class ToolsAction extends ALDAdminActionSupport {
 	private int ssjb;
 	private String desc;
 	public String addAqAndBq(){
-        if(!super.getUserName().equals("admin1")){
+       /* if(!super.getUserName().equals("admin1")){
             return INPUT;
         }
-
+*/
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
