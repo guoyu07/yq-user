@@ -18,6 +18,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
+import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
@@ -67,6 +68,7 @@ import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.constant.BDBChangeType;
 import com.yq.user.constant.GpjyChangeType;
+import com.yq.user.constant.PasswordKey;
 import com.yq.user.constant.ScoresChangeType;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.BabyInfoDao;
@@ -2087,11 +2089,13 @@ public class UserService {
 	 * @param toUser
 	 * @param amount
 	 */
-	
+	public String getConfigPassword(String key){
+		return ConfigLoader.getStringValue(key, "");
+	}
 	@Transactional
 	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy,double ration){
 		
-        if(!password3.equals("gliy18th")){
+        if(!password3.equals(getConfigPassword(PasswordKey.MALL_BACK_YB))){
 			throw new ServiceException(1, "操作密码不正确！");
 		}
 		
@@ -2156,7 +2160,7 @@ public class UserService {
 	
 	@Transactional
 	public void mallBackScores(String fromUser,String toUser,String password3,int amount,String orderId,String yy){
-		if(!password3.equals("gltk2016ycscores")){
+		if(!password3.equals(getConfigPassword(PasswordKey.MALL_BACK_SCORE))){
 			throw new ServiceException(1, "操作密码不正确！");
 		}
 		if(yy==null)yy="";
