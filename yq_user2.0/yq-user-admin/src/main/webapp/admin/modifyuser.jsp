@@ -219,7 +219,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 		<td align="center"><c:if test="${role.roleLevel<2}"><iframe name="I8" width="100%" height="200" border="0" frameborder="0" src="bcjf?bcid=${userid}"></iframe></c:if></td>
 	</tr>
 		<tr>
-		<td align="center"><c:if test="${role.roleLevel<2}"><iframe name="I9" width="100%" height="200" border="0" frameborder="0" src="epsf?uid=${userid}"></iframe></c:if></td>
+		<td align="center"><c:if test="${role.roleLevel<3}"><iframe name="I9" width="100%" height="200" border="0" frameborder="0" src="epsf?uid=${userid}"></iframe></c:if></td>
 		<td align="center"><c:if test="${role.roleLevel<2}"><iframe name="I10" width="100%" height="200" border="0" frameborder="0" src="btpay?uid=${userid}"></iframe></c:if></td>
 	</tr>
 		<tr>
