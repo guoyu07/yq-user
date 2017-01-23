@@ -1188,7 +1188,7 @@ public class UserService {
 					int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());//得到明细的sjb的总和
 					if(sjtjzb>0){
 						if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
-							sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());
+							sgxtDao.updateZOrYfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb);
 						}
 					}
 				}
@@ -1200,7 +1200,7 @@ public class UserService {
 					int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
 					if(sjtjzb>0){
 						if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-							sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
+							sgxtDao.updateZOrYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb);
 						}
 					}
 				}

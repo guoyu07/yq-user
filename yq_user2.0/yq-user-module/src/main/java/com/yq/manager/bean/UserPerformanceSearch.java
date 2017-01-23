@@ -7,6 +7,10 @@ public class UserPerformanceSearch {
     private int sigleAllPerformance;
     //个人时间段总业绩
     private int sigleTimeAllPerformance;
+    //用户所有同名账户的总业绩之和
+    private int myAllSigleAllPerformance;
+    //用户所有同名账户的个人总业绩之和
+    private int myAllSignleTimeAllPerformance;
 	//5层左区总业绩
 	private int fiveLeftPerformance;
 	//5层左区时间段总业绩
@@ -105,6 +109,18 @@ public class UserPerformanceSearch {
 	}
 	public void setUp(Sgxt up) {
 		this.up = up;
+	}
+	public int getMyAllSignleTimeAllPerformance() {
+		return myAllSignleTimeAllPerformance;
+	}
+	public void setMyAllSignleTimeAllPerformance(int myAllSignleTimeAllPerformance) {
+		this.myAllSignleTimeAllPerformance = myAllSignleTimeAllPerformance;
+	}
+	public int getMyAllSigleAllPerformance() {
+		return myAllSigleAllPerformance;
+	}
+	public void setMyAllSigleAllPerformance(int myAllSigleAllPerformance) {
+		this.myAllSigleAllPerformance = myAllSigleAllPerformance;
 	}
 	
 }
