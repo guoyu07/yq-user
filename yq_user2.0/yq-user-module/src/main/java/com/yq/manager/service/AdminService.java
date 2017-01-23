@@ -1482,7 +1482,7 @@ public class AdminService {
 	 * @param userName
 	 * @param addAmount
 	 */
-	public void addVipcjb(String userName,int addAmount){
+	public void addVipcjb(String userName,int addAmount, String oparetor){
 //		if(addAmount<1000||addAmount%1000!=0){
 //			throw new ServiceException(1, "充值必须是1000的倍整数如：2000，3000，4000，5000，6000，7000，8000，请检查输入是否正确！");
 //		}
@@ -1497,7 +1497,7 @@ public class AdminService {
                 vipcjgl.setCjjo(addAmount);
                 vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
                 vipcjgl.setVipuser(userName);
-                vipcjgl.setBz("入账");
+                vipcjgl.setBz("入账---操作者："+oparetor);
                 vipcjgl.setCjdate(new Date());
                 vipcjglDao.add(vipcjgl);
             }
@@ -1508,7 +1508,7 @@ public class AdminService {
                 vipcjgl.setCjjo(addAmount);
                 vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
                 vipcjgl.setVipuser(userName);
-                vipcjgl.setBz("扣除");
+                vipcjgl.setBz("扣除---操作者："+oparetor);
                 vipcjgl.setCjdate(new Date());
                 vipcjglDao.add(vipcjgl);
             }

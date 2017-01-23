@@ -23,9 +23,6 @@ public class VipcjbAction extends ALDAdminActionSupport {
 	private Gcuser gcuser;
 	
 	public String execute(){
-       /* if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin2")&&!super.getUserName().equals("admin3")){
-            return INPUT;
-        }*/
 
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		if(status==0){
@@ -33,7 +30,7 @@ public class VipcjbAction extends ALDAdminActionSupport {
 			return INPUT;
 		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.addVipcjb(sfid, cjb);
+		adminService.addVipcjb(sfid, cjb, super.getUserName());
 		gcuser = userService.getUserByUserName(sfid);
 		return SUCCESS;
 	}
