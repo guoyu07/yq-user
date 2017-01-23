@@ -30,7 +30,7 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
             return INPUT;
         }*/
 		UserService userService  = ServiceCacheFactory.getService(UserService.class);
-		userService.trasferBdbByAdmin(jcname, syuser, jzpay, oppass,remark);
+		userService.trasferBdbByAdmin(jcname, syuser, jzpay, oppass,remark, super.getUserName());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}

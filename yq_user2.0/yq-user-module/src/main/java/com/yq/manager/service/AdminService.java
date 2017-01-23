@@ -483,6 +483,8 @@ public class AdminService {
 		
 		modifyUserLogDao.add(modifyUserLog);
 		
+		 AdminOperateLog log= new AdminOperateLog(operator,"", new Date(), AdminGlobal.OP_MODIFYVIP, "修改资料"+userName);
+		 adminOperateLogDao.addLog(log);
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
 			//写身份证和名字修改日志
@@ -911,8 +913,16 @@ public class AdminService {
 	 * @param userName
 	 * @param sjid
 	 */
-	public void changeArea(String userName,int sjid){
+	public void changeArea(String userName,int sjid, String oparetor){
 		gcuserDao.updateGwuid(userName, sjid);
+		AdminOperateLog log=null;
+		if(sjid==0){
+			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成国内玩家");
+		}
+		if(sjid==1){
+			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成海外玩家");
+		}
+		adminOperateLogDao.addLog(log);
 	}
 	
 	@Transactional
@@ -1497,9 +1507,11 @@ public class AdminService {
                 vipcjgl.setCjjo(addAmount);
                 vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
                 vipcjgl.setVipuser(userName);
-                vipcjgl.setBz("入账---操作者："+oparetor);
+                vipcjgl.setBz("入账");
                 vipcjgl.setCjdate(new Date());
                 vipcjglDao.add(vipcjgl);
+        		AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_VIPCZJ, userName+"入账："+addAmount);
+        		adminOperateLogDao.addLog(log);
             }
         }else{
             if(gcuserDao.reduceVipcjcjb(userName, addAmount*-1)){
@@ -1508,9 +1520,11 @@ public class AdminService {
                 vipcjgl.setCjjo(addAmount);
                 vipcjgl.setSycjb(gcuser.getVipcjcjb()+addAmount);
                 vipcjgl.setVipuser(userName);
-                vipcjgl.setBz("扣除---操作者："+oparetor);
+                vipcjgl.setBz("扣除");
                 vipcjgl.setCjdate(new Date());
                 vipcjglDao.add(vipcjgl);
+                AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_VIPCZJ, userName+"扣除："+addAmount);
+        		adminOperateLogDao.addLog(log);
             }
         }
 	}
@@ -2318,7 +2332,7 @@ public class AdminService {
 		}
 	}
 	
-	public boolean callRemoteCharge(String call,int amount,String ip,String userName){
+	public boolean callRemoteCharge(String call,int amount,String ip,String userName, String oparetor){
 		LogSystem.info("手动--用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】");
 		_99douInterface _99dou = new _99douInterface();
 		String out_trade_id = userName+"-"+DateUtils.DateToString(new Date(),DateStyle.YYYY_MM_DD_HH_MM_SS_EN);
@@ -2337,6 +2351,8 @@ public class AdminService {
 			throw new ServiceException(100, "充值话费失败！稍后再试");
 		}
         LogSystem.info("话费充值返回 :"+result+" 消息:"+msg);
+        AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_MOBILEFEE, userName+":手机号："+call+"充值："+amount);
+		adminOperateLogDao.addLog(log);
         if(result==0){//成功
         	return true;
         }
