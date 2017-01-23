@@ -2,6 +2,7 @@ package com.yq.admin.manager.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
 import com.yq.manager.service.AdminService;
 
 public class TelPayByHandAction extends ALDAdminActionSupport {
@@ -29,7 +30,7 @@ public class TelPayByHandAction extends ALDAdminActionSupport {
 			return SUCCESS;
 		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.callRemoteCharge(call, amount, super.ip(), user);
+		adminService.callRemoteCharge(call, amount, super.ip(), user, super.getUserName());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}

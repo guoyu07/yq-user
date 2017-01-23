@@ -30,6 +30,9 @@ import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.Global;
 import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.dao.AdminOperateLogDao;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.BabyInfo;
 import com.yq.user.bo.Bdbdate;
@@ -176,6 +179,8 @@ public class UserService {
 	private UserPropertyDao userPropertyDao;
 	@Autowired
 	private SameUserPropertyDao sameUserPropertyDao;
+	@Autowired
+	private AdminOperateLogDao adminOperateLogDao;
     
   //用户id与UserMapper的映射map
 //  	private Cache<String,Session> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(20000).build();
@@ -842,7 +847,7 @@ public class UserService {
 	 * @param kjqi
 	 * @return
 	 */
-	public boolean changeYbCanFu(String username,int changeNum,String desc,int newzBz,Integer kjqi){
+	public boolean changeYbCanFu(String username,int changeNum,String desc,int newzBz,Integer kjqi, String oparetor){
 		boolean result = false;
 		if(changeNum<0){
 			result = gcuserDao.reduceYbCanFu(username, changeNum*-1);
@@ -853,7 +858,7 @@ public class UserService {
 				datePay.setJc(changeNum*-1);
 				datePay.setPay(gcuser.getPay());
 				datePay.setJydb(gcuser.getJydb());
-				datePay.setRegid("消费一币("+desc+")");
+				datePay.setRegid("消费一币("+desc+")---操作者："+oparetor);
 				datePay.setNewbz(newzBz);
 				if(kjqi!=null){
 					datePay.setKjqi(kjqi);
@@ -872,7 +877,7 @@ public class UserService {
 				datePay.setSyjz(changeNum);
 				datePay.setPay(gcuser.getPay());
 				datePay.setJydb(gcuser.getJydb());
-				datePay.setRegid(desc);
+				datePay.setRegid(desc+"---操作者："+oparetor);
 				datePay.setNewbz(newzBz);
 				datePay.setAbdate(new Date());
 				datePay.setOrigintype(YbChangeType.SYSTEM_CONSUMEYB_ADD);
@@ -1497,7 +1502,7 @@ public class UserService {
 	 * @param amount
 	 */
 	@Transactional
-	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,String remark){
+	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,String remark, String oparetor){
 		
 		if(!"zbdb8989".equals(oppass)){
 			throw new ServiceException(6, "操作密码不正确！");
@@ -1523,6 +1528,9 @@ public class UserService {
 		if(to==null){
 			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
 		}
+		 AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_BDBZZ,"转出用户："+fromUser+"转入用户："+toUser+"数量："+amount);
+		 adminOperateLogDao.addLog(log);
+		
 		if("转错".equals(remark)){
 			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_REDUCE)){
 				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
@@ -1545,6 +1553,8 @@ public class UserService {
 			
 			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_DEPOSIT_ADD);
 		}
+		
+		
 		
 	}
 	
