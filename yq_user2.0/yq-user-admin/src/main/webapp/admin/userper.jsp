@@ -63,6 +63,16 @@
                 <td>${bean.sigleTimeAllPerformance}单=${bean.sigleTimeAllPerformance*500}元</td>
                 <td>(【${startTime}至${endTime}】时间段的个人总业绩)</td>
               </tr>
+             <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>所有同名账号个人总业绩之和</strong></font></td>
+                <td>${bean.myAllSigleAllPerformance}单=${bean.myAllSigleAllPerformance*500}元</td>
+                <td>(用户所有同名账号个人总业绩之和)</td>
+              </tr>
+              <tr bgcolor="#7bb5de"> 
+                <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>【${startTime}至${endTime}】所有同名账号个人总业绩之和</strong></font></td>
+                <td>${bean.myAllSignleTimeAllPerformance}单=${bean.myAllSignleTimeAllPerformance*500}元</td>
+                <td>(【${startTime}至${endTime}】所有同名账号个人总业绩之和)</td>
+              </tr>
               <tr bgcolor="#7bb5de"> 
                 <td width="350" align="center" height="23" bgcolor="#D9E6FF"><font face="宋体"><strong>5层内左总</strong></font></td>
                 <td>${bean.fiveLeftPerformance}单=${bean.fiveLeftPerformance*500}元</td>

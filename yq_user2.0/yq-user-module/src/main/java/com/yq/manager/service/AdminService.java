@@ -1635,7 +1635,7 @@ public class AdminService {
 				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
 				if(sjtjzb>0){
 					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
-						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());
+						sgxtDao.updateZOrYfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb);
 					}
 				}
 			}
@@ -1647,11 +1647,14 @@ public class AdminService {
 				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
 				if(sjtjzb>0){
 					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
+						sgxtDao.updateZOrYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb);
 					}
 				}
 			}
 		}
+
+        
+        
 		List<Bdbdate> logList = Lists.newArrayList();
 		userService.CalculateQ(bduser, sjb, bduser,logList);
 		bdbDateDao.batchInsert(logList);
@@ -2100,8 +2103,8 @@ public class AdminService {
 	
 	private List<YouMingxi> yList = Lists.newArrayList();
 	private List<ZuoMingxi> zList = Lists.newArrayList();
-	private final String Y_FILE_NAME = "D://temp//youmingxi.sql";
-	private final String Z_FILE_NAME = "D://temp//zuomingxi.sql";
+	private final String Y_FILE_NAME = "//Users//dogdog//Desktop//data//youmingxi.sql";
+	private final String Z_FILE_NAME = "//Users//dogdog//Desktop//data//zuomingxi.sql";
 	public void resetUserDownInfo(){
 		long allStartTime = System.currentTimeMillis();
 		LogSystem.info("开启重置z y明细表功能---");
@@ -2710,6 +2713,28 @@ public class AdminService {
 		return gcuserDao.getUserSigleSumSjbByTime(userName,gcuser.getUserid(), startTime, endTime);
 	}
 	/**
+	 * 获取用户下 所有同名账号的个人业绩总和
+	 * @param userName
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	private int getMyAllUserThisYearSignlePerformance(String userName,String startTime,String endTime){
+		if(startTime!=null&&endTime!=null){
+			startTime = startTime + " 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		List<Gcuser> list = gcuserDao.getUserByIdCard(gcuser.getUserid());
+		int result = 0;
+		if(list!=null&&list.size()>0){
+			for(Gcuser gc:list){
+				result = result + gcuserDao.getUserSigleSumSjbByTime(gc.getUsername(),gc.getUserid(), startTime, endTime);
+			}
+		}
+		return result;
+	}
+	/**
 	 * 个人总业绩查询
 	 * @param userName
 	 * @param startYear
@@ -2747,6 +2772,8 @@ public class AdminService {
 		UserPerformanceSearch result = new UserPerformanceSearch();
 		result.setSigleAllPerformance(getUserThisYearSiglePerformance(userName, null, null));
 		result.setSigleTimeAllPerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
+		result.setMyAllSigleAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  null, null));
+		result.setMyAllSignleTimeAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  startTime, endTime));
 		startTime = startTime + " 00:00:00";
 		endTime = endTime + " 23:59:59";
 		result.setFiveLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, null, null,5));
@@ -2985,9 +3012,9 @@ public class AdminService {
 		if(searchs!=null&&searchs.size()>0){
 			return searchs;
 		}
-		String startTime = "2015-01-01 00:00:00";
-		String endTime =  "2015-12-31 23:59:59";
-		List<TopReward> list = gcuserDao.getUserTopReward(startTime);
+		String startTime = "2016-01-01 00:00:00";
+		String endTime =  "2016-12-31 23:59:59";
+		List<TopReward> list = gcuserDao.getUserTopReward2016(startTime,endTime);
 		if(list!=null&&list.size()>0){
 			for(TopReward tr:list){
 				UserPerformance t = getUserPerformanceBO(tr.getUp(),startTime, endTime);
@@ -3206,29 +3233,42 @@ public class AdminService {
 	 * @return
 	 * */
 	public String resetUserAchivement(String guser) {
-		List<ZuoMingxi> zList = zuoMingxiDao.getTjuserList(guser);
-		if(zList!=null&&!zList.isEmpty()){
-			for(ZuoMingxi zuoMingxi:zList){
-				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
-				if(sjtjzb>0){
-					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
-						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb,zuoMingxi.getCount());
-					}
-				}
-			}
-		}
-		List<YouMingxi> yList = youMingXiDao.getTjuserList(guser);
-		if(yList!=null&&!yList.isEmpty()){
-			for(YouMingxi youMingxi:yList){
-				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
-				if(sjtjzb>0){
-					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb,youMingxi.getCount());
-					}
-				}
-			}
-		}
+//		List<ZuoMingxi> zList = zuoMingxiDao.getTjuserList(guser);
+//		if(zList!=null&&!zList.isEmpty()){
+//			for(ZuoMingxi zuoMingxi:zList){
+//				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
+//				if(sjtjzb>0){
+//					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
+//						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb,zuoMingxi.getCount());
+//					}
+//				}
+//			}
+//		}
+//		List<YouMingxi> yList = youMingXiDao.getTjuserList(guser);
+//		if(yList!=null&&!yList.isEmpty()){
+//			for(YouMingxi youMingxi:yList){
+//				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
+//				if(sjtjzb>0){
+//					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
+//						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb,youMingxi.getCount());
+//					}
+//				}
+//			}
+//		}
+		resetUserZandY16(guser);
 		return "success";
+	}
+	/**
+	 * 重置用户z1-16和 y1-16的临时值
+	 * @param userName
+	 */
+	public void resetUserZandY16(String userName){
+		for(int i=1;i<=16;i++){
+			int zIsjb = zuoMingxiDao.getSumSjb(userName, i);
+			sgxtDao.updateZOrYfiled(userName, "z"+i, zIsjb);
+			int yIsjb = youMingXiDao.getSumSjb(userName, i);
+			sgxtDao.updateZOrYfiled(userName, "y"+i, yIsjb);
+		}
 	}
 	
 	
