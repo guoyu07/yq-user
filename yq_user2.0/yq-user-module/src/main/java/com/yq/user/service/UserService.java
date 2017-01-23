@@ -5117,6 +5117,27 @@ public class UserService {
 		}
 		return "xtgc001";
 	}
+	/**
+	 * 寻找大vip
+	 * @param userName
+	 * @return
+	 */
+	public String findMyBigUpVipName(String userName) {
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
+		if (sgxtBd != null) {
+			if (sgxtBd.getVip() == 1) {
+				Gcuser gcuser = gcuserDao.getUser(sgxtBd.getUsername());
+				if(gcuser.getVip()==2){
+					return gcuser.getUsername();
+				}else{
+					return findMyBigUpVipName(sgxtBd.getUsername());
+				}
+			} else {
+				return findMyBigUpVipName(sgxtBd.getUsername());
+			}
+		}
+		return "xtgc001";
+	}
 	
 	
 	@Transactional

@@ -49,6 +49,7 @@ import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.bo.PointsChangeLog;
 import com.yq.manager.bo.UserVipLog;
 import com.yq.manager.bo.W10Bean;
+import com.yq.manager.bo.Zq2016stat;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
@@ -56,6 +57,7 @@ import com.yq.manager.dao.MtfhtjDao;
 import com.yq.manager.dao.PointsChangeLogDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.manager.dao.UserVipLogDao;
+import com.yq.manager.dao.Zq2016statDao;
 import com.yq.user.bean.TopReward;
 import com.yq.user.bo.AbsModifyUserLog;
 import com.yq.user.bo.Addsheng;
@@ -193,6 +195,8 @@ public class AdminService {
 	private AdminOperateLogDao adminOperateLogDao;
 	@Autowired
 	private ManageUserDao manageDao;
+	@Autowired
+	private Zq2016statDao zq2016statDao;
 	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -3017,10 +3021,10 @@ public class AdminService {
 		List<TopReward> list = gcuserDao.getUserTopReward2016(startTime,endTime);
 		if(list!=null&&list.size()>0){
 			for(TopReward tr:list){
-				UserPerformance t = getUserPerformanceBO(tr.getUp(),startTime, endTime);
-				if(t!=null){
-					searchs.add(t);
-				}
+//				UserPerformance t = getUserPerformanceBO(tr.getUp(),startTime, endTime);
+//				if(t!=null){
+//					searchs.add(t);
+//				}
 			}
 			userPerformanceDao.removeAll();
 			userPerformanceDao.insert(searchs);
@@ -3049,6 +3053,8 @@ public class AdminService {
 		result.setUserName(userName);
 		return result;
 	}
+	
+
 	
 	
 	public void setVerifile(String userName,int verify){
@@ -3511,11 +3517,19 @@ public class AdminService {
 	public void setAdminUserMap(Cache<String, Session> adminUserMap) {
 		this.adminUserMap = adminUserMap;
 	}
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 设置2016年业绩数据大vip
+	 */
+	public void setBigVipUser(){
+		LogSystem.info("开始设置数据大vip");
+		List<Zq2016stat> list = zq2016statDao.getAll();
+		if(list!=null&&list.size()>0){
+			for(Zq2016stat zq2016stat:list){
+				String bigVipUser = userService.findMyBigUpVipName(zq2016stat.getUserName());
+				Gcuser gcuser = gcuserDao.getUser(bigVipUser);
+				boolean result = zq2016statDao.updateBigVipUser(zq2016stat.getUserName(), bigVipUser,gcuser.getName());
+				LogSystem.info("用户["+zq2016stat.getUserName()+"]的大vip=["+bigVipUser+"]，大vip姓名["+gcuser.getName()+"],更新结果为:["+result+"]");
+			}
+		}
+	}
 }
