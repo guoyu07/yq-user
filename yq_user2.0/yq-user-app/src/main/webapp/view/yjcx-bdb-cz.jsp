@@ -8,6 +8,7 @@
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('备用报单币不足！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('被充值用户的一币不足！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('二级密码不正确');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('年终结算，暂停使用!');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
