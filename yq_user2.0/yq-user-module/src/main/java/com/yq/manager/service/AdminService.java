@@ -3021,37 +3021,198 @@ public class AdminService {
 	
 	public List<UserPerformance> getUserPerformancePage(){
 //		return userPerformanceDao.getListPage(time, pageIndex, pageSize);
-		Date end = DateUtils.StringToDate("2016-01-02 00:00:00", DateStyle.YYYY_MM_DD_HH_MM_SS);
-		String d = DateUtils.getDate(new Date());
-		if(new Date().getTime()>end.getTime()){
-			d = "2016-01-01";
-		}
+		String d = "2017-01-01";
 		List<UserPerformance> searchs = userPerformanceDao.getListPage(d);
-		
-		
-		if(searchs!=null&&searchs.size()>0){
-			return searchs;
-		}
+//		if(searchs!=null&&searchs.size()>0){
+//			return searchs;
+//		}
 		String startTime = "2016-01-01 00:00:00";
 		String endTime =  "2016-12-31 23:59:59";
-		List<TopReward> list = gcuserDao.getUserTopReward2016(startTime,endTime);
-		if(list!=null&&list.size()>0){
-			for(TopReward tr:list){
-//				UserPerformance t = getUserPerformanceBO(tr.getUp(),startTime, endTime);
-//				if(t!=null){
-//					searchs.add(t);
-//				}
+		
+		//如果数据库中没有数据则进行查询
+		if(searchs==null||searchs.size()==0){
+			List<Zq2016stat> list = zq2016statDao.getAll();//获取所有小区业绩高于500万的用户
+			for(Zq2016stat zq:list){
+				UserPerformance t = getUserPerformanceBO(zq.getUserName(),startTime, endTime,d);
+				if(t!=null){
+					searchs.add(t);
+				}
 			}
-			userPerformanceDao.removeAll();
-			userPerformanceDao.insert(searchs);
+		}else{
+			if(searchs.get(0).getStep()>0){
+				return searchs;
+			}
 		}
+
+		for(UserPerformance search:searchs){
+			search.setId(null);
+			search.resetDescription();
+		}
+			//开始分析获得的奖品
+			//筛选出满足前三个条件获取蒙迪欧的用户
+			int W = 10000;
+			LogSystem.info("开始蒙迪欧循环");
+			//蒙迪欧循环
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 50*W, 1000*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=2){
+								search.setStep(1);
+								search.setDescription("达到蒙迪欧需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					if(search.getStep()!=1){
+						String dStr = "升级蒙迪欧失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			
+			
+			
+			LogSystem.info("蒙迪欧循环结束");
+			//探险者循环
+			LogSystem.info("开始探险者循环");
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 100*W, 3600*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())&&search2.getStep()>=1){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=2){
+								search.setStep(2);
+								search.setDescription("达到探险者需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					
+					if(search.getStep()!=2){
+						String dStr = "升级探险者失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			LogSystem.info("探险者循环结束");
+			
+			//保时捷循环
+			LogSystem.info("开始保时捷循环");
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 150*W, 5000*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())&&search2.getStep()>=2){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=3){
+								search.setStep(3);
+								search.setDescription("达到保时捷需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					
+					if(search.getStep()!=3){
+						String dStr = "升级保时捷失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			LogSystem.info("保时捷循环结束");
+			
+			//小洋房循环
+			LogSystem.info("开始小洋房循环");
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 200*W, 25000*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())&&search2.getStep()>=3){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=5){
+								search.setStep(4);
+								search.setDescription("达到小洋房需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					if(search.getStep()!=4){
+						String dStr = "升级小洋房失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			LogSystem.info("小洋房循环结束");
+			userPerformanceDao.removeAll(d);
+			userPerformanceDao.insert(searchs);
 		return searchs;
 	}
 	
-	public UserPerformance getUserPerformanceBO(String userName,String startTime,String endTime){
+	/**
+	 * 5层布满通用条件
+	 * @param u
+	 * @return
+	 */
+	private boolean conditionC(UserPerformance u){
+		if(u.getFu()==0){
+			u.setDescription("未满5层");
+			return false;
+		}
+		if((u.getFiveLeftPerformance()+u.getFiveRightPerformance())*500<620000){
+			u.setDescription("5层业绩未超过62w");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean conditionD(UserPerformance u,int d1,int d3){
+		int d1t = d1/500;
+		int d3t = d3/500;
+		if(u.getSigleTimeTheSameuserAllPerformance()<d1t){
+			u.setDescription("直推业绩未满"+d1);
+			return false;
+		}
+		if(Math.min(u.getAllTimeLeftPerformance(), u.getAllTimeRightPerformance())<d3t){
+			u.setDescription("小区业绩未满"+d3);
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean condition3(UserPerformance u,List<UserPerformance> searchs){
+		return false;
+	}
+	
+	private boolean condition4(UserPerformance u,List<UserPerformance> searchs){
+		return false;
+	}
+	
+	public UserPerformance getUserPerformanceBO(String userName,String startTime,String endTime,String d){
+		Date geDate = DateUtils.StringToDate(d, DateStyle.YYYY_MM_DD);
 		UserPerformance result = new UserPerformance();
 		result.setSigleAllPerformance(getUserThisYearSiglePerformance(userName, null, null));
 		result.setSigleTimeAllPerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
+		result.setSigleTheSameuserAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  null, null));
+		result.setSigleTimeTheSameuserAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  startTime, endTime));
 //		startTime = startTime + " 00:00:00";
 //		endTime = endTime + " 23:59:59";
 		result.setFiveLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, null, null,5));
@@ -3065,7 +3226,7 @@ public class AdminService {
 		result.setAllTimeRightPerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime,0));
 		boolean isfivefull = isFiveStepFull(userName);
 		result.setFu(isfivefull?1:0);
-		result.setAddTime(new Date());
+		result.setAddTime(geDate);
 		result.setUserName(userName);
 		return result;
 	}

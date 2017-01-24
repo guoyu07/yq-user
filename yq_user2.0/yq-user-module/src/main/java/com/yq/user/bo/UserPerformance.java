@@ -11,6 +11,8 @@ public class UserPerformance{
 	private String userName;
 	private int sigleAllPerformance;
 	private int sigleTimeAllPerformance;
+	private int sigleTheSameuserAllPerformance;
+	private int sigleTimeTheSameuserAllPerformance;
 	private int fiveLeftPerformance;
 	private int fiveLeftTimePerformance;
 	private int fiveRightPerformance;
@@ -22,6 +24,8 @@ public class UserPerformance{
 	private int zaq;
 	private int zbq;
 	private int db;
+	private int step;
+	private String description;
 	public void setId(Integer id){
 	this.id=id;
 	}
@@ -111,6 +115,34 @@ public class UserPerformance{
 	}
 	public void setDb(int db) {
 		this.db = db;
+	}
+	public int getSigleTheSameuserAllPerformance() {
+		return sigleTheSameuserAllPerformance;
+	}
+	public void setSigleTheSameuserAllPerformance(int sigleTheSameuserAllPerformance) {
+		this.sigleTheSameuserAllPerformance = sigleTheSameuserAllPerformance;
+	}
+	public int getSigleTimeTheSameuserAllPerformance() {
+		return sigleTimeTheSameuserAllPerformance;
+	}
+	public void setSigleTimeTheSameuserAllPerformance(int sigleTimeTheSameuserAllPerformance) {
+		this.sigleTimeTheSameuserAllPerformance = sigleTimeTheSameuserAllPerformance;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = this.description+"|"+description;
+	}
+	
+	public void resetDescription(){
+		this.description = "";
 	}
 }
 
