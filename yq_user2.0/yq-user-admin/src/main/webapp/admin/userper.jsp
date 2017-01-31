@@ -42,7 +42,7 @@
   
   <tr align="center">
       <td width="100%" height="26" background="/meme/images/admin_bg_1.gif"> 
-           <p class="showbtn"><a href='userperlist'>查看2015年度获奖用户名单</a></p>
+           <p class="showbtn"><a href='userperlist'>查看2016年度获奖用户名单</a></p>
       </td>
   </tr> 
   </table>

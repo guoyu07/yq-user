@@ -735,6 +735,10 @@
 			<result name="redirect" type="redirect">/admin/adminmanager</result>
 		</action>
 		
+		<action name="resetBigVipUser" class="com.yq.admin.manager.action.AdminLoginAction" method="resetBigVipUser">
+		<result name="success" >/admin/default.jsp</result>
+		</action>
+		
 		<action name="babyList" class="com.yq.admin.manager.action.BabyAction" method="babyList">
 		    <result name="success">
 		      /admin/babyinfolist.jsp

@@ -46,6 +46,21 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 		}
 		
 	}
+	/**
+	 * 重置大vip
+	 * @return
+	 */
+	public String resetBigVipUser(){
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
+//				adminService.setBigVipUser();
+//			}
+//		}).start();;
+		return SUCCESS;
+	}
+	
 	public String getAdminusername() {
 		return adminusername;
 	}

@@ -42,18 +42,21 @@ public class BdbZzAction extends ALDAdminActionSupport {
 	private Gcuser czgcuser;
 	private String touser;
 	public String bdbcz(){
-		UserService userSercice = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		if(status==1){
-			userSercice.chargeBdbByBigVip(super.getUserName(),pa3,touser);
-			return "bdbdate";
-		}else{
-			czgcuser = userSercice.getUserByUserName(super.getUserName());
-			if(czgcuser.getVip()!=2){
-				super.setErroCodeNum(1);
-				return SUCCESS;
-			}
-		}
+		super.setErroCodeNum(9);
 		return SUCCESS;
+//		UserService userSercice = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+//		if(status==1){
+//			userSercice.chargeBdbByBigVip(super.getUserName(),pa3,touser);
+//			return "bdbdate";
+//			
+//		}else{
+//			czgcuser = userSercice.getUserByUserName(super.getUserName());
+//			if(czgcuser.getVip()!=2){
+//				super.setErroCodeNum(1);
+//				return SUCCESS;
+//			}
+//		}
+//		return SUCCESS;
 	}
 
 	public int getStatus() {

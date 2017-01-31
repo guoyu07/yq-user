@@ -1922,7 +1922,7 @@ public class UserService {
     private static final long endLimitTime = DateUtils.StringToDate("2016-6-30 23:59:59", "yyyy-MM-dd HH:mm:ss").getTime();
 	
     //以下身份证号码 也只能体现奖金金额  不能体现其他
-    private String FORBIDDEN_ID_CARD = "330726197208232522，130627198306226028，522132198106124949，330725197506072727，331081198202260778，330726197501111148，330721198308316312，620403195406020028，330726197006042528，362325197202081910，450204198003071506，330323197202167124，330325198004277629，33252319750516402x，332623194702070032，330726194205242510，330726198012211126，330725198109043935";
+    private String FORBIDDEN_ID_CARD = "";
 	@Transactional
 	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
 		
@@ -1982,26 +1982,26 @@ public class UserService {
         }
         boolean isCanGetPrice = false;
         //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分 及指定身份证号码
-		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
-			boolean isSkip = false;
-			for(String skipUser:SKIL_USERS){
-				if(userName.equals(skipUser)){
-					isSkip = true;
-					break;
-				}
-			}
-			
-			if(sgxtUser.getBddate().getTime()<startLimitTime||sgxtUser.getBddate().getTime()>endLimitTime){
-				isSkip = true;
-			}
-			if(!isSkip){
-				isCanGetPrice = true;
-			}
-		}
+//		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
+//			boolean isSkip = false;
+//			for(String skipUser:SKIL_USERS){
+//				if(userName.equals(skipUser)){
+//					isSkip = true;
+//					break;
+//				}
+//			}
+//			
+//			if(sgxtUser.getBddate().getTime()<startLimitTime||sgxtUser.getBddate().getTime()>endLimitTime){
+//				isSkip = true;
+//			}
+//			if(!isSkip){
+//				isCanGetPrice = true;
+//			}
+//		}
 		//某些身份证号码只能提现奖金部分
-		if(FORBIDDEN_ID_CARD.indexOf(gcuser.getUserid())!=-1){
-			isCanGetPrice = true;
-		}
+//		if(FORBIDDEN_ID_CARD.indexOf(gcuser.getUserid())!=-1){
+//			isCanGetPrice = true;
+//		}
 		
 		if(isCanGetPrice){
 			int prizeYb = gcuser.getJbpay()+gcuser.getJjpay()+gcuser.getJypay();
@@ -5127,6 +5127,27 @@ public class UserService {
 		}
 		return "xtgc001";
 	}
+	/**
+	 * 寻找大vip
+	 * @param userName
+	 * @return
+	 */
+	public String findMyBigUpVipName(String userName) {
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
+		if (sgxtBd != null) {
+			if (sgxtBd.getVip() == 1) {
+				Gcuser gcuser = gcuserDao.getUser(sgxtBd.getUsername());
+				if(gcuser.getVip()==2){
+					return gcuser.getUsername();
+				}else{
+					return findMyBigUpVipName(sgxtBd.getUsername());
+				}
+			} else {
+				return findMyBigUpVipName(sgxtBd.getUsername());
+			}
+		}
+		return "xtgc001";
+	}
 	
 	
 	@Transactional
@@ -5473,6 +5494,7 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 
    @Transactional
    public void chargeBdbByBigVip(String userName,String pa3,String toUser){
+	   
 	   int czb = 5000;
 	   int byBdb = 22200;
 	   int yb = 22800;

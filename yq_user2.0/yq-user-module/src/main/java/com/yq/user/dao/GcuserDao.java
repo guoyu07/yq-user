@@ -1206,7 +1206,7 @@ public class GcuserDao {
 		return this.jdbc.getList(sql, TopReward.class,parameter);
 	}
 	public List<TopReward> getUserTopReward2016(String date,String end){
-		String sql = "select gc.userid as userid,gc.name as name,sum(g.sjb) as num from gcuser g left join gcuser gc on g.up=gc.username where g.regtime between ？ and ? and g.userid<>gc.userid and g.sjb>=20 group by gc.userid having num>1000";
+		String sql = "select gc.userid as userid,gc.name as name,sum(g.sjb) as num from gcuser g left join gcuser gc on g.up=gc.username where g.regtime between ? and ? and g.userid<>gc.userid and g.sjb>=20 group by gc.userid having num>=1000";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setString(date);
 		parameter.setString(end);
