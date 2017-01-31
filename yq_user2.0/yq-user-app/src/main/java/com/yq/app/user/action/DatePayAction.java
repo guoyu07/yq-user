@@ -18,6 +18,8 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 	private static final long serialVersionUID = 1L;
 	private Integer lb;
 	private Gcuser gcuser;
+
+	private int status;
 	
 	public String execute(){
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
@@ -31,6 +33,10 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		IPage<Datepay> page = logService.getDatePayListPage(super.getUserName(), lb, super.getToPage(), 10);
 		
 		super.initPage(page);
+		
+		if(status==1){
+			return "detail";
+		}
 		
 		return SUCCESS;
 	}
@@ -52,6 +58,16 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 
 	public void setGcuser(Gcuser gcuser) {
 		this.gcuser = gcuser;
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	

@@ -15,6 +15,8 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private int status;
+	
 	public String execute(){
 		@ProblemCode
 		/**查询的时候有这么一段代码  不知道是不是有问题的
@@ -45,7 +47,21 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 		}
 		super.setDataList(userService.getMarkList(10));
 //		LogSystem.warn("[进入市场]["+super.getUserName()+"]["+super.ip()+"],数据数量有"+(super.getDataList()==null?0:super.getDataList().size()));
+		if(status==1){
+			return "ybmarketdetail";
+		}
+		
 		return SUCCESS;
 	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	
 
 }

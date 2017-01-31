@@ -60,6 +60,11 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 		if(status==0){
 			super.initPage(userService.getAllGpjyDetailsPageList(super.getUserName(), super.getToPage(), 15));
 		}
+		if(status==4){
+			super.initPage(userService.getAllGpjyDetailsPageList(super.getUserName(), super.getToPage(), 10));
+			return "moredetail";
+		}
+		
 		return SUCCESS;
 	}
 

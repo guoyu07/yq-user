@@ -14,11 +14,15 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	private static final long serialVersionUID = 1L;
 	
 	private Gcuser gcuser;
+	private int status;
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
-		super.initPage(userService.getVipcjbPageList(super.getUserName(), super.getToPage(), 20));
+		super.initPage(userService.getVipcjbPageList(super.getUserName(), super.getToPage(), 10));
+		if(status==1){
+			return "cjbdetail";
+		}
 		return SUCCESS;
 	}
 	
@@ -31,6 +35,20 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		super.setErroCodeNum(2000);;
 		return SUCCESS;
 	}
+
+	
+	
+	public int getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+
 
 	public Gcuser getGcuser() {
 		return gcuser;

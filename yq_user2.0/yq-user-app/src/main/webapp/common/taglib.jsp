@@ -6,6 +6,7 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <s:set name="SESSION_LOCALE" value="#session['WW_TRANS_I18N_LOCALE']" />
+<c:set var="ctx" value="/mainUI/public"/>
 <%
 	response.setCharacterEncoding("utf-8");
 	response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1

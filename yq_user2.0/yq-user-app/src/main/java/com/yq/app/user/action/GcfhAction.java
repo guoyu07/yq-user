@@ -21,6 +21,8 @@ public class GcfhAction extends ALDAdminPageActionSupport<Gcfh> {
 
 	private Gcuser gcuser;
 	
+	private int status;
+	
 	public String execute(){
 		
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -34,10 +36,24 @@ public class GcfhAction extends ALDAdminPageActionSupport<Gcfh> {
 		
 		String result = "p0";
 		if(lb==1){
+			if(status==1){
+				return "p1detail";
+			}
 			result ="p1";
 		}
 		return result;
 	}
+
+	
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 
 	public Gcuser getGcuser(){
 		return gcuser;

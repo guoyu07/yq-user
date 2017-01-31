@@ -12,11 +12,25 @@ public class EpmyjlAction extends ALDAdminPageActionSupport<Txpay> {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private int status;
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		super.initPage(userService.getTxpayBuyDetailsPage(super.getUserName(), super.getToPage(), 15));
+		super.initPage(userService.getTxpayBuyDetailsPage(super.getUserName(), super.getToPage(), 10));
+		if(status==1){
+			return "mrdetail";
+		}
 		return SUCCESS;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	
+	
 }

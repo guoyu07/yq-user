@@ -6,7 +6,7 @@
 	<package name="other" extends="managerInterceptor" namespace="/">
 		<action name="manager" class="com.yq.app.user.action.ManagerAction">
 			<result name="success">
-				view/index2.jsp
+				mainUI/public/member-index.jsp
 			</result>
 		</action>
 
@@ -25,16 +25,21 @@
 		</action>
 
 		<action name="userlist" class="com.yq.app.user.action.UserListAction">
-			<result name="success">view/zhgl-tmzhlist.jsp</result>
+			<!-- <result name="success">view/zhgl-tmzhlist.jsp</result> -->
+			<result name="success">mainUI/public/account-list.jsp</result>
+			<result name="detail">mainUI/public/account-list-more.jsp</result>
 		</action>
 		<action name="relogin" class="com.yq.app.user.action.ReLoginAction">
 			<result name="success" type="redirect">${redirectBaseUrl}/manager</result>
 		</action>
 		<action name="datepay" class="com.yq.app.user.action.DatePayAction">
-			<result name="success">view/yblc-details.jsp</result>
+			<!-- <result name="success">view/yblc-details.jsp</result> -->
+			<result name="success">mainUI/public/eb-change-detail.jsp</result>
+			<result name="detail">mainUI/public/eb-change-detail-more.jsp</result>
 		</action>
 		<action name="datepayfororder" class="com.yq.app.user.action.DatePayForMallOrderAction">
-			<result name="success">view/yblc-mallorder-details.jsp</result>
+			<!-- <result name="success">view/yblc-mallorder-details.jsp</result> -->
+			<result name="success">mainUI/public/eb-store-order-search-more.jsp</result>
 		</action>
 		<action name="userscoreslog" class="com.yq.app.user.action.UserScoresLogAction">
 			<result name="success">view/yblc-userscoreslog.jsp</result>
@@ -48,34 +53,41 @@
 		</action>
 
 		<action name="tgurl" class="com.yq.app.user.action.TgurlAction">
-			<result name="success">view/grxx-rule.jsp</result>
+			<!-- <result name="success">view/grxx-rule.jsp</result> -->
+			<result name="success">mainUI/public/personal-game-rule.jsp</result>
 		</action>
 
 		<action name="login2j" class="com.yq.app.user.action.Login2jAction">
-			<result name="input">view/${inputUrl}</result>
+			<result name="input">mainUI/public/${inputUrl}</result>
 			<result name="success" type="json"></result>
 		</action>
 
 
 		<action name="userga" class="com.yq.app.user.action.UpdateUserInfoAction">
-			<result name="input">view/grxx-edit-userinfo.jsp</result>
+			<!-- <result name="input">view/grxx-edit-userinfo.jsp</result> -->
+			<result name="input">mainUI/public/personal-modify-information.jsp</result>
 			<result name="success" type="json"></result>
 		</action>
 
 
 		<action name="updateuserjc" class="com.yq.app.user.action.UpdateUserJcAction">
-			<result name="input">view/grxx-edit-jc.jsp</result>
+			<!-- <result name="input">view/grxx-edit-jc.jsp</result> -->
+			<result name="input">mainUI/public/personal-modify-information-heir.jsp</result>
 			<result name="success" type="json"></result>
 		</action>
 
 		<action name="gcbf" class="com.yq.app.user.action.GcfhAction">
-			<result name="p0">view/grxx-gcbf.jsp</result>
-			<result name="p1">view/grxx-gcbftj.jsp</result>
+		<!-- 	<result name="p0">view/grxx-gcbf.jsp</result>
+			<result name="p1">view/grxx-gcbftj.jsp</result> -->
+			<result name="p0">mainUI/public/personal-total-dividend-point.jsp</result>
+			<result name="p1">mainUI/public/personal-total-dividend.jsp</result>
+			<result name="p1detail">mainUI/public/personal-total-dividend-more.jsp</result>
 		</action>
 
 
 		<action name="ybsf" class="com.yq.app.user.action.YbsfAction">
-			<result name="input">view/grxx-shopmanager.jsp</result>
+			<!-- <result name="input">view/grxx-shopmanager.jsp</result> -->
+			<result name="input">mainUI/public/personal-business-management-system.jsp</result>
 			<result name="success" type="json"></result>
 		</action>
 
@@ -85,11 +97,12 @@
 
 		<action name="dldate" class="com.yq.app.user.action.LoginLogListAction">
 			<!-- <result name="success">vgo/dldate.jsp</result> -->
-			<result name="success">view/grxx-loginlog.jsp</result>
+			<!-- <result name="success">view/grxx-loginlog.jsp</result> -->
+			<result name="success">mainUI/public/personal-check-login-log.jsp</result> 
 		</action>
 		<action name="ggck" class="com.yq.app.user.action.GgckAction">
 			<!-- <result name="success">vgo/ggck.jsp</result> -->
-			<result name="success">view/zhgl-notice.jsp</result>
+			<result name="success">mainUI/public/index-notice-detail.jsp</result>
 		</action>
 
 		<action name="logout" class="com.yq.app.user.action.LogoutAction">
@@ -98,25 +111,34 @@
 		</action>
 
 		<action name="sgks01" class="com.yq.app.user.action.Sgks01Action">
-			<result name="success">view/yjcx-game.jsp</result>
+			<!-- <result name="success">view/yjcx-game.jsp</result> -->
+			<result name="success">mainUI/public/game-business.jsp</result>
+			<result name="detail">mainUI/public/game-business-more.jsp</result>
 		</action>
 		<action name="sgreg" class="com.yq.app.user.action.SgRegAction">
-			<result name="success">view/yjcx-choose-empty.jsp</result>
+			<!-- <result name="success">view/yjcx-choose-empty.jsp</result> -->
+			<result name="success">mainUI/public/game-open-account.jsp</result>
 		</action>
 		<action name="bdreg" class="com.yq.app.user.action.BdRegAction">
-			<result name="success">view/yjcx-choose-empty-sure.jsp</result>
+			<!-- <result name="success">view/yjcx-choose-empty-sure.jsp</result> -->
+			<result name="success">mainUI/public/game-open-account-confirm.jsp</result>
 			<result name="sgks01" type="redirect">${redirectBaseUrl}/sgks01?myup=${up}&amp;lb=1</result>
+			<result name="sgks02" type="redirect">${redirectBaseUrl}/sgks01?myup=${up}&amp;lb=1&amp;status=1</result>
 		</action>
 
 		<action name="vipup" class="com.yq.app.user.action.VipUpAction">
-			<result name="success">view/service.jsp</result>
+			<!-- <result name="success">view/service.jsp</result> -->
+			<result name="success">mainUI/public/customer-service-center.jsp</result>
 		</action>
 
 		<action name="bdbdate" class="com.yq.app.user.action.DateBdbAction">
-			<result name="success">view/yjcx-bdb-details.jsp</result>
+			<!-- <result name="success">view/yjcx-bdb-details.jsp</result> -->
+			<result name="success">mainUI/public/game-bdb-detail.jsp</result>
+			<result name="bdbdetail">mainUI/public/game-bdb-detail-more.jsp</result>
 		</action>
 		<action name="bybdblog" class="com.yq.app.user.action.BybdbLogAction">
-			<result name="success">view/yjcx-bybdb-details.jsp</result>
+			<!-- <result name="success">view/yjcx-bybdb-details.jsp</result> -->
+			<result name="success">mainUI/public/game-bdb-prepare.jsp</result>
 		</action>
 
 		<action name="bdbzz" class="com.yq.app.user.action.BdbZzAction" >
@@ -130,15 +152,19 @@
 		</action>
 
 		<action name="tgdown" class="com.yq.app.user.action.TgdownAction">
-			<result name="success">view/zhgl-kehu.jsp</result>
+			<!-- <result name="success">view/zhgl-kehu.jsp</result> -->
+			<result name="success">mainUI/public/account-my-customer.jsp</result>
+			<result name="tgdowndetail">mainUI/public/account-my-customer-more.jsp</result>
 		</action>
 
 		<action name="regTheSame" class="com.yq.app.user.action.RegTheSameAction">
-			<result name="success">view/zhgl-regthesame.jsp</result>
+			<!-- <result name="success">view/zhgl-regthesame.jsp</result> -->
+			<result name="success">mainUI/public/account-samename-add.jsp</result>
 		</action>
 
 		<action name="tjz" class="com.yq.app.user.action.TjzAction">
-			<result name="success">view/zhgl-tmzhgl.jsp</result>
+			<!-- <result name="success">view/zhgl-tmzhgl.jsp</result> -->
+			<result name="success">mainUI/public/account-samename-batch-transfer.jsp</result>
 		</action>
 
 		<action name="epjqks" class="com.yq.app.user.action.EpjqksAction">
@@ -159,7 +185,8 @@
 
 		<action name="userpay" class="com.yq.app.user.action.UserPayAction">
 			<!-- <result name="success">vip/userpay.jsp</result> -->
-			<result name="success">view/yblc-sales.jsp</result>
+			 <!-- <result name="success">view/yblc-sales.jsp</result> --> 
+			<result name="success">mainUI/public/eb-sale.jsp</result>
 		</action>
 
 		<action name="updateuser" class="com.yq.app.user.action.UpdateUserAction">
@@ -182,72 +209,91 @@
 			</result>
 		</action>
 		<action name="vipjzpay" class="com.yq.app.user.action.VipjzpayAction">
-			<result name="success">view/yblc-transferout.jsp</result>
+			<!-- <result name="success">view/yblc-transferout.jsp</result> -->
+			<result name="success">mainUI/public/eb-transfer.jsp</result>
 		</action>
 		<action name="ybPresent" class="com.yq.app.user.action.YbPresentAction">
-			<result name="success">view/yblc-transferout-present.jsp</result>
+			<!-- <result name="success">view/yblc-transferout-present.jsp</result> -->
+			<result name="success">mainUI/public/eb-contribution.jsp</result>
 		</action>
 		<action name="epjysc" class="com.yq.app.user.action.EphyscAction">
-			<result name="success">view/yblc-mark.jsp</result>
+			<!-- <result name="success">view/yblc-mark.jsp</result> -->
+			<result name="success">mainUI/public/eb-exchange-market.jsp</result>
+			<result name="ybmarketdetail">mainUI/public/eb-exchange-market-more.jsp</result>
 		</action>
 
 		<action name="epmcjl" class="com.yq.app.user.action.EpmcjlAction">
-			<result name="success">view/yblc-mcdetails.jsp</result>
+			<!-- <result name="success">view/yblc-mcdetails.jsp</result> -->
+			<result name="success">mainUI/public/eb-sale-detail.jsp</result>
+			<result name="mcdetail">mainUI/public/eb-sale-detail-more.jsp</result>
 		</action>
 		<action name="epmyjl" class="com.yq.app.user.action.EpmyjlAction">
-			<result name="success">view/yblc-mrdetails.jsp</result>
+			<!-- <result name="success">view/yblc-mrdetails.jsp</result> -->
+			<result name="success">mainUI/public/eb-buy-detail.jsp</result>
+			<result name="mrdetail">mainUI/public/eb-buy-detail-more.jsp</result>
 		</action>
 		<action name="qxepmc" class="com.yq.app.user.action.QxepmcAction">
 			<result name="success">vip/qxepmc.jsp</result>
 		</action>
 		<action name="epmy" class="com.yq.app.user.action.EpmyAction">
-			<result name="success">vip/epmy.jsp</result>
+			<!-- <result name="success">vip/epmy.jsp</result> -->
+			<result name="success">mainUI/public/eb-exchange-market-buy.jsp</result>
 		</action>
 
 		<action name="fbbank" class="com.yq.app.user.action.FbbankAction">
 			<result name="success">vip/fbbank.jsp</result>
 		</action>
 		<action name="myepok" class="com.yq.app.user.action.MyepokAction">
-			<result name="success">vip/myepok.jsp</result>
+			<!-- <result name="success">vip/myepok.jsp</result> -->
+			<result name="success">mainUI/public/myepok.jsp</result>
 		</action>
 		<action name="mcepok" class="com.yq.app.user.action.McepokAction">
 			<result name="input">vip/mcepok.jsp</result>
 			<result name="success">vip/mcepok.jsp</result>
 		</action>
 		<action name="jztojb" class="com.yq.app.user.action.JztobjAction">
-			<result name="success">view/yblc-buy-goldcard1.jsp</result>
+			<!-- <result name="success">view/yblc-buy-goldcard1.jsp</result>
 			<result name="suc2">view/yblc-buy-goldcard2.jsp</result>
 			<result name="suc3">view/yblc-buy-goldcard3.jsp</result>
-			<result name="suc4">view/yblc-buy-goldcard4.jsp</result>
+			<result name="suc4">view/yblc-buy-goldcard4.jsp</result> -->
+			<result name="success">mainUI/public/eb-gold-buy.jsp</result>
+			<result name="suc2">mainUI/public/eb-gold-buy-select-num.jsp</result>
+			<result name="suc3">mainUI/public/eb-gold-buy-confirm.jsp</result>
+			<result name="suc4">mainUI/public/eb-gold-buy.jsp</result>
 		</action>
 
 		<action name="vipgo" class="com.yq.app.user.action.VipgoAction">
-			<result name="input">view/jflc-recharge.jsp</result>
-			<result name="success">view/jflc-recharge-ok.jsp</result>
+			<!-- <result name="input">view/jflc-recharge.jsp</result> -->
+			<result name="input">mainUI/public/point-recharge.jsp</result>
+			<result name="success">mainUI/public/point-recharge-confirm.jsp</result>
 		</action>
 
 		<action name="bank" class="com.yq.app.user.action.BankAction">
-			<result name="success">view/zhgl-bank.jsp</result>
+			<result name="success">mainUI/public/customer-service-center-infomation.jsp</result>
 		</action>
 		<action name="cjjl" class="com.yq.app.user.action.CjjlAction">
 			<result name="success">vip/cjjl.jsp</result>
 		</action>
 		<action name="gmjh" class="com.yq.app.user.action.GmjhAction">
-			<result name="success">view/jflc-activie-goldcard.jsp</result>
+			<!-- <result name="success">view/jflc-activie-goldcard.jsp</result> -->
+			<result name="success">mainUI/public/point-gold-detail.jsp</result>
 		</action>
 
 		<action name="glfhk" class="com.yq.app.user.action.GlfhkAction">
-			<result name="success">view/jflc-activie-gold-look2.jsp</result>
-			<result name="ckpa">view/jflc-activie-gold-look.jsp</result>
+			<!-- <result name="success">view/jflc-activie-gold-look2.jsp</result> -->
+			<!-- <result name="ckpa">view/jflc-activie-gold-look.jsp</result> -->
+			<result name="ckpa">mainUI/public/point-gold-quick-activation.jsp</result>
+			<result name="success">mainUI/public/point-gold-reset-password.jsp</result>
 		</action>
 
 		<action name="czpa" class="com.yq.app.user.action.CzpaAction">
-			<result name="success">view/jflc-activie-gold-look.jsp</result>
+			<!-- <result name="success">view/jflc-activie-gold-look.jsp</result> -->
+			<result name="success">mainUI/public/point-gold-quick-activation.jsp</result>
 		</action>
 
 
 		<action name="activedGoldCard" class="com.yq.app.user.action.ActivGoldCardAction">
-			<result name="success">vip/chklogin.jsp</result>
+			<result name="success">mainUI/public/point-recharge-detail-more.jsp</result>
 		</action>
 
 		<action name="jfjqks" class="com.yq.app.user.action.JfjqksAction">
@@ -272,13 +318,8 @@
 			</result>
 		</action>
 
-		<action name="mysl" class="com.yq.app.user.action.MyslAction">
-			<result name="success">view/jflc-jfmr.jsp</result>
-			<result name="mysl2">view/jflc-jfmr-2.jsp</result>
-		</action>
-
 		<action name="qxqg" class="com.yq.app.user.action.QxqgAction">
-			<result name="success">vip/qxqg.jsp</result>
+			<result name="success">mainUI/public/point-exchange-buy-cancel.jsp</result>
 		</action>
 
 		<action name="sgqg" class="com.yq.app.user.action.SgqgAction">
@@ -286,18 +327,32 @@
 		</action>
 
 		<action name="gpjy" class="com.yq.app.user.action.GpjyAction">
-			<result name="success">view/jflc-details.jsp</result>
+			<!-- <result name="success">view/jflc-details.jsp</result> -->
+			<result name="success">mainUI/public/point-exchange-detail.jsp</result>
+			<result name="desuccess">mainUI/public/point-excharge-nodeal-detail-more.jsp</result>
 		</action>
 		
 		<action name="gpjyOfDeal" class="com.yq.app.user.action.GpjyAction" method="gpjyOfDeal">
-			<result name="success">view/dealjflc-details.jsp</result>
+			<result name="success">mainUI/public/point-excharge-deal-detail-more.jsp</result>
 		</action>
 
 		<action name="mcsl" class="com.yq.app.user.action.McslAction">
-			<result name="success">view/jflc-jfmc.jsp</result>
-			<!-- <result name="redirect" type="redirect">/mcsl</result> -->
-			<result name="mcsl2">vip/mcsl2.jsp</result>
+			<!-- <result name="success">view/jflc-jfmc.jsp</result>
+			<result name="redirect" type="redirect">/mcsl</result>
+			<result name="mcsl2">vip/mcsl2.jsp</result> -->
+			<result name="success">mainUI/public/point-exchange-sale.jsp</result>
+			<result name="mcsl2">mainUI/public/point-exchange-sale-confirm.jsp</result>
+			<result name="moredetail">mainUI/public/point-exchange-sale-detail-more.jsp</result>
 		</action>
+		
+		
+		<action name="mysl" class="com.yq.app.user.action.MyslAction">
+			<!-- <result name="success">view/jflc-jfmr.jsp</result>
+			<result name="mysl2">view/jflc-jfmr-2.jsp</result> -->
+			<result name="success">mainUI/public/point-exchange-buy.jsp</result>
+			<result name="mysl2">mainUI/public/point-exchange-buy-confirm.jsp</result>
+		</action>
+		
 
 		<action name="sggpjy" class="com.yq.app.user.action.SggpjyAction">
 			<result name="success">vip/sggpjy.jsp</result>
@@ -308,25 +363,38 @@
 		</action>
 
 		<action name="diyjygj" class="com.yq.app.user.action.DiyjygjAction">
-			<result name="success">vip/diyjygj.jsp</result>
+			<result name="success">mainUI/public/point-exchange-sale-modify.jsp</result>
 		</action>
 
 		<action name="gpjysc" class="com.yq.app.user.action.GpjyscAction">
-			<result name="success">view/jflc-mark.jsp</result>
+			<result name="success">mainUI/public/point-exchange-market.jsp</result>
 		</action>
 
-		<action name="gpjymc" class="com.yq.app.user.action.GpgymcAction">
+		<!-- <action name="gpjymc" class="com.yq.app.user.action.GpgymcAction">
 			<result name="success">vip/gpjymc.jsp</result>
 		</action>
 
 		<action name="gpjymy" class="com.yq.app.user.action.GpgymyAction">
-			<result name="success">vip/gpjymy.jsp</result>
+			<result name="success">mainUI/public/point-exchange-buy-infomation.jsp</result>
 		</action>
 		<action name="wymy" class="com.yq.app.user.action.WymrAction">
 			<result name="success">vip/wymy.jsp</result>
 		</action>
 		<action name="wymc" class="com.yq.app.user.action.WymcAction">
 			<result name="success">vip/wymc.jsp</result>
+		</action> -->
+		<action name="gpjymc" class="com.yq.app.user.action.GpgymcAction">
+			<result name="success">mainUI/public/point-exchange-sale-infomation.jsp</result>
+		</action>
+
+		<action name="gpjymy" class="com.yq.app.user.action.GpgymyAction">
+			<result name="success">mainUI/public/point-exchange-buy-infomation.jsp</result>
+		</action>
+		<action name="wymy" class="com.yq.app.user.action.WymrAction">
+			<result name="success">mainUI/public/point-i-buy.jsp</result>
+		</action>
+		<action name="wymc" class="com.yq.app.user.action.WymcAction">
+			<result name="success">mainUI/public/point-i-sale.jsp</result>
 		</action>
 
 		<action name="sms" class="com.yq.app.user.action.SmsAction">
@@ -334,7 +402,9 @@
 		</action>
 
 		<action name="vipcjb" class="com.yq.app.user.action.VipcjbAction">
-			<result name="success">view/yblc-vipcjb.jsp</result>
+			<!-- <result name="success">view/yblc-vipcjb.jsp</result> -->
+			<result name="success">mainUI/public/eb-transfer-VIP.jsp</result>
+			<result name="cjbdetail">mainUI/public/eb-transfer-VIP-more.jsp</result>
 		</action>
 
 		<action name="vipcj" class="com.yq.app.user.action.VipcjbAction"
@@ -352,12 +422,15 @@
 		</action>
 
 		<action name="hfcz" class="com.yq.app.user.action.TelPayAction">
-			<result name="success">view/xfgl-mobilecharge.jsp</result>
+			<!-- <result name="success">view/xfgl-mobilecharge.jsp</result> -->
+			<result name="success">mainUI/public/expense-telephone-fare-recharge.jsp</result>
 		</action>
 
 		<action name="baby" class="com.yq.app.user.action.BabyAction">
-			<result name="success">view/xfgl-baby.jsp</result>
-			<result name="input">view/xfgl-baby.jsp</result>
+			<!-- <result name="success">view/xfgl-baby.jsp</result>
+			<result name="input">view/xfgl-baby.jsp</result> -->
+			<result name="success">mainUI/public/expense-eloquence-training-camp.jsp</result>
+			<result name="input">mainUI/public/expense-eloquence-training-camp.jsp</result>
 		</action>
 		<action name="checkUserName" class="com.yq.app.user.action.CheckUserNameAction">
 			<result name="success" type="json">

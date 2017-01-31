@@ -12,6 +12,7 @@ public class GpjyAction extends ALDAdminPageActionSupport<Gpjy> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int status;
 	@ProblemCode
 	public String execute(){
 		
@@ -32,6 +33,11 @@ public class GpjyAction extends ALDAdminPageActionSupport<Gpjy> {
 		 */
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		super.initPage(userService.getAllNoDealGpjyPageList(super.getUserName(), super.getToPage(), 12));
+		if(status==2){
+			return "desuccess";
+		}
+		
+		
 		return SUCCESS;
 		
 	}
@@ -42,6 +48,16 @@ public class GpjyAction extends ALDAdminPageActionSupport<Gpjy> {
 		super.initPage(userService.getAllGpjyPageList(super.getUserName(), super.getToPage(), 12));
 		return SUCCESS;
 		
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }
