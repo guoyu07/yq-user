@@ -45,6 +45,9 @@ public class Sgks01Action extends ALDAdminActionSupport {
 	private Sgxt sgxtbba;
 	private Sgxt sgxtbbb;
 
+	
+	private int status;
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
@@ -140,10 +143,29 @@ public class Sgks01Action extends ALDAdminActionSupport {
 			
 		}
 		
+		if(status==1){
+			return "detail";
+		}
 		
 		
 		return SUCCESS;
 	}
+
+	
+	
+
+	public int getStatus() {
+		return status;
+	}
+
+
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+
 
 
 	public String getMyup() {
