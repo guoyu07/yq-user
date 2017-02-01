@@ -1310,5 +1310,13 @@ public class GcuserDao {
 		parameter.setString(idCard);
 		return this.jdbc.update(strBuffer.toString(), parameter)>0;
 	}
+
+	public List<Gcuser> getList(String name, String userid) {
+		String sql = "select * from "+table+" where userid=? and name=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(userid);
+		parameter.setString(name);
+		return this.jdbc.getList(sql,Gcuser.class, parameter);
+	}
 	
 }

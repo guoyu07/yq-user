@@ -29,6 +29,10 @@
 			<result name="success">mainUI/public/account-list.jsp</result>
 			<result name="detail">mainUI/public/account-list-more.jsp</result>
 		</action>
+		<action name="getuserlist" class="com.yq.app.user.action.UserListAction" method="getuserlist">
+			<result name="success" type="json"></result>
+		</action>
+		
 		<action name="relogin" class="com.yq.app.user.action.ReLoginAction">
 			<result name="success" type="redirect">${redirectBaseUrl}/manager</result>
 		</action>

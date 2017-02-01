@@ -18,7 +18,7 @@ public class UserListAction extends ALDAdminPageActionSupport<Gcuser> {
 	
 	private Gcuser gcuser;
 	
-	
+	private List<String> userList;
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
@@ -26,6 +26,12 @@ public class UserListAction extends ALDAdminPageActionSupport<Gcuser> {
 		super.initPage(dataPage);
 		return SUCCESS;
 	}
+	public String getuserlist(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		userList = userService.getUserNameList(super.getUserName());
+		return SUCCESS;
+	}
+	
 	public Gcuser getGcuser(){
 		return gcuser;
 	}
@@ -35,4 +41,12 @@ public class UserListAction extends ALDAdminPageActionSupport<Gcuser> {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public List<String> getUserList() {
+		return userList;
+	}
+	public void setUserList(List<String> userList) {
+		this.userList = userList;
+	}
+	
+	
 }

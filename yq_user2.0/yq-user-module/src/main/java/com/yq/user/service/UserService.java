@@ -1,5 +1,6 @@
 package com.yq.user.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -5595,5 +5596,15 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 
 	public List<UserScoresLog> getUserScoresLogByMallOrderList(String userName, String orderId) {
 		return userScoresLogDao.getUserScoresLogByMallOrderList(userName, orderId);
+	}
+
+	public List<String> getUserNameList(String userName) {
+		Gcuser gcuser= gcuserDao.getUser(userName);
+		List<Gcuser> list= gcuserDao.getList(gcuser.getName(), gcuser.getUserid());
+		List<String> result= new ArrayList<>();
+		for (Gcuser gcuser2 : list) {
+			result.add(gcuser2.getUsername());
+		}
+		return result;
 	}
 }
