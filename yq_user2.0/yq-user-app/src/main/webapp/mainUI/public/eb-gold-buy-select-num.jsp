@@ -17,7 +17,7 @@
 <body> 
 <!-- 通用头部 -->
 <div class="header" id="J_header">
-  <<%@ include file="/mainUI/common/head.jsp" %>
+  <%@ include file="/mainUI/common/head.jsp" %>
 <!-- 通用头部 end -->
  
 <!-- 会员中心导航模块 -->

@@ -19,20 +19,25 @@
     </div>
     <div class="head-info">
       <div class="user-info">
-        <p>
+        <div class="user-info-wrap">
           <span>同名ID</span>
-          <select class="select-id" id="J_headerSameNameIdSelect" name="nameIdSelect">
-	          <option value="william1">william1</option>
-	          <option value="william2">william2</option>
-	          <option value="william123">william123</option>
-          </select>
+          <%-- <select class="select-id" id="J_headerSameNameIdSelect" name="nameIdSelect">
+          <option value="<%=gcuserHead.getUsername()%>"><%=gcuserHead.getUsername()%></option>
+	         <!--  <option value="william1">william1</option> -->
+	          <<!-- option value="william2">william2</option>
+	          <option value="william123">william123</option> -->
+          </select> --%>
+          <div class="select-id" id="J_headerSameNameIdSelect" name="nameIdSelect" title="<%=gcuserHead.getUsername()%>">
+          <p class="user-name"><span id="J_userName"><%=gcuserHead.getUsername()%></span></p>
+          <div class="select-id-list" id="J_headerSameNameIdList"></div>
+          </div>
           <span>当前可用一币：</span><em><%=gcuserHead.getPay()%></em>
           <span>累计交易一币：</span>
           <em><%=gcuserHead.getCbpay()%></em>
           <span>累计使用一币：</span>
           <em><%=gcuserHead.getTxpay()%></em>
           <span class="logout"><a href="/logout?type=1">退出登录</a></span>
-        </p>
+      	</div>
       </div>
       <div class="nav">
         <ul class="list">
