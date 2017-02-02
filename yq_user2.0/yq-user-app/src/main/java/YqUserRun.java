@@ -23,10 +23,10 @@ public class YqUserRun {
 		server.setStopAtShutdown(true);
 		return server;
 	}
-	
+	/*
 	public static void smsSend(){
 		Map<String,String> param = new HashMap<String,String>();
 		param.put("code", "1234567");
 		SubMailSendUtils.sendMessage("15919820372", "aGTtt3", param);
-	}
+	}*/
 }
