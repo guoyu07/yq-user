@@ -20,7 +20,7 @@
     <import resource="applicationContext-jdbc.xml" />
     
     <!-- 每日 1分钟执行一次重试发送-->
-   <!--  <bean id="sendCallBackScheduler" class="com.yq.user.scheduler.SendChargeMsgScheduler">
+    <bean id="sendCallBackScheduler" class="com.yq.user.scheduler.SendChargeMsgScheduler">
           <property name="cronExpression" value="0 0/1 * * * ?"></property>
-   </bean> -->
+   </bean>
 </beans>
