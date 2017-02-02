@@ -17,6 +17,8 @@ public class TgdownAction extends ALDAdminPageActionSupport<Gcuser> {
 	
 	private String upName;
 	
+	private int status;
+	
 	public String execute(){
 		
 		UserService userService  = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -26,7 +28,19 @@ public class TgdownAction extends ALDAdminPageActionSupport<Gcuser> {
 		upName = up.getName().substring(0, 1);
 		super.initPage(userService.getMyDownUserPage(super.getUserName(), super.getToPage(), 10));
 		
+		if(status==1){
+			return "tgdowndetail";
+		}
+		
 		return SUCCESS;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public Gcuser getUp() {
