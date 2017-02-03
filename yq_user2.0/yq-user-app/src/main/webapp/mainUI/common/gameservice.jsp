@@ -60,9 +60,9 @@ function bdbcz(){
 
 </script>
   <div class="point-info">
-    <p class="title">积分理财</p>
+    <p class="title">业绩查询</p>
     <ul class="list">
-      <li class="selected"><a href="sgks01">游戏业务</a></li>
+      <li><a href="sgks01">游戏业务</a></li>
       <p>游戏级别<em><%=yjcxGcuser.getSjb()%></em></p>
       <p>报单币余额<em><%=yjcxGcuser.getSybdb()%></em></p>
       

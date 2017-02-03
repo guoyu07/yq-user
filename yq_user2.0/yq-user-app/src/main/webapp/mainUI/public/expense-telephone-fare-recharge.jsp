@@ -45,7 +45,7 @@
   <%@ include file="/mainUI/common/userLeft.jsp" %>
   <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
   <div class="point-info">
-    <p class="title">话费管理</p>
+    <p class="title">消费管理</p>
     <ul class="list">
       <%@ include file="/mainUI/common/xfgl2.jsp" %>
     </ul>

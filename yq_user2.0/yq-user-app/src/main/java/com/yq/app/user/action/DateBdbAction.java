@@ -15,6 +15,8 @@ public class DateBdbAction extends ALDAdminPageActionSupport<Bdbdate> {
 	private static final long serialVersionUID = 1L;
 	
 	private int type;
+	
+	private int status;
 	public String execute(){
 		
 		@ProblemCode
@@ -107,8 +109,20 @@ public class DateBdbAction extends ALDAdminPageActionSupport<Bdbdate> {
 		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(),type, super.getToPage(), 10);
 		super.initPage(page);
 		super.setErroCodeNum(2000);
+		if(status==1){
+			return "bdbdetail";
+		}
 		return SUCCESS;
 	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public int getType() {
 		return type;
 	}
