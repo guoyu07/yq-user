@@ -1976,10 +1976,10 @@ public class UserService {
         if(gcuser.getTxlb()==3||gcuser.getJb()==5){
             throw new ServiceException(8,"商户或商家账号不能卖出一币！");
 		}
-        Sgxt sgxtUser = sgxtDao.get(userName);
-        if(sgxtUser==null){
-        	return;
-        }
+//        Sgxt sgxtUser = sgxtDao.get(userName);
+//        if(sgxtUser==null){
+//        	return;
+//        }
         boolean isCanGetPrice = false;
         //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分 及指定身份证号码
 //		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
