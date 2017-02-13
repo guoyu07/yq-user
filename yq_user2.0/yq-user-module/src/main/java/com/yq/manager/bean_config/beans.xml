@@ -27,5 +27,7 @@
        <bean id="pointsChangeLogDao" class="com.yq.manager.dao.PointsChangeLogDao"></bean>
        
         <bean id="userVipLogDao" class="com.yq.manager.dao.UserVipLogDao"></bean>
+        
+        <bean id="zq2016statDao" class="com.yq.manager.dao.Zq2016statDao"></bean>
 
 </beans>

@@ -19,12 +19,12 @@ public class UserPerformanceDao {
     
     public List<UserPerformance> getListPage(String date){
     	
-    	String sql = "select * from "+table+" where add_time='"+date+"'";
+    	String sql = "select * from "+table+" where add_time='"+date+"' order by step desc";
     	return jdbc.getList(sql, UserPerformance.class, null);
     }
     
-    public void removeAll(){
-    	String sql = "delete from "+table;
+    public void removeAll(String date){
+    	String sql = "delete from "+table+" where add_time='"+date+"'";
     	jdbc.update(sql, null);
     }
 }

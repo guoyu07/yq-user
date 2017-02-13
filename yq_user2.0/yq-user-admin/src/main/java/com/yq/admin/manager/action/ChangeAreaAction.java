@@ -16,7 +16,7 @@ public class ChangeAreaAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.changeArea(diyid, sjid);
+		adminService.changeArea(diyid, sjid, super.getUserName());
 		super.setErroCodeNum(201);
 		return SUCCESS;
 	}

@@ -53,7 +53,7 @@ function checkdate1()  {
 		</tr>
 		<tr>
 			<td width="253" align="right"><s:text name='vipmcepok.jsp.mcepok.jsp.724813892'/>：</td>
-			<td width="403" align="left" colspan="2">${txpay.paynum*0.9}</td>
+			<td width="403" align="left" colspan="2">${txpay.paynum9}</td>
 		</tr>
 		<tr>
 			<td width="253" align="right"><s:text name='vipmcepok.jsp.mcepok.jsp.630954966'/>：</td>

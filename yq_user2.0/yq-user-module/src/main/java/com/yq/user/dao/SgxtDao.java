@@ -85,12 +85,10 @@ public class SgxtDao {
 	 * @param count 左区所在层数
 	 * 
 	 * */
-	public boolean updateZfiled(String userName,String filedName,int filedValue,int dqzuo,int count){
-		String sql = "update "+table+" set "+filedName+"=?,dqzuo=?,count=? where username=?";
+	public boolean updateZOrYfiled(String userName,String filedName,int filedValue){
+		String sql = "update "+table+" set "+filedName+"=? where username=?";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(filedValue);
-		parameter.setInt(dqzuo);
-		parameter.setInt(count);
 		parameter.setString(userName);
 		return jdbc.update(sql, parameter)>0;
 	}
@@ -111,15 +109,15 @@ public class SgxtDao {
 	 * 
 	 * */
 	
-	public boolean updateYfiled(String userName,String filedName,int filedValue,int dqyou,int count){
-		String sql = "update "+table+" set "+filedName+"=?,dqyou=?,count=? where username=?";
-		SqlParameter parameter = new SqlParameter();
-		parameter.setInt(filedValue);
-		parameter.setInt(dqyou);
-		parameter.setInt(count);
-		parameter.setString(userName);
-		return jdbc.update(sql, parameter)>0;
-	}
+//	public boolean updateYfiled(String userName,String filedName,int filedValue,int dqyou,int count){
+//		String sql = "update "+table+" set "+filedName+"=?,dqyou=?,count=? where username=?";
+//		SqlParameter parameter = new SqlParameter();
+//		parameter.setInt(filedValue);
+//		parameter.setInt(dqyou);
+//		parameter.setInt(count);
+//		parameter.setString(userName);
+//		return jdbc.update(sql, parameter)>0;
+//	}
 	
 	
 	public boolean updateZaq(String userName,int zaq){

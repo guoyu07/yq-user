@@ -31,6 +31,9 @@ import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.Global;
 import com.yq.common.utils.IDCardUtils;
 import com.yq.common.utils.MD5Security;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.dao.AdminOperateLogDao;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.BabyInfo;
 import com.yq.user.bo.Bdbdate;
@@ -177,6 +180,8 @@ public class UserService {
 	private UserPropertyDao userPropertyDao;
 	@Autowired
 	private SameUserPropertyDao sameUserPropertyDao;
+	@Autowired
+	private AdminOperateLogDao adminOperateLogDao;
     
   //用户id与UserMapper的映射map
 //  	private Cache<String,Session> userSession = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(20000).build();
@@ -843,7 +848,7 @@ public class UserService {
 	 * @param kjqi
 	 * @return
 	 */
-	public boolean changeYbCanFu(String username,int changeNum,String desc,int newzBz,Integer kjqi){
+	public boolean changeYbCanFu(String username,int changeNum,String desc,int newzBz,Integer kjqi, String oparetor){
 		boolean result = false;
 		if(changeNum<0){
 			result = gcuserDao.reduceYbCanFu(username, changeNum*-1);
@@ -854,7 +859,7 @@ public class UserService {
 				datePay.setJc(changeNum*-1);
 				datePay.setPay(gcuser.getPay());
 				datePay.setJydb(gcuser.getJydb());
-				datePay.setRegid("消费一币("+desc+")");
+				datePay.setRegid("消费一币("+desc+")---操作者："+oparetor);
 				datePay.setNewbz(newzBz);
 				if(kjqi!=null){
 					datePay.setKjqi(kjqi);
@@ -873,7 +878,7 @@ public class UserService {
 				datePay.setSyjz(changeNum);
 				datePay.setPay(gcuser.getPay());
 				datePay.setJydb(gcuser.getJydb());
-				datePay.setRegid(desc);
+				datePay.setRegid(desc+"---操作者："+oparetor);
 				datePay.setNewbz(newzBz);
 				datePay.setAbdate(new Date());
 				datePay.setOrigintype(YbChangeType.SYSTEM_CONSUMEYB_ADD);
@@ -1189,7 +1194,7 @@ public class UserService {
 					int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());//得到明细的sjb的总和
 					if(sjtjzb>0){
 						if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
-							sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());
+							sgxtDao.updateZOrYfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb);
 						}
 					}
 				}
@@ -1201,7 +1206,7 @@ public class UserService {
 					int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
 					if(sjtjzb>0){
 						if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-							sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
+							sgxtDao.updateZOrYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb);
 						}
 					}
 				}
@@ -1498,7 +1503,7 @@ public class UserService {
 	 * @param amount
 	 */
 	@Transactional
-	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,String remark){
+	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,String remark, String oparetor){
 		
 		if(!"zbdb8989".equals(oppass)){
 			throw new ServiceException(6, "操作密码不正确！");
@@ -1524,6 +1529,9 @@ public class UserService {
 		if(to==null){
 			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
 		}
+		 AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_BDBZZ,"转出用户："+fromUser+"转入用户："+toUser+"数量："+amount);
+		 adminOperateLogDao.addLog(log);
+		
 		if("转错".equals(remark)){
 			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_REDUCE)){
 				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
@@ -1546,6 +1554,8 @@ public class UserService {
 			
 			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_DEPOSIT_ADD);
 		}
+		
+		
 		
 	}
 	
@@ -1913,7 +1923,7 @@ public class UserService {
     private static final long endLimitTime = DateUtils.StringToDate("2016-6-30 23:59:59", "yyyy-MM-dd HH:mm:ss").getTime();
 	
     //以下身份证号码 也只能体现奖金金额  不能体现其他
-    private String FORBIDDEN_ID_CARD = "330726197208232522，130627198306226028，522132198106124949，330725197506072727，331081198202260778，330726197501111148，330721198308316312，620403195406020028，330726197006042528，362325197202081910，450204198003071506，330323197202167124，330325198004277629，33252319750516402x，332623194702070032，330726194205242510，330726198012211126，330725198109043935";
+    private String FORBIDDEN_ID_CARD = "";
 	@Transactional
 	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
 		
@@ -1967,32 +1977,32 @@ public class UserService {
         if(gcuser.getTxlb()==3||gcuser.getJb()==5){
             throw new ServiceException(8,"商户或商家账号不能卖出一币！");
 		}
-        Sgxt sgxtUser = sgxtDao.get(userName);
-        if(sgxtUser==null){
-        	return;
-        }
+//        Sgxt sgxtUser = sgxtDao.get(userName);
+//        if(sgxtUser==null){
+//        	return;
+//        }
         boolean isCanGetPrice = false;
         //南京vip 下面的用户   只能提现奖金部分  不能体现其他部分 及指定身份证号码
-		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
-			boolean isSkip = false;
-			for(String skipUser:SKIL_USERS){
-				if(userName.equals(skipUser)){
-					isSkip = true;
-					break;
-				}
-			}
-			
-			if(sgxtUser.getBddate().getTime()<startLimitTime||sgxtUser.getBddate().getTime()>endLimitTime){
-				isSkip = true;
-			}
-			if(!isSkip){
-				isCanGetPrice = true;
-			}
-		}
+//		if(userName.equals(FORBIDDEN_USERS)||zuoMingxiDao.get(FORBIDDEN_USERS, userName)!=null||youMingXiDao.get(FORBIDDEN_USERS, userName)!=null){
+//			boolean isSkip = false;
+//			for(String skipUser:SKIL_USERS){
+//				if(userName.equals(skipUser)){
+//					isSkip = true;
+//					break;
+//				}
+//			}
+//			
+//			if(sgxtUser.getBddate().getTime()<startLimitTime||sgxtUser.getBddate().getTime()>endLimitTime){
+//				isSkip = true;
+//			}
+//			if(!isSkip){
+//				isCanGetPrice = true;
+//			}
+//		}
 		//某些身份证号码只能提现奖金部分
-		if(FORBIDDEN_ID_CARD.indexOf(gcuser.getUserid())!=-1){
-			isCanGetPrice = true;
-		}
+//		if(FORBIDDEN_ID_CARD.indexOf(gcuser.getUserid())!=-1){
+//			isCanGetPrice = true;
+//		}
 		
 		if(isCanGetPrice){
 			int prizeYb = gcuser.getJbpay()+gcuser.getJjpay()+gcuser.getJypay();
@@ -5118,6 +5128,27 @@ public class UserService {
 		}
 		return "xtgc001";
 	}
+	/**
+	 * 寻找大vip
+	 * @param userName
+	 * @return
+	 */
+	public String findMyBigUpVipName(String userName) {
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
+		if (sgxtBd != null) {
+			if (sgxtBd.getVip() == 1) {
+				Gcuser gcuser = gcuserDao.getUser(sgxtBd.getUsername());
+				if(gcuser.getVip()==2){
+					return gcuser.getUsername();
+				}else{
+					return findMyBigUpVipName(sgxtBd.getUsername());
+				}
+			} else {
+				return findMyBigUpVipName(sgxtBd.getUsername());
+			}
+		}
+		return "xtgc001";
+	}
 	
 	
 	@Transactional
@@ -5464,6 +5495,7 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 
    @Transactional
    public void chargeBdbByBigVip(String userName,String pa3,String toUser){
+	   
 	   int czb = 5000;
 	   int byBdb = 22200;
 	   int yb = 22800;

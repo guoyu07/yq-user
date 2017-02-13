@@ -70,6 +70,7 @@
         <!-- 同名账户玩家属性 -->
        <bean id="sameUserProperty" class="com.yq.user.dao.SameUserPropertyDao"></bean>
        
+       <bean id="adminOperateLogDao" class="com.yq.manage.dao.AdminOperateLogDao"></bean>
        
        <!-- 用户数据service -->
        <bean id="userService" class="com.yq.user.service.UserService"></bean>

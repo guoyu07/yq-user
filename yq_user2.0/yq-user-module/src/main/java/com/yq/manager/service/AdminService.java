@@ -49,6 +49,7 @@ import com.yq.manager.bo.PmmltBean;
 import com.yq.manager.bo.PointsChangeLog;
 import com.yq.manager.bo.UserVipLog;
 import com.yq.manager.bo.W10Bean;
+import com.yq.manager.bo.Zq2016stat;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
@@ -56,6 +57,7 @@ import com.yq.manager.dao.MtfhtjDao;
 import com.yq.manager.dao.PointsChangeLogDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.manager.dao.UserVipLogDao;
+import com.yq.manager.dao.Zq2016statDao;
 import com.yq.user.bean.TopReward;
 import com.yq.user.bo.AbsModifyUserLog;
 import com.yq.user.bo.Addsheng;
@@ -193,6 +195,8 @@ public class AdminService {
 	private AdminOperateLogDao adminOperateLogDao;
 	@Autowired
 	private ManageUserDao manageDao;
+	@Autowired
+	private Zq2016statDao zq2016statDao;
 	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -483,6 +487,8 @@ public class AdminService {
 		
 		modifyUserLogDao.add(modifyUserLog);
 		
+		 AdminOperateLog log= new AdminOperateLog(operator,"", new Date(), AdminGlobal.OP_MODIFYVIP, "修改资料"+userName);
+		 adminOperateLogDao.addLog(log);
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
 			//写身份证和名字修改日志
@@ -911,8 +917,16 @@ public class AdminService {
 	 * @param userName
 	 * @param sjid
 	 */
-	public void changeArea(String userName,int sjid){
+	public void changeArea(String userName,int sjid, String oparetor){
 		gcuserDao.updateGwuid(userName, sjid);
+		AdminOperateLog log=null;
+		if(sjid==0){
+			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成国内玩家");
+		}
+		if(sjid==1){
+			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成海外玩家");
+		}
+		adminOperateLogDao.addLog(log);
 	}
 	
 	@Transactional
@@ -1482,7 +1496,7 @@ public class AdminService {
 	 * @param userName
 	 * @param addAmount
 	 */
-	public void addVipcjb(String userName,int addAmount){
+	public void addVipcjb(String userName,int addAmount, String oparetor){
 //		if(addAmount<1000||addAmount%1000!=0){
 //			throw new ServiceException(1, "充值必须是1000的倍整数如：2000，3000，4000，5000，6000，7000，8000，请检查输入是否正确！");
 //		}
@@ -1500,6 +1514,8 @@ public class AdminService {
                 vipcjgl.setBz("入账");
                 vipcjgl.setCjdate(new Date());
                 vipcjglDao.add(vipcjgl);
+        		AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_VIPCZJ, userName+"入账："+addAmount);
+        		adminOperateLogDao.addLog(log);
             }
         }else{
             if(gcuserDao.reduceVipcjcjb(userName, addAmount*-1)){
@@ -1511,6 +1527,8 @@ public class AdminService {
                 vipcjgl.setBz("扣除");
                 vipcjgl.setCjdate(new Date());
                 vipcjglDao.add(vipcjgl);
+                AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_VIPCZJ, userName+"扣除："+addAmount);
+        		adminOperateLogDao.addLog(log);
             }
         }
 	}
@@ -1635,7 +1653,7 @@ public class AdminService {
 				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
 				if(sjtjzb>0){
 					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
-						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb-sjb,zuoMingxi.getCount());
+						sgxtDao.updateZOrYfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb);
 					}
 				}
 			}
@@ -1647,11 +1665,14 @@ public class AdminService {
 				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
 				if(sjtjzb>0){
 					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb-sjb,youMingxi.getCount());
+						sgxtDao.updateZOrYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb);
 					}
 				}
 			}
 		}
+
+        
+        
 		List<Bdbdate> logList = Lists.newArrayList();
 		userService.CalculateQ(bduser, sjb, bduser,logList);
 		bdbDateDao.batchInsert(logList);
@@ -2100,8 +2121,8 @@ public class AdminService {
 	
 	private List<YouMingxi> yList = Lists.newArrayList();
 	private List<ZuoMingxi> zList = Lists.newArrayList();
-	private final String Y_FILE_NAME = "D://temp//youmingxi.sql";
-	private final String Z_FILE_NAME = "D://temp//zuomingxi.sql";
+	private final String Y_FILE_NAME = "//Users//dogdog//Desktop//data//youmingxi.sql";
+	private final String Z_FILE_NAME = "//Users//dogdog//Desktop//data//zuomingxi.sql";
 	public void resetUserDownInfo(){
 		long allStartTime = System.currentTimeMillis();
 		LogSystem.info("开启重置z y明细表功能---");
@@ -2315,7 +2336,7 @@ public class AdminService {
 		}
 	}
 	
-	public boolean callRemoteCharge(String call,int amount,String ip,String userName){
+	public boolean callRemoteCharge(String call,int amount,String ip,String userName, String oparetor){
 		LogSystem.info("手动--用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】");
 		_99douInterface _99dou = new _99douInterface();
 		String out_trade_id = userName+"-"+DateUtils.DateToString(new Date(),DateStyle.YYYY_MM_DD_HH_MM_SS_EN);
@@ -2334,6 +2355,8 @@ public class AdminService {
 			throw new ServiceException(100, "充值话费失败！稍后再试");
 		}
         LogSystem.info("话费充值返回 :"+result+" 消息:"+msg);
+        AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_MOBILEFEE, userName+":手机号："+call+"充值："+amount);
+		adminOperateLogDao.addLog(log);
         if(result==0){//成功
         	return true;
         }
@@ -2710,6 +2733,28 @@ public class AdminService {
 		return gcuserDao.getUserSigleSumSjbByTime(userName,gcuser.getUserid(), startTime, endTime);
 	}
 	/**
+	 * 获取用户下 所有同名账号的个人业绩总和
+	 * @param userName
+	 * @param startTime
+	 * @param endTime
+	 * @return
+	 */
+	private int getMyAllUserThisYearSignlePerformance(String userName,String startTime,String endTime){
+		if(startTime!=null&&endTime!=null){
+			startTime = startTime + " 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		List<Gcuser> list = gcuserDao.getUserByIdCard(gcuser.getUserid());
+		int result = 0;
+		if(list!=null&&list.size()>0){
+			for(Gcuser gc:list){
+				result = result + gcuserDao.getUserSigleSumSjbByTime(gc.getUsername(),gc.getUserid(), startTime, endTime);
+			}
+		}
+		return result;
+	}
+	/**
 	 * 个人总业绩查询
 	 * @param userName
 	 * @param startYear
@@ -2747,6 +2792,8 @@ public class AdminService {
 		UserPerformanceSearch result = new UserPerformanceSearch();
 		result.setSigleAllPerformance(getUserThisYearSiglePerformance(userName, null, null));
 		result.setSigleTimeAllPerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
+		result.setMyAllSigleAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  null, null));
+		result.setMyAllSignleTimeAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  startTime, endTime));
 		startTime = startTime + " 00:00:00";
 		endTime = endTime + " 23:59:59";
 		result.setFiveLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, null, null,5));
@@ -2974,37 +3021,198 @@ public class AdminService {
 	
 	public List<UserPerformance> getUserPerformancePage(){
 //		return userPerformanceDao.getListPage(time, pageIndex, pageSize);
-		Date end = DateUtils.StringToDate("2016-01-02 00:00:00", DateStyle.YYYY_MM_DD_HH_MM_SS);
-		String d = DateUtils.getDate(new Date());
-		if(new Date().getTime()>end.getTime()){
-			d = "2016-01-01";
-		}
+		String d = "2017-01-01";
 		List<UserPerformance> searchs = userPerformanceDao.getListPage(d);
+//		if(searchs!=null&&searchs.size()>0){
+//			return searchs;
+//		}
+		String startTime = "2016-01-01 00:00:00";
+		String endTime =  "2016-12-31 23:59:59";
 		
-		
-		if(searchs!=null&&searchs.size()>0){
-			return searchs;
-		}
-		String startTime = "2015-01-01 00:00:00";
-		String endTime =  "2015-12-31 23:59:59";
-		List<TopReward> list = gcuserDao.getUserTopReward(startTime);
-		if(list!=null&&list.size()>0){
-			for(TopReward tr:list){
-				UserPerformance t = getUserPerformanceBO(tr.getUp(),startTime, endTime);
+		//如果数据库中没有数据则进行查询
+		if(searchs==null||searchs.size()==0){
+			List<Zq2016stat> list = zq2016statDao.getAll();//获取所有小区业绩高于500万的用户
+			for(Zq2016stat zq:list){
+				UserPerformance t = getUserPerformanceBO(zq.getUserName(),startTime, endTime,d);
 				if(t!=null){
 					searchs.add(t);
 				}
 			}
-			userPerformanceDao.removeAll();
-			userPerformanceDao.insert(searchs);
+		}else{
+			if(searchs.get(0).getStep()>0){
+				return searchs;
+			}
 		}
+
+		for(UserPerformance search:searchs){
+			search.setId(null);
+			search.resetDescription();
+		}
+			//开始分析获得的奖品
+			//筛选出满足前三个条件获取蒙迪欧的用户
+			int W = 10000;
+			LogSystem.info("开始蒙迪欧循环");
+			//蒙迪欧循环
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 50*W, 1000*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=2){
+								search.setStep(1);
+								search.setDescription("达到蒙迪欧需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					if(search.getStep()!=1){
+						String dStr = "升级蒙迪欧失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			
+			
+			
+			LogSystem.info("蒙迪欧循环结束");
+			//探险者循环
+			LogSystem.info("开始探险者循环");
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 100*W, 3600*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())&&search2.getStep()>=1){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=2){
+								search.setStep(2);
+								search.setDescription("达到探险者需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					
+					if(search.getStep()!=2){
+						String dStr = "升级探险者失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			LogSystem.info("探险者循环结束");
+			
+			//保时捷循环
+			LogSystem.info("开始保时捷循环");
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 150*W, 5000*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())&&search2.getStep()>=2){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=3){
+								search.setStep(3);
+								search.setDescription("达到保时捷需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					
+					if(search.getStep()!=3){
+						String dStr = "升级保时捷失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			LogSystem.info("保时捷循环结束");
+			
+			//小洋房循环
+			LogSystem.info("开始小洋房循环");
+			for(UserPerformance search:searchs){
+				if(conditionC(search)&&conditionD(search, 200*W, 25000*W)){
+					int num = 0;
+					String description = "";
+					for(UserPerformance search2:searchs){
+						if(!search2.getUserName().equals(search.getUserName())&&search2.getStep()>=3){
+							if(zuoMingxiDao.get(search.getUserName(), search2.getUserName())!=null||youMingXiDao.get(search.getUserName(), search2.getUserName())!=null){
+								description = description+","+search2.getUserName();
+								num++;
+							}
+							if(num>=5){
+								search.setStep(4);
+								search.setDescription("达到小洋房需要的团队下2个用户："+description);
+								break;
+							}
+						}
+					}
+					if(search.getStep()!=4){
+						String dStr = "升级小洋房失败-团队下用户达到上一级奖励数量为:"+num+",分别为["+description+"]";
+						search.setDescription(dStr);
+					}
+				}
+			}
+			LogSystem.info("小洋房循环结束");
+			userPerformanceDao.removeAll(d);
+			userPerformanceDao.insert(searchs);
 		return searchs;
 	}
 	
-	public UserPerformance getUserPerformanceBO(String userName,String startTime,String endTime){
+	/**
+	 * 5层布满通用条件
+	 * @param u
+	 * @return
+	 */
+	private boolean conditionC(UserPerformance u){
+		if(u.getFu()==0){
+			u.setDescription("未满5层");
+			return false;
+		}
+		if((u.getFiveLeftPerformance()+u.getFiveRightPerformance())*500<620000){
+			u.setDescription("5层业绩未超过62w");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean conditionD(UserPerformance u,int d1,int d3){
+		int d1t = d1/500;
+		int d3t = d3/500;
+		if(u.getSigleTimeTheSameuserAllPerformance()<d1t){
+			u.setDescription("直推业绩未满"+d1);
+			return false;
+		}
+		if(Math.min(u.getAllTimeLeftPerformance(), u.getAllTimeRightPerformance())<d3t){
+			u.setDescription("小区业绩未满"+d3);
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean condition3(UserPerformance u,List<UserPerformance> searchs){
+		return false;
+	}
+	
+	private boolean condition4(UserPerformance u,List<UserPerformance> searchs){
+		return false;
+	}
+	
+	public UserPerformance getUserPerformanceBO(String userName,String startTime,String endTime,String d){
+		Date geDate = DateUtils.StringToDate(d, DateStyle.YYYY_MM_DD);
 		UserPerformance result = new UserPerformance();
 		result.setSigleAllPerformance(getUserThisYearSiglePerformance(userName, null, null));
 		result.setSigleTimeAllPerformance(getUserThisYearSiglePerformance(userName, startTime, endTime));
+		result.setSigleTheSameuserAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  null, null));
+		result.setSigleTimeTheSameuserAllPerformance(getMyAllUserThisYearSignlePerformance(userName,  startTime, endTime));
 //		startTime = startTime + " 00:00:00";
 //		endTime = endTime + " 23:59:59";
 		result.setFiveLeftPerformance(zuoMingxiDao.getZUserAllPerformanceByTime(userName, null, null,5));
@@ -3018,10 +3226,12 @@ public class AdminService {
 		result.setAllTimeRightPerformance(youMingXiDao.getYUserAllPerformanceByTime(userName, startTime, endTime,0));
 		boolean isfivefull = isFiveStepFull(userName);
 		result.setFu(isfivefull?1:0);
-		result.setAddTime(new Date());
+		result.setAddTime(geDate);
 		result.setUserName(userName);
 		return result;
 	}
+	
+
 	
 	
 	public void setVerifile(String userName,int verify){
@@ -3206,29 +3416,42 @@ public class AdminService {
 	 * @return
 	 * */
 	public String resetUserAchivement(String guser) {
-		List<ZuoMingxi> zList = zuoMingxiDao.getTjuserList(guser);
-		if(zList!=null&&!zList.isEmpty()){
-			for(ZuoMingxi zuoMingxi:zList){
-				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
-				if(sjtjzb>0){
-					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
-						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb,zuoMingxi.getCount());
-					}
-				}
-			}
-		}
-		List<YouMingxi> yList = youMingXiDao.getTjuserList(guser);
-		if(yList!=null&&!yList.isEmpty()){
-			for(YouMingxi youMingxi:yList){
-				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
-				if(sjtjzb>0){
-					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
-						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb,youMingxi.getCount());
-					}
-				}
-			}
-		}
+//		List<ZuoMingxi> zList = zuoMingxiDao.getTjuserList(guser);
+//		if(zList!=null&&!zList.isEmpty()){
+//			for(ZuoMingxi zuoMingxi:zList){
+//				int sjtjzb = zuoMingxiDao.getSumSjb(zuoMingxi.getTjuser(), zuoMingxi.getCount());
+//				if(sjtjzb>0){
+//					if(zuoMingxi.getCount()>0&&zuoMingxi.getCount()<=16){
+//						sgxtDao.updateZfiled(zuoMingxi.getTjuser(), "z"+zuoMingxi.getCount(), sjtjzb,sjtjzb,zuoMingxi.getCount());
+//					}
+//				}
+//			}
+//		}
+//		List<YouMingxi> yList = youMingXiDao.getTjuserList(guser);
+//		if(yList!=null&&!yList.isEmpty()){
+//			for(YouMingxi youMingxi:yList){
+//				int sjtjzb = youMingXiDao.getSumSjb(youMingxi.getTjuser(), youMingxi.getCount());
+//				if(sjtjzb>0){
+//					if(youMingxi.getCount()>0&&youMingxi.getCount()<=16){
+//						sgxtDao.updateYfiled(youMingxi.getTjuser(), "y"+youMingxi.getCount(), sjtjzb,sjtjzb,youMingxi.getCount());
+//					}
+//				}
+//			}
+//		}
+		resetUserZandY16(guser);
 		return "success";
+	}
+	/**
+	 * 重置用户z1-16和 y1-16的临时值
+	 * @param userName
+	 */
+	public void resetUserZandY16(String userName){
+		for(int i=1;i<=16;i++){
+			int zIsjb = zuoMingxiDao.getSumSjb(userName, i);
+			sgxtDao.updateZOrYfiled(userName, "z"+i, zIsjb);
+			int yIsjb = youMingXiDao.getSumSjb(userName, i);
+			sgxtDao.updateZOrYfiled(userName, "y"+i, yIsjb);
+		}
 	}
 	
 	
@@ -3471,11 +3694,19 @@ public class AdminService {
 	public void setAdminUserMap(Cache<String, Session> adminUserMap) {
 		this.adminUserMap = adminUserMap;
 	}
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 设置2016年业绩数据大vip
+	 */
+	public void setBigVipUser(){
+		LogSystem.info("开始设置数据大vip");
+		List<Zq2016stat> list = zq2016statDao.getAll();
+		if(list!=null&&list.size()>0){
+			for(Zq2016stat zq2016stat:list){
+				String bigVipUser = userService.findMyBigUpVipName(zq2016stat.getUserName());
+				Gcuser gcuser = gcuserDao.getUser(bigVipUser);
+				boolean result = zq2016statDao.updateBigVipUser(zq2016stat.getUserName(), bigVipUser,gcuser.getName());
+				LogSystem.info("用户["+zq2016stat.getUserName()+"]的大vip=["+bigVipUser+"]，大vip姓名["+gcuser.getName()+"],更新结果为:["+result+"]");
+			}
+		}
+	}
 }

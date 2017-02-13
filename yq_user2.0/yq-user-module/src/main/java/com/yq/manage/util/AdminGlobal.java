@@ -74,7 +74,29 @@ public class AdminGlobal {
 	public static final int DELET_DEPARTMENT					= 2023;
 	
 	
-	
-	
+	/**
+	 * 后台vip入账充值币
+	 * */
+	public static final int OP_VIPCZJ							= 2024;
+	/**
+	 *修改vip信息
+	 * */
+	public static final int OP_MODIFYVIP							= 2026;
+	/**
+	 * 保单币转账
+	 * */
+	public static final int OP_BDBZZ							= 2027;
+	/**
+	 * 历史退户记录
+	 * */
+	public static final int OP_TUIHU							= 2028;
+	/**
+	 * 后台手动冲话费
+	 * */
+	public static final int OP_MOBILEFEE							= 2029;
+	/**
+	 * 设置为海外玩家
+	 * */
+	public static final int OP_SETOVERSEAS							= 2030;
 	
 }

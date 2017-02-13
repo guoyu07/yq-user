@@ -21,9 +21,6 @@ public class EpsfAction extends ALDAdminActionSupport {
 	private int sfpay;
 	
 	public String execute(){
-       /* if(!super.getUserName().equals("admin1")){
-            return INPUT;
-        }*/
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		if(status==0){
 			gcuser = userService.getUserByUserName(uid);
@@ -34,7 +31,7 @@ public class EpsfAction extends ALDAdminActionSupport {
 			
 			return INPUT;
 		}
-		userService.changeYbCanFu(uid, -sfpay, sflb, 0, null);
+		userService.changeYbCanFu(uid, -sfpay, sflb, 0, null, super.getUserName());
 		gcuser = userService.getUserByUserName(uid);
 		return SUCCESS;
 	}
