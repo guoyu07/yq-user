@@ -13,12 +13,11 @@ import com.yq.user.service.UserService;
 
 public class UserScoresLogAction extends ALDAdminPageActionSupport<UserScoresLogForExcel> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String startDate1;
 	private String endDate1;
+	
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		super.initPage(userService.getUserScoresLogPage(super.getUserName(), super.getToPage(), 30,startDate1,endDate1));

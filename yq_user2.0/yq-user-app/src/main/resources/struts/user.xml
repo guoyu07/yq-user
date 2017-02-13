@@ -46,10 +46,12 @@
 			<result name="success">mainUI/public/eb-store-order-search-more.jsp</result>
 		</action>
 		<action name="userscoreslog" class="com.yq.app.user.action.UserScoresLogAction">
-			<result name="success">view/yblc-userscoreslog.jsp</result>
+			<!-- <result name="success">view/yblc-userscoreslog.jsp</result> -->
+			<result name="success">mainUI/public/coupon-change-detail.jsp</result>
 		</action>
 		<action name="usermallorderscoreslog" class="com.yq.app.user.action.UserMallorderScoresLogAction">
-			<result name="success">view/yblc-mallordercores.jsp</result>
+			<!-- <result name="success">view/yblc-mallordercores.jsp</result> -->
+			<result name="success">mainUI/public/coupon-store-order-search.jsp</result>
 		</action>
 		<action name="userscoreslogoutExcel" class="com.yq.app.user.action.UserScoresLogAction"
 			method="outExcel">

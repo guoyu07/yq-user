@@ -28,10 +28,16 @@ if(fcxt!=null){
             <img src="${ctx}/img/user_head.png" width="102" height="102">
           </div>
           <ul class="user-detail">
-            <li class="login-info"><span>上次登录：</span><em>2015/8/10</em></li>
+           <!--  <li class="login-info"><span>上次登录：</span><em></em></li> -->
             <li class="user-name"><span>用户名：</span><a href="userlist"><%=gcuser.getUsername()%></a></li>
             <li class="eb"><span>当前可用一币：</span><em><%=gcuser.getPay()%></em></li>
             <li class="eb-exchange"><span>累计交易一币：</span><em><%=gcuser.getCbpay()%></em></li>
             <li class="eb-uesd"><span>累计使用一币：</span><em><%=gcuser.getTxpay()%></em></li>
+           	<% if(Global.OpenScoresPay){
+			 %>
+			<li class="eb-exchange"><span>购物券：</span><a href="/userscoreslog"><%=gcuser.getScores()%></a></li>
+			<%
+			}
+			%>
           </ul>
         </div>

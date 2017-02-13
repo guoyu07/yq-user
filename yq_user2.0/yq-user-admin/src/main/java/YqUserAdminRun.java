@@ -21,7 +21,7 @@ public class YqUserAdminRun {
 		return server;
 	}
 	
-//	public static void smsSend(){
+//	public static void smsSend(){ 
 //		Map<String,String> param = new HashMap<String,String>();
 //		param.put("name", "刘");
 //		param.put("numStr", "20000元(贰万圆整)");

@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
         <div class="point-info">
-          <p class="title">积分理财</p>
+          <p class="title">账户概览</p>
           <ul class="list">
             <li><a href="/datepay">累计奖励一币 <em><%=gcuserJflc.getDlpay()%></em></a></li>
             <li><a href="/datepay?lb=9">推广部分一币 <em><%=gcuserJflc.getJbpay()%></em></a></li>
