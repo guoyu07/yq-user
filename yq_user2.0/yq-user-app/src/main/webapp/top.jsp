@@ -13,19 +13,23 @@
 		</div> 
         <div class="d-nav">
 			<ul>
-				<li><a href="http://p.zgyce.com"><s:text name='QPYL'/></a></li>
-				<li><a href="http://dy.zgyce.com"><s:text name='YY'/></a></li>
-				<li><a href="http://keyukeji.com"><s:text name='JPYX'/></a></li>
-				<li><a href="http://gw.zgyce.com"><s:text name='DG'/></a></li>
-				<li><a href="http://hy.zgyce.com"><s:text name='QDHYW'/></a></li>
+				<li><a href="http://game.keyukeji.com/index/game/app_category.html?sid=1"><s:text name='QPYL'/></a></li>
+				<li><a href="http://game.keyukeji.com/index/game/game_category.html?sid=1"><s:text name='JPYX'/></a></li>
+				<li><a href="#" onclick="gt();" ><s:text name='YY'/></a></li>
+				<li><a href="#" onclick="gt();" ><s:text name='DG'/></a></li>
+				<li><a href="#" onclick="gt();" ><s:text name='QDHYW'/></a></li>
 				<li><a href="http://www.qlsme.com"><s:text name='HAPPY100'/></a></li>
 			</ul>
 		</div>
 		<p class="clickTop"><span class="hover"></span></p>
-		<!-- <script type="text/javascript">
-	function langSelecter_onChanged() {
-		document.getElementById("langForm").submit();
-	}
-</script> -->
+		<script type="text/javascript">
+			/* function langSelecter_onChanged() {
+				document.getElementById("langForm").submit();
+			} */
+			function gt(){
+				alert(" <s:text name='gt'/>");
+			}
+			
+		</script>
 		<!-- "zhcn"), Locale.CHINA);
         locales.put(bundle.getString("usen" -->
