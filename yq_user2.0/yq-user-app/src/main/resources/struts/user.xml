@@ -148,12 +148,14 @@
 		</action>
 
 		<action name="bdbzz" class="com.yq.app.user.action.BdbZzAction" >
-			<result name="success">view/yjcx-bdb-zz.jsp</result>
+			<!-- <result name="success">view/yjcx-bdb-zz.jsp</result> -->
+			<result name="success">mainUI/public/game-bdb-roll-out.jsp</result>
 			<result name="bdbdate" type="redirect">${redirectBaseUrl}/bdbdate</result>
 		</action>
 		
 		<action name="bdbcz" class="com.yq.app.user.action.BdbZzAction" method="bdbcz">
-			<result name="success">view/yjcx-bdb-cz.jsp</result>
+			<!-- <result name="success">view/yjcx-bdb-cz.jsp</result> -->
+			<result name="success">mainUI/public/game-bdb-recharge.jsp</result>
 			<result name="bdbdate" type="redirect">${redirectBaseUrl}/bdbdate</result>
 		</action>
 

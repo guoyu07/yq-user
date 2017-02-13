@@ -64,11 +64,13 @@ function bdbcz(){
     <ul class="list">
       <li><a href="sgks01">游戏业务</a></li>
       <p>游戏级别<em><%=yjcxGcuser.getSjb()%></em></p>
-      <p>报单币余额<em><%=yjcxGcuser.getSybdb()%></em></p>
       
+      <li class="special">
+		     报单币余额<em><%=yjcxGcuser.getSybdb()%></em>--<a href="bdbzz">转出</a>
+		    </li>
 		<% if(yjcxGcuser.getVip()>0) {%>
 			<li class="special">
-	        <a href="bybdblog">备用报单币</a>--<a href="bdbzz">转出</a><em><%=yjcxGcuser.getSyep()%></em>
+	        <a href="bybdblog">备用报单币</a><em><%=yjcxGcuser.getSyep()%></em>
 		    </li>
 		    <li class="special">
 		     <a href="bdbdate">报单币明细</a>--<a href="bdbcz">充值</a>

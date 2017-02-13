@@ -122,7 +122,7 @@
             <input type="text" name="smsCode">
             <input class="widget-button-small" id="btn" type="button" onclick="checkdate()" value="获取验证码" name="B2">
           </p>
-          <p class="button-line">
+          <p class="button-line mt15">
             <button class="widget-button" type="submit">确定</button>
           </p>
         </form>

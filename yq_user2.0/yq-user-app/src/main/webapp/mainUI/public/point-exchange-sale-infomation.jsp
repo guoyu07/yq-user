@@ -19,6 +19,15 @@
   <table>
     <caption>出售信息</caption>
     <thead>
+      <tr>
+        <td>出售数量</td>
+        <td>单价</td>
+        <td>交易额</td>
+        <td>发布方</td>
+        <td>操作</td>
+      </tr>
+    </thead>
+    <thead>
       <s:iterator var="data" value="dataList">
         <tr> 
          <td>${data.mcsl}</td>

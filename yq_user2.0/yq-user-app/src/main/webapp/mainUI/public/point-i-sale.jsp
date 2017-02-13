@@ -83,8 +83,8 @@
             <span class="text widget-warning">${mc70}</span>一币
           </p>
           <p class="item">
-            <lable class="title">其中30%分配到一币账户：</lable>
-            <span class="text widget-warning">${dqpay}</span>一币
+            <lable class="title">其中30%分配到金币账户：</lable>
+            <span class="text widget-warning">${dqpay}</span>金币
           </p>
           <p class="item">
             <lable class="title">二级密码:</lable>

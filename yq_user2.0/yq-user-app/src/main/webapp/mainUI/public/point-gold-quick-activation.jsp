@@ -39,7 +39,7 @@
               <span class="text widget-warning">${ejbk.bf2}0</span>
             </p>
             <p class="button-line mt15">
-              <a onClick="return confirm('提示：按此激活将是自己使用，不能再用于赠送，您确定了吗？')" href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1">快速激活</a>
+              <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1">快速激活</a>
             </p>
           </form>
         </div>
