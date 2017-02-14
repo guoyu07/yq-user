@@ -142,10 +142,10 @@ public class Sgks01Action extends ALDAdminActionSupport {
 			}
 			
 		}
-		
+		/*
 		if(status==1){
 			return "detail";
-		}
+		}*/
 		
 		
 		return SUCCESS;

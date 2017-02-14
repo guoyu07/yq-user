@@ -18,6 +18,7 @@
 <c:if test="${erroCodeNum==16}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1463370214'/>！');history.go(-2);</script></c:if>
 <c:if test="${erroCodeNum==17}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1086940459'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==100}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-632272473'/>！');history.go(-1);</script></c:if>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -29,13 +30,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
   <link rel="stylesheet" href="${ctx}/css/common.css">
-  <style type="text/css">
-	.zzbg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:2;top:0;left:0;opacity:0.7;}
-	.zzcontent{display:none;width:500px;height:50px;position:fixed;top:50%;margin-top:-150px;background:#fff;z-index:3;left:50%;margin-left:-250px;}
-</style>
 </head>
 
 <body> 
+<style type="text/css">
+  .zzbg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:2;top:0;left:0;opacity:0.7;}
+  .zzcontent{display:none;width:500px;height:50px;position:fixed;top:50%;margin-top:-150px;background:#fff;z-index:3;left:50%;margin-left:-250px;}
+</style>
 <!-- 通用头部 -->
 <%@ include file="/mainUI/common/head.jsp" %>
 <!-- 通用头部 end -->
@@ -44,7 +45,7 @@
 <div class="container">
   <div class="member-header" id="J_memberHeader">
     <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
-    <%@ include file="/mainUI/common/accountpart.jsp" %>
+     <%@ include file="/mainUI/common/accountpart.jsp" %>
   </div>
 </div>
 <!-- 会员中心导航模块 end -->
@@ -69,10 +70,11 @@
           <a class="widget-warning" href="javascript:history.back();">返回上一页</a>
         </p>
         <form class="widget-form" method="POST" action="bdreg?step=7" name="Form" id="Form" onSubmit="return showZz()">
-          <input type="hidden" name="targetdate" size="8">
+            <input type="hidden" name="targetdate" size="8">
           <input type="hidden" name="status" value="1">
           <input type="hidden" name="xmlmode" size="8">
 	      <input type="hidden" name="cjpay" size="10" value="${cjpay}" readonly><input type="hidden" name="remark" size="8" value="3" readonly><input type="hidden" name="user" size="10" value="${userName}" readonly>
+          
           <p class="item">
             <label class="title">选择接点人：</label>
             <b class="text widget-warning"><input type="hidden" name="up" readonly value="${up}">${up}</b>
@@ -85,8 +87,8 @@
           	<label class="title">选择套餐：</label>
 			<font color="#008000"><b>${cjpay}</b></font><input type="hidden" name="pa1j" size="8" value="${pa1j}"><input type="hidden" name="pa2j" size="8" value="${pa2j}">
 		  </p>
-         <p class="widget-notice mt15 ml10">（将从您的（<b>${userName}</b>）<c:if test="${cjpay<9000}">一币</c:if><c:if test="${cjpay>=9000}">报单币</c:if>账户扣除${cjpay}）</p> 
-         <c:if test="${cjpay<9000}">
+          <p class="widget-notice mt15 ml10">（将从您的（<b>${userName}</b>）<c:if test="${cjpay<9000}">一币</c:if><c:if test="${cjpay>=9000}">报单币</c:if>账户扣除${cjpay}）</p>
+          <c:if test="${cjpay<9000}">
           <p class="item">
             <label class="title">您的手机号码：</label><span class="text">${call}</span>
           </p>
@@ -106,6 +108,9 @@
     </div>
   </div>
 </div>
+<div class="zzbg"></div>
+<div class="zzcontent">
+<h2 align="center">系统已进入核算中...期间请停止其它操作，更不要关闭本页！</h2>
 </div>
 <!-- 业绩查询内容 end -->
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
