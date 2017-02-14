@@ -6,7 +6,7 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|VIP充值管理明细详情</title>
+  <title>会员中心|报单币变化明细|报单日志 详情</title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,7 +18,7 @@
 <div class="member-dialog-container">
   <div class="member-main">
     <div class="dialog-widget">
-      <p class="dialog-title">VIP充值管理明细详情</p>
+      <p class="dialog-title">报单币变化明细|报单日志 详情</p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">
@@ -57,7 +57,7 @@
         </div>
         <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-<aldtags:pageTag paraStr="status,1,type,1"/>
+  <aldtags:pageTag paraStr="status,1,type,1"/>
 </p>
 <!-- 会员中心翻页组件 end -->
 

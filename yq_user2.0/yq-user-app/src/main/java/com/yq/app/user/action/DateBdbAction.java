@@ -109,10 +109,20 @@ public class DateBdbAction extends ALDAdminPageActionSupport<Bdbdate> {
 		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(),type, super.getToPage(), 10);
 		super.initPage(page);
 		super.setErroCodeNum(2000);
-		if(status==1){
-			return "bdbdetail";
+		if(type==0){
+			if(status==1){
+				return "zzdetail";
+			}
+			
+			return "zhuanzhang";
+			
+		}else{
+			if(status==1){
+				return "baodandetail";
+			}
+			return "baodan";
 		}
-		return SUCCESS;
+		
 	}
 	
 	public int getStatus() {

@@ -55,13 +55,14 @@
             <label class="title">当前充值币：</label><span class="text">${czgcuser.vipcjcjb}</span></p>
           <p class="item">
             <label class="title">当前备用报单币：</label><span class="text">${czgcuser.syep}</span></p>
-          <p class="widget-notice widget-warning mt15">本次操作需要消耗：</p>
+         <!--  <p class="widget-notice widget-warning mt15">本次操作需要消耗：</p>
           <p class="item mt15">
             <label class="title">当前用户充值币：</label><span class="text">5000</span></p>
           <p class="item">
             <label class="title">当前用户备用报单币：</label><span class="text">22200</span></p>
           <p class="item">
-            <label class="title">被充值用户一币：</label><span class="text">222800</span></p>
+            <label class="title">被充值用户一币：</label><span class="text">22800</span></p> -->
+           	<p class="widget-notice widget-warning mt15"> 本次操作需要消耗当前用户5000充值币，22200备用报单币及被充值用户22800一币。</p>
           <p class="widget-notice widget-warning mt15"> 注：只能给团队下的小vip充值。</p>
           <p class="item mt15">
             <label class="title">被充值用户名：</label>

@@ -139,8 +139,10 @@
 
 		<action name="bdbdate" class="com.yq.app.user.action.DateBdbAction">
 			<!-- <result name="success">view/yjcx-bdb-details.jsp</result> -->
-			<result name="success">mainUI/public/game-bdb-detail.jsp</result>
-			<result name="bdbdetail">mainUI/public/game-bdb-detail-more.jsp</result>
+			<result name="baodan">mainUI/public/game-bdb-detail-bd.jsp</result>
+			<result name="baodandetail">mainUI/public/game-bdb-detail-bd-more.jsp</result>
+			<result name="zhuanzhang">mainUI/public/game-bdb-detail-transfer.jsp</result>
+			<result name="zzdetail">mainUI/public/game-bdb-detail-transfer-more.jsp</result>
 		</action>
 		<action name="bybdblog" class="com.yq.app.user.action.BybdbLogAction">
 			<!-- <result name="success">view/yjcx-bybdb-details.jsp</result> -->
