@@ -318,6 +318,10 @@ public class YbChangeType {
 	 * */
 	public static final int MONTH_SHAREMONEY = 99;
 	
+	/**
+	 * 购买机票转入公司账户
+	 * */
+	public static final int BUYTICKETGETYB = 147;
 	
 	
 }

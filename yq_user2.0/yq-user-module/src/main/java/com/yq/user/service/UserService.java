@@ -4861,6 +4861,13 @@ public class UserService {
 //            date = new Date();
 //		}
 //		gcuserDao.updatePwdate(gcuser.getUserid(), gcuser.getName(), DateUtils.addDay(date, 30));
+		
+		//机票支付的一币转到公司账户上（kssl888）
+		Gcuser companeyUser = gcuserDao.getUser("kssl888");
+		if(companeyUser!=null){
+			this.changeYb(companeyUser.getUsername(), ybsl, paylb+"---"+user, 11, null, 0, YbChangeType.BUYTICKETGETYB);
+		}
+		
 		userDailyGainLogDao.addUserDailyGain(user, 1, ybsl, date);
 		gcuserDao.updateSmsCode(user, Global.INIT_SMS_CODE);
 		return day;
