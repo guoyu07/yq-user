@@ -1,24 +1,23 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('还没有到结算时间（每星期二22点后）！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('选择报单金额错误，无法完成开户，请充值后再试！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('登录密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('二级密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('此功能，需联系推荐人选择适合的位置升级！！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('报单币余额小于开户金额${cjpay}，无法完成开户，请充值后再试！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==7}"><script language=javascript>alert('一币余额小于开户金额${cjpay}，无法完成开户，请充值后再试！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==8}"><script language=javascript>alert('要开户的用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==9}"><script language=javascript>alert('系统调试中，请重新注册新的用户名进行操作或联系您的推荐人！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('该姓名持有5万的账户已达到3个，不能再开设5万的账户！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==11}"><script language=javascript>alert('开户人已安置好，不能重复，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==12}"><script language=javascript>alert('开户人已安置好，不能重复，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==13}"><script language=javascript>alert('只能给自己的直接推荐的人开户！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==14}"><script language=javascript>alert('接点人不存在，没法放置，请检查是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==15}"><script language=javascript>alert('接点人位置已被占用，请重新选择！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==16}"><script language=javascript>alert('验证码错误，请检查输入是否正确！');history.go(-2);</script></c:if>
-<c:if test="${erroCodeNum==17}"><script language=javascript>alert('接点人必须在自己的团队下，请重新选择！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==100}"><script language=javascript>alert('为给家人们提供更好的服务，报单功能正在维护！预计上午8点完成！给您带来的不便请见谅！');history.go(-1);</script></c:if>
- 
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1610007112'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1396378774'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-394660049'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1923400400'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1060799146'/>！！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1996562206'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1380597198'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1649708849'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1817862406'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.153703061'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==11}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1554447127'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==12}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1554447127'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==13}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-131078147'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==14}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1541818965'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==15}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1917340790'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==16}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1463370214'/>！');history.go(-2);</script></c:if>
+<c:if test="${erroCodeNum==17}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1086940459'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-632272473'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -30,6 +29,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
   <link rel="stylesheet" href="${ctx}/css/common.css">
+  <style type="text/css">
+	.zzbg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:2;top:0;left:0;opacity:0.7;}
+	.zzcontent{display:none;width:500px;height:50px;position:fixed;top:50%;margin-top:-150px;background:#fff;z-index:3;left:50%;margin-left:-250px;}
+</style>
 </head>
 
 <body> 
@@ -66,7 +69,10 @@
           <a class="widget-warning" href="javascript:history.back();">返回上一页</a>
         </p>
         <form class="widget-form" method="POST" action="bdreg?step=7" name="Form" id="Form" onSubmit="return showZz()">
-          <input type="hidden" name="status" value="${status}">
+          <input type="hidden" name="targetdate" size="8">
+          <input type="hidden" name="status" value="1">
+          <input type="hidden" name="xmlmode" size="8">
+	      <input type="hidden" name="cjpay" size="10" value="${cjpay}" readonly><input type="hidden" name="remark" size="8" value="3" readonly><input type="hidden" name="user" size="10" value="${userName}" readonly>
           <p class="item">
             <label class="title">选择接点人：</label>
             <b class="text widget-warning"><input type="hidden" name="up" readonly value="${up}">${up}</b>

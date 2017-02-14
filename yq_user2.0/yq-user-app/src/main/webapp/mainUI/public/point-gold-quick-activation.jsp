@@ -39,7 +39,7 @@
               <span class="text widget-warning">${ejbk.bf2}0</span>
             </p>
             <p class="button-line mt15">
-              <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1">快速激活</a>
+              <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1"  class="widget-button">快速激活</a>
             </p>
           </form>
         </div>
