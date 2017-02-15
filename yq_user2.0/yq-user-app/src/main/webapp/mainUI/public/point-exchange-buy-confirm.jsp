@@ -71,7 +71,7 @@
 <script>
 function bitch() {
   if (confirm("提示：您确定了吗？")) {
-    location.href = "/mysl?status=2&txpay=10";
+    location.href = "/mysl?status=2&txpay=${txpay}";
   }
 }
 </script>

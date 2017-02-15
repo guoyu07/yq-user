@@ -140,13 +140,13 @@ function checkdate() {
     Form.jygj.focus();
     return false;
   }
-  if (Form.jygj.value < 0.78) {
-    alert("卖出单价不能小于 0.78 !");
+  if (Form.jygj.value < ${fcxt.zdj}) {
+    alert("卖出单价不能小于 ${fcxt.zdj} !");
     Form.jygj.focus();
     return false;
   }
-  if (Form.jygj.value > 0.96 + 0.03) {
-    alert("卖出单价不能大于 0.99 哦");
+  if (Form.jygj.value > ${fcxt.jygj}+0.03) {
+    alert("卖出单价不能大于 ${fcxt.jygj}+0.03 哦");
     Form.jygj.focus();
     return false;
   }
@@ -200,8 +200,8 @@ function checkdate() {
     alert("单笔卖出数量不能大于3000积分!");
     return false;
   }
-  if (Form.txpay.value > 1200) {
-    alert("你的卖出数量不能大于你剩余的数量 1200 哦");
+  if (Form.txpay.value > ${gcuser.jyg}) {
+    alert("你的卖出数量不能大于你剩余的数量 ${gcuser.jyg} 哦");
     return false;
   }
   if (Form.pa3.value == "") {
