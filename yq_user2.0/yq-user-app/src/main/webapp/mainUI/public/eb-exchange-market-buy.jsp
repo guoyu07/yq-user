@@ -33,7 +33,7 @@
         <form class="widget-form" method="POST" action="epmy?ep=${ep}&status=1" name="Form" onSubmit="return checkdate()">
           <p class="widget-notice mt15 ml10">本次交易倒计时还剩<b class="widget-warning" id="sec"></b>秒，超时没确认将会自动取消该交易！</p>
           <p class="widget-notice mt15 ml10">本次下单须在您的用户名(认购方)：<b class="widget-warning">${userName}</b>的积分账户暂扣<b class="widget-warning">${txpay.paynum}</b>作为本次交易诚信金！</p>
-          <p class="widget-tips mt15 ml10">下单成功后必须在“<b class="widget-warning">2小时</b>”内向发布方<b class="widget-warning">${txpay.payusername}</b>的指定银行账号打入不低于<b class="widget-warning"><c:choose><c:when test="${txpay.paynum<900}" >${txpay.paynum*0.85}</c:when><c:otherwise>${txpay.paynum*0.90}</c:otherwise></c:choose>元</b>！同时在登录平台点“一币-理财”下“认购明细”查看该笔交易状态-发布方<b class="widget-warning"><c:choose><c:when test="${txpay.paynum<900}" >${txpay.paynum*0.85}</c:when><c:otherwise>${txpay.paynum*0.90}</c:otherwise></c:choose></b>收款账号，并进行“我已付款<c:if test="${txpay.paynum}<900" >${txpay.paynum}*0.15</c:if>通知发布方确认”的操作！</p>
+          <p class="widget-tips mt15 ml10">下单成功后必须在“<b class="widget-warning">2小时</b>”内向发布方<b class="widget-warning">${txpay.payusername}</b>的指定银行账号打入不低于<b class="widget-warning"><c:choose><c:when test="${txpay.paynum<900}" >${txpay.paynum*0.85}</c:when><c:otherwise>${txpay.paynum*0.90}</c:otherwise></c:choose>元</b>！同时在登录平台点“一币-理财”下“认购明细”查看该笔交易状态-发布方<b class="widget-warning">${txpay.payusername}</b>收款账号，并进行“我已付款<c:choose><c:when test="${txpay.paynum<900}" >${txpay.paynum*0.85}</c:when><c:otherwise>${txpay.paynum*0.90}</c:otherwise></c:choose>通知发布方确认”的操作！</p>
           <p class="item mt15">
             <label class="title">发布方收款方式：</label><span class="text widget-warning">${txpay.paybank}</span>
           </p>
