@@ -50,9 +50,9 @@
             <thead>
               <tr>
                 <th>用户名</th>
+                <th>可用一币</th>
                 <th>积分数量</th>
                 <th>可用金币</th>
-                <th>注册时间</th>
                 <th>信誉星</th>
               </tr>
             </thead>
@@ -60,9 +60,9 @@
               <s:iterator var="data" value="dataList">
 				<tr>
 					<td><a href="/relogin?luserName=${data.username}">${data.username}</a><c:if test="${data.username==gcuser.username}"></font><b><font color="#FF00FF">(当前)</font></b></c:if></td>
+					<td>${data.pay}</td>
 					<td>${data.jyg}</td>
 					<td>${data.jydb}</td>
-					<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
 					<td>${data.cxt}</td>
 				</tr>
 				</s:iterator>

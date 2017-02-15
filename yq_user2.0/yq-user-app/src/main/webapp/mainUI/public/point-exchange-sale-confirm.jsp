@@ -67,7 +67,7 @@
               <label class="title">扣除10%的手续费得到：</label><span class="text"><b class="widget-warning">${dqpay}</b></span>
             </p>
             <p class="item">
-              <label class="title">其中70%分配到一币账户：</label><span class="text"><b class="widget-warning">${mc70}</b>  一币</span>
+              <label class="title">其中70%分配到一币账户：</label><span class="text"><b class="widget-warning">${mc70}</b></span>
             </p>
             <p class="item">
               <label class="title">其中30%分配到金币账户</label><span class="text"><b class="widget-warning">${mc30}</b></span>

@@ -33,7 +33,7 @@
         <form class="widget-form" method="POST" action="epmy?ep=${ep}&status=1" name="Form" onSubmit="return checkdate()">
           <p class="widget-notice mt15 ml10">本次交易倒计时还剩<b class="widget-warning" id="sec"></b>秒，超时没确认将会自动取消该交易！</p>
           <p class="widget-notice mt15 ml10">本次下单须在您的用户名(认购方)：<b class="widget-warning">${userName}</b>的积分账户暂扣<b class="widget-warning">${txpay.paynum}</b>作为本次交易诚信金！</p>
-          <p class="widget-tips mt15 ml10">下单成功后必须在“<b class="widget-warning">2小时</b>”内向发布方<b class="widget-warning">${txpay.payusername}</b>的指定银行账号打入不低于<b class="widget-warning">${txpay.paynum*0.9}元</b>！同时在登录平台点“一币-理财”下“认购明细”查看该笔交易状态-发布方<b class="widget-warning">${txpay.paynum*0.9}</b>收款账号，并进行“我已付款${txpay.paynum*0.9}通知发布方确认”的操作！</p>
+          <p class="widget-tips mt15 ml10">下单成功后必须在“<b class="widget-warning">2小时</b>”内向发布方<b class="widget-warning">${txpay.payusername}</b>的指定银行账号打入不低于<b class="widget-warning"><c:choose><c:when test="${txpay.paynum<900}" >${txpay.paynum*0.85}</c:when><c:otherwise>${txpay.paynum*0.90}</c:otherwise></c:choose>元</b>！同时在登录平台点“一币-理财”下“认购明细”查看该笔交易状态-发布方<b class="widget-warning"><c:choose><c:when test="${txpay.paynum<900}" >${txpay.paynum*0.85}</c:when><c:otherwise>${txpay.paynum*0.90}</c:otherwise></c:choose></b>收款账号，并进行“我已付款<c:if test="${txpay.paynum}<900" >${txpay.paynum}*0.15</c:if>通知发布方确认”的操作！</p>
           <p class="item mt15">
             <label class="title">发布方收款方式：</label><span class="text widget-warning">${txpay.paybank}</span>
           </p>
@@ -46,7 +46,7 @@
           <p class="item">
             <label class="title">本次认购一币数量为：</label><span class="text"><b class="widget-warning">${txpay.paynum}</b> 一币 （将增加到您的“一币-余额”）</span></p>
           <p class="item">
-            <label class="title">认购方将支付：</label><span class="text"><b class="widget-warning">${txpay.paynum*0.9}</b>元</span></p>
+            <label class="title">认购方将支付：</label><span class="text"><b class="widget-warning"><c:choose><c:when test="${txpay.paynum<900}" >${txpay.paynum*0.85}</c:when><c:otherwise>${txpay.paynum*0.90}</c:otherwise></c:choose></b>元</span></p>
           <p class="item">
             <label class="title">二级密码：</label>
             <input type="password" name="epnm3" />
@@ -55,7 +55,7 @@
             <input type="submit" class="widget-button" value="确定无误" name="B1" />
           </p>
           <p class="widget-tips mt30 ml10 tc">根据您注册用户时选择的地区，本服务中心为您提供贴身的服务，以提高办事效率！</p>
-          <p class="widget-tips mt10 ml10 tc">有任何事情请与我联系:<b class="widget-warning"><s:text name="vipepmy.jsp.epmy.jsp.643357742">QQ：613697152</s:text></b>
+          <p class="widget-tips mt10 ml10 tc">有任何事情请与我联系:<b class="widget-warning"><s:text name="vipepmy.jsp.epmy.jsp.643357742">QQ：${qq}</s:text></b>
             <a class="contact-qq" target="_blank" href="https://wpa.qq.com/msgrd?v=3&amp;uin=${qq}&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:613697152:41" alt="点击这里发消息" title="点击这里发消息"></a>
           </p>
           <p class="widget-tips widget-warning mt15 ml10 tc">各部门服务中心人员分工有序,请不要重复添加好友,更不要向每个客服在同一时段咨询同一个问题，感谢您的配合。</p>
@@ -85,7 +85,7 @@ for (i = 0; i <= secs; i++) {
 function update(num) {
   if (num == secs) {
     alert('交易超时或撒消交易成功！');
-    location.replace('eb-exchange-market-more.html');
+    location.replace('epmy');
   } else {
     printnr = secs - num;
     document.getElementById('sec').innerHTML = printnr;

@@ -361,6 +361,7 @@
 			<result name="mysl2">view/jflc-jfmr-2.jsp</result> -->
 			<result name="success">mainUI/public/point-exchange-buy.jsp</result>
 			<result name="mysl2">mainUI/public/point-exchange-buy-confirm.jsp</result>
+			<result name="moredetail">mainUI/public/point-exchange-buy-detail-more.jsp</result>
 		</action>
 		
 

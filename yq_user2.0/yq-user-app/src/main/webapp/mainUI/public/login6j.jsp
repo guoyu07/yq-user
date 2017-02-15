@@ -20,7 +20,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -33,17 +33,17 @@
 <div class="member-aside">
   <%@ include file="/mainUI/common/userLeft.jsp" %>
   <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
- <%@ include file="/mainUI/common/yblc.jsp" %>
+ <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
   <!-- 账户概览 end -->
 </div>
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
       <!-- 一币理财交易规则 -->
-      <div class="main-widget">
+      <!-- <div class="main-widget">
         <p class="widget-title-line">一币理财交易规则</p>
         <div class="widget-article scroll-y small-size">
-          <!-- 以下是直接引入的文章内容 -->
+          以下是直接引入的文章内容
           一、认购方（付款方）责任
           <br/> 1、超过“2小时”没有成功付款到发布方指定银行账号，系统将没收暂扣下来的诚信金，解除本交易限制，让其它用户来完成此交易。
           <br/>2、并没有成功付款到发布方指定银行账号，提前操作或恶意操作，影响正常交易流程，系统将没收暂扣下来的诚信金，解除本交易限制，让其它用户来完成此交易。
@@ -53,7 +53,7 @@
           <br/> 3、为了交易公平公正，交易双方有一定的约束，系统启动信星方案，每个用户初始为“5星”，每违反一次交易规则扣除“1星”，当剩下“3星”，将被限制发布和认购一星期，当剩下“2星”，将被限制发布和认购两星期，两星期内将不能获得平衡奖金，当剩下“1星”，将被限制发布和认购三星期，三星期内将不能获得平衡奖金和领导奖金，当剩下“0星”，将被限制发布和认购60天，60天内将不能获得平衡奖金和领导奖金。
           <br/> （温馨提示：一币卖出交易后在48小时内未确认用户系统将会自动扣信誉星一枚，用户在5天后还未确认（包含前面48小时），系统将会自动确认，系统确认后就会直接封锁用户无法操作卖出一币的，要再卖出一币，要先向公司提交申请书，书面承诺平台系统规则，申请机会只有三次（包含同名账户，同名账户有一个用户被系统自动确认后，所有同名的都是不能操作一币卖出。），超出三次申请的用户永久不能卖出一币！感谢您的配合！）
         </div>
-      </div>
+      </div> -->
       <!-- 一币理财交易规则 end -->
       <!-- 二级密码登录验证 -->
       <%-- <div class="main-widget mt15">

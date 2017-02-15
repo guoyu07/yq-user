@@ -126,9 +126,8 @@ function checkdate() {
   }
 
 
-  if (Form.txpay.value > 6074) {
-    alert("您的发布不能大于您可卖的6074一币哦!");
-    return false;
+  if (Form.txpay.value > ${gcuser.pay}) {
+	  <c:if test="${transferType==1}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977'/>"); </c:if> <c:if test="${transferType==2}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977a'/>"); </c:if>     return false;   
   }
   if (Form.txpay.value < 100) {
     alert("您的发布不能小于100一币!");

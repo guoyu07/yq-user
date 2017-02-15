@@ -63,6 +63,11 @@ public class MyslAction extends ALDAdminPageActionSupport<Gpjy> {
 			super.setErroCodeNum(2000);
 		}
 		
+		if(status==4){
+			super.initPage(userService.getMrPageList(super.getUserName(), super.getToPage(), 10));
+			return "moredetail";
+		}
+		
 		return SUCCESS;
 	}
 
