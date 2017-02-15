@@ -1,8 +1,11 @@
 package com.yq.app.user.action;
 
+import java.math.BigDecimal;
+
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.common.utils.BigDecimalUtil;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
@@ -49,7 +52,9 @@ public class MyslAction extends ALDAdminPageActionSupport<Gpjy> {
 			if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){
 				super.setErroCodeNum(1);
 			}
-			needJf = (int)(Math.ceil(jygj*txpay));
+			double dd = BigDecimalUtil.multiply(jygj, txpay);
+			
+			needJf = (int)(Math.ceil(dd));
 			return "mysl2";
 		}
 		
@@ -60,6 +65,33 @@ public class MyslAction extends ALDAdminPageActionSupport<Gpjy> {
 		
 		return SUCCESS;
 	}
+
+	/*private double needjg(double a) {
+		 int exponent = Math.getExponent(a);
+         double negativeBoundary = -0.0;
+         double positiveBoundary = 1.0;
+         double sign = 1.0;
+	     if (exponent < 0) {
+	        return ((a == 0.0) ? a : ( (a < 0.0) ?  negativeBoundary : positiveBoundary) );
+	    } else if (exponent >= 52) {
+	        return a;
+	    }
+		
+		 assert exponent >= 0 && exponent <= 51;
+	
+	    long doppel = Double.doubleToRawLongBits(a);
+	    long mask   = 4503599627370495l >> exponent;
+	
+	    if ( (mask & doppel) == 0L )
+	        return a; // integral value
+	    else {
+	        double result = Double.longBitsToDouble(doppel & (~mask));
+	        if (sign*a > 0.0)
+	            result = result + sign;
+	        return result;
+	    }
+		
+	}*/
 
 	public int getZdjyg() {
 		return zdjyg;

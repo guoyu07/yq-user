@@ -26,6 +26,7 @@ import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.utils.JedisUtils;
 import com.sr178.module.web.session.Session;
 import com.yq.common.ProblemCode;
+import com.yq.common.utils.BigDecimalUtil;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.Global;
@@ -3061,8 +3062,8 @@ public class UserService {
 		checkJfIsOpen();
 		
 		Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
-		
-		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		double dd = BigDecimalUtil.multiply(fcxt.getJygj(), buyNum);
+		int needJb = (int)(Math.ceil(dd));
 		
 		
 		
@@ -3089,7 +3090,8 @@ public class UserService {
 			return;
 		}
 		
-		int needJb1 = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		double dd1 = BigDecimalUtil.multiply(fcxt.getJygj(), buyNum);
+		int needJb1 = (int)(Math.ceil(dd1));
 		
 		if(!useUserItem(userName, "金币", needJb1)){
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
@@ -3521,7 +3523,8 @@ public class UserService {
 		
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
-		double needJb = Math.ceil(fcxt.getJygj()*buyCount);
+		double dd = BigDecimalUtil.multiply(fcxt.getJygj(), buyCount);
+		double needJb = Math.ceil(dd);
 		
 		//扣除用户金币
 		if(!useUserItem(userName, "金币", (int) needJb)){

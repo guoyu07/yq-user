@@ -133,8 +133,8 @@ function checkdate() {
     alert("目前最大每次买入数量为3000，成功后可继续发布买入");
     return false;
   }
-  if (Form.txpay.value > 41) {
-    alert("买入数量最大为41");
+  if (Form.txpay.value > ${zdjyg}) {
+    alert("买入数量最大为${zdjyg}");
     return false;
   }
   if (!chkinteger(Form.txpay.value)) {
