@@ -76,7 +76,7 @@
           </p>
           </p>
           <p class="item">
-            <button class="widget-button-small" type="submit" onClick="return cf()">批量提交转至</button> 当前登陆的用户名：<b class="widget-warning">william1</b>
+            <button class="widget-button-small" type="submit" onClick="return cf()">批量提交转至</button> 当前登陆的用户名：<b class="widget-warning">${userName}</b>
           </p>
           <div class="widget-table">
             <table border="0" cellspacing="0" cellpadding="0">

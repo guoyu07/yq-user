@@ -923,7 +923,7 @@ public class UserService {
 	 * @param cjpay     绑定的业务类型
 	 * @param pa1j      登录密码
 	 * @param pa2j      二级密码
-	 * @param idCardNum 身份证号码
+	 * @param idCardNum 验证码
 	 * @param status    0 确认绑定   1提交绑定
 	 * @return
 	 */

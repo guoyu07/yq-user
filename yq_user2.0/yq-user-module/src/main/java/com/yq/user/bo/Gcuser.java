@@ -15,7 +15,7 @@ public class Gcuser{
 	private String username;
 	private String up;				//上级
 	private int jb;
-	private int sjb;
+	private int sjb;				//绑定在那个位置
 	//0普通用户   2大vip  3小vip
 	private int vip;
 	private String vipname;

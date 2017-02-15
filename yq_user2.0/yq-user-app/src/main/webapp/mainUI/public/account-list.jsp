@@ -60,9 +60,9 @@
               <s:iterator var="data" value="dataList">
 				<tr>
 					<td><a href="/relogin?luserName=${data.username}">${data.username}</a><c:if test="${data.username==gcuser.username}"></font><b><font color="#FF00FF">(当前)</font></b></c:if></td>
+					<td>${data.jyg}</td>
 					<td>${data.jydb}</td>
 					<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
-					<td><fmt:formatDate value="${data.bddate}" type="both"/></td>
 					<td>${data.cxt}</td>
 				</tr>
 				</s:iterator>
