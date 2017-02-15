@@ -20,7 +20,7 @@
     <caption>求购信息</caption>
     <thead>
       <tr>
-        <td>求购数量</td>
+        <td>出售数量</td>
         <td>单价</td>
         <td>交易额</td>
         <td>发布方</td>

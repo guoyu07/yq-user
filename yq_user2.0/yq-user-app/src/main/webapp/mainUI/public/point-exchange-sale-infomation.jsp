@@ -27,7 +27,7 @@
         <td>操作</td>
       </tr>
     </thead>
-    <thead>
+    <tbody>
       <s:iterator var="data" value="dataList">
         <tr> 
          <td>${data.mcsl}</td>

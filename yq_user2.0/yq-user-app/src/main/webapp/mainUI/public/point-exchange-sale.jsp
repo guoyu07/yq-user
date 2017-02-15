@@ -12,7 +12,6 @@
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('交易市场已有求购信息，请按需求点击 [我要卖给] ！');location.replace('gpjysc');</script></c:if>
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('单笔卖出数量不能大于 1000 哦!');history.go(-1);</script></c:if>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
