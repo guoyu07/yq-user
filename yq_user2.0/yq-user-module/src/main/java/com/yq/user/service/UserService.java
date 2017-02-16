@@ -3089,7 +3089,7 @@ public class UserService {
 			return;
 		}
 		
-		int needJb1 = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		int needJb1 = (int)(Math.ceil(BigDecimalUtil.multiply(fcxt.getJygj(),buyNum)));
 		
 		if(!useUserItem(userName, "金币", needJb1)){
 			throw new ServiceException(2,"操作错误，金币不足，请检查输入是否正确！");
@@ -3241,7 +3241,7 @@ public class UserService {
 //		}
 		
 		
-		int needJb = (int)(Math.ceil(price*saleNum));
+		int needJb = (int)(Math.ceil(BigDecimalUtil.multiply(price,saleNum)));
 		
 		if(needJb<=0){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
@@ -3261,7 +3261,7 @@ public class UserService {
 		}
 		
 		
-		int needJb1 = (int)(Math.ceil(price*saleNum));
+		int needJb1 = (int)(Math.ceil(BigDecimalUtil.multiply(price,saleNum)));
 		
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
@@ -3383,7 +3383,7 @@ public class UserService {
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		
 		double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
-		double needJb = (int)(Math.ceil(currentPrice*saleCount));
+		double needJb = (int)(Math.ceil(BigDecimalUtil.multiply(currentPrice,saleCount)));
 
 		
 		
@@ -3875,7 +3875,7 @@ public class UserService {
 			throw new ServiceException(2,"修改卖出单价不能大于原来的定价");
 		}
 		
-		if(!gpjyDao.updatePayAndJyPay(id, price,(int)(Math.ceil(price*gpjy1.getMcsl())))){
+		if(!gpjyDao.updatePayAndJyPay(id, price,(int)(Math.ceil(BigDecimalUtil.multiply(price,gpjy1.getMcsl()))))){
 			throw new ServiceException(3,"该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！");
 		}
 		gpjyDao.updateIndexPay(id, price);

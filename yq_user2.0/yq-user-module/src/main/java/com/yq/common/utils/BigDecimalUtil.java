@@ -17,5 +17,19 @@ public class BigDecimalUtil {
 		return r;
 		
 	};  //BigDecimal 乘法 
+	
+
+	/** 乘法 
+	 * @param price
+	 * @param count
+	 * @return
+	 */
+	public static double multiply(double price, double count){
+		BigDecimal r1 = new BigDecimal(price);
+		BigDecimal r2 = new BigDecimal(count);
+		double r= r1.multiply(r2).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+		return r;
+		
+	};  //BigDecimal 乘法 
 
 }
