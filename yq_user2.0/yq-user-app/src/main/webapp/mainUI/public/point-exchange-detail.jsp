@@ -47,7 +47,7 @@
       <div class="main-widget">
         <p class="widget-title-line">积分交易明细</p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointExchangeNodealDetail" data-url="/gpjy?status=2">未成交详细</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointExchangeNodealDetail" data-url="/gpjydesuccess?status=2">未成交详细</a>
           <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointExchangeDealDetail" data-url="/gpjyOfDeal">已成交详细</a>
         </p>
         <div class="widget-table mt5 full-size">

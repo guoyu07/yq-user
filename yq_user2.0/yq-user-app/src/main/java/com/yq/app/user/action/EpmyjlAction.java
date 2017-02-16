@@ -22,6 +22,13 @@ public class EpmyjlAction extends ALDAdminPageActionSupport<Txpay> {
 		}
 		return SUCCESS;
 	}
+	public String epmyjlmrdetail(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		super.initPage(userService.getTxpayBuyDetailsPage(super.getUserName(), super.getToPage(), 10));
+		return "mrdetail";
+	}
+	
+	
 
 	public int getStatus() {
 		return status;

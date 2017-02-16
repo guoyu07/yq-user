@@ -41,6 +41,13 @@ public class GpjyAction extends ALDAdminPageActionSupport<Gpjy> {
 		return SUCCESS;
 		
 	}
+	public String gpjydesuccess(){
+		
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		super.initPage(userService.getAllNoDealGpjyPageList(super.getUserName(), super.getToPage(), 12));
+		return "desuccess";
+		
+	}
 	
 	
 	public String  gpjyOfDeal() {

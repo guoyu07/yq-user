@@ -63,7 +63,7 @@
       <div class="main-widget mt15">
         <p class="widget-title-line">我的客户</p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="tgdown?status=1">查看更多</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="tgdowntgdowndetail?status=1">查看更多</a>
         </p>
         <div class="widget-table mt5">
           <table border="0" cellspacing="0" cellpadding="0">

@@ -36,6 +36,13 @@ public class UserListAction extends ALDAdminPageActionSupport<Gcuser> {
 		userList = userService.getUserNameList(super.getUserName());
 		return SUCCESS;
 	}
+	public String userlistdetail(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		IPage<Gcuser> dataPage = userService.getTheSameNameUserPage(gcuser.getName(), gcuser.getUserid(), super.getToPage(), 20);
+		super.initPage(dataPage);
+		return "detail";
+	}
 	
 	public Gcuser getGcuser(){
 		return gcuser;

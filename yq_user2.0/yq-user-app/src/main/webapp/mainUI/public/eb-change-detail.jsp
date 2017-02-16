@@ -63,7 +63,7 @@
             <option value="16">话费充值 </option>
             <option value="20">交易违规 </option>
           </select> -->
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointChangeDetail" data-url="datepay?status=1&lb=${lb}">查看更多</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointChangeDetail" data-url="datepaydetail?status=1&lb=${lb}">查看更多</a>
         </p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">

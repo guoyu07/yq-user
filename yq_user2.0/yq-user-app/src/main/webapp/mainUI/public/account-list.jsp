@@ -43,7 +43,7 @@
       <div class="main-widget">
         <p class="widget-title-line">同名账户列表</p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_accountList" data-url="userlist?status=1">查看更多</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_accountList" data-url="userlistdetail?status=1">查看更多</a>
         </p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">

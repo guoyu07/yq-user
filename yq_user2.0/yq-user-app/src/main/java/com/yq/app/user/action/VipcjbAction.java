@@ -35,7 +35,13 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		super.setErroCodeNum(2000);;
 		return SUCCESS;
 	}
-
+	
+	public String vipcjbcjbdetail(){
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		super.initPage(userService.getVipcjbPageList(super.getUserName(), super.getToPage(), 20));
+		return "cjbdetail";
+	}
 	
 	
 	public int getStatus() {

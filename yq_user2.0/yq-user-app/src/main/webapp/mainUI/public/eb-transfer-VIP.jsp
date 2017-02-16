@@ -77,7 +77,7 @@
       <!-- VIP充值管理明细 -->
       <div class="main-widget mt15">
         <p class="widget-title-line">VIP充值管理明细</p>
-        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="vipcjb?status=1" id="J_ebSaleDetailMore">查看更多</a></p>
+        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="vipcjbcjbdetail?status=1" id="J_ebSaleDetailMore">查看更多</a></p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>

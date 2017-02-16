@@ -43,7 +43,21 @@ public class GcfhAction extends ALDAdminPageActionSupport<Gcfh> {
 		}
 		return result;
 	}
+	
+	public String gcbfp1detail(){
+		
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		
+		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
+		
+		IPage<Gcfh> page = logService.getGcfhListPage(super.getUserName(),lb, super.getToPage(), 15);
+		
+		super.initPage(page);
+		return "p1detail";
+	}
 
+	
 	
 	public int getStatus() {
 		return status;

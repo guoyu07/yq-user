@@ -45,7 +45,7 @@
       <div class="main-widget">
         <p class="widget-title-line">全部分红明细</p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="gcbf?status=1&lb=1">查看更多</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="gcbfp1detail?status=1&lb=1">查看更多</a>
         </p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">

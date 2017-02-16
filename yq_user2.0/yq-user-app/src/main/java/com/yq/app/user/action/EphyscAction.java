@@ -53,6 +53,17 @@ public class EphyscAction extends ALDAdminPageActionSupport<Txpay> {
 		
 		return SUCCESS;
 	}
+	
+	public String epjyscybmarketdetail(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
+		if(gcuser.getVip()==0){
+			super.setErroCodeNum(1);//alert('请您联系您地区的VIP服务中心，谢谢！');
+			return SUCCESS;
+		}
+		super.setDataList(userService.getMarkList(10));
+		return "ybmarketdetail";
+	}
 
 	public int getStatus() {
 		return status;

@@ -54,9 +54,8 @@
       <div class="main-widget">
         <p class="widget-title-line">一币卖出说明</p>
         <div class="widget-article">
-          <p class="widget-tips">最低100一币起就可以发布卖出，每次发布需等上一次处理（您确认收到款）了才可以发起第二次，发布成功后我们认购一币—方向下单后2小时内打到您的收款账号上！</p>
+          <p class="widget-tips">最低100一币起就可以发布卖出，每次发布需等上一次处理（您确认收到款）了才可以发起第二次，发布成功后我们认购一币-方向下单后2小时内打到您的收款账号上！</p>
           <p class="widget-tips widget-warning mt15">一币卖出低于500（含500），交易手续费为15%，高于500为10%</p>
-          <p class="widget-tips mt20">您申请发布后，认购一币-方向您下单后2小时内打到您的收款账号上</p>
         </div>
       </div>
       <!-- 一币卖出说明 end -->
@@ -64,7 +63,6 @@
       <div class="main-widget mt15">
         <p class="widget-title-line">确认当前账户信息</p>
         <from class="widget-form">
-          <p class="widget-tips widget-warning mt15">您好！您申请发布后，认购一币-返现，您下单后2小时内打到您的收款账号上。</p>
           <p class="item mt15">
             <label class="title">真实姓名：</label><span class="text">${gcuser.name}</span>
           </p>
@@ -99,6 +97,8 @@
               <option value="2000">2000</option>
               <option value="5000">5000</option>
               <option value="10000">10000</option>
+              <option value="20000">20000</option>
+              <option value="30000">30000</option>
             </select>
           </p>
           <p class="item">

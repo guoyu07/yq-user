@@ -45,7 +45,7 @@
       <!-- 一币卖出明细表格 -->
       <div class="main-widget">
         <p class="widget-title-line">一币交易市场</p>
-        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epjysc?status=1" id="J_ebSaleDetailMore">查看更多</a></p>
+        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epjyscybmarketdetail?status=1" id="J_ebSaleDetailMore">查看更多</a></p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>

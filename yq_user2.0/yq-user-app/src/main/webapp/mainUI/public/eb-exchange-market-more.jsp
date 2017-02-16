@@ -39,24 +39,24 @@
             </thead>
             <tbody>
               	<s:iterator var="data" value="dataList">
-							<tr>
-								<td>${data.payid}</td>
-								<td>${data.payusername}</td>
-								<td>${data.cxt}</td>
-								<td>${data.paynum9}</td>
-								<td> ${data.paynum}</td>
-								<td>${data.paynum-data.paynum9}</td>
-								<td>${data.paytime}</td>
-								<td> <c:if test="${data.payusername==userName}"><b><a onClick="return confirm('提示：您确定了吗？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000">撤销卖出</font></a></b></c:if><c:if test="${data.payusername!=userName}">等待认购中。。。</c:if></td>
-								<td><a onClick="return confirm('提示：对方使用的收款方式是“${data.paybank}”您确定认购了吗？')" href="epmy?ep=${data.payid}"><font color="#FF0000" size="2">我要认购</font></a></td>
-							</tr>
-							</s:iterator>
+				<tr>
+					<td>${data.payid}</td>
+					<td>${data.payusername}</td>
+					<td>${data.cxt}</td>
+					<td>${data.paynum9}</td>
+					<td> ${data.paynum}</td>
+					<td>${data.paynum-data.paynum9}</td>
+					<td>${data.paytime}</td>
+					<td> <c:if test="${data.payusername==userName}"><b><a onClick="return confirm('提示：您确定了吗？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000">撤销卖出</font></a></b></c:if><c:if test="${data.payusername!=userName}">等待认购中。。。</c:if></td>
+					<td><a onClick="return confirm('提示：对方使用的收款方式是“${data.paybank}”您确定认购了吗？')" href="epmy?ep=${data.payid}"><font color="#FF0000" size="2">我要认购</font></a></td>
+				</tr>
+				</s:iterator>
             </tbody>
           </table>
         </div>
         <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-  <aldtags:pageTag paraStr="status,1"/>
+  <aldtags:pageTag paraStr="status,${status}"/>
 </p>
 <!-- 会员中心翻页组件 end -->
 

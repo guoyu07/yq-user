@@ -67,6 +67,8 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 		
 		return SUCCESS;
 	}
+	
+	
 
 	public Fcxt getFcxt() {
 		return fcxt;
