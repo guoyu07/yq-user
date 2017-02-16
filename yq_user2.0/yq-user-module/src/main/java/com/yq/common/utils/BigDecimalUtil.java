@@ -42,5 +42,18 @@ public class BigDecimalUtil {
 		BigDecimal r2 = new BigDecimal(count);
 		BigDecimal r= r1.divide(r2);
 		return r;
-	}; //除法 
+	}
+
+	/**
+	 * 乘法
+	 * @param price
+	 * @param count
+	 * @return
+	 */
+	public static double multiply(double price, Double count) {
+		BigDecimal r1 = new BigDecimal(price);
+		BigDecimal r2 = new BigDecimal(count);
+		double r= r1.multiply(r2).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+		return r;
+	};
 }

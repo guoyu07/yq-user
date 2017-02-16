@@ -52,9 +52,7 @@ public class MyslAction extends ALDAdminPageActionSupport<Gpjy> {
 			if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){
 				super.setErroCodeNum(1);
 			}
-			double dd = BigDecimalUtil.multiply(jygj, txpay);
-			
-			needJf = (int)(Math.ceil(dd));
+			needJf = (int)(Math.ceil(BigDecimalUtil.multiply(jygj, txpay)));
 			return "mysl2";
 		}
 		
