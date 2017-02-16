@@ -25,6 +25,7 @@ import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.utils.JedisUtils;
 import com.sr178.module.web.session.Session;
 import com.yq.common.ProblemCode;
+import com.yq.common.utils.BigDecimalUtil;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.Global;
@@ -3061,7 +3062,7 @@ public class UserService {
 		
 		Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
 		
-		int needJb = (int)(Math.ceil(fcxt.getJygj()*buyNum));
+		int needJb = (int)(Math.ceil(BigDecimalUtil.multiply(fcxt.getJygj(), buyNum)));
 		
 		
 		
@@ -3520,7 +3521,7 @@ public class UserService {
 		
 		Fcxt fcxt = managerService.getFcxtById(2);
 		
-		double needJb = Math.ceil(fcxt.getJygj()*buyCount);
+		double needJb = Math.ceil(BigDecimalUtil.multiply(fcxt.getJygj(), buyCount));
 		
 		//扣除用户金币
 		if(!useUserItem(userName, "金币", (int) needJb)){

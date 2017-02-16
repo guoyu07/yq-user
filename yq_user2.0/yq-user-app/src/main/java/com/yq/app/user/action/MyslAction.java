@@ -3,6 +3,7 @@ package com.yq.app.user.action;
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.common.utils.BigDecimalUtil;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
@@ -49,7 +50,7 @@ public class MyslAction extends ALDAdminPageActionSupport<Gpjy> {
 			if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){
 				super.setErroCodeNum(1);
 			}
-			needJf = (int)(Math.ceil(jygj*txpay));
+			needJf = (int)(Math.ceil(BigDecimalUtil.multiply(jygj, txpay)));
 			return "mysl2";
 		}
 		
