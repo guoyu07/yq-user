@@ -61,14 +61,24 @@ public class MyslAction extends ALDAdminPageActionSupport<Gpjy> {
 			super.setErroCodeNum(2000);
 		}
 		
-		if(status==4){
-			super.initPage(userService.getMrPageList(super.getUserName(), super.getToPage(), 10));
-			return "moredetail";
-		}
 		
 		return SUCCESS;
 	}
 
+	public String myslmoredetail(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
+		
+		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
+		Fcxt fcxt = managerService.getFcxtById(2);
+		jygj = fcxt.getJygj();
+		jydb = gcuser.getJydb();
+		zdjyg = (int)(gcuser.getJydb()/fcxt.getJygj()+0.1);
+		super.initPage(userService.getMrPageList(super.getUserName(), super.getToPage(), 10));
+		return "moredetail";
+	}
+	
+	
 	/*private double needjg(double a) {
 		 int exponent = Math.getExponent(a);
          double negativeBoundary = -0.0;

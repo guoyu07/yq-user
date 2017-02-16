@@ -24,24 +24,20 @@
         <div class="dialog-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
-              <tr>
+             <tr>
 								<th width="75"><s:text name='reg.jsp.reg.jsp.29623262'/></th>
-								<th><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.682340'/></th>
-								<th><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/></th>
-								<th><s:text name='viewjflc-details.jsp.jflc-details.jsp.784049096'/></th>
-								<th><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.747890431'/></th>
-								<th><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.635139184'/></th>
+								<th><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.-1172477375'/></th>
+								<th><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.787632912'/></th>
+								<th><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.861206825'/></th>
 								<th><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></th>
 							</tr>
 							<s:iterator var="data" value="dataList">
 							<tr>
 								<td>${userName}</td>
-								<td>${data.mcsl}</td>
-								<td>${data.sysl}</td>
+								<td>${data.mysl}</td>
+								<td>${data.jypay}</td>
 								<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
-								<td>${data.pay}</td>
-			                    <td><a href="/diyjygj?sgid=${data.id}"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.635139184'/></a></td>
-			                    <td></td>
+								<td><a href="qxqg?qxid=${data.jyid}" style="text-decoration: none"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.836270'/></a></td>
 							</tr>
 							</s:iterator>
             </tbody>

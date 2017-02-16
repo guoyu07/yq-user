@@ -57,7 +57,7 @@
         </div>
         <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-  <aldtags:pageTag paraStr="status,1,type,1"/>
+  <aldtags:pageTag paraStr="status,1,type,${type}"/>
 </p>
 <!-- 会员中心翻页组件 end -->
 

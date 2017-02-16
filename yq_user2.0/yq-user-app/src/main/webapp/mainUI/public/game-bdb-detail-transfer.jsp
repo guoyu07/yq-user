@@ -46,7 +46,7 @@
         <p class="widget-title-line">报单币变化明细|转账日志</p>
         <p class="small-button-line">
           <a href="bdbdate?type=1" class="widget-warning mr10">查看报单日志</a>
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/bdbdate?status=1&type=0">查看更多</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/bdbdatezzdetail?status=1&type=0">查看更多</a>
         </p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">

@@ -156,6 +156,14 @@
 			<result name="zhuanzhang">mainUI/public/game-bdb-detail-transfer.jsp</result>
 			<result name="zzdetail">mainUI/public/game-bdb-detail-transfer-more.jsp</result>
 		</action>
+		<action name="bdbdatebaodandetail" class="com.yq.app.user.action.DateBdbAction" method="bdbdatebaodandetail">
+			<result name="baodandetail">mainUI/public/game-bdb-detail-bd-more.jsp</result>
+		</action>
+		
+		<action name="bdbdatezzdetail" class="com.yq.app.user.action.DateBdbAction" method="bdbdatezzdetail">
+			<result name="zzdetail">mainUI/public/game-bdb-detail-transfer-more.jsp</result>
+		</action>
+		
 		<action name="bybdblog" class="com.yq.app.user.action.BybdbLogAction">
 			<!-- <result name="success">view/yjcx-bybdb-details.jsp</result> -->
 			<result name="success">mainUI/public/game-bdb-prepare.jsp</result>
@@ -382,11 +390,18 @@
 		</action>
 		
 		
+		<action name="mcslmoredetail" class="com.yq.app.user.action.McslAction" method="mcslmoredetail">
+			<result name="moredetail">mainUI/public/point-exchange-sale-detail-more.jsp</result>
+		</action>
+		
+		
 		<action name="mysl" class="com.yq.app.user.action.MyslAction">
 			<!-- <result name="success">view/jflc-jfmr.jsp</result>
 			<result name="mysl2">view/jflc-jfmr-2.jsp</result> -->
 			<result name="success">mainUI/public/point-exchange-buy.jsp</result>
 			<result name="mysl2">mainUI/public/point-exchange-buy-confirm.jsp</result>
+		</action>
+		<action name="myslmoredetail" class="com.yq.app.user.action.MyslAction" method="myslmoredetail">
 			<result name="moredetail">mainUI/public/point-exchange-buy-detail-more.jsp</result>
 		</action>
 		

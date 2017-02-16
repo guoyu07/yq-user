@@ -125,6 +125,27 @@ public class DateBdbAction extends ALDAdminPageActionSupport<Bdbdate> {
 		
 	}
 	
+	
+	public String bdbdatebaodandetail(){
+		
+		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
+		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(),1, super.getToPage(), 10);
+		super.initPage(page);
+		super.setErroCodeNum(2000);
+		return "baodandetail";
+		
+	}
+
+	public String bdbdatezzdetail(){
+		
+		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
+		IPage<Bdbdate> page = logService.getBdbPage(super.getUserName(),0, super.getToPage(), 10);
+		super.initPage(page);
+		super.setErroCodeNum(2000);
+		return "zzdetail";
+		
+	}
+	
 	public int getStatus() {
 		return status;
 	}

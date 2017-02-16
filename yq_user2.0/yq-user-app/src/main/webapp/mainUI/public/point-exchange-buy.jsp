@@ -76,7 +76,7 @@
       <!-- 当前求购明细 大概是一页10行数据 -->
       <div class="main-widget mt15">
         <p class="widget-title">当前求购明细</p>
-        <p class="small-button-line"><a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/mysl?status=4" id="J_rechargeDetailMore">查看更多</a></p>
+        <p class="small-button-line"><a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/myslmoredetail?status=4" id="J_rechargeDetailMore">查看更多</a></p>
         <div class="widget-table mt5">
         	<c:if test="${empty dataList}">
 						<div class="content-tisp">

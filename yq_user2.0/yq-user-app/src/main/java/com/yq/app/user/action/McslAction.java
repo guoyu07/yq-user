@@ -67,6 +67,16 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 		
 		return SUCCESS;
 	}
+	public String mcslmoredetail(){
+		UserService userService  = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+
+		ManagerService managerService  = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		fcxt = managerService.getFcxtById(2);
+		super.initPage(userService.getAllGpjyDetailsPageList(super.getUserName(), super.getToPage(), 10));
+		return "moredetail";
+	}
+	
 	
 	
 
