@@ -69,7 +69,7 @@
             <input type="password" name="cjpass">
           </p>
           <p class="button-line mt15">
-            <input class="widget-button" type="submit" value="提交充值" name="B1" id="B1"><span class="widget-tips ml10">（剩余：<b class="widget-warning">15000</b>）</span>
+            <input class="widget-button" type="submit" value="提交充值" name="B1" id="B1"><span class="widget-tips ml10">（剩余：<b class="widget-warning">${gcuser.vipcjcjb}</b>）</span>
           </p>
         </form>
       </div>

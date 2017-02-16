@@ -49,7 +49,7 @@
         <p class="widget-title-line">一币购金币卡规则</p>
         <div class="widget-article">
           <p class="widget-tips">按<span class="widget-warning">15-一币-买10金币</span>的比例，成功后显示相应金币卡,
-            <br/>再到<span class="widget-warning">积分理财</span>下<span class="widget-warning">我要充值</span>-激活金币卡即可！</p>
+            <br/>再到<span class="widget-warning">积分理财</span>下激活金币卡！</p>
         </div>
       </div>
       <!-- 一币购金币卡规则 end -->

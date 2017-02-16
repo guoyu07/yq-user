@@ -66,9 +66,9 @@ function bdbcz(){
       <p>游戏级别<em><%=yjcxGcuser.getSjb()%></em></p>
       
       <li class="special">
-		     报单币余额<em><%=yjcxGcuser.getSybdb()%></em>--<a href="bdbzz">转出</a>
+		     报单币余额<em><%=yjcxGcuser.getSybdb()%></em><% if(yjcxGcuser.getVip()>0) {%>--<a href="bdbzz">转出</a><%}%>
 		    </li>
-		<% if(yjcxGcuser.getVip()>0) {%>
+		<% if(yjcxGcuser.getVip()==2) {%>
 			<li class="special">
 	        <a href="bybdblog">备用报单币</a><em><%=yjcxGcuser.getSyep()%></em>
 		    </li>

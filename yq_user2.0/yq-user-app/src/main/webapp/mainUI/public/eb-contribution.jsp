@@ -89,8 +89,8 @@ function checkdate() {
     alert("捐助的一币必须大于等于100!");
     return false;
   }
-  if (Form.jzpay.value > 100) {
-    alert("您的转账一币不能超过您剩余的一币100");
+  if (Form.jzpay.value > ${gcuser.pay}) {
+    alert("您的捐助一币不能超过您剩余的一币${gcuser.pay}");
     return false;
   }
   if (Form.pa3.value == "") {

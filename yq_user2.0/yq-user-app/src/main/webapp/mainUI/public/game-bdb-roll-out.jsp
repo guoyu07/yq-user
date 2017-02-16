@@ -58,7 +58,7 @@
         <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="bdbzz?status=1">
           <p class="item mt15">
             <label class="title widget-warning">转出用户名：</label>
-            <input type="text" name="jcname" value="william123" readonly="" />
+            <input type="text" name="jcname" value="${userName}" readonly="" />
           </p>
           <p class="item">
             <label class="title">转账数量：</label>
@@ -68,7 +68,7 @@
               <option value="30000">---- 3万 ----</option>
               <option value="50000">---- 5万 ----</option>
             </select>
-            <span class="text"> 剩余：<b class="widget-warning">89100</b></span>
+            <span class="text"> 剩余：<b class="widget-warning">${sybdb}</b></span>
           </p>
           <p class="item">
             <label class="title">接受用户名：</label>

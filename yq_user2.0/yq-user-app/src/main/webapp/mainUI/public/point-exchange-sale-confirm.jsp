@@ -60,7 +60,7 @@
               <label class="title">您要卖出积分数量：</label><span class="text">${txpay}</span>
             </p>
             <p class="item">
-              <label class="title">选择单价是：</label><span class="text">>${jygj}</span>
+              <label class="title">选择单价是：</label><span class="text">${jygj}</span>
             </p>
             <p class="mt10">卖出成功后：</p>
             <p class="item mt10">
@@ -70,7 +70,7 @@
               <label class="title">其中70%分配到一币账户：</label><span class="text"><b class="widget-warning">${mc70}</b></span>
             </p>
             <p class="item">
-              <label class="title">其中30%分配到金币账户</label><span class="text"><b class="widget-warning">${mc30}</b></span>
+              <label class="title">其中30%分配到金币账户：</label><span class="text"><b class="widget-warning">${mc30}</b></span>
             </p>
             <p class="button-line mt15">
               <a href="/mcsl?status=2&txpay=${txpay}&jygj=${jygj}" class="widget-button">确定无误</a>

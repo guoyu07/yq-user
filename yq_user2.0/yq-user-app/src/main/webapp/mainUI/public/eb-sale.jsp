@@ -49,7 +49,6 @@
   <!-- 账户概览 end -->
 </div>
 <!-- 会员中心左边栏 end -->
-
     <div class="member-main">
       <!-- 一币卖出说明 -->
       <div class="main-widget">
@@ -61,6 +60,29 @@
         </div>
       </div>
       <!-- 一币卖出说明 end -->
+      <!-- 当前卖出一币的账户信息 -->
+      <div class="main-widget mt15">
+        <p class="widget-title-line">确认当前账户信息</p>
+        <from class="widget-form">
+          <p class="widget-tips widget-warning mt15">您好！您申请发布后，认购一币-返现，您下单后2小时内打到您的收款账号上。</p>
+          <p class="item mt15">
+            <label class="title">真实姓名：</label><span class="text">${gcuser.name}</span>
+          </p>
+          <p class="item">
+            <label class="title">手机号码：</label><span class="text">${gcuser.simpleCall}</span>
+          </p>
+          <p class="item">
+            <label class="title">收款方式：</label><span class="text">${gcuser.bank}</span>
+          </p>
+          <p class="item">
+            <label class="title">账号：</label><span class="text">${gcuser.card}</span>
+          </p>
+          <p class="item">
+            <label class="title">开户行：</label><span class="text">${gcuser.addsheng}${gcuser.addshi}${gcuser.addqu}支行</span>
+          </p>
+        </from>
+      </div>
+      <!-- 当前卖出一币的账户信息 end -->
       <!-- 一币卖出表单 -->
       <div class="main-widget mt15">
         <form class="widget-form mt15" method="POST" name="Form" id="Form" onSubmit="return checkdate1()" action="userpay?status=1">
@@ -87,6 +109,7 @@
             <button class="widget-button" type="submit" id="btn" onClick="return confirm('提示：发布卖出的一币如低于500（含500）交易手续费为15%，高于500的则为10%，您确定了吗？')">发布卖出</button>
           </p>
         </form>
+        <p class="widget-tips widget-warning mt15">警告：请认真核对以下收款信息，如有错误请马上点<a href="login2j?inputUrl=login2j.jsp"><b>修改个人资料</b></a>，再进行发布卖出！如不认真核对，造成付款不成功，该笔卖出将冻结，申请解冻将加收20%手续费！</p>
       </div>
       <!-- 一币卖出表单 end -->
     </div>
