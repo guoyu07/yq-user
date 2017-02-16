@@ -12,7 +12,8 @@ public class YqUserRun {
 		Server server = buildNormalServer(1437, "/");
 		server.start();
 	}
-	/**
+	/**http://www.le.com/ptv/vplay/23170601.html
+
 	 * 创建用于正常运行调试的Jetty Server, 以src/main/webapp为Web应用目录.
 	 */
 	public static Server buildNormalServer(int port, String contextPath) {
