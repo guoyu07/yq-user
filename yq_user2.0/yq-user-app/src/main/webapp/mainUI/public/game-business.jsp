@@ -34,7 +34,7 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
-<div class="member-aside-game-business">
+<div class="member-aside-sp">
   <%@ include file="/mainUI/common/userLeft.jsp" %>
   <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
    <%@ include file="/mainUI/common/gameservice.jsp" %>
@@ -42,7 +42,7 @@
 </div>
 <!-- 会员中心左边栏 end -->
 
-    <div class="member-main-game-business">
+    <div class="member-main-sp">
       <!-- 游戏业务 -->
       <div class="main-widget">
         <p class="widget-title-line">游戏业务</p>

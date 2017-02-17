@@ -41,14 +41,13 @@
 		<action name="datepay" class="com.yq.app.user.action.DatePayAction">
 			<!-- <result name="success">view/yblc-details.jsp</result> -->
 			<result name="success">mainUI/public/eb-change-detail.jsp</result>
-			<result name="detail">mainUI/public/eb-change-detail-more.jsp</result>
 		</action>
 		<action name="datepaydetail" class="com.yq.app.user.action.DatePayAction" method="datepaydetail">
 			<result name="detail">mainUI/public/eb-change-detail-more.jsp</result>
 		</action>
 		<action name="datepayfororder" class="com.yq.app.user.action.DatePayForMallOrderAction">
 			<!-- <result name="success">view/yblc-mallorder-details.jsp</result> -->
-			<result name="success">mainUI/public/eb-store-order-search-more.jsp</result>
+			<result name="success">mainUI/public/eb-store-order-search.jsp</result>
 		</action>
 		<action name="userscoreslog" class="com.yq.app.user.action.UserScoresLogAction">
 			<!-- <result name="success">view/yblc-userscoreslog.jsp</result> -->

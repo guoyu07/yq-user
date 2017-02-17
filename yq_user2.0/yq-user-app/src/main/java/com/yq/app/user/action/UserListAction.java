@@ -24,7 +24,7 @@ public class UserListAction extends ALDAdminPageActionSupport<Gcuser> {
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
-		IPage<Gcuser> dataPage = userService.getTheSameNameUserPage(gcuser.getName(), gcuser.getUserid(), super.getToPage(), 20);
+		IPage<Gcuser> dataPage = userService.getTheSameNameUserPage(gcuser.getName(), gcuser.getUserid(), super.getToPage(), 12);
 		super.initPage(dataPage);
 		if(status==1){
 			return "detail";
@@ -39,7 +39,7 @@ public class UserListAction extends ALDAdminPageActionSupport<Gcuser> {
 	public String userlistdetail(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
-		IPage<Gcuser> dataPage = userService.getTheSameNameUserPage(gcuser.getName(), gcuser.getUserid(), super.getToPage(), 20);
+		IPage<Gcuser> dataPage = userService.getTheSameNameUserPage(gcuser.getName(), gcuser.getUserid(), super.getToPage(), 12);
 		super.initPage(dataPage);
 		return "detail";
 	}

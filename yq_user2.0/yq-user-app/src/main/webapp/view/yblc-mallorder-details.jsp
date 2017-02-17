@@ -13,7 +13,7 @@
 		  if (order==""){
 				alert("<s:text name='pleaseinputmallorder'/>！");
 				Form.orderId.focus();
-				return;
+				return false;
 			}
 	  }
 	

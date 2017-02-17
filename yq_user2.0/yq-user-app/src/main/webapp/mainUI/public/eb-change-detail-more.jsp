@@ -22,7 +22,7 @@
       <!-- 图纸为一页13条数据 -->
       <p class="small-button-line">
         <a href="datepayfororder" class="widget-warning mr10">点击这里进入商城订单号查询</a>
-        <select class="widget-select" id="lb" name="lb" onchange="jump(document.getElementById('lb').options[document.getElementById('lb').selectedIndex].value);">
+        <!-- <select class="widget-select" id="lb" name="lb" onchange="jump(document.getElementById('lb').options[document.getElementById('lb').selectedIndex].value);">
           <option value="0" selected="">全部</option>
           <option value="1">推广奖</option>
           <option value="2">平衡奖</option>
@@ -40,7 +40,7 @@
           <option value="15">商户收入 </option>
           <option value="16">话费充值 </option>
           <option value="20">交易违规 </option>
-        </select>
+        </select> -->
       </p>
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">
@@ -77,7 +77,7 @@
         </div>
         <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-	<aldtags:pageTag paraStr="lb,${lb},status,${status}"/>
+	<aldtags:pageTag paraStr="lb,${lb},status,${status}"/><%-- paraStr="lb,${lb},status,${status}"  --%>
 </p>
 <!-- 会员中心翻页组件 end -->
 

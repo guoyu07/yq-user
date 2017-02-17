@@ -26,6 +26,7 @@ public class YqUserAdminRun {
 		return server;
 	}
 	
+	
 //	public static void smsSend(){ 
 //		Map<String,String> param = new HashMap<String,String>();
 //		param.put("name", "邵");

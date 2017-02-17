@@ -67,7 +67,7 @@ public class PageTag implements Tag {
     
     private static final String TAG_FORMAT = FIRST_PAGE_TAG+"　"+UP_PAGE_TAG+"　"+NEXT_PAGE_TAG+"　"+END_PAGE_TAG+" "+PAGES+"：<b>"+CURRENT_PAGE_NUM_TAG+"/"+ALL_PAGE_NUM_TAG+"</b>"+PAGE+"　"+TOTAL+":<b>"+ALL_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"　<b>"+PER_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"/"+PAGE+"　<input id='toPageInputText' type='text' name='toPage' style='width:49px' value='"+CURRENT_PAGE_NUM_TAG+"' onkeydown='if(event.keyCode==13)document.getElementById(&quot;pageGo&quot;).click()' /><button class='page-go-button' id='pageGo'  onClick=gotoPage(document.getElementById('toPageInputText').value); >GO</button>";
     
-    private static final String TAG_FORMAT_DEFUAT = "首页"+"　"+"上一页"+"　"+"下一页"+"　"+"尾页"+" "+PAGES+"：<b>"+CURRENT_PAGE_NUM_TAG+"/"+ALL_PAGE_NUM_TAG+"</b>"+PAGE+"　"+TOTAL+":<b>"+ALL_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"　<b>"+PER_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"/"+PAGE+"　<input id='toPageInputText' type='text' name='toPage' style='width:49px' value='"+CURRENT_PAGE_NUM_TAG+"' onkeydown='if(event.keyCode==13)document.getElementById(&quot;pageGo&quot;).click()' /><button id='pageGo'  onClick=gotoPage(document.getElementById('toPageInputText').value); >GO</button>";
+    //private static final String TAG_FORMAT_DEFUAT = "首页"+"　"+"上一页"+"　"+"下一页"+"　"+"尾页"+" "+PAGES+"：<b>"+CURRENT_PAGE_NUM_TAG+"/"+ALL_PAGE_NUM_TAG+"</b>"+PAGE+"　"+TOTAL+":<b>"+ALL_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"　<b>"+PER_PAGE_SIZE_NUM_TAG+"</b>"+ITEM+"/"+PAGE+"　<input id='toPageInputText' type='text' name='toPage' style='width:49px' value='"+CURRENT_PAGE_NUM_TAG+"' onkeydown='if(event.keyCode==13)document.getElementById(&quot;pageGo&quot;).click()' /><button id='pageGo'  onClick=gotoPage(document.getElementById('toPageInputText').value); >GO</button>";
     
     
     public int doEndTag() throws JspTagException {
@@ -285,7 +285,7 @@ public class PageTag implements Tag {
             			;
         	}
         	
-        	result=result+"<script>function gotoPage(pageNum){location.href='"+endUrlStr.replaceAll("&amp;", "&")+"toPage='+(pageNum-1)+'';}</script>";
+        	result=result+"<script>function gotoPage(pageNum){location.href='"+endUrlStr.replaceAll("&amp;", "&")+"toPage='+(pageNum-1)+'';};</script>";
         	pageContext.getOut().write(result);
 	} catch (IOException e) {
     		throw new JspTagException("IO Error" + e.getMessage());

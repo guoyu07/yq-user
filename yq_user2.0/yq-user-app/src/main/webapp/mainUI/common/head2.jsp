@@ -19,6 +19,7 @@
     </div>
     <div class="head-info">
       <div class="user-info">
+      <form class="user-info" id="J_ebContributionForm" name="headerSameNameIdForm" action="" method="post">
         <div class="user-info-wrap">
           <span>同名ID</span>
           <div class="select-id" id="J_headerSameNameIdSelect" name="nameIdSelect" title="<%=gcuserHead.getUsername()%>">
@@ -32,6 +33,7 @@
           <em><%=gcuserHead.getTxpay()%></em>
           <span class="logout"><a href="/logout?type=1">退出登录</a></span>
       	</div>
+      	</form>
       </div>
       <div class="nav">
         <ul class="list">
