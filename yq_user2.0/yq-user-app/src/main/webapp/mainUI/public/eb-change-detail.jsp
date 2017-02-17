@@ -44,7 +44,7 @@
         <p class="widget-title-line">一币变化明细</p>
         <p class="small-button-line">
           <a href="datepayfororder" class="widget-warning mr10">点击这里进入商城订单号查询</a>
-          <select class="widget-select" id="lb" name="lb" onchange="jump(document.getElementById('lb').options[document.getElementById('lb').selectedIndex].value);">
+          <!-- <select class="widget-select" id="lb" name="lb" onchange="jump(document.getElementById('lb').options[document.getElementById('lb').selectedIndex].value);">
             <option value="0" selected="">全部</option>
             <option value="1">推广奖</option>
             <option value="2">平衡奖</option>
@@ -62,7 +62,7 @@
             <option value="15">商户收入 </option>
             <option value="16">话费充值 </option>
             <option value="20">交易违规 </option>
-          </select>
+          </select> -->
         </p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
