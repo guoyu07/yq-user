@@ -3240,16 +3240,14 @@ public class UserService {
 //			throw new ServiceException(8,"您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！");
 //		}
 		
-		
 		int needJb = (int)(Math.ceil(BigDecimalUtil.multiply(price,saleNum)));
 		
 		if(needJb<=0){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
-		
-	
 		// 自动积分卖出功能 
 		saleNum = automationSaleJf(userName, price, saleNum, passwrod3);
+		
 		
 		if(saleNum<=0){
 			return;
@@ -3421,11 +3419,9 @@ public class UserService {
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
 		
-		
 		//修改买卖索引交易数量
 		gpjyDao.updateIndexCount(id, saleCount);
-		
-		
+
 		
 
 		gcuser = gcuserDao.getUser(userName);
@@ -3672,6 +3668,7 @@ public class UserService {
 			throw new ServiceException(3000, "未知錯誤");
 		}
 		gpjyDao.deleteIndex(id);
+		
 		
 		gcuser = gcuserDao.getUser(userName);
 		
