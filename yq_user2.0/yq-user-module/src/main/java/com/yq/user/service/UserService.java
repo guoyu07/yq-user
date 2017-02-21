@@ -859,7 +859,7 @@ public class UserService {
 				datePay.setJc(changeNum*-1);
 				datePay.setPay(gcuser.getPay());
 				datePay.setJydb(gcuser.getJydb());
-				datePay.setRegid("消费一币("+desc+")---操作者："+oparetor);
+				datePay.setRegid("消费一币("+desc+")");
 				datePay.setNewbz(newzBz);
 				if(kjqi!=null){
 					datePay.setKjqi(kjqi);
@@ -878,7 +878,7 @@ public class UserService {
 				datePay.setSyjz(changeNum);
 				datePay.setPay(gcuser.getPay());
 				datePay.setJydb(gcuser.getJydb());
-				datePay.setRegid(desc+"---操作者："+oparetor);
+				datePay.setRegid(desc);
 				datePay.setNewbz(newzBz);
 				datePay.setAbdate(new Date());
 				datePay.setOrigintype(YbChangeType.SYSTEM_CONSUMEYB_ADD);
