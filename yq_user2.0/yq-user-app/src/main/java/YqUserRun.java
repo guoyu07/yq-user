@@ -9,7 +9,7 @@ import com.sr178.module.sms.util.SubMailSendUtils;
 
 public class YqUserRun {
 	public static void main(String[] args) throws Exception {
-		Server server = buildNormalServer(8087, "/");
+		Server server = buildNormalServer(8081, "/");
 		server.start();
 	}
 	/**
