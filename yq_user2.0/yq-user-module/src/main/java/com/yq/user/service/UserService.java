@@ -12,7 +12,9 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -3248,7 +3250,6 @@ public class UserService {
 		// 自动积分卖出功能 
 		saleNum = automationSaleJf(userName, price, saleNum, passwrod3);
 		
-		
 		if(saleNum<=0){
 			return;
 		}
@@ -3288,7 +3289,8 @@ public class UserService {
 	 * @return saleCount 如果有余下，挂单...
 	 * 
 	 * */
-	public int automationSaleJf(String userName,double price,int saleCount, String passwrod3) {
+	@Transactional(propagation=Propagation.REQUIRED)
+	public int automationSaleJf(String userName,double price,int saleCount, String passwrod3){
 		//得到当前价格的买入列表
 		double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
 		if(currentPrice!=price){//如果卖出价格与当前价格不等，直接创建新的交易订单
@@ -3332,19 +3334,20 @@ public class UserService {
 						if(salenum<=0){
 							break;
 						}
+						
 						try{
 							//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
 							if(saleCount>=salenum){
 								
 									//直接完结买入订单
 									saleCount = automcJf(userName,gpjy,saleCount);
-								
 							}else{
 									//修改订单
 									saleCount = changemcJf(userName,gpjy,saleCount);
+								
 							}
 						}catch(ServiceException e){
-							continue;
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 						}
 						
 					}
@@ -3374,7 +3377,7 @@ public class UserService {
 	 * @param saleCount 卖出数量
 	 * 
 	 * */
-	@Transactional(rollbackFor=ServiceException.class) 
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public int changemcJf(String userName, Gpjy gpjy1, int saleCount) {
 		int id = gpjy1.getId();
 		checkJfIsOpen();
@@ -3396,6 +3399,7 @@ public class UserService {
 		if(!useUserItem(userName, "积分", saleCount)){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
+		
 		
 		//获得一币
 		if(!giveUserItem(userName, "一币", mc70)){
@@ -3510,7 +3514,7 @@ public class UserService {
 	 * 
 	 * @param buyCount 卖出数量  
 	 */
-	@Transactional(rollbackFor=ServiceException.class) 
+	@Transactional(propagation=Propagation.REQUIRES_NEW,rollbackFor=ServiceException.class) 
 	public int changemrJf(String userName,Gpjy gpjy1,int buyCount){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id = gpjy1.getId();
@@ -3618,7 +3622,6 @@ public class UserService {
 		return 0;
 		 
 	}
-
 	/**
 	 * 自动积分卖出,正常流程
 	 * 
@@ -3626,7 +3629,7 @@ public class UserService {
 	 * 
 	 * @param gpjy1  订单
 	 */
-	@Transactional(rollbackFor=ServiceException.class) 
+	@Transactional(propagation=Propagation.REQUIRES_NEW,rollbackFor=ServiceException.class)
 	public int automcJf(String userName,Gpjy gpjy1, int saleCount){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		int id= gpjy1.getId();
@@ -3639,12 +3642,10 @@ public class UserService {
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
 		
-		
 		//扣除积分
 		if (!useUserItem(userName, "积分", gpjy1.getMysl().intValue())) {
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
-		
 
 		//增加一币
 		if(!giveUserItem(userName, "一币", mc70)){
@@ -3971,7 +3972,8 @@ public class UserService {
 	 * @param buycount	买入的数量， 如果有余下，挂单..
 	 * 
 	 */
-	private int automationBuyJf(String userName, int buycount) {
+	@Transactional(propagation=Propagation.REQUIRED)
+	public int automationBuyJf(String userName, int buycount) {
 
 		double price = managerService.getCurrentyPrice();//得到當前價格
 		
@@ -4010,7 +4012,7 @@ public class UserService {
 			    					buycount=changemrJf(userName,gpjy,buycount);
 		    				}
 		    			}catch(ServiceException e){
-							continue;
+		    				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 						}
 	    				
 	    			}
@@ -4033,7 +4035,7 @@ public class UserService {
 	 * @param gpjy 买入积分订单
 	 * @return 
 	 */
-	@Transactional(rollbackFor=ServiceException.class) 
+	@Transactional(propagation=Propagation.REQUIRES_NEW,rollbackFor=ServiceException.class) 
 	public int automrJf(String userName,Gpjy gpjy1, int buycount){
 		
 		Gcuser gcuser = gcuserDao.getUser(userName);
