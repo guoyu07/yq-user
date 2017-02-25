@@ -1507,7 +1507,7 @@ public class UserService {
 	@Transactional
 	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,String remark, String oparetor){
 		
-		if(!"zbdb8989".equals(oppass)){
+		if(!this.getConfigPassword(PasswordKey.BDB_TRANSFER).equals(oppass)){
 			throw new ServiceException(6, "操作密码不正确！");
 		}
 		Gcuser from = gcuserDao.getUser(fromUser);
