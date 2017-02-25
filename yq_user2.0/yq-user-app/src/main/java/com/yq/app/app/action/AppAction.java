@@ -1,7 +1,6 @@
 package com.yq.app.app.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.yq.app.bean.SimpleUserInfoBean;
 import com.yq.app.service.AppService;
 
 public class AppAction extends AppBaseActionSupport {

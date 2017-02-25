@@ -14,6 +14,15 @@
          <action name="payOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="payOrder" />
          <action name="addScores" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="addScores" />
          <action name="getUserInfo" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="getUserInfo" />
+         
+         <!-- version2.0 -->
+         <action name="userPersonalInfo" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="userPersonalInfo" />
+         <action name="pointChangeinfo" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="pointChangeinfo" />
+         <action name="getSameUserPersonalInfo" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getSameUserPersonalInfo" />
+         <action name="userPointChangeDetail" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="userPointChangeDetail" />
+         <action name="userPointSplitDetail" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="userPointSplitDetail" />
+         <action name="getSameUserTotalWealth" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getSameUserTotalWealth" />
+         
    </package>
 	
 	<package name="agentNoLoginInterceptor" extends="myInterceptor">

@@ -96,7 +96,7 @@ function checkdate1()  {
 				<div class="content-box2 mth10" >
 					<div style="color: #515151;">
 						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1318893197'/></p>
-						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.36915859'/>：<b style="color: red"><c:if test="${transferType==1}"><c:if test="${gcuser.pay<1}"> 0${gcuser.pay-gcuser.vippay} </c:if><c:if test="${gcuser.pay>=1}"> ${gcuser.pay-gcuser.vippay} </c:if></c:if><c:if test="${transferType==2}">${gcuser.pay}</c:if></b><s:text name='yibi'/></p>
+						<p><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.36915859'/><b style="color: red"><c:if test="${transferType==1}"><c:if test="${gcuser.pay<1}"> 0${gcuser.pay-gcuser.vippay} </c:if><c:if test="${gcuser.pay>=1}"> ${gcuser.pay-gcuser.vippay} </c:if></c:if><c:if test="${transferType==2}">${gcuser.pay}</c:if></b><s:text name='yibi'/></p>
 					</div>
 					<div class="z-cb">
 					<form class="form form3" style="width: 420px; float:left;" method="POST" name="Form" id="Form" onSubmit="return checkdate1()" action="userpay?status=1">

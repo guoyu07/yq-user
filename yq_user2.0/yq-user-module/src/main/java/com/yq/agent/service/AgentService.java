@@ -1,10 +1,8 @@
 package com.yq.agent.service;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,28 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
+import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.utils.JedisUtils;
 import com.sr178.module.utils.MD5Security;
 import com.sr178.module.web.session.Session;
+import com.yq.agent.bean.SameAccountWealth;
 import com.yq.agent.bo.AgentApp;
 import com.yq.agent.bo.AgentOrder;
 import com.yq.agent.bo.AgentScoresChangeLog;
 import com.yq.agent.bo.AgentUser;
 import com.yq.agent.constant.AgentScoresChangeType;
 import com.yq.agent.dao.AgentAppDao;
+import com.yq.agent.dao.AgentGpjyDao;
 import com.yq.agent.dao.AgentOrderDao;
+import com.yq.agent.dao.AgentPointsChangeLogDao;
 import com.yq.agent.dao.AgentScoresChangeLogDao;
+import com.yq.agent.dao.AgentTxpayDao;
 import com.yq.agent.dao.AgentUserDao;
 import com.yq.app.utils.MacShaUtils;
 import com.yq.common.utils.Global;
 import com.yq.common.utils.ParamCheck;
 import com.yq.common.utils.UrlRequestUtils;
 import com.yq.common.utils.UrlRequestUtils.Mode;
+import com.yq.manager.bo.PointsChangeLog;
 import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.bo.Gpjy;
 import com.yq.user.constant.ScoresChangeType;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.GcuserDao;
@@ -54,6 +59,13 @@ public class AgentService {
 	private AgentUserDao agentUserDao;
 	@Autowired
 	private AgentScoresChangeLogDao agentScoresChangeLogDao;
+	
+	@Autowired
+	private AgentTxpayDao agentTxpayDao;
+	@Autowired
+	private AgentPointsChangeLogDao agentPointsChangeLogDao;
+	@Autowired
+	private AgentGpjyDao agentGpjyDao;
 	
 	
   	private static final String AGENT_APP_SESSION_CACHE_PRE = "agent_app_session_";
@@ -460,5 +472,95 @@ public class AgentService {
 		return guser;
 	}
 
+	public List<PointsChangeLog> getPointsChangeLog(String appId, String param, String sign) {
+		//检测客户端传过来的参数是否为空
+		ParamCheck.checkString(sign, 5, "签名不能为空");
+		if(param==null){
+			param = "";
+		}
+		//获得app
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appId");
+		}
+		String signString = appId+param;
+		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}
+		
+		return agentPointsChangeLogDao.get10();
+	}
+
+	public IPage<Gcuser> getSameUserInfo(String user,int pageIndex, int pageSize) {
+		Gcuser guser=gcuserDao.getUser(user);
+		if(guser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		return gcuserDao.getUserPage(guser.getName(), guser.getUserid(), pageIndex, pageSize);
+	}
+
+	
+	/**
+	 * 得到玩家積分明細
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Gpjy> getPointDetail(String user,int pageIndex,int pageSize) {
+		return agentGpjyDao.getAllGpjyPageList(user, pageIndex, pageSize);
+	}
+
+	
+	/**
+	 * 玩家積分拆分收益明細
+	 * @param user
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Gpjy> getUserPointSplitDetail(String user, int currentPage, int pageSize) {
+		return agentGpjyDao.getUserPointSplitPageList(user, currentPage, pageSize);
+	}
+
+	public boolean checkSign(String appId, String user, String param, String sign) {
+		//检测客户端传过来的参数是否为空
+		ParamCheck.checkString(user, 2, "用户名不能为空");
+		ParamCheck.checkString(sign, 5, "签名不能为空");
+		if(param==null){
+			param = "";
+		}
+		Gcuser guser=gcuserDao.getUser(user);
+		if(guser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		//获得app
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appId");
+		}
+		String signString = appId+user+param;
+		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}
+		return true;
+		
+	}
+
+	public SameAccountWealth getSameAccountWealth(String user) {
+
+		Gcuser guser=gcuserDao.getUser(user);
+		if(guser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		
+		return gcuserDao.getSameAccountTatolWealth(guser.getName(),guser.getUserid());
+	}
+
+	
+	
 	
 }

@@ -607,7 +607,7 @@
 		        jfcf.jsp
 		    </result>
 		</action>
-		<!-- 未知模块 -->
+		<!-- 積分拆分 -->
 		<action name="cf" class="com.yq.admin.manager.action.JfcfAction" method="chaifeng">
 		    <result name="success">
 		        jfcf.jsp

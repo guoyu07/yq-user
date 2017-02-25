@@ -17,4 +17,10 @@
        <bean id="agentScoresChangeLogDao" class="com.yq.agent.dao.AgentScoresChangeLogDao"></bean>
        <bean id="agentYbChangeLogDao" class="com.yq.agent.dao.AgentYbChangeLogDao"></bean>
        <bean id="agentOrderDao" class="com.yq.agent.dao.AgentOrderDao"></bean>
+       
+       <bean id="agentPointsChangeLogDao" class="com.yq.agent.dao.AgentPointsChangeLogDao"></bean>
+       <bean id="agentTxpayDao" class="com.yq.agent.dao.AgentTxpayDao"></bean>
+        <bean id="agentGpjyDao" class="com.yq.agent.dao.AgentGpjyDao"></bean>
+     
+       
 </beans>
