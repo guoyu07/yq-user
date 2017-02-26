@@ -5011,6 +5011,23 @@ public class UserService {
 		return "xtgc001";
 	}
 	
+	public Gcuser findMyBigUpVip(String userName) {
+		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
+		if (sgxtBd != null) {
+			if (sgxtBd.getVip() == 1) {
+				Gcuser gcuser = gcuserDao.getUser(sgxtBd.getUsername());
+				if(gcuser.getVip()==2){
+					return gcuser;
+				}else{
+					return findMyBigUpVip(sgxtBd.getUsername());
+				}
+			} else {
+				return findMyBigUpVip(sgxtBd.getUsername());
+			}
+		}
+		return gcuserDao.getUser("xtgc001");
+	}
+	
 	
 	@Transactional
 	public void addBabyInfo(String userName,String babyName, int babyAge, String babySex, String dadyName,

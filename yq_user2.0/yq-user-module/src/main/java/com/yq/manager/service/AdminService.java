@@ -50,6 +50,7 @@ import com.yq.manager.bo.PointsChangeLog;
 import com.yq.manager.bo.UserVipLog;
 import com.yq.manager.bo.W10Bean;
 import com.yq.manager.bo.Zq2016stat;
+import com.yq.manager.bo.ZqStat;
 import com.yq.manager.dao.AddShengDao;
 import com.yq.manager.dao.FhdateDao;
 import com.yq.manager.dao.MqfhDao;
@@ -3017,7 +3018,42 @@ public class AdminService {
 //		LogSystem.info("采集年度获奖数据结束，日期="+DateUtils.getDate(date)+",采集数据条数"+searchs.size()+",用去时间为="+(endTimes-startTimes)/1000+"秒！");
 //	}
 	
-	
+	public void generatorStatData(){
+		List<ZqStat> listA = zq2016statDao.getAllXList("a");
+		String startTimea = "2016-01-01 00:00:00";
+		String endTimea =  "2016-12-31 23:59:59";
+		for(ZqStat a:listA){
+			int zup = getMyAllUserThisYearSignlePerformance(a.getUserName(), startTimea, endTimea);
+			boolean isfivefull = isFiveStepFull(a.getUserName());
+			Gcuser bigVipUser = userService.findMyBigUpVip(a.getUserName());
+			int fu = isfivefull?1:0;
+			zq2016statDao.updateZupAndFu(a.getUserName(), zup, fu,bigVipUser.getUsername(),bigVipUser.getName(), "a");
+		}
+		
+		
+		List<ZqStat> listB = zq2016statDao.getAllXList("b");
+		String startTimeb = "2016-01-01 00:00:00";
+		String endTimeb =  "2016-12-31 23:59:59";
+        for(ZqStat b:listB){
+			int zup = getMyAllUserThisYearSignlePerformance(b.getUserName(), startTimeb, endTimeb);
+			boolean isfivefull = isFiveStepFull(b.getUserName());
+			int fu = isfivefull?1:0;
+			Gcuser bigVipUser = userService.findMyBigUpVip(b.getUserName());
+			zq2016statDao.updateZupAndFu(b.getUserName(), zup, fu,bigVipUser.getUsername(),bigVipUser.getName(), "b");
+		}
+		
+		
+		List<ZqStat> listC = zq2016statDao.getAllXList("c");
+		String startTimec = "2016-01-01 00:00:00";
+		String endTimec =  "2017-02-23 23:59:59";
+        for(ZqStat c:listC){
+        	int zup = getMyAllUserThisYearSignlePerformance(c.getUserName(), startTimec, endTimec);
+			boolean isfivefull = isFiveStepFull(c.getUserName());
+			int fu = isfivefull?1:0;
+			Gcuser bigVipUser = userService.findMyBigUpVip(c.getUserName());
+			zq2016statDao.updateZupAndFu(c.getUserName(), zup, fu,bigVipUser.getUsername(),bigVipUser.getName(), "c");
+		}
+	}
 	
 	public List<UserPerformance> getUserPerformancePage(){
 //		return userPerformanceDao.getListPage(time, pageIndex, pageSize);
