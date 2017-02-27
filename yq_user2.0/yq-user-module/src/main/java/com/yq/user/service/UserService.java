@@ -3299,10 +3299,78 @@ public class UserService {
 		if(needJb<=0){
 			throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 		}
+
+		int saleCount = saleNum;
+		// 自动积分卖出功能 开始
+		double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
+		if(currentPrice==price){//如果卖出价格与当前价格不等，直接创建新的交易订单
+			//得到当前价格的买入列表
+			int salenum1 = 0;
+			Collection<GpjyIndexMr> tempList = null;
+			IPage<GpjyIndexMr> page = null;
+			for (int i = 0; i < 3; i++) {
+				//1、得到相同所有单价的买入积分列表
+				page = gpjyDao.getMrIndexList(i, 100);
+				
+				if(page!=null){
+					tempList = page.getData();
+					if(tempList!=null&&tempList.size()>0){
+						if(saleCount==0){
+							break ;
+						}
+						for (GpjyIndexMr gpjyIndexMr : tempList) {
+							int orderId = gpjyIndexMr.getId();
+							Gpjy gpjy = gpjyDao.getNoJyById(orderId);
+							if(null==gpjy){
+								continue;
+							}
+							if(userName.equals(gpjy.getUsername())){//自己不能卖给自己
+								continue;
+							}
+							if(saleCount==0){
+								break ;
+							}
+							// 重置数量和价格
+							if(gpjy.getNewjy()!=GpjyChangeType.BUY_BY_SYSTEM){
+								gpjy.setPay(price);
+								gpjy.setMysl(Double.valueOf(gpjy.countNum(price)));
+								salenum1 =  (int) (gpjy.getJypay()/currentPrice);
+							}else{
+								salenum1 =  (int) gpjyIndexMr.getMysl();
+							}
+							if(salenum1<=0){
+								break;
+							}
+							try{
+								//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
+								if(saleCount>=salenum1){
+										//直接完结买入订单
+										saleCount = proxySelf.automcJf(userName,gpjy,saleCount );
+										
+									
+								}else{
+										//修改订单
+										saleCount = proxySelf.changemcJf(userName,gpjy,saleCount);
+								}
+							}catch(RuntimeException e){
+							}
+							
+						}
+						
+					}else{
+						break;
+					}
+					
+				}else{
+					break;
+				}
+			}
 		
-	
-		//TODO  自动积分卖出功能 
-		//saleNum = automationSaleJf(userName, price, saleNum, passwrod3);
+			}
+		
+		
+		saleNum = saleCount;
+		
 		
 		if(saleNum<=0){
 			return;
@@ -3330,7 +3398,6 @@ public class UserService {
 		gpjyDao.add(gpjy);
 		
 	}
-	
 
 	
 
