@@ -10,7 +10,8 @@
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('购物券不足，不允许退户！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('推荐奖励没有减成功，不允许退户！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('下面已挂载了用户，不能退户！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('退户成功！');window.location.href="searchuser.action?status=1&user="+${user};</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('有玩家已经结算，不能退户！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('退户成功！');window.location.href="searchuser.action?status=1&user="${user};</script></c:if>
 
 <html>
 <title>显示用户信息</title>

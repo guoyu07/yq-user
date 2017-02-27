@@ -138,18 +138,20 @@ public class SgxtDao {
 	
 	
 	public boolean updateAq(String userName,int aq){
-		String sql = "update "+table+" set aq=aq+? where username=?";
+		String sql = "update "+table+" set aq=aq+? where username=? and aq+?>=0";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(aq);
 		parameter.setString(userName);
+		parameter.setInt(aq);
 		return jdbc.update(sql, parameter)>0;
 	}
 	
 	public boolean updateBq(String userName,int bq){
-		String sql = "update "+table+" set bq=bq+? where username=?";
+		String sql = "update "+table+" set bq=bq+? where username=? and bq+?>=0";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(bq);
 		parameter.setString(userName);
+		parameter.setInt(bq);
 		return jdbc.update(sql, parameter)>0;
 	}
 	

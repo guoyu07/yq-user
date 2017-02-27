@@ -1267,9 +1267,11 @@ public class UserService {
     	List<ZuoMingxi> zupList = zuoMingxiDao.getDownList(username);
     	for(ZuoMingxi z:zupList){
     		sgxtDao.updateZaq(z.getTjuser(), -sjb);
-    		int aq = getAddAqOrBqFromBdbdate(z.getTjuser(),username);
+    		int aq = getAddAqOrBqFromBdbdate(z.getTjuser(),username,sjb);
     		if(aq>0){
-    			sgxtDao.updateAq(z.getTjuser(), -aq);
+    			if(!sgxtDao.updateAq(z.getTjuser(), -aq)){
+    				throw new ServiceException(9,"有玩家已经结算！无法退户,user="+z.getTjuser());
+    			}
     		}
     		 Sgxt sgxtBd = sgxtDao.get(z.getTjuser());
 			 Bdbdate bdbdate = new Bdbdate();
@@ -1292,9 +1294,11 @@ public class UserService {
     	List<YouMingxi> yupList = youMingXiDao.getDownList(username);
     	for(YouMingxi y:yupList){
     		sgxtDao.updateZbq(y.getTjuser(), -sjb);
-    		int bq = getAddAqOrBqFromBdbdate(y.getTjuser(),username);
+    		int bq = getAddAqOrBqFromBdbdate(y.getTjuser(),username,sjb);
     		if(bq>0){
-    			sgxtDao.updateBq(y.getTjuser(), -bq);
+    			if(!sgxtDao.updateBq(y.getTjuser(), -bq)){
+    				throw new ServiceException(9,"有玩家已经结算！无法退户"+y.getTjuser());
+    			}
     		}
    		     Sgxt sgxtBd = sgxtDao.get(y.getTjuser());
 			 Bdbdate bdbdate = new Bdbdate();
