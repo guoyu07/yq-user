@@ -349,7 +349,7 @@ public class YbShopPayAction extends ALDAdminActionSupport {
 	 * @return
 	 */
 	private int day;
-	private static final String KYPW_URL = "http://www.kypwb.com/interface/YiBiPayReturnNotify?act=payment&op=returnyibi&paycode=success";
+	private static final String KYPW_URL = "http://113.106.27.120:8080/interface/YiBiPayReturnNotify?act=payment&op=returnyibi&paycode=success";
 	private static final String SUCCESS_TAG = "ok";
 	public String kypwe(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);

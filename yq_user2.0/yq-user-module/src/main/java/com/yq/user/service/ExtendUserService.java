@@ -160,11 +160,6 @@ public class ExtendUserService {
 				throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
 			}
 			
-			
-			if(1==1){
-				throw new ServiceException(879998,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
-			}
-			
 			//获得一币
 			if(!giveUserItem(userName, "一币", mc70)){
 				throw new ServiceException(3000,"未知错误！");
@@ -430,10 +425,6 @@ public class ExtendUserService {
 				throw new ServiceException(1, "金币不足！");
 			}
 			
-			//TODO
-			if(1==1){
-				throw new ServiceException(23434,"抛出异常");
-			}
 
 			//获得积分
 			if(!giveUserItem(userName, "积分", buyCount)){
