@@ -316,7 +316,8 @@ public class YbChangeType {
 	 * 月分红
 	 * 
 	 * */
-	public static final int MONTH_SHAREMONEY = 99;
+	public static final int MONTH_SHAREMONEY = 99; 
+
 	
 	/**
 	 * 购买机票转入公司账户

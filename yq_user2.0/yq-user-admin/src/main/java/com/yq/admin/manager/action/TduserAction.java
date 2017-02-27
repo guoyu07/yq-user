@@ -1,11 +1,13 @@
 package com.yq.admin.manager.action;
 
 import com.google.common.base.Strings;
+import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Tduser;
+import com.yq.user.constant.PasswordKey;
 
 public class TduserAction extends ALDAdminPageActionSupport<Tduser> {
 
@@ -79,7 +81,7 @@ public class TduserAction extends ALDAdminPageActionSupport<Tduser> {
 	
 	
 	private void checkPassword(){
-        if(!cjpa.equals("xfyc15th")){
+        if(!cjpa.equals(ConfigLoader.getStringValue(PasswordKey.LI_SHI_TUI_HU_JI_LU, ""))){
 			throw new ServiceException(100, "密码错误");
 		}
 	}

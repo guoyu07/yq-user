@@ -54,6 +54,7 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 		}
 		if(status==2){
 			userService.saleJf(super.getUserName(), jygj, txpay, "-1");
+			
 			super.setErroCodeNum(2000);
 			return "mcsl2";
 		}

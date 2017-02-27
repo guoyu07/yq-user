@@ -72,6 +72,8 @@
        
        <bean id="adminOperateLogDao" class="com.yq.manage.dao.AdminOperateLogDao"></bean>
        
+       <bean id="proxySelf" class="com.yq.user.service.ExtendUserService"></bean>
+       
        <!-- 用户数据service -->
        <bean id="userService" class="com.yq.user.service.UserService"></bean>
        <!-- 管理类service -->
@@ -81,10 +83,12 @@
        <!-- 系统币日志表 -->
        <bean id="sysBiLogDao" class="com.yq.user.dao.SysBiLogDao"></bean>
        
+      
           
        <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
 		<property name="corePoolSize" value="8" />
 		<property name="maxPoolSize" value="20" />
 		<property name="queueCapacity" value="102400" />
 	   </bean>
+	   
 </beans>

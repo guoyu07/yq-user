@@ -1,7 +1,11 @@
 package com.yq.user.dao;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,9 +14,11 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.log.LogSystem;
+import com.yq.agent.bean.SameAccountWealth;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.MD5Security;
+import com.yq.cw.bean.DayOfYb;
 import com.yq.user.bean.TopReward;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
@@ -1325,5 +1331,37 @@ public class GcuserDao {
 		parameter.setString(name);
 		return this.jdbc.getList(sql,Gcuser.class, parameter);
 	}
+	
+	
+	/**
+	 * 
+	 * 得到同名账户总资产
+	 * 
+	 * */
+	public SameAccountWealth getSameAccountTatolWealth(String name, String userId){
+
+		SameAccountWealth sameAccountWealth= new SameAccountWealth();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select sum(pay) as totalYb, sum(jydb) as totalGold, sum(jyg) as totalPoint, sum(mcpay) as totalTx from "+table+"  where  name=? and userid=? ");
+		List rows = jdbc.getJdbcTemplate().queryForList(sql.toString(),name,userId);
+		Iterator it = rows.iterator();  
+		while(it.hasNext()) {  
+			 Map map = (Map) it.next();
+			 BigDecimal totalYb = new BigDecimal(map.get("totalYb").toString());   
+			 BigDecimal totalGold = new BigDecimal(map.get("totalGold").toString());
+			 BigDecimal totalPoint = new BigDecimal(map.get("totalPoint").toString());
+			 BigDecimal totalTx = new BigDecimal(map.get("totalTx").toString());
+			 sameAccountWealth.setTotalYb(totalYb.doubleValue());
+			 sameAccountWealth.setTotalGold(totalGold.doubleValue());
+			 sameAccountWealth.setTotalPoint(totalPoint.doubleValue());
+			 sameAccountWealth.setTotalTx(totalTx.doubleValue());
+		}  
+		return sameAccountWealth;
+		
+	}
+	
+	
+	
+	
 	
 }
