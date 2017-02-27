@@ -27,6 +27,8 @@ public class ScoresChangeType {
 	
 	public static final int MALL_TEMP_ADD_REDUCE = 2004;//商城临时存放转出
 	
+	public static final int SYSTEM_REDUCE = 2005;//退户扣回购物券
+	
 	
 	
 }

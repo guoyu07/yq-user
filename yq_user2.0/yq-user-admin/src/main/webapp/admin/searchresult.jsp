@@ -5,6 +5,13 @@
 <script language="javascript" src="/js/ajax.js"></script>
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('用户不存在！');history.go(-1);</script></c:if>
 <c:if test="${code==1}"><script language=javascript>alert('用户不存在1！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('报单数不支持退户，只支持 10000，20000，50000！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('金币不足，不允许退户！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('购物券不足，不允许退户！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('推荐奖励没有减成功，不允许退户！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('下面已挂载了用户，不能退户！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('退户成功！');window.location.href="searchuser.action?status=1&user="+${user};</script></c:if>
+
 <html>
 <title>显示用户信息</title>
 </head>
@@ -72,8 +79,11 @@
 		<c:if test="${role.roleLevel<3}">
 		<td align="center" >
 			<a href="javascript:void(0);" style="text-decoration: none;" onclick="reset('${data.username}')">重置玩家业绩</a></td>
-		</td>
-		</c:if>
+		</td></c:if>
+		<c:if test="${data.sjb>=20}"><td align="center" >
+			<a onClick="return confirm('提示：您确定要对用户[${data.username}]进行退户操作吗？')" href="cancleBd?user=${data.username}" style="text-decoration: none">退户</a></td>
+		</td></c:if>
+		
 		</tr>
 		</s:iterator>
 	</table>

@@ -326,6 +326,10 @@ public class YbChangeType {
 	 * */
 	public static final int BUYTICKETGETYB = 147;
 	
+	/**
+	 * 退户减推荐奖励
+	 */
+	public static final int SYSTEM_BACK_PRICE = 148;
 	
 	
 }

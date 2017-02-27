@@ -183,7 +183,13 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 		vipDownTempList = ServiceCacheFactory.getService(CwService.class).getDownVipList(user);
 		return SUCCESS;
 	}
-
+    //退户
+	public String cancleBd(){
+		UserService userService = ServiceCacheFactory.getService(UserService.class);
+		userService.cancleBd(user);
+		super.setErroCodeNum(2000);
+		return SUCCESS;
+	}
 	
 	
 	public List<VipDownTemp> getVipDownTempList() {

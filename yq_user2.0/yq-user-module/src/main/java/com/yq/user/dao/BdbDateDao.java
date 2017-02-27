@@ -111,4 +111,10 @@ public class BdbDateDao {
 		return this.jdbc.getList(sql, Bdbdate.class, parameter);
 	}
 	
+	public Bdbdate getBdbdate(String username,String bduser){
+		String sql = "select * from "+table+" where zuser = ? and bz like '新单"+bduser+"%' limit 1";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(username);
+		return this.jdbc.get(sql, Bdbdate.class, parameter);
+	}
 }

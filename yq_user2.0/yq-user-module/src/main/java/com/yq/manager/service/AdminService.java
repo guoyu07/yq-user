@@ -2745,12 +2745,15 @@ public class AdminService {
 			startTime = startTime + " 00:00:00";
 			endTime = endTime + " 23:59:59";
 		}
+		LogSystem.info("查询用户:"+userName+",startTime="+startTime+",endTime="+endTime);
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		List<Gcuser> list = gcuserDao.getUserByIdCard(gcuser.getUserid());
 		int result = 0;
 		if(list!=null&&list.size()>0){
 			for(Gcuser gc:list){
-				result = result + gcuserDao.getUserSigleSumSjbByTime(gc.getUsername(),gc.getUserid(), startTime, endTime);
+				int num = gcuserDao.getUserSigleSumSjbByTime(gc.getUsername(),gc.getUserid(), startTime, endTime);
+				result = result + num;
+				LogSystem.info(gc.getUsername()+"="+num+",result="+result);
 			}
 		}
 		return result;

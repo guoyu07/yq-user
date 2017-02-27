@@ -187,6 +187,7 @@ public class UserService {
 	
 	@Autowired
     private ExtendUserService proxySelf; 
+	
 
 
 	//用户id与UserMapper的映射map
@@ -1227,7 +1228,129 @@ public class UserService {
 		return call;
 	}
 	
-	
+    @Transactional
+    public void cancleBd(String username){
+    	Gcuser gcuser = gcuserDao.getUser(username);
+    	if(gcuser==null){
+    		throw new ServiceException(1,"用户不存在");
+    	}
+    	
+    	int sjb = gcuser.getSjb();
+		int scores = 0;
+		int zjjb = 0;
+    	if(sjb==20){
+    		scores = 300;
+    		zjjb=5000;
+    	}else if(sjb==40){
+    		scores = 600;
+    		zjjb=11000;
+    	}else if(sjb==100){
+    		scores = 1500;
+    		zjjb=30000;
+    	}else{
+    		throw new ServiceException(4,"报单数不支持退户，只支持 10000，20000，50000");
+    	}
+    	//清除用户报单所得的金币  如果金币被使用了  不支持退户
+    	if(!this.updateJB(username, -zjjb, "退户减金币")){
+    		throw new ServiceException(5,"金币不足，不允许退户");
+    	}
+    	//减购物券  如果购物券被用了 不支持退户
+    	if(!this.changeScores(username, -scores,ScoresChangeType.SYSTEM_REDUCE,0,"0","","")){
+    		throw new ServiceException(6,"购物券不足，不允许退户");
+    	}
+    	//减推荐奖励  如果推荐奖励减不成功  不支持退户
+    	if(!this.changeYb(gcuser.getUp(), -(int)(sjb*500*0.1), username+"退户减推荐奖", 0,null,0, YbChangeType.SYSTEM_BACK_PRICE)){
+    		throw new ServiceException(7,"推荐奖励没有减成功，不允许退户");
+    	}
+        //减上面左总和右总
+    	//上层减结算区的左和右  有的层封顶了  就不需要减
+    	List<ZuoMingxi> zupList = zuoMingxiDao.getDownList(username);
+    	for(ZuoMingxi z:zupList){
+    		sgxtDao.updateZaq(z.getTjuser(), -sjb);
+    		int aq = getAddAqOrBqFromBdbdate(z.getTjuser(),username);
+    		if(aq>0){
+    			sgxtDao.updateAq(z.getTjuser(), -aq);
+    		}
+    		 Sgxt sgxtBd = sgxtDao.get(z.getTjuser());
+			 Bdbdate bdbdate = new Bdbdate();
+			 bdbdate.setZuser(sgxtBd.getUsername());
+			 bdbdate.setZaq(sgxtBd.getZaq());
+			 bdbdate.setZbq(sgxtBd.getZbq());
+			 bdbdate.setAq(sgxtBd.getAq());
+			 bdbdate.setBq(sgxtBd.getBq());
+			 bdbdate.setBz(username+"退户，减左总数量:"+sjb+",减左结算区数量:"+aq);
+			 bdbDateDao.add(bdbdate);
+			 //恢复前16层统计数据
+			 int sjtjzb = zuoMingxiDao.getSumSjb(z.getTjuser(), z.getCount());//得到明细的sjb的总和
+			 if(sjtjzb>0){
+				if(z.getCount()>0&&z.getCount()<=16){
+						sgxtDao.updateZOrYfiled(z.getTjuser(), "z"+z.getCount(), sjtjzb-sjb);
+					}
+			}
+    	}
+    	
+    	List<YouMingxi> yupList = youMingXiDao.getDownList(username);
+    	for(YouMingxi y:yupList){
+    		sgxtDao.updateZbq(y.getTjuser(), -sjb);
+    		int bq = getAddAqOrBqFromBdbdate(y.getTjuser(),username);
+    		if(bq>0){
+    			sgxtDao.updateBq(y.getTjuser(), -bq);
+    		}
+   		     Sgxt sgxtBd = sgxtDao.get(y.getTjuser());
+			 Bdbdate bdbdate = new Bdbdate();
+			 bdbdate.setZuser(sgxtBd.getUsername());
+			 bdbdate.setZaq(sgxtBd.getZaq());
+			 bdbdate.setZbq(sgxtBd.getZbq());
+			 bdbdate.setAq(sgxtBd.getAq());
+			 bdbdate.setBq(sgxtBd.getBq());
+			 bdbdate.setBz(username+"退户，减右总数量:"+sjb+",减右结算区数量:"+bq);
+			 bdbDateDao.add(bdbdate);
+			//恢复前16层统计数据
+			 int sjtjzb = youMingXiDao.getSumSjb(y.getTjuser(), y.getCount());
+			 if(sjtjzb>0){
+				if(y.getCount()>0&&y.getCount()<=16){
+						sgxtDao.updateZOrYfiled(y.getTjuser(), "y"+y.getCount(), sjtjzb-sjb);
+				}
+			 }
+    	}
+    	//清除点位表中所占的点位 如果下层已挂载了用户  不支持退户
+    	//清理开户表sgxt中的记录
+    	if(!sgxtDao.resetUserSgxtInfo(username)){
+    		throw new ServiceException(8,"下面已挂载了用户，不能退户");
+    	}
+    	//清理zuo_mingxi和 you_mingxi中down为用户名的记录
+    	zuoMingxiDao.deleteAllDown(username);
+    	youMingXiDao.deleteAllDown(username);
+    	//设置sjb为0
+    	gcuserDao.updateSjb(username, 0);
+    }
+	/**
+	 * 获取报单的时候加的结算区数量
+	 * @param zuser
+	 * @param bdbuser
+	 * @return
+	 */
+    private int getAddAqOrBqFromBdbdate(String zuser,String bdbuser,int sjb){
+    	Bdbdate bdbdate = bdbDateDao.getBdbdate(zuser, bdbuser);
+    	int result = 0;
+    	if(bdbdate!=null){
+    		String[] array = bdbdate.getBz().split("-");
+    		if(array.length==2){
+    			try {
+					result = Integer.valueOf(array[1]);
+				} catch (Exception e) {
+					LogSystem.info(zuser+"-with-"+bdbuser+"分析结果"+array[1]);
+				}
+    			if(result>0){
+    				if(bdbdate.getBz().indexOf("层封顶超出")!=-1){
+    					result = sjb - result;
+    				}
+    			}
+    		}
+    	}
+    	return result;
+    }
+    
 	public void CalculateQ(String userName,int sjb,String bduser,List<Bdbdate> logList){
 		Sgxt sgxtBd = sgxtDao.getByAOrBuid(userName);
 		if(sgxtBd==null){

@@ -14,8 +14,8 @@ import com.yq.user.service.UserService;
 public class AdminServiceTest extends DaoTest{
 
 	public void testWay(){
-//		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-//		adminService.generatorStatData();
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		adminService.generatorStatData();
 //		adminService.resetCfb();
 //		adminService.managequeren();
 //		adminService.man123();

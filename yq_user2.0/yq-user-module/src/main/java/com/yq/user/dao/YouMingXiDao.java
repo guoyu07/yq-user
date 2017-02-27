@@ -130,4 +130,11 @@ public class YouMingXiDao {
     	parameter.setInt(count);
     	return jdbc.getInt(sql,  parameter);
     }
+    
+    public boolean deleteAllDown(String down){
+    	String sql = "delete from "+ table +" where down=?";
+    	SqlParameter parameter = new SqlParameter();
+    	parameter.setString(down);
+    	return jdbc.update(sql, parameter)>0;
+    }
 }
