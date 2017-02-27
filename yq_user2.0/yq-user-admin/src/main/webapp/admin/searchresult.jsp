@@ -81,7 +81,7 @@
 		<td align="center" >
 			<a href="javascript:void(0);" style="text-decoration: none;" onclick="reset('${data.username}')">重置玩家业绩</a></td>
 		</td></c:if>
-		<c:if test="${data.sjb>=20}"><td align="center" >
+		<c:if test="${data.sjb>=10000}"><td align="center" >
 			<a onClick="return confirm('提示：您确定要对用户[${data.username}]进行退户操作吗？')" href="cancleBd?user=${data.username}" style="text-decoration: none">退户</a></td>
 		</td></c:if>
 		
