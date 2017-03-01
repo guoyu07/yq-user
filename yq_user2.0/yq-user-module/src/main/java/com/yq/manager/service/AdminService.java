@@ -1211,7 +1211,7 @@ public class AdminService {
 				datepay2.setJydb(gcuser.getJydb());
 				datepay2.setBz(fcxt.getPayadd());
 				datepay2.setNewbz(1);
-				datepay.setOrigintype(YbChangeType.BALANCE_AWARD_REDUCE);
+				datepay2.setOrigintype(YbChangeType.BALANCE_AWARD_REDUCE);
 				logService.addDatePay(datepay2);
 			}
 			
@@ -1227,7 +1227,7 @@ public class AdminService {
 				datepay3.setSyjz(addNum);
 				datepay3.setJydb(upUser.getJydb());
 				datepay3.setNewbz(8);
-				datepay.setOrigintype(YbChangeType.COUNSELING_AWARD);
+				datepay3.setOrigintype(YbChangeType.COUNSELING_AWARD);
 				logService.addDatePay(datepay3);
 				
 				if(upUser.getCxt()<2&&(gcuser.getCxdate()!=null&&upUser.getCxdate().getTime()>System.currentTimeMillis())){
@@ -1240,7 +1240,7 @@ public class AdminService {
 					datepay4.setJydb(upUser.getJydb());
 					datepay4.setBz(fcxt.getPayadd());
 					datepay4.setNewbz(8);
-					datepay.setOrigintype(YbChangeType.COUNSELING_AWARD_REDUCE);
+					datepay4.setOrigintype(YbChangeType.COUNSELING_AWARD_REDUCE);
 					logService.addDatePay(datepay4);
 				}
 			}
