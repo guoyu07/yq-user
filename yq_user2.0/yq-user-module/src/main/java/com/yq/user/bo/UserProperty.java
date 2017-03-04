@@ -13,7 +13,6 @@ public class UserProperty {
 	
 	private int region_code;	//国际区域码...
 	
-	private int userType;		//用户类型  2 表示商户
 
 	public String getUsername() {
 		return username;
@@ -39,13 +38,6 @@ public class UserProperty {
 		this.id = id;
 	}
 
-	public int getUserType() {
-		return userType;
-	}
-
-	public void setUserType(int userType) {
-		this.userType = userType;
-	}
 	
 	
 
