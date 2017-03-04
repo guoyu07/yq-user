@@ -16,18 +16,32 @@ public class SameUserProperty {
 	
 	private Date lastDate;			//最后时间
 	
+	private String appPayPassword;	//app支付密码
+	
+	private Date createTime;		//app支付密码创建时间
+	
+	private Date modifyTime;		//app支付密码最后 修改时间
+	
 	
 
 	public SameUserProperty() {
 		
 	}
 	
-
+	
 	public SameUserProperty(String nameUserid, int noSureTimes, Date lastDate) {
 		super();
 		this.nameUserid = nameUserid;
 		this.noSureTimes = noSureTimes;
 		this.lastDate = lastDate;
+	}
+	
+	public SameUserProperty(String nameUserid, Date createTime, Date modifyTime,String appPayPassword) {
+		super();
+		this.nameUserid = nameUserid;
+		this.createTime = createTime;
+		this.modifyTime = modifyTime;
+		this.appPayPassword = appPayPassword;
 	}
 
 	public String getNameUserid() {
@@ -55,6 +69,37 @@ public class SameUserProperty {
 
 	public void setLastDate(Date lastDate) {
 		this.lastDate = lastDate;
+	}
+
+
+
+	public String getAppPayPassword() {
+		return appPayPassword;
+	}
+
+
+	public void setAppPayPassword(String appPayPassword) {
+		this.appPayPassword = appPayPassword;
+	}
+
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
 	}
 	
 	

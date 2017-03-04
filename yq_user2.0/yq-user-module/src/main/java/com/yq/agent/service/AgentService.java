@@ -22,6 +22,7 @@ import com.yq.agent.bo.AgentApp;
 import com.yq.agent.bo.AgentOrder;
 import com.yq.agent.bo.AgentScoresChangeLog;
 import com.yq.agent.bo.AgentUser;
+import com.yq.agent.bo.AppPayRecord;
 import com.yq.agent.constant.AgentScoresChangeType;
 import com.yq.agent.dao.AgentAppDao;
 import com.yq.agent.dao.AgentGpjyDao;
@@ -30,6 +31,7 @@ import com.yq.agent.dao.AgentPointsChangeLogDao;
 import com.yq.agent.dao.AgentScoresChangeLogDao;
 import com.yq.agent.dao.AgentTxpayDao;
 import com.yq.agent.dao.AgentUserDao;
+import com.yq.agent.dao.AppPayRecordDao;
 import com.yq.app.utils.MacShaUtils;
 import com.yq.common.utils.Global;
 import com.yq.common.utils.ParamCheck;
@@ -39,9 +41,13 @@ import com.yq.manager.bo.PointsChangeLog;
 import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.SameUserProperty;
+import com.yq.user.bo.UserProperty;
 import com.yq.user.constant.ScoresChangeType;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.GcuserDao;
+import com.yq.user.dao.SameUserPropertyDao;
+import com.yq.user.dao.UserPropertyDao;
 import com.yq.user.scheduler.SendChargeMsgScheduler;
 import com.yq.user.service.UserService;
 
@@ -66,6 +72,14 @@ public class AgentService {
 	private AgentPointsChangeLogDao agentPointsChangeLogDao;
 	@Autowired
 	private AgentGpjyDao agentGpjyDao;
+	
+	@Autowired
+	private SameUserPropertyDao sameUserPropertyDao;
+	@Autowired
+	private AppPayRecordDao appPayRecordDao;
+	@Autowired
+	private UserPropertyDao userPropertyDao;
+	
 	
 	
   	private static final String AGENT_APP_SESSION_CACHE_PRE = "agent_app_session_";
@@ -524,7 +538,7 @@ public class AgentService {
 		return agentGpjyDao.getUserPointSplitPageList(user, currentPage, pageSize);
 	}
 
-	public boolean checkSign(String appId, String user, String param, String sign) {
+	public boolean checkSign(String appId, String user, String param, String sign,String endKey) {
 		//检测客户端传过来的参数是否为空
 		ParamCheck.checkString(user, 2, "用户名不能为空");
 		ParamCheck.checkString(sign, 5, "签名不能为空");
@@ -541,6 +555,10 @@ public class AgentService {
 			throw new ServiceException(7, "无效的appId");
 		}
 		String signString = appId+user+param;
+		if(!Strings.isNullOrEmpty(endKey)){
+			signString +=endKey;
+		}
+		
 		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
@@ -560,6 +578,266 @@ public class AgentService {
 		return gcuserDao.getSameAccountTatolWealth(guser.getName(),guser.getUserid());
 	}
 
+	
+	@Transactional
+	public String setPayPassword(String appId, String user, String payPassword,String smsCode,String call, String sign, String password, String secondPassword,String param) {
+		ParamCheck.checkString(user, 1, "用户名不能为空");
+		ParamCheck.checkString(password, 2, "登录密码不能为空");
+		ParamCheck.checkString(secondPassword, 3, "二级密码不能为空");
+		ParamCheck.checkString(payPassword, 4, "支付密码不能为空");
+		ParamCheck.checkString(smsCode, 5, "验证码不能为空");
+		ParamCheck.checkString(sign, 6, "签名不能为空");
+		
+		
+		Gcuser guser=gcuserDao.getUser(user);
+		if(guser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		if(!smsCode.equals(guser.getVipsq())){
+			throw new ServiceException(10, "验证码有误!");
+		}
+		//获得app
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appId");
+		}
+		String signStr = appId+user+payPassword+password+secondPassword+smsCode+param;
+		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}
+		
+		String nameUserid=guser.getName() + guser.getUserid();
+		SameUserProperty userProperty = sameUserPropertyDao.getSameUserProperty(nameUserid);
+		if(userProperty!=null ){
+				boolean flag = sameUserPropertyDao.updatePayPassword(nameUserid,MD5Security.md5_16_Small(payPassword));
+				if(!flag){
+					throw new ServiceException(10, "增加支付密码失败！");
+				}
+				LogSystem.info("玩家：["+user+"],增加支付密码成功！");
+			
+		}else{
+			SameUserProperty sameUserProperty =new SameUserProperty(nameUserid, new Date(), null, MD5Security.md5_16_Small(payPassword));
+			if(!sameUserPropertyDao.insertSameUserProperty(sameUserProperty)){
+				throw new ServiceException(10, "增加失败！");
+			}
+			LogSystem.info("玩家：["+user+"],设置支付密码成功！");
+		}
+		gcuserDao.updateSmsCode(user, Global.INIT_SMS_CODE);
+		
+		return "设置成功";
+		
+	}
+
+	@Transactional
+	public String transactionPay(String appId, String fromUserName, String toUserName, String amount,
+			String productOrder, String productDesc, String param, String sign, String payPassWord) {
+		ParamCheck.checkString(fromUserName, 1, "扣款用户不能为空");
+		ParamCheck.checkString(amount, 2, "订单金额不能为空");
+		ParamCheck.checkString(productOrder, 3, "商户订单号不能为空");
+		ParamCheck.checkString(productDesc, 4, "商品名称不能为空不能为空");
+		//ParamCheck.checkString(sign, 5, "签名不能为空");
+		ParamCheck.checkString(toUserName, 10, "收款账户不能为空");
+		ParamCheck.checkString(payPassWord, 16, "支付密码不能为空");
+		
+		if(param==null){
+			param = "";
+		}
+		Gcuser fromgcuser = gcuserDao.getUser(fromUserName);
+		if(fromgcuser==null){
+			throw new ServiceException(6, "扣款用户名不存在！");
+		}
+        if(fromgcuser.getTxlb()==3||fromgcuser.getJb()==5){
+            throw new ServiceException(19,"商户或商家账号不能转账！");
+		}
+		
+		
+		Gcuser togcuser = gcuserDao.getUser(toUserName);
+		if(togcuser==null){
+			throw new ServiceException(11, "收款用户名不存在！");
+		}
+		
+		
+		 if(togcuser.getTxlb()!=3 && togcuser.getJb()!=5){
+	         throw new ServiceException(20,"收款用户名非商户或商家账号！");
+		 }
+		
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appid");
+		}
+		if(amount.indexOf(".")!=-1){
+			throw new ServiceException(8, "金额必须是正整数！");
+		}
+		int yb = 0;
+		try {
+			yb = Integer.valueOf(amount);
+		} catch (Exception e) {
+			throw new ServiceException(8, "金额必须是正整数！");
+		}
+		if(yb<=0){
+			throw new ServiceException(8, "金额必须是正整数！");
+		}
+		SameUserProperty fromsameUserProperty = sameUserPropertyDao.getSameUserProperty(fromgcuser.getName()+fromgcuser.getUserid());
+		if(fromsameUserProperty==null || fromsameUserProperty.getAppPayPassword()==null){
+			throw new ServiceException(17, "扣款账户没有设置支付密码！");
+		}
+		if(!fromsameUserProperty.getAppPayPassword().equals(MD5Security.md5_16_Small(payPassWord))){
+			throw new ServiceException(18, "支付密码不正确！");
+		}
+		
+		String signStr = appId+fromUserName+toUserName+amount+productOrder+productDesc+param;
+		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}
+		
+		//查询订单是否存在，不存在增加并且扣款
+		if(appPayRecordDao.get(productOrder)!=null){
+			throw new ServiceException(12, "扣款已经成功，请勿重复提交！");
+		}
+		
+		AppPayRecord appPayRecord = new AppPayRecord();
+		appPayRecord.setAmount(yb);
+		appPayRecord.setAppId(appId);
+		appPayRecord.setCreatedTime(new Date());
+		appPayRecord.setFromUserName(fromUserName);
+		appPayRecord.setToUserName(toUserName);
+		appPayRecord.setParam(param);
+		appPayRecord.setProductDesc(productDesc.trim());
+		appPayRecord.setProductOrder(productOrder.trim());
+		appPayRecord.setStatus(1);
+		int orderId = appPayRecordDao.addBackKey(appPayRecord);
+		if(orderId<0){
+			throw new ServiceException(15, "支付失败！");
+		}
+		
+		boolean fromresult = userService.changeYb(fromUserName, -yb, "订单号："+orderId+"-"+productDesc+"("+productOrder+")", YbChangeType.AGENTTYPE, null, 0, YbChangeType.APPTRASACTIONREDUCE);
+		if(!fromresult){
+			throw new ServiceException(13, "扣款账户余额不足！");
+		}
+		boolean toresult = userService.changeYb(toUserName, yb, "订单号："+orderId+"-"+productDesc+"("+productOrder+")", YbChangeType.AGENTTYPE, null, 0, YbChangeType.APPTRASACTIONADD);
+		if(!toresult){
+			throw new ServiceException(14, "收款账户不存在！");
+		}
+		
+		return orderId+"";
+		
+	}
+
+	public String getUserPaypassword(String user) {
+		
+		Gcuser gcuser = gcuserDao.getUser(user);
+		if(gcuser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		SameUserProperty fromsameUserProperty = sameUserPropertyDao.getSameUserProperty(gcuser.getName()+gcuser.getUserid());
+		if(fromsameUserProperty==null || fromsameUserProperty.getAppPayPassword()==null){
+			return "false";
+		}
+		return "true";
+	}
+
+	@Transactional
+	public String updatePayPassword(String appId, String user, String payPassword, String oldPayPassword, String smsCode,String call,String sign,String password,String secondPassword,String param) {
+		ParamCheck.checkString(user, 1, "用户名不能为空");
+		/*ParamCheck.checkString(password, 2, "登录密码不能为空");
+		ParamCheck.checkString(secondPassword, 3, "二级密码不能为空");*/
+		ParamCheck.checkString(payPassword, 4, "支付密码不能为空");
+		ParamCheck.checkString(smsCode, 5, "验证码不能为空");
+		ParamCheck.checkString(sign, 6, "签名不能为空");
+		ParamCheck.checkString(oldPayPassword, 11, "原支付密码不能为空");
+		
+		if(param==null){
+			param = "";
+		}
+		Gcuser guser=gcuserDao.getUser(user);
+		if(guser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		
+		
+
+		if(!smsCode.equals(guser.getVipsq())){
+			throw new ServiceException(10, "验证码有误!");
+		}
+		
+		//获得app
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appId");
+		}
+		String signStr = appId+user+payPassword+oldPayPassword+smsCode+param;
+		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}
+		
+		
+		String nameUserid=guser.getName() + guser.getUserid();
+		SameUserProperty userProperty = sameUserPropertyDao.getSameUserProperty(nameUserid);
+		if(userProperty!=null){
+			if(userProperty.getAppPayPassword()==null){
+				throw new ServiceException(13, "您没有设置过支付密码！");
+			}else if(!MD5Security.md5_16_Small(oldPayPassword).equals(userProperty.getAppPayPassword())){
+				throw new ServiceException(12, "原支付密码错误！");
+			}else{
+				boolean flag = sameUserPropertyDao.updatePayPassword(nameUserid,MD5Security.md5_16_Small(payPassword));
+				if(!flag){
+					throw new ServiceException(10, "修改失败！");
+				}
+				LogSystem.info("玩家：["+user+"],设置支付密码成功！");
+			}
+		}else{
+			throw new ServiceException(13, "您没有设置过支付密码！");
+		}
+		gcuserDao.updateSmsCode(user, Global.INIT_SMS_CODE);
+		
+		if(oldPayPassword!=null){
+			return "修改成功";
+		}else{
+			return "设置成功";
+		}
+	}
+
+	public void checkParamAndSign(String user, String passWord, String secondPassWord, String call, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String queryTrasactionOder(String appId, String productOrder, String param, String sign) {
+		//检测客户端传过来的参数是否为空
+		ParamCheck.checkString(productOrder, 1, "订单号不能为空");
+		//ParamCheck.checkString(sign, 5, "签名不能为空");
+		if(param==null){
+			param = "";
+		}
+		//获得app
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appId");
+		}
+		String signString = appId+productOrder+param;
+		
+		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}
+		
+		AppPayRecord appPayRecord= appPayRecordDao.get(productOrder);
+		if(appPayRecord==null){
+			return "订单不存在";
+		}
+		return appPayRecord.getProductOrder();
+	}
+
+	
+	
+	
 	
 	
 	

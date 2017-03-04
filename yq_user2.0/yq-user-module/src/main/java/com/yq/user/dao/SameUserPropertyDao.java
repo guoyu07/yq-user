@@ -22,8 +22,8 @@ public class SameUserPropertyDao {
      * @param sameuserproperty
      * @return
      */
-    public int insertSameUserProperty(SameUserProperty sameuserproperty){
-    	return jdbc.insert(sameuserproperty);
+    public boolean insertSameUserProperty(SameUserProperty sameuserproperty){
+    	return jdbc.insert(sameuserproperty)>0;
     }
 
 	
@@ -55,6 +55,19 @@ public class SameUserPropertyDao {
     	sqlParam.setString(nameUserId);
     	return jdbc.update(sql.toString(), sqlParam);
     }
+
+
+
+	public boolean updatePayPassword(String nameUserid, String md5_16_Small) {
+		StringBuilder sql = new StringBuilder();
+    	SqlParameter sqlParam= new SqlParameter();
+    	sql.append("update "+table+" set app_pay_password = ?,modify_time=? where name_userid = ?");
+    	sqlParam.setString(md5_16_Small);
+    	sqlParam.setObject(new Date());
+    	sqlParam.setString(nameUserid);
+    	return jdbc.update(sql.toString(), sqlParam)>0;
+		
+	}
 	
 
 }

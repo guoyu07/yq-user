@@ -4,6 +4,7 @@ public class YbChangeType {
 
 	public static final int AGENT_REDUCE 		= 1000;		//第三方代理商减少
 	
+	public static final int AGENTTYPE 			= 7777;		//第三方交易类型
 	
 	public static final int MALL_BUY_RATION 	= 1001;		//商城买家缴纳的税
 	
@@ -331,5 +332,16 @@ public class YbChangeType {
 	 */
 	public static final int SYSTEM_BACK_PRICE = 148;
 	
+	/**
+	 * app转账增加
+	 * 
+	 * */
+	public static final int APPTRASACTIONADD = 149;
+	
+	/**
+	 * app转账扣除
+	 * 
+	 * */
+	public static final int APPTRASACTIONREDUCE = 150;
 	
 }
