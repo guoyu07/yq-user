@@ -12,6 +12,7 @@ public class UserProperty {
 	private String username;	//用户名
 	
 	private int region_code;	//国际区域码...
+	
 
 	public String getUsername() {
 		return username;
@@ -36,6 +37,7 @@ public class UserProperty {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	
 	
 

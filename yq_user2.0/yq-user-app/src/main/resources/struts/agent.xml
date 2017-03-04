@@ -16,12 +16,29 @@
          <action name="getUserInfo" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="getUserInfo" />
          
          <!-- version2.0 -->
+         <!-- 会员简要信息 -->
          <action name="userPersonalInfo" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="userPersonalInfo" />
+       	 <!-- 积分单价变动记录 -->
          <action name="pointChangeinfo" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="pointChangeinfo" />
+      	 <!-- 会员同名账号总资产 -->
          <action name="getSameUserPersonalInfo" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getSameUserPersonalInfo" />
+   		  <!--会员积分交易明细 -->
          <action name="userPointChangeDetail" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="userPointChangeDetail" />
+          <!-- 会员拆分收益详情(积分详情) -->
          <action name="userPointSplitDetail" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="userPointSplitDetail" />
+  		 <!-- 同名账户总资产 -->
          <action name="getSameUserTotalWealth" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getSameUserTotalWealth" />
+         <!-- app端设置支付密码 -->
+         <action name="setPayPassword" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="setPayPassword" />
+         <!-- 查询订单号 -->
+         <action name="queryOder" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="queryOder" />
+         <!-- 查询用户是否已经设置支付密码 -->
+         <action name="getUserPaypassword" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getUserPaypassword" />
+         <!-- app端转账 -->
+         <action name="transactionPay" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="transactionPay" />
+         
+         
+         
          
    </package>
 	

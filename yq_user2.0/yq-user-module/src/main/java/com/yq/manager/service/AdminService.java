@@ -1211,7 +1211,7 @@ public class AdminService {
 				datepay2.setJydb(gcuser.getJydb());
 				datepay2.setBz(fcxt.getPayadd());
 				datepay2.setNewbz(1);
-				datepay.setOrigintype(YbChangeType.BALANCE_AWARD_REDUCE);
+				datepay2.setOrigintype(YbChangeType.BALANCE_AWARD_REDUCE);
 				logService.addDatePay(datepay2);
 			}
 			
@@ -1227,7 +1227,7 @@ public class AdminService {
 				datepay3.setSyjz(addNum);
 				datepay3.setJydb(upUser.getJydb());
 				datepay3.setNewbz(8);
-				datepay.setOrigintype(YbChangeType.COUNSELING_AWARD);
+				datepay3.setOrigintype(YbChangeType.COUNSELING_AWARD);
 				logService.addDatePay(datepay3);
 				
 				if(upUser.getCxt()<2&&(gcuser.getCxdate()!=null&&upUser.getCxdate().getTime()>System.currentTimeMillis())){
@@ -1240,7 +1240,7 @@ public class AdminService {
 					datepay4.setJydb(upUser.getJydb());
 					datepay4.setBz(fcxt.getPayadd());
 					datepay4.setNewbz(8);
-					datepay.setOrigintype(YbChangeType.COUNSELING_AWARD_REDUCE);
+					datepay4.setOrigintype(YbChangeType.COUNSELING_AWARD_REDUCE);
 					logService.addDatePay(datepay4);
 				}
 			}
@@ -2745,12 +2745,15 @@ public class AdminService {
 			startTime = startTime + " 00:00:00";
 			endTime = endTime + " 23:59:59";
 		}
+		LogSystem.info("查询用户:"+userName+",startTime="+startTime+",endTime="+endTime);
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		List<Gcuser> list = gcuserDao.getUserByIdCard(gcuser.getUserid());
 		int result = 0;
 		if(list!=null&&list.size()>0){
 			for(Gcuser gc:list){
-				result = result + gcuserDao.getUserSigleSumSjbByTime(gc.getUsername(),gc.getUserid(), startTime, endTime);
+				int num = gcuserDao.getUserSigleSumSjbByTime(gc.getUsername(),gc.getUserid(), startTime, endTime);
+				result = result + num;
+				LogSystem.info(gc.getUsername()+"="+num+",result="+result);
 			}
 		}
 		return result;

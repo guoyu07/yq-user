@@ -366,22 +366,29 @@ public class CwService {
 			Gcuser gcuser = gcuserDao.getUser(sgxt.getAuid());
 			if(gcuser.getVip()==3){//小vip添加
 				vipList.add(sgxt.getAuid());
+				//继续往下找
+				generatorDownList(sgxt.getAuid(), vipList);
 			}else if(gcuser.getVip()==2){//大vip中断
-				return;
+				
+			}else{
+				//继续往下找
+				generatorDownList(sgxt.getAuid(), vipList);
 			}
-			//继续往下找
-			generatorDownList(sgxt.getAuid(), vipList);
+			
 		}
 		
 		if(!Strings.isNullOrEmpty(sgxt.getBuid())){
 			Gcuser gcuser = gcuserDao.getUser(sgxt.getBuid());
 			if(gcuser.getVip()==3){//小vip添加
 				vipList.add(sgxt.getBuid());
+				//继续往下找
+				generatorDownList(sgxt.getBuid(), vipList);
 			}else if(gcuser.getVip()==2){//大vip中断
-				return;
+				
+			}else{
+				//继续往下找
+				generatorDownList(sgxt.getBuid(), vipList);
 			}
-			//继续往下找
-			generatorDownList(sgxt.getBuid(), vipList);
 		}
 		
 		

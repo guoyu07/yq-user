@@ -138,18 +138,20 @@ public class SgxtDao {
 	
 	
 	public boolean updateAq(String userName,int aq){
-		String sql = "update "+table+" set aq=aq+? where username=?";
+		String sql = "update "+table+" set aq=aq+? where username=? and aq+?>=0";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(aq);
 		parameter.setString(userName);
+		parameter.setInt(aq);
 		return jdbc.update(sql, parameter)>0;
 	}
 	
 	public boolean updateBq(String userName,int bq){
-		String sql = "update "+table+" set bq=bq+? where username=?";
+		String sql = "update "+table+" set bq=bq+? where username=? and bq+?>=0";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(bq);
 		parameter.setString(userName);
+		parameter.setInt(bq);
 		return jdbc.update(sql, parameter)>0;
 	}
 	
@@ -254,6 +256,18 @@ public class SgxtDao {
 	     parameter.setInt(vip);
 	     parameter.setString(userName);
 	     return jdbc.update(sql, parameter)>0;
+	 }
+	 
+	 public boolean resetUserSgxtInfo(String username){
+		 String sql1 = "update sgxt set auid=null where auid=? limit 1";
+		 String sql2 = "update sgxt set buid=null where buid=? limit 1";
+		 String sql3 = "delete from sgxt where username=? and auid is null and buid is null limit 1";
+		 if(jdbc.update(sql3, SqlParameter.Instance().withString(username))>0){
+			 jdbc.update(sql2, SqlParameter.Instance().withString(username));
+			 jdbc.update(sql1, SqlParameter.Instance().withString(username));
+			 return true;
+		 }
+		 return false;
 	 }
 	 
 	 public int executeSql(String sql){

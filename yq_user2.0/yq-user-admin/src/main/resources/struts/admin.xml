@@ -195,6 +195,11 @@
                 downVipList.jsp
             </result>
         </action>
+        <action name="cancleBd" class="com.yq.admin.manager.action.ModifyaabuserAction" method="cancleBd">
+           <result name="success">
+                searchresult.jsp
+            </result>
+        </action>
 		<!-- 未知模块 -->
 		<action name="usercj" class="com.yq.admin.manager.action.UserCjAction">
 		    <result name="input">
