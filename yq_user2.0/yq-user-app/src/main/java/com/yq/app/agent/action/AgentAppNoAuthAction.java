@@ -58,6 +58,9 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		if(state==3){
 			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			result.put("call", agentService.bindAccountCheck(user, passWord, secondPassWord, smsCode, call));
+			userService.sendSmsMsg(user,777);//发送验证码
+			Gcuser gcuser = userService.getUserByUserName(user);
+			result.put("smsCodeSuccess", gcuser.getVipsq());//为了验证app端用户名绑定和支付密码的设定统一步骤~
 			return renderObjectResult(result);
 		}
 		result.put("tokenId", agentService.login(user, passWord,appId));

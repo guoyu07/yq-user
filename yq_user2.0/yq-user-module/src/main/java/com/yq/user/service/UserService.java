@@ -4137,9 +4137,9 @@ public class UserService {
 	/**
 	 * 短信模板2
 	 * @param userName
-	 * @param op
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定"};
+	 * @param op  777不用发送到玩家手机上
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		String randomString = RandomStringUtils.random(6, chars);
@@ -4150,6 +4150,9 @@ public class UserService {
 			param.put("userName", userName);
 			param.put("op", OP_STR.length>op?OP_STR[op]:"");
 			if(gcuserDao.updateSmsCode(userName, randomString)){
+					if(op==777){
+						return ;
+					}
 				    try {
 				    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
 				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
@@ -4166,6 +4169,9 @@ public class UserService {
             Map<String,String> param = new HashMap<String,String>();
 			param.put("code", randomString);
 			if(gcuserDao.updateSmsCode(userName, randomString)){
+				if(op==777){
+					return ;
+				}
 				    try {
 				    	if(!SubMsgSendUtils.sendInternationalMessage(p.getRegion_code()+"", gcuser.getCall(), "742m76", param)){
 				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
