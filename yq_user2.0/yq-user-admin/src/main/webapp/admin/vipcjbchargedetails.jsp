@@ -6,8 +6,7 @@
 <script src="/scripts/jquery.datetimepicker.js"></script>
  <script type="text/javascript">
  function exportExcel(){
-	 //var url="vipcjbdetailsoutexcel?startDate1="+Form.startDate1.value+"&endDate1="+Form.endDate1.value;
-	 var url="vipcjbdetailsoutexcel?zuser="+Form.zuser.value+"&startDate1="+Form.startDate1.value+"&endDate1="+Form.endDate1.value;
+	 var url="vipcjbdetailsoutexcel?startDate1="+Form.startDate1.value+"&endDate1="+Form.endDate1.value;//var url="vipcjbdetailsoutexcel?zuser="+Form.zuser.value+"&startDate1="+Form.startDate1.value+"&endDate1="+Form.endDate1.value;
 	 window.open(url,'new','toolbar=no,scrollbars=yes,width=800,height=850');
  }
  </script>
@@ -24,7 +23,7 @@
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="87" bgcolor="#C3DAF9">
     <form method="post" action="rechargedetail" name="Form" id="Form">
-    <p align="center">用户：<input name="zuser" id="zuser" type="text" value="${zuser}"/>
+    <%-- <p align="center">用户：<input name="zuser" id="zuser" type="text" value="${zuser}"/> --%>
 	 开始日期:<input name="startDate1" id="startDate1" type="text" value="${startDate1}"/>结束日期:<input name="endDate1" id="endDate1" type="text" value="${endDate1}"/><input type="submit" value="查询" name="B1"><input type="button" onClick="exportExcel()" value="导出excel"/>(每次的导出数量不能超过5000条)<br> 
     </form>
  <div align="center">    
@@ -48,7 +47,7 @@
               </tr>
              </s:iterator>
             </table> 
-</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="startDate1,${startDate1},endDate1,${endDate1},zuser,${zuser}"/>
+</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="startDate1,${startDate1},endDate1,${endDate1}"/>
 </font> 
 </tr> 
 </table> 
