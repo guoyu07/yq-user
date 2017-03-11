@@ -45,7 +45,7 @@
 
                                   </td>
          <td>
-         <c:if test="${data.mcsl>0}"><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymy?id=${data.id}&pay=${data.jypay}">我要买</a></c:if>
+         <c:if test="${data.mcsl>0}"><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymy?id=${data.id}&pay=${data.jypay}&secondThisState=${secondThisState}&thisState=${thisState}">我要买</a></c:if>
          </td>
         </tr>
        </s:iterator>

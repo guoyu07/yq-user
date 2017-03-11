@@ -34,8 +34,8 @@
 
 <body> 
 <style type="text/css">
-  .zzbg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:2;top:0;left:0;opacity:0.7;}
-  .zzcontent{display:none;width:500px;height:50px;position:fixed;top:50%;margin-top:-150px;background:#fff;z-index:3;left:50%;margin-left:-250px;}
+  .zzbg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:998;top:0;left:0;opacity:0.7;}
+  .zzcontent{display:none;width:500px;height:50px;position:fixed;top:50%;margin-top:-150px;background:#fff;z-index:999;left:50%;margin-left:-250px;}
 </style>
 <!-- 通用头部 -->
 <%@ include file="/mainUI/common/head.jsp" %>
@@ -55,7 +55,7 @@
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
 <div class="member-aside">
-  <%@ include file="/mainUI/common/userLeft.jsp" %>
+  <%-- <%@ include file="/mainUI/common/userLeft.jsp" %> --%>
   <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
   <%@ include file="/mainUI/common/gameservice.jsp" %>
   <!-- 账户概览  end -->
@@ -69,7 +69,7 @@
         <p class="small-button-line">
           <a class="widget-warning" href="javascript:history.back();">返回上一页</a>
         </p>
-        <form class="widget-form" method="POST" action="bdreg?step=7" name="Form" id="Form" onSubmit="return showZz()">
+        <form class="widget-form" method="POST" action="bdreg?step=7&secondThisState=${secondThisState}&thisState=${thisState}" name="Form" id="Form" onSubmit="return showZz()">
             <input type="hidden" name="targetdate" size="8">
           <input type="hidden" name="status" value="1">
           <input type="hidden" name="xmlmode" size="8">

@@ -32,44 +32,55 @@
 <!-- 一币理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
+ <%--   <!-- 会员中心左边栏 -->
 <div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  	<!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
- 	<%@ include file="/mainUI/common/yblc.jsp" %>
-  <!-- 账户概览 end -->
+  <!-- VIP中心左边栏 -->
+  <%@ include file="/mainUI/common/vipleft.jsp" %>
+  <!-- VIP中心左边栏  end -->
 </div>
 <!-- 会员中心左边栏 end -->
 
-    <div class="member-main">
+    <div class="member-main"> --%>
+      <div class="member-main-full">
       <!-- 一币卖出明细表格 -->
       <div class="main-widget">
         <p class="widget-title-line">一币交易市场</p>
-        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epjyscybmarketdetail?status=1" id="J_ebSaleDetailMore">查看更多</a></p>
+        <p class="small-button-line"><!-- <a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epjyscybmarketdetail?status=1" id="J_ebSaleDetailMore">查看更多</a></p> -->
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
                 <th>流水号</th>
                 <th>卖出方</th>
+                <th>信用星</th>
                 <th>求现金额</th>
+                <th>认购后可获一币</th>
+                <th>认购后可获利</th>
                 <th>卖出时间</th>
                 <th>交易状态</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody>
-            <s:iterator var="data" value="dataList">
-              <tr>
-                <td>${data.payid}</td>
-                <td>${data.payusername}</td>
-                <td>${data.paynum9}元</td>
-                <td>${data.paytime}</td>
-                <td><c:if test="${data.payusername==userName}"><b><a onClick="return confirm('提示：您确定了吗？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000">撤销卖出</font></a></b></c:if><c:if test="${data.payusername!=userName}">等待认购中。。。</c:if></td>
-              </tr>
-              </s:iterator>
+              	<s:iterator var="data" value="dataList">
+				<tr>
+					<td>${data.payid}</td>
+					<td>${data.payusername}</td>
+					<td>${data.cxt}</td>
+					<td>${data.paynum9}</td>
+					<td> ${data.paynum}</td>
+					<td>${data.paynum-data.paynum9}</td>
+					<td>${data.paytime}</td>
+					<td> <c:if test="${data.payusername==userName}"><b><a onClick="return confirm('提示：您确定了吗？')" href="qxepmc?qx=${data.payid}&secondThisState=${secondThisState}&thisState=${thisState}"><font color="#FF0000">撤销卖出</font></a></b></c:if><c:if test="${data.payusername!=userName}">等待认购中。。。</c:if></td>
+					<td><a onClick="return confirm('提示：对方使用的收款方式是“${data.paybank}”您确定认购了吗？')" href="epmy?ep=${data.payid}&secondThisState=${secondThisState}&thisState=${thisState}"><font color="#FF0000" size="2">我要认购</font></a></td>
+				</tr>
+				</s:iterator>
             </tbody>
           </table>
         </div>
+        <p class="widget-pages">
+  <aldtags:pageTag paraStr="status,${status},thisState,${thisState},secondThisState,${secondThisState}"/>
+</p>
       </div>
     </div>
     <!-- 一币卖出明细表格 end -->

@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <p class="breadcrumb-trail">财富中心 >> 报单币明细</p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -31,29 +31,33 @@
 <!-- 业绩查询内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
+   <!-- 会员中心左边栏 -->
 <div class="member-aside">
-  <%@ include file="/mainUI/common/userLeft.jsp" %>
-	  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-	  <%@ include file="/mainUI/common/gameservice.jsp" %>
-	  <!-- 账户概览  end -->
+  
+  <!-- 报单币明细左边栏 -->
+  <div class="point-info">
+    <p class="title">报单币明细</p>
+     <%@ include file="/mainUI/common/bdb.jsp" %>
+  </div>
+  <!-- 报单币明细左边栏  end -->
 </div>
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
       <!-- 报单币变化明细 -->
       <div class="main-widget">
-        <p class="widget-title-line">报单币变化明细|报单日志</p>
+        <p class="widget-title-line">报单币变化明细</p>
         <p class="small-button-line">
-          <a href="/bdbdate?type=0" class="widget-warning mr10">查看转账日志</a>
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/bdbdatebaodandetail?status=1&type=1">查看更多</a>
+          <%-- <a href="/bdbdate?type=0&secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10">查看转账日志</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_goDialog" data-url="/bdbdatebaodandetail?status=1&type=1">查看更多</a> --%>
         </p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
-            <thead>
+            <%-- <thead>
               <tr>
                 <th>用户名</th>
                 <th>报单币收入</th>
+                <th>报单币支出</th>
                 <th>剩余报单币</th>
                 <th>更新时间</th>
                 <th>备注</th>
@@ -69,9 +73,42 @@
 					<td>${data.bz}</td>
 				</tr>
 				</s:iterator>
+            </tbody> --%>
+            <thead>
+              <tr>
+                <th>用户名</th>
+               <!--  <th>报单币收入</th>
+                <th>报单币支出</th>
+                <th>剩余报单币</th> -->
+                <th>左总计</th>
+                <th>右总计</th>
+                <th>左结余</th>
+                <th>右结余</th>
+                <th>更新时间</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>
+              <s:iterator var="data" value="dataList">
+				<tr>
+					<td>${userName}</td>
+					<%-- <td>${data.sy}</td>
+					<td><c:if test="${data.jc<0}">-${data.jc}</c:if><c:if test="${data.jc>0}">${data.jc}</c:if></td>
+					<td>${data.sybdb}</td> --%>
+					<td>${data.zaq}</td>
+					<td>${data.zbq}</td>
+					<td>${data.aq}</td>
+					<td>${data.bq}</td>
+					<td><fmt:formatDate value="${data.bfdate}" type="both"/></td>
+					<td>${data.bz}</td>
+				</tr>
+				</s:iterator>
             </tbody>
           </table>
         </div>
+        <p class="widget-pages">
+  <aldtags:pageTag paraStr="type,${type},thisState,${thisState},secondThisState,${secondThisState}"/>
+</p>
       </div>
       <!-- 报单币变化明细 end -->
     </div>

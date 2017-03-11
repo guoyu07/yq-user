@@ -31,21 +31,12 @@
 <!-- 账户管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <%@ include file="/mainUI/common/persionalinfo.jsp" %>
-  <!-- 账户概览  end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 全部分红明细 -->
       <div class="main-widget">
         <p class="widget-title-line">全部分红明细</p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="gcbfp1detail?status=1&lb=1">查看更多</a>
+          <!-- <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="gcbfp1detail?status=1&lb=1">查看更多</a> -->
         </p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
@@ -55,7 +46,9 @@
                 <th>个人持点数量</th>
                 <th>每点分红</th>
                 <th>本期累计</th>
+                <th>所有累计</th>
                 <th>分红时间</th>
+                <th>备注</th>
               </tr>
             </thead>
             <tbody>
@@ -63,7 +56,9 @@
 				<tr>
 					<td>${gcuser.username}</td>
 					<td>${data.sygc}</td>
-					<td>${data.ljgc}</td>
+					<td><c:if test="${fhpay<1}">0</c:if><c:if test="${fhpay>=1}">${fhpay}</c:if></td>
+					<td>${data.syfh}</td>
+					<td>${data.ljfhtj}</td>
 					<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
 					<td>${data.bz}</td>
 				</tr>
@@ -71,7 +66,7 @@
             </tbody>
           </table>
           <p class="widget-pages">
-			<aldtags:pageTag para1="lb" value1="${lb}"/>
+			<aldtags:pageTag paraStr="lb,${lb},thisState,${thisState},secondThisState,${secondThisState}"/>
 			</p>
         </div>
       </div>

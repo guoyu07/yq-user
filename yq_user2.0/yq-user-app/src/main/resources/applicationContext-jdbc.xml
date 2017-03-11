@@ -17,6 +17,8 @@
 		</property>
 		<property name="username" value="${jdbc.username}"></property>
 		<property name="password" value="${jdbc.password}"></property>
+		<!-- <property name="username" value="${encrypt_jdbc.username}"></property>
+		<property name="password" value="${encrypt_jdbc.password}"></property> -->
 		<property name="maxActive" value="${jdbc.maxActive}"></property>
 		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
 		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />

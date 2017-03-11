@@ -4,7 +4,7 @@
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('未满100天的账户，积分暂时停止卖出交易，收益完成后自动开放！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('二级密码不正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('卖出${gpjy.mysl}积分成功！');location.replace('/gpjysc');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('卖出${gpjy.mysl}积分成功！');location.replace('/gpjysc?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -27,12 +27,7 @@
 <div class="container">
   <div class="member-header" id="J_memberHeader">
     <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
-    <ul class="nav-secondary">
-      <li class="cur"><a href="point-recharge.html">积分理财</a></li>
-      <li><a href="second-login.html">一币理财</a></li>
-      <li><a href="game.html">业绩查询</a></li>
-      <li><a href="eb-change-detail.html">账户概览</a></li>
-    </ul>
+   <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
 <!-- 会员中心导航模块 end -->
@@ -53,7 +48,7 @@
     <div class="member-main">
       <div class="main-widget">
         <p class="widget-title-line">我要卖积分</p>
-        <form class="widget-form" action="/wymc?status=1&id=${id}" method="POST" onSubmit="return confirm('提示：您确定了吗？')">
+        <form class="widget-form" action="/wymc?status=1&id=${id}&secondThisState=${secondThisState}&thisState=${thisState}" method="POST" onSubmit="return confirm('提示：您确定了吗？')">
           <p class="item">
             <lable class="title">本次卖出交易积分数量为：</lable>
             <span class="text widget-warning">${gpjy.mysl}</span>

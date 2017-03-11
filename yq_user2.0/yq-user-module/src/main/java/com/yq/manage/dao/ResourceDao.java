@@ -207,4 +207,12 @@ public class ResourceDao {
          return this.jdbc.get(sql, Resource.class, sqlparam);
 	}
 
+
+	public List<Resource> getByResourceId(int resourceId) {
+		String sql="select * from "+table+" where resource_id= ? order by reso_no";
+        SqlParameter sqlparam = new SqlParameter();
+        sqlparam.setInt(resourceId);
+        return this.jdbc.getList(sql, Resource.class, sqlparam);
+	}
+
 }

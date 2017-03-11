@@ -31,28 +31,19 @@
 <!-- 账户管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <%@ include file="/mainUI/common/persionalinfo.jsp" %>
-  <!-- 账户概览  end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 公司相关资料 -->
-      <div class="main-widget">
+      <!-- <div class="main-widget">
         <p class="widget-title-line">公司相关资料</p>
         <div class="widget-article">
           <p class="widget-notice"><a target="_blank" href="images/积分游戏平台用户名转让申请书.doc">《平台用户名转让申请书》</a></p>
         </div>
-      </div>
+      </div> -->
       <!-- 公司相关资料 end -->
       <!-- 修改个人资料 -->
       <div class="main-widget mt15">
         <p class="widget-title-line">修改个人资料</p>
-        <p class="small-button-line"><a href="updateuserjc" class="widget-button-small">继承人资料</a></p>
+        <p class="small-button-line"><!-- <a href="updateuserjc" class="widget-button-small">继承人资料</a> --></p>
         <form class="widget-form" method="post" action="" name="Form" id="Form" onSubmit="return false">
           <input type="hidden" name="remark" size="5" value="2" readonly>
           <input type="hidden" name="targetdate" size="8">

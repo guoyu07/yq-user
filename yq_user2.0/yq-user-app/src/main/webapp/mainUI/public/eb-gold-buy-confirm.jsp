@@ -30,21 +30,12 @@
 <!-- 一币理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  	<!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
- 	<%@ include file="/mainUI/common/yblc.jsp" %>
-  <!-- 账户概览 end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+     <div class="member-main-full">
       <!-- 一币购金币卡 -->
       <div class="main-widget">
         <p class="widget-title-line">一币转换电子金币卡录入</p>
         <div class="widget-article">
-          <form class="widget-form" action="jztojb?status=3&mj=${mj}&gmsl=${gmsl}" method="post" onSubmit="return checkdate();" name="Form" id="Form">
+          <form class="widget-form" action="jztojb?status=3&mj=${mj}&gmsl=${gmsl}&secondThisState=${secondThisState}&thisState=${thisState}" method="post" onSubmit="return checkdate();" name="Form" id="Form">
             <p class="item">
               <lable class="title">金币卡面值：</lable>
               <span class="text widget-warning">

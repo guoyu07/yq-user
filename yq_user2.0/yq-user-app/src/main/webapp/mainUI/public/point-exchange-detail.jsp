@@ -35,7 +35,6 @@
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
 <div class="member-aside">
-        <%@ include file="/mainUI/common/userLeft.jsp" %>
         <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
           <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
         <!-- 账户概览  end -->

@@ -4,7 +4,7 @@
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='vipmcepok.jsp.mcepok.jsp.-2080179417'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='vipmcepok.jsp.mcepok.jsp.-51880318'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='vipmcepok.jsp.mcepok.jsp.-1011373655'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipmcepok.jsp.mcepok.jsp.-373366424'/>！');location.replace('epmcjl');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipmcepok.jsp.mcepok.jsp.-373366424'/>！');location.replace('epmcjl?secondThisState=249&thisState=244');</script></c:if>
 
 <script type="text/javascript" src="/images/jquery.min.js"></script>
 <script src="/scripts/sms.js"></script>

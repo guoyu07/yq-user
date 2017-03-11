@@ -22,13 +22,8 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
-    <ul class="nav-secondary">
-       <li class="cur"><a href="/vipgo">积分理财</a></li>
-        <li><a href="/login2j?inputUrl=login3j.jsp">一币理财</a></li>
-        <li><a href="/sgks01">业绩查询</a></li>
-        <li><a href="/datepay">账户概览</a></li>
-    </ul>
+    <p class="breadcrumb-trail">财富中心 >> 金币管理</p>
+    <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
 <!-- 会员中心导航模块 end -->
@@ -36,16 +31,7 @@
 <!-- 积分理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-      <div class="member-aside">
-  		<%@ include file="/mainUI/common/userLeft.jsp" %>
-        <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-         <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
-        <!-- 账户概览  end -->
-		</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+   <div class="member-main-full">
       <!-- 注意事项 -->
       <div class="main-widget">
         <p class="widget-title-line">注意事项</p>

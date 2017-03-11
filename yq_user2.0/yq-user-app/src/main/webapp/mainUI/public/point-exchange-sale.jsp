@@ -9,7 +9,7 @@
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('您好，您卖出数量不能小于零，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，为了提供更公平公证的交易规则，累计挂牌最高20笔，待交易完成后才可以继续发布，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('您好，您卖出数量不能大于您剩余数量 ${gcuser.jyg} ，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('交易市场已有求购信息，请按需求点击 [我要卖给] ！');location.replace('gpjysc');</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('交易市场已有求购信息，请按需求点击 [我要卖给] ！');location.replace('gpjysc?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('单笔卖出数量不能大于 1000 哦!');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -43,7 +43,6 @@
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
 <div class="member-aside">
-   		<%@ include file="/mainUI/common/userLeft.jsp" %>
         <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
           <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
         <!-- 账户概览  end -->
@@ -56,7 +55,7 @@
       <div class="main-widget">
         <p class="widget-title-line">发布积分卖出</p>
         <div class="widget-article">
-          <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="mcsl?status=1">
+          <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="mcsl?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
             <p class="item">
               <label class="title">您当前的积分剩余：</label><span class="text">${gcuser.jyg}</span>
             </p>
@@ -91,7 +90,7 @@
       <!-- 当前求购明细 大概是一页10行数据 -->
       <div class="main-widget mt15">
         <p class="widget-title">当前卖出明细</p>
-        <p class="small-button-line"><a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/mcslmoredetail?status=4" id="J_rechargeDetailMore">查看更多</a></p>
+        <p class="small-button-line"><!-- <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/mcslmoredetail?status=4" id="J_rechargeDetailMore">查看更多</a> --></p>
         <div class="widget-table mt5">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
@@ -102,8 +101,9 @@
 					</c:if>
 			<c:if test="${not empty dataList}">
               <tr>
-                 <th>用户名</th>
+                <th>用户名</th>
                 <th>卖出</th>
+                <th>剩余</th>
                 <th>挂牌时间</th>
                 <th>当前价格</th>
                 <th>修改价格</th>
@@ -113,18 +113,22 @@
             <tbody>
             <s:iterator var="data" value="dataList">
               <tr>
-                <td>${userName}</td>
-                <td>${data.mcsl}</td>
-                <td><fmt:formatDate value="${data.abdate}" type="both"/></td>
-                <td>${data.pay}</td>
-                <td><a href="javascript:void(0);" class="JQ_goDialog" data-url="/diyjygj?sgid=${data.id}"  >修改价格</a></td>
-                <td></td>
-              </tr>
+				<td>${userName}</td>
+				<td>${data.mcsl}</td>
+				<td>${data.sysl}</td>
+				<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
+				<td>${data.pay}</td>
+                   <td><a href="/diyjygj?sgid=${data.id}&secondThisState=${secondThisState}&thisState=${thisState}">修改价格</a></td>
+                   <td><!-- <c:if test="${data.newjy!=3}"><a href="qxyjg?qxid=${data.id}" style="text-decoration: none">撒销</a></c:if> --></td>
+			</tr>
              </s:iterator>
              </c:if>
             </tbody>
           </table>
         </div>
+         <p class="widget-pages">
+  <aldtags:pageTag paraStr="thisState,${thisState},secondThisState,${secondThisState}"/>
+</p>
       </div>
       <!-- 当前求购明细 end -->
     </div>

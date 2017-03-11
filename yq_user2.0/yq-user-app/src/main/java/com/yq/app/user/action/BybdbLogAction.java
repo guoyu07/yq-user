@@ -15,7 +15,7 @@ public class BybdbLogAction extends ALDAdminPageActionSupport<SysBiLog> {
 
 	public String execute(){
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
-        super.initPage(logService.getSysBiLogPageList(super.getUserName(), null, null, super.getToPage(), 20));
+        super.initPage(logService.getSysBiLogPageList(super.getUserName(), null, null, super.getToPage(), 17));
 		return SUCCESS;
 	}
 	

@@ -4,7 +4,7 @@
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('修改卖出单价不能大于原来的定价！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('价格不能低于最低价！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('修改卖出单价成功！');location.replace('/mcsl?status=4');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('修改卖出单价成功！');location.replace('mcsl?secondThisState=248&thisState=244');</script></c:if>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -20,7 +20,30 @@
 </head>
 
 <body>
-<div class="member-dialog-container">
+<!-- 通用头部 -->
+<%@ include file="/mainUI/common/head.jsp" %>
+<!-- 通用头部 end -->
+ 
+<!-- 会员中心导航模块 -->
+<div class="container">
+  <div class="member-header" id="J_memberHeader">
+    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <%@ include file="/mainUI/common/scendhead.jsp" %>
+  </div>
+</div>
+<!-- 会员中心导航模块 end -->
+
+<!-- 积分理财内容 -->
+<div class="container">
+  <div class="member-content" id="J_memberContent">
+    <!-- 会员中心左边栏 -->
+<div class="member-aside">
+        <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
+          <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
+        <!-- 账户概览  end -->
+      </div>
+<!-- 会员中心左边栏 end -->
+
   <div class="member-main">
     <div class="dialog-widget">
       <p class="dialog-title">当前发布的积分买入撤销</p>

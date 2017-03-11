@@ -31,21 +31,12 @@
 <!-- 积分理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-        <%@ include file="/mainUI/common/userLeft.jsp" %>
-        <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-          <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
-        <!-- 账户概览  end -->
-      </div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+       <div class="member-main-full">
       <!-- 确认发布积分买入 -->
       <div class="main-widget">
         <p class="widget-title-line">确认发布积分买入</p>
         <div class="widget-article">
-          <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/mysl?status=2&txpay=${txpay}">
+          <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/mysl?status=2&txpay=${txpay}&secondThisState=${secondThisState}&thisState=${thisState}">
             <p class="item">
               <label class="title">您要买入积分数量：</label><span class="text">${txpay}</span>
             </p>
@@ -71,7 +62,7 @@
 <script>
 function bitch() {
   if (confirm("提示：您确定了吗？")) {
-    location.href = "/mysl?status=2&txpay=${txpay}";
+    location.href = "/mysl?status=2&txpay=${txpay}&secondThisState=${secondThisState}&thisState=${thisState}";
   }
 }
 </script>

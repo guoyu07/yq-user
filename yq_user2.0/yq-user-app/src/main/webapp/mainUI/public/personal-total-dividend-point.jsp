@@ -31,17 +31,7 @@
 <!-- 账户管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <%@ include file="/mainUI/common/persionalinfo.jsp" %>
-  <!-- 账户概览  end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 分红点变化明细 -->
       <div class="main-widget">
         <p class="widget-title-line">分红点变化明细</p>
@@ -70,7 +60,7 @@
           </table>
           <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-<aldtags:pageTag para1="lb" value1="${lb}"/>
+<aldtags:pageTag paraStr="lb,${lb},thisState,${thisState},secondThisState,${secondThisState}"/>
 </p>
 <!-- 会员中心翻页组件 end -->
 

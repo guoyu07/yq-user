@@ -32,18 +32,14 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
-<div class="member-aside-sp">
-  <%@ include file="/mainUI/common/userLeft.jsp" %>
-        <%@ include file="/mainUI/common/licaiLeft.jsp" %>
-</div>
 <!-- 会员中心左边栏 end -->
-<form method="post" name="Form" action="datepayfororder?status=1">
-    <div class="member-main-sp">
+<form method="post" name="Form" action="datepayfororder?status=1&thisState=${thisState}&secondThisState=${secondThisState}">
+    <div class="member-main-full">
       <!-- 积分交易明细 -->
       <div class="main-widget">
         <p class="widget-title-line">商城订单号一币明细</p>
         <p class="small-button-line">
-          <a href="datepay" class="widget-warning mr10">回到一币变化明细</a>
+          <a href="datepay?thisState=${thisState}&secondThisState=${secondThisState}" class="widget-warning mr10">回到一币变化明细</a>
           <span>商城订单号查询：</span>
           <input type="text" name="orderId" id="orderId" value="" size="10" style="padding: 0 5px;" />
           <button type="submit" class="widget-button-small order-search" onClick="querydata()">查询 </button>

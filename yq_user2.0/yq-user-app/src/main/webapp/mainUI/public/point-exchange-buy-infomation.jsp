@@ -44,7 +44,7 @@
     </c:choose>
         </td>
         <td>
-       <c:if test="${data.mysl>0}"><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymc?id=${data.id}&sl=${data.mysl}">我要卖</a></c:if>
+       <c:if test="${data.mysl>0}"><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymc?id=${data.id}&sl=${data.mysl}&secondThisState=${secondThisState}&thisState=${thisState}">我要卖</a></c:if>
         </td>
        </tr>
 		</s:iterator> 

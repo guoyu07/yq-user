@@ -37,12 +37,11 @@
 <!-- 业绩查询内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
+     <!-- 会员中心左边栏 -->
 <div class="member-aside">
-  	<%@ include file="/mainUI/common/userLeft.jsp" %>
-	  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-	  <%@ include file="/mainUI/common/gameservice.jsp" %>
-  <!-- 账户概览  end -->
+  <!-- VIP中心左边栏 -->
+  <%@ include file="/mainUI/common/vipleft.jsp" %>
+  <!-- VIP中心左边栏  end -->
 </div>
 <!-- 会员中心左边栏 end -->
 
@@ -50,7 +49,7 @@
       <!-- 报单币充值 -->
       <div class="main-widget">
         <p class="widget-title-line">充值50000报单币</p>
-        <form class="widget-form" method="POST" name="Form" action="bdbcz?status=1">
+        <form class="widget-form" method="POST" name="Form" action="bdbcz?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item">
             <label class="title">当前充值币：</label><span class="text">${czgcuser.vipcjcjb}</span></p>
           <p class="item">

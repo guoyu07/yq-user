@@ -31,16 +31,7 @@
 <!-- 账户管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-   <div class="user-info">
-     <%@ include file="/mainUI/common/userLeft.jsp" %>
-   	 <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
-   	 </div>
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 我的客户 -->
       <div class="main-widget">
         <p class="widget-title-line">推荐人信息</p>
@@ -63,7 +54,7 @@
       <div class="main-widget mt15">
         <p class="widget-title-line">我的客户</p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="tgdowntgdowndetail?status=1">查看更多</a>
+         <!--  <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="tgdowntgdowndetail?status=1">查看更多</a> -->
         </p>
         <div class="widget-table mt5">
           <table border="0" cellspacing="0" cellpadding="0">
@@ -73,11 +64,13 @@
                 <th>QQ/Email</th>
                 <th>注册时间</th>
                 <th>累计充值</th>
+                <th>最近充值时间</th>
                 <th>双区玩家</th>
+                <th>升级时间</th>
               </tr>
             </thead>
             <tbody>
-              <s:iterator var="data" value="dataList">
+ 				<s:iterator var="data" value="dataList">
 				<tr>
 					<td>${data.username}</td>
 					<td>
@@ -92,12 +85,17 @@
 					</td>
 					<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
 					<td>${data.cjtj}</td>
+					<td><fmt:formatDate value="${data.gmdate}" type="both"/></td>
 					<td><c:if test="${data.sjb==0}">否</c:if><c:if test="${data.sjb!=0}">${data.sjb}单</c:if></td>
+					<td><fmt:formatDate value="${data.bddate}" type="both"/></td>
 				</tr>
 			   </s:iterator>
             </tbody>
           </table>
         </div>
+        <p class="widget-pages">
+  <aldtags:pageTag paraStr="status,${status},thisState,${thisState},secondThisState,${secondThisState}"/>
+</p>
         <!-- 我的客户 end -->
       </div>
     </div>

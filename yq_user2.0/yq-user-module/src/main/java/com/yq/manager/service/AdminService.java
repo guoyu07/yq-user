@@ -262,6 +262,7 @@ public class AdminService {
 		return result;
 	}
 	
+	
 	public Double getSumpayNumOfTxpay(){
 		return txPayDao.getSumPayNum();
 	}

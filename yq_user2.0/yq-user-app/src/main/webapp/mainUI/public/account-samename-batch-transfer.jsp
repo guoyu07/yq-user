@@ -7,7 +7,7 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('非同名用户,不能转');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('您至少选择一个需要转账的用户名，谢谢！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('非双区用户不能使用该功能！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已成功批量转账！');location.href='tjz'</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已成功批量转账！');location.href='tjz?secondThisState=275&thisState=245'</script></c:if>
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('转出用户名报单币不能大于剩余报单币！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==12}"><script language=javascript>alert('接收的用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==13}"><script language=javascript>alert('转账保单币小于0！');history.go(-1);</script></c:if>
@@ -43,16 +43,7 @@
   <!-- 账户管理内容 -->
   <div class="container">
     <div class="member-content" id="J_memberContent">
-      <!-- 会员中心左边栏 -->
-      <div class="member-aside">
-        <div class="user-info">
-         <%@ include file="/mainUI/common/userLeft.jsp" %>
-       	 <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
-       	 </div>
-      </div>
-      <!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+       <div class="member-main-full">
       <div class="main-widget">
         <p class="widget-title-line">同姓名账户批量转账</p>
         <c:if test="${empty dataList}">
@@ -62,6 +53,8 @@
 		</c:if>
 		<c:if test="${not empty dataList}">
         <form class="widget-form" method="POST" action="tjz?status=1" name="form" id="form">
+              <input type="hidden" name="thisState" value="${thisState}">
+    <input type="hidden" name="secondThisState" value="${secondThisState}">
           <p class="item">
             <label class="title">转账类型：</label>
             <select class="widget-select" name="tp">
@@ -82,8 +75,7 @@
             <table border="0" cellspacing="0" cellpadding="0">
               <thead>
                 <tr>
-                  <td colspan="6">
-                    <input type='checkbox' name="chkall" onclick="CheckAll(this.form)">全选</td>
+                  <td class="checked-all-wrap" colspan="6"><input class="checked-all" type='checkbox' name="chkall" onclick="CheckAll(this.form)">全选</td>
                 </tr>
               </thead>
               <tbody>
@@ -105,7 +97,7 @@
            
             <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-	<aldtags:pageTag />
+	<aldtags:pageTag paraStr="thisState,${thisState},secondThisState,${secondThisState}"  />
 </p>
 <!-- 会员中心翻页组件 end -->
 

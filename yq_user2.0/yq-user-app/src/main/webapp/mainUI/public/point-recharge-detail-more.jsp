@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('激活成功！');location.replace('gmjh?secondThisState=251&thisState=244');</script></c:if>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -15,9 +16,24 @@
 </head>
 
 <body>
-<div class="member-dialog-container">
-  <div class="member-main">
-    <div class="dialog-widget">
+<!-- 通用头部 -->
+  <%@ include file="/mainUI/common/head.jsp" %>
+  <!-- 通用头部 end -->
+  <!-- 会员中心导航模块 -->
+  <div class="container">
+    <div class="member-header" id="J_memberHeader">
+      <p class="breadcrumb-trail">财富中心 >> 金币管理</p>
+      <ul class="nav-secondary">
+       <%@ include file="/mainUI/common/scendhead.jsp" %>
+      </ul>
+    </div>
+  </div>
+  <!-- 会员中心导航模块 end -->
+  <!-- 积分理财内容 -->
+  <div class="container">
+    <div class="member-content" id="J_memberContent">
+      <div class="member-main-full">
+      <div class="dialog-widget">
       <p class="dialog-title">充值明细详情</p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
@@ -36,7 +52,7 @@
 	                <th>IP地址</th>
 	              </tr>
 	            </thead>
-            <tbodd>
+            <tbody>
                <s:iterator var="data" value="dataList">
 				<tr>
 					<td>${data.cjuser}</td>
@@ -50,7 +66,7 @@
 					<td>${data.ip}</td>
 				</tr>
 			   </s:iterator>
-            </tbodd>
+            </tbody>
           </table>
         </div>
         <!-- 会员中心翻页组件 -->

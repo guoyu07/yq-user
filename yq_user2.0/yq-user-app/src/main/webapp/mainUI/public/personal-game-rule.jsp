@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">账户管理 >> 同名账户管理</p>
+    <p class="breadcrumb-trail">支持帮助 >> 游戏规则</p>
     <%@ include file="/mainUI/common/accountpart.jsp" %>
   </div>
 </div>
@@ -31,16 +31,7 @@
 <!-- 账户管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
- <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <%@ include file="/mainUI/common/persionalinfo.jsp" %>
-  <!-- 账户概览  end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 游戏规则 -->
       <div class="main-widget">
         <p class="widget-title-line">游戏规则</p>

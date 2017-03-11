@@ -29,15 +29,16 @@ if(fcxt!=null){
           </div>
           <ul class="user-detail">
            <!--  <li class="login-info"><span>上次登录：</span><em></em></li> -->
-            <li class="user-name"><span>用户名：</span><a href="userlist"><%=gcuser.getUsername()%></a></li>
-            <li class="eb"><span>当前可用一币：</span><em><%=gcuser.getPay()%></em></li>
+            <li class="user-name"><span>用户名：</span><a href="userlist?secondThisState=292&thisState=245"><%=gcuser.getUsername()%></a></li>
+            <li class="eb-exchange"><span>当前可用一币：</span><em><%=gcuser.getPay()%></em></li>
             <li class="eb-exchange"><span>累计交易一币：</span><em><%=gcuser.getCbpay()%></em></li>
-            <li class="eb-uesd"><span>累计使用一币：</span><em><%=gcuser.getTxpay()%></em></li>
-           	<% if(Global.OpenScoresPay){
+            <li class="eb-exchange"><span>累计使用一币：</span><em><%=gcuser.getTxpay()%></em></li>
+           <%-- 	<% if(Global.OpenScoresPay){
 			 %>
 			<li class="eb-exchange"><span>购物券：</span><a href="/userscoreslog"><%=gcuser.getScores()%></a></li>
 			<%
 			}
-			%>
+			%> --%>
+			 <li class="eb-exchange"><span>游戏级别：</span><em><%=gcuser.getSjb()%></em></li>
           </ul>
         </div>

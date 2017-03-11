@@ -62,9 +62,8 @@ function bdbcz(){
   <div class="point-info">
     <p class="title">业绩查询</p>
     <ul class="list">
-      <li><a href="sgks01">游戏业务</a></li>
-      <p>游戏级别<em><%=yjcxGcuser.getSjb()%></em></p>
-      
+       <li>游戏级别:<em><%=yjcxGcuser.getSjb()%></em></li>
+      <%-- 
       <li class="special">
 		     报单币余额<em><%=yjcxGcuser.getSybdb()%></em><% if(yjcxGcuser.getVip()>0) {%>--<a href="bdbzz">转出</a><%}%>
 		    </li>
@@ -75,20 +74,20 @@ function bdbcz(){
 		    <li class="special">
 		     <a href="bdbdate">报单币明细</a>--<a href="bdbcz">充值</a>
 		    </li>
-		 <%-- <li><label onclick="bybdblog()">备用报单币</label><em><%=yjcxGcuser.getSyep()%></em>--<b onclick="bdbzz()">转出</b></p></li>
-      	 <li><label onclick="bdbdate()">报单币明细</label>--<b onclick="bdbcz()">充值</b></li> --%>
+		 <li><label onclick="bybdblog()">备用报单币</label><em><%=yjcxGcuser.getSyep()%></em>--<b onclick="bdbzz()">转出</b></p></li>
+      	 <li><label onclick="bdbdate()">报单币明细</label>--<b onclick="bdbcz()">充值</b></li>
 		<%}else{%>
 		 <li><a href="bybdblog">备用报单币<em><%=yjcxGcuser.getSyep()%></em></a></li>
       	 <li><a href="bdbdate">报单币明细</a></li>
 		<%}%>
-		
-		<li>周封奖金：<span class="c-b"><%=fdpay%></span></li>
-		<li>收益比例：<span class="c-z">
+		 --%>
+		<li>周封奖金：<em><%=fdpay%></em></li>
+		<%-- <li>收益比例：<em>
 		<% if(fbpay<1) {%>
 		<%="0"%>
 		<%}else{ %>
 		<%=fbpay%>
-		<%}%></span></li>
-      <p>当前收益<em><%=mqfh%></em></p>
+		<%}%></em></li>
+      <li>当前收益:<em><%=mqfh%></em></li> --%>
     </ul>
   </div>

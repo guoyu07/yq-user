@@ -17,21 +17,22 @@
 <%@ include file="/mainUI/common/head.jsp" %>
 <!-- 通用头部 end -->
 
+<!-- 会员中心导航模块 -->
+<div class="container">
+  <div class="member-header" id="J_memberHeader">
+    <p class="breadcrumb-trail">财富中心 >> 购物券变化明细</p>
+     <%@ include file="/mainUI/common/scendhead.jsp" %>
+  </div>
+</div>
+
 <!-- 购物券内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-	<div class="member-aside">
-       <%@ include file="/mainUI/common/userLeft.jsp" %>
-       <%@ include file="/mainUI/common/licaiLeft.jsp" %>
-      </div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+     <div class="member-main-full">
       <!-- 购物券变化明细 -->
       <div class="main-widget">
         <p class="widget-title-line">购物券变化明细</p>
-        <p class="small-button-line"><a href="usermallorderscoreslog" class="widget-warning mr10">商城订单号查询</a></p>
+        <p class="small-button-line"><a href="usermallorderscoreslog?secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10">商城订单号查询</a></p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
@@ -73,7 +74,7 @@
         </div>
         <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-  <aldtags:pageTag paraStr="status,1"/>
+  <aldtags:pageTag paraStr="status,1,secondThisState,${secondThisState},thisState,${thisState}"/>
 </p>
 <!-- 会员中心翻页组件 end -->
 

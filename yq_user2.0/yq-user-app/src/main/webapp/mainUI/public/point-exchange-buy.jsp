@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('交易市场已有积分在出售中，请按需求点击 [我要买入] ！');location.replace('gpjysc');</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('操作错误，金币不足，请检查输入是否正确！');location.replace('jztojb');</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('买入挂牌成功！');location.replace('gpjy');</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('交易市场已有积分在出售中，请按需求点击 [我要买入] ！');location.replace('gpjysc?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('操作错误，金币不足，请检查输入是否正确！');location.replace('jztojb?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('买入挂牌成功！');location.replace('gpjy?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -35,7 +35,6 @@
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
 <div class="member-aside">
-        <%@ include file="/mainUI/common/userLeft.jsp" %>
         <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
           <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
         <!-- 账户概览  end -->
@@ -47,7 +46,7 @@
       <div class="main-widget">
         <p class="widget-title-line">发布积分买入</p>
         <div class="widget-article">
-          <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/mysl?status=1">
+          <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/mysl?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
             <p class="item">
               <label class="title">您当前的金币剩余：</label><span class="text">${jydb}</span>
             </p>
@@ -76,36 +75,41 @@
       <!-- 当前求购明细 大概是一页10行数据 -->
       <div class="main-widget mt15">
         <p class="widget-title">当前求购明细</p>
-        <p class="small-button-line"><a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/myslmoredetail?status=4" id="J_rechargeDetailMore">查看更多</a></p>
-        <div class="widget-table mt5">
-        	<c:if test="${empty dataList}">
+        <p class="small-button-line"><!-- <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="/myslmoredetail?status=4" id="J_rechargeDetailMore">查看更多</a> --></p>
+        <c:if test="${empty dataList}">
 						<div class="content-tisp">
 							<h5>暂无记录</h5>
 						</div>
 					</c:if>
 		<c:if test="${not empty dataList}">
+        <div class="widget-table mt5">
+        	
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
-              <tr>
-                <th>用户名</th>
-                <th>求购积分数量</th>
-                <th>求购时间</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-            <s:iterator var="data" value="dataList">
-              <tr>
-                <td>${userName}</td>
-                <td>${data.mysl}</td>
-                <td><fmt:formatDate value="${data.abdate}" type="both"/></td>
-                <td><a href="qxqg?qxid=${data.jyid}" style="text-decoration: none">撒销</a></td>
-              </tr>
-            </s:iterator>
+             <tr>
+								<th width="75"><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+								<th><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.-1172477375'/></th>
+								<th><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.787632912'/></th>
+								<th><s:text name='viewjflc-jfmr.jsp.jflc-jfmr.jsp.861206825'/></th>
+								<th><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></th>
+							</tr>
+							<s:iterator var="data" value="dataList">
+							<tr>
+								<td>${userName}</td>
+								<td>${data.mysl}</td>
+								<td>${data.jypay}</td>
+								<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
+								<td><a href="qxqg?qxid=${data.jyid}&secondThisState=${secondThisState}&thisState=${thisState}" style="text-decoration: none"><s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.836270'/></a></td>
+							</tr>
+							</s:iterator>
             </tbody>
           </table>
-          </c:if>
+        
         </div>
+        <p class="widget-pages">
+	<aldtags:pageTag paraStr="thisState,${thisState},secondThisState,${secondThisState}"/>
+</p>
+  </c:if>
       </div>
       <!-- 当前求购明细 end -->
     </div>

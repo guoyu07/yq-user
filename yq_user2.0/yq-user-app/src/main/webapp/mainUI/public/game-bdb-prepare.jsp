@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <p class="breadcrumb-trail">财富中心 >> 报单币明细</p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -32,12 +32,11 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
-	<div class="member-aside">
-	     <%@ include file="/mainUI/common/userLeft.jsp" %>
-	  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-	  <%@ include file="/mainUI/common/gameservice.jsp" %>
-	  <!-- 账户概览  end -->
-	</div>
+<div class="member-aside">
+  <!-- VIP中心左边栏 -->
+  <%@ include file="/mainUI/common/vipleft.jsp" %>
+  <!-- VIP中心左边栏  end -->
+</div>
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
@@ -70,7 +69,7 @@
         </div>
         <!-- 会员中心翻页组件 -->
 <p class="widget-pages">
-	<aldtags:pageTag />
+	<aldtags:pageTag paraStr="secondThisState,${secondThisState},thisState,${thisState}" />
 </p>
 <!-- 会员中心翻页组件 end -->
 

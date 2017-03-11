@@ -30,20 +30,11 @@
 <!-- 一币理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-  <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <%@ include file="/mainUI/common/yblc.jsp" %>
-  <!-- 账户概览 end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+  <div class="member-main-full">
       <!-- 一币卖出明细表格 -->
       <div class="main-widget">
         <p class="widget-title-line">一币求现（卖出）明细</p>
-        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epmcjlmcdetail?status=1" id="J_ebSaleDetailMore">查看更多</a></p>
+        <p class="small-button-line"><!-- <a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epmcjlmcdetail?status=1" id="J_ebSaleDetailMore">查看更多</a> --></p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
@@ -53,6 +44,8 @@
                 <th>求现金额</th>
                 <th>发布时间</th>
                 <th>交易状态</th>
+                <th>操作</th>
+                <th>操作状态</th>
               </tr>
             </thead>
             <tbody>
@@ -66,22 +59,25 @@
 								<c:if test="${empty data.zftime}">
              <c:if test="${data.ep==1}">${data.dfuser}--已下单，等待${data.dfuser}付款中...</c:if>
              <c:if test="${data.ep==2}">${data.dfuser}--已向您付款-${data.paynum9}元，等待您在<b><font color="#0000FF"><fmt:formatDate value="${data.rgdate}" type="both"/></font></b>前确认。。。</c:if>
-             <c:if test="${data.ep!=1&&data.ep!=2}">等待认购中。。--<b><a onClick="return confirm('提示：您确定了吗？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000">撤销卖出</font></a></b></c:if>
+             <c:if test="${data.ep!=1&&data.ep!=2}">等待认购中。。--<b><a onClick="return confirm('提示：您确定了吗？')" href="qxepmc?qx=${data.payid}&thisState=${thisState}&secondThisState=${secondThisState}"><font color="#FF0000">撤销卖出</font></a></b></c:if>
               </c:if>
 								</td>
-								<%-- <td>
-								<a onClick="return confirm('提示：您确定已收到认购方 ${data.dfuser}给打款 ${data.paynum9}了吗？ 确定后不可恢复！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
+								<td>
+								<a onClick="return confirm('提示：您确定已收到认购方 ${data.dfuser}给打款 ${data.paynum9}了吗？ 确定后不可恢复！')" href="/mcepok?payId= ${data.payid}&thisState=${thisState}&secondThisState=${secondThisState}"><font color="#FF0000" size="2">
           <c:if test="${data.ep==2}"><input type="button" value="确认收到${data.paynum9}元款" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
           </c:if>
           </font>
 					         	</a>
 					         	</td>	
-					          	<td><c:if test="${data.opstate==1}">订单被重置</c:if></td> --%>
+					          	<td><c:if test="${data.opstate==1}">订单被重置</c:if></td>
 							</tr>
 							</s:iterator>
             </tbody>
           </table>
         </div>
+        <p class="widget-pages">
+         <aldtags:pageTag paraStr="thisState,${thisState},secondThisState,${secondThisState}"/>
+      	</p>
       </div>
     </div>
     <!-- 一币卖出明细表格 end -->

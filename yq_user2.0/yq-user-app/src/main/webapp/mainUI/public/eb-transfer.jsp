@@ -16,7 +16,7 @@
 <c:if test="${erroCodeNum==12}"><script language=javascript>alert('该玩家是大vip！您不能转给他！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==13}"><script language=javascript>alert('您只是小vip！不能转给您团队下的小vip！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==14}"><script language=javascript>alert('被转对象vip标识错误，请截图后联系管理员！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('datepay');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('datepay?secondThisState=249&thisState=244');</script></c:if>
 <head>
   <meta chartset="UTF-8">
   <title>会员中心|一币转出</title>
@@ -44,12 +44,11 @@
 <!-- 一币理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
+   <!-- 会员中心左边栏 -->
 <div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
- 	<%@ include file="/mainUI/common/yblc.jsp" %>
-  <!-- 账户概览 end -->
+  <!-- VIP中心左边栏 -->
+  <%@ include file="/mainUI/common/vipleft.jsp" %>
+  <!-- VIP中心左边栏  end -->
 </div>
 <!-- 会员中心左边栏 end -->
 
@@ -57,7 +56,7 @@
       <!-- 一币转出 -->
       <div class="main-widget">
         <p class="widget-title-line">一币转出</p>
-        <form class="widget-form" method="POST" name="Form" onsubmit="return checkdate()" action="vipjzpay?status=1">
+        <form class="widget-form" method="POST" name="Form" onsubmit="return checkdate()" action="vipjzpay?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item">
             <label class="title">用户名：</label><span class="text"><b class="widget-warning">${userName}</b></span></p>
           <p class="item">
@@ -77,7 +76,7 @@
             <button class="widget-button" type="submit" name="submit2" onclick="return confirm('提示：您确定了吗？')">确定转账</button>
           </p>
         </form>
-        <c:if test="${gcuser.vip==2}"><p class="widget-tips mt10"><a href="vipcjb">VIP充值管理（累计充值币：${gcuser.vipljcjb}）（已使用：${gcuser.vipsycjb}）（剩余：${gcuser.vipcjcjb}）</a></p></c:if>
+        <%-- <c:if test="${gcuser.vip==2}"><p class="widget-tips mt10"><a href="vipcjb">VIP充值管理（累计充值币：${gcuser.vipljcjb}）（已使用：${gcuser.vipsycjb}）（剩余：${gcuser.vipcjcjb}）</a></p></c:if> --%>
       </div>
     </div>
     <!-- 一币转出 end -->

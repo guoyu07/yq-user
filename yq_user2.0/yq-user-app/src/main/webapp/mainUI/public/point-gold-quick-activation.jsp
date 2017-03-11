@@ -15,8 +15,23 @@
 </head>
 
 <body>
-  <div class="member-dialog-container">
-    <div class="member-main">
+<!-- 通用头部 -->
+  <%@ include file="/mainUI/common/head.jsp" %>
+  <!-- 通用头部 end -->
+  <!-- 会员中心导航模块 -->
+  <div class="container">
+    <div class="member-header" id="J_memberHeader">
+      <p class="breadcrumb-trail">财富中心 >> 金币管理</p>
+      <ul class="nav-secondary">
+       <%@ include file="/mainUI/common/scendhead.jsp" %>
+      </ul>
+    </div>
+  </div>
+  <!-- 会员中心导航模块 end -->
+  <!-- 积分理财内容 -->
+  <div class="container">
+    <div class="member-content" id="J_memberContent">
+      <div class="member-main-full">
       <div class="dialog-widget">
         <p class="dialog-title">快速激活金币卡</p>
         <!-- 图纸为一页13条数据 -->
@@ -39,7 +54,7 @@
               <span class="text widget-warning">${ejbk.bf2}0</span>
             </p>
             <p class="button-line mt15">
-              <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1"  class="widget-button">快速激活</a>
+              <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1&secondThisState=${secondThisState}&thisState=${thisState}"  class="widget-button">快速激活</a>
             </p>
           </form>
         </div>

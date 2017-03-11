@@ -20,7 +20,7 @@ public class UserScoresLogAction extends ALDAdminPageActionSupport<UserScoresLog
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
-		super.initPage(userService.getUserScoresLogPage(super.getUserName(), super.getToPage(), 30,startDate1,endDate1));
+		super.initPage(userService.getUserScoresLogPage(super.getUserName(), super.getToPage(), 17,startDate1,endDate1));
 		return SUCCESS;
 	}
 	

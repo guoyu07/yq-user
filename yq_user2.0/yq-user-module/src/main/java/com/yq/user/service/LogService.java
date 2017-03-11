@@ -418,4 +418,20 @@ public class LogService {
 	}
 	
 	
+	/**
+	 * @param userName
+	 * @param lb
+	 * @param toPage
+	 * @param i
+	 * @return
+	 */
+	public IPage<Datepay> getGoldDetailListPage(String userName, Integer lb, int toPage, int pageSize) {
+		return datePayDao.getGoldPage(userName,lb,toPage,pageSize);
+	}
+	
+	public IPage<Datepay> getYbListPage(String userName, Integer lb, int toPage, int pageSize) {
+		return datePayDao.getYbPage(userName,lb,toPage,pageSize);
+	}
+	
+	
 }

@@ -12,7 +12,7 @@
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='VIP_users_can_not_withdraw_cash'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('<s:text name='nosuremanytimesforclose'/>！');history.go(-1);</script></c:if>
 
-<c:if test="${erroCodeNum==-1}"><script language=javascript>alert('您的发布已经成功提交，发布成功后如有认购一币方向您下单后2小时内打到您的收款账号上！请您及时查收！');location.replace('epmcjl');</script></c:if>
+<c:if test="${erroCodeNum==-1}"><script language=javascript>alert('您的发布已经成功提交，发布成功后如有认购一币方向您下单后2小时内打到您的收款账号上！请您及时查收！');location.replace('epmcjl?secondThisState=249&thisState=244');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -41,15 +41,7 @@
 <!-- 一币理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
- <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <%@ include file="/mainUI/common/yblc.jsp" %>
-  <!-- 账户概览 end -->
-</div>
-<!-- 会员中心左边栏 end -->
-    <div class="member-main">
+   <div class="member-main-full">
       <!-- 一币卖出说明 -->
       <div class="main-widget">
         <p class="widget-title-line">一币卖出说明</p>

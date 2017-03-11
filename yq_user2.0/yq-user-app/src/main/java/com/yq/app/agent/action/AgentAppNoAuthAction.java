@@ -36,11 +36,11 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		if(state==1){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			Gcuser gcuser = userService.getUserByUserName(user);
 			if(gcuser==null){
 				throw new ServiceException(1, "用户名不存在！");
 			}
-			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			int callLenght = gcuser.getCall().length();
 			String callLeft = gcuser.getCall().substring(0, 3);
 			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);

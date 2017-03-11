@@ -6,7 +6,7 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('您好，您输入的二级密码不正确，请重新输入！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('您好，您输入的手机验证码不正确，请重新输入！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==100}"><script language=javascript>alert('充值话费失败！稍后再试！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('手机话费-"${call}"-正在入账，请您耐心等待！');location.replace('datepay');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('手机话费-"${call}"-正在入账，请您耐心等待！');location.replace('datepay?secondThisState=249&thisState=244');</script></c:if>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -36,25 +36,10 @@
   </div>
 </div>
 <!-- 会员中心导航模块 end -->
-
 <!-- 消费管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-  <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <div class="point-info">
-    <p class="title">消费管理</p>
-    <ul class="list">
-      <%@ include file="/mainUI/common/xfgl2.jsp" %>
-    </ul>
-  </div>
-  <!-- 账户概览 end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 话费充值（100） -->
       <div class="main-widget">
         <p class="widget-title-line">话费充值（100）</p>

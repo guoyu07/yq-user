@@ -504,9 +504,30 @@ public class DatePayDao {
 		sql.append(" order by id desc ");
 		return this.jdbc.getList(sql.toString(), Datepay.class, sqlParameter);
 	}
-	
-	
-	
+
+	public IPage<Datepay> getGoldPage(String userName, Integer oType, int toPage, int pageSize) {
+		String sql = "select * from "+table+" where username = ? and (dbjc<>0 or jyjz<>0) ";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		/*if(oType!=null){
+			sql = sql +" and origintype = ?";
+			sqlParameter.setInt(oType);
+		}*/
+		sql = sql +" order by id desc";
+		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, toPage);
+	}
+
+	public IPage<Datepay> getYbPage(String userName, Integer oType, int toPage, int pageSize) {
+		String sql = "select * from "+table+" where username = ? and  (syjz<>0 or jc<>0) ";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		if(oType!=null){
+			sql = sql +" and origintype = ?";
+			sqlParameter.setInt(oType);
+		}
+		sql = sql +" order by id desc";
+		return this.jdbc.getListPage(sql, Datepay.class, sqlParameter, pageSize, toPage);
+	}
 	
 	
 }

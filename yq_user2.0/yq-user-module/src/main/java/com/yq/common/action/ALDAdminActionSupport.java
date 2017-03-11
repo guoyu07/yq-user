@@ -1,14 +1,42 @@
 package com.yq.common.action;
 
 import com.sr178.module.web.action.BaseActionSupport;
-/**
- * @author hzy
- * 2012-7-20
- */
 public class ALDAdminActionSupport extends BaseActionSupport {
 	/**  */
 	private static final long serialVersionUID = 1L;
 	
+	private int thisState = 242;
+	
+	private int secondThisState=244;
+	
+	private int thirdThisState;
+	
+	
+	
+	public int getThirdThisState() {
+		return thirdThisState;
+	}
+
+	public void setThirdThisState(int thirdThisState) {
+		this.thirdThisState = thirdThisState;
+	}
+
+	public int getSecondThisState() {
+		return secondThisState;
+	}
+
+	public void setSecondThisState(int secondThisState) {
+		this.secondThisState = secondThisState;
+	}
+
+	public int getThisState() {
+		return thisState;
+	}
+
+	public void setThisState(int thisState) {
+		this.thisState = thisState;
+	}
+
 	public int getErroCodeNum() {
 		return super.getCode();
 	}

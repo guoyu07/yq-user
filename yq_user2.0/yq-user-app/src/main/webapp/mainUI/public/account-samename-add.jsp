@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('此用户名已有人使用！请更换！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('恭喜同姓名用户注册成功，请进行下一步的操作！');location.href='tgdown'</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('恭喜同姓名用户注册成功，请进行下一步的操作！');location.href='userlist?secondThisState=292&thisState=245'</script></c:if>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -33,16 +33,7 @@
 <!-- 账户管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-  <div class="user-info">
-     <%@ include file="/mainUI/common/userLeft.jsp" %>
-   	 <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
-   	 </div>
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <div class="main-widget">
         <p class="widget-title-line">添加同名用户说明</p>
         <div class="widget-article">
@@ -52,7 +43,7 @@
       </div>
       <div class="main-widget mt15">
         <p class="widget-title-line">添加同名用户</p>
-        <form class="widget-form" method="POST" action="regTheSame?status=1" name="Form" onSubmit="return checkdate()">
+        <form class="widget-form" method="POST" action="userlist?status=1&thisState=${thisState}&secondThisState=292" name="Form" onSubmit="return checkdate()">
           <p class="item mt15">
             <label class="title">用户名：</label>
             <input type="text" name="gguser" maxlength="12" onkeyup="value=value.replace(/[\W]/g,'')" />

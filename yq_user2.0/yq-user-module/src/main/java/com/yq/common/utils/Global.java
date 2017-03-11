@@ -30,8 +30,9 @@ public class Global {
      * 打开积分支付
      * */
     public static final boolean OpenScoresPay 	= 	true; 
-	
-	
+    
+    
+    public static final String CHAR_ENCODING	= "UTF-8";
 	
 
 }

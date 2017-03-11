@@ -93,7 +93,7 @@
 				    	}
 					    return;
 				    }else{
-				    	location.href='/manager';
+				    	location.href='/manager?thisState=243';
 				    }
 			    }
 			    ajaxobj.send();

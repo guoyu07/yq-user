@@ -1250,4 +1250,10 @@ public class ManageService {
 	}
 
 
+
+	public List<Resource> findResourceListByResourceId(int resourceId) {
+		return resourceDao.getByResourceId(resourceId);
+	}
+
+
 }

@@ -11,7 +11,7 @@
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('转入用户不存在！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('添加失败！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==100}"><script language=javascript>alert('YB不足！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！捐助成功！');location.replace('datepay');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！捐助成功！');location.replace('datepay?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <head>
   <meta chartset="UTF-8">
   <title>会员中心|一币捐助</title>
@@ -39,20 +39,11 @@
 <!-- 一币理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  	<!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
- 	<%@ include file="/mainUI/common/yblc.jsp" %>
-  <!-- 账户概览 end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 一笔捐助区 -->
       <div class="main-widget">
         <p class="widget-title-line">一币捐助区</p>
-        <form class="widget-form" id="J_ebContributionForm" name="Form" method="POST" onSubmit="return checkdate()" action="ybPresent?status=1">
+        <form class="widget-form" id="J_ebContributionForm" name="Form" method="POST" onSubmit="return checkdate()" action="ybPresent?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <div class="form-content eb-content">
             <p class="item">
               <label class="title">捐助数量：</label>

@@ -38,21 +38,7 @@
 <!-- 消费管理内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-<div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-  <div class="point-info">
-    <p class="title">消费管理</p>
-    <ul class="list">
-    <%@ include file="/mainUI/common/xfgl2.jsp" %>
-    </ul>
-  </div>
-  <!-- 账户概览 end -->
-</div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
+    <div class="member-main-full">
       <!-- 未来领袖青少年口才训练营报名须知 -->
       <div class="main-widget">
         <p class="widget-title-line">未来领袖青少年口才训练营报名须知</p>

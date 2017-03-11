@@ -45,16 +45,7 @@
 <div class="container">
   <!-- 首页内容 -->
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
-     <div class="member-aside">
- 			<%@ include file="/mainUI/common/userLeft.jsp" %>
-        <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
-          <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
-        <!-- 账户概览  end -->
-	<!-- 会员中心左边栏 end -->
-	</div>
-    <!-- 客服中心 -->
-    <div class="member-main">
+    <div class="member-main-full">
       <div class="main-widget customer-service-center">
         <p class="widget-title-line">关于服务中心</p>
         <div class="widget-article">

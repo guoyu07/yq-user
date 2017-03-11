@@ -22,6 +22,27 @@ public class TgurlAction extends ALDAdminActionSupport {
 		return SUCCESS;
 	}
 	
+	
+	public String ybtrasactionrule(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		return SUCCESS;
+	}
+	
+	public String shenqingbook(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		return SUCCESS;
+	}
+	
+	public String userprotocol(){
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		gcuser = userService.getUserByUserName(super.getUserName());
+		return SUCCESS;
+	}
+	
+	
+	
 	public Gcuser getGcuser(){
 		return gcuser;
 	}

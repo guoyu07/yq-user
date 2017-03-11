@@ -37,6 +37,7 @@ import com.yq.manage.bean.AdminOperateLog;
 import com.yq.manage.dao.AdminOperateLogDao;
 import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
+import com.yq.user.bean.UserBeanTemp;
 import com.yq.user.bo.BabyInfo;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Cpuser;
@@ -1045,6 +1046,7 @@ public class UserService {
 //			super.setErroCodeNum(14);//alert('接点人不存在，没法放置，请检查是否正确！');history.go(-1);
 //			return SUCCESS;
 		}else{
+			
 			if(!Strings.isNullOrEmpty(tuser.getAuid())&&!Strings.isNullOrEmpty(tuser.getBuid())){
 				throw new ServiceException(15,"接点人位置已被占用，请重新选择！");
 //				super.setErroCodeNum(15);//alert('接点人位置已被占用，请重新选择！');history.go(-1);
@@ -1137,10 +1139,12 @@ public class UserService {
 //			}
 			if(Strings.isNullOrEmpty(tuser.getAuid())){
 				if(!sgxtDao.updateAuid(tuser.getUsername(), bduser)){
+					System.out.println("a接点人位置已被占用");
 					throw new ServiceException(15,"接点人位置已被占用，请重新选择！");
 				}
 			}else{
 				if(!sgxtDao.updateBuid(tuser.getUsername(), bduser)){
+					System.out.println("b接点人位置已被占用");
 					throw new ServiceException(15,"接点人位置已被占用，请重新选择！");
 				}
 			}
@@ -2685,6 +2689,7 @@ public class UserService {
 	@Transactional
 	public void sureIReceivedMoney(String userName,int payId,String password3,String smsCode,String ip){
 		Txpay txpay = txPayDao.getByPayid(payId);
+		System.out.println("txpay="+txpay.getPayusername());
 		if(!txpay.getPayusername().equals(userName)){
 			throw new ServiceException(1, "发布方出错，请检查输入是否正确！");
 		}
@@ -5409,12 +5414,15 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		return userScoresLogDao.getUserScoresLogByMallOrderList(userName, orderId);
 	}
 
-	public List<String> getUserNameList(String userName) {
+	public List<UserBeanTemp> getUserNameList(String userName) {
 		Gcuser gcuser= gcuserDao.getUser(userName);
 		List<Gcuser> list= gcuserDao.getList(gcuser.getName(), gcuser.getUserid());
-		List<String> result= new ArrayList<>();
+		List<UserBeanTemp> result= new ArrayList<>();
 		for (Gcuser gcuser2 : list) {
-			result.add(gcuser2.getUsername());
+			UserBeanTemp bean= new UserBeanTemp();
+			bean.setUsername(gcuser2.getUsername());
+			bean.setLevel(gcuser2.getSjb());
+			result.add(bean);
 		}
 		return result;
 	}

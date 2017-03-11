@@ -36,7 +36,7 @@ public class SameUserPropertyDao {
     public SameUserProperty getSameUserProperty(String nameUserId){
     	StringBuilder sql = new StringBuilder();
     	SqlParameter sqlParam = new SqlParameter();
-    	sql.append("select * from "+table+" where  name_userid= ?");
+    	sql.append("select * from "+table+" where  name_userid= ? limit 1");
     	sqlParam.setString(nameUserId);
     	return jdbc.get(sql.toString(), SameUserProperty.class, sqlParam);
     }

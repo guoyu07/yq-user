@@ -27,22 +27,22 @@ function querydata(){
 <%@ include file="/mainUI/common/head.jsp" %>
 <!-- 通用头部 end -->
 
+<div class="container">
+  <div class="member-header" id="J_memberHeader">
+    <p class="breadcrumb-trail">财富中心 >> 报单币明细</p>
+     <%@ include file="/mainUI/common/scendhead.jsp" %>
+  </div>
+</div>
+
 <!-- 购物券内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
- 	  <div class="member-aside">
-       <%@ include file="/mainUI/common/userLeft.jsp" %>
-       <%@ include file="/mainUI/common/licaiLeft.jsp" %>
-      </div>
-<!-- 会员中心左边栏 end -->
-
-    <div class="member-main">
-     <form method="POST" action="usermallorderscoreslog?status=1" name="Form" id="Form">
+      <div class="member-main-full">
+     <form method="POST" action="usermallorderscoreslog?status=1&secondThisState=${secondThisState}&thisState=${thisState}" name="Form" id="Form">
       <!-- 购物券变化明细 -->
       <div class="main-widget">
         <p class="widget-title-line">商城订单号购物券变化明细</p>
-        <p class="small-button-line"><a href="userscoreslog" class="widget-warning mr10">返回购物券变化明细</a></p>
+        <p class="small-button-line"><a href="userscoreslog?secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10">返回购物券变化明细</a></p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
             <caption class="search-line">

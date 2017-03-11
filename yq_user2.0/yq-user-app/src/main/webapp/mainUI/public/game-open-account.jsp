@@ -25,18 +25,17 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
-    <%@ include file="/mainUI/common/accountpart.jsp" %>
+    <p class="breadcrumb-trail">业绩查询 >> 激活用户</p>
+    <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
 <!-- 会员中心导航模块 end -->
-
 <!-- 业绩查询内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
 <div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
+  <%--  <%@ include file="/mainUI/common/userLeft.jsp" %> --%>
   <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
   <%@ include file="/mainUI/common/gameservice.jsp" %>
   <!-- 账户概览  end -->
@@ -50,7 +49,7 @@
         <p class="small-button-line">
           <a class="widget-warning" href="javascript:history.back();">返回上一页</a>
         </p>
-        <form class="widget-form" method="POST" action="bdreg" name="Form" onSubmit="return checkdate()">
+        <form class="widget-form" method="POST" action="bdreg?secondThisState=${secondThisState}&thisState=${thisState}" name="Form" onSubmit="return checkdate()">
           <input type="hidden" name="status" value="${status}">
           <p class="item">
             <label class="title">选择接点人：</label><b class="widget-warning"><input type="hidden" name="up" readonly value="${myup}">${myup}</b></p>

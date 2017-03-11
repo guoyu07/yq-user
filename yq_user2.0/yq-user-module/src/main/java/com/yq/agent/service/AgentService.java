@@ -160,12 +160,13 @@ public class AgentService {
 	 * @param param
 	 * @param sign
 	 */
+	@Transactional
 	public int creatOrder(String appId, String orderUserName, String amount, String productOrder, String productDesc, String param, String sign){
 		ParamCheck.checkString(orderUserName, 1, "用户名不能为空");
 		ParamCheck.checkString(amount, 2, "订单金额不能为空");
 		ParamCheck.checkString(productOrder, 3, "商户订单号不能为空");
 		ParamCheck.checkString(productDesc, 4, "商品名称不能为空不能为空");
-		ParamCheck.checkString(sign, 5, "签名不能为空");
+		//ParamCheck.checkString(sign, 5, "签名不能为空");
 		if(param==null){
 			param = "";
 		}
@@ -191,6 +192,7 @@ public class AgentService {
 		}
 		String signStr = appId+orderUserName+amount+productOrder+productDesc+param;
 		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
+		System.out.println("mySign="+mySign);
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
 			throw new ServiceException(9, "签名不正确！");
@@ -301,6 +303,7 @@ public class AgentService {
 	 */
 	@Transactional
 	public Map<String,String> payOrder(String payUserName,String password,String password3,int orderId){
+		long l1=System.currentTimeMillis();
 		ParamCheck.checkString(payUserName, 1, "用户名不能为空");
 		ParamCheck.checkString(password, 2, "登录密码不能为空");
 		ParamCheck.checkString(password3, 3, "二级密码不能为空");
@@ -336,11 +339,15 @@ public class AgentService {
 				String sign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey()).trim();
 				paramMap.put("sign", sign);
 				LogSystem.info("开启第三方商户支付回调，回调签名字符串为["+signStr+"],key为["+agentApp.getAppKey()+"],签名为["+sign+"]");
+				
 				//回调
 				if(!Strings.isNullOrEmpty(agentApp.getCallBackUrl())){
 					String url = agentApp.getCallBackUrl();
 					callBackToAgent(url, paramMap);
 				}
+				long l2=System.currentTimeMillis();
+				System.out.println("************************finishTime="+(l2-l1));
+				
 				return paramMap;
 			}
 		}else{
@@ -414,10 +421,14 @@ public class AgentService {
 		ParamCheck.checkString(userName, 7, "用户名不能为空");
 		ParamCheck.checkString(passWord,8, "密码不能为空");
 		ParamCheck.checkString(secondPassWord, 9, "二级密码不能为空");
-		param.put("userName", userName);
-		param.put("passWord", MD5Security.md5_16_Small(passWord));
-		param.put("secondPassWord", secondPassWord);
-		userService.checkUserInfo(userName,param);
+	   if(!gcuser.getPassword().equals(MD5Security.md5_16_Small(passWord))){
+		  throw new ServiceException(4, "密码错误！");
+	   }
+	   if(!gcuser.getPassword3().equals(secondPassWord)){
+		  throw new ServiceException(5, "二级密码错误！");
+	   }
+		
+		//userService.checkUserInfo(userName,param);
 	}
 	
 	
@@ -613,14 +624,14 @@ public class AgentService {
 		if(userProperty!=null ){
 				boolean flag = sameUserPropertyDao.updatePayPassword(nameUserid,MD5Security.md5_16_Small(payPassword));
 				if(!flag){
-					throw new ServiceException(10, "增加支付密码失败！");
+					throw new ServiceException(11, "增加支付密码失败！");
 				}
 				LogSystem.info("玩家：["+user+"],增加支付密码成功！");
 			
 		}else{
 			SameUserProperty sameUserProperty =new SameUserProperty(nameUserid, new Date(), null, MD5Security.md5_16_Small(payPassword));
 			if(!sameUserPropertyDao.insertSameUserProperty(sameUserProperty)){
-				throw new ServiceException(10, "增加失败！");
+				throw new ServiceException(12, "增加失败！");
 			}
 			LogSystem.info("玩家：["+user+"],设置支付密码成功！");
 		}

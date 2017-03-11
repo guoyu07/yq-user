@@ -34,7 +34,6 @@
   <div class="member-content" id="J_memberContent">
     <!-- 会员中心左边栏 -->
 	  <div class="member-aside">
-        <%@ include file="/mainUI/common/userLeft.jsp" %>
         <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
           <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
         <!-- 账户概览  end -->
@@ -51,7 +50,7 @@
             <p class="price">${fcxt.jygj}</p>
           </div>
           <div class="exchange-price-info">
-            <a href="/mcsl" class="exchange-btn btn-sale">我要卖出</a>
+            <a href="/mcsl?secondThisState=${secondThisState}&thisState=${thisState}" class="exchange-btn btn-sale">我要卖出</a>
             <div class="exchange-price">
               <table class="exchange-price-table" align="center" border="0" cellspacing="0" cellpadding="0">
                 <thead>
@@ -74,18 +73,18 @@
                 </tbody>
               </table>
             </div>
-            <a href="/mysl" class="exchange-btn btn-buy">我要买入</a>
+            <a href="/mysl?secondThisState=${secondThisState}&thisState=${thisState}" class="exchange-btn btn-buy">我要买入</a>
           </div>
           <p class="warning-tips"><span>友情提醒：</span>根据市场情况，电子积分单价会稳步上涨，到一定时候拆分</p>
           <div class="exchange-detail">
             <!-- 出售信息表格 图纸是13条数据 用户名在后端输出的时候就做了限制 超过10位会显示为8位+... -->
             <div class="table-wrap">
-              <iframe name="I1" width="100%" height="400" align="center" border="0" frameborder="0" src="/gpjymc" scrolling="no"></iframe>
+              <iframe name="I1" width="100%" height="400" align="center" border="0" frameborder="0" src="/gpjymc?secondThisState=${secondThisState}&thisState=${thisState}" scrolling="no"></iframe>
             </div>
             <!-- 出售信息表格 end -->
             <!-- 求购信息表格 图纸是13条数据 -->
             <div class="table-wrap ml30">
-              <iframe name="I2" width="100%" height="400" align="center" border="0" frameborder="0" src="/gpjymy" scrolling="no"></iframe>
+              <iframe name="I2" width="100%" height="400" align="center" border="0" frameborder="0" src="/gpjymy?secondThisState=${secondThisState}&thisState=${thisState}" scrolling="no"></iframe>
             </div>
             <!-- 求购信息表格 end -->
           </div>

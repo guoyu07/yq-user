@@ -8,7 +8,7 @@
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('两分钟内只能充值一次，请稍后再试！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('您的充值币小于${cjpay}，无法完成充值，请联系管理员！！！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('本次充值${cjpay}可一币小于${cjpay*9}，请先补充一币！！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('充值成功！');location.href='vipcjb';</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('充值成功！');location.href='vipcjb?secondThisState=253&thisState=244';</script></c:if>
 
 <head>
   <meta chartset="UTF-8">
@@ -28,7 +28,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail">财富中心 >> VIP充值币管理</p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -37,12 +37,11 @@
 <!-- 一币理财内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-    <!-- 会员中心左边栏 -->
+      <!-- 会员中心左边栏 -->
 <div class="member-aside">
-   <%@ include file="/mainUI/common/userLeft.jsp" %>
-  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
- 	<%@ include file="/mainUI/common/yblc.jsp" %>
-  <!-- 账户概览 end -->
+  <!-- VIP中心左边栏 -->
+  <%@ include file="/mainUI/common/vipleft.jsp" %>
+  <!-- VIP中心左边栏  end -->
 </div>
 <!-- 会员中心左边栏 end -->
 
@@ -50,7 +49,7 @@
       <!-- VIP充值管理 -->
       <div class="main-widget">
         <p class="widget-title-line">VIP充值管理</p>
-        <form class="widget-form" method="POST" action="vipcj" name="form" onsubmit="return checkdate()">
+        <form class="widget-form" method="POST" action="vipcj?secondThisState=${secondThisState}&thisState=${thisState}" name="form" onsubmit="return checkdate()">
           <p class="item">
             <label class="title">用户名：</label>
             <input type="text" name="cjuser">
