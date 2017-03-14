@@ -26,9 +26,6 @@ public class UserListAction extends ALDAdminPageActionSupport<Gcuser> {
 		gcuser = userService.getUserByUserName(super.getUserName());
 		IPage<Gcuser> dataPage = userService.getTheSameNameUserPage(gcuser.getName(), gcuser.getUserid(), super.getToPage(),18);
 		super.initPage(dataPage);
-		if(status==1){
-			return "detail";
-		}
 		return SUCCESS;
 	}
 	public String getuserlist(){

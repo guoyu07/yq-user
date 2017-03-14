@@ -7,7 +7,7 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1476527375'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1580362770'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-47326774'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.246684949'/>！');location.replace('/datepay');</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.246684949'/>！');location.replace('/datepay?secondThisState=249&thisState=244');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -43,7 +43,7 @@
       <!-- 商城退款 -->
       <div class="main-widget mt15">
         <p class="widget-title-line">商城退款</p>
-        <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/glpay?status=1">
+        <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/glpay?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item">
             <label class="title">转出用户名:</label>
             <input type="text" name="fromUser" id="fromUser" size="15" maxlength="20" value="${userName}">

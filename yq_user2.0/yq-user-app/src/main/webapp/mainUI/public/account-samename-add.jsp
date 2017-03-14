@@ -43,7 +43,7 @@
       </div>
       <div class="main-widget mt15">
         <p class="widget-title-line">添加同名用户</p>
-        <form class="widget-form" method="POST" action="userlist?status=1&thisState=${thisState}&secondThisState=292" name="Form" onSubmit="return checkdate()">
+        <form class="widget-form" method="POST" action="regTheSame?status=1&thisState=${thisState}&secondThisState=292" name="Form" onSubmit="return checkdate()">
           <p class="item mt15">
             <label class="title">用户名：</label>
             <input type="text" name="gguser" maxlength="12" onkeyup="value=value.replace(/[\W]/g,'')" />

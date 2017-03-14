@@ -59,7 +59,6 @@ import com.yq.manager.dao.PointsChangeLogDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.manager.dao.UserVipLogDao;
 import com.yq.manager.dao.Zq2016statDao;
-import com.yq.user.bean.TopReward;
 import com.yq.user.bo.AbsModifyUserLog;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
@@ -76,6 +75,7 @@ import com.yq.user.bo.GcuserForExcel;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.ModifyUserLog;
 import com.yq.user.bo.Mtfhtj;
+import com.yq.user.bo.SameUserProperty;
 import com.yq.user.bo.Sgtj;
 import com.yq.user.bo.Sgxt;
 import com.yq.user.bo.SysBiLog;
@@ -104,6 +104,7 @@ import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.ModifyUserLogDao;
+import com.yq.user.dao.SameUserPropertyDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.SysBiLogDao;
 import com.yq.user.dao.TduserDao;
@@ -198,6 +199,8 @@ public class AdminService {
 	private ManageUserDao manageDao;
 	@Autowired
 	private Zq2016statDao zq2016statDao;
+	@Autowired
+	private SameUserPropertyDao sameUserPropertyDao;
 	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
@@ -465,11 +468,21 @@ public class AdminService {
 		String beforName = gcuser.getName()==null?"":gcuser.getName();
 		String nowName = name==null?"":name;
 		
-		
-		
 		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
 			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
 		}
+		
+		if(!Strings.isNullOrEmpty(nowName) && !gcuser.getName().equals(nowName)){
+			SameUserProperty sameUserProperty=sameUserPropertyDao.getSameUserProperty(gcuser.getName()+gcuser.getUserid());
+			if(sameUserProperty!=null){
+				SameUserProperty newsameUserProperty=sameUserPropertyDao.getSameUserProperty(nowName+gcuser.getUserid());
+				if(newsameUserProperty==null){
+					SameUserProperty userProperty=new SameUserProperty(nowName+gcuser.getUserid(),sameUserProperty.getCreateTime(), new Date(), sameUserProperty.getAppPayPassword());
+					sameUserPropertyDao.insertSameUserProperty(userProperty);
+				}
+			}
+		}
+		
 		int oldareaCode=86;
 		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
 			if(userPropertyDao.isHasUserpropertyByName(userName)){

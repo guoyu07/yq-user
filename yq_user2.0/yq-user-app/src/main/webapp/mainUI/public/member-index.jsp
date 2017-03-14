@@ -24,23 +24,25 @@
   <div class="index-top" id="J_memberIndexTop">
     <div class="active">
       <p class="title">活动</p>
+      <div class="banner">
       <!-- <img src="img/banner.png" width="348" height="168"> -->
       <a href="#"><img src="${ctx}/img/banner.png" /></a>
+      </div>
     </div>
-    <div class="news">
+    <%-- <div class="news">
       <p class="title">公告</p>
       <div class="news-content">
         <!--文摘的所有内容 start-->
           <span>根据您注册用户时选择的地区，本服务中心为您提供贴身的服务，以提高办事效率！</span>
 	有任何事情请联系：${gcuserup.qq}<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${gcuserup.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:${gcuserup.qq}:41" alt="点击这里给我发消息" title="点击这里给我发消息"></a><br /><br />
-	<%-- 各部门服务中心人员分工，一个人不能重复加上，更不能向每个人同一时段咨询同一个问题<a href="/bank?dq=${dq}" style="text-decoration: none">本服务中心已配备指定的客服人员，专用的收款账号名字为“${gcuserup.vipuser}”--点击查看汇款账号</a> --%>
+	各部门服务中心人员分工，一个人不能重复加上，更不能向每个人同一时段咨询同一个问题<a href="/bank?dq=${dq}" style="text-decoration: none">本服务中心已配备指定的客服人员，专用的收款账号名字为“${gcuserup.vipuser}”--点击查看汇款账号</a>
           <br>
          <!--  <span>根据您注册用户时选择的地区，本服务中心为您提供贴身的服务，以提高办事效率！ 有任何事情请联系：中国一川【②号】客服QQ：613</span>
           <br>
           <span>根据您注册用户时选择的地区，本服务中心为您提供贴身的服务，以提高办事效率！ 有任何事情请联系：中国一川【②号】客服QQ：613</span> -->
           <!--文摘的所有内容 end-->
       </div>
-    </div>
+    </div> --%>
   </div>
   <!-- 首页活动公告 end -->
 </div>

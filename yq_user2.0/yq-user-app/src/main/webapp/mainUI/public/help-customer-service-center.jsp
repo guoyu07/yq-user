@@ -63,7 +63,7 @@
 			 <p widget-notice mt5> <s:text name='viewservice.jsp.service.jsp.643086062'/>， <s:text name='viewservice.jsp.service.jsp.-1565630892'/></p>
              --%>
             <p class="widget-notice mt10">开户行所在地：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}</p>
-            <p class="widget-tips mt10">有关业务问题可咨询，如您无法在一币市场进行收购一币的操作或您想省去在收一币中（打款，等待对方确认）的中间环节，就可以联系本团队服务中心快速购买。</p> 
+            <!-- <p class="widget-tips mt10">有关业务问题可咨询，如您无法在一币市场进行收购一币的操作或您想省去在收一币中（打款，等待对方确认）的中间环节，就可以联系本团队服务中心快速购买。</p> --> 
           </div>
         </div>
       </div>

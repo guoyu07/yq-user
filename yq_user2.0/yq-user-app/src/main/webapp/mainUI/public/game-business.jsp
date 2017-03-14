@@ -311,6 +311,7 @@
                     <th>左总</th>
                     <th>右总</th>
                     <th>层封</th>
+                    <th>可用</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -319,96 +320,320 @@
                     <td>${sgxt.z1}</td>
 					<td>${sgxt.y1}</td>
 					<td><span class="r">${sgxt.cfd}</span></td>
+					<td>
+						<c:set var="basez" scope="session" value="${sgxt.z1}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y1}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>2</i></td>
                     <td>${sgxt.z2}</td>
 					<td>${sgxt.y2}</td>
 					<td><span class="r">${sgxt.cfd}</span></td>
+					<td>
+						<c:set var="basez" scope="session" value="${sgxt.z2}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y2}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>3</i></td>
                     <td>${sgxt.z3}</td>
                     <td>${sgxt.y3}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z3}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y3}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>4</i></td>
                     <td>${sgxt.z4}</td>
                     <td>${sgxt.y4}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z4}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y4}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>5</i></td>
                     <td>${sgxt.z5}</td>
                     <td>${sgxt.y5}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z5}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y5}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>6</i></td>
                     <td>${sgxt.z6}</td>
                     <td>${sgxt.y6}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z6}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y6}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>7</i></td>
                     <td>${sgxt.z7}</td>
                     <td>${sgxt.y7}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z7}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y7}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>8</i></td>
                     <td>${sgxt.z8}</td>
                     <td>${sgxt.y8}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z8}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y8}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>9</i></td>
                     <td>${sgxt.z9}</td>
                     <td>${sgxt.y9}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z9}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y9}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>10</i></td>
                     <td>${sgxt.z10}</td>
                     <td>${sgxt.y10}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z10}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y10}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>11</i></td>
                    <td>${sgxt.z11}</td>
                     <td>${sgxt.y11}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z11}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y11}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>12</i></td>
                    <td>${sgxt.z12}</td>
                     <td>${sgxt.y12}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z12}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y12}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>13</i></td>
                     <td>${sgxt.z13}</td>
                     <td>${sgxt.y13}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z13}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y13}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>14</i></td>
                     <td>${sgxt.z14}</td>
                     <td>${sgxt.y14}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z14}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y14}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>15</i></td>
                     <td>${sgxt.z15}</td>
                     <td>${sgxt.y15}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z15}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y15}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                   <tr>
                     <td><i>16</i></td>
                     <td>${sgxt.z16}</td>
                     <td>${sgxt.y16}</td>
                     <td><span class="r">${sgxt.cfd}</span></td>
+                    <td>
+						<c:set var="basez" scope="session" value="${sgxt.z16}"/>
+						<c:set var="basey" scope="session" value="${sgxt.y16}"/>
+						<c:choose>
+							<c:when test="${null==basez || null==basey}">
+								<c:out value="${sgxt.cfd}"/>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${basez>basey}"> <c:out value="${sgxt.cfd-basey}"/></c:if>
+								<c:if test="${basez==basey}"> <c:out value="${sgxt.cfd-basez}"/></c:if>
+								<c:if test="${basez<basey}"><c:out value="${sgxt.cfd-basez}"/></c:if>
+							</c:otherwise>
+						</c:choose>
+					</td>
                   </tr>
                 </tbody>
               </table>

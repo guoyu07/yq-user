@@ -16,17 +16,14 @@
   
   ManageService manageService = ServiceCacheFactory.getService(ManageService.class);
   List<Resource> rootResource = manageService.findResourceListByResourceId(242);
-  System.out.println("rootResource="+rootResource.size());
   
   String thisState1 = "243";
   String thisState1temp = request.getParameter("thisState");
-  System.out.println("thisState1temp="+thisState1temp);
   if(null==thisState1temp || thisState1temp.equals("")){
 	  thisState1temp = thisState1;
   } 
   String secondThisState = "248";
   String secondThisStatetemp = request.getParameter("secondThisState");
-  System.out.println("secondThisStatetemp="+secondThisStatetemp);
   if(null==secondThisStatetemp || secondThisStatetemp.equals("")){
 	  if(thisState1temp.equals("243")){
 		  secondThisState = "248";
@@ -40,13 +37,8 @@
 	  
 	  secondThisStatetemp = secondThisState;
   } 
-  System.out.println("secondThisStatetemp="+secondThisStatetemp);
   
   List<Resource> secondResource = manageService.findResourceListByResourceId(Integer.parseInt(thisState1temp));
-  System.out.println("secondResource="+secondResource.size());
-  System.out.println("gcuserHead.getVip()="+gcuserHead.getVip());
-  
-  
  
 %>
 

@@ -575,5 +575,6 @@ public class GpjyDao {
 		List<Gpjy> list = this.jdbc.getList(sql, Gpjy.class, null);
 		return list;
 	}
+
 	
 }

@@ -3335,7 +3335,12 @@ public class UserService {
 			throw new ServiceException(1,"二级密码不正确");
 		}
 		
+		
 		Gpjy gpjy1 = gpjyDao.getByJyId(orderId);
+		
+		if(gpjy1.getNewjy()==100){
+			throw new ServiceException(3,"系统代买不能撤销！");
+		}
 		
 		if(!gpjy1.getUsername().equals(userName)){
 			throw new ServiceException(3000,"非法操作");

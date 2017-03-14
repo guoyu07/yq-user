@@ -256,7 +256,8 @@
 			<result name="success">mainUI/public/store-refund.jsp</result>
 		</action>
 		<action name="backscores" class="com.yq.app.user.action.JzpayAction" method="backScores">
-			<result name="success">view/yblc-mallbackscores.jsp</result>
+			<!-- <result name="success">view/yblc-mallbackscores.jsp</result> -->
+			<result name="success">mainUI/public/store-coupon-refund.jsp</result>
 		</action>
 		<action name="maller" class="com.yq.app.user.action.JzpayAction"
 			method="setForMall">

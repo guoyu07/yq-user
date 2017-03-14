@@ -2,6 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('二级密码不正确！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('该积分交易进行中或已经由它人交易成功了，不能修改，请选择其它交易！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('系统代买不能撤销！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('撤销求购积分成功！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 
 <!DOCTYPE html>

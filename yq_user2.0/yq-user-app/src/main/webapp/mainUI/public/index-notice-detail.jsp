@@ -37,7 +37,7 @@
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main"> --%>
-        <div class="member-main-full">
+     <div class="member-main-full article-detail">
       <!-- 公告详情 -->
       <div class="main-widget">
         <p class="widget-title-line">${dgag.ggbt}</p>

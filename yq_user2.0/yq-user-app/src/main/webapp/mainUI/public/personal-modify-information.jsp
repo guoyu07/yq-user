@@ -116,8 +116,11 @@
             <input type="text" name="idCard" maxlength="19" /><span class="text">${gcuser.userid}</span>
           </p>
           <p class="item">
+                      
             <label class="title">手机验证码：</label>
-            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()">获取验证码</a>
+            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/>
+            <input class="widget-button-small" id="btn" type="button" onclick="sendMsg()" value="获取验证码"/>
+           <!--  <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()">获取验证码</a> -->
           </p>
           <p class="widget-tips widget-warning mt10">只需修改一个用户名。其他同名账户统一更新！</p>
           <p class="button-line mt15">
