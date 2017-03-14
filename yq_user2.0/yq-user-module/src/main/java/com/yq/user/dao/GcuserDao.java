@@ -1332,14 +1332,14 @@ public class GcuserDao {
 	 * */
 	public SameAccountWealth getSameAccountTatolWealth(String name, String userId){
 
-		SameAccountWealth sameAccountWealth= new SameAccountWealth();
+		/*SameAccountWealth sameAccountWealth= new SameAccountWealth();
 		StringBuilder sql = new StringBuilder();
 		sql.append("select sum(pay) as totalYb, sum(jydb) as totalGold, sum(jyg) as totalPoint, sum(mcpay) as totalTx from "+table+"  where  name=? and userid=? ");
 		List rows = jdbc.getJdbcTemplate().queryForList(sql.toString(),name,userId);
 		Iterator it = rows.iterator();  
 		while(it.hasNext()) {  
 			 Map map = (Map) it.next();
-			 BigDecimal totalYb = new BigDecimal(map.get("totalYb").toString());   
+			 BigDecimal totalYb = new BigDecimal(map.get("totalYb").toString());
 			 BigDecimal totalGold = new BigDecimal(map.get("totalGold").toString());
 			 BigDecimal totalPoint = new BigDecimal(map.get("totalPoint").toString());
 			 BigDecimal totalTx = new BigDecimal(map.get("totalTx").toString());
@@ -1348,7 +1348,48 @@ public class GcuserDao {
 			 sameAccountWealth.setTotalPoint(totalPoint.doubleValue());
 			 sameAccountWealth.setTotalTx(totalTx.doubleValue());
 		}  
+		return sameAccountWealth;*/
+		
+		SameAccountWealth sameAccountWealth= new SameAccountWealth();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from "+table+"  where  name=? and userid=? ");
+		SqlParameter sqlparam= new SqlParameter();
+		sqlparam.setString(name);
+		sqlparam.setString(userId);
+		List<Gcuser> rows = jdbc.getList(sql.toString(), Gcuser.class, sqlparam);
+		double totalYb=0;
+		double totalGold=0;
+		double totalPoint=0;
+		double totalTx=0;
+		for (Gcuser gcuser : rows) {
+			totalYb=totalYb+gcuser.getPay();
+			totalGold=totalGold+gcuser.getJydb();
+			totalPoint=totalPoint+gcuser.getJyg();
+			totalTx=totalTx+gcuser.getMcpay();
+		}
+		 sameAccountWealth.setTotalYb(totalYb);
+		 sameAccountWealth.setTotalGold(totalGold);
+		 sameAccountWealth.setTotalPoint(totalPoint);
+		 sameAccountWealth.setTotalTx(totalTx);
+		 sameAccountWealth.setTotalNum(rows.size());
+		/*Iterator it = rows.iterator();  
+		while(it.hasNext()) {  
+			 Map map = (Map) it.next();
+			 BigDecimal totalYb = new BigDecimal(map.get("totalYb").toString());
+			 BigDecimal totalGold = new BigDecimal(map.get("totalGold").toString());
+			 BigDecimal totalPoint = new BigDecimal(map.get("totalPoint").toString());
+			 BigDecimal totalTx = new BigDecimal(map.get("totalTx").toString());
+			 sameAccountWealth.setTotalYb(totalYb.doubleValue());
+			 sameAccountWealth.setTotalGold(totalGold.doubleValue());
+			 sameAccountWealth.setTotalPoint(totalPoint.doubleValue());
+			 sameAccountWealth.setTotalTx(totalTx.doubleValue());
+		}  */
+		
+		
+		
 		return sameAccountWealth;
+		
+		
 		
 	}
 	
