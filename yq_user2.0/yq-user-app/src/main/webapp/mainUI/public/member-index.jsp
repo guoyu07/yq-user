@@ -23,7 +23,7 @@
   <!-- 首页活动公告 -->
   <div class="index-top" id="J_memberIndexTop">
     <div class="active">
-      <p class="title">活动</p>
+     <!--  <p class="title">活动</p> -->
       <div class="banner">
       <!-- <img src="img/banner.png" width="348" height="168"> -->
       <a href="#"><img src="${ctx}/img/banner.png" /></a>

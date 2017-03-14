@@ -36,6 +36,7 @@ public class AdminLogin extends ALDAdminActionSupport {
 				.getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
+		
 		String rand = (String) sessionhttp.getAttribute("rand");
 		if (rand == null) {
 			super.setErroCodeNum(1);

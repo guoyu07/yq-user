@@ -50,3 +50,8 @@
     </div>
   </div>
 </div>
+<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/js/common.js"></script>
+<script type="text/javascript" src="${ctx}/js/member-index.js"></script>
+</body>
+</html>
