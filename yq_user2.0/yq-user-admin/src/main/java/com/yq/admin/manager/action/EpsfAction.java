@@ -1,6 +1,9 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -31,6 +34,7 @@ public class EpsfAction extends ALDAdminActionSupport {
 			
 			return INPUT;
 		}
+		LogSystem.log("用户["+super.getUserName()+"]操作，修改一币["+new Date()+"],给--->["+uid+"],sfpay:"+sfpay+",sflb="+sflb);
 		userService.changeYbCanFu(uid, -sfpay, sflb, 0, null, super.getUserName());
 		gcuser = userService.getUserByUserName(uid);
 		return SUCCESS;

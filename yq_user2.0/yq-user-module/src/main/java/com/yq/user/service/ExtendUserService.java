@@ -322,11 +322,16 @@ public class ExtendUserService {
 		@Transactional(propagation=Propagation.REQUIRES_NEW,rollbackFor=ServiceException.class) 
 		public int automrJf(String userName,Gpjy gpjy1, int buycount){
 			
+			Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
+			
+			int needJb = (int)(Math.ceil(BigDecimalUtil.multiply(fcxt.getJygj(), buycount)));
+			
+			
 			Gcuser gcuser = gcuserDao.getUser(userName);
 			int id= gpjy1.getId();
 			
 			//扣除玩家金币
-			if (!useUserItem(userName, "金币", gpjy1.getJypay().intValue())) {
+			if (!useUserItem(userName, "金币", needJb)) {
 				throw new ServiceException(2,"金币不足，请检查输入是否正确！");
 			}
 

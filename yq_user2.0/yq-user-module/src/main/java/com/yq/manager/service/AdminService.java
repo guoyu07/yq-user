@@ -898,7 +898,7 @@ public class AdminService {
 		if (!gcuserDao.updateJyg(userName, - addAmount)) {
 			throw new ServiceException(3000, "未知错误");
 		}
-
+        
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		Gpjy gpjy = new Gpjy();
 		gpjy.setUsername(userName);

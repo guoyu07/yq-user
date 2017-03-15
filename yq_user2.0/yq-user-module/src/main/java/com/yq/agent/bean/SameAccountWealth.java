@@ -6,6 +6,14 @@ public class SameAccountWealth {
 	private double totalGold;
 	private double totalYb;
 	private double totalTx;
+	private int totalNum;
+	
+	public int getTotalNum() {
+		return totalNum;
+	}
+	public void setTotalNum(int totalNum) {
+		this.totalNum = totalNum;
+	}
 	public double getTotalPoint() {
 		return totalPoint;
 	}
