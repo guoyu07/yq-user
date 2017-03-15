@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<title>充值币变化明细</title>
+<title>一币变化明细</title>
 <script type="text/javascript" src="/scripts/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="/scripts/jquery.datetimepicker.css"/>
 <script src="/scripts/jquery.datetimepicker.js"></script>

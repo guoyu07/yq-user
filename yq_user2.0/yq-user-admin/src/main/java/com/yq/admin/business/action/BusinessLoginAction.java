@@ -44,7 +44,7 @@ public class BusinessLoginAction extends ALDAdminActionSupport {
 				return SUCCESS;
 			}
 			
-			if(businessService.adminUserLogin(adminUserName, passWord, sessionhttp, ServletActionContext.getRequest().getRemoteAddr())){
+			if(businessService.businessUserLogin(adminUserName, passWord, sessionhttp, ServletActionContext.getRequest().getRemoteAddr())){
 				return "redirect";
 			}else{
 				super.setErroCodeNum(402);

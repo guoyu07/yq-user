@@ -14,11 +14,7 @@
 		       left2.jsp
 		    </result>
 		</action>
-		 <action name="left" class="com.yq.admin.manager.action.LeftAction">
-		    <result name="success">
-		        left2.jsp
-		    </result>
-		</action> -->
+		  -->
 		<action name="readme" class="com.yq.admin.business.action.ReadMeAction">
 		    <result name="success">
 		      ybdetails.jsp
@@ -39,36 +35,6 @@
 			<result name="success" >/business/login.jsp</result>
 			<result name="redirect" type="redirect">/business/readme</result>
 		</action>
-		<!-- 
-		<action name="resetBigVipUser" class="com.yq.business.manager.action.businessLoginAction" method="resetBigVipUser">
-		<result name="success" >/business/default.jsp</result>
-		</action>
-		
-		<action name="babyList" class="com.yq.business.manager.action.BabyAction" method="babyList">
-		    <result name="success">
-		      /business/babyinfolist.jsp
-		    </result>
-		</action>
-		<action name="outBabyExcel" class="com.yq.business.manager.action.BabyAction" method="outExcel">
-		    <result name="success">
-		      /business/babyinfolist.jsp
-		    </result>
-		</action>
-        <action name="editBaby" class="com.yq.business.manager.action.BabyAction" method="edit">
-		    <result name="success">
-		      /business/editbabyinfo.jsp
-		    </result>
-		</action>
-		<action name="delBaby" class="com.yq.business.manager.action.BabyAction" method="delete">
-		    <result name="success">
-		      /business/editbabyinfo.jsp
-		    </result>
-		</action>
-		<action name="recBaby" class="com.yq.business.manager.action.BabyAction" method="recover">
-		    <result name="success">
-		      /business/editbabyinfo.jsp
-		    </result>
-		</action> -->
 	</package>
 	
 

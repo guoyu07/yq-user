@@ -1372,19 +1372,6 @@ public class GcuserDao {
 		 sameAccountWealth.setTotalPoint(totalPoint);
 		 sameAccountWealth.setTotalTx(totalTx);
 		 sameAccountWealth.setTotalNum(rows.size());
-		/*Iterator it = rows.iterator();  
-		while(it.hasNext()) {  
-			 Map map = (Map) it.next();
-			 BigDecimal totalYb = new BigDecimal(map.get("totalYb").toString());
-			 BigDecimal totalGold = new BigDecimal(map.get("totalGold").toString());
-			 BigDecimal totalPoint = new BigDecimal(map.get("totalPoint").toString());
-			 BigDecimal totalTx = new BigDecimal(map.get("totalTx").toString());
-			 sameAccountWealth.setTotalYb(totalYb.doubleValue());
-			 sameAccountWealth.setTotalGold(totalGold.doubleValue());
-			 sameAccountWealth.setTotalPoint(totalPoint.doubleValue());
-			 sameAccountWealth.setTotalTx(totalTx.doubleValue());
-		}  */
-		
 		
 		
 		return sameAccountWealth;

@@ -26,7 +26,7 @@ public class BusinessInterceptor extends AbstractInterceptor {
 				.getService(ManageService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
-		Session session = businessService.getLoginAdminUserName(sessionhttp.getId());
+		Session session = businessService.getLoginBusinessUserName(sessionhttp.getId());
 		
 		if(session==null){
 			return "nologin"; 

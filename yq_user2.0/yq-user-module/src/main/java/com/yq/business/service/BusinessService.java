@@ -15,11 +15,12 @@ import com.sr178.module.web.session.Session;
 import com.yq.business.dao.YbDao;
 import com.yq.common.utils.MD5Security;
 import com.yq.manage.bean.AdminOperateLog;
-import com.yq.manage.bean.ManageUser;
 import com.yq.manage.dao.AdminOperateLogDao;
 import com.yq.manage.dao.ManageUserDao;
 import com.yq.manage.util.AdminGlobal;
 import com.yq.user.bo.Datepay;
+import com.yq.user.bo.Gcuser;
+import com.yq.user.dao.GcuserDao;
 
 public class BusinessService {
 	
@@ -29,12 +30,14 @@ public class BusinessService {
 	private AdminOperateLogDao adminOperateLogDao;
 	@Autowired
 	private YbDao ybDao;
+	@Autowired
+	private GcuserDao userDao;
 	
 	private Cache<String,Session> businessUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
     public static boolean isClose = ConfigLoader.getIntValue("is_stop_jf_mc",0)==0?false:true;
     
-	public Session getLoginAdminUserName(String sessionId){
+	public Session getLoginBusinessUserName(String sessionId){
 		Session adminSession = businessUserMap.getIfPresent(sessionId);
 		return adminSession;
 	}
@@ -44,10 +47,11 @@ public class BusinessService {
 	 * @param password
 	 * @param sessionId
 	 */
-	public boolean adminLogin(String userName,String password,String sessionId){
-		String md5pass = MD5Security.md5_16(password);
-		ManageUser admin = manageDao.getByUserNameAndPassword(userName, md5pass);
-		if(admin!=null){
+	public boolean businessLogin(String userName,String password,String sessionId){
+		String md5pass = MD5Security.md5_16(password).toLowerCase();
+		//ManageUser admin = manageDao.getByUserNameAndPassword(userName, md5pass);
+		Gcuser admin = userDao.getUser(userName);
+		if(admin!=null && admin.getPassword().equals(md5pass)){
 			Session session = new Session(userName, System.currentTimeMillis(), sessionId);
 			businessUserMap.put(sessionId, session);
 			return true;
@@ -56,16 +60,10 @@ public class BusinessService {
 		}
 	}
 	
-	/**
-	 * @param adminUserName
-	 * @param passWord
-	 * @param sessionId
-	 * @return
-	 */
-	public boolean adminUserLogin(String adminUserName, String passWord, HttpSession session, String ip) {
+	public boolean businessUserLogin(String adminUserName, String passWord, HttpSession session, String ip) {
 		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.LOGIN_EVENT, "后台登录");
 		adminOperateLogDao.addLog(log);
-		return adminLogin(adminUserName, passWord, session.getId());
+		return businessLogin(adminUserName, passWord, session.getId());
 	}
 	
 	public void logout(String sessionId){
