@@ -1,6 +1,9 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Gcfh;
@@ -24,12 +27,13 @@ public class BcgpAction extends ALDAdminActionSupport {
 	
 	private Gcuser gcuser;
 	public String execute(){
-		
+
 		if(status==0){
 			UserService userService = ServiceCacheFactory.getService(UserService.class);
 			gcuser =  userService.getUserByUserName(bcid);
 			return INPUT;
 		}
+		LogSystem.log("用户["+super.getUserName()+"]操作，加gp["+new Date()+"],给--->["+bcid+"],gcgc:"+gcgc+",bcgp="+bcgp);
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.editGfAndJf(bcid, gcgc, bcgp);
 		gcfh = adminService.getGcfh(bcid, "系统配送");

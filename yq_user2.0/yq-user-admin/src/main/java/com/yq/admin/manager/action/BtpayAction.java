@@ -1,6 +1,9 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Gcuser;
@@ -26,6 +29,7 @@ public class BtpayAction extends ALDAdminActionSupport {
 			gcuser = userService.getUserByUserName(uid);
 			return INPUT;
 		}
+		LogSystem.log("用户["+super.getUserName()+"]操作，加btpay["+new Date()+"],给--->["+uid+"],积分数量:"+btpay);
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addBtPay(uid, btpay);
 		gcuser = userService.getUserByUserName(uid);

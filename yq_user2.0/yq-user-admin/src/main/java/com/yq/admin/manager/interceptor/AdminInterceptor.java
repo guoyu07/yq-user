@@ -56,7 +56,6 @@ public class AdminInterceptor extends AbstractInterceptor {
 						}
 					}
 				}
-				
 			} else {
 				String className = obj.getClass().getCanonicalName();
 				throw new RuntimeException("ACTION继承的类非ALDAdminActionSupport"+className);
