@@ -35,13 +35,13 @@ public class BigDecimalUtil {
 	
 	/**
 	 * 除法
-	 * @param price
-	 * @param count
+	 * @param chushu
+	 * @param beichushu
 	 * @return
 	 */
-	public static double divide(double price, double count){
-		BigDecimal r1 = new BigDecimal(price);
-		BigDecimal r2 = new BigDecimal(count);
+	public static double divide(double chushu, double beichushu){
+		BigDecimal r1 = new BigDecimal(chushu);
+		BigDecimal r2 = new BigDecimal(beichushu);
 		BigDecimal num3 = r1.divide(r2,10,BigDecimal.ROUND_HALF_DOWN);
 		double r= num3.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 		return r;

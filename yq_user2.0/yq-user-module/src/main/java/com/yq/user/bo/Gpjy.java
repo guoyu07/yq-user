@@ -1,6 +1,8 @@
 package com.yq.user.bo;
 
 import java.util.Date;
+
+import com.yq.common.utils.BigDecimalUtil;
    /**
     * gpjy 实体类
     */ 
@@ -120,7 +122,7 @@ public class Gpjy{
 		this.newjy = newjy;
 	}
 	public int countNum(double price){
-		return (int)(this.jypay/price);
+		return (int)(BigDecimalUtil.divide(this.jypay, price));
 	}
 	@Override
 	public String toString() {
