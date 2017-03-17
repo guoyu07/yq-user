@@ -2,7 +2,18 @@
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
-
+<c:if test="${isHaveTxPayBuy==true}"><script language=javascript>alert('<s:text name='viewindex2.jsp.index2.jsp.1200989498'/>！');location.replace('epmyjl?secondThisState=253&thisState=244');</script></c:if>
+<c:if test="${isHaveTxPaySale==true}"><script language=javascript>alert('<s:text name='viewindex2.jsp.index2.jsp.545255763'/>！');location.replace('epmcjl?secondThisState=249&thisState=244');</script></c:if>
+<c:if test="${dq=='0' or dq=='2' or dq=='7' or dq=='8'}">
+<c:set var="cz01" value="本公司【①号】客服QQ：613697151"></c:set>
+<c:set var="qq" value="613697151"></c:set>
+<c:set var="cz02" value="陈文娟"></c:set>
+</c:if>
+<c:if test="${dq=='1' or dq=='3' or dq=='4' or dq=='5' or dq=='6'}">
+<c:set var="cz01" value="本公司【②号】客服QQ：613697152"></c:set>
+<c:set var="qq" value="613697152"></c:set>
+<c:set var="cz02" value="陈文娟"></c:set>
+</c:if>
 <head>
   <meta chartset="UTF-8">
   <title>会员中心|首页</title>
