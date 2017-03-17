@@ -10,12 +10,7 @@ public class YqPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
     @Override  
     protected String convertProperty(String propertyName,String propertyValue){  
         if(isEncryptPropertyVal(propertyName)){
-        	//return AES.encryptWithKeyBase64(propertyValue, "xingfu100keyukejifhl7");TODO 
-        	if(propertyName.equals("encrypt_jdbc.password")){
-        		return "";
-        	}else{
-        		return "root";
-        	}
+        	return AES.decryptWithKeyBase64(propertyValue, ConfigureEncryptAndDecrypt.KEY);//TODO 
         }else{  
             return propertyValue;  
         }  

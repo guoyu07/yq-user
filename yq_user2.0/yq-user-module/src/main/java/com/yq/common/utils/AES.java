@@ -87,6 +87,13 @@ public class AES {
 		}
 	}
 	
+	/**
+	 * 加密
+	 * 
+	 * @param data  需要加密的字符串
+	 * @param key	 密钥
+	 * @return
+	 */
 	public static String encryptWithKeyBase64(String data, String key){
 		try {
 			byte[] valueByte = encrypt(data.getBytes(ConfigureEncryptAndDecrypt.CHAR_ENCODING), Base64.decode(key.getBytes()));
@@ -96,6 +103,12 @@ public class AES {
 		}
 	}
 	
+	/**
+	 * 解密
+	 * @param data  需要解密的字符串
+	 * @param key	密钥
+	 * @return
+	 */
 	public static String decryptWithKeyBase64(String data, String key){
 		try {
 			byte[] originalData = Base64.decode(data.getBytes());
@@ -122,16 +135,11 @@ public class AES {
 	public static String genarateRandomKeyWithBase64(){
 		return new String(Base64.encode(genarateRandomKey()));
 	}
-	
 	public static void main(String[] args) throws Exception {
+		System.out.println("root="+encryptWithKeyBase64("root",ConfigureEncryptAndDecrypt.KEY));
+		System.out.println("252493618="+encryptWithKeyBase64("252493618",ConfigureEncryptAndDecrypt.KEY));
 		
-		
-		System.out.println("root="+encryptWithKeyBase64("root","xingfu100keyukejifhl7"));
-		/*Map<String, String> string = RSA.generateKeyPair();
-		
-		System.out.println(string.get("publicKey") + "\r\n" + string.get("privateKey"));
-		System.out.println(string.get("modulus"));*/
-		System.out.println("root="+decryptWithKeyBase64("MZbsP64uIzS18QIDzaeBpg==","mengchaohuhualiguobin"));
+		System.out.println("root="+decryptWithKeyBase64("LcVrYGTql+xbqvGYo8jE+A==",ConfigureEncryptAndDecrypt.KEY));
 		
 	}
 	

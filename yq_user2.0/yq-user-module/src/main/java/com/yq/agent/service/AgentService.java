@@ -406,6 +406,9 @@ public class AgentService {
 	 * @param step 步骤
 	 */
 	public void checkParam(String userName, String passWord, String secondPassWord, String call, int step) {
+		ParamCheck.checkString(userName, 7, "用户名不能为空");
+		ParamCheck.checkString(passWord,8, "密码不能为空");
+		ParamCheck.checkString(secondPassWord, 9, "二级密码不能为空");
 		Gcuser gcuser = userService.getUserByUserName(userName);
 		if(gcuser==null){
 			throw new ServiceException(1, "用户名不存在！");
@@ -418,17 +421,13 @@ public class AgentService {
 				throw new ServiceException(12, "输入的手机号与预留的手机号不匹配！");
 			}
 		}
-		ParamCheck.checkString(userName, 7, "用户名不能为空");
-		ParamCheck.checkString(passWord,8, "密码不能为空");
-		ParamCheck.checkString(secondPassWord, 9, "二级密码不能为空");
 	   if(!gcuser.getPassword().equals(MD5Security.md5_16_Small(passWord))){
 		  throw new ServiceException(4, "密码错误！");
 	   }
 	   if(!gcuser.getPassword3().equals(secondPassWord)){
-		  throw new ServiceException(5, "二级密码错误！");
+		  throw new ServiceException(6, "二级密码错误！");
 	   }
 		
-		//userService.checkUserInfo(userName,param);
 	}
 	
 	
