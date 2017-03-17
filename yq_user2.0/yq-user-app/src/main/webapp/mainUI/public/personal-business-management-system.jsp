@@ -206,7 +206,8 @@ function checkdate1() {
     var responseMsg = response;
     if (responseMsg.erroCodeNum == 0) { //支付成功成功
       alert('支付操作成功！');
-      location.replace('ybsf?secondThisState=${secondThisState}&thisState=${thisState}');
+      delCookie("secondsremained");
+      window.location.reload('ybsf?secondThisState=${secondThisState}&thisState=${thisState}');
       return false;
     } else if (responseMsg.erroCodeNum == 1) {
       alert('非商户用户名，请联系管理员！');
