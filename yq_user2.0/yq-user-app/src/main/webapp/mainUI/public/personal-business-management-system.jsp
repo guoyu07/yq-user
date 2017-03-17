@@ -202,11 +202,11 @@ function checkdate1() {
   }
   //if (Form.sfcode.value=="") {   alert("请先点击获取验证码，然后再填入您的手机收到的验证码");  Form.sfcode.focus();   return false;    }
   var data = $("#Form").serialize();
-  $.post("ybsf?status=1", data, function(response) {
+  $.post("ybsf?status=1&secondThisState=${secondThisState}&thisState=${thisState}", data, function(response) {
     var responseMsg = response;
-    if (responseMsg.erroCodeNum == 0) { //注册成功
+    if (responseMsg.erroCodeNum == 0) { //支付成功成功
       alert('支付操作成功！');
-      location.replace('ybsf');
+      location.replace('ybsf?secondThisState=${secondThisState}&thisState=${thisState}');
       return false;
     } else if (responseMsg.erroCodeNum == 1) {
       alert('非商户用户名，请联系管理员！');

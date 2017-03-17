@@ -15,8 +15,8 @@
 		</property>
 		<property name="url" value="${jdbc.url}">
 		</property>
-		<property name="username" value="${jdbc.username}"></property>
-		<property name="password" value="${jdbc.password}"></property>
+		<property name="username" value="${encrypt_jdbc.username}"></property>
+		<property name="password" value="${encrypt_jdbc.password}"></property>
 		<!-- <property name="username" value="${encrypt_jdbc.username}"></property>
 		<property name="password" value="${encrypt_jdbc.password}"></property> -->
 		<property name="maxActive" value="${jdbc.maxActive}"></property>
