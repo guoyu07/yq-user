@@ -21,7 +21,7 @@
       <p class="dialog-title">查看卖出方收款账号</p>
       <div class="dialog-wrap-border main-widget">
       <form class="widget-form" method="POST" action="mcepok?status=1&payId=${payId}" id="Form" name="Form" onSubmit="return checkdate1()">
-          <p class="widget-notice widget-warning mt15 ml10">您正在操作确认收款，请确认是否收到相关款项！</p>
+          <!-- <p class="widget-notice widget-warning mt15 ml10">您正在操作确认收款，请确认是否收到相关款项！</p> -->
           <p class="item mt15">
             <label class="title">本次交易发布方用户名：</label><span class="text">${txpay.payusername}</span>
           </p>

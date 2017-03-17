@@ -10,6 +10,7 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.Page;
+import com.sr178.module.utils.JedisUtils;
 import com.yq.manage.bean.Resource;
 import com.yq.manage.util.CompareResource;
 public class ResourceDao {
@@ -20,10 +21,10 @@ public class ResourceDao {
 	private final static String  table = "resource";
 	
 	/**资源权限缓存键*/
-	//private static final String RESOURCE_KEY = "resource_key";
+	/*private static final String RESOURCE_KEY = "resource_key";
 	
 	
-	/*
+	
 	private void setCacheList(String key,List<Resource> list){
 		JedisUtils.setList(key, list);
 	}
