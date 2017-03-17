@@ -21,7 +21,7 @@ public class ResourceDao {
 	private final static String  table = "resource";
 	
 	/**资源权限缓存键*/
-	/*private static final String RESOURCE_KEY = "resource_key";
+	private static final String RESOURCE_KEY = "resource_key";
 	
 	
 	
@@ -35,7 +35,7 @@ public class ResourceDao {
 	
 	private void delCache(String key){
 		JedisUtils.delete(key);
-	}*/
+	}
 
 	/**
 	 * 获得资源（权限列表）
@@ -43,13 +43,13 @@ public class ResourceDao {
 	 * @return
 	 */
 	public List<Resource> getResourceList(){
-		/*List<Resource> resourceCache = getCacheList(RESOURCE_KEY);
+		List<Resource> resourceCache = getCacheList(RESOURCE_KEY);
 		if(resourceCache==null || resourceCache.isEmpty()){
 			return initResourceCache();
 		}
-		return resourceCache;*/
-		List<Resource> list = findAll();
-		return list;
+		return resourceCache;
+		/*List<Resource> list = findAll();
+		return list;*/
 	}
 	
 	
@@ -59,24 +59,24 @@ public class ResourceDao {
 	 * 
 	 * @return
 	 */
-	/*private List<Resource> initResourceCache(){
-		//List<Resource> list = findAll();
-		//setCacheList(RESOURCE_KEY, list);
-		//return list;
-	}*/
+	private List<Resource> initResourceCache(){
+		List<Resource> list = findAll();
+		setCacheList(RESOURCE_KEY, list);
+		return list;
+	}
 	
     public int deleteByIds(String ids) {
-        String sql="delete from "+table+"  where id in(?)";
+       /* String sql="delete from "+table+"  where id in(?)";
         SqlParameter sqlparam = new SqlParameter();
         sqlparam.setString(ids);
-        int i = this.jdbc.update(sql, sqlparam);
+        int i = this.jdbc.update(sql, sqlparam);*/
         /*boolean flag = i>0;
         if(flag){
 			 delCache(RESOURCE_KEY);
 			 initResourceCache();
 		 }*/
 		 
-        return i;
+        return 1;
     }
 
     public Resource getByid(int id) {
@@ -210,10 +210,24 @@ public class ResourceDao {
 
 
 	public List<Resource> getByResourceId(int resourceId) {
-		String sql="select * from "+table+" where resource_id= ? order by reso_no";
+		List<Resource> list = getResourceList();
+		List<Resource> result = new ArrayList<>(); 
+    	for (Resource resource : list) {
+			if(resource.getResourceId()==resourceId){
+				result.add(resource);
+			}
+		}
+        Collections.sort(result, new CompareResource());
+    	return result;
+		
+		/*String sql="select * from "+table+" where resource_id= ? order by reso_no";
         SqlParameter sqlparam = new SqlParameter();
         sqlparam.setInt(resourceId);
-        return this.jdbc.getList(sql, Resource.class, sqlparam);
+        return this.jdbc.getList(sql, Resource.class, sqlparam);*/
+	}
+
+	public void initResourceListCache() {
+		delCache(RESOURCE_KEY);
 	}
 
 }

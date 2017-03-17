@@ -4,6 +4,7 @@ import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.NotAllowedCode;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.manage.service.ManageService;
 import com.yq.user.bo.Dgag;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.dao.TxPayDao;
@@ -32,6 +33,9 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 		IPage<Dgag> page =managerService.getDgagPageList(super.getToPage(),8);
 		super.initPage(page);
 		
+		ManageService manageService = ServiceCacheFactory.getServiceCache().getService(ManageService.class);
+		
+		manageService.initResourceCache();
 		
 		@NotAllowedCode
 		TxPayDao txPayDao = ServiceCacheFactory.getServiceCache().getService(TxPayDao.class);

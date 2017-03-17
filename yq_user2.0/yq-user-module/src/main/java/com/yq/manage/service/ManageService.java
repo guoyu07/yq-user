@@ -1256,4 +1256,10 @@ public class ManageService {
 	}
 
 
+
+	public void initResourceCache() {
+		resourceDao.initResourceListCache();
+	}
+
+
 }

@@ -98,7 +98,9 @@ public class ExtendUserService {
 			gpjy.setCgdate(new Date());
 			gpjy.setJy(1);
 			gpjy.setDfuser(gpjy1.getUsername());
-			gpjyDao.add(gpjy);
+			if(!gpjyDao.add(gpjy)){
+				throw new ServiceException(3000, "未知錯誤");
+			}
 
 			String mydj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
 
