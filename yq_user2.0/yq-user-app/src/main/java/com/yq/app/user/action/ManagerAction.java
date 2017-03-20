@@ -30,7 +30,7 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 		gcuserup = userService.getUserByUserName(gcuserb.getVipname());
 		
 		ManagerService managerService = ServiceCacheFactory.getServiceCache().getService(ManagerService.class);
-		IPage<Dgag> page =managerService.getDgagPageList(super.getToPage(),8);
+		IPage<Dgag> page =managerService.getDgagPageList(super.getToPage(),6);
 		super.initPage(page);
 		
 		ManageService manageService = ServiceCacheFactory.getServiceCache().getService(ManageService.class);

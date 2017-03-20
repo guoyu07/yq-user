@@ -112,22 +112,14 @@
     ajaxobj.send();
   }
 
-  function CheckIfEnglish(String) {
-    var Letters = "abcdefghijklmnopqrstuvwxyz0123456789";
-    var i;
-    var c;
-    if (String.charAt(0) == '-')
-      return false;
-    if (String.charAt(String.length - 1) == '-')
-      return false;
-    for (i = 0; i < String.length; i++) {
-      c = String.charAt(i);
-      if (Letters.indexOf(c) < 0)
-        return false;
-    }
-    return true;
-  }
-
+  function CheckIfEnglish(str) {
+		if (/[a-z]/.test(str) && /[0-9]/.test(str)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+  
   function checkdate() {
     if (Form.gguser.value == "") {
       alert("用户名不能为空!");
