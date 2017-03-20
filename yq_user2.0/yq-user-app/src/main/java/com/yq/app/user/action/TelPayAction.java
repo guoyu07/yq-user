@@ -20,7 +20,7 @@ public class TelPayAction extends ALDAdminActionSupport {
 			return SUCCESS;
 		}
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
-		//userService.telCharge(super.getUserName(), call, pa3, smsCode, super.ip()); TODO 话费充值去掉（测试）
+		userService.telCharge(super.getUserName(), call, pa3, smsCode, super.ip()); //TODO 话费充值去掉（测试）
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
