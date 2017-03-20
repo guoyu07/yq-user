@@ -136,7 +136,7 @@ public class AES {
 		return new String(Base64.encode(genarateRandomKey()));
 	}
 	public static void main(String[] args) throws Exception {
-		System.out.println("root="+encryptWithKeyBase64("root",ConfigureEncryptAndDecrypt.KEY));
+		System.out.println("yquser="+encryptWithKeyBase64("yquser",ConfigureEncryptAndDecrypt.KEY));
 		System.out.println("252493618="+encryptWithKeyBase64("252493618",ConfigureEncryptAndDecrypt.KEY));
 		
 		System.out.println("root="+decryptWithKeyBase64("LcVrYGTql+xbqvGYo8jE+A==",ConfigureEncryptAndDecrypt.KEY));

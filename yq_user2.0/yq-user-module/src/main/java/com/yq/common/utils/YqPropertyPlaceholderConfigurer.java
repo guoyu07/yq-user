@@ -2,6 +2,8 @@ package com.yq.common.utils;
 
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
+import com.google.common.base.Strings;
+
 public class YqPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer{
 
 	/** 
@@ -10,6 +12,9 @@ public class YqPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigur
     @Override  
     protected String convertProperty(String propertyName,String propertyValue){  
         if(isEncryptPropertyVal(propertyName)){
+        	if(Strings.isNullOrEmpty(propertyValue)){
+        		return "";
+        	}
         	return AES.decryptWithKeyBase64(propertyValue, ConfigureEncryptAndDecrypt.KEY);//TODO 
         }else{  
             return propertyValue;  

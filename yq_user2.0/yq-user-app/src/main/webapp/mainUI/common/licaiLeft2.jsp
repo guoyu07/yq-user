@@ -38,9 +38,10 @@ if(fcxt!=null){
             <li>积分数量 <em><%=gcuserJflc.getJyg()%></em></li>
             <li>积分拆分次数 <em><%=gcuserJflc.getCfa()%></em></li>
             <li>积分拆分倍数<em><%=gcuserJflc.getCfb()%></em></li>
+            <%--
             <li>分红点总数 <em><%=gcuserJflc.getGdgc() %></em></li>
             <li>累计分红<em><%=gcuserJflc.getLjfh()%></em></li>
-           <%--  <li>当前信用星<em><%=gcuserJflc.getCxt()%></em></li> --%>
+            <li>当前信用星<em><%=gcuserJflc.getCxt()%></em></li> --%>
             <li class="member-stars"><span>当前信用星：</span>
             <%if(gcuserJflc.getCxt()==1) {%>
             	<i class="icon-member-star on"></i>

@@ -77,7 +77,7 @@
               <p class="article-info">
                 <span class="time"><fmt:formatDate value="${data.ggdate}" type="date"/></span>
                 <br/>
-                <span class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt}</span>
+                <span class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt}</a></span>
               </p>
               <a class="more" href="/ggck?ck=${data.id}">查看</a>
             </li>
