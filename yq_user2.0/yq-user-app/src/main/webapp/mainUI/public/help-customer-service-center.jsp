@@ -37,9 +37,7 @@
           <div class="widget-article">
             <p class="widget-notice">团队服务中心编号： ${upuname}***</p>
             <p class="widget-notice mt5">称谓：${gcuserup.vipuser} </p> 
-            <p class="widget-notice">联系QQ：
-              <a class="contact-qq" target="_blank" href="https://wpa.qq.com/msgrd?v=3&amp;uin=111111&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:111111:41" alt="点击这里发消息" title="点击这里发消息"></a>
-            </p>
+            <p class="widget-notice">联系QQ： ${gcuserup.qq}</p>
             <p class="widget-notice mt5">联系电话： ${gcuserup.call}</p>
             <c:if test="${not empty gcuserup.vipgh}">
 			  <p class="widget-notice mt5"><s:text name='reg.jsp.reg.jsp.-453899062'/>:${gcuserup.vipgh}</p>

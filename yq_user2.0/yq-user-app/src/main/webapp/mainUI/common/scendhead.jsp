@@ -92,7 +92,7 @@
 				         <%}else if("254".equals(re.getId()+"") && (gcuserHead.getUsername().equals("300fhk") || gcuserHead.getUsername().equals("zxz888"))){%>
 				         <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><span class="root"><%=re.getResoName()%></a>
 				          <div class="list JQ_navThirdList">
-				          <%if(gcuserHead.getUsername().equals("300fhk")) {%>
+				          <%if(gcuserHead.getUsername().equals("300fhk")|| gcuserHead.getUsername().equals("zxz888")) {%>
 				          <a href="/glpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">商城退款</a>
 				          <%} %>
 				           <%if(gcuserHead.getUsername().equals("zxz888")) {%>
