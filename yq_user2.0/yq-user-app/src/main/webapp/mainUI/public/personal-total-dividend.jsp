@@ -56,7 +56,7 @@
 				<tr>
 					<td>${gcuser.username}</td>
 					<td>${data.sygc}</td>
-					<td><c:if test="${fhpay<1}">0</c:if><c:if test="${fhpay>=1}">${fhpay}</c:if></td>
+					<td>${fhpay}</td>
 					<td>${data.syfh}</td>
 					<td>${data.ljfhtj}</td>
 					<td><fmt:formatDate value="${data.abdate}" type="both"/></td>

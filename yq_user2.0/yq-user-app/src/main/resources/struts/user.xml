@@ -113,12 +113,11 @@
 			
 		</action>
 		<action name="gcbf0" class="com.yq.app.user.action.GcfhAction" method="gcbf0">
-			<result name="p0">mainUI/public/personal-total-dividend.jsp</result>
-			<result name="p1detail">mainUI/public/personal-total-dividend-more.jsp</result>
+			<result name="p0">mainUI/public/personal-total-dividend-point.jsp</result>
 		</action>
 		
 		<action name="gcbf1" class="com.yq.app.user.action.GcfhAction" method="gcbf1"> 
-			<result name="p1detail">mainUI/public/personal-total-dividend-point.jsp</result>
+			<result name="p1detail">mainUI/public/personal-total-dividend.jsp</result>
 		</action>
 
 		<action name="ybsf" class="com.yq.app.user.action.YbsfAction">
