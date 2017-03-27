@@ -60,7 +60,8 @@
            <li><label>一币：</label><em><%=gcuserHead.getPay()%></em></li>
            <li><label>金币：</label><em><%=gcuserHead.getJydb()%></em></li>
            <li><label>积分：</label><em><%=gcuserHead.getJyg()%></em></li>
-           <li><label>购物券：</label> <em><%=gcuserHead.getScores()%></em></li>
+           <li><label>报单币：</label><em> <%=gcuserHead.getSybdb()%></em></li>
+          <%--  <li><label>购物券：</label> <em><%=gcuserHead.getScores()%></em></li> --%>
           </ul>
           <span class="logout"><a href="/logout?type=1">退出登录</a></span>
       </div>

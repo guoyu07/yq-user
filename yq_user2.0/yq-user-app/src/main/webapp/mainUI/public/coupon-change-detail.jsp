@@ -25,10 +25,22 @@
   </div>
 </div>
 
-<!-- 购物券内容 -->
+
+<!-- 业绩查询内容 -->
 <div class="container">
   <div class="member-content" id="J_memberContent">
-     <div class="member-main-full">
+   <!-- 会员中心左边栏 -->
+<div class="member-aside">
+  
+  <!-- 报单币明细左边栏 -->
+  <div class="point-info">
+    <p class="title">购物券明细</p>
+     <%@ include file="/mainUI/common/gwjLeft.jsp" %>
+  </div>
+</div>
+<!-- 会员中心左边栏 end -->
+
+    <div class="member-main">
       <!-- 购物券变化明细 -->
       <div class="main-widget">
         <p class="widget-title-line">购物券变化明细</p>

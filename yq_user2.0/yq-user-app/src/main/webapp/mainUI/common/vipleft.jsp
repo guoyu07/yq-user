@@ -21,10 +21,10 @@ Gcuser gcuserJflc2 = userServiceJflc2.getUserByUserName(userServiceJflc2.isLogin
         <div class="point-info">
     <p class="title">VIP中心</p>
     <ul class="list">
-      <li>充值币余额<em><%=gcuserHead.getVipcjcjb()%></em></li>
-      <li>累计充值数量<em><%=gcuserHead.getVipljcjb()%></em></li>
-      <li>已使用充值币<em><%=gcuserHead.getVipsycjb()%></em></li>
-      <li>备用报单币<em><%=gcuserHead.getSyep()%></em></li>
+      <li>充值币余额<em style="font-size: 10px;font-weight:bold;"><%=gcuserHead.getVipcjcjb()%></em></li>
+      <li>累计充值数<em  style="font-size: 10px;font-weight:bold;"><%=gcuserHead.getVipljcjb()%></em></li>
+      <li>已用充值币<em  style="font-size: 10px;font-weight:bold;"><%=gcuserHead.getVipsycjb()%></em></li>
+      <li>备用报单币<em style="font-size: 10px;font-weight:bold;"><%=gcuserHead.getSyep()%></em></li>
     </ul>
     <%-- <c:if test="${gcuser.vip==2}"><p class="widget-tips mt10"><a href="vipcjb">VIP充值管理（累计充值币：${gcuser.vipljcjb}）（已使用：${gcuser.vipsycjb}）（剩余：${gcuser.vipcjcjb}）</a></p></c:if> --%>
   </div>
