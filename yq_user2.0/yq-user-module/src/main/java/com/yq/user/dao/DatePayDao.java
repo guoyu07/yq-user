@@ -72,7 +72,7 @@ public class DatePayDao {
 		}
 		
 		if(newbz!=null){
-			sql = sql +" and newbz = ?";
+			sql = sql +" and origintype = ?";
 			sqlParameter.setInt(newbz);
 		}
 		sql = sql +" order by id desc";
