@@ -20,6 +20,8 @@
 		      ybdetails.jsp
 		    </result>
 		</action>
+		<action name="yibidetail" class="com.yq.admin.business.action.ReadMeAction" method="outExcel">
+		</action>
 		
 		<action name="logout001" class="com.yq.admin.business.action.LogoutAction">
 		    <result name="success" type="redirect">
