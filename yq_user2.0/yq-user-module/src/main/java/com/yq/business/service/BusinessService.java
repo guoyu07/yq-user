@@ -1,6 +1,8 @@
 package com.yq.business.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import com.google.common.cache.CacheBuilder;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.module.web.session.Session;
+import com.yq.business.bean.YbDetail;
 import com.yq.business.dao.YbDao;
 import com.yq.common.utils.MD5Security;
 import com.yq.manage.bean.AdminOperateLog;
@@ -69,8 +72,23 @@ public class BusinessService {
 	public void logout(String sessionId){
 		businessUserMap.invalidate(sessionId);
 	}
-	public IPage<Datepay> getYbDetail(String userName,int pageIndex, int pageSize) {
-		return ybDao.getpageList(userName, pageIndex, pageSize);
+	public IPage<Datepay> getYbDetail(String userName,int pageIndex, int pageSize,String queryStartDate, String queryEndDatet) {
+		return ybDao.getpageList(userName, pageIndex, pageSize,queryStartDate, queryEndDatet);
+	}
+	public List<YbDetail> getYbList(String userName, String queryStartDate, String queryEndDatet) {
+		List<Datepay> dateList = ybDao.getList(userName,queryStartDate, queryEndDatet);
+		List<YbDetail> result = new ArrayList<YbDetail>();
+		for (Datepay datepay : dateList) {
+			YbDetail ybchange=new YbDetail();
+			ybchange.setUsername(datepay.getUsername());
+			ybchange.setAbdate(datepay.getAbdate());
+			ybchange.setSyjz(datepay.getSyjz());
+			ybchange.setJc(datepay.getJc());
+			ybchange.setPay(datepay.getPay());
+			ybchange.setRegid(datepay.getRegid());
+			result.add(ybchange);
+		}
+		return result;
 	}
 
 }
