@@ -730,6 +730,38 @@
 				/admin/buyjf.jsp
 			</result>
 		</action>	
+		
+		<!-- 商城退款 -->
+		<action name="glpay" class="com.yq.admin.manager.action.JzpayAction">
+			<result name="success">/admin/mallback.jsp</result>
+		</action>
+		<!-- 退购物券 -->
+		<action name="backscores" class="com.yq.admin.manager.action.JzpayAction" method="backScores">
+			<result name="success">/admin/mallbackscores.jsp</result>
+		</action>
+		<!-- 设置成商户 -->
+		<action name="maller" class="com.yq.admin.manager.action.JzpayAction"
+			method="setForMall">
+			<result name="success" type="json">
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		<!-- 检测用户名 -->
+		<action name="checkUserName" class="com.yq.admin.manager.action.CheckUserNameAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">code,name</param>
+			</result>
+		</action>
+		<!-- 商城购物卷明细查询 -->
+		<action name="gwjDetail" class="com.yq.admin.manager.action.UserScoresLogAction">
+			<result name="success">/admin/userscoreslog.jsp</result>
+		</action>
+		<!-- 购物卷导出 -->
+		<action name="userscoreslogoutExcel" class="com.yq.admin.manager.action.UserScoresLogAction"
+			method="outExcel">
+			<result name="success">/admin/userscoreslog.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
