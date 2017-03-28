@@ -7,7 +7,6 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.dao.YqDaoBase;
-import com.yq.user.bo.Datepay;
 import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.UserScoresLogForExcel;
 
@@ -50,5 +49,38 @@ public class UserScoresLogDao extends YqDaoBase<UserScoresLog>{
 		sqlParameter.setString(orderId);
 		sql.append(" order by created_time desc ");
 		return super.getJdbc().getList(sql.toString(), UserScoresLog.class, sqlParameter);
+	}
+
+	public IPage<UserScoresLogForExcel> getPageList(String userName, String startTime, String endTime, int pageIndex,
+			int pageSize) {
+			String sql = "select * from "+super.getTable()+" where 1=1 ";
+			SqlParameter parameter = SqlParameter.Instance();
+			if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+				sql = sql+" and created_time between ? and ? ";
+				parameter.withString(startTime);
+				parameter.withString(endTime);
+			}
+			if(!Strings.isNullOrEmpty(userName)){
+				sql = sql+" and  user_name = ? ";
+				parameter.withString(userName);
+			}
+			sql = sql + " order by id desc";
+			return super.getJdbc().getListPage(sql, UserScoresLogForExcel.class, parameter, pageSize, pageIndex);
+	}
+
+	public List<UserScoresLogForExcel> getList(String userName, String startTime, String endTime) {
+		String sql = "select * from "+super.getTable()+" where 1=1 ";
+		SqlParameter parameter = SqlParameter.Instance();
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			sql = sql+" and created_time between ? and ? ";
+			parameter.withString(startTime);
+			parameter.withString(endTime);
+		}
+		if(!Strings.isNullOrEmpty(userName)){
+			sql = sql+" and  user_name = ?";
+			parameter.withString(userName);
+		}
+		sql = sql + " order by id desc";
+		return super.getJdbc().getList(sql, UserScoresLogForExcel.class, parameter);
 	}
 }

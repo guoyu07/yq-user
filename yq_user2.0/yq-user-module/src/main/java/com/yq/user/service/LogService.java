@@ -26,6 +26,7 @@ import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Jbkzj;
 import com.yq.user.bo.SysBiLog;
+import com.yq.user.bo.UserScoresLogForExcel;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.DatePayDao;
 import com.yq.user.dao.DatecjDao;
@@ -34,6 +35,7 @@ import com.yq.user.dao.DldateDao;
 import com.yq.user.dao.GcfhDao;
 import com.yq.user.dao.MallOrderDao;
 import com.yq.user.dao.SysBiLogDao;
+import com.yq.user.dao.UserScoresLogDao;
 
 public class LogService {
 	@Autowired
@@ -52,6 +54,8 @@ public class LogService {
 	private JbkzjDao jbkzjDao;
 	@Autowired
 	private SysBiLogDao sysBiLogDao;
+	@Autowired
+	private UserScoresLogDao userScoresLogDao;
 	
 	/**
 	 * 获取一币奖励日志
@@ -415,6 +419,29 @@ public class LogService {
 	}
 	public List<Datepay> getDatePayListByMallorder(String username, String orderId) {
 		return datePayDao.getListByMallorder(username, orderId);
+	}
+	
+	/**
+	 * 查询购物券日志
+	 * @param userName
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<UserScoresLogForExcel> getUserScoresLogPage(String userName,int pageIndex,int pageSize,String startTime,String endTime){
+		
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return userScoresLogDao.getPageList(userName, startTime, endTime, pageIndex, pageSize);
+	}
+	public List<UserScoresLogForExcel> getUserScoresLogList(String userName, String startTime, String endTime) {
+		if(!Strings.isNullOrEmpty(startTime)&&!Strings.isNullOrEmpty(endTime)){
+			startTime = startTime+" 00:00:00";
+			endTime = endTime + " 23:59:59";
+		}
+		return userScoresLogDao.getList(userName, startTime, endTime);
 	}
 	
 	

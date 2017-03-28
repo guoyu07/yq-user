@@ -124,6 +124,26 @@ public class AdminManagerAction extends BaseManageAction<Object> {
 				hyglres.setResoClass(resource.getResoClass());
 				rootset.add(hyglres);
         	}
+        	 // 商城管理
+        	if(resource.getResourceId() == r.getId() && ("SCGL").equals(resource.getResoCode())){
+        		PlayerResource scglres = new PlayerResource();
+        		scglres.setId(resource.getId());
+        		scglres.setResoNo(resource.getResoNo());
+        		scglres.setResoName(resource.getResoName());
+        		//商城管理相关的子根（此处只做二级菜单）
+        		ArrayList<Resource> hygl2resList=new ArrayList<>();
+        		Resource hygl2;
+				for (Resource child : list) {
+	                    if (child.getResourceId()==scglres.getId() && !("SCGL").equals(child.getResoCode())) {
+	                    	hygl2 = child;
+	                    	hygl2resList.add(hygl2);
+	                    }
+	            }
+				scglres.setResourceList(hygl2resList);
+				scglres.setResoCode(resource.getResoCode());
+				scglres.setResoClass(resource.getResoClass());
+				rootset.add(scglres);
+        	}
         	
         	
 		}
