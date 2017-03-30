@@ -42,4 +42,17 @@ public class MallOrderDao extends YqDaoBase<MallOrder> {
 		return mallorder;
 	}
 	
+	/**
+	 * 根据订单id获得订单信息
+	 * @param orderId
+	 * @return
+	 */
+	public MallOrder getMallOrderByorder(String orderId){
+		String sql= "select * from "+super.getTable()+" where order_id = ?";
+		SqlParameter sqlparameter = new SqlParameter();
+		sqlparameter.setString(orderId);
+		MallOrder mallorder = super.getJdbc().get(sql, MallOrder.class, sqlparameter);
+		return mallorder;
+	}
+	
 }

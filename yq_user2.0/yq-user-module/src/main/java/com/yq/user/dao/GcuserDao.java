@@ -92,7 +92,7 @@ public class GcuserDao {
 	 * @return
 	 */
 	public IPage<Gcuser> getUserPageByCondition(String userName,String name,String idNum,int pageIndex,int pageSize){
-		String sql = "select * from "+table+" where userid=? and name=? and (pay>0  or scores>0 or sybdb>0) and username<>? order by id asc";
+		String sql = "select * from "+table+" where userid=? and name=? and (pay-vippay>0  or scores>0 or sybdb>0) and username<>? order by id asc";
 		SqlParameter paramter = new SqlParameter();
 		paramter.setString(idNum);
 		paramter.setString(name);		
@@ -245,7 +245,7 @@ public class GcuserDao {
 	 * @return
 	 */
 	public boolean reduceYbNotReduceVipPay(String username,int changeNum){
-		String sql = "update "+table+" set pay=pay-?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+? where username=? and pay-?>=0";
+		String sql = "update "+table+" set pay=pay-?,fhpay= case when fhpay<? then 0 else fhpay-? end,txpay=txpay+? where username=? and pay-vippay-?>=0";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setInt(changeNum);
 		parameter.setInt(changeNum);
