@@ -7,6 +7,7 @@ import com.google.common.base.Strings;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.yq.common.dao.YqDaoBase;
+import com.yq.user.bo.Datepay;
 import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.UserScoresLogForExcel;
 
@@ -82,5 +83,17 @@ public class UserScoresLogDao extends YqDaoBase<UserScoresLog>{
 		}
 		sql = sql + " order by id desc";
 		return super.getJdbc().getList(sql, UserScoresLogForExcel.class, parameter);
+	}
+
+	public IPage<UserScoresLog> getScoresLogPageByMallOrder(String orderId, int toPage, int pageSize) {
+		StringBuilder sql = new StringBuilder();
+		SqlParameter sqlParameter = new SqlParameter();
+		sql.append("select * from "+super.getTable()+" where 1=1 ");
+		if(!Strings.isNullOrEmpty(orderId)){
+			sql.append(" and order_id = ?");
+			sqlParameter.setString(orderId);
+		}
+		sql.append(" order by id desc ");
+		return super.getJdbc().getListPage(sql.toString(), UserScoresLog.class,sqlParameter, pageSize, toPage);
 	}
 }

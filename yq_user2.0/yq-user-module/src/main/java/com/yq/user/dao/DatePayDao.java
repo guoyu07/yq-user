@@ -20,6 +20,7 @@ import com.yq.cw.bean.DayOfYb;
 import com.yq.cw.bo.ConfYbChangeType;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.DatepayMore;
+import com.yq.user.bo.UserScoresLog;
 import com.yq.user.constant.YbChangeType;
 
 public class DatePayDao {
@@ -504,8 +505,18 @@ public class DatePayDao {
 		sql.append(" order by id desc ");
 		return this.jdbc.getList(sql.toString(), Datepay.class, sqlParameter);
 	}
-	
-	
+
+	public IPage<Datepay> getPageList(String orderId,int pageIndex, int pageSize) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from "+table+" where 1=1 ");
+		if(!Strings.isNullOrEmpty(orderId)){
+			sql.append(" and regid like '%"+orderId+"%'");
+		}
+		sql.append(" order by id desc ");
+		return this.jdbc.getListPage(sql.toString(), Datepay.class,null, pageSize, pageIndex);
+	}
+
+
 	
 	
 	

@@ -762,6 +762,12 @@
 			method="outExcel">
 			<result name="success">/admin/userscoreslog.jsp</result>
 		</action>
+		<action name="datepayfororder" class="com.yq.admin.manager.action.DatePayForMallOrderAction">
+			<result name="success">/admin/mallorder-details.jsp</result>
+		</action>
+		<action name="usermallorderscoreslog" class="com.yq.admin.manager.action.UserMallorderScoresLogAction">
+			<result name="success">/admin/mallordercores.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->
