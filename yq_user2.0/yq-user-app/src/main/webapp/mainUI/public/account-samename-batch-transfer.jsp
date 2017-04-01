@@ -86,7 +86,11 @@
                   </td>
                   <td>${data.username}</td>
                   <td>${data.name}</td>
-                  <td>可转一币: <input type="hidden" name="tpay" size="10" value="${data.pay-data.vippay}" readonly>${data.pay-data.vippay}
+                  <td>可转一币:
+                  <c:choose>
+                  		<c:when test="${data.pay-data.vippay<0}"><input type="hidden" name="tpay" size="10" value="0" readonly>0</c:when>
+                  		<c:otherwise ><input type="hidden" name="tpay" size="10" value="${data.pay-data.vippay}" readonly>${data.pay-data.vippay}</c:otherwise>
+                  </c:choose>
                   </td>
                   <td>购物券:${data.scores}</td>
                   <td>报单币余额:${data.sybdb}</td>
