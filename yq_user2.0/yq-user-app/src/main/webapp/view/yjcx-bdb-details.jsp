@@ -52,7 +52,12 @@
 								<td>${data.aq}</td>
 								<td>${data.bq}</td>
 								<td><fmt:formatDate value="${data.bfdate}" type="both"/></td>
-								<td>${data.bz}</td>
+								<td>${data.bz}
+								<c:if test="${data.origintype==30023003 || data.origintype==3002 || data.origintype==3003}"><s:text name='Rechargeerrorreversa'/></c:if>
+								<c:if test="${data.origintype==30043005 || data.origintype==3004 || data.origintype==3005}"><s:text name='deposit'/></c:if>
+								<c:if test="${data.origintype==30003001 || data.origintype==3000 || data.origintype==3001}"><s:text name='wrongturn'/></c:if>
+								<c:if test="${data.origintype==3008}"><s:text name='system'/></c:if>
+								</td>
 							</tr>
 							</s:iterator>
 						</table>

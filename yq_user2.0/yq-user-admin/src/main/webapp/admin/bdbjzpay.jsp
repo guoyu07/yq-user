@@ -103,9 +103,10 @@ return (allValid);
 		<font face="Tahoma" style="font-size: 11pt">备注：</font></TD>
       <TD align=middle bgColor=#ffffff width="274" height="41"><p align="left">&nbsp;
       <select style="width:130px;" id="remark" name="remark" >
-      <option value="转错">转错</option>
-      <option value="VIP充值错误转回">VIP充值错误转回</option>
-      <option value="宿舍押金">宿舍押金</option>
+      <option value="30003001">转错</option>
+      <option value="30023003">VIP充值错误转回</option>
+      <option value="30043005">宿舍押金</option>
+      <option value="3008">系统</option>
       </select><!-- <input type="text" name="remark" size="15" maxlength="10"> <font color="#FF0000" size="3">*不超过10字。*</font>--></TD>
     </TR>
     <TR class=content> 
