@@ -14,7 +14,6 @@ import com.yq.common.utils.DateUtils;
 import com.yq.cw.bean.BDBExcelData;
 import com.yq.cw.bean.ClientBdblog;
 import com.yq.cw.bean.DatepayCw;
-import com.yq.cw.bean.VipSearchBdbLogBean;
 import com.yq.manager.dao.JbkzjDao;
 import com.yq.user.bo.Bdbdate;
 import com.yq.user.bo.Datecj;
@@ -25,7 +24,9 @@ import com.yq.user.bo.Dldate;
 import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Jbkzj;
+import com.yq.user.bo.MallOrder;
 import com.yq.user.bo.SysBiLog;
+import com.yq.user.bo.UserScoresLog;
 import com.yq.user.bo.UserScoresLogForExcel;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.DatePayDao;
@@ -56,6 +57,9 @@ public class LogService {
 	private SysBiLogDao sysBiLogDao;
 	@Autowired
 	private UserScoresLogDao userScoresLogDao;
+	@Autowired
+	private MallOrderDao mallOrderDao;
+	
 	
 	/**
 	 * 获取一币奖励日志
@@ -442,6 +446,19 @@ public class LogService {
 			endTime = endTime + " 23:59:59";
 		}
 		return userScoresLogDao.getList(userName, startTime, endTime);
+	}
+	public IPage<Datepay> getDatePayByMallorder(String orderId, int pageIndex, int pageSize) {
+		return datePayDao.getPageList(orderId,pageIndex, pageSize);
+	}
+	public MallOrder getMallorder(String orderId) {
+		MallOrder mallorder = mallOrderDao.getMallOrderByorder(orderId);
+		if(mallorder==null){
+			throw new ServiceException(1,"订单不存在！");
+		}
+		return mallorder;
+	}
+	public IPage<UserScoresLog> getScoresLogPageByMallOrder(String orderId, int toPage, int pageSize) {
+		return userScoresLogDao.getScoresLogPageByMallOrder(orderId,toPage, pageSize);
 	}
 	
 	
