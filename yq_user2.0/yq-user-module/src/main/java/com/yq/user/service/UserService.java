@@ -1796,7 +1796,7 @@ public class UserService {
 			if(!gcuser.getName().equals(user.getName())||!gcuser.getUserid().trim().toLowerCase().equals(user.getUserid().trim().toLowerCase())){
 				throw new ServiceException(5, "非同名用户,不能转,from name=["+user.getName()+"]，userid=["+user.getUserid().toLowerCase()+"],to name=["+gcuser.getName()+"],userId=["+gcuser.getUserid().toLowerCase()+"],名字判断=["+(gcuser.getName().equals(user.getName()))+"],身份证判断=["+(gcuser.getUserid().toLowerCase().equals(user.getUserid().toLowerCase()))+"]");
 			}
-			if(user.getPay()>0&&!fromUser.equals(toUser)){
+			if(user.getPay()-user.getVippay()>0&&!fromUser.equals(toUser)){
 				trasferYb(fromUser,toUser,user.getPay()-user.getVippay());//vip账户转入的部分不能被转出
 			}
 		}
