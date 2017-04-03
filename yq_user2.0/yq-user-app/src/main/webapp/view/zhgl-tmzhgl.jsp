@@ -80,7 +80,13 @@ function CheckAll(form) {
 								<td><input type="checkbox" name="fromUsers" value="${data.username}"></td>
 								<td>${data.username}</td>
 								<td>${data.name}</td>
-								<td><s:text name='canturn'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>:<input type="hidden" name="tpay" size="10" value="${data.pay-data.vippay}" readonly>${data.pay-data.vippay}</td>
+								<td>
+								<s:text name='canturn'/><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>:
+								<c:choose>
+			                  	 <c:when test="${data.pay-data.vippay<0}"><input type="hidden" name="tpay" size="10" value="0" readonly>0</c:when>
+			                  	 <c:otherwise ><input type="hidden" name="tpay" size="10" value="${data.pay-data.vippay}" readonly>${data.pay-data.vippay}</c:otherwise>
+			                    </c:choose>
+								</td>
 								<td><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.35660508'/>:${data.scores}</td>
 								<td><s:text name='viewlinks.html.links.html.-1788801323'/>:${data.sybdb}</td>
 							</tr>

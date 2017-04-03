@@ -1641,8 +1641,7 @@ public class UserService {
 	 * @param amount
 	 */
 	@Transactional
-	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,String remark, String oparetor){
-		
+	public void trasferBdbByAdmin(String fromUser,String toUser,int amount,String oppass,int remark, String oparetor){
 		if(!this.getConfigPassword(PasswordKey.BDB_TRANSFER).equals(oppass)){
 			throw new ServiceException(6, "操作密码不正确！");
 		}
@@ -1670,29 +1669,13 @@ public class UserService {
 		 AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_BDBZZ,"转出用户："+fromUser+"转入用户："+toUser+"数量："+amount);
 		 adminOperateLogDao.addLog(log);
 		
-		if("转错".equals(remark)){
-			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_REDUCE)){
-				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
-			}
-			
-			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_ADD);
-		}
-		if("VIP充值错误转回".equals(remark)){
-			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_VIPRECHARGE_REDUCE)){
-				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
-			}
-			
-			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_VIPRECHARGE_ADD);
-			
-		}
-		if("宿舍押金".equals(remark)){
-			if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_DEPOSIT_REDUCE)){
-				throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
-			}
-			
-			this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注："+remark,BDBChangeType.BDB_ZUANCUO_SYSTEM_DEPOSIT_ADD);
+		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注：",remark)){
+			throw new ServiceException(3, "转出用户名报单币不能大于剩余报单币 "+from.getSybdb()+" ，谢谢！");
 		}
 		
+		if(!this.updateSybdb(toUser, amount, "收到-"+fromUser+"备注：",remark)){
+			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
+		}
 		
 		
 	}
@@ -2243,7 +2226,7 @@ public class UserService {
 	}
 	@Transactional
 	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy,double ration){
-        if(!password3.equals(getConfigPassword(PasswordKey.MALL_BACK_YB))){
+		if(!password3.equals(getConfigPassword(PasswordKey.MALL_BACK_YB))){
 			throw new ServiceException(1, "操作密码不正确！");
 		}
 		
@@ -2565,10 +2548,28 @@ public class UserService {
 	 * @param payId
 	 */
 	public Txpay buyYbPre(String userName,int payId){
+		boolean notmarket = true;
+		List<Txpay> txpayList = this.getMarkList(10);
+		for (Txpay txpay2 : txpayList) {
+			if(txpay2.getPayid()==payId){
+				notmarket=false;
+			}
+		}
+		
+		if(notmarket){
+			throw new ServiceException(1, "交易不存在，请重新操作！");
+		}
+		
 		Txpay txpay = txPayDao.getByPayid(payId);
+		
 		if(txpay==null){
 			throw new ServiceException(1, "交易不存在，请重新操作！");
 		}
+		
+		if(txpay.getTxvip()==1){
+			throw new ServiceException(9, "此订单没审核！");
+		}
+
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getSjb()==0){
 			throw new ServiceException(2, "您好，您还不是双区玩家，暂时不能使用一币理财功能！");

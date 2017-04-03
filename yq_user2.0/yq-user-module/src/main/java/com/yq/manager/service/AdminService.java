@@ -90,6 +90,7 @@ import com.yq.user.bo.Vipxtgc;
 import com.yq.user.bo.YouMingxi;
 import com.yq.user.bo.ZuoMingxi;
 import com.yq.user.constant.GpjyChangeType;
+import com.yq.user.constant.PasswordKey;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.BdbDateDao;
 import com.yq.user.dao.CpuserDao;
@@ -3761,5 +3762,118 @@ public class AdminService {
 				LogSystem.info("用户["+zq2016stat.getUserName()+"]的大vip=["+bigVipUser+"]，大vip姓名["+gcuser.getName()+"],更新结果为:["+result+"]");
 			}
 		}
+	}
+	public String getConfigPassword(String key){
+		return ConfigLoader.getStringValue(key, "");
+	}
+	@Transactional
+	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy,double ration){
+		if(!password3.equals(getConfigPassword(PasswordKey.MALL_BACK_YB))){
+			throw new ServiceException(1, "操作密码不正确！");
+		}
+		
+		if(yy==null)yy="";
+		
+		String regId=null;
+		String sct = "";
+		if(!Strings.isNullOrEmpty(orderId)){
+			regId = "退款-"+orderId;
+			sct="(商城)";
+			Datepay datepay = datePayDao.getDatepayByUserNameAndRegid(toUser, regId);
+			if(datepay!=null){
+				throw new ServiceException(2, "此订单号已经处理过，请不要重复！");
+			}
+		}else{
+//			regId = "收到-"+fromUser.substring(0, 2)+"***"+"-"+yy;
+			if(fromUser.equals("300fhk")){
+				regId = "收到-300***"+"-"+yy;
+			}else if(fromUser.equals("xtgc002")){
+				regId = "收到-xtg***"+"-"+yy;
+			}
+			else{
+				regId = "收到-"+fromUser+"-"+yy;
+			}
+		}
+        Gcuser toGcUser = gcuserDao.getUser(toUser);
+		
+		if(toGcUser==null){
+			throw new ServiceException(3, "转入的用户名不存在，请检查输入是否正确！");
+		}
+		
+		if(fromUser.equals(toUser)){
+			throw new ServiceException(4, "您好，不能转给自己，谢谢！");
+		}
+		
+        if(amount<0 || amount==0){
+        	throw new ServiceException(5,"您好，您转账一币不能小于零，谢谢！");
+        }
+        Gcuser gcuser = gcuserDao.getUser(fromUser);
+		
+		
+		if(gcuser.getPay()<amount){
+			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+		}
+		
+		if(!this.changeYb(fromUser, -amount, "转给"+sct+"-"+toUser+"-"+yy, 13, null,ration, YbChangeType.MALLTUIKUAN)){
+			throw new ServiceException(6, "您好，您转账一币不能大于您剩余一币 "+gcuser.getPay()+" ，谢谢！");
+		}
+		
+		if(!this.changeYb(toUser, amount, regId, 6, null,ration,  YbChangeType.MALLHUANKUAN)){
+			throw new ServiceException(3000, "未知错误！");
+		}
+	}
+	
+	/**
+	 * 改变yb
+	 * @param username
+	 * @param changeNum
+	 * @param desc
+	 * @param newzBz
+	 * @param kjqi
+	 * @param ration
+	 * @param originType 一币产出或者消耗途径
+	 * @return
+	 */
+	public boolean changeYb(String username,int changeNum,String desc,int newzBz,Integer kjqi,double ration, int originType){
+		boolean result = false;
+		if(changeNum<0){
+			result = gcuserDao.reduceYb(username, changeNum*-1);
+			if(result){
+				Gcuser gcuser = gcuserDao.getUser(username);
+				Datepay datePay = new Datepay();
+				datePay.setUsername(username);
+				datePay.setJc(changeNum*-1);
+				datePay.setPay(gcuser.getPay());
+				datePay.setJydb(gcuser.getJydb());
+				datePay.setRegid(desc);
+				datePay.setNewbz(newzBz);
+				if(kjqi!=null){
+					datePay.setKjqi(kjqi);
+				}
+				datePay.setRation(ration);
+				datePay.setAbdate(new Date());
+				datePay.setOrigintype(originType);
+				logService.addDatePay(datePay);
+			}
+			return result;
+		}else if(changeNum>0){
+			result = gcuserDao.addYb(username, changeNum);
+			if(result){
+				Gcuser gcuser = gcuserDao.getUser(username);
+				Datepay datePay = new Datepay();
+				datePay.setUsername(gcuser.getUsername());
+				datePay.setSyjz(changeNum);
+				datePay.setPay(gcuser.getPay());
+				datePay.setJydb(gcuser.getJydb());
+				datePay.setRegid(desc);
+				datePay.setNewbz(newzBz);
+				datePay.setAbdate(new Date());
+				datePay.setRation(ration);
+				datePay.setOrigintype(originType);
+				logService.addDatePay(datePay);
+			}
+			return result;
+		}
+		return true;
 	}
 }

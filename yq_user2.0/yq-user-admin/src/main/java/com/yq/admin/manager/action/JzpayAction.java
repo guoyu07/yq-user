@@ -2,6 +2,7 @@ package com.yq.admin.manager.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -32,17 +33,17 @@ public class JzpayAction extends ALDAdminActionSupport {
 	
 	
 	public String execute(){
-		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
 		//gcuser = userService.getUserByUserName(super.getUserName());
         /*if(!super.getUserName().equals("300fhk")&&!super.getUserName().equals("zxz888")){
 			super.setErroCodeNum(7);
 			return SUCCESS;
 		}*/
-        if(super.getUserName().equals("bjcaltd")){//TODO 特殊账号需跟小周沟通
+       /* if(super.getUserName().equals("bjcaltd")){
         	fromUser = super.getUserName();
-        }
+        }*/
 		if(status==1){
-			userService.mallBack(fromUser, jzuser, pa3, jzpay, dbz,yy,ration);
+			adminService.mallBack(fromUser, jzuser, pa3, jzpay, dbz,yy,ration);
 			super.setErroCodeNum(2000);
 		}
 		

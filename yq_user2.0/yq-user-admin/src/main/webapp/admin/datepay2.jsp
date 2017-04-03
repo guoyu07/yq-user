@@ -36,6 +36,8 @@
 		            <option value="111" <c:if test="${beizhu==111}">selected</c:if>>卖出 一币 </option>
 		            <option value="144" <c:if test="${beizhu==144}">selected</c:if>>认购 一币 </option>
 		            <option value="118" <c:if test="${beizhu==118}">selected</c:if>>同名互转</option>
+		            <option value="122" <c:if test="${beizhu==122}">selected</c:if>>转账</option>
+		            <option value="123" <c:if test="${beizhu==123}">selected</c:if>>冲销销售一币</option>
 		            <option value="127" <c:if test="${beizhu==127}">selected</c:if>>VIP转收</option>
 		            <option value="146" <c:if test="${beizhu==146}">selected</c:if>>一币 消费 </option>
 		            <option value="137" <c:if test="${beizhu==137}">selected</c:if>>票务支出 </option>

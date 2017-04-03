@@ -235,13 +235,13 @@ function AmendCity(ProvinceID,CityID,AreaID)
 										<option value="<s:text name='reg.jsp.reg.jsp.1019445992'/>"><s:text name='reg.jsp.reg.jsp.1019445992'/></option>
 										</c:if>
 										<c:if test="${lan==1}">
-										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>
-										<option value='<s:text name='1worldbank'/>'><s:text name='1worldbank'/></option>
+										<option value="<s:text name='bank_paypal'/>"><s:text name='bank_paypal'/></option>g
+									<%-- 	<option value='<s:text name='1worldbank'/>'><s:text name='1worldbank'/></option>
 										<option value='<s:text name='2worldbank'/>'><s:text name='2worldbank'/></option>
 										<option value='<s:text name='3worldbank'/>'><s:text name='3worldbank'/></option>
-										<option value='<s:text name='4worldbank'/>'><s:text name='4worldbank'/></option>
-										<option value='<s:text name='5worldbank'/>'><s:text name='5worldbank'/></option>
-										<option value='<s:text name='6worldbank'/>'><s:text name='6worldbank'/></option>
+										<option value='<s:text name='4worldbank'/>'><s:text name='4worldbank'/></option> --%>
+										<option value='<s:text name='5worldbank'/>'><s:text name='5worldbank'/></option>g
+									<%-- 	<option value='<s:text name='6worldbank'/>'><s:text name='6worldbank'/></option>
 										<option value='<s:text name='7worldbank'/>'><s:text name='7worldbank'/></option>
 										<option value='<s:text name='8worldbank'/>'><s:text name='8worldbank'/></option>
 										<option value='<s:text name='9worldbank'/>'><s:text name='9worldbank'/></option>
@@ -250,34 +250,34 @@ function AmendCity(ProvinceID,CityID,AreaID)
 										<option value='<s:text name='12worldbank'/>'><s:text name='12worldbank'/></option>
 										<option value='<s:text name='13worldbank'/>'><s:text name='13worldbank'/></option>
 										<option value='<s:text name='14worldbank'/>'><s:text name='14worldbank'/></option>
-										<option value='<s:text name='15worldbank'/>'><s:text name='15worldbank'/></option>
-										<option value='<s:text name='16worldbank'/>'><s:text name='16worldbank'/></option>
-										<option value='<s:text name='17worldbank'/>'><s:text name='17worldbank'/></option>
+										<option value='<s:text name='15worldbank'/>'><s:text name='15worldbank'/></option> --%>
+										<option value='<s:text name='16worldbank'/>'><s:text name='16worldbank'/></option>g
+<%-- 										<option value='<s:text name='17worldbank'/>'><s:text name='17worldbank'/></option>
 										<option value='<s:text name='18worldbank'/>'><s:text name='18worldbank'/></option>
 										<option value='<s:text name='19worldbank'/>'><s:text name='19worldbank'/></option>
-										<option value='<s:text name='20worldbank'/>'><s:text name='20worldbank'/></option>
-										<option value='<s:text name='21worldbank'/>'><s:text name='21worldbank'/></option>
-										<option value='<s:text name='22worldbank'/>'><s:text name='22worldbank'/></option>
+										<option value='<s:text name='20worldbank'/>'><s:text name='20worldbank'/></option> --%>
+										<option value='<s:text name='21worldbank'/>'><s:text name='21worldbank'/></option>g
+										<%-- <option value='<s:text name='22worldbank'/>'><s:text name='22worldbank'/></option>
 										<option value='<s:text name='23worldbank'/>'><s:text name='23worldbank'/></option>
 										<option value='<s:text name='24worldbank'/>'><s:text name='24worldbank'/></option>
 										<option value='<s:text name='25worldbank'/>'><s:text name='25worldbank'/></option>
 										<option value='<s:text name='26worldbank'/>'><s:text name='26worldbank'/></option>
 										<option value='<s:text name='27worldbank'/>'><s:text name='27worldbank'/></option>
-										<option value='<s:text name='28worldbank'/>'><s:text name='28worldbank'/></option>
-										<option value='<s:text name='29worldbank'/>'><s:text name='29worldbank'/></option>
-										<option value='<s:text name='30worldbank'/>'><s:text name='30worldbank'/></option>
-										<option value='<s:text name='31worldbank'/>'><s:text name='31worldbank'/></option>
-										<option value='<s:text name='32worldbank'/>'><s:text name='32worldbank'/></option>
-										<option value='<s:text name='33worldbank'/>'><s:text name='33worldbank'/></option>
-										<option value='<s:text name='34worldbank'/>'><s:text name='34worldbank'/></option>
-										<option value='<s:text name='35worldbank'/>'><s:text name='35worldbank'/></option>
-										<option value='<s:text name='36worldbank'/>'><s:text name='36worldbank'/></option>
-										<option value='<s:text name='37worldbank'/>'><s:text name='37worldbank'/></option>
-										<option value='<s:text name='38worldbank'/>'><s:text name='38worldbank'/></option>
+										<option value='<s:text name='28worldbank'/>'><s:text name='28worldbank'/></option> --%>
+										<option value='<s:text name='29worldbank'/>'><s:text name='29worldbank'/></option>g
+										<option value='<s:text name='30worldbank'/>'><s:text name='30worldbank'/></option>g
+										<option value='<s:text name='31worldbank'/>'><s:text name='31worldbank'/></option>g
+										<option value='<s:text name='32worldbank'/>'><s:text name='32worldbank'/></option>g
+										<option value='<s:text name='33worldbank'/>'><s:text name='33worldbank'/></option>g
+										<option value='<s:text name='34worldbank'/>'><s:text name='34worldbank'/></option>g
+										<%-- <option value='<s:text name='35worldbank'/>'><s:text name='35worldbank'/></option>
+										<option value='<s:text name='36worldbank'/>'><s:text name='36worldbank'/></option> --%>
+										<option value='<s:text name='37worldbank'/>'><s:text name='37worldbank'/></option>g
+										<%-- <option value='<s:text name='38worldbank'/>'><s:text name='38worldbank'/></option>
 										<option value='<s:text name='39worldbank'/>'><s:text name='39worldbank'/></option>
-										<option value='<s:text name='40worldbank'/>'><s:text name='40worldbank'/></option>
-										<option value='<s:text name='41worldbank'/>'><s:text name='41worldbank'/></option>
-										<option value='<s:text name='42worldbank'/>'><s:text name='42worldbank'/></option>
+										<option value='<s:text name='40worldbank'/>'><s:text name='40worldbank'/></option> --%>
+										<option value='<s:text name='41worldbank'/>'><s:text name='41worldbank'/></option>g
+										<%-- <option value='<s:text name='42worldbank'/>'><s:text name='42worldbank'/></option>
 										<option value='<s:text name='43worldbank'/>'><s:text name='43worldbank'/></option>
 										<option value='<s:text name='44worldbank'/>'><s:text name='44worldbank'/></option>
 										<option value='<s:text name='45worldbank'/>'><s:text name='45worldbank'/></option>
@@ -335,7 +335,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 										<option value='<s:text name='97worldbank'/>'><s:text name='97worldbank'/></option>
 										<option value='<s:text name='98worldbank'/>'><s:text name='98worldbank'/></option>
 										<option value='<s:text name='99worldbank'/>'><s:text name='99worldbank'/></option>
-										<option value='<s:text name='100worldbank'/>'><s:text name='100worldbank'/></option>
+										<option value='<s:text name='100worldbank'/>'><s:text name='100worldbank'/></option> --%>
 										</c:if>
 						</select>
 					 	<p><label ><s:text name='reg.jsp.reg.jsp.1170349181'/>：</label> <input id="gcard"  type="text" name="ggcard"  size="19" maxlength="20"></p><!-- value==value.replace(/[^\d]/g,'') -->

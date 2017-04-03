@@ -17,19 +17,20 @@
 					<td width="10">　</td>
 					<td width="113"><select size="1" name="beizhu">
 					<option  <c:if test="${empty beizhu or beizhu==0}">selected</c:if> value="0">全部</option>
-					<option <c:if test="${beizhu==1}">selected</c:if> value="1">平衡奖</option>
-					<option <c:if test="${beizhu==2}">selected</c:if> value="2">认购一币</option>
-					<option <c:if test="${beizhu==3}">selected</c:if> value="3">卖出一币</option>
-					<option <c:if test="${beizhu==4}">selected</c:if> value="4">一币换购</option>
-					<option <c:if test="${beizhu==5}">selected</c:if> value="5">商品交易收入</option>
-					<option <c:if test="${beizhu==6}">selected</c:if> value="6">一币互转</option>
-					<option <c:if test="${beizhu==7}">selected</c:if> value="7">话费充值</option>
-					<option <c:if test="${beizhu==8}">selected</c:if> value="8">辅导奖</option>
-					<option <c:if test="${beizhu==9}">selected</c:if> value="9">推广奖</option>
-					<option <c:if test="${beizhu==10}">selected</c:if> value="10">购物支出</option>
-					<option <c:if test="${beizhu==11}">selected</c:if> value="11">票务支出</option>
-					<option <c:if test="${beizhu==12}">selected</c:if> value="12">一币支付</option>
-					<option <c:if test="${beizhu==13}">selected</c:if> value="13">不同名转账</option>
+					<option value="141" <c:if test="${beizhu==141}">selected</c:if>>推广奖</option>
+		            <option value="103" <c:if test="${beizhu==103}">selected</c:if>>平衡奖</option>
+		            <option value="105" <c:if test="${beizhu==105}">selected</c:if>>辅导奖</option>
+		            <option value="108" <c:if test="${beizhu==108}">selected</c:if>>积分卖出</option>
+		            <option value="111" <c:if test="${beizhu==111}">selected</c:if>>卖出 一币 </option>
+		            <option value="144" <c:if test="${beizhu==144}">selected</c:if>>认购 一币 </option>
+		            <option value="118" <c:if test="${beizhu==118}">selected</c:if>>同名互转</option>
+		            <option value="122" <c:if test="${beizhu==122}">selected</c:if>>退款</option>
+		            <option value="123" <c:if test="${beizhu==123}">selected</c:if>>冲销销售一币</option>
+		            <option value="127" <c:if test="${beizhu==127}">selected</c:if>>VIP转收</option>
+		            <option value="146" <c:if test="${beizhu==146}">selected</c:if>>一币 消费 </option>
+		            <option value="137" <c:if test="${beizhu==137}">selected</c:if>>票务支出 </option>
+		            <option value="138" <c:if test="${beizhu==138}">selected</c:if>>话费充值 </option>
+		            <option value="116" <c:if test="${beizhu==116}">selected</c:if>>app端消费</option>
 					</select></td>
 					<td><input type="submit" value="提交" name="B1"></td>
 				</tr>
