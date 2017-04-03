@@ -8,6 +8,7 @@
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='vipepmy.jsp.epmy.jsp.-1471587826'/>！');location.replace('vipup?my=${userName}');</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='vipepmy.jsp.epmy.jsp.121840279'/>！');location.href='epjysc';</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='vipepmy.jsp.epmy.jsp.-1308925165'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='auditedis'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipepmy.jsp.epmy.jsp.-1565930477'/>！');location.replace('epmyjl');</script></c:if>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">

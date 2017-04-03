@@ -2543,10 +2543,28 @@ public class UserService {
 	 * @param payId
 	 */
 	public Txpay buyYbPre(String userName,int payId){
+		boolean notmarket = true;
+		List<Txpay> txpayList = this.getMarkList(10);
+		for (Txpay txpay2 : txpayList) {
+			if(txpay2.getPayid()==payId){
+				notmarket=false;
+			}
+		}
+		
+		if(notmarket){
+			throw new ServiceException(1, "交易不存在，请重新操作！");
+		}
+		
 		Txpay txpay = txPayDao.getByPayid(payId);
+		
 		if(txpay==null){
 			throw new ServiceException(1, "交易不存在，请重新操作！");
 		}
+		
+		if(txpay.getTxvip()==1){
+			throw new ServiceException(9, "此订单没审核！");
+		}
+
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getSjb()==0){
 			throw new ServiceException(2, "您好，您还不是双区玩家，暂时不能使用一币理财功能！");
