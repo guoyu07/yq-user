@@ -54,7 +54,7 @@ public class DatePayDao {
 		String sql = "select * from "+table+" ";
 		SqlParameter sqlParameter = new SqlParameter();
 		if(newbz!=null){
-			sql = sql +" where newbz = ?";
+			sql = sql +" where origintype = ?";
 			sqlParameter.setInt(newbz);
 		}
 		sql = sql +" order by id desc";
