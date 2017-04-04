@@ -42,7 +42,10 @@
               <td valign="middle" align="center" width="95"><font color="#000000" face="宋体" size="2">${data.aq}</font></td>
               <td valign="middle" align="center" width="95"><font color="#000000" face="宋体" size="2">${data.bq}</font></td>
               <td valign="middle" align="center" width="150"><font color="#000000" face="宋体" size="2">${data.bfdate}</font></td>
-              <td valign="middle" align="center" width="404"><font color="#000000" face="宋体" size="2">${data.bz}</font></td>
+              <td valign="middle" align="center" width="404"><font color="#000000" face="宋体" size="2">${data.bz}<c:if test="${data.origintype==30023003 || data.origintype==3002 || data.origintype==3003}">VIP充值错误转回</c:if>
+								<c:if test="${data.origintype==30043005 || data.origintype==3004 || data.origintype==3005}">宿舍押金</c:if>
+								<c:if test="${data.origintype==30003001 || data.origintype==3000 || data.origintype==3001}">转错</c:if>
+								<c:if test="${data.origintype==3008}">系统</c:if></font></td>
               </tr>
              </s:iterator>
             </table> 
