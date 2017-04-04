@@ -17,10 +17,7 @@ public class TelPayByHandAction extends ALDAdminActionSupport {
 	private String user;
 	private String oppa;
 	public String execute(){
-		
-        /*if(!super.getUserName().equals("admin1")){
-            return INPUT;
-        }*/
+		/*
 
 		if(status==0){
 			return SUCCESS;
@@ -31,7 +28,7 @@ public class TelPayByHandAction extends ALDAdminActionSupport {
 		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.callRemoteCharge(call, amount, super.ip(), user, super.getUserName());
-		super.setErroCodeNum(2000);
+		super.setErroCodeNum(2000);*/
 		return SUCCESS;
 	}
 	

@@ -2322,6 +2322,7 @@ public class UserService {
 		if(!this.changeScores(toUser, amount, ScoresChangeType.MALL_BACK_ADD,0d, fromUser, yy+"-"+orderId,orderId)){
 			throw new ServiceException(3000, "未知错误！");
 		}
+		
 	}
 	
 	/**
@@ -5142,7 +5143,6 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	 * 
 	 * */
 	public boolean enoughUserItem(Gcuser gcuser, String item, Double number) {
-		
 		if(item.equals("yibi") || item.equals("一币") || item.equals("pay")){
 			if(gcuser.getPay() >= number){
 				return true;
@@ -5430,5 +5430,12 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 			result.add(bean);
 		}
 		return result;
+	}
+	/**
+	 * 增加后台操作日志
+	 * @param log
+	 */
+	public void addAdminOperateLog(AdminOperateLog log) {
+		adminOperateLogDao.addLog(log);
 	}
 }
