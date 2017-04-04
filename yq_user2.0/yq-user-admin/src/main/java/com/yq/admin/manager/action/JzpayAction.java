@@ -1,7 +1,11 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -42,8 +46,10 @@ public class JzpayAction extends ALDAdminActionSupport {
        /* if(super.getUserName().equals("bjcaltd")){
         	fromUser = super.getUserName();
         }*/
+		
+		
 		if(status==1){
-			adminService.mallBack(fromUser, jzuser, pa3, jzpay, dbz,yy,ration);
+			adminService.mallBack(fromUser, jzuser, pa3, jzpay, dbz,yy,ration,super.getUserName());
 			super.setErroCodeNum(2000);
 		}
 		

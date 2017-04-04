@@ -768,6 +768,9 @@
 		<action name="usermallorderscoreslog" class="com.yq.admin.manager.action.UserMallorderScoresLogAction">
 			<result name="success">/admin/mallordercores.jsp</result>
 		</action>
+		<action name="adminoperatelog" class="com.yq.admin.manager.action.AdminOperateLogAction">
+			<result name="success">/admin/adminoperatorlog.jsp</result>
+		</action>
 	</package>
 
 	<!-- 一个包可以就是一个模块 -->

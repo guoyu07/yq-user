@@ -3753,7 +3753,7 @@ public class AdminService {
 		return ConfigLoader.getStringValue(key, "");
 	}
 	@Transactional
-	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy,double ration){
+	public void mallBack(String fromUser,String toUser,String password3,int amount,String orderId,String yy,double ration,String operator){
 		if(!password3.equals(getConfigPassword(PasswordKey.MALL_BACK_YB))){
 			throw new ServiceException(1, "操作密码不正确！");
 		}
@@ -3807,6 +3807,8 @@ public class AdminService {
 		if(!this.changeYb(toUser, amount, regId, 6, null,ration,  YbChangeType.MALLHUANKUAN)){
 			throw new ServiceException(3000, "未知错误！");
 		}
+		AdminOperateLog log= new AdminOperateLog(operator,"", new Date(), AdminGlobal.MALL_TRANFER, "转账金额:"+amount+",订单号:["+orderId+"],"+"转出者:"+fromUser+",接收者:"+toUser+",折扣:"+ration+",转账说明:"+yy);
+		this.addAdminOperateLog(log);
 	}
 	
 	/**
@@ -3861,5 +3863,18 @@ public class AdminService {
 			return result;
 		}
 		return true;
+	}
+	/**
+	 * 增加后台操作日志
+	 * @param log
+	 */
+	public void addAdminOperateLog(AdminOperateLog log) {
+		adminOperateLogDao.addLog(log);
+		
+	}
+	
+	public IPage<AdminOperateLog> getAdminOperateLogPageList(String admin, int type, String queryStartDate,
+			String queryEndDatet, int pageIndex, int pageSize) {
+		return adminOperateLogDao.getPageList(admin,type,pageSize,pageIndex,queryStartDate,queryEndDatet);
 	}
 }

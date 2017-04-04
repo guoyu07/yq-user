@@ -81,9 +81,9 @@ public class AdminGlobal {
 	/**
 	 *修改vip信息
 	 * */
-	public static final int OP_MODIFYVIP							= 2026;
+	public static final int OP_MODIFYVIP						= 2026;
 	/**
-	 * 保单币转账
+	 * 报单币转账
 	 * */
 	public static final int OP_BDBZZ							= 2027;
 	/**
@@ -93,10 +93,19 @@ public class AdminGlobal {
 	/**
 	 * 后台手动冲话费
 	 * */
-	public static final int OP_MOBILEFEE							= 2029;
+	public static final int OP_MOBILEFEE						= 2029;
 	/**
 	 * 设置为海外玩家
 	 * */
-	public static final int OP_SETOVERSEAS							= 2030;
+	public static final int OP_SETOVERSEAS						= 2030;
+	/**
+	 * 商城转账
+	 * */
+	public static final int MALL_TRANFER						= 2031;
+	/**
+	 * 消费一币
+	 * */
+	public static final int REDUCE_YB							= 2032;
+	
 	
 }
