@@ -8,6 +8,9 @@
 <%
 	UserService userServiceJflc2xx = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 	Gcuser gcuserJflc2xx = userServiceJflc2xx.getUserByUserName(userServiceJflc2xx.isLogin(request.getSession().getId()));
+	/* String key="lladsfkk@331";
+  	String time = new Date().getTime()+"";
+  	String sign = MD5Security.code(gcuserHead.getUsername()+key+time, 32).toLowerCase(); */
 %>
 
 		<%	
@@ -35,7 +38,7 @@
 				     		<%}else if("284".equals(re.getId()+"")){%> 
 				      		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="active" <%} %>><a class="root" target="_blank" href='<%=re.getResoUrl()%>?thisState=<%=re.getId()%>&secondThisState=<%=re.getId()%>'><%=re.getResoName()%></a></li>
 					       <%}else if("285".equals(re.getId()+"")){%> 
-					      		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="active" <%} %>><a class="root" target="_blank" href='<%=re.getResoUrl()%>?thisState=<%=re.getId()%>&secondThisState=<%=re.getId()%>'><%=re.getResoName()%></a></li>
+					      		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="active" <%} %>><a class="root" target="_blank" href='<%=re.getResoUrl()%>shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>&thisState=<%=re.getId()%>&secondThisState=<%=re.getId()%>'><%=re.getResoName()%></a></li>
 					       <%}%>
 				     		
 				     </li>
