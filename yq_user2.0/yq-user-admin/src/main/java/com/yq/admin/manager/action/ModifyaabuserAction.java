@@ -51,6 +51,7 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 	
 	private Fcxt fcxt;
 	private String updateAllDown;
+	private String updateAllDownProperty;
 	
 	private List<VipDownTemp> vipDownTempList;
 	private List<InterRegionCode> areaCodeList = Lists.newArrayList();
@@ -60,6 +61,7 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 	private String sign;
 	private int test;
 	private static final String KEY="daddewr!@#11";
+	
 	
 	//等到当前用户最高角色
 	private Role role;
@@ -94,7 +96,7 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 			
 			return INPUT;
 		}
-		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode,super.getUserName());
+		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode,super.getUserName(),updateAllDownProperty);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -513,6 +515,16 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+
+	public String getUpdateAllDownProperty() {
+		return updateAllDownProperty;
+	}
+
+
+	public void setUpdateAllDownProperty(String updateAllDownProperty) {
+		this.updateAllDownProperty = updateAllDownProperty;
 	}
 
 	

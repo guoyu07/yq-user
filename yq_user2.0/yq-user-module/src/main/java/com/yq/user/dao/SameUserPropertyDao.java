@@ -69,5 +69,22 @@ public class SameUserPropertyDao {
 		
 	}
 	
+	/**
+	 * @param oldnameUserid
+	 * @param newnameUserid
+	 * @return
+	 */
+	public boolean updateNameUserId(String oldnameUserid, String newnameUserid) {
+		StringBuilder sql = new StringBuilder();
+    	SqlParameter sqlParam= new SqlParameter();
+    	sql.append("update "+table+" set name_userid = ?,modify_time=? where name_userid = ?");
+    	sqlParam.setString(newnameUserid);
+    	sqlParam.setObject(new Date());
+    	sqlParam.setString(oldnameUserid);
+    	return jdbc.update(sql.toString(), sqlParam)>0;
+		
+	}
+	
+	
 
 }

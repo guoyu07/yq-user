@@ -449,8 +449,9 @@ public class AdminService {
 	 * @return
 	 */
 	@Transactional
-	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,int areaCode,String operator){
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,int areaCode,String operator,String updateAllDownProperty){
 		Gcuser gcuser = gcuserDao.getUser(userName);
+		String oldnameUserId = gcuser.getName()+gcuser.getUserid();
 		Date date = null;
 		if(!Strings.isNullOrEmpty(pwdate)){
 			try {
@@ -471,17 +472,6 @@ public class AdminService {
 		
 		if(gcuserDao.updateUserByAdmin(userName,password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password,date,cxt)){
 			dateipDao.addDateIpLog(userName, "修改资料sy-"+userName, ip);
-		}
-		
-		if(!Strings.isNullOrEmpty(nowName) && !gcuser.getName().equals(nowName)){
-			SameUserProperty sameUserProperty=sameUserPropertyDao.getSameUserProperty(gcuser.getName()+gcuser.getUserid());
-			if(sameUserProperty!=null){
-				SameUserProperty newsameUserProperty=sameUserPropertyDao.getSameUserProperty(nowName+gcuser.getUserid());
-				if(newsameUserProperty==null){
-					SameUserProperty userProperty=new SameUserProperty(nowName+gcuser.getUserid(),sameUserProperty.getCreateTime(), new Date(), sameUserProperty.getAppPayPassword());
-					sameUserPropertyDao.insertSameUserProperty(userProperty);
-				}
-			}
 		}
 		
 		int oldareaCode=86;
@@ -525,11 +515,61 @@ public class AdminService {
 		if(md5Password!=null){
 			dateipDao.addDateIpLog("admin", "修改密码sy-"+userName, ip);
 		}
-		//更新其下所有同名用户的信息
+		
+		String newuseridkey="";
+		String newnamekey="";
+		if(!Strings.isNullOrEmpty(nowUserId)&&!beforUserId.equals(nowUserId)){
+			newuseridkey = nowUserId;
+		}else{
+			newuseridkey = beforUserId;
+		}
+		if(!Strings.isNullOrEmpty(nowName)&&!beforName.equals(nowName)){
+			newnamekey = nowName;
+		}else{
+			newnamekey = beforName;
+		}
+		String newnameUserId = newnamekey+newuseridkey;
+		
+		
 		if("ok".equals(updateDownPayOk)){
 			gcuserDao.updatePayOk(nowName, nowUserId, payok);
+			
 			LogSystem.log("修改"+userName+",下所有同名账号的payok,name="+nowName+",nowUserId="+nowUserId+",payok="+payok);
 		}
+		
+		//更新其下所有同名用户的信息
+		if("ok".equals(updateAllDownProperty)){
+			if(!newnameUserId.equals(oldnameUserId)){
+				SameUserProperty oldsameUserProperty = sameUserPropertyDao.getSameUserProperty(oldnameUserId);
+				if(oldsameUserProperty!=null){
+					SameUserProperty getnewsameUserProperty = sameUserPropertyDao.getSameUserProperty(newnameUserId);
+					if(getnewsameUserProperty==null){
+						SameUserProperty sameuserproperty = new SameUserProperty();
+						sameuserproperty.setNameUserid(newnameUserId);
+						sameuserproperty.setLastDate(oldsameUserProperty.getLastDate());
+						sameuserproperty.setAppPayPassword(oldsameUserProperty.getAppPayPassword());
+						sameuserproperty.setCreateTime(oldsameUserProperty.getCreateTime());
+						sameuserproperty.setNoSureTimes(oldsameUserProperty.getNoSureTimes());
+						sameuserproperty.setModifyTime(oldsameUserProperty.getModifyTime());
+						sameUserPropertyDao.insertSameUserProperty(sameuserproperty);
+					}
+				}else{
+					SameUserProperty sameuserproperty = new SameUserProperty();
+					sameuserproperty.setNameUserid(newnameUserId);
+					sameuserproperty.setCreateTime(new Date());
+					sameUserPropertyDao.insertSameUserProperty(sameuserproperty);
+				}
+			}
+		}else{
+			SameUserProperty oldsameUserProperty = sameUserPropertyDao.getSameUserProperty(newnameUserId);
+			if(oldsameUserProperty==null){
+				SameUserProperty sameuserproperty = new SameUserProperty();
+				sameuserproperty.setNameUserid(newnameUserId);
+				sameuserproperty.setCreateTime(new Date());
+				sameUserPropertyDao.insertSameUserProperty(sameuserproperty);
+			}
+		}
+		
 		
 		return true;
 	}
