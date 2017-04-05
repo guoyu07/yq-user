@@ -36,7 +36,7 @@ public class SameUserPropertyDao {
     public SameUserProperty getSameUserProperty(String nameUserId){
     	StringBuilder sql = new StringBuilder();
     	SqlParameter sqlParam = new SqlParameter();
-    	sql.append("select * from "+table+" where  name_userid= ?");
+    	sql.append("select * from "+table+" where  name_userid= ? limit 1");
     	sqlParam.setString(nameUserId);
     	return jdbc.get(sql.toString(), SameUserProperty.class, sqlParam);
     }
@@ -68,6 +68,23 @@ public class SameUserPropertyDao {
     	return jdbc.update(sql.toString(), sqlParam)>0;
 		
 	}
+	
+	/**
+	 * @param oldnameUserid
+	 * @param newnameUserid
+	 * @return
+	 */
+	public boolean updateNameUserId(String oldnameUserid, String newnameUserid) {
+		StringBuilder sql = new StringBuilder();
+    	SqlParameter sqlParam= new SqlParameter();
+    	sql.append("update "+table+" set name_userid = ?,modify_time=? where name_userid = ?");
+    	sqlParam.setString(newnameUserid);
+    	sqlParam.setObject(new Date());
+    	sqlParam.setString(oldnameUserid);
+    	return jdbc.update(sql.toString(), sqlParam)>0;
+		
+	}
+	
 	
 
 }
