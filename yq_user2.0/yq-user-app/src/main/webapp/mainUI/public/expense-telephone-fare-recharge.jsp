@@ -42,7 +42,7 @@
     <div class="member-main-full">
       <!-- 话费充值（100） -->
       <div class="main-widget">
-        <p class="widget-title-line">话费充值（100）</p>
+        <%-- <p class="widget-title-line">话费充值（100）</p>
         <form class="widget-form" action="?status=1" method="post" onSubmit="return checkdate1()" name="Form" id="Form">
           <p class="item">
             <label class="title">用户名：</label><span class="text widget-warning">${userName}</span>
@@ -73,7 +73,7 @@
           </p>
           <p class="button-line mt15">
             <button class="widget-button" type="submit">确定充值</button>
-          </p>
+          </p> --%>
         </form>
       </div>
       <!-- 话费充值（100） end -->

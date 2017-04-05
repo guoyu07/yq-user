@@ -33,9 +33,9 @@
 					%>
 					<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>>
 					
-				     		 <% if("283".equals(re.getId()+"")){%> 
+				     		 <%-- <% if("283".equals(re.getId()+"")){%> 
 				     			<a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
-				     		<%}else if("284".equals(re.getId()+"")){%> 
+				     		<%}else --%><% if("284".equals(re.getId()+"")){%> 
 				      		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="active" <%} %>><a class="root" target="_blank" href='<%=re.getResoUrl()%>?thisState=<%=re.getId()%>&secondThisState=<%=re.getId()%>'><%=re.getResoName()%></a></li>
 					       <%}else if("285".equals(re.getId()+"")){%> 
 					      		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="active" <%} %>><a class="root" target="_blank" href='<%=re.getResoUrl()%>shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserHead.getUsername()%>&sign=<%=sign%>&time=<%=time%>&thisState=<%=re.getId()%>&secondThisState=<%=re.getId()%>'><%=re.getResoName()%></a></li>

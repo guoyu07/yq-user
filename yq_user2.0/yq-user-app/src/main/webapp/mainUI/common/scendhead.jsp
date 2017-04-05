@@ -89,7 +89,7 @@
 				           <a href="/bybdblog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">备用报单币明细</a>
 				        </div>
 				        </li>
-				         <%}else if("254".equals(re.getId()+"") && (gcuserHead.getUsername().equals("300fhk") || gcuserHead.getUsername().equals("zxz888"))){%>
+				         <%-- <%}else if("254".equals(re.getId()+"") && (gcuserHead.getUsername().equals("300fhk") || gcuserHead.getUsername().equals("zxz888"))){%>
 				         <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><span class="root"><%=re.getResoName()%></a>
 				          <div class="list JQ_navThirdList">
 				          <%if(gcuserHead.getUsername().equals("300fhk")|| gcuserHead.getUsername().equals("zxz888")) {%>
@@ -99,7 +99,7 @@
 				          <a href="/backscores?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">商城购物券退款</a>
 				       	 	<%} %>
 				       	 </div>
-				       	 </li>
+				       	 </li> --%>
 				        <%}else if("250".equals(re.getId()+"")){%>
 				      	 <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a></li>
 				       <%}else if("273".equals(re.getId()+"") && (gcuserHead.getJb()==5 || gcuserHead.getJb()==3)){%>
