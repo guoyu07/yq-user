@@ -554,10 +554,13 @@ public class AdminService {
 						sameUserPropertyDao.insertSameUserProperty(sameuserproperty);
 					}
 				}else{
-					SameUserProperty sameuserproperty = new SameUserProperty();
-					sameuserproperty.setNameUserid(newnameUserId);
-					sameuserproperty.setCreateTime(new Date());
-					sameUserPropertyDao.insertSameUserProperty(sameuserproperty);
+					SameUserProperty getnewsameUserProperty = sameUserPropertyDao.getSameUserProperty(newnameUserId);
+					if(getnewsameUserProperty==null){
+						SameUserProperty sameuserproperty = new SameUserProperty();
+						sameuserproperty.setNameUserid(newnameUserId);
+						sameuserproperty.setCreateTime(new Date());
+						sameUserPropertyDao.insertSameUserProperty(sameuserproperty);
+					}
 				}
 			}
 		}else{

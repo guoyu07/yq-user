@@ -1,7 +1,11 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.bo.W10Bean;
 import com.yq.manager.service.AdminService;
 
@@ -34,6 +38,8 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.syusers(payid, op);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.TXSH, "訂單:"+payid+",提現審核："+op);
+		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
@@ -47,6 +53,8 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 */
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.setVerifile(user, verify);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.YB_MSH, "用戶："+user+"免審核："+verify);
+		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2001);
 		return SUCCESS;
 	}
@@ -57,7 +65,10 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
         }*/
-		ServiceCacheFactory.getService(AdminService.class).cancleYbSale(super.getUserName(), payid, resionMassage, super.ip());
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		adminService.cancleYbSale(super.getUserName(), payid, resionMassage, super.ip());
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.TXTH, "体现id："+payid+"，说明："+resionMassage);
+		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2002);
 		return SUCCESS;
 	}
@@ -66,7 +77,10 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 		/*if(!super.getUserName().equals("admin1")&&!super.getUserName().equals("admin4")){
             return INPUT;
         }*/
-		ServiceCacheFactory.getService(AdminService.class).resetYbOrder(super.getUserName(), payid, opstate, super.ip());
+		AdminService adminService=ServiceCacheFactory.getService(AdminService.class);
+		adminService.resetYbOrder(super.getUserName(), payid, opstate, super.ip());
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.RESET_YB_ORDER, "體現id："+payid);
+		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2003);
 		return SUCCESS;
 	}

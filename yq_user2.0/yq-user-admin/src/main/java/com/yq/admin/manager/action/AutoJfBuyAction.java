@@ -1,7 +1,11 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 
 /**
@@ -24,6 +28,7 @@ public class AutoJfBuyAction extends ALDAdminActionSupport{
 	private int status;
 	
 	public String dealJfMcByAdmin(){
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		if(status==0){
 			return SUCCESS;
 		}
@@ -52,6 +57,8 @@ public class AutoJfBuyAction extends ALDAdminActionSupport{
 		 needNum = AdminService.mcneedDealNum;
 		 currentNum = AdminService.mccurrentNum;
 		super.setErroCodeNum(2001);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.AUTO_JB_SALE, "自動賣出數："+num);
+		adminService.addAdminOperateLog(log);
 		return SUCCESS;
 	}
 	public int getNeedNum() {

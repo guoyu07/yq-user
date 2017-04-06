@@ -32,6 +32,16 @@
 		            <option value="2027" <c:if test="${beizhu==2027}">selected</c:if>>报单币转账</option>
 		            <option value="2031" <c:if test="${beizhu==2031}">selected</c:if>>商城转账</option>
 		            <option value="2032" <c:if test="${beizhu==2032}">selected</c:if>>消费一币</option>
+		            <option value="2033" <c:if test="${beizhu==2033}">selected</c:if>>備用報單幣</option>
+		            <option value="2034" <c:if test="${beizhu==2034}">selected</c:if>>改變金幣</option>
+		            <option value="2035" <c:if test="${beizhu==2035}">selected</c:if>>改變積分</option>
+		            <option value="2036" <c:if test="${beizhu==2036}">selected</c:if>>一幣補貼</option>
+		            <option value="2037" <c:if test="${beizhu==2037}">selected</c:if>>積分自動買入</option>
+		            <option value="2038" <c:if test="${beizhu==2038}">selected</c:if>>積分自動賣出</option>
+		            <option value="2039" <c:if test="${beizhu==2039}">selected</c:if>>體現審核</option>
+		            <option value="2040" <c:if test="${beizhu==2040}">selected</c:if>>提现免審核</option>
+		            <option value="2041" <c:if test="${beizhu==2041}">selected</c:if>>重置一幣體現訂單</option>
+		            <option value="2042" <c:if test="${beizhu==2042}">selected</c:if>>提现退回</option>
 					</select><input type="submit" value="查询" name="B1">
 		 	<!-- <input type="button" onClick="exportExcel()" value="导出excel"/> --><br>
     </form>
