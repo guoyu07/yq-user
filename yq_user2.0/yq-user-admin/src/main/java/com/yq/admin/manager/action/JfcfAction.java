@@ -1,7 +1,11 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 
 public class JfcfAction extends ALDAdminActionSupport {
@@ -39,7 +43,7 @@ public class JfcfAction extends ALDAdminActionSupport {
 	private String oppa;
 	private int status;
 	public String dealJfMrByAdmin(){
-
+		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		if(status==0){
 			return SUCCESS;
 		}
@@ -68,6 +72,8 @@ public class JfcfAction extends ALDAdminActionSupport {
 		needNum = AdminService.needDealNum;
 		currentNum = AdminService.currentNum;
 		super.setErroCodeNum(2001);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.AUTO_JB_BUY, "自動買入數："+num);
+		adminService.addAdminOperateLog(log);
 		return SUCCESS;
 	}
 	

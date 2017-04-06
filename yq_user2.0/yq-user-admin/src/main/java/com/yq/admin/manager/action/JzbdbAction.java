@@ -1,7 +1,11 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -18,9 +22,6 @@ public class JzbdbAction extends ALDAdminActionSupport {
 	private Gcuser gcuser;
 	
 	public String execute(){
-      /*  if(!super.getUserName().equals("admin1")){
-            return INPUT;
-        }*/
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		if(status==0){
 			gcuser =  userService.getUserByUserName(jzid);
@@ -28,6 +29,8 @@ public class JzbdbAction extends ALDAdminActionSupport {
 		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addSyep(jzid, jzbdb,super.getUserName());
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.CHANGE_BDB, "改變數量："+jzbdb);
+		adminService.addAdminOperateLog(log);
 		gcuser =  userService.getUserByUserName(jzid);
 		return SUCCESS;
 	}

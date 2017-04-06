@@ -5,6 +5,8 @@ import java.util.Date;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
@@ -32,6 +34,8 @@ public class BcjfAction extends ALDAdminActionSupport {
 		LogSystem.log("用户["+super.getUserName()+"]操作，加积分["+new Date()+"],给--->["+bcid+"],积分数量:"+bcjf);
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addJf(bcid, bcjf);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.CHANGE_JF, "給用戶:"+bcid+",積分数量："+bcjf);
+		adminService.addAdminOperateLog(log);
 		gcuser =  userService.getUserByUserName(bcid);
 		return SUCCESS;
 	}

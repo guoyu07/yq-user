@@ -106,6 +106,46 @@ public class AdminGlobal {
 	 * 消费一币
 	 * */
 	public static final int REDUCE_YB							= 2032;
+	/**
+	 * 備用報單幣
+	 * */
+	public static final int CHANGE_BDB							= 2033;
+	/**
+	 * 改變金幣
+	 * */
+	public static final int CHANGE_JB							= 2034;
+	/**
+	 * 改變積分
+	 * */
+	public static final int CHANGE_JF 							= 2035;
+	/**
+	 * 一幣補貼
+	 * */
+	public static final int CHANGE_YB_BT 						= 2036;
+	/**
+	 * 積分自動買入
+	 * */
+	public static final int AUTO_JB_BUY 						= 2037;
+	/**
+	 * 積分自動賣出
+	 * */
+	public static final int AUTO_JB_SALE 						= 2038;
+	/**
+	 * 體現審核
+	 * */
+	public static final int TXSH 								= 2039;
+	/**
+	 * 免審核
+	 * */
+	public static final int YB_MSH 								= 2040;
+	/**
+	 * 重置一幣體現訂單
+	 * */
+	public static final int RESET_YB_ORDER 						= 2041;
+	/**
+	 * 重置一幣體現訂單
+	 * */
+	public static final int TXTH 								= 2041;
 	
 	
 }

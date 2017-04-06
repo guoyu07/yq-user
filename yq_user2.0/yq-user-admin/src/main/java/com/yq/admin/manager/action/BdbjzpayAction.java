@@ -1,7 +1,11 @@
 package com.yq.admin.manager.action;
 
+import java.util.Date;
+
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.bean.AdminOperateLog;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -43,6 +47,8 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 			return INPUT;
 		}
 		userService.addBdbByAdmin(syuser, jzpay);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.CHANGE_BDB, "給用戶:"+syuser+",報單幣数量："+jzpay);
+		userService.addAdminOperateLog(log);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
