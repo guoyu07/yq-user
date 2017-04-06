@@ -29,7 +29,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">消费管理 >> 话费充值（100）</p>
+    <p class="breadcrumb-trail">消费管理 </p>
      <ul class="nav-secondary">
     	<%@ include file="/mainUI/common/xfgl.jsp" %>
     </ul>
