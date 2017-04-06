@@ -10,10 +10,11 @@ import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.Page;
+import com.sr178.game.framework.plugin.IAppPlugin;
 import com.sr178.module.utils.JedisUtils;
 import com.yq.manage.bean.Resource;
 import com.yq.manage.util.CompareResource;
-public class ResourceDao {
+public class ResourceDao implements IAppPlugin{
 
 	@Autowired
 	private Jdbc jdbc;
@@ -226,8 +227,27 @@ public class ResourceDao {
         return this.jdbc.getList(sql, Resource.class, sqlparam);*/
 	}
 
-	public void initResourceListCache() {
+	public void cleanCache() {
 		delCache(RESOURCE_KEY);
+	}
+
+	@Override
+	public void startup() throws Exception {
+		cleanCache();
+		initResourceCache();
+		
+	}
+
+	@Override
+	public void shutdown() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int cpOrder() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

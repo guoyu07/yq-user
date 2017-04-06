@@ -33,10 +33,6 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 		IPage<Dgag> page =managerService.getDgagPageList(super.getToPage(),7);
 		super.initPage(page);
 		
-		ManageService manageService = ServiceCacheFactory.getServiceCache().getService(ManageService.class);
-		
-		manageService.initResourceCache();
-		
 		@NotAllowedCode
 		TxPayDao txPayDao = ServiceCacheFactory.getServiceCache().getService(TxPayDao.class);
 		dq = gcuserb.getDqu()+"";
