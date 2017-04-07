@@ -25,17 +25,20 @@ public class ActivGoldCardAction extends ALDAdminPageActionSupport<Datecj> {
 	
 	private int status;
 	
+	private String smsCode;
+	
 	public String execute(){
 		if(status==1){
 			UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-			userService.activedGoldCard(super.getUserName(), pdid, pdpa, fwid, super.ip());
+			userService.activedGoldCard(super.getUserName(), pdid, pdpa, fwid, super.ip(),smsCode);
+			super.setErroCodeNum(2000);
 		}
 		
 		
 		LogService logService = ServiceCacheFactory.getServiceCache().getService(LogService.class);
 		super.initPage(logService.getDateCjPageList(super.getUserName(), super.getToPage(), 10));
+		super.setErroCodeNum(2001);
 		
-		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
 
@@ -77,6 +80,16 @@ public class ActivGoldCardAction extends ALDAdminPageActionSupport<Datecj> {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+
+	public String getSmsCode() {
+		return smsCode;
+	}
+
+
+	public void setSmsCode(String smsCode) {
+		this.smsCode = smsCode;
 	}
 	
 	

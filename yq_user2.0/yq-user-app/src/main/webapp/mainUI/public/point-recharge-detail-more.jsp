@@ -1,7 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='vipchklogin.jsp.chklogin.jsp.-253996823'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='vipchklogin.jsp.chklogin.jsp.-1299761769'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='vipchklogin.jsp.chklogin.jsp.1309921904'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('您无权激活此卡！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('手机验证码为空！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('您填入的手机验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('激活成功！');location.replace('gmjh?secondThisState=251&thisState=244');</script></c:if>
-
+<c:if test="${erroCodeNum==2001}"><script language=javascript>history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 

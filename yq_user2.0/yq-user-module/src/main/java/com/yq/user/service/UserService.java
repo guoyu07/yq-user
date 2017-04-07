@@ -2946,16 +2946,31 @@ public class UserService {
 	 * @param ip
 	 */
 	@Transactional
-	public void activedGoldCard(String userName,String pdid,String pdpa,String fwid,String ip){
+	public void activedGoldCard(String userName,String pdid,String pdpa,String fwid,String ip,String smsCode){
+		Gcuser guser = getUserByUserName(userName);
+		if(Strings.isNullOrEmpty(smsCode)){
+			throw new ServiceException(5, "手机验证码为空！");
+		}
+		if(!smsCode.equals(guser.getVipsq())){
+			throw new ServiceException(6, "您填入的手机验证码不正确!");
+		}
+		
+		
 		String pdpamd5 = MD5Security.md5_16(pdpa).toUpperCase(); 
 		String fwidmd5 = MD5Security.md5_16(fwid).toUpperCase();
 		
 		Ejbk ejbk = ejbkDao.get(pdid);
+		
+		
+		
 		String gmuser = "";
 		Date gmdate= null;
 		if(ejbk==null){
 			Jbk10 jbk10 = jdbDao.getJbk10(pdid);
 			if(jbk10!=null){
+				if(!jbk10.getUp().equals(userName)){
+					throw new ServiceException(4, "你的无权激活此卡！");
+				}
 				if(!pdpamd5.equals(jbk10.getPdpamd5())){
 					throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
 				}
@@ -2970,6 +2985,9 @@ public class UserService {
 			}else{
 				Jbk50 jbk50 = jdbDao.getJbk50(pdid);
 				if(jbk50!=null){
+					if(!jbk50.getUp().equals(userName)){
+						throw new ServiceException(4, "你的无权激活此卡！");
+					}
 					if(!pdpamd5.equals(jbk50.getPdpamd5())){
 						throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
 					}
@@ -2985,6 +3003,9 @@ public class UserService {
 				}else{
 					Jbk100 jbk100 = jdbDao.getJbk100(pdid);
 					if(jbk100!=null){
+						if(!jbk100.getUp().equals(userName)){
+							throw new ServiceException(4, "你的无权激活此卡！");
+						}
 						if(!pdpamd5.equals(jbk100.getPdpamd5())){
 							throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
 						}
@@ -2999,6 +3020,9 @@ public class UserService {
 					}else{
 						Jbk300 jbk300 = jdbDao.getJbk300(pdid);
 						if(jbk300!=null){
+							if(!jbk300.getUp().equals(userName)){
+								throw new ServiceException(4, "你的无权激活此卡！");
+							}
 							if(!pdpamd5.equals(jbk300.getPdpamd5())){
 								throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
 							}
@@ -3013,6 +3037,9 @@ public class UserService {
 						}else{
 							Jbk500 jbk500 = jdbDao.getJbk500(pdid);
 							if(jbk500!=null){
+								if(!jbk500.getUp().equals(userName)){
+									throw new ServiceException(4, "你的无权激活此卡！");
+								}
 								if(!pdpamd5.equals(jbk500.getPdpamd5())){
 									throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
 								}
@@ -3033,19 +3060,24 @@ public class UserService {
 			}
 			
 		}else{
-				if(!pdpamd5.equals(ejbk.getPdpamd5())){
-					throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
-				}
-				if(!fwidmd5.equals(ejbk.getFwidmd5())){
-					throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
-				}
-				gmuser=  ejbk.getUp();
-				gmdate=    ejbk.getGmdate();
-				int cjpay=      ejbk.getBf2()*10;
-				vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
-				if(!ejbkDao.delete(pdid)){
-					throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
-				}
+			
+			if(!ejbk.getUp().equals(userName)){
+				throw new ServiceException(4, "你的无权激活此卡！");
+			}
+			
+			if(!pdpamd5.equals(ejbk.getPdpamd5())){
+				throw new ServiceException(1, "你的 登录密码 不正确，请重新输入！");
+			}
+			if(!fwidmd5.equals(ejbk.getFwidmd5())){
+				throw new ServiceException(2, "你的 防伪编码 不正确，请重新输入！");
+			}
+			gmuser=  ejbk.getUp();
+			gmdate=    ejbk.getGmdate();
+			int cjpay=      ejbk.getBf2()*10;
+			vipgwly(userName, pdid, pdpamd5, fwidmd5, gmuser, gmdate, cjpay, ip);
+			if(!ejbkDao.delete(pdid)){
+				throw new ServiceException(3, "你的 消费编号 不正确或已激活过，请查正后重新输入！");
+			}
 		}
 	}
 	
@@ -4144,8 +4176,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op  777不用发送到玩家手机上
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		String randomString = RandomStringUtils.random(6, chars);

@@ -36,25 +36,36 @@
         <p class="dialog-title">快速激活金币卡</p>
         <!-- 图纸为一页13条数据 -->
         <div class="dialog-wrap-border main-widget">
-          <form class="widget-form">
+          <form class="widget-form" name="Form" action="activedGoldCard?secondThisState=${secondThisState}&thisState=${thisState}">
             <p class="item">
               <lable class="title">消费编号：</lable>
               <span class="text widget-warning">${id}</span>
+              <input type="hidden" name="pdid" value="${id}" />
             </p>
             <p class="item">
               <lable class="title">登录密码：</lable>
               <span class="text widget-warning">${pdpa}</span>
+               <input type="hidden" name="pdpa" value="${pdpa}" />
             </p>
             <p class="item">
               <lable class="title">防伪编号：</lable>
               <span class="text widget-warning">${fwid}</span>
+              <input type="hidden" name="fwid" value="${fwid}" />
+              <input type="hidden" name="status" value="1" />
             </p>
             <p class="item">
               <lable class="title">金币面值：</lable>
               <span class="text widget-warning">${ejbk.bf2}0</span>
             </p>
+            <p class="item">
+	            <label class="title">手机验证码：</label>
+	            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/>
+	            <input class="widget-button-small" id="btn" type="button" onclick="sendMsg()" value="获取验证码"/>
+	           <!--  <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()">获取验证码</a> -->
+         	 </p>
             <p class="button-line mt15">
-              <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1&secondThisState=${secondThisState}&thisState=${thisState}"  class="widget-button">快速激活</a>
+            <button type="submit" class="widget-button" onClick="checkdate();">提交修改</button>
+              <%-- <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1&secondThisState=${secondThisState}&thisState=${thisState}"  class="widget-button">快速激活</a> --%>
             </p>
           </form>
         </div>
@@ -64,5 +75,46 @@
   <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
   <script type="text/javascript" src="${ctx}/js/common.js"></script>
 </body>
+<script type="text/javascript">
+function checkdate1() {
+	  if (!checkdate()) {
+	    return;
+	  }
+	 /*  var data = $("#Form").serialize();
+	  $.post("activedGoldCard?status=1&pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1&secondThisState=${secondThisState}&thisState=${thisState}", data, function(response) {
+	    if (response.erroCodeNum ==2000) {
+	      alert('更新资料成功，请重新登录！');
+	      location.replace('../index.jsp?id=' + Form.userName.value);
+	    }
+	  });
+	  return true; */
+	}
+function checkdate() {
+	  if (Form.smsCode.value == "") {
+	    alert("手机验证码不能为空！");
+	    Form.smsCode.focus();
+	    return false;
+	  }
+}
+
+function sendMsg() {
+  /* if (!checkdate()) {
+    return;
+  } */
+  $("#btn").attr("disabled", "disabled");
+  var data = $("#Form").serialize();
+  $.post("/sms?op=16", data, function(response) {
+    $("#btn").removeAttr("disabled");
+    if (response.erroCodeNum != 0) {
+      alert("手机验证码发送失败");
+      return false;
+    }
+    settime($("#btn"), '#SESSION_LOCALE');
+    alert("手机验证码发送成功");
+  });
+} 
+
+
+</script>
 
 </html>
