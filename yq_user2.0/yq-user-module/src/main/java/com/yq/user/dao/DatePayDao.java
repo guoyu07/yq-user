@@ -544,6 +544,6 @@ public class DatePayDao {
 		SqlParameter sqlParameter = new SqlParameter();
 		sqlParameter.setString(userName);
 		sql = sql +" order by id desc";
-		return this.jdbc.getListPage(sql.toString(), Datepay.class,null, pageSize, toPage);
+		return this.jdbc.getListPage(sql.toString(), Datepay.class,sqlParameter, pageSize, toPage);
 	}
 }

@@ -31,7 +31,7 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		
-		if(lb==YbChangeType.ReputationStart){
+		if(lb!=null&&lb==YbChangeType.ReputationStart){
 			IPage<Datepay> page = logService.getReputationStartPage(super.getUserName(), super.getToPage(), 18);
 			super.initPage(page);
 		}else{
@@ -49,7 +49,7 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		if(lb!=null&&lb==0){
 			lb=null;
 		}
-		if(lb==YbChangeType.ReputationStart){
+		if(lb!=null&&lb==YbChangeType.ReputationStart){
 			IPage<Datepay> page = logService.getReputationStartPage(super.getUserName(), super.getToPage(), 7);
 			super.initPage(page);
 		}else{
