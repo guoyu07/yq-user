@@ -325,10 +325,13 @@ public class AgentService {
 		}
 		//支付指定的yb
 		boolean result = userService.changeYb(payUserName, -agentOrder.getAmount(),orderId+"-"+agentOrder.getProductDesc(), YbChangeType.AGENT_REDUCE, null, 0, YbChangeType.APPUSE);
+		LogSystem.info("【===app==】"+orderId+"支付完成，result="+result+",payUserName="+payUserName+",agentOrder.getAmount()="+agentOrder.getAmount()+",orderId="+orderId+",desc="+agentOrder.getProductDesc());
 		if(result){
 			if(!agentOrderDao.updateStatusToSuccess(orderId, payUserName.trim(), new Date())){
+				LogSystem.info("【===app==】"+orderId+"支付完成，更新订单失败，,payUserName.trim()="+payUserName.trim()+",agentOrder.getAmount()="+agentOrder.getAmount()+",orderId="+orderId);
 				throw new ServiceException(4, "订单不存在或该订单已失效！");
 			}else{
+				LogSystem.info("【===app==】"+orderId+"支付完成，更新订单成功，result="+result+",payUserName="+payUserName+",agentOrder.getAmount()="+agentOrder.getAmount()+",orderId="+orderId+",desc="+agentOrder.getProductDesc());
 				Map<String,String> paramMap = new HashMap<String,String>();
 				paramMap.put("payUserName", payUserName.trim());
 				paramMap.put("amount", agentOrder.getAmount()+"");
@@ -338,16 +341,14 @@ public class AgentService {
 				String signStr = payUserName+agentOrder.getAmount()+agentOrder.getProductOrder()+orderId+agentOrder.getParam();
 				String sign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey()).trim();
 				paramMap.put("sign", sign);
-				LogSystem.info("开启第三方商户支付回调，回调签名字符串为["+signStr+"],key为["+agentApp.getAppKey()+"],签名为["+sign+"]");
-				
+				LogSystem.info("【===app==】"+orderId+"开启第三方商户支付回调，回调签名字符串为["+signStr+"],key为["+agentApp.getAppKey()+"],签名为["+sign+"]");
 				//回调
 				if(!Strings.isNullOrEmpty(agentApp.getCallBackUrl())){
 					String url = agentApp.getCallBackUrl();
 					callBackToAgent(url, paramMap);
 				}
 				long l2=System.currentTimeMillis();
-				System.out.println("************************finishTime="+(l2-l1));
-				
+				LogSystem.info("************************finishTime="+(l2-l1));
 				return paramMap;
 			}
 		}else{

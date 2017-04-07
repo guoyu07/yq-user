@@ -1,10 +1,14 @@
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.testcore.ActionTest;
+import com.sr178.module.utils.MD5Security;
+import com.yq.agent.service.AgentService;
+import com.yq.app.utils.MacShaUtils;
 import com.yq.user.service.UserService;
 
 
 public class AdminServiceTest extends ActionTest{
 	public void testWay(){
+//		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
 //		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 //		adminService.man123();
 //		adminService.resetZaqAndZbq();
@@ -76,6 +80,20 @@ public class AdminServiceTest extends ActionTest{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
+//		String appKey = "2k6bhoc8q4ecpjcnv9m1wb9bun55k5fu";
+//		
+//		String appId = 100+"";
+//		String orderUserName = "300fhk";
+//		String amount = "100";
+//		String productOrder = "2254ss";
+//		String productDesc = "测试订单";
+//		String param = "";
+//		String signStr = appId+orderUserName+amount+productOrder+productDesc+param;
+//		String sign = MacShaUtils.doEncryptBase64(signStr, appKey);
+//		int orderId =agentService.creatOrder(appId, orderUserName, amount, productOrder, productDesc, param, sign);
+		
+//		agentService.payOrder("15880805512", "965eb72c92a549dd", MD5Security.md5_16_Small("222222"), 9);
 		
 	}
 }
