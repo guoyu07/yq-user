@@ -2792,7 +2792,6 @@ public class UserService {
 			throw new ServiceException(5, "手机验证码为空！");
 		}
 			
-		
 		//需要的一币数量
 		double needYbCountDouble = (double)mz*(double)gmsl*1.5;
 		int needYbCount = (int)needYbCountDouble;
@@ -4196,7 +4195,7 @@ public class UserService {
 			param.put("code", randomString);
 			param.put("userName", userName);
 			param.put("op", OP_STR.length>op?OP_STR[op]:"");
-			if(true){//gcuserDao.updateSmsCode(userName, randomString);
+			if(gcuserDao.updateSmsCode(userName, randomString)){
 					if(op==777){
 						return ;
 					}
