@@ -341,5 +341,10 @@ public class YbChangeType {
 	 * 
 	 * */
 	public static final int APPTRASACTIONREDUCE = 150;
+	/**
+	 * 信誉星变化明细
+	 * 
+	 * */
+	public static final int ReputationStart = 151;
 
 }

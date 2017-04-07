@@ -61,6 +61,7 @@
             <option value="137" <c:if test="${lb==137}">selected</c:if>>票务支出 </option>
             <!-- <option value="15">商户收入 </option> -->
             <option value="138" <c:if test="${lb==138}">selected</c:if>>话费充值 </option>
+             <option value="151" <c:if test="${lb==151}">selected</c:if>>信誉星明细 </option>
            <!--  <option value="20">交易违规 </option> -->
           </select>
         </p>
@@ -82,7 +83,8 @@
             </thead>
             <tbody>
               <s:iterator var="data" value="dataList">
-				<tr>
+<%--               <c:if test="${data.jc!=0||data.syjz!=0}">
+ --%>				<tr>
 					<td>${gcuser.username}</td>
 					<td>${data.syjz}</td>
 					<td><c:if test="${data.jc>0}">-${data.jc}</c:if><c:if test="${data.jc<=0}">${data.jc}</c:if></td>
@@ -93,6 +95,7 @@
 					<td><fmt:formatDate value="${data.abdate}" type="both"/></td>
 					<td>${data.regid}</td>
 				</tr>
+				<%-- </c:if> --%>
 				</s:iterator>
             </tbody>
           </table>

@@ -477,5 +477,16 @@ public class LogService {
 		return datePayDao.getYbPage(userName,lb,toPage,pageSize);
 	}
 	
+	/**
+	 * 得到信誉星明细
+	 * @param userName
+	 * @param toPage
+	 * @param i
+	 * @return
+	 */
+	public IPage<Datepay> getReputationStartPage(String userName, int toPage, int pageSize) {
+		return datePayDao.getXyxPage(userName,toPage,pageSize);
+	}
+	
 	
 }
