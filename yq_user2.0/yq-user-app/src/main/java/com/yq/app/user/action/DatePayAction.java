@@ -7,6 +7,7 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Gcuser;
+import com.yq.user.constant.YbChangeType;
 import com.yq.user.service.LogService;
 import com.yq.user.service.UserService;
 
@@ -30,9 +31,13 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		
-		IPage<Datepay> page = logService.getYbListPage(super.getUserName(), lb, super.getToPage(), 18);
-		
-		super.initPage(page);
+		if(lb!=null&&lb==YbChangeType.ReputationStart){
+			IPage<Datepay> page = logService.getReputationStartPage(super.getUserName(), super.getToPage(), 18);
+			super.initPage(page);
+		}else{
+			IPage<Datepay> page = logService.getYbListPage(super.getUserName(), lb, super.getToPage(), 18);
+			super.initPage(page);
+		}
 		
 		return SUCCESS;
 	}
@@ -44,9 +49,17 @@ public class DatePayAction extends ALDAdminPageActionSupport<Datepay> {
 		if(lb!=null&&lb==0){
 			lb=null;
 		}
-		IPage<Datepay> page = logService.getYbListPage(super.getUserName(), lb, super.getToPage(), 7);
+		if(lb!=null&&lb==YbChangeType.ReputationStart){
+			IPage<Datepay> page = logService.getReputationStartPage(super.getUserName(), super.getToPage(), 7);
+			super.initPage(page);
+		}else{
+			IPage<Datepay> page = logService.getYbListPage(super.getUserName(), lb, super.getToPage(), 7);
+			super.initPage(page);
+		}
 		
-		super.initPage(page);
+		
+		
+		
 		return "detail";
 	}
 	

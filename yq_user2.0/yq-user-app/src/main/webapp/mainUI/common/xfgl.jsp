@@ -4,7 +4,6 @@
 <%@page import="com.yq.user.bo.Gcuser"%>
 <%@page import="com.yq.user.service.UserService"%>
 <%@page import="com.yq.user.bo.Fcxt"%>
-
 <%
 	UserService userServiceJflc2xx = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 	Gcuser gcuserJflc2xx = userServiceJflc2xx.getUserByUserName(userServiceJflc2xx.isLogin(request.getSession().getId()));

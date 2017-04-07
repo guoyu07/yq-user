@@ -539,5 +539,11 @@ public class DatePayDao {
 		return this.jdbc.getListPage(sql.toString(), Datepay.class,null, pageSize, pageIndex);
 	}
 	
-	
+	public IPage<Datepay> getXyxPage(String userName, int toPage, int pageSize) {
+		String sql = "select * from "+table+" where username = ? and  newbz = 20 ";
+		SqlParameter sqlParameter = new SqlParameter();
+		sqlParameter.setString(userName);
+		sql = sql +" order by id desc";
+		return this.jdbc.getListPage(sql.toString(), Datepay.class,sqlParameter, pageSize, toPage);
+	}
 }
