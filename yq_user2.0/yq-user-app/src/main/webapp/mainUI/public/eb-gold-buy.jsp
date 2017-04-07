@@ -6,6 +6,8 @@
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('注意：您的一币小于15，请充值！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('注意：您的一币不够本次购卡，请充值！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('二级密码不正确，请重新输入！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('手机验证码为空！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('您填入的手机验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('电子卡发放及业绩更新成功！');location.href='datepay?secondThisState=${secondThisState}&thisState=${thisState}'</script></c:if>
 <head>
   <meta chartset="UTF-8">

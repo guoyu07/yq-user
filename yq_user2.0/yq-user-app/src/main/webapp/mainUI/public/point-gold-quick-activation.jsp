@@ -57,14 +57,14 @@
               <lable class="title">金币面值：</lable>
               <span class="text widget-warning">${ejbk.bf2}0</span>
             </p>
-            <p class="item">
+            <!-- <p class="item">
 	            <label class="title">手机验证码：</label>
 	            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/>
 	            <input class="widget-button-small" id="btn" type="button" onclick="sendMsg()" value="获取验证码"/>
-	           <!--  <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()">获取验证码</a> -->
-         	 </p>
+	            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()">获取验证码</a>
+         	 </p> -->
             <p class="button-line mt15">
-            <button type="submit" class="widget-button" onClick="checkdate();">提交修改</button>
+            <!-- <button type="submit" class="widget-button" >提交修改</button>onClick="checkdate();" -->
               <%-- <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1&secondThisState=${secondThisState}&thisState=${thisState}"  class="widget-button">快速激活</a> --%>
             </p>
           </form>

@@ -2787,7 +2787,12 @@ public class UserService {
 	private static final String[] descs = new String[]{"商家一","商家二","商家三"};
 	
 	@Transactional
-	public void buyJb(String userName,int mz,int gmsl,String pa3){
+	public void buyJb(String userName,int mz,int gmsl,String pa3,String smsCode){
+		if(Strings.isNullOrEmpty(smsCode)){
+			throw new ServiceException(5, "手机验证码为空！");
+		}
+			
+		
 		//需要的一币数量
 		double needYbCountDouble = (double)mz*(double)gmsl*1.5;
 		int needYbCount = (int)needYbCountDouble;
@@ -2802,6 +2807,10 @@ public class UserService {
 		
 		if(Strings.isNullOrEmpty(pa3)||!pa3.equals(gcuser.getPassword3())){
 			throw new ServiceException(3, "二级密码不正确！");
+		}
+		
+		if(!smsCode.equals(gcuser.getVipsq())){
+			throw new ServiceException(6, "您填入的手机验证码不正确!");
 		}
 		
 		if(gcuser.getPay()<needYbCount){
@@ -2947,14 +2956,14 @@ public class UserService {
 	 */
 	@Transactional
 	public void activedGoldCard(String userName,String pdid,String pdpa,String fwid,String ip,String smsCode){
-		Gcuser guser = getUserByUserName(userName);
-		if(Strings.isNullOrEmpty(smsCode)){
+		//Gcuser guser = getUserByUserName(userName);
+		/*if(Strings.isNullOrEmpty(smsCode)){
 			throw new ServiceException(5, "手机验证码为空！");
-		}
-		if(!smsCode.equals(guser.getVipsq())){
+		}*/
+		/*if(!smsCode.equals(guser.getVipsq())){
 			throw new ServiceException(6, "您填入的手机验证码不正确!");
 		}
-		
+		*/
 		
 		String pdpamd5 = MD5Security.md5_16(pdpa).toUpperCase(); 
 		String fwidmd5 = MD5Security.md5_16(fwid).toUpperCase();
@@ -4176,8 +4185,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op  777不用发送到玩家手机上
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		String randomString = RandomStringUtils.random(6, chars);
@@ -4187,7 +4196,7 @@ public class UserService {
 			param.put("code", randomString);
 			param.put("userName", userName);
 			param.put("op", OP_STR.length>op?OP_STR[op]:"");
-			if(gcuserDao.updateSmsCode(userName, randomString)){
+			if(true){//gcuserDao.updateSmsCode(userName, randomString);
 					if(op==777){
 						return ;
 					}

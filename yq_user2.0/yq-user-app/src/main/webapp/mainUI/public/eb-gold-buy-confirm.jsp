@@ -62,9 +62,16 @@
               <lable class="title">二级密码：</lable>
               <input type="password" name="pa3" />
             </p>
+            <p class="item">
+	            <label class="title">手机验证码：</label>
+	            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/>
+	            <input class="widget-button-small" id="btn" type="button" onclick="sendMsg()" value="获取验证码"/>
+	            <!-- input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()">获取验证码</a> -->
+         	 </p> 
             <p class="button-line mt15">
               <button type="submit" class="widget-button">确定从我的一币-扣除</button>
             </p>
+            
           </form>
         </div>
       </div>
@@ -81,11 +88,32 @@ function checkdate() {
     alert("请输入二级密码!");
     return false;
   }
+  if (Form.smsCode.value == "") {
+	    alert("手机验证码不能为空！");
+	    Form.smsCode.focus();
+	    return false;
+	  }
   if (!confirm('提示：您确定了吗？ ')) {
     return false;
   }
   return true;
 }
+function sendMsg() {
+	  /* if (!checkdate()) {
+	    return;
+	  } */
+	  $("#btn").attr("disabled", "disabled");
+	  var data = $("#Form").serialize();
+	  $.post("/sms?op=17", data, function(response) {
+	    $("#btn").removeAttr("disabled");
+	    if (response.erroCodeNum != 0) {
+	      alert("手机验证码发送失败");
+	      return false;
+	    }
+	    settime($("#btn"), '#SESSION_LOCALE');
+	    alert("手机验证码发送成功");
+	  });
+	} 
 </script>
 </body>
 
