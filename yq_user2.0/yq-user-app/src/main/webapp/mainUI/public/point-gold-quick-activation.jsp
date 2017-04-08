@@ -65,7 +65,7 @@
          	 </p> -->
             <p class="button-line mt15">
             <!-- <button type="submit" class="widget-button" >提交修改</button>onClick="checkdate();" -->
-              <%-- <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1&secondThisState=${secondThisState}&thisState=${thisState}"  class="widget-button">快速激活</a> --%>
+              <a href="activedGoldCard?pdid=${id}&pdpa=${pdpa}&fwid=${fwid}&status=1&secondThisState=${secondThisState}&thisState=${thisState}"  class="widget-button">快速激活</a>
             </p>
           </form>
         </div>
