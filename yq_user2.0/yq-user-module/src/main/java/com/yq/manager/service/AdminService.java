@@ -243,6 +243,18 @@ public class AdminService {
 		return adminLogin(adminUserName, passWord, session.getId());
 	}
 	
+	/**
+	 * @param adminUserName
+	 * @param passWord
+	 * @param sessionId
+	 * @return
+	 */
+	public boolean adminUserLoginOp(String adminUserName, String passWord, HttpSession session, String ip) {
+		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.ADMIN_LOGIN_OP, "后台管理登录");
+		adminOperateLogDao.addLog(log);
+		return adminLogin(adminUserName, passWord, session.getId());
+	}
+	
 	public IPage<Gcfh> getAllGcfhPage(int pageIndex,int pageSize){
 		return gcfhDao.getAllPageList(pageSize, pageIndex);
 	}

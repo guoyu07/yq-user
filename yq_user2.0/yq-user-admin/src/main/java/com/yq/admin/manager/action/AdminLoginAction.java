@@ -37,7 +37,7 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 			super.setErroDescrip("验证码不正确！");
 			return SUCCESS;
 		}
-		if(adminService.adminLogin(adminusername, password, sessionhttp.getId())){
+		if(adminService.adminUserLoginOp(adminusername, password, sessionhttp,ServletActionContext.getRequest().getRemoteAddr())){
 			return "redirect";
 		}else{
 			super.setErroCodeNum(3);

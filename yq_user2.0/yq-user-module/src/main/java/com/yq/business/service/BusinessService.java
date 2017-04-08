@@ -64,7 +64,7 @@ public class BusinessService {
 	}
 	
 	public boolean businessUserLogin(String adminUserName, String passWord, HttpSession session, String ip) {
-		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.LOGIN_EVENT, "后台登录");
+		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.LOGIN_EVENT, "商户后台登录");
 		adminOperateLogDao.addLog(log);
 		return businessLogin(adminUserName, passWord, session.getId());
 	}

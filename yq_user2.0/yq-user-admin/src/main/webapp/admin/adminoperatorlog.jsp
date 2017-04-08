@@ -43,27 +43,28 @@
 		            <option value="2041" <c:if test="${beizhu==2041}">selected</c:if>>重置一幣體現訂單</option>
 		            <option value="2042" <c:if test="${beizhu==2042}">selected</c:if>>提现退回</option>
 		            <option value="2043" <c:if test="${beizhu==2043}">selected</c:if>>系统管理后台登录</option>
-		             <option value="2017" <c:if test="${beizhu==2017}">selected</c:if>>商户后台登录</option>
+		            <option value="2017" <c:if test="${beizhu==2017}">selected</c:if>>商户后台登录</option>
+		            <option value="2044" <c:if test="${beizhu==2044}">selected</c:if>>后台管理登录</option>
 					</select><input type="submit" value="查询" name="B1">
 		 	<!-- <input type="button" onClick="exportExcel()" value="导出excel"/> --><br>
     </form>
  <div align="center">    
           <table border="1" cellspacing="0" width="100%" bordercolor="#FFFFFF" style="border-collapse: collapse" cellpadding="0" height="57">
             <tr>
-          <td width="69" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
+          <td  align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font face="宋体" color="#000000" size="2"><strong>操作者</strong></font></td>
-			<td width="178" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
+			<td  align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" style="font-weight:700" face="宋体" size="2">操作时间</font></td>
-			<td width="178" align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
+			<td  align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" style="font-weight:700" face="宋体" size="2">操作描述</font></td>
           </tr>
           <s:iterator var="data" value="dataList">	
           <tr> 
-          <td valign="middle" width="67" align="center"><p style="margin-top: 0; margin-bottom: 0">
+          <td valign="middle"align="center"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" face="宋体" size="2">${data.operator}</font></td>
-			<td valign="middle" width="67" align="center"><p style="margin-top: 0; margin-bottom: 0">
+			<td valign="middle"  align="center"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" face="宋体" size="2">${data.operateDate}</font></td>
-			<td valign="middle" width="67" align="center"><p style="margin-top: 0; margin-bottom: 0">
+			<td valign="middle"  align="center"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" face="宋体" size="2">${data.operateDesc}</font></td>
           </tr>
          </s:iterator>

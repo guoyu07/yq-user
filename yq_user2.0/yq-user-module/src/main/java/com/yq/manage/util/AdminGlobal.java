@@ -147,9 +147,13 @@ public class AdminGlobal {
 	 * */
 	public static final int TXTH 								= 2042;
 	/**
-	 * 系统管理后台登录
+	 * 权限系统管理后台登录
 	 * */
 	public static final int ADMIN_LOGIN							= 2043;
+	/**
+	 * 后台管理登录
+	 * */
+	public static final int ADMIN_LOGIN_OP						= 2044;
 	
 	
 }
