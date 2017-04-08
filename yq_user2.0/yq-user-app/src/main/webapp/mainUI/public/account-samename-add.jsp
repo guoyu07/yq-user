@@ -2,6 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('此用户名已有人使用！请更换！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('恭喜同姓名用户注册成功，请进行下一步的操作！');location.href='userlist?secondThisState=292&thisState=245'</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('未激活账户不能创建同名账户！');history.go(-1);</script></c:if>
 
 <!DOCTYPE html>
 <html lang="zh-CN">

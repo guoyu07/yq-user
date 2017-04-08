@@ -524,6 +524,9 @@ public class UserService {
 		}
 		Gcuser oldUser = gcuserDao.getUser(oldUserName);
 		
+		if(oldUser.getSjb()==0){
+			throw new ServiceException(3, "未激活不能创建同名账户！");
+		}
 		Gcuser user = new Gcuser();
 		user.setUsername(newUserName);
 		user.setPassword(oldUser.getPassword());
@@ -2064,6 +2067,9 @@ public class UserService {
 		
 		if(gcuser.getVip()!=0){
 			throw new ServiceException(10, "VIP账户不可提现！");
+		}
+		if(gcuser.getSjb()==0){
+			throw new ServiceException(12, "未激活用户不能提现！");
 		}
 		
 		int txqpay = gcuser.getPay();
