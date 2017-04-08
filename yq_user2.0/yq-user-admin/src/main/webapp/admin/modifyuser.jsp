@@ -107,9 +107,9 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
        <tr>
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">电话号码：</font>
         <select  id="areaCode" name="areaCode">
-							<option selected= "selected" value="${interRegionCode.region_code}">${interRegionCode.country_name}</option>
+							<option selected= "selected" value="${interRegionCode.country}">${interRegionCode.country_name}</option>
 							   <s:iterator  var="data" value="areaCodeList">
-									<option  value="${data.region_code}">${data.country_name}</option>
+									<option  value="${data.country}">${data.country_name}</option>
 								</s:iterator>
 		</select>
 		</td>

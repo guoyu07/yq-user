@@ -143,9 +143,9 @@ public class AdminGlobal {
 	 * */
 	public static final int RESET_YB_ORDER 						= 2041;
 	/**
-	 * 重置一幣體現訂單
+	 * 提现退回
 	 * */
-	public static final int TXTH 								= 2041;
+	public static final int TXTH 								= 2042;
 	
 	
 }

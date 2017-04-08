@@ -56,7 +56,7 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 	private List<VipDownTemp> vipDownTempList;
 	private List<InterRegionCode> areaCodeList = Lists.newArrayList();
 	private InterRegionCode interRegionCode;
-	private int areaCode;
+	private String areaCode;
 	private String md5pass;
 	private String sign;
 	private int test;
@@ -81,7 +81,12 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 			areaCodeList = interRegionCodeDao.getAllList();
 			UserPropertyDao userPropertyDao=ServiceCacheFactory.getServiceCache().getService(UserPropertyDao.class);
 			UserProperty userporperty = userPropertyDao.getPorpertyByName(gcuser.getUsername());
-			interRegionCode = interRegionCodeDao.getInterCodeByRegionCode(userporperty.getRegion_code());
+			if(userporperty.getCountry_code()!=null){
+				interRegionCode = interRegionCodeDao.getInterCodeByCountry(userporperty.getCountry_code());
+			}else{
+				interRegionCode = interRegionCodeDao.getInterCodeByRegionCode(userporperty.getRegion_code());
+			}
+			
 			try {
 				String signStr = gcuser.getUsername()+KEY+gcuser.getPassword();
 				sign = MD5Security.code(signStr,32).toLowerCase();
@@ -498,7 +503,7 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 	}
 
 
-	public int getAreaCode() {
+	/*public int getAreaCode() {
 		return areaCode;
 	}
 
@@ -506,10 +511,22 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 	public void setAreaCode(int areaCode) {
 		this.areaCode = areaCode;
 	}
+*/
 
-
+	
+	
 	public Role getRole() {
 		return role;
+	}
+
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
 	}
 
 

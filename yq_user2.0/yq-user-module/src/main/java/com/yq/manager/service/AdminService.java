@@ -73,6 +73,7 @@ import com.yq.user.bo.Gcfh;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.GcuserForExcel;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.ModifyUserLog;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.SameUserProperty;
@@ -449,7 +450,7 @@ public class AdminService {
 	 * @return
 	 */
 	@Transactional
-	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,int areaCode,String operator,String updateAllDownProperty){
+	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,String areaCode,String operator,String updateAllDownProperty){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		String oldnameUserId = gcuser.getName()+gcuser.getUserid();
 		Date date = null;
@@ -475,13 +476,15 @@ public class AdminService {
 		}
 		
 		int oldareaCode=86;
-		if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
+		InterRegionCode interRegionCode = interRegionCodeDao.getInterCodeByCountry(areaCode);
+		if(!Strings.isNullOrEmpty(areaCode)&&interRegionCode!=null){
 			if(userPropertyDao.isHasUserpropertyByName(userName)){
 				oldareaCode =userPropertyDao.getPorpertyByName(userName).getRegion_code();
-				userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
+				userPropertyDao.updateUserAreaCodeByName(userName,interRegionCode.getRegion_code(),interRegionCode.getCountry());
 			}else{
 				UserProperty userproperty= new UserProperty();
-				userproperty.setRegion_code(areaCode);
+				userproperty.setRegion_code(interRegionCode.getRegion_code());
+				userproperty.setCountry_code(interRegionCode.getCountry());
 				userproperty.setUsername(userName);
 				userPropertyDao.insertUserProperty(userproperty);
 			}
@@ -489,7 +492,7 @@ public class AdminService {
 		}
 		
 		//增加用户更新日志 
-		ModifyUserLog modifyUserLog = new ModifyUserLog(userName, password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password, date, cxt, areaCode, gcuser.getUsername(), gcuser.getPassword3(), gcuser.getCard(), gcuser.getBank(), gcuser.getName(), gcuser.getCall(), gcuser.getEmail(), gcuser.getQq(), gcuser.getUserid(), gcuser.getPayok(), gcuser.getJcname(), gcuser.getJcuserid(), gcuser.getPassword(), gcuser.getPwdate(), gcuser.getCxt(), oldareaCode, new Date(), operator);
+		ModifyUserLog modifyUserLog = new ModifyUserLog(userName, password3, card, bank, nowName, call, email, qq, nowUserId, payok, jcname, jcuserid, md5Password, date, cxt, interRegionCode.getRegion_code(), gcuser.getUsername(), gcuser.getPassword3(), gcuser.getCard(), gcuser.getBank(), gcuser.getName(), gcuser.getCall(), gcuser.getEmail(), gcuser.getQq(), gcuser.getUserid(), gcuser.getPayok(), gcuser.getJcname(), gcuser.getJcuserid(), gcuser.getPassword(), gcuser.getPwdate(), gcuser.getCxt(), oldareaCode, new Date(), operator);
 		
 		modifyUserLogDao.add(modifyUserLog);
 		

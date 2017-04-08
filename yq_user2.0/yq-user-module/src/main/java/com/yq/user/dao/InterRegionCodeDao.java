@@ -53,9 +53,22 @@ public class InterRegionCodeDao {
 	 * @return
 	 */
 	public InterRegionCode getInterCodeByRegionCode(int areaCode) {
-		String sql = "select * from "+table+" where region_code = ? ";
+		String sql = "select * from "+table+" where region_code = ? limit 1";
 		SqlParameter sqlParameter = SqlParameter.Instance();
 		sqlParameter.withInt(areaCode);
+		return jdbc.get(sql, InterRegionCode.class, sqlParameter);
+	}
+	
+	/**
+	 * 通过国家得到区域码信息
+	 * 
+	 * @param countryCode
+	 * @return
+	 */
+	public InterRegionCode getInterCodeByCountry(String countryCode) {
+		String sql = "select * from "+table+" where country = ? ";
+		SqlParameter sqlParameter = SqlParameter.Instance();
+		sqlParameter.withString(countryCode);
 		return jdbc.get(sql, InterRegionCode.class, sqlParameter);
 	}
 	

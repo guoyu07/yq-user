@@ -73,7 +73,7 @@
 			  if (Form.gguserid.value.length>18) {      alert("<s:text name='reg.jsp.reg.jsp.1428610724'/>!"); Form.gguserid.focus();     return false;    }    
 			  if (Form.ggqq.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.-764220017'/>!");  Form.ggqq.focus();    return false;    }
 			  if("中国"==$("#loc_areaCode").find("option:selected").text()||"China"==$("#loc_areaCode").find("option:selected").text()){
-				  Form.areaCode.value=86;
+				  Form.areaCode.value='CN';
 			  }
 			  
 		  }
@@ -96,7 +96,7 @@
 			  if (Form.gguserid.value.length>15) {      alert("<s:text name='passport1428610724'/>!"); Form.gguserid.focus();     return false;    }
 		  }
 		  
-		 if (Form.areaCode.value=="") {      alert("<s:text name='emptyinternationalareacode'/>!");     return false;    } 
+		 if (Form.areaCode.value=="") { alert('code null');     alert("<s:text name='emptyinternationalareacode'/>!");     return false;    } 
 		 if (Form.upvip.value=="") {      alert("<s:text name='reg.jsp.reg.jsp.1311603234'/>!"); Form.upvip.focus();     return false;    } 
 		//location.href = '/reg?step=1&ggpa1=' + Form.ggpa1.value + '&ggpa2='
 		//		+ Form.ggpa2.value + "ggpa3=" + Form.ggpa3.value;
@@ -146,13 +146,13 @@
 							  	<s:iterator var="data" value="areaCodeList">
 							  	<c:choose>  
 									<c:when test="${SESSION_LOCALE=='en_US'}"> 
-										<c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.en_name}</option></c:if>
+										<c:if test="${data.country!='CN'}"><option value="${data.country}">${data.en_name}</option></c:if>
 					   				</c:when>
 					   				<c:when test="${SESSION_LOCALE=='zh_CN'}"> 
-					   				  <c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
+					   				  <c:if test="${data.country!='CN'}"><option value="${data.country}">${data.country_name}</option></c:if>
 				   					</c:when>  
 									<c:otherwise>
-									  <c:if test="${data.region_code!=86}"><option value="${data.region_code}">${data.country_name}</option></c:if>
+									  <c:if test="${data.country!='CN'}"><option value="${data.country}">${data.country_name}</option></c:if>
 					   				</c:otherwise> 
 				   				</c:choose>
 									
@@ -163,13 +163,13 @@
 									<s:iterator var="data" value="areaCodeList">
 										<c:choose>  
 										<c:when test="${SESSION_LOCALE=='en_US'}"> 
-											<option value="${data.region_code}">${data.en_name}</option>
+											<option value="${data.country}">${data.en_name}</option>
 						   				</c:when>
 						   				<c:when test="${SESSION_LOCALE=='zh_CN'}"> 
-						   				  <option value="${data.region_code}">${data.country_name}</option>
+						   				  <option value="${data.country}">${data.country_name}</option>
 					   					</c:when>  
 										<c:otherwise>
-											<option value="${data.region_code}">${data.country_name}</option>
+											<option value="${data.country}">${data.country_name}</option>
 						   				</c:otherwise> 
 					   					</c:choose>
 									</s:iterator>

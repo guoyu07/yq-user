@@ -76,7 +76,12 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 			
 			UserPropertyDao userPropertyDao=ServiceCacheFactory.getServiceCache().getService(UserPropertyDao.class);
 			UserProperty userporperty = userPropertyDao.getPorpertyByName(userName);
-			interRegionCode = interRegionCodeDao.getInterCodeByRegionCode(userporperty.getRegion_code());
+			if(userporperty.getCountry_code()!=null){
+				interRegionCode = interRegionCodeDao.getInterCodeByCountry(userporperty.getCountry_code());
+			}else{
+				interRegionCode = interRegionCodeDao.getInterCodeByRegionCode(userporperty.getRegion_code());
+			}
+			
 			
 			if(!Strings.isNullOrEmpty(gcuser.getCall())){
 				int callLenght = gcuser.getCall().length();
