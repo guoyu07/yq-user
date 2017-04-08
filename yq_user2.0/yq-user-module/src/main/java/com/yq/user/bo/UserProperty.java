@@ -13,6 +13,8 @@ public class UserProperty {
 	
 	private int region_code;	//国际区域码...
 	
+	private String country_code;//区域码对于的国家
+	
 
 	public String getUsername() {
 		return username;
@@ -36,6 +38,14 @@ public class UserProperty {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCountry_code() {
+		return country_code;
+	}
+
+	public void setCountry_code(String country_code) {
+		this.country_code = country_code;
 	}
 
 	

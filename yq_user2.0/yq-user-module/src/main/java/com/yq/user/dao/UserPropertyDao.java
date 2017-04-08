@@ -65,10 +65,11 @@ public class UserPropertyDao {
 	 * @param areaCode
 	 * @return
 	 */
-	public boolean updateUserAreaCodeByName(String userName, int areaCode) {
-		String sql = "update "+table+" set region_code=? where  username=? ";
+	public boolean updateUserAreaCodeByName(String userName, int areaCode,String coutryCode) {
+		String sql = "update "+table+" set region_code=?,country_code=? where  username=? ";
 		SqlParameter sqlparameter = new SqlParameter();
 		sqlparameter.setInt(areaCode);
+		sqlparameter.setString(coutryCode);
 		sqlparameter.setString(userName);
 		return jdbc.update(sql, sqlparameter)>0;
 	}

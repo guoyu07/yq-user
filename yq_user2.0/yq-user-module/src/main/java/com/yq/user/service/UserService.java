@@ -48,6 +48,7 @@ import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.GpjyIndexMc;
 import com.yq.user.bo.GpjyIndexMr;
+import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.Jbk10;
 import com.yq.user.bo.Jbk100;
 import com.yq.user.bo.Jbk300;
@@ -363,7 +364,7 @@ public class UserService {
     }
     
     
-    public int checkNameAndIdCardAndUpUser(String ggname,String gguserid,String upvip,int lan, int areaCode){
+    public int checkNameAndIdCardAndUpUser(String ggname,String gguserid,String upvip,int lan, String countryCode){
     	if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
 			return 2;//推荐人不存在
 		}
@@ -378,10 +379,10 @@ public class UserService {
 			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！
 		}
 		
-		if(areaCode==0||!interRegionCodeDao.isHasByRegioncode(areaCode)){
+		if(Strings.isNullOrEmpty(countryCode)||interRegionCodeDao.getInterCodeByCountry(countryCode)==null){
 			return 8;
 		}
-		if(lan==1&&areaCode==86){
+		if(lan==1&&countryCode.equals("CN")){
 			return 10;//海外注册只能是非中国号码
 		}
 		
@@ -404,7 +405,7 @@ public class UserService {
 	 * @param areaName
 	 * @return
 	 */
-	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan, int areaCode){
+	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan, String countryCode){
 		gguser = gguser.trim();
 		ggname = ggname.trim();
 		gguserid = gguserid.trim();
@@ -440,7 +441,7 @@ public class UserService {
 				return 6;//所在地区不全！请重新选择！
 			}
 		}else if(lan==1){
-			if(areaCode==86){
+			if(countryCode.equals("CN")){
 				return 10;//海外注册只能是非中国手机号码
 			}
 			
@@ -473,13 +474,14 @@ public class UserService {
 			user.setDqu(Integer.valueOf(province.getAreaNum()));
 			user.setAdd9dqu(province.getAreaName());
 		}
-
-		if(areaCode==0||!interRegionCodeDao.isHasByRegioncode(areaCode)){
+		InterRegionCode interRegionCode=interRegionCodeDao.getInterCodeByCountry(countryCode);
+		if(Strings.isNullOrEmpty(countryCode)||interRegionCode==null){
 			return 9;//国际区域码不存在！请重新选择！
 		}
 		
 		UserProperty userproperty = new UserProperty();
-		userproperty.setRegion_code(areaCode);
+		userproperty.setCountry_code(interRegionCode.getCountry());
+		userproperty.setRegion_code(interRegionCode.getRegion_code());
 		userproperty.setUsername(gguser);
 		//增加玩家区域码
 		userPropertyDao.insertUserProperty(userproperty);

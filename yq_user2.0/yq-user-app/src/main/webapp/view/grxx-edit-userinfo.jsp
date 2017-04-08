@@ -182,7 +182,7 @@ function AmendCity(ProvinceID,CityID,AreaID)
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.734362'/>：</label>${gcuser.name}</p>
 							<p><label><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.799485150'/>：</label>
 							<select size="1" name="bank">
-							<option selected value="${gcuser.bank}">${gcuser.bank}</option>			
+							<option selected value="${gcuser.bank}">${gcuser.bank}</option>		
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-453899062'/></option>
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1781968004'/></option>
 							<option value="<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/>"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.691148048'/></option>

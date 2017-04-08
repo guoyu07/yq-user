@@ -50,7 +50,9 @@ public class RegAction extends ALDAdminActionSupport {
  	
  	private int lan;
  	
- 	private int areaCode;
+ 	private String areaCode;
+ 	
+ 	private String countryCode;
  	
  	
  	private String tag;
@@ -203,10 +205,22 @@ public class RegAction extends ALDAdminActionSupport {
 	public void setAreaCodeList(List<InterRegionCode> areaCodeList) {
 		this.areaCodeList = areaCodeList;
 	}
-	public int getAreaCode() {
+	/*public int getAreaCode() {
 		return areaCode;
 	}
 	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}*/
+	public String getCountryCode() {
+		return countryCode;
+	}
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+	public String getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
 	}
 	
