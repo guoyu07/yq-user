@@ -43,7 +43,7 @@ public class YbsfAction extends ALDAdminActionSupport {
 			}
 			return INPUT;
 		}else{
-			//userService.transferYbToShop(super.getUserName(), shpa, sfpay, pay10, ybpay, user, pa01, pa02, sfcode);
+			userService.transferYbToShop(super.getUserName(), shpa, sfpay, pay10, ybpay, user, pa01, pa02, sfcode);
 			return SUCCESS;
 		}
 	}
