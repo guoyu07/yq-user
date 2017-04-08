@@ -45,7 +45,7 @@ public class AdminGlobal {
 	/**********************************************************************************操作功能模块**************************************************************************/
 	
 	/**
-	 * 登录
+	 * 商户后台登录
 	 * */
 	public static final int LOGIN_EVENT 						= 2017;
 	/**
@@ -146,6 +146,10 @@ public class AdminGlobal {
 	 * 提现退回
 	 * */
 	public static final int TXTH 								= 2042;
+	/**
+	 * 系统管理后台登录
+	 * */
+	public static final int ADMIN_LOGIN							= 2043;
 	
 	
 }

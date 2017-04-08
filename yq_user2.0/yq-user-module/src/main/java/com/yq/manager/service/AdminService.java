@@ -238,7 +238,7 @@ public class AdminService {
 	 * @return
 	 */
 	public boolean adminUserLogin(String adminUserName, String passWord, HttpSession session, String ip) {
-		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.LOGIN_EVENT, "后台登录");
+		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.ADMIN_LOGIN, "系统管理后台登录");
 		adminOperateLogDao.addLog(log);
 		return adminLogin(adminUserName, passWord, session.getId());
 	}

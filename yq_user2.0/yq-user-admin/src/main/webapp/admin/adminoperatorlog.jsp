@@ -42,6 +42,8 @@
 		            <option value="2040" <c:if test="${beizhu==2040}">selected</c:if>>提现免審核</option>
 		            <option value="2041" <c:if test="${beizhu==2041}">selected</c:if>>重置一幣體現訂單</option>
 		            <option value="2042" <c:if test="${beizhu==2042}">selected</c:if>>提现退回</option>
+		            <option value="2043" <c:if test="${beizhu==2043}">selected</c:if>>系统管理后台登录</option>
+		             <option value="2017" <c:if test="${beizhu==2017}">selected</c:if>>商户后台登录</option>
 					</select><input type="submit" value="查询" name="B1">
 		 	<!-- <input type="button" onClick="exportExcel()" value="导出excel"/> --><br>
     </form>
