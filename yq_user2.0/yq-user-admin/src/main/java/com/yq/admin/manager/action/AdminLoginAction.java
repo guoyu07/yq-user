@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.service.ManageService;
 import com.yq.manager.service.AdminService;
 
 public class AdminLoginAction extends ALDAdminActionSupport {
@@ -19,11 +20,13 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 	private String password;
 	private String ValidCode;
 	private int status;
+	private String smsCode;
 	public String execute(){
 		if(status==0){
 			return SUCCESS;
 		}
 		AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
+		ManageService manageService = ServiceCacheFactory.getServiceCache().getService(ManageService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
 		String rand = (String) sessionhttp.getAttribute("rand");
@@ -35,6 +38,11 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 		if (!rand.equals(ValidCode)) {
 			super.setErroCodeNum(2);
 			super.setErroDescrip("验证码不正确！");
+			return SUCCESS;
+		}
+		if(!manageService.getAminSmscode(adminusername).equals(smsCode)){
+			super.setErroCodeNum(407);
+			super.setErroDescrip("短信验证码不正确！");
 			return SUCCESS;
 		}
 		if(adminService.adminUserLoginOp(adminusername, password, sessionhttp,ServletActionContext.getRequest().getRemoteAddr())){
@@ -61,6 +69,13 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 		return SUCCESS;
 	}
 	
+	
+	public String getSmsCode() {
+		return smsCode;
+	}
+	public void setSmsCode(String smsCode) {
+		this.smsCode = smsCode;
+	}
 	public String getAdminusername() {
 		return adminusername;
 	}

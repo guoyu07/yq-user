@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.manage.service.ManageService;
 import com.yq.manager.service.AdminService;
 
 public class AdminLoginAction extends ALDAdminActionSupport {
@@ -19,13 +20,14 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 		private String passWord;
 		private String validCode;
 		private int status;
-		
+		private String smsCode;
 		
 		public String execute(){
 			if(status==0){
 				return SUCCESS;
 			}
-			AdminService manageService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
+			AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
+			ManageService manageService = ServiceCacheFactory.getServiceCache().getService(ManageService.class);
 			HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 			String rand = (String) sessionhttp.getAttribute("rand");
 			if(Strings.isNullOrEmpty(validCode)){
@@ -43,8 +45,19 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 				super.setErroDescrip("验证码不正确！");
 				return SUCCESS;
 			}
+			if(Strings.isNullOrEmpty(smsCode)){
+				super.setErroCodeNum(406);
+				super.setErroDescrip("短信验证码不能为空！");
+				return SUCCESS;
+			}
+			if(!manageService.getAminSmscode(adminUserName).equals(smsCode)){
+				super.setErroCodeNum(407);
+				super.setErroDescrip("短信验证码不正确！");
+				return SUCCESS;
+			}
 			
-			if(manageService.adminUserLogin(adminUserName, passWord, sessionhttp, ServletActionContext.getRequest().getRemoteAddr())){
+			
+			if(adminService.adminUserLogin(adminUserName, passWord, sessionhttp, ServletActionContext.getRequest().getRemoteAddr())){
 				return "redirect";
 			}else{
 				super.setErroCodeNum(402);
@@ -52,6 +65,16 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 				return SUCCESS;
 			}
 			
+		}
+
+		
+		public String getSmsCode() {
+			return smsCode;
+		}
+
+
+		public void setSmsCode(String smsCode) {
+			this.smsCode = smsCode;
 		}
 
 

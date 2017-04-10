@@ -3,22 +3,29 @@ package com.yq.manage.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import com.google.common.base.Strings;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.Page;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.utils.MD5Security;
 import com.yq.manage.bean.Department;
 import com.yq.manage.bean.ManageUser;
@@ -39,6 +46,8 @@ import com.yq.manage.util.CompareResource;
 import com.yq.manage.util.JqueryZTreeNode;
 import com.yq.manage.util.MyTool;
 import com.yq.manager.service.AdminService;
+
+import cn.submsg.client.util.SubMsgSendUtils;
 
 /**
  * @author 作者: HuHua
@@ -67,6 +76,25 @@ public class ManageService {
 		Session cwSession = manageUserMap.getIfPresent(sessionId);
   		return cwSession;
 	}*/
+	private Cache<String,String> adminSmscode = CacheBuilder.newBuilder().expireAfterAccess(120, TimeUnit.SECONDS).maximumSize(20000).build();
+
+
+  	public String setAminSmscode(String userName, String smsCode){
+  		adminSmscode.put(userName, smsCode);
+  		return adminSmscode.getIfPresent(userName);
+  	}
+  	public String getAminSmscode(String userName){
+  		return adminSmscode.getIfPresent(userName);
+  	}
+	
+	private boolean updateSmsCode(String userName, String smsCode) {
+		setAminSmscode(userName,smsCode);
+		if(getAminSmscode(userName).equals(smsCode)){
+			return true;
+		}
+		return false;
+	}
+
 	
 	/**
 	 * 管理人员登录
@@ -1247,6 +1275,62 @@ public class ManageService {
         	throw new ServiceException(4, "修改密码失败");
         }
 		
+	}
+
+	private static final char[] chars = new char[]{'0','1','2','3','4','5','6','7','8','9'};
+	/**
+	 * TODO 短信模板3
+	 * @param admin
+	 * @param op  777不用发送到玩家手机上
+	 */        //                            	0      		1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16			17
+	private String[] OP_STR = new String[]{"登录权限系统管理","登录管理后台",};
+	public void sendSmsMsg(String userName,int op){
+		Staff admin=getStaffByUserName(userName);
+		Map<String,String> param = new HashMap<String,String>();
+		String randomString = RandomStringUtils.random(6, chars);
+		param.put("code", randomString);
+		param.put("userName", userName+"("+admin.getFullName()+")");
+		param.put("op", OP_STR.length>op?OP_STR[op]:"");
+		if(updateSmsCode(userName, randomString)){
+				if(op==777){
+					return ;
+				}
+			    try {
+			    	if(!SubMsgSendUtils.sendMessage(admin.getMobilePhone(), "NFgnN3", param)){
+			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			    	}
+				} catch (Exception e) {
+					LogSystem.error(e, "发送短信发生错误，phone="+admin.getMobilePhone()+",姓名="+admin.getFullName()+"");
+					throw new ServiceException(3000, "发送短信发生错误，phone="+admin.getMobilePhone()+",姓名="+admin.getFullName()+",");
+				}
+				
+		}else{
+			throw new ServiceException(3000, "发送短信发生错误,更新错误");
+		}
+	}
+
+	
+
+
+	public boolean checkAdmin(String adminUserName) {
+		if(adminUserName==null){
+			throw new ServiceException(3001, "管理员不存在");
+		}
+		if(null!=adminSmscode.getIfPresent(adminUserName)){
+			throw new ServiceException(3003, "操作频繁，请稍后再试");
+		}
+		ManageUser muser=getManageUser(adminUserName);
+		if(muser==null){
+			throw new ServiceException(3001, "管理员不存在");
+		}
+		Staff admin=getStaffById(muser.getStaffId());
+		if(admin==null){
+			throw new ServiceException(3001, "管理员不存在");
+		}
+		if(Strings.isNullOrEmpty(admin.getMobilePhone())){
+			throw new ServiceException(3002, "管理员手机号不存在，请联系超级管理员！");
+		}
+		return true;
 	}
 
 

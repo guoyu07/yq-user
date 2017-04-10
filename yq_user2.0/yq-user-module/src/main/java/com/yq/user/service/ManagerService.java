@@ -1,20 +1,29 @@
 package com.yq.user.service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.game.framework.exception.ServiceException;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.user.bo.Dgag;
 import com.yq.user.bo.Epkjdate;
 import com.yq.user.bo.Fcxt;
+import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Jfkjdate;
+import com.yq.user.bo.UserProperty;
 import com.yq.user.dao.DgagDao;
 import com.yq.user.dao.EpkjdateDao;
 import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.JfkjdateDao;
+
+import cn.submsg.client.util.SubMsgSendUtils;
 
 public class ManagerService {
     @Autowired
@@ -150,5 +159,6 @@ public class ManagerService {
 		Fcxt fcxt = this.getFcxtById(2);
 		return fcxt.getJygj();
 	}
+	
 	
 }
