@@ -785,6 +785,13 @@
 		<result name="success" >/admin/default.jsp</result>
 		</action>
 		
+		<action name="sms3" class="com.yq.admin.manager.action.SmsAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
 		<action name="babyList" class="com.yq.admin.manager.action.BabyAction" method="babyList">
 		    <result name="success">
 		      /admin/babyinfolist.jsp

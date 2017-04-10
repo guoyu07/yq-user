@@ -3255,7 +3255,7 @@ public class UserService {
 			    					// 减掉卖出订单数量，同时做相关的修改
 			    					buycount = proxySelf.changemrJf(userName,gpjy,buycount);
 		    				}
-		    			}catch(ServiceException e){
+		    			}catch(RuntimeException e){
 		    				
 						}
 	    				

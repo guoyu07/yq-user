@@ -48,6 +48,15 @@
 			<result name="success" >/manage/login.jsp</result>
 			<result name="redirect" type="redirect">/manage/manageindex</result>
 		</action>
+		
+		<action name="sms4" class="com.yq.admin.manage.action.SmsAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
+		
 	</package>
 
 
