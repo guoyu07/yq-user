@@ -98,6 +98,14 @@
 			<result name="input">mainUI/public/personal-modify-information.jsp</result>
 			<result name="success" type="json"></result>
 		</action>
+		
+		<action name="reSetSecondPass" class="com.yq.app.user.action.ResetSecondPassAction">
+			<result name="input">mainUI/public/account-second-password.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
 
 
 		<action name="updateuserjc" class="com.yq.app.user.action.UpdateUserJcAction">

@@ -4192,8 +4192,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op  777不用发送到玩家手机上
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		String randomString = RandomStringUtils.random(6, chars);
@@ -5485,5 +5485,17 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	 */
 	public void addAdminOperateLog(AdminOperateLog log) {
 		adminOperateLogDao.addLog(log);
+	}
+
+	/**
+	 * 重置同名账户二级密码
+	 * @param guser
+	 * @param newSecondPassword2
+	 * @return
+	 */
+	public boolean reSetSecondPassBySameUser(Gcuser guser, String newSecondPassword2) {
+		LogSystem.info("玩家重置二级密码操作："+guser.getUsername()+"-原二级密码："+guser.getPassword3()+"--新二级密码："+newSecondPassword2);
+		return gcuserDao.updateSecondPass(guser.getName(),guser.getUserid(),newSecondPassword2);
+		
 	}
 }

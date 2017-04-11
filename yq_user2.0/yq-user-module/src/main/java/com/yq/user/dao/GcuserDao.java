@@ -1386,6 +1386,15 @@ public class GcuserDao {
 		
 		
 	}
+
+	public boolean updateSecondPass(String name,String userId,String newSecondpass) {
+		String sql = "update "+table+" set password3=? where name=? and userid=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setString(newSecondpass);
+		parameter.setString(name);
+		parameter.setString(userId);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 	
 	
 	
