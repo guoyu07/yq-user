@@ -33,13 +33,14 @@ public class ManageUserDao extends YqDaoBase<ManageUser>{
 		 
 	}
 
-	public boolean update(String userName, int staffId, int userId, String oparetor) {
-		String sql = "update "+ table+" set adminusername=?,staff_id=?,update_date=?,update_name=? where id = ?";
+	public boolean update(String userName, int staffId, int userId, String oparetor,int overdue) {
+		String sql = "update "+ table+" set adminusername=?,staff_id=?,update_date=?,update_name=?,is_overdue=? where id = ?";
 		 SqlParameter sqlparam= new SqlParameter();
 		 sqlparam.setString(userName);
 		 sqlparam.setInt(staffId);
 		 sqlparam.setObject(new Date());
 		 sqlparam.setString(oparetor);
+		 sqlparam.setInt(overdue);
 		 sqlparam.setInt(userId);
 		 return super.getJdbc().update(sql, sqlparam)>0;
 	}

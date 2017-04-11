@@ -26,12 +26,13 @@ public class StaffDao {
 	public Staff update(Staff oldStaffTable) {
 		StringBuilder sql= new StringBuilder();
 		sql.append("update "+table+" set ");
-		sql.append(" full_name =?,sex=?,mobile_phone=?,email=? where id= ?");
+		sql.append(" full_name =?,sex=?,mobile_phone=?,email=?,department_id=? where id= ?");
 		SqlParameter sqlparam= new SqlParameter();
 		sqlparam.setString(oldStaffTable.getFullName());
 		sqlparam.setString(oldStaffTable.getSex());
 		sqlparam.setString(oldStaffTable.getMobilePhone());
 		sqlparam.setString(oldStaffTable.getEmail());
+		sqlparam.setInt(oldStaffTable.getDepartmentId());
 		sqlparam.setInt(oldStaffTable.getId());
 		this.jdbc.update(sql.toString(), sqlparam);
 		return oldStaffTable;
