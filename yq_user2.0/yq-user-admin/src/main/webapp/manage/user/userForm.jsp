@@ -149,8 +149,10 @@
 													<td width="220" align="right">
 														<span class="left_txt2">电话 ：</span>
 													</td>
-													<td width="5">
-														&nbsp;
+													<td width="5" height="30">
+														<input style="width: 47px" name="userTable.isOverdue"
+															id="userTable.isOverdue" type="text"
+															value="${userTable.isOverdue}" />
 													</td>
 													<td height="30">
 														<input name="staffTable.mobilePhone"
@@ -204,7 +206,7 @@
 														&nbsp;
 													</td>
 													<td height="30">
-														&nbsp;
+														
 													</td>
 												</tr>
 												<tr>

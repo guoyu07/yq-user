@@ -739,7 +739,7 @@ public class ManageService {
             oldStaffTable.setDepartmentId(Integer.parseInt(depId));
             Staff newStaffTable = staffDao.update(oldStaffTable);
             if (newStaffTable != null) {
-                if (manageUserDao.update(userTable.getAdminusername(),newStaffTable.getId(),user.getId(),oparetor)) {
+                if (manageUserDao.update(userTable.getAdminusername(),newStaffTable.getId(),user.getId(),oparetor,userTable.getIsOverdue())) {
                     return true;
                 }
             }
@@ -1279,34 +1279,63 @@ public class ManageService {
 
 	private static final char[] chars = new char[]{'0','1','2','3','4','5','6','7','8','9'};
 	/**
-	 * TODO 短信模板3
+	 * 短信模板3
 	 * @param admin
 	 * @param op  777不用发送到玩家手机上
 	 */        //                            	0      		1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16			17
 	private String[] OP_STR = new String[]{"登录权限系统管理","登录管理后台",};
 	public void sendSmsMsg(String userName,int op){
 		Staff admin=getStaffByUserName(userName);
-		Map<String,String> param = new HashMap<String,String>();
 		String randomString = RandomStringUtils.random(6, chars);
-		param.put("code", randomString);
-		param.put("userName", userName+"("+admin.getFullName()+")");
-		param.put("op", OP_STR.length>op?OP_STR[op]:"");
-		if(updateSmsCode(userName, randomString)){
+		ManageUser user=getManageUser(userName);
+		if(user.getIsOverdue()==0||user.getIsOverdue()==86){
+			Map<String,String> param = new HashMap<String,String>();
+			param.put("code", randomString);
+			param.put("userName", userName+"("+admin.getFullName()+")");
+			param.put("op", OP_STR.length>op?OP_STR[op]:"");
+			if(updateSmsCode(userName, randomString)){
+					if(op==777){
+						return ;
+					}
+				    try {
+				    	if(!SubMsgSendUtils.sendMessage(admin.getMobilePhone(), "NFgnN3", param)){
+				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+				    	}
+					} catch (Exception e) {
+						LogSystem.error(e, "发送短信发生错误，phone="+admin.getMobilePhone()+",姓名="+admin.getFullName()+"");
+						throw new ServiceException(3000, "发送短信发生错误，phone="+admin.getMobilePhone()+",姓名="+admin.getFullName()+",");
+					}
+					
+			}else{
+				throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			}
+		}else{
+            Map<String,String> param = new HashMap<String,String>();
+			param.put("code", randomString);
+			if(updateSmsCode(userName, randomString)){
 				if(op==777){
 					return ;
 				}
-			    try {
-			    	if(!SubMsgSendUtils.sendMessage(admin.getMobilePhone(), "NFgnN3", param)){
-			    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
-			    	}
-				} catch (Exception e) {
-					LogSystem.error(e, "发送短信发生错误，phone="+admin.getMobilePhone()+",姓名="+admin.getFullName()+"");
-					throw new ServiceException(3000, "发送短信发生错误，phone="+admin.getMobilePhone()+",姓名="+admin.getFullName()+",");
-				}
-				
-		}else{
-			throw new ServiceException(3000, "发送短信发生错误,更新错误");
+				    try {
+				    	if(!SubMsgSendUtils.sendInternationalMessage(user.getIsOverdue()+"", admin.getMobilePhone(), "742m76", param)){
+				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+				    	}
+					} catch (Exception e) {
+						LogSystem.error(e, "发送短信发生错误，phone="+user.getIsOverdue()+admin.getMobilePhone()+",姓名="+admin.getFullName()+"");
+						throw new ServiceException(3000, "发送短信发生错误，phone="+user.getIsOverdue()+admin.getMobilePhone()+",姓名="+admin.getFullName()+",");
+					}
+					
+			}else{
+				throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			}
 		}
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	
