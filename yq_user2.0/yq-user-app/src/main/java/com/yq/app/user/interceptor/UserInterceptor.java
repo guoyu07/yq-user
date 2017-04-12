@@ -51,10 +51,10 @@ public class UserInterceptor extends AbstractInterceptor {
 				String className = obj.getClass().getCanonicalName();
 				throw new RuntimeException("ACTION继承的类非ALDAdminActionSupport"+className);
 			}
-			Gcuser gcuser = aus.getUserByUserName(userName);
-			if(gcuser.getGanew()!=0&&!(obj instanceof UpdateUserAction)&&!(obj instanceof SmsAction)){
-				return "upuserg";
-			}
+//			Gcuser gcuser = aus.getUserByUserName(userName);
+//			if(gcuser.getGanew()!=0&&!(obj instanceof UpdateUserAction)&&!(obj instanceof SmsAction)){
+//				return "upuserg";
+//			}
 			//兼容以前的设置
 			if(aldAction.getErrorResult()==null){
 				aldAction.setErrorResult("success");
