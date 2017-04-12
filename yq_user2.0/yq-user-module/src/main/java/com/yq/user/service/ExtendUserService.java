@@ -326,7 +326,7 @@ public class ExtendUserService {
 			
 			Fcxt fcxt = managerService.getFcxtById(2); //查詢當前價格
 			
-			int needJb = (int)(Math.ceil(BigDecimalUtil.multiply(fcxt.getJygj(), buycount)));
+			int needJb = (int)(Math.ceil(BigDecimalUtil.multiply(fcxt.getJygj(), gpjy1.getMcsl())));
 			
 			
 			Gcuser gcuser = gcuserDao.getUser(userName);
