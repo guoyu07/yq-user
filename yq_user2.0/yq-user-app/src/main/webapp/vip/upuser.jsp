@@ -39,6 +39,8 @@ function checkdate()  {
 	var data = $("#Form").serialize();
 	$.post("/sms?op=0", data, function(response) {
 		$("#btn").removeAttr("disabled");
+		if (response.erroCodeNum==2999) { alert("发送过快！请歇息一会！"); return false; }
+		if (response.erroCodeNum==2998) { alert("发送过快！请歇息一阵！"); return false; }
 		if (response.erroCodeNum!=0) { alert("<s:text name='vipupuser.jsp.upuser.jsp.1886666017'/>"); return false; }
 		settime($("#btn"),'<s:text name="#SESSION_LOCALE"/>');
 		alert("<s:text name='vipupuser.jsp.upuser.jsp.1886721436'/>");
