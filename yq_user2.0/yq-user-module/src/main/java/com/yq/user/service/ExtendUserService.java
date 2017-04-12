@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sr178.game.framework.exception.ServiceException;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.utils.BigDecimalUtil;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
@@ -54,7 +55,7 @@ public class ExtendUserService {
 			int mc70 = (int) (mc70a * 1 + 0.1);
 			double mc30a = 0.3 * dqpay;
 			int mc30 = (int) (mc30a * 1 + 0.1);
-			
+			LogSystem.info("积分自动卖出扣除开始"+"userName:"+userName+"卖家剩余一币为："+gcuser.getPay()+",卖家剩余积分为："+gcuser.getJyg());
 			//扣除积分
 			if (!useUserItem(userName, "积分", gpjy1.getMysl().intValue())) {
 				throw new ServiceException(9,"您好，您卖出数量不能大于您剩余数量  ，谢谢！");
@@ -85,7 +86,7 @@ public class ExtendUserService {
 			
 			
 			gcuser = gcuserDao.getUser(userName);
-			
+			LogSystem.info("积分自动卖出扣除结束"+"userName:"+userName+"卖家剩余一币为："+gcuser.getPay()+",卖家剩余积分为："+gcuser.getJyg());
 			//增加卖出者记录
 			Gpjy gpjy = new Gpjy();
 			gpjy.setUsername(userName);
@@ -146,7 +147,7 @@ public class ExtendUserService {
 			double currentPrice = managerService.getCurrentyPrice(); //查詢當前價格
 			double needJb = (int)(Math.ceil(BigDecimalUtil.multiply(currentPrice,saleCount)));
 
-			
+			LogSystem.info("积分自动卖出扣除开始"+"userName:"+userName+"卖家剩余一币为："+gcuser.getPay()+",卖家剩余积分为："+gcuser.getJyg());
 			
 			double dqpay92 = (0.9 * needJb);
 			int dqpay = (int) (dqpay92 * 1 + 0.1);
@@ -189,7 +190,7 @@ public class ExtendUserService {
 
 			gcuser = gcuserDao.getUser(userName);
 			
-			
+			LogSystem.info("积分自动卖出扣除结束"+"userName:"+userName+"卖家剩余一币为："+gcuser.getPay()+",卖家剩余积分为："+gcuser.getJyg());
 			
 			
 			//记录日志
@@ -329,17 +330,17 @@ public class ExtendUserService {
 			
 			Gcuser gcuser = gcuserDao.getUser(userName);
 			int id= gpjy1.getId();
-			
+			LogSystem.info("积分自动买入[扣金币开始]"+"userName:"+userName+",扣除:"+needJb+",买家金币为："+gcuser.getJydb());
 			//扣除玩家金币
 			if (!useUserItem(userName, "金币", needJb)) {
 				throw new ServiceException(2,"金币不足，请检查输入是否正确！");
 			}
-
+			LogSystem.info("积分自动买入[扣金币开始]"+"userName:"+userName+",开始给积分:"+gpjy1.getMcsl().intValue()+",买家积分为："+gcuser.getJyg());
 			//获得积分
 			if (!giveUserItem(userName, "积分", gpjy1.getMcsl().intValue())) {
 				throw new ServiceException(3000, "未知错误");
 			}
-
+			LogSystem.info("积分自动买入[扣金币开始]"+"userName:"+userName+",积分自动买入[买家已经获得积分]");
 			if (!gpjyDao.updateSaleSuccess(id, userName, "卖出成功",gpjy1.getMcsl())) {
 				gpjyDao.cleanCache(id);
 				throw new ServiceException(3000, "未知错误");
@@ -349,6 +350,9 @@ public class ExtendUserService {
 			gpjyDao.deleteIndex(id);
 
 			gcuser = gcuserDao.getUser(userName);
+			
+			LogSystem.info("积分自动买入[扣金币开始]"+"userName:"+userName+",积分自动买入扣除结束，买家剩余金币为："+gcuser.getJydb()+",买家剩余积分为："+gcuser.getJyg());
+			
 			Gpjy gpjy = new Gpjy();
 			gpjy.setUsername(userName);
 			gpjy.setMysl(gpjy1.getMcsl());
@@ -424,7 +428,7 @@ public class ExtendUserService {
 			Fcxt fcxt = managerService.getFcxtById(2);
 			
 			double needJb = Math.ceil(BigDecimalUtil.multiply(fcxt.getJygj(), buyCount));
-			
+			LogSystem.info("积分自动买入userName:"+userName+"买家剩余金币为："+gcuser.getJydb()+",买家剩余积分为："+gcuser.getJyg());
 			//扣除用户金币
 			if(!useUserItem(userName, "金币", (int) needJb)){
 				throw new ServiceException(1, "金币不足！");
@@ -449,7 +453,7 @@ public class ExtendUserService {
 			
 			gcuser = gcuserDao.getUser(userName);
 			
-		
+			LogSystem.info("积分自动买入扣除结束:userName:"+userName+"买家剩余金币为："+gcuser.getJydb()+",买家剩余积分为："+gcuser.getJyg());
 			
 			//增加一条购买成功的记录（作为买入数量的）
 			Gpjy gpjy = new Gpjy();

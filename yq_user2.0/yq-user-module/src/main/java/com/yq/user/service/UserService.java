@@ -3248,12 +3248,15 @@ public class UserService {
 	    				try{
 		    				//如果买入的数量大于卖出的数量,需要完结卖出订单，否则完结卖出订单，同时做相关的业务逻辑处理
 		    				if(buycount>=buynum){
+		    						LogSystem.info("积分自动买入[交易订单开始]"+"userName:"+userName+",买入数量:"+"buycount:"+buycount+",buynum:"+buynum);
 		    						//完结卖出订单结算
 		    						buycount = proxySelf.automrJf(userName,gpjy,buycount);
-		    					
+		    						LogSystem.info("积分自动买入[交易订单结束]"+"userName:"+userName+",剩余买入数量:"+"buycount:"+buycount+",buynum:"+buynum);
 		    				}else{
+		    						LogSystem.info("积分自动买入[修改订单开始]"+"userName:"+userName+",买入数量:"+"buycount:"+buycount+",buynum:"+buynum);
 			    					// 减掉卖出订单数量，同时做相关的修改
 			    					buycount = proxySelf.changemrJf(userName,gpjy,buycount);
+			    					LogSystem.info("积分自动买入[修改订单结束]"+"userName:"+userName+",买入数量:"+"buycount:"+buycount+",buynum:"+buynum);
 		    				}
 		    			}catch(RuntimeException e){
 		    				
@@ -3475,13 +3478,15 @@ public class UserService {
 							try{
 								//如果卖出的数量大于买入的数量,需要完结买入订单，否则完结卖出订单（此次交易），同时做相关的业务逻辑处理
 								if(saleCount>=salenum1){
+									LogSystem.info("积分自动卖出[交易订单开始]"+"userName:"+userName+"卖出数量:"+"saleCount:"+saleCount+",salenum:"+salenum1);
 										//直接完结买入订单
 										saleCount = proxySelf.automcJf(userName,gpjy,saleCount );
-										
-									
+									LogSystem.info("积分自动卖出[交易订单结束]"+"userName:"+userName+"卖出数量:"+"saleCount:"+saleCount+",salenum:"+salenum1);	
 								}else{
+									LogSystem.info("积分自动卖出[修改订单开始]"+"userName:"+userName+"卖出数量:"+"saleCount:"+saleCount+",salenum:"+salenum1);
 										//修改订单
 										saleCount = proxySelf.changemcJf(userName,gpjy,saleCount);
+									LogSystem.info("积分自动卖出[修改订单结束]"+"userName:"+userName+"卖出数量:"+"saleCount:"+saleCount+",salenum:"+salenum1);
 								}
 							}catch(RuntimeException e){
 							}
