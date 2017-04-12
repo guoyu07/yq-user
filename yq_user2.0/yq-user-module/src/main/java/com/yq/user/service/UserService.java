@@ -1,6 +1,7 @@
 package com.yq.user.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -2049,9 +2050,14 @@ public class UserService {
     private static final long endLimitTime = DateUtils.StringToDate("2016-6-30 23:59:59", "yyyy-MM-dd HH:mm:ss").getTime();
 	
     //以下身份证号码 也只能体现奖金金额  不能体现其他
+    private Integer[] ybArray = new Integer[] { 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 30000};
+    List<Integer> list = Arrays.asList(ybArray);
     private String FORBIDDEN_ID_CARD = "";
 	@Transactional
 	public void saleYb(String userName,String password3,int saleNum,String smsCode,String ip){
+		if(!list.contains(saleNum)){
+			throw new ServiceException(12,"不提供此额度的一币卖出！");
+		}
 		
 		if(saleNum<100){
 			throw new ServiceException(1,"发布一币数量有误，请检查输入是否正确！");
