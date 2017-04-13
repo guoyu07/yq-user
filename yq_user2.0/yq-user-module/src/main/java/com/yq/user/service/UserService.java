@@ -223,6 +223,10 @@ public class UserService {
     	JedisUtils.delete(key);
     }
     
+    public static char[]  getChars(){
+  		return  new char[]{'0','1','2','3','4','5','6','7','8','9'};
+  	}
+    
     /**
      * 查看是否登录了
      * @param sessionId
@@ -5531,5 +5535,17 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		LogSystem.info("玩家重置二级密码操作："+guser.getUsername()+"-原二级密码："+guser.getPassword3()+"--新二级密码："+newSecondPassword2);
 		return gcuserDao.updateSecondPass(guser.getName(),guser.getUserid(),newSecondPassword2);
 		
+	}
+	
+	
+	/**
+	 * 修改玩家验证码
+	 * 
+	 * @param userName
+	 * @param smsCode
+	 * @return
+	 */
+	public boolean updateSmsCode(String userName,String smsCode){
+		return gcuserDao.updateSmsCode(userName, smsCode);
 	}
 }
