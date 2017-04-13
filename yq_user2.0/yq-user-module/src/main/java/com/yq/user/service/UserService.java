@@ -4211,21 +4211,23 @@ public class UserService {
 	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18
 	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码"};
 	public void sendSmsMsg(String userName,int op){
-		Long time = userSendMsgTime.getIfPresent(userName);
-		Integer times = userSendMsgTimes.getIfPresent(userName);
-		if(time!=null){
-			LogSystem.info("短信在1分钟内重复发送，直接屏蔽,userName="+userName);
-			if(times==null){
-				userSendMsgTimes.put(userName, 1);
-			}else{
-				userSendMsgTimes.put(userName, times+1);
+		if (op != 777) {
+			Long time = userSendMsgTime.getIfPresent(userName);
+			Integer times = userSendMsgTimes.getIfPresent(userName);
+			if (time != null) {
+				LogSystem.info("短信在1分钟内重复发送，直接屏蔽,userName=" + userName);
+				if (times == null) {
+					userSendMsgTimes.put(userName, 1);
+				} else {
+					userSendMsgTimes.put(userName, times + 1);
+				}
+				throw new ServiceException(2999, "发送短信发生错误,还没到达发送间隔时间!");
 			}
-			throw new ServiceException(2999, "发送短信发生错误,还没到达发送间隔时间!");
-		}
-		
-		if(times!=null&&times>=10){
-			LogSystem.info("短信在1分钟内重复发送，直接屏蔽次数超过10次,被禁止发送短信24小时，userName="+userName);
-			throw new ServiceException(2998, "发送短信发生错误,已被禁用发短信功能!");
+
+			if (times != null && times >= 10) {
+				LogSystem.info("短信在1分钟内重复发送，直接屏蔽次数超过10次,被禁止发送短信24小时，userName=" + userName);
+				throw new ServiceException(2998, "发送短信发生错误,已被禁用发短信功能!");
+			}
 		}
 		
 		Gcuser gcuser = gcuserDao.getUser(userName);
@@ -4272,7 +4274,9 @@ public class UserService {
 				throw new ServiceException(3000, "发送短信发生错误,更新错误");
 			}
 		}
-		userSendMsgTime.put(userName, System.currentTimeMillis());
+		if (op != 777) {
+		  userSendMsgTime.put(userName, System.currentTimeMillis());
+		}
 	}
 	
 	
