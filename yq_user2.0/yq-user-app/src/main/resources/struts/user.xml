@@ -183,9 +183,12 @@
 			<!-- <result name="success">view/yjcx-bdb-details.jsp</result> -->
 			<result name="baodan">mainUI/public/game-bdb-detail-bd.jsp</result>
 			<result name="baodandetail">mainUI/public/game-bdb-detail-bd-more.jsp</result>
+		</action>
+		<action name="bdbzhuanzhang" class="com.yq.app.user.action.DateBdbAction" method="bdbzhuanzhang">
 			<result name="zhuanzhang">mainUI/public/game-bdb-detail-transfer.jsp</result>
 			<result name="zzdetail">mainUI/public/game-bdb-detail-transfer-more.jsp</result>
 		</action>
+		
 		<action name="bdbdatebaodandetail" class="com.yq.app.user.action.DateBdbAction" method="bdbdatebaodandetail">
 			<result name="baodandetail">mainUI/public/game-bdb-detail-bd-more.jsp</result>
 		</action>

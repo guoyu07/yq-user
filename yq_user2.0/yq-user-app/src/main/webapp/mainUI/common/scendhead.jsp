@@ -72,7 +72,7 @@
 				       <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><span class="root"><%=re.getResoName()%></a>
 			       		 <div class="list JQ_navThirdList">
 					       <a href="/bdbdate?secondThisState=<%=re.getId()%>&thisState=${thisState}&type=1" class="item">报单明细</a>
-					       <a href="/bdbdate?secondThisState=<%=re.getId()%>&thisState=${thisState}&type=0" class="item">转账明细</a>
+					       <a href="/bdbzhuanzhang?secondThisState=<%=re.getId()%>&thisState=${thisState}&type=0" class="item">转账明细</a>
 				        </div>
 				        </li>
 				       <%}else if("253".equals(re.getId()+"") && gcuserHead.getVip()!=0 ){%>

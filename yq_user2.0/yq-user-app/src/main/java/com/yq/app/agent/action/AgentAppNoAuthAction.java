@@ -3,14 +3,13 @@ package com.yq.app.agent.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
+import org.apache.commons.lang.RandomStringUtils;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.module.web.action.JsonBaseActionSupport;
 import com.yq.agent.service.AgentService;
 import com.yq.app.bean.SimpleUserInfoBean;
-import com.yq.app.service.AppService;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -58,9 +57,10 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		if(state==3){
 			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			result.put("call", agentService.bindAccountCheck(user, passWord, secondPassWord, smsCode, call));
-			userService.sendSmsMsg(user,777);//发送验证码
-			Gcuser gcuser = userService.getUserByUserName(user);
-			result.put("smsCodeSuccess", gcuser.getVipsq());//为了验证app端用户名绑定和支付密码的设定统一步骤~
+			String randomString = RandomStringUtils.random(6, UserService.getChars());
+			if(userService.updateSmsCode(user,randomString)){//修改玩家验证码
+				result.put("smsCodeSuccess", randomString);//为了验证app端用户名绑定和支付密码的设定统一步骤~
+			}
 			return renderObjectResult(result);
 		}
 		result.put("tokenId", agentService.login(user, passWord,appId));
