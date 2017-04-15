@@ -781,6 +781,10 @@
 			<result name="redirect" type="redirect">/admin/adminmanager</result>
 		</action>
 		
+		<action name="allp" class="com.yq.admin.manager.action.AllPerformance">
+		<result name="success" >/admin/userperall.jsp</result>
+		</action>
+		
 		<action name="resetBigVipUser" class="com.yq.admin.manager.action.AdminLoginAction" method="resetBigVipUser">
 		<result name="success" >/admin/default.jsp</result>
 		</action>

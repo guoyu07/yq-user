@@ -2887,6 +2887,12 @@ public class AdminService {
 		return result;
 	}
 	
+	public Performance getUserAllStepPerformance(String userName,int max){
+		Performance performance = generatorCommonPerformance(userName);
+		generatorDownMap(performance,1,max);
+		return performance;
+	}
+	
 	/**
 	 * 获取用户前5层 二叉树
 	 * @param userName
