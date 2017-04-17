@@ -2,9 +2,9 @@ package com.yq.app.agent.action;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.module.web.action.JsonBaseActionSupport;
 import com.yq.agent.bean.PointChangeDetail;
 import com.yq.agent.bean.PointChangeInfo;
@@ -26,17 +26,27 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	private String secondPassWord;	//二级密码
 	private String param;
 	private String sign;
+	private String data;//第三方数据包
+	private String rsaKey;
 	
 	
-	public String userPersonalInfo(){
+	public String userPersonalInfo(){//新方法
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		agentService.checkSign(appId,user, param, sign,"");
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		param=treeMap.get("param");
+		sign=treeMap.get("sign");
 		return this.renderObjectResult(UserPersonalInfoBean.getUserPersonalInfoBeanByGcuser(agentService.getUserInfo(appId, user,param,sign)));
 	}
 
 	
 	public String pointChangeinfo(){
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		param=treeMap.get("param");
+		sign=treeMap.get("sign");
 		return this.renderObjectResult(PointChangeInfo.getPointChangeInfo(agentService.getPointsChangeLog(appId, param, sign)));
 	}
 
@@ -45,28 +55,42 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	private int pageSize;
 	public String getSameUserPersonalInfo(){
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		agentService.checkSign(appId,user, param, sign,"");
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		currentPage=Integer.parseInt(treeMap.get("currentPage"));
+		pageSize=Integer.parseInt(treeMap.get("pageSize"));
 		return this.renderPageResult(SameAccount.getPageSameUserPersonalInfo(agentService.getSameUserInfo(user,currentPage, pageSize)));
 	}
 	
 	
 	public String userPointChangeDetail(){
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		agentService.checkSign(appId,user, param, sign, "");
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		currentPage=Integer.parseInt(treeMap.get("currentPage"));
+		pageSize=Integer.parseInt(treeMap.get("pageSize"));
 		return this.renderPageResult(PointChangeDetail.getPointChangeDetail(agentService.getPointDetail(user,currentPage, pageSize)));
 	}
 	
 	
 	public String userPointSplitDetail(){
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		agentService.checkSign(appId,user, param, sign, "");
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		currentPage=Integer.parseInt(treeMap.get("currentPage"));
+		pageSize=Integer.parseInt(treeMap.get("pageSize"));
 		return this.renderPageResult(UserPointSplitDetail.getPointSplitDetail(agentService.getUserPointSplitDetail(user,currentPage, pageSize)));
 		
 	}
 	
 	public String getSameUserTotalWealth(){
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		agentService.checkSign(appId,user, param, sign, "");
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
 		return this.renderObjectResult(agentService.getSameAccountWealth(user));
 	}
 	
@@ -80,6 +104,17 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	public String setPayPassword(){
 		Map<String,String> result = new HashMap<String,String>();
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		payPassword=treeMap.get("payPassword");
+		call=treeMap.get("call");
+		passWord=treeMap.get("passWord");
+		secondPassWord=treeMap.get("secondPassWord");
+		oldPayPassword=treeMap.get("oldPayPassword");
+		user=treeMap.get("user");
+		smsCode=treeMap.get("smsCode");
+		state=Integer.parseInt(treeMap.get("state"));
+		sign=treeMap.get("sign");
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		/*if(state==1){
 			Gcuser gcuser = userService.getUserByUserName(user);
@@ -95,7 +130,7 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 			return renderObjectResult(result);
 		}*/
 		if(state==2){
-			agentService.checkSign(appId, user, param, sign,"");
+			//agentService.checkSign(appId, user, param, sign,"");
 			userService.sendSmsMsg(user,15);//发送验证码
 			Gcuser gcuser = userService.getUserByUserName(user);
 			result.put("callNumber", gcuser.getCall());
@@ -112,10 +147,31 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 		}
         return renderObjectResult(result);
 	}
+	private String token;
+	public String bindPayPassword(){
+		Map<String,String> result = new HashMap<String,String>();
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		payPassword=treeMap.get("payPassword");
+		token=treeMap.get("token");
+		call=treeMap.get("call");
+		sign=treeMap.get("sign");
+		passWord=treeMap.get("passWord");
+		secondPassWord=treeMap.get("secondPassWord");
+		param=treeMap.get("param");
+		result.put("info", agentService.bindPayPassword(appId, user,payPassword, token, call, sign, passWord, secondPassWord,param));
+		return renderObjectResult(result);
+	}
 	
 	public String queryOder(){
 		Map<String,String> result = new HashMap<String,String>();
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		productOrder=treeMap.get("productOrder");
+		param=treeMap.get("param");
 		result.put("info", agentService.queryTrasactionOder( appId,  productOrder,  param, sign));
 		return renderObjectResult(result);
 	}
@@ -123,7 +179,8 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	public String getUserPaypassword(){
 		Map<String,String> result = new HashMap<String,String>();
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		agentService.checkSign(appId, user, param, sign, "");
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		user=treeMap.get("user");
 		result.put("flag", agentService.getUserPaypassword(user));
 		return renderObjectResult(result);
 	}
@@ -142,11 +199,37 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	public String transactionPay(){
 		Map<String,String> result = new HashMap<String,String>();
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		fromUserName=treeMap.get("fromUserName");
+		toUserName=treeMap.get("toUserName");
+		amount=treeMap.get("amount");
+		productOrder=treeMap.get("productOrder");
+		productDesc=treeMap.get("productDesc");
+		payPassword=treeMap.get("payPassword");
+		param=treeMap.get("param");
 		result.put("info", agentService.transactionPay(appId, fromUserName, toUserName, amount, productOrder, productDesc, param, sign, payPassword));
 		return renderObjectResult(result);
 	}
 	
+	public String getAllUsername(){
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		param=treeMap.get("param");
+		return renderObjectResult(agentService.getUserNameList(user));
+	}
 	
+	
+	public String getUserByUsername(){
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		param=treeMap.get("param");
+		return this.renderObjectResult(UserPersonalInfoBean.getUserPersonalInfoBeanByGcuser(agentService.getUserName(user)));
+	}
 	
 	public String getFromUserName() {
 		return fromUserName;
@@ -325,6 +408,16 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+
+	public String getData() {
+		return data;
+	}
+
+
+	public void setData(String data) {
+		this.data = data;
 	}
 	
 	

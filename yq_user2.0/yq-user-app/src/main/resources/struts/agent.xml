@@ -11,7 +11,9 @@
    <package name="agentNoAuth" extends="agentNoLoginInterceptor" namespace="/">
          <action name="agentLogin" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="login" />
          <action name="createOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="createOrder" />
+         <action name="appCreateOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="appCreateOrder" />
          <action name="payOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="payOrder" />
+         <action name="appPayOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="appPayOrder" />
          <action name="addScores" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="addScores" />
          <action name="getUserInfo" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="getUserInfo" />
          
@@ -36,9 +38,13 @@
          <action name="getUserPaypassword" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getUserPaypassword" />
          <!-- app端转账 -->
          <action name="transactionPay" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="transactionPay" />
-         
-         
-         
+         <!-- app端绑定支付密码 -->
+         <action name="bindPayPassword" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="bindPayPassword" />
+         <!-- version2.1 -->
+         <!-- 获取账户所以同名账户用户名 -->
+         <action name="getAllUsername" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getAllUsername" />
+          <!-- 通过用户名得到玩家信息 -->
+         <action name="getUserByUsername" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getUserByUsername" />
          
    </package>
 	

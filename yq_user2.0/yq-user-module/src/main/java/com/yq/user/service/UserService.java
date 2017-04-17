@@ -203,6 +203,10 @@ public class UserService {
   	private static final String USER_SESSION_CACHE_PRE = "user_session_";
   	private static final int SESSION_EXPERI_SECONDS = 24*3600;
   	
+  	public static char[]  getChars(){
+  		return  new char[]{'0','1','2','3','4','5','6','7','8','9'};
+  	}
+  	
   	public String generatorCacheKey(String sessionId){
   		return USER_SESSION_CACHE_PRE+sessionId;
   	}
@@ -222,10 +226,6 @@ public class UserService {
     	String key = generatorCacheKey(sessionId);
     	JedisUtils.delete(key);
     }
-    
-    public static char[]  getChars(){
-  		return  new char[]{'0','1','2','3','4','5','6','7','8','9'};
-  	}
     
     /**
      * 查看是否登录了

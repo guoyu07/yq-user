@@ -2,9 +2,10 @@ package com.yq.app.agent.action;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang.RandomStringUtils;
-
+import org.apache.struts2.ServletActionContext;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.module.web.action.JsonBaseActionSupport;
@@ -26,6 +27,7 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 	private String smsCode; 		//手机验证码
 	private int state;				
 	private String call;
+	private String data;
 	/**
 	 * 加密登录接口
 	 * @return
@@ -34,6 +36,14 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		Map<String,String> result = new HashMap<String,String>();
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,"");
+		user=treeMap.get("user");
+		call=treeMap.get("call");
+		sign=treeMap.get("sign");
+		passWord=treeMap.get("passWord");
+		secondPassWord=treeMap.get("secondPassWord");
+		state=Integer.parseInt(treeMap.get("state"));
+		
 		if(state==1){
 			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			Gcuser gcuser = userService.getUserByUserName(user);
@@ -55,12 +65,17 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 			return renderObjectResult(result);
 		}
 		if(state==3){
+			smsCode=treeMap.get("smsCode");
 			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			result.put("call", agentService.bindAccountCheck(user, passWord, secondPassWord, smsCode, call));
 			String randomString = RandomStringUtils.random(6, UserService.getChars());
 			if(userService.updateSmsCode(user,randomString)){//修改玩家验证码
 				result.put("smsCodeSuccess", randomString);//为了验证app端用户名绑定和支付密码的设定统一步骤~
 			}
+			/*userService.sendSmsMsg(user,777);//发送验证码
+			Gcuser gcuser = userService.getUserByUserName(user);
+			result.put("smsCodeSuccess", gcuser.getVipsq());//为了验证app端用户名绑定和支付密码的设定统一步骤~
+*/			result.put("token", agentService.setToken(user));//兼容新版本
 			return renderObjectResult(result);
 		}
 		result.put("tokenId", agentService.login(user, passWord,appId));
@@ -79,6 +94,19 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
 		return this.renderKeyValueResult("order", agentService.creatOrder(appId, orderUserName, amount, productOrder, productDesc, param, sign));
 	}
+	
+	public String appCreateOrder(){
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,"");
+		appId=treeMap.get("appId");
+		orderUserName=treeMap.get("orderUserName");
+		amount=treeMap.get("amount");
+		sign=treeMap.get("sign");
+		productOrder=treeMap.get("productOrder");
+		productDesc=treeMap.get("productDesc");
+		param=treeMap.get("param");
+		return this.renderKeyValueResult("order", agentService.appCreatOrder(appId, orderUserName, amount, productOrder, productDesc, param));
+	}
 	/**
 	 * 支付订单
 	 */
@@ -88,6 +116,24 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
         return this.renderObjectResult(agentService.payOrder(user, passWord, passWord3, order));
 	}
+	private String payPassword;
+	public String appPayOrder(){
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,"");
+		user=treeMap.get("user");
+		payPassword=treeMap.get("payPassword");
+		passWord=treeMap.get("passWord");
+		passWord3=treeMap.get("passWord3");
+		order=Integer.parseInt(treeMap.get("order"));
+		state=Integer.parseInt(treeMap.get("state"));
+		if(state==1){
+			return this.renderObjectResult(agentService.appPayOrder(user, payPassword, order));
+		}else{
+			return this.renderObjectResult(agentService.payOrder(user, passWord, passWord3, order));
+		}
+	}
+	
+	
 	/**
 	 * 给商户加购物券
 	 * @return
@@ -217,6 +263,26 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 
 	public void setCall(String call) {
 		this.call = call;
+	}
+
+
+	public String getData() {
+		return data;
+	}
+
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+
+	public String getPayPassword() {
+		return payPassword;
+	}
+
+
+	public void setPayPassword(String payPassword) {
+		this.payPassword = payPassword;
 	}
 	
 
