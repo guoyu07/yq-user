@@ -16,6 +16,7 @@ public class SameAccount {
 	private int point;			//积分余额
 	private int txTotal;		//已提現金額
 	private int accountLevel;	//账号等级
+	private int isBussiness;	//是否是商戶
 	public String getUserName() {
 		return userName;
 	}
@@ -53,6 +54,13 @@ public class SameAccount {
 	public void setAccountLevel(int accountLevel) {
 		this.accountLevel = accountLevel;
 	}
+	
+	public int getIsBussiness() {
+		return isBussiness;
+	}
+	public void setIsBussiness(int isBussiness) {
+		this.isBussiness = isBussiness;
+	}
 	public static IPage<SameAccount> getPageSameUserPersonalInfo(IPage<Gcuser> gcuserList){
 		SameAccount user = null;
 		List<SameAccount>	result = new ArrayList<>();
@@ -72,6 +80,11 @@ public class SameAccount {
 					user.setAccountLevel(0);
 				}
 				user.setTxTotal(gcuser.getMcpay());
+				if(gcuser.getTxlb()==3||gcuser.getJb()==5){
+					user.setIsBussiness(1);
+				}else{
+					user.setIsBussiness(0);
+				}
 				result.add(user);
 			}
 		}

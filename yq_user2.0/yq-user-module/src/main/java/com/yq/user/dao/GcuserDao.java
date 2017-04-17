@@ -1379,6 +1379,20 @@ public class GcuserDao {
 		
 		
 	}
+
+	public List<String> getAllUserNameList(String name, String userid) {
+		List<String> result=new ArrayList<String>();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from "+table+"  where  name=? and userid=? ");
+		SqlParameter sqlparam= new SqlParameter();
+		sqlparam.setString(name);
+		sqlparam.setString(userid);
+		List<Gcuser> rows = jdbc.getList(sql.toString(), Gcuser.class, sqlparam);
+		for (Gcuser gcuser : rows) {
+			result.add(gcuser.getUsername());
+		}
+		return result;
+	}
 	
 	
 	

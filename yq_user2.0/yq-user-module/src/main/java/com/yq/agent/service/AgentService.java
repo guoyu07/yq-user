@@ -4,12 +4,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.TreeMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.google.common.base.Strings;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.exception.ServiceException;
@@ -33,6 +41,7 @@ import com.yq.agent.dao.AgentTxpayDao;
 import com.yq.agent.dao.AgentUserDao;
 import com.yq.agent.dao.AppPayRecordDao;
 import com.yq.app.utils.MacShaUtils;
+import com.yq.common.utils.AES;
 import com.yq.common.utils.Global;
 import com.yq.common.utils.ParamCheck;
 import com.yq.common.utils.UrlRequestUtils;
@@ -42,7 +51,6 @@ import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.SameUserProperty;
-import com.yq.user.bo.UserProperty;
 import com.yq.user.constant.ScoresChangeType;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.GcuserDao;
@@ -80,10 +88,26 @@ public class AgentService {
 	@Autowired
 	private UserPropertyDao userPropertyDao;
 	
+	private static final String DEFAULT_CHAR_SET = "UTF-8";
+	public static final String ENCRY_TYPE_RSA = "RSA";
+	public static final String ENCRY_TYPE_MD5 = "MD5";
+	public Map<String, EasySecureHttp> easySecureHttpMap = new HashMap<String, EasySecureHttp>();
+	
 	
 	
   	private static final String AGENT_APP_SESSION_CACHE_PRE = "agent_app_session_";
   	private static final int SESSION_EXPERI_SECONDS = 24*3600;
+  	
+  	private Cache<String,String> tokenBindAndPay = CacheBuilder.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(20000).build();
+  	
+  	
+  	public String setToken(String userName){
+  		tokenBindAndPay.put(userName, UUID.randomUUID().toString());
+  		return tokenBindAndPay.getIfPresent(userName);
+  	}
+  	public String getToken(String userName){
+  		return tokenBindAndPay.getIfPresent(userName);
+  	}
   	
   	public String generatorCacheKey(String sessionId){
   		return AGENT_APP_SESSION_CACHE_PRE+sessionId;
@@ -288,10 +312,6 @@ public class AgentService {
 		}
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("");
-	}
-	
 	/**
 	 * 支付订单
 	 * @param payUserName
@@ -468,7 +488,7 @@ public class AgentService {
 	public Gcuser getUserInfo(String appId, String user, String param, String sign) {
 		//检测客户端传过来的参数是否为空
 		ParamCheck.checkString(user, 2, "用户名不能为空");
-		ParamCheck.checkString(sign, 5, "签名不能为空");
+		//ParamCheck.checkString(sign, 5, "签名不能为空");
 		if(param==null){
 			param = "";
 		}
@@ -481,32 +501,32 @@ public class AgentService {
 		if(agentApp==null){
 			throw new ServiceException(7, "无效的appId");
 		}
-		String signString = appId+user+param;
+		/*String signString = appId+user+param;
 		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
 			throw new ServiceException(9, "签名不正确！");
-		}
+		}*/
 		return guser;
 	}
 
 	public List<PointsChangeLog> getPointsChangeLog(String appId, String param, String sign) {
 		//检测客户端传过来的参数是否为空
-		ParamCheck.checkString(sign, 5, "签名不能为空");
-		if(param==null){
+		//ParamCheck.checkString(sign, 5, "签名不能为空");
+		/*if(param==null){
 			param = "";
-		}
+		}*/
 		//获得app
-		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		/*AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
 		if(agentApp==null){
 			throw new ServiceException(7, "无效的appId");
-		}
-		String signString = appId+param;
+		}*/
+		/*String signString = appId+param;
 		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
 			throw new ServiceException(9, "签名不正确！");
-		}
+		}*/
 		
 		return agentPointsChangeLogDao.get10();
 	}
@@ -543,6 +563,7 @@ public class AgentService {
 	}
 
 	public boolean checkSign(String appId, String user, String param, String sign,String endKey) {
+		
 		//检测客户端传过来的参数是否为空
 		ParamCheck.checkString(user, 2, "用户名不能为空");
 		ParamCheck.checkString(sign, 5, "签名不能为空");
@@ -571,6 +592,7 @@ public class AgentService {
 		return true;
 		
 	}
+	
 
 	public SameAccountWealth getSameAccountWealth(String user) {
 
@@ -590,7 +612,7 @@ public class AgentService {
 		ParamCheck.checkString(secondPassword, 3, "二级密码不能为空");
 		ParamCheck.checkString(payPassword, 4, "支付密码不能为空");
 		ParamCheck.checkString(smsCode, 5, "验证码不能为空");
-		ParamCheck.checkString(sign, 6, "签名不能为空");
+		//ParamCheck.checkString(sign, 6, "签名不能为空");
 		
 		
 		Gcuser guser=gcuserDao.getUser(user);
@@ -605,13 +627,13 @@ public class AgentService {
 		if(agentApp==null){
 			throw new ServiceException(7, "无效的appId");
 		}
-		String signStr = appId+user+payPassword+password+secondPassword+smsCode+param;
+		/*String signStr = appId+user+payPassword+password+secondPassword+smsCode+param;
 		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
 			throw new ServiceException(9, "签名不正确！");
 		}
-		
+		*/
 		String nameUserid=guser.getName() + guser.getUserid();
 		SameUserProperty userProperty = sameUserPropertyDao.getSameUserProperty(nameUserid);
 		if(userProperty!=null ){
@@ -691,12 +713,12 @@ public class AgentService {
 			throw new ServiceException(18, "支付密码不正确！");
 		}
 		
-		String signStr = appId+fromUserName+toUserName+amount+productOrder+productDesc+param;
+		/*String signStr = appId+fromUserName+toUserName+amount+productOrder+productDesc+param;
 		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
 			throw new ServiceException(9, "签名不正确！");
-		}
+		}*/
 		
 		//查询订单是否存在，不存在增加并且扣款
 		if(appPayRecordDao.get(productOrder)!=null){
@@ -773,13 +795,13 @@ public class AgentService {
 		if(agentApp==null){
 			throw new ServiceException(7, "无效的appId");
 		}
-		String signStr = appId+user+payPassword+oldPayPassword+smsCode+param;
+		/*String signStr = appId+user+payPassword+oldPayPassword+smsCode+param;
 		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
 			throw new ServiceException(9, "签名不正确！");
 		}
-		
+		*/
 		
 		String nameUserid=guser.getName() + guser.getUserid();
 		SameUserProperty userProperty = sameUserPropertyDao.getSameUserProperty(nameUserid);
@@ -824,13 +846,13 @@ public class AgentService {
 		if(agentApp==null){
 			throw new ServiceException(7, "无效的appId");
 		}
-		String signString = appId+productOrder+param;
+		/*String signString = appId+productOrder+param;
 		
 		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
 		if(!mySign.equals(sign)){
 			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
 			throw new ServiceException(9, "签名不正确！");
-		}
+		}*/
 		
 		AppPayRecord appPayRecord= appPayRecordDao.get(productOrder);
 		if(appPayRecord==null){
@@ -839,10 +861,288 @@ public class AgentService {
 		return appPayRecord.getProductOrder();
 	}
 
+	public static class EasySecureHttp {
+		
+		private String appId;
+		private String agentId;
+		private String appKey;
+		private String callBackUrl;
+		private String signKey;
+		/**MD5/RSA**/
+		private String encryType;
+		
+		private String SIGN_KEY = "sign";
+		
+		private String RSA_DATA_KEY = "data";
+		private String RSA_APP_ID_KEY = "appId";
+		public EasySecureHttp(){
+			
+		}
+		
+		public EasySecureHttp(String appId, String agentId, String appKey, String callBackUrl, String signKey){
+			this.appId = appId;
+			this.agentId = agentId;
+			this.appKey = appKey;
+			this.callBackUrl = callBackUrl;
+			this.signKey = signKey;
+		}
+		
+
+		/**
+		 * 解密数据包
+		 * @param data
+		 * @param rsakey
+		 * @return
+		 */
+		public TreeMap<String, String> receiveResponse(String data){
+			return response4Md5(this.appId, data);
+		}
+		
+		
+		public TreeMap<String, String> response4Md5(String merchantId, String data){
+			try{
+				TreeMap<String, String> treeMap = _decrypt4Md5(data);
+				
+				if(!_checkSign4Md5(treeMap, this.signKey)) {
+					throw new ServiceException(9, "签名不正确！");
+				}
+				return treeMap;
+			}catch(Exception e){
+				throw new ServiceException(111, "解析数据包或者前面异常！");
+			}
+		}
+		
+		public TreeMap<String, String> _decrypt4Md5(String data) {
+			TreeMap<String, String> result	= null;
+			String jsonStr = AES.decryptFromBase64(data, this.appKey);
+			result = JSON.parseObject(jsonStr,new TypeReference<TreeMap<String, String>>() {});
+			return result;
+		}
+		
+		
+		/**
+		 * 签名
+		 * @param dataMap
+		 * @param encryptKey
+		 * @return
+		 */
+		public boolean _checkSign4Md5(TreeMap<String, String> dataMap, String encryptKey) {
+			String rsign	= StringUtils.trimToEmpty(dataMap.get(SIGN_KEY));
+			StringBuffer buffer	= new StringBuffer();
+			for(Map.Entry<String, String> entry : dataMap.entrySet()) {
+				String key = _formatStr(entry.getKey());
+				String value = _formatStr(entry.getValue());
+				if(SIGN_KEY.equals(key)) {
+					continue;
+				}
+				buffer.append(value);
+			}
+			buffer.append(encryptKey);
+			return rsign.equals(MD5Security.md5_32_Small(buffer.toString()));
+		}
+		
+		public String _formatStr(String text) {
+			return (text == null) ? "" : text.trim();
+		}
+	}
 	
+	/**
+	 * 解析数据包
+	 * @param appId
+	 * @param data
+	 * @param rsaKey
+	 * @return
+	 */
+	public TreeMap<String, String> analysisData(String appId, String data, String rsaKey) {
+		
+		if(easySecureHttpMap.isEmpty()){
+			List<AgentApp> appList = agentAppDao.getAll();
+			for(AgentApp app : appList){
+				easySecureHttpMap.put(app.getAppId()+"", new EasySecureHttp(app.getAppId()+"", app.getAgentId()+"", app.getAppKey(), app.getCallBackUrl(),app.getAppKey()));
+			}
+		}
+		if(Strings.isNullOrEmpty(appId) || easySecureHttpMap.get(appId)==null){
+			throw new ServiceException(7, "无效的appId");
+		}else{
+			return easySecureHttpMap.get(appId).receiveResponse(data);
+		}
+	}
+
+	/**
+	 * 绑定支付密码
+	 * @param appId
+	 * @param user
+	 * @param payPassword
+	 * @param token
+	 * @param call
+	 * @param sign
+	 * @param passWord
+	 * @param secondPassWord
+	 * @param param
+	 * @return
+	 */
+	public String bindPayPassword(String appId, String user, String payPassword, String token, String call,
+			String sign, String passWord, String secondPassWord, String param) {
+		ParamCheck.checkString(user, 1, "用户名不能为空");
+/*		ParamCheck.checkString(passWord, 2, "登录密码不能为空");
+		ParamCheck.checkString(secondPassWord, 3, "二级密码不能为空");*/
+		ParamCheck.checkString(payPassword, 4, "支付密码不能为空");
+		ParamCheck.checkString(token, 5, "token不能为空");
+		//ParamCheck.checkString(sign, 6, "签名不能为空");
+		Gcuser guser=gcuserDao.getUser(user);
+		if(guser==null){
+			throw new ServiceException(1, "用户名不存在！");
+		}
+		String tok = getToken(user);
+		if(Strings.isNullOrEmpty(tok)){
+			throw new ServiceException(11,"token过期");
+		}
+		if(!token.equals(tok)){
+			throw new ServiceException(10, "token有误");
+		}
+		//获得app
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		if(agentApp==null){
+			throw new ServiceException(7, "无效的appId");
+		}
+		/*String signStr = appId+user+payPassword+password+secondPassword+smsCode+param;
+		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
+		if(!mySign.equals(sign)){
+			LogSystem.warn("加密串为["+signStr+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
+			throw new ServiceException(9, "签名不正确！");
+		}*/
+		
+		String nameUserid=guser.getName() + guser.getUserid();
+		SameUserProperty userProperty = sameUserPropertyDao.getSameUserProperty(nameUserid);
+		if(userProperty!=null ){
+				boolean flag = sameUserPropertyDao.updatePayPassword(nameUserid,MD5Security.md5_16_Small(payPassword));
+				if(!flag){
+					throw new ServiceException(10, "增加支付密码失败！");
+				}
+				LogSystem.info("玩家：["+user+"],增加支付密码成功！");
+			
+		}else{
+			SameUserProperty sameUserProperty =new SameUserProperty(nameUserid, new Date(), null, MD5Security.md5_16_Small(payPassword));
+			if(!sameUserPropertyDao.insertSameUserProperty(sameUserProperty)){
+				throw new ServiceException(10, "增加失败！");
+			}
+			LogSystem.info("玩家：["+user+"],设置支付密码成功！");
+		}
+		gcuserDao.updateSmsCode(user, Global.INIT_SMS_CODE);
+		
+		return "设置成功";
+		
+	}
+	public int appCreatOrder(String appId, String orderUserName, String amount, String productOrder,
+			String productDesc, String param) {
+
+		ParamCheck.checkString(orderUserName, 1, "用户名不能为空");
+		ParamCheck.checkString(amount, 2, "订单金额不能为空");
+		ParamCheck.checkString(productOrder, 3, "商户订单号不能为空");
+		ParamCheck.checkString(productDesc, 4, "商品名称不能为空不能为空");
+		if(param==null){
+			param = "";
+		}
+		Gcuser gcuser = gcuserDao.getUser(orderUserName);
+		if(gcuser==null){
+			throw new ServiceException(6, "用户名不存在！");
+		}
+		if(amount.indexOf(".")!=-1){
+			throw new ServiceException(8, "金额必须是正整数！");
+		}
+		int yb = 0;
+		try {
+			yb = Integer.valueOf(amount);
+		} catch (Exception e) {
+			throw new ServiceException(8, "金额必须是正整数！");
+		}
+		if(yb<=0){
+			throw new ServiceException(8, "金额必须是正整数！");
+		}
+		AgentOrder agentOrder = new AgentOrder();
+		agentOrder.setAmount(yb);
+		agentOrder.setAppId(appId);
+		agentOrder.setCreatedTime(new Date());
+		agentOrder.setOrderUserName(orderUserName.trim());
+		agentOrder.setParam(param);
+		agentOrder.setProductDesc(productDesc.trim());
+		agentOrder.setProductOrder(productOrder.trim());
+		agentOrder.setStatus(AgentOrder.ST_CTREATE);
+		agentOrder.setCallBackStatus(AgentOrder.ST_CTREATE);
+		int orderId = agentOrderDao.addBackKey(agentOrder);
+		return orderId;
 	
+	}
+	@Transactional
+	public  Map<String,String> appPayOrder(String payUserName, String payPassword, int orderId) {
+
+		ParamCheck.checkString(payUserName, 1, "用户名不能为空");
+		ParamCheck.checkString(payPassword, 2, "支付密码不能为空");
+		/*ParamCheck.checkString(password, 2, "登录密码不能为空");
+		ParamCheck.checkString(password3, 3, "二级密码不能为空");*/
+		
+		AgentOrder agentOrder = agentOrderDao.get(new SqlParamBean("id", orderId));
+		if(agentOrder==null||agentOrder.getStatus()!=AgentOrder.ST_CTREATE){
+			throw new ServiceException(4, "订单不存在或该订单已失效！");
+		}
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", agentOrder.getAppId()));
+		Gcuser gcuser = gcuserDao.getUser(payUserName);
+		if(gcuser==null){
+			throw new ServiceException(5, "用户名不存在！");
+		}
+		SameUserProperty fromsameUserProperty = sameUserPropertyDao.getSameUserProperty(gcuser.getName()+gcuser.getUserid());
+		if(fromsameUserProperty==null || fromsameUserProperty.getAppPayPassword()==null){
+			throw new ServiceException(17, "扣款账户没有设置支付密码！");
+		}
+		if(!fromsameUserProperty.getAppPayPassword().equals(payPassword)){
+			throw new ServiceException(18, "支付密码不正确！");
+		}
+		
+		//支付指定的yb
+		boolean result = userService.changeYb(payUserName, -agentOrder.getAmount(),orderId+"-"+agentOrder.getProductDesc(), YbChangeType.AGENT_REDUCE, null, 0, YbChangeType.APPUSE);
+		if(result){
+			if(!agentOrderDao.updateStatusToSuccess(orderId, payUserName.trim(), new Date())){
+				throw new ServiceException(4, "订单不存在或该订单已失效！");
+			}else{
+				Map<String,String> paramMap = new HashMap<String,String>();
+				paramMap.put("payUserName", payUserName.trim());
+				paramMap.put("amount", agentOrder.getAmount()+"");
+				paramMap.put("productOrder", agentOrder.getProductOrder());
+				paramMap.put("order", orderId+"");
+				paramMap.put("param", agentOrder.getParam());
+				String signStr = payUserName+agentOrder.getAmount()+agentOrder.getProductOrder()+orderId+agentOrder.getParam();
+				String sign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey()).trim();
+				paramMap.put("sign", sign);
+				LogSystem.info("开启第三方商户支付回调，回调签名字符串为["+signStr+"],key为["+agentApp.getAppKey()+"],签名为["+sign+"]");
+				//回调
+				if(!Strings.isNullOrEmpty(agentApp.getCallBackUrl())){
+					String url = agentApp.getCallBackUrl();
+					callBackToAgent(url, paramMap);
+				}
+				return paramMap;
+			}
+		}else{
+			throw new ServiceException(8, "账户金额不足！");
+		}
+		
+		
 	
-	
+	}
+	public List<String> getUserNameList(String user) {
+		Gcuser gcuser = gcuserDao.getUser(user);
+		if(gcuser==null){
+			throw new ServiceException(5, "用户名不存在！");
+		}
+		List<String> userNameList= gcuserDao.getAllUserNameList(gcuser.getName(),gcuser.getUserid());
+		return userNameList;
+	}
+	public Gcuser getUserName(String user) {
+		Gcuser gcuser = gcuserDao.getUser(user);
+		if(gcuser==null){
+			throw new ServiceException(5, "用户名不存在！");
+		}
+		return gcuser;
+	}
 	
 	
 }

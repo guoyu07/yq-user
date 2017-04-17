@@ -21,6 +21,7 @@ public class UserPersonalInfoBean {
 	private double splitBs;		//上次拆分倍数
 	private int txTotal;		//已提現金額
 	private int accountLevel;	//账号等级(普通玩家,大vip，小vip)//0普通用户   2大vip  3小vip
+	private int isBussiness;	//是否是商家（0不是 1是）
 	//private List<TxDetail>	txdetailList;	//提现明细
 	//private Set<PointsChangeInfo> pointsChangeInfoList;	//积分价格变化明细
 	
@@ -108,6 +109,16 @@ public class UserPersonalInfoBean {
 	}
 
 
+	public int getIsBussiness() {
+		return isBussiness;
+	}
+
+
+	public void setIsBussiness(int isBussiness) {
+		this.isBussiness = isBussiness;
+	}
+
+
 	public static UserPersonalInfoBean getUserPersonalInfoBeanByGcuser(Gcuser gcuser/*,	List<PointsChangeLog> pointsChangeLogList,	List<Txpay> txpayList*/){
 		UserPersonalInfoBean result = new UserPersonalInfoBean();
 		//Set<PointsChangeInfo> pointsList= new HashSet<PointsChangeInfo>();
@@ -126,6 +137,11 @@ public class UserPersonalInfoBean {
 				result.setAccountLevel(1);
 			}else{
 				result.setAccountLevel(0);
+			}
+			if(gcuser.getTxlb()==3||gcuser.getJb()==5){
+				result.setIsBussiness(1);
+			}else{
+				result.setIsBussiness(0);
 			}
 		}
 		/*
