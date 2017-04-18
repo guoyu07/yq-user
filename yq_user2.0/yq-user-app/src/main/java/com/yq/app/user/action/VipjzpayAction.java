@@ -1,5 +1,6 @@
 package com.yq.app.user.action;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
@@ -24,12 +25,51 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 	
 	private String dlpa;//独立密码
 	
+	private Gcuser farenUser;
+	
+	private String smsCode;
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		
+		if(gcuser.getVip()==2){
+			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			if(!Strings.isNullOrEmpty(farenUser.getCall())){
+				int callLenght = farenUser.getCall().length();
+				String callLeft = farenUser.getCall().substring(0, 3);
+				String CallRight = farenUser.getCall().substring(callLenght-3, callLenght);
+				farenUser.setCall(callLeft+"*****"+CallRight);
+			}
+		}
+		
+		if(!Strings.isNullOrEmpty(gcuser.getCall())){
+			int callLenght = gcuser.getCall().length();
+			String callLeft = gcuser.getCall().substring(0, 3);
+			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
+			gcuser.setCall(callLeft+"*****"+CallRight);
+		}
+		
 		if(status==1){
-			userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay);
+			
+			if(gcuser.getVip()==2){
+				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+				if(farenUser!=null){
+					if(!farenUser.getVipsq().equals(smsCode)){
+						super.setErroCodeNum(2001);
+						return SUCCESS;
+					}
+				}else{
+					super.setErroCodeNum(2002);
+					return SUCCESS;
+				}
+			}else{
+				if(!smsCode.equals(gcuser.getVipsq())){
+					super.setErroCodeNum(2001);
+					return SUCCESS;
+				}
+			}
+			userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay,farenUser);
 			super.setErroCodeNum(2000);
 		}
 		
@@ -71,4 +111,18 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 	public void setDlpa(String dlpa) {
 		this.dlpa = dlpa;
 	}
+	public Gcuser getFarenUser() {
+		return farenUser;
+	}
+	public void setFarenUser(Gcuser farenUser) {
+		this.farenUser = farenUser;
+	}
+	public String getSmsCode() {
+		return smsCode;
+	}
+	public void setSmsCode(String smsCode) {
+		this.smsCode = smsCode;
+	}
+	
+	
 }

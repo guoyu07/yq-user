@@ -1570,7 +1570,7 @@ public class UserService {
 	 * @param amount
 	 */
 	@Transactional
-	public void trasferBdb(String fromUser,String toUser,int amount,String password3){
+	public void trasferBdb(String fromUser,String toUser,int amount,String password3,Gcuser farenUser){
 		Gcuser from = gcuserDao.getUser(fromUser);
 		if(from.getVip()==0){
 			throw new ServiceException(1, "vip用户才能玩这个功能！");
@@ -1644,6 +1644,12 @@ public class UserService {
 		this.updateSybdb(toUser, amount, "收到-服务中心"+fromUser.substring(0,2)+"***",0);
 		
 		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
+		
+		if(from.getVip()==2){
+			gcuserDao.updateSmsCode(farenUser.getUsername(), Global.INIT_SMS_CODE);
+		}else{
+			gcuserDao.updateSmsCode(from.getUsername(), Global.INIT_SMS_CODE);
+		}
 		
 	}
 	
@@ -2364,7 +2370,7 @@ public class UserService {
 	//转出折扣为0.9的vip用户名
 	private static final String[] ration_0_9_user = new String[]{"qaz363363b","lyl5577a","qal999999a","cmj999999a","gyc363363a","csp5218a"};
 	@Transactional
-	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount){
+	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount, Gcuser farenUser){
 		if(!fromUser.equals("300fhk")&&!fromUser.equals("xtgc001")){//公司账号转不限制金额
 	        if(amount<0 || amount==0 || amount >50000){
 	        	throw new ServiceException(1,"您好，您转账一币不能小于零或超过50000，谢谢！");
@@ -2487,6 +2493,11 @@ public class UserService {
 		}
 		
 		vipxtgcDao.updateJcYb(fromUser, DateUtils.getDate(new Date()), amount);
+		if(gcuser.getVip()==2){
+			gcuserDao.updateSmsCode(farenUser.getUsername(), Global.INIT_SMS_CODE);
+		}else{
+			gcuserDao.updateSmsCode(gcuser.getUsername(), Global.INIT_SMS_CODE);
+		}
 	}
 	
 	/**
@@ -4212,8 +4223,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op  777不用发送到玩家手机上
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18			19		20		21			22
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码","一币转账","报单币转账","充值币充值","报单币充值"};
 	public void sendSmsMsg(String userName,int op){
 		if (op != 777) {
 			Long time = userSendMsgTime.getIfPresent(userName);
@@ -4317,9 +4328,10 @@ public class UserService {
 	 * @param toUser
 	 * @param amount
 	 * @param password
+	 * @param farenUser 
 	 */
 	@Transactional
-	public void vipCj(String fromUserName,String toUserName,int amount,String password){
+	public void vipCj(String fromUserName,String toUserName,int amount,String password, Gcuser farenUser){
 		if(zuoMingxiDao.get(fromUserName, toUserName)==null&&youMingXiDao.get(fromUserName, toUserName)==null){
 			throw new ServiceException(1, "用户名输入错误或不属于自己团队的玩家，请检查后再试！");
 		}
@@ -4362,6 +4374,11 @@ public class UserService {
 			throw new ServiceException(6, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 		}
 		this.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v",0);
+		if(fromUser.getVip()==2){
+			gcuserDao.updateSmsCode(farenUser.getUsername(), Global.INIT_SMS_CODE);
+		}else{
+			gcuserDao.updateSmsCode(fromUser.getUsername(), Global.INIT_SMS_CODE);
+		}
 	}
 	/**
 	 * 获取一币支付订单信息
@@ -5537,7 +5554,12 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	 */
 	public boolean reSetSecondPassBySameUser(Gcuser guser, String newSecondPassword2) {
 		LogSystem.info("玩家重置二级密码操作："+guser.getUsername()+"-原二级密码："+guser.getPassword3()+"--新二级密码："+newSecondPassword2);
-		return gcuserDao.updateSecondPass(guser.getName(),guser.getUserid(),newSecondPassword2);
+		if(gcuserDao.updateSecondPass(guser.getName(),guser.getUserid(),newSecondPassword2)){
+			gcuserDao.updateSmsCode(guser.getUsername(), Global.INIT_SMS_CODE);
+			return true;
+		}else{
+			return false;
+		}
 		
 	}
 	
@@ -5552,4 +5574,62 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	public boolean updateSmsCode(String userName,String smsCode){
 		return gcuserDao.updateSmsCode(userName, smsCode);
 	}
+	
+	/**
+	 * 得到玩家扩展属性
+	 * @param username
+	 * @return
+	 */
+	public UserProperty getUserProperty(String username){
+		Gcuser gcuser = getUserByUserName(username);
+		if(gcuser==null){
+			throw new ServiceException(4004, "玩家不存在");
+		}
+		UserProperty olduserproperty = userPropertyDao.getHasPorpertyByName(username);
+		if(olduserproperty==null){//与玩家绑定 不存在添加
+			InterRegionCode interRegionCode = interRegionCodeDao.getInterCodeByCountry("CN");//默认中国
+			UserProperty userproperty= new UserProperty();
+			userproperty.setRegion_code(interRegionCode.getRegion_code());
+			userproperty.setCountry_code(interRegionCode.getCountry());
+			userproperty.setUsername(username);
+			if(userPropertyDao.insertUserProperty(userproperty)>0){
+				return userproperty;
+			}
+		}
+		return olduserproperty;
+		
+	}
+
+	public boolean updateFaren(String userName, String faren) {
+		Gcuser gcuser = getUserByUserName(userName);
+		if(gcuser==null){
+			throw new ServiceException(4004, "玩家不存在");
+		}
+		Gcuser farenUser = getUserByUserName(faren);
+		if(farenUser==null){
+			throw new ServiceException(4005, "法人不存在");
+		}
+		if(Strings.isNullOrEmpty(farenUser.getCall())){
+			throw new ServiceException(4006, "法人手机号不存在，请添加！");
+		}
+		
+		UserProperty olduserproperty = userPropertyDao.getHasPorpertyByName(userName);
+		if(olduserproperty==null){//与玩家绑定 不存在添加
+			InterRegionCode interRegionCode = interRegionCodeDao.getInterCodeByCountry("CN");//默认中国
+			UserProperty userproperty= new UserProperty();
+			userproperty.setRegion_code(interRegionCode.getRegion_code());
+			userproperty.setCountry_code(interRegionCode.getCountry());
+			userproperty.setUsername(userName);
+			userproperty.setFaren(faren);
+			if(userPropertyDao.insertUserProperty(userproperty)>0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+		return userPropertyDao.updatefaren(userName, faren);
+	}
+	
+	
 }

@@ -9,7 +9,8 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('您的充值币小于${cjpay}，无法完成充值，请联系管理员！！！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('本次充值${cjpay}可一币小于${cjpay*9}，请先补充一币！！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('充值成功！');location.href='vipcjb?secondThisState=253&thisState=244';</script></c:if>
-
+<c:if test="${erroCodeNum==2001}"><script language=javascript>alert('验证码不正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2002}"><script language=javascript>alert('此大vip用户所对应的法人不存在，请联系管理员添加！');history.go(-1);</script></c:if>
 <head>
   <meta chartset="UTF-8">
   <title>会员中心|VIP充值管理</title>
@@ -66,6 +67,30 @@
           <p class="item">
             <label class="title widget-warning">充值密码：</label>
             <input type="password" name="cjpass">
+          </p>
+          
+           <c:if test="${gcuser.vip==2}">
+	          <p class="item">
+	            <label class="title">法人手机号码：</label>
+	            <span class="text">${farenUser.call}(${farenUser.name})</span>
+	          </p>
+	          <input type="hidden" name="toUserName" value="${farenUser.username}">
+          </c:if>
+          <c:if test="${gcuser.vip!=2}">
+	          <p class="item">
+	            <label class="title">手机号码：</label>
+	            <span class="text">${gcuser.call}</span>
+	          </p>
+	          <input type="hidden" name="toUserName" value="${gcuser.username}">
+          </c:if>
+         <p class="item">
+			<label class="title"><s:text name='enter.phone.number'/>：</label>
+			<input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input>
+		</p>
+           <p class="item">
+            <label class="title">手机验证码：</label>
+            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
+            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
           </p>
           <p class="button-line mt15">
             <input class="widget-button" type="submit" value="提交充值" name="B1" id="B1"><span class="widget-tips ml10">（剩余：<b class="widget-warning">${gcuser.vipcjcjb}</b>）</span>
@@ -134,11 +159,58 @@ function checkdate() {
     form.cjpass.focus();
     return false;
   }
+  if (form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  form.inputCall.focus();  return false;  }
+  if (form.smsCode.value=="") {   alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");  form.smsCode.focus();   return false;    }
   if (confirm("温馨提示：请认真核对后再充值,一经充值不可以恢复,您确定了吗？")) {
     $("#B1").hide();
     return true;
   }
   return false;
+}
+
+
+function sendmsg(){
+	
+	if (form.cjuser.value == "") {
+	    alert("请输入要充值的用户名!");
+	    form.cjuser.focus();
+	    return false;
+	  }
+	  if (form.cjpay.value == 0) {
+	    alert("请选择充值金额!");
+	    form.cjpay.focus();
+	    return false;
+	  }
+	  if (form.cjpay.value > ${gcuser.vipcjcjb}) {
+	    alert("您的余额不足!");
+	    form.cjpay.focus();
+	    return false;
+	  }
+	  if (form.cjpass.value == "") {
+	    alert("请输入您的充值密码!");
+	    form.cjpass.focus();
+	    return false;
+	  }
+	  if (form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  form.inputCall.focus();  return false;  }
+	  $("#btn").attr("disabled", "disabled");
+	  var data = $("#Form").serialize();
+	  $.post("/sms2?op=21&status=8&toUserName="+form.toUserName.value+"&inputCall="+form.inputCall.value, data, function(response) {
+	    if (response.erroCodeNum == 2) {
+	      alert('输入的手机号与预留手机号不一致！');
+	      $("#btn").attr("disabled", false);
+	      form.inputCall.focus();
+	      return false;
+
+	    }
+	    $("#btn").removeAttr("disabled");
+	    if (response.erroCodeNum != 0) {
+	      alert("手机验证码发送失败");
+	      return false;
+	    }
+	    settime($("#btn"), '#SESSION_LOCALE');
+	    alert("手机验证码发送成功");
+	  });
+	  return true;
 }
 </script>
 </body>

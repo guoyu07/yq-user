@@ -91,5 +91,34 @@ public class UserPropertyDao {
 		return false;
 		
 	}
+	
+	/**
+	 * 修改法人
+	 * 
+	 * @param userName
+	 * @param faren
+	 * @return
+	 */
+	public boolean updatefaren(String userName, String faren) {
+		String sql = "update "+table+" set faren=? where  username=? ";
+		SqlParameter sqlparameter = new SqlParameter();
+		sqlparameter.setString(faren);
+		sqlparameter.setString(userName);
+		return jdbc.update(sql, sqlparameter)>0;
+	}
     
+    
+	/**
+	 * 通过用户名得到玩家属性
+	 * @param userName
+	 * @return
+	 */
+	public UserProperty getHasPorpertyByName(String userName) {
+		String sql = "select * from  "+table+" where username=? limit 1 ";
+		SqlParameter sqlparameter = new SqlParameter();
+		sqlparameter.setString(userName);
+		return jdbc.get(sql, UserProperty.class, sqlparameter);
+	}
+    
+	
 }

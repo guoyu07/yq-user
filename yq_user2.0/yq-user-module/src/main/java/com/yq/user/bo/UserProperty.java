@@ -15,6 +15,8 @@ public class UserProperty {
 	
 	private String country_code;//区域码对于的国家
 	
+	private String faren;//法人
+	
 
 	public String getUsername() {
 		return username;
@@ -46,6 +48,14 @@ public class UserProperty {
 
 	public void setCountry_code(String country_code) {
 		this.country_code = country_code;
+	}
+
+	public String getFaren() {
+		return faren;
+	}
+
+	public void setFaren(String faren) {
+		this.faren = faren;
 	}
 
 	

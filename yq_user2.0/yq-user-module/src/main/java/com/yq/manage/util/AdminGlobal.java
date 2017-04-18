@@ -154,6 +154,10 @@ public class AdminGlobal {
 	 * 后台管理登录
 	 * */
 	public static final int ADMIN_LOGIN_OP						= 2044;
+	/**
+	 * 修改法人
+	 * */
+	public static final int LEGALPERSON_OP						= 2045;
 	
 	
 }

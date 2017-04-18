@@ -82,8 +82,8 @@
 				          <a href="/epjysc?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币交易市场</a>
 				          <a href="/epmyjl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币认购明细</a>
 				          <a href="/bdbzz?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">报单币转出</a>
+				           <% if(gcuserHead.getVip()==2){%>
 				          <a href="/bdbcz?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">报单币充值</a>
-				          <% if(gcuserHead.getVip()==2){%>
 				          <a href="/vipcjb?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">vip充值币管理</a>
 				          <%} %>
 				           <a href="/bybdblog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">备用报单币明细</a>

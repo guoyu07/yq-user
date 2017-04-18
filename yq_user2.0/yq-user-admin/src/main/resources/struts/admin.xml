@@ -267,6 +267,15 @@
 		   <result name="success">
 		        epsf_result.jsp
 		    </result>
+		</action>
+		<!-- 修改大vip法人 -->
+		<action name="modifylegalperson" class="com.yq.admin.manager.action.BigVipLegalPersonAction">
+		    <result name="input">
+		       modifyLegalPerson.jsp
+		    </result>
+		   <result name="success">
+		        modifyLegalPerson_result.jsp
+		    </result>
 		</action>	
 		<action name="btpay" class="com.yq.admin.manager.action.BtpayAction">
 		    <result name="input">

@@ -12,6 +12,8 @@
 <c:if test="${erroCodeNum==12}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1495661441'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==13}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.571194964'/>vip！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==14}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-2079296314'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2001}"><script language=javascript>alert('验证码不正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2002}"><script language=javascript>alert('此大vip用户所对应的法人不存在，请联系管理员添加！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -54,7 +56,7 @@
       <!-- 报单币转账 -->
       <div class="main-widget">
         <p class="widget-title-line">报单币转账</p>
-        <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="bdbzz?status=1">
+        <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="bdbzz?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item mt15">
             <label class="title widget-warning">转出用户名：</label>
             <input type="text" name="jcname" value="${userName}" readonly="" />
@@ -76,6 +78,30 @@
           <p class="item">
             <label class="title">二级密码：</label>
             <input type="password" name="pa3" />
+          </p>
+         
+           <c:if test="${gcuser.vip==2}">
+	          <p class="item">
+	            <label class="title">法人手机号码：</label>
+	            <span class="text">${farenUser.call}(${farenUser.name})</span>
+	          </p>
+	          <input type="hidden" name="toUserName" value="${farenUser.username}">
+          </c:if>
+          <c:if test="${gcuser.vip!=2}">
+	          <p class="item">
+	            <label class="title">手机号码：</label>
+	            <span class="text">${gcuser.call}</span>
+	          </p>
+	          <input type="hidden" name="toUserName" value="${gcuser.username}">
+          </c:if>
+         <p class="item">
+			<label class="title"><s:text name='enter.phone.number'/>：</label>
+			<input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input>
+		</p>
+           <p class="item">
+            <label class="title">手机验证码：</label>
+            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
+            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
           </p>
           <p class="button-line mt15">
             <button class="widget-button" type="submit" onclick="return confirm('提示：您确定了吗？')">确定转账</button>
@@ -117,7 +143,8 @@ function checkdate() {
     document.Form.jzpay.focus;
     return (false);
   }
-
+  if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
+  if (Form.smsCode.value=="") {   alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");  Form.smsCode.focus();   return false;    }
   function chkinteger(checkStr) {
     var checkOK = "0123456789";
     var allValid = true;
@@ -135,6 +162,77 @@ function checkdate() {
     return (allValid);
   }
   return true;
+}
+
+
+function sendmsg(){
+	
+	 if (Form.jcname.value == "") {
+		    alert("请写入转出用户名!");
+	    return false;
+	  }
+	  if (Form.jzpay.value < 5000) {
+	    alert("转账的金额必须大于5000!");
+	    return false;
+	  }
+	  if (Form.syuser.value == "") {
+	    alert("请填写接收用户名!");
+	    return false;
+	  }
+	  if (Form.jcname.value == Form.syuser.value) {
+	    alert("不能转给自己!");
+	    return false;
+	  }
+	  if (Form.pa3.value == "") {
+	    alert("请输入二级密码!");
+	    return false;
+	  }
+	  if (!chkinteger(Form.jzpay.value)) {
+	    alert('转账金额只能为整字!');
+	    document.Form.jzpay.focus;
+	    return (false);
+	  }
+	  if (!chkinteger(Form.jzpay.value)) {
+		    alert('转账一币只能为整字!');
+		    document.Form.jzpay.focus;
+		    return (false);
+		  }
+	  if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
+	  function chkinteger(checkStr) {
+	    var checkOK = "0123456789";
+	    var allValid = true;
+	    for (i = 0; i < checkStr.length; i++) {
+	      ch = checkStr.charAt(i);
+	      if (checkOK.indexOf(ch) == -1) {
+	        allValid = false;
+	        break;
+	      }
+	      if ((ch == '+' || ch == '-') && i > 0) {
+	        allValid = false;
+	        break;
+	      }
+	    }
+	    return (allValid);
+	  }
+	  $("#btn").attr("disabled", "disabled");
+	  var data = $("#Form").serialize();
+	  $.post("/sms2?op=20&status=8&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
+	    if (response.erroCodeNum == 2) {
+	      alert('输入的手机号与预留手机号不一致！');
+	      $("#btn").attr("disabled", false);
+	      Form.inputCall.focus();
+	      return false;
+
+	    }
+	    $("#btn").removeAttr("disabled");
+	    if (response.erroCodeNum != 0) {
+	      alert("手机验证码发送失败");
+	      return false;
+	    }
+	    settime($("#btn"), '#SESSION_LOCALE');
+	    alert("手机验证码发送成功");
+	  });
+	  return true;
 }
 </script>
 </body>
