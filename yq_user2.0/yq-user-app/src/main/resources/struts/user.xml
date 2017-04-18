@@ -490,7 +490,12 @@
 		<action name="sms" class="com.yq.app.user.action.SmsAction">
 			<result name="success" type="json"></result>
 		</action>
-
+		<action name="smsother" class="com.yq.app.user.action.Sms3Action">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
 		<action name="vipcjb" class="com.yq.app.user.action.VipcjbAction">
 			<!-- <result name="success">view/yblc-vipcjb.jsp</result> -->
 			<result name="success">mainUI/public/eb-transfer-VIP.jsp</result>

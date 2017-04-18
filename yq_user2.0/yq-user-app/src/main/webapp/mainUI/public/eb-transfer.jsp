@@ -247,8 +247,8 @@ function sendmsg(){
 	  }
 	  $("#btn").attr("disabled", "disabled");
 	  var data = $("#Form").serialize();
-	  $.post("/sms2?op=19&status=8&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
-	    if (response.erroCodeNum == 2) {
+	  $.post("/smsother?op=19&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
+		  if (response.erroCodeNum == 2) {
 	      alert('输入的手机号与预留手机号不一致！');
 	      $("#btn").attr("disabled", false);
 	      Form.inputCall.focus();

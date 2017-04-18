@@ -194,7 +194,7 @@ function sendmsg(){
 	  if (form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  form.inputCall.focus();  return false;  }
 	  $("#btn").attr("disabled", "disabled");
 	  var data = $("#Form").serialize();
-	  $.post("/sms2?op=21&status=8&toUserName="+form.toUserName.value+"&inputCall="+form.inputCall.value, data, function(response) {
+	  $.post("/smsother?op=21&other=1&toUserName="+form.toUserName.value+"&inputCall="+form.inputCall.value, data, function(response) {
 	    if (response.erroCodeNum == 2) {
 	      alert('输入的手机号与预留手机号不一致！');
 	      $("#btn").attr("disabled", false);

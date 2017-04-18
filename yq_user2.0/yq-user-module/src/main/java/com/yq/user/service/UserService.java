@@ -4294,6 +4294,79 @@ public class UserService {
 		}
 	}
 	
+	/**
+	 * 短信模板3
+	 * @param userName
+	 * @param op  777不用发送到玩家手机上
+	 */        
+	public void sendSmsMsgother(String userName,int op,String otherPerson){
+		if (op != 777) {
+			Long time = userSendMsgTime.getIfPresent(otherPerson);
+			Integer times = userSendMsgTimes.getIfPresent(otherPerson);
+			if (time != null) {
+				LogSystem.info("短信在1分钟内重复发送，直接屏蔽,userName=" + otherPerson);
+				if (times == null) {
+					userSendMsgTimes.put(otherPerson, 1);
+				} else {
+					userSendMsgTimes.put(otherPerson, times + 1);
+				}
+				throw new ServiceException(2999, "发送短信发生错误,还没到达发送间隔时间!");
+			}
+
+			if (times != null && times >= 10) {
+				LogSystem.info("短信在1分钟内重复发送，直接屏蔽次数超过10次,被禁止发送短信24小时，userName=" + otherPerson);
+				throw new ServiceException(2998, "发送短信发生错误,已被禁用发短信功能!");
+			}
+		}
+		
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		String randomString = RandomStringUtils.random(6, chars);
+		UserProperty p = userPropertyDao.getPorpertyByName(userName);
+		if(p==null||p.getRegion_code()==86){
+			Map<String,String> param = new HashMap<String,String>();
+			param.put("code", randomString);
+			param.put("userName", otherPerson);
+			param.put("op", OP_STR.length>op?OP_STR[op]:"");
+			if(gcuserDao.updateSmsCode(userName, randomString)){
+					if(op==777){
+						return ;
+					}
+				    try {
+				    	if(!SubMsgSendUtils.sendMessage(gcuser.getCall(), "NFgnN3", param)){
+				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+				    	}
+					} catch (Exception e) {
+						LogSystem.error(e, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+						throw new ServiceException(3000, "发送短信发生错误，phone="+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+					}
+					
+			}else{
+				throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			}
+		}else{
+            Map<String,String> param = new HashMap<String,String>();
+			param.put("code", randomString);
+			if(gcuserDao.updateSmsCode(userName, randomString)){
+				if(op==777){
+					return ;
+				}
+				    try {
+				    	if(!SubMsgSendUtils.sendInternationalMessage(p.getRegion_code()+"", gcuser.getCall(), "742m76", param)){
+				    		throw new ServiceException(3000, "发送短信发生错误,更新错误");
+				    	}
+					} catch (Exception e) {
+						LogSystem.error(e, "发送短信发生错误，phone="+p.getRegion_code()+gcuser.getCall()+",userName="+gcuser.getUsername()+"");
+						throw new ServiceException(3000, "发送短信发生错误，phone="+p.getRegion_code()+gcuser.getCall()+",userName="+gcuser.getUsername()+",");
+					}
+					
+			}else{
+				throw new ServiceException(3000, "发送短信发生错误,更新错误");
+			}
+		}
+		if (op != 777) {
+		  userSendMsgTime.put(userName, System.currentTimeMillis());
+		}
+	}
 	
 	/**
 	 * 查询所有玩家分页列表

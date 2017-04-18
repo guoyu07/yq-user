@@ -9,7 +9,7 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.service.UserService;
 
-public class SmsAction extends ALDAdminActionSupport{
+public class Sms3Action extends ALDAdminActionSupport{
 
 	/**
 	 * 
@@ -24,25 +24,19 @@ public class SmsAction extends ALDAdminActionSupport{
 	public String execute(){
 		
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		/*if(other==1){
+		
+		if(other==1){
 			Map<String, String> param= new HashMap<>();
 			param.put("call", inputCall);
 			userService.checkUserInfo(toUserName,param);
 			userService.sendSmsMsgother(toUserName,op,super.getUserName());
 			return "success";
-		}*/
+		}
 		
 		if(Strings.isNullOrEmpty(toUserName)){
 			toUserName = super.getUserName();
 		}
 		
-		if(status==8){//验证手机号
-			Map<String, String> param= new HashMap<>();
-			param.put("call", inputCall);
-			userService.checkUserInfo(toUserName,param);
-			userService.sendSmsMsg(toUserName,op);
-			return "success";
-		}
 		try {
 			userService.sendSmsMsg(toUserName,op);
 		} catch (Exception e) {
