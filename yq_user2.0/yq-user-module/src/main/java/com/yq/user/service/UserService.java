@@ -4301,7 +4301,8 @@ public class UserService {
 	 * @param op  777不用发送到玩家手机上
 	 */        
 	public void sendSmsMsgother(String userName,int op,String otherPerson){
-		if (op != 777) {
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if (op != 777 && gcuser.getVip()==0) {
 			Long time = userSendMsgTime.getIfPresent(otherPerson);
 			Integer times = userSendMsgTimes.getIfPresent(otherPerson);
 			if (time != null) {
@@ -4320,7 +4321,7 @@ public class UserService {
 			}
 		}
 		
-		Gcuser gcuser = gcuserDao.getUser(userName);
+	
 		String randomString = RandomStringUtils.random(6, chars);
 		UserProperty p = userPropertyDao.getPorpertyByName(userName);
 		if(p==null||p.getRegion_code()==86){
@@ -4364,7 +4365,7 @@ public class UserService {
 				throw new ServiceException(3000, "发送短信发生错误,更新错误");
 			}
 		}
-		if (op != 777) {
+		if (op != 777 && gcuser.getVip()==0) {
 		  userSendMsgTime.put(userName, System.currentTimeMillis());
 		}
 	}
