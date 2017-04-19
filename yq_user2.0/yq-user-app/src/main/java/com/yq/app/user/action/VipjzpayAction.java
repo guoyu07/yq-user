@@ -35,6 +35,10 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 		
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			if(farenUser==null){
+				super.setErroCodeNum(2002);
+				return SUCCESS;
+			}
 			if(!Strings.isNullOrEmpty(farenUser.getCall())){
 				int callLenght = farenUser.getCall().length();
 				String callLeft = farenUser.getCall().substring(0, 3);
