@@ -1,5 +1,10 @@
 package com.yq.app.user.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
@@ -19,6 +24,7 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	private Gcuser farenUser;
 	private String smsCode;
 	
+	private String inputUrl;
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
@@ -42,7 +48,13 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
 			gcuser.setCall(callLeft+"*****"+CallRight);
 		}
-		
+		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
+		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
+			inputUrl= request.getRequestURI();
+			return "noVipToken";
+		}
 		super.initPage(userService.getVipcjbPageList(super.getUserName(), super.getToPage(), 10));
 		if(status==1){
 			return "cjbdetail";
@@ -56,6 +68,34 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	public String cj(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
+		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		if(gcuser.getVip()==2){
+			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			if(farenUser==null){
+				super.setErroCodeNum(2002);
+				return SUCCESS;
+			}
+			if(!Strings.isNullOrEmpty(farenUser.getCall())){
+				int callLenght = farenUser.getCall().length();
+				String callLeft = farenUser.getCall().substring(0, 3);
+				String CallRight = farenUser.getCall().substring(callLenght-3, callLenght);
+				farenUser.setCall(callLeft+"*****"+CallRight);
+			}
+		}
+		
+		if(!Strings.isNullOrEmpty(gcuser.getCall())){
+			int callLenght = gcuser.getCall().length();
+			String callLeft = gcuser.getCall().substring(0, 3);
+			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
+			gcuser.setCall(callLeft+"*****"+CallRight);
+		}
+		
+		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
+		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
+			inputUrl= request.getRequestURI();
+			return "noVipToken";
+		}
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser!=null){
@@ -86,6 +126,14 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	}
 	
 	
+	public String getInputUrl() {
+		return inputUrl;
+	}
+
+	public void setInputUrl(String inputUrl) {
+		this.inputUrl = inputUrl;
+	}
+
 	public Gcuser getFarenUser() {
 		return farenUser;
 	}

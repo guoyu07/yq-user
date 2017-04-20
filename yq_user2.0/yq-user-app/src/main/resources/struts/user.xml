@@ -206,12 +206,14 @@
 			<!-- <result name="success">view/yjcx-bdb-zz.jsp</result> -->
 			<result name="success">mainUI/public/game-bdb-roll-out.jsp</result>
 			<result name="bdbdate" type="redirect">${redirectBaseUrl}/bdbdate</result>
+			<result name="noVipToken">mainUI/public/checkVipToken.jsp</result>
 		</action>
 		
 		<action name="bdbcz" class="com.yq.app.user.action.BdbZzAction" method="bdbcz">
 			<!-- <result name="success">view/yjcx-bdb-cz.jsp</result> -->
 			<result name="success">mainUI/public/game-bdb-recharge.jsp</result>
 			<result name="bdbdate" type="redirect">${redirectBaseUrl}/bdbdate</result>
+			<result name="noVipToken">mainUI/public/checkVipToken.jsp</result>
 		</action>
 
 		<action name="tgdown" class="com.yq.app.user.action.TgdownAction">
@@ -277,7 +279,15 @@
 		</action>
 		<action name="vipjzpay" class="com.yq.app.user.action.VipjzpayAction">
 			<!-- <result name="success">view/yblc-transferout.jsp</result> -->
+			<result name="noVipToken">mainUI/public/checkVipToken.jsp</result>
 			<result name="success">mainUI/public/eb-transfer.jsp</result>
+		</action>
+		<action name="addviptoken" class="com.yq.app.user.action.AddVipTokenAction">
+			<!-- <result name="success">view/yblc-transferout.jsp</result> -->
+			<result name="noVipToken">mainUI/public/checkVipToken.jsp</result>
+			<result name="success" type="redirect">
+				${inputUrl}?secondThisState=${secondThisState}&amp;thisState=${thisState}
+			</result>
 		</action>
 		<action name="ybPresent" class="com.yq.app.user.action.YbPresentAction">
 			<!-- <result name="success">view/yblc-transferout-present.jsp</result> -->
@@ -499,6 +509,7 @@
 		<action name="vipcjb" class="com.yq.app.user.action.VipcjbAction">
 			<!-- <result name="success">view/yblc-vipcjb.jsp</result> -->
 			<result name="success">mainUI/public/eb-transfer-VIP.jsp</result>
+			<result name="noVipToken">mainUI/public/checkVipToken.jsp</result>
 		</action>
 
 		<action name="vipcjbcjbdetail" class="com.yq.app.user.action.VipcjbAction" method="vipcjbcjbdetail">
@@ -538,6 +549,12 @@
 			</result>
 		</action>
 	</package>
+	<!-- <package name="viptoken" extends="vipInterceptor" namespace="/">
+		<action name="vipjzpay" class="com.yq.app.user.action.VipjzpayAction">
+			<result name="success">view/yblc-transferout.jsp</result>
+			<result name="success">mainUI/public/eb-transfer.jsp</result>
+		</action>
+	</package> -->
 
 	<!-- 一个包可以就是一个模块 -->
 	<package name="login" extends="noLoginInterceptor" namespace="/">
@@ -615,9 +632,8 @@
 		<action name="dealMallOrder" class="com.yq.app.user.action.YbShopPayAction"
 			method="dealMallOrder">
 		</action>
-
-
 	</package>
+	
 
 	<package name="managerInterceptor" extends="someInterceptor">
 
@@ -678,4 +694,27 @@
 		</interceptors>
 		<default-interceptor-ref name="someStack" />
 	</package>
+	
+	<package name="vipInterceptor" extends="managerInterceptor">
+		<interceptors>
+			<!-- 认证拦截器 -->
+			<interceptor name="vipUserInterceptor"
+				class="com.yq.app.user.interceptor.VipUserInterceptor" />
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="vipUserInterceptor" />
+				<interceptor-ref name="someStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="adminStack" />
+
+		<global-results>
+			<result name="noVipToken" type="redirect">
+				mainUI/public/checkVipToken.jsp
+			</result>
+			<result name="noFaren" type="redirect">
+				mainUI/public/noFaren.jsp
+			</result>
+		</global-results>
+	</package>
+	
 </struts>

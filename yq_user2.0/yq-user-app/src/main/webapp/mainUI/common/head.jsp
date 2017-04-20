@@ -10,6 +10,10 @@
 <%
   UserService userServiceHead = ServiceCacheFactory.getServiceCache().getService(UserService.class);
   Gcuser gcuserHead = userServiceHead.getUserByUserName(userServiceHead.isLogin(request.getSession().getId()));
+  
+ /*  Gcuser vipgcuser = userServiceHead.getUserByUserName(userServiceHead.isHasVipToken(request.getSession().getId()));
+   */
+  
   String key="lladsfkk@331";
   String time = new Date().getTime()+"";
   String sign = MD5Security.code(gcuserHead.getUsername()+key+time, 32).toLowerCase();

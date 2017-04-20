@@ -227,6 +227,44 @@ public class UserService {
     	JedisUtils.delete(key);
     }
     
+  	
+  	/**对于商务中心vip操作的会话保存*/
+  	private static final String VIP_SESSION_CACHE_PRE = "vip_session_";
+  	private static final int VIP_SESSION_EXPERI_SECONDS = 12*3600;
+  	
+  	public String vipCacheKey(String sessionId){
+  		return VIP_SESSION_CACHE_PRE+sessionId;
+  	}
+  	
+  	public Session getVipSession(String sessionId){
+    	String key = vipCacheKey(sessionId);
+    	return JedisUtils.getObject(key, Session.class);
+    }
+    
+    public void setVipSession(String sessionId,Session session){
+    	String key = vipCacheKey(sessionId);
+    	JedisUtils.setObject(key, session);
+    	JedisUtils.expireKey(key, VIP_SESSION_EXPERI_SECONDS);
+    }
+    
+    public void delVipSession(String sessionId){
+    	String key = vipCacheKey(sessionId);
+    	JedisUtils.delete(key);
+    }
+    
+    public String isHasVipToken(String sessionId){
+    	Session userSessionBean = getVipSession(sessionId);
+    	if(userSessionBean!=null){
+    		return userSessionBean.getUserName();
+    	}
+    	return null;
+    }
+    
+    
+    
+    
+    
+    
     /**
      * 查看是否登录了
      * @param sessionId
@@ -368,6 +406,7 @@ public class UserService {
     	Session userSessionBean = this.getSession(sessionId);
     	if(userSessionBean!=null){
         	this.delSession(sessionId);
+        	this.delVipSession(sessionId);//登出时候移除vip权限的会话
         	return dateipDao.updateLogout(userSessionBean.getUserName());
     	}
         return true;
@@ -1645,11 +1684,11 @@ public class UserService {
 		
 		vipxtgcDao.updateJcBdb(fromUser, DateUtils.getDate(new Date()), amount);
 		
-		if(from.getVip()==2){
+		/*if(from.getVip()==2){
 			gcuserDao.updateSmsCode(farenUser.getUsername(), Global.INIT_SMS_CODE);
 		}else{
 			gcuserDao.updateSmsCode(from.getUsername(), Global.INIT_SMS_CODE);
-		}
+		}*/
 		
 	}
 	
@@ -2493,11 +2532,11 @@ public class UserService {
 		}
 		
 		vipxtgcDao.updateJcYb(fromUser, DateUtils.getDate(new Date()), amount);
-		if(gcuser.getVip()==2){
+		/*if(gcuser.getVip()==2){
 			gcuserDao.updateSmsCode(farenUser.getUsername(), Global.INIT_SMS_CODE);
 		}else{
 			gcuserDao.updateSmsCode(gcuser.getUsername(), Global.INIT_SMS_CODE);
-		}
+		}*/
 	}
 	
 	/**
@@ -4223,8 +4262,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op  777不用发送到玩家手机上
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18			19		20		21			22
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码","一币转账","报单币转账","充值币充值","报单币充值"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18			19		20		21			22			23
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码","一币转账","报单币转账","充值币充值","报单币充值","校验vip权限"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if (op != 777 && gcuser.getVip()==0) {
@@ -4368,6 +4407,8 @@ public class UserService {
 		if (op != 777 && gcuser.getVip()==0) {
 		  userSendMsgTime.put(userName, System.currentTimeMillis());
 		}
+		
+		
 	}
 	
 	/**
@@ -4449,11 +4490,11 @@ public class UserService {
 			throw new ServiceException(6, "本次充值"+amount+"可一币小于"+9*amount+"，请先补充一币！");
 		}
 		this.updateSybdb(toUserName, amount*10, "充值"+amount+"与一币"+9*amount+"生效v",0);
-		if(fromUser.getVip()==2){
+		/*if(fromUser.getVip()==2){
 			gcuserDao.updateSmsCode(farenUser.getUsername(), Global.INIT_SMS_CODE);
 		}else{
 			gcuserDao.updateSmsCode(fromUser.getUsername(), Global.INIT_SMS_CODE);
-		}
+		}*/
 	}
 	/**
 	 * 获取一币支付订单信息

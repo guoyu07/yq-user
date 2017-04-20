@@ -1,5 +1,10 @@
 package com.yq.app.user.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
@@ -29,8 +34,11 @@ public class BdbZzAction extends ALDAdminActionSupport {
 	
 	private String smsCode;
 	
+	private String inputUrl;
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
+		HttpServletRequest request=ServletActionContext.getRequest();
 		gcuser = userService.getUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
@@ -52,9 +60,14 @@ public class BdbZzAction extends ALDAdminActionSupport {
 			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
 			gcuser.setCall(callLeft+"*****"+CallRight);
 		}
+		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
+		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
+			inputUrl= request.getRequestURI();
+			return "noVipToken";
+		}
 		
 		if(status==1){
-			if(gcuser.getVip()==2){
+			/*if(gcuser.getVip()==2){
 				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 				if(farenUser!=null){
 					if(!farenUser.getVipsq().equals(smsCode)){
@@ -70,7 +83,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(2001);
 					return SUCCESS;
 				}
-			}
+			}*/
 			userService.trasferBdb(super.getUserName(), syuser, jzpay,pa3,farenUser);
 			return "bdbdate";
 		}else{
@@ -91,6 +104,8 @@ public class BdbZzAction extends ALDAdminActionSupport {
 //		super.setErroCodeNum(9);
 //		return SUCCESS;
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
+		HttpServletRequest request=ServletActionContext.getRequest();
 		gcuser = userService.getUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
@@ -113,9 +128,15 @@ public class BdbZzAction extends ALDAdminActionSupport {
 			gcuser.setCall(callLeft+"*****"+CallRight);
 		}
 		
+		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
+		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
+			inputUrl= request.getRequestURI();
+			return "noVipToken";
+		}
+		
 		if(status==1){
 			
-			if(gcuser.getVip()==2){
+			/*if(gcuser.getVip()==2){
 				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 				if(farenUser!=null){
 					if(!farenUser.getVipsq().equals(smsCode)){
@@ -131,7 +152,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(2001);
 					return SUCCESS;
 				}
-			}
+			}*/
 			userService.chargeBdbByBigVip(super.getUserName(),pa3,touser);
 			return "bdbdate";
 			
@@ -146,6 +167,19 @@ public class BdbZzAction extends ALDAdminActionSupport {
 	}
 
 	
+	
+	public String getInputUrl() {
+		return inputUrl;
+	}
+
+
+
+	public void setInputUrl(String inputUrl) {
+		this.inputUrl = inputUrl;
+	}
+
+
+
 	public Gcuser getGcuser() {
 		return gcuser;
 	}

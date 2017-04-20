@@ -16,9 +16,9 @@
 <c:if test="${erroCodeNum==12}"><script language=javascript>alert('该玩家是大vip！您不能转给他！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==13}"><script language=javascript>alert('您只是小vip！不能转给您团队下的小vip！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==14}"><script language=javascript>alert('被转对象vip标识错误，请截图后联系管理员！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('datepay?secondThisState=249&thisState=244');</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2002}"><script language=javascript>alert('此大vip用户所对应的法人不存在，请联系管理员添加！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2003}"><script language=javascript>alert('您无权访问！');history.go(-1);</script></c:if>
 <head>
   <meta chartset="UTF-8">
   <title>会员中心|一币转出</title>
@@ -37,7 +37,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail">财富中心 >> 验证vip权限</p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -57,24 +57,14 @@
     <div class="member-main">
       <!-- 一币转出 -->
       <div class="main-widget">
-        <p class="widget-title-line">一币转出</p>
-        <form class="widget-form" method="POST" name="Form" onsubmit="return checkdate()" action="vipjzpay?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
+        <p class="widget-title-line">验证vip权限</p>
+        <form class="widget-form" method="POST" name="Form" onsubmit="return checkdate()" action="addviptoken?secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item">
-            <label class="title">用户名：</label><span class="text"><b class="widget-warning">${userName}</b></span></p>
-          <p class="item">
-            <label class="title">您的一币为：</label><span class="text"><b class="widget-warning">${gcuser.pay}</b></span></p>
-          <p class="item">
-            <label class="title widget-warning">接收用户名：</label>
-            <input type="text" name="jzuser" id="jzuser" size="15"><a herf="#" class="widget-button-small" id="J_chkUserName">查看姓名</a></p>
-          <p class="item">
-            <label class="title">转账一币：</label>
-            <input type="text" name="jzpay" size="15" maxlength="10">
-          </p>
+            <label class="title">用户名：</label><span class="text"><b class="widget-warning">${gcuser.username}</b></span></p>
           <p class="item">
             <label class="title">二级密码：</label>
             <input type="password" name="pa3" size="20">
           </p>
-          <%-- <c:if test="${vipgcuser==null || vipgcuser==''}">
           <c:if test="${gcuser.vip==2}">
 	          <p class="item">
 	            <label class="title">法人手机号码：</label>
@@ -99,9 +89,9 @@
             <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
             <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
           </p>
-          </c:if> --%>
+          <input type="hidden" name="inputUrl" value="${inputUrl}">
           <p class="button-line mt15">
-            <button class="widget-button" type="submit" name="submit2" onclick="return confirm('提示：您确定了吗？')">确定转账</button>
+            <button class="widget-button" type="submit" name="submit2" onclick="return confirm('提示：您确定了吗？')">验证</button>
           </p>
         </form>
         <%-- <c:if test="${gcuser.vip==2}"><p class="widget-tips mt10"><a href="vipcjb">VIP充值管理（累计充值币：${gcuser.vipljcjb}）（已使用：${gcuser.vipsycjb}）（剩余：${gcuser.vipcjcjb}）</a></p></c:if> --%>
@@ -117,7 +107,7 @@
 <script>
 /*验证交互*/
 function checkdate() {
- if (Form.jzuser.value == "") {
+ /* if (Form.jzuser.value == "") {
 	    alert("请填写您要转入的用户名!");
 	    Form.jzuser.focus;
 	    return false;
@@ -141,7 +131,7 @@ function checkdate() {
     alert("您的转账一币不能超过您剩余的一币${gcuser.pay}");
     Form.jzpay.focus;
     return false;
-  }
+  } */
  
   if (Form.pa3.value == "") {
     alert("请输入二级密码密码!");
@@ -150,11 +140,11 @@ function checkdate() {
   }
   if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
   if (Form.smsCode.value=="") {   alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");  Form.smsCode.focus();   return false;    }
-  if (!chkinteger(Form.jzpay.value)) {
+/*   if (!chkinteger(Form.jzpay.value)) {
     alert('转账一币只能为整字!');
     document.Form.jzpay.focus;
     return (false);
-  }
+  } */
   function chkinteger(checkStr) {
     var checkOK = "0123456789";
     var allValid = true;
@@ -195,7 +185,7 @@ function Check(user) {
 
 function sendmsg(){
 	
-	 if (Form.jzuser.value == "") {
+	/*  if (Form.jzuser.value == "") {
 		    alert("请填写您要转入的用户名!");
 		    Form.jzuser.focus;
 		    return false;
@@ -220,18 +210,18 @@ function sendmsg(){
 	    Form.jzpay.focus;
 	    return false;
 	  }
-	 
+	  */
 	  if (Form.pa3.value == "") {
 	    alert("请输入二级密码密码!");
 	    Form.pa3.focus;
 	    return false;
 	  }
 	  if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
-	  if (!chkinteger(Form.jzpay.value)) {
+	/*   if (!chkinteger(Form.jzpay.value)) {
 	    alert('转账一币只能为整字!');
 	    document.Form.jzpay.focus;
 	    return (false);
-	  }
+	  } */
 	  function chkinteger(checkStr) {
 	    var checkOK = "0123456789";
 	    var allValid = true;
@@ -250,7 +240,7 @@ function sendmsg(){
 	  }
 	  $("#btn").attr("disabled", "disabled");
 	  var data = $("#Form").serialize();
-	  $.post("/smsother?op=19&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
+	  $.post("/smsother?op=23&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
 		  if (response.erroCodeNum == 2) {
 	      alert('输入的手机号与预留手机号不一致！');
 	      $("#btn").attr("disabled", false);

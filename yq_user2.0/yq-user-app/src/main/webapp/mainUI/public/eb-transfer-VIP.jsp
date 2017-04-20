@@ -69,7 +69,7 @@
             <input type="password" name="cjpass">
           </p>
           
-           <c:if test="${gcuser.vip==2}">
+          <%--  <c:if test="${gcuser.vip==2}">
 	          <p class="item">
 	            <label class="title">法人手机号码：</label>
 	            <span class="text">${farenUser.call}(${farenUser.name})</span>
@@ -82,7 +82,7 @@
 	            <span class="text">${gcuser.call}</span>
 	          </p>
 	          <input type="hidden" name="toUserName" value="${gcuser.username}">
-          </c:if>
+          </c:if> 
          <p class="item">
 			<label class="title"><s:text name='enter.phone.number'/>：</label>
 			<input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input>
@@ -91,7 +91,7 @@
             <label class="title">手机验证码：</label>
             <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
             <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
-          </p>
+          </p>--%>
           <p class="button-line mt15">
             <input class="widget-button" type="submit" value="提交充值" name="B1" id="B1"><span class="widget-tips ml10">（剩余：<b class="widget-warning">${gcuser.vipcjcjb}</b>）</span>
           </p>
@@ -194,7 +194,7 @@ function sendmsg(){
 	  if (form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  form.inputCall.focus();  return false;  }
 	  $("#btn").attr("disabled", "disabled");
 	  var data = $("#Form").serialize();
-	  $.post("/smsother?op=21&other=1&toUserName="+form.toUserName.value+"&inputCall="+form.inputCall.value, data, function(response) {
+	  $.post("/smsother?op=23&other=1&toUserName="+form.toUserName.value+"&inputCall="+form.inputCall.value, data, function(response) {
 	    if (response.erroCodeNum == 2) {
 	      alert('输入的手机号与预留手机号不一致！');
 	      $("#btn").attr("disabled", false);

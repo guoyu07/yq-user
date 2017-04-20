@@ -1,6 +1,12 @@
 package com.yq.app.user.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.google.common.base.Strings;
+import com.opensymphony.xwork2.ActionContext;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
@@ -29,8 +35,13 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 	
 	private String smsCode;
 	
+	private String inputUrl;
+	
 	public String execute(){
+		HttpSession sessionhttp = ServletActionContext.getRequest()
+				.getSession();
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		HttpServletRequest request=ServletActionContext.getRequest();
 		gcuser = userService.getUserByUserName(super.getUserName());
 		
 		if(gcuser.getVip()==2){
@@ -54,27 +65,32 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 			gcuser.setCall(callLeft+"*****"+CallRight);
 		}
 		
+		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
+		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
+			inputUrl= request.getRequestURI();
+			return "noVipToken";
+		}
+		
 		if(status==1){
-			
-			if(gcuser.getVip()==2){
-				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
-				if(farenUser!=null){
-					if(!farenUser.getVipsq().equals(smsCode)){
+				/*if(gcuser.getVip()==2){
+					farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+						if(farenUser!=null){
+							if(!farenUser.getVipsq().equals(smsCode)){
+								super.setErroCodeNum(2001);
+								return SUCCESS;
+							}
+						}else{
+							super.setErroCodeNum(2002);
+							return SUCCESS;
+						}
+				}else{
+					if(!smsCode.equals(gcuser.getVipsq())){
 						super.setErroCodeNum(2001);
 						return SUCCESS;
 					}
-				}else{
-					super.setErroCodeNum(2002);
-					return SUCCESS;
-				}
-			}else{
-				if(!smsCode.equals(gcuser.getVipsq())){
-					super.setErroCodeNum(2001);
-					return SUCCESS;
-				}
-			}
-			userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay,farenUser);
-			super.setErroCodeNum(2000);
+				}*/
+				userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay,farenUser);
+				super.setErroCodeNum(2000);
 		}
 		
 		return SUCCESS;
@@ -126,6 +142,12 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 	}
 	public void setSmsCode(String smsCode) {
 		this.smsCode = smsCode;
+	}
+	public String getInputUrl() {
+		return inputUrl;
+	}
+	public void setInputUrl(String inputUrl) {
+		this.inputUrl = inputUrl;
 	}
 	
 	

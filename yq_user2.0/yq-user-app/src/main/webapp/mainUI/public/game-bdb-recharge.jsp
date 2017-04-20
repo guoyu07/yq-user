@@ -73,7 +73,7 @@
             <label class="title">二级密码：</label>
             <input type="password" name="pa3" />
           </p>
-          
+          <%-- 
            <c:if test="${gcuser.vip==2}">
 	          <p class="item">
 	            <label class="title">法人手机号码：</label>
@@ -96,7 +96,7 @@
             <label class="title">手机验证码：</label>
             <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
             <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
-          </p>
+          </p> --%>
           <p class="button-line mt15">
             <button class="widget-button" type="submit" onclick="return confirm('提示：您确定了吗？')">确定转账</button>
           </p>
@@ -118,7 +118,7 @@ function sendmsg(){
 	  if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
 	  $("#btn").attr("disabled", "disabled");
 	  var data = $("#Form").serialize();
-	  $.post("/smsother?op=22&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
+	  $.post("/smsother?op=23&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
 	    if (response.erroCodeNum == 2) {
 	      alert('输入的手机号与预留手机号不一致！');
 	      $("#btn").attr("disabled", false);
