@@ -36,10 +36,10 @@
           <p class="widget-title-line">客服中心</p>
           <div class="widget-article">
             <p class="widget-notice">团队服务中心编号： ${upuname}***</p>
-            <p class="widget-notice mt5">称谓：${gcuserup.vipuser} </p> 
+          <%--   <p class="widget-notice mt5">称谓：${gcuserup.vipuser} </p>  --%>
             <p class="widget-notice">联系QQ： ${gcuserup.qq}</p>
             <p class="widget-notice mt5">联系电话： ${gcuserup.call}</p>
-            <c:if test="${not empty gcuserup.vipgh}">
+            <%-- <c:if test="${not empty gcuserup.vipgh}">
 			  <p class="widget-notice mt5"><s:text name='reg.jsp.reg.jsp.-453899062'/>:${gcuserup.vipgh}</p>
 			</c:if>
 			<c:if test="${not empty gcuserup.vipnh}">
@@ -56,11 +56,11 @@
 			</c:if>		
 			<c:if test="${not empty gcuserup.vipzfb}">
 			  <p class="widget-notice mt5"><s:text name='viewservice.jsp.service.jsp.25541940'/>:${gcuserup.vipzfb}</p>
-			</c:if>				
+			</c:if>	 --%>			
 			<%-- <p widget-notice mt5><s:text name='reg.jsp.reg.jsp.-1009112269'/>：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}<s:text name='vipuserpay.jsp.userpay.jsp.837885'/></p>
 			 <p widget-notice mt5> <s:text name='viewservice.jsp.service.jsp.643086062'/>， <s:text name='viewservice.jsp.service.jsp.-1565630892'/></p>
              --%>
-            <p class="widget-notice mt10">开户行所在地：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}</p>
+           <%--  <p class="widget-notice mt10">开户行所在地：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}</p> --%>
             <!-- <p class="widget-tips mt10">有关业务问题可咨询，如您无法在一币市场进行收购一币的操作或您想省去在收一币中（打款，等待对方确认）的中间环节，就可以联系本团队服务中心快速购买。</p> --> 
           </div>
         </div>
