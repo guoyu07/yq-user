@@ -492,7 +492,11 @@ public class AdminService {
 		if(!Strings.isNullOrEmpty(areaCode)&&interRegionCode!=null){
 			if(userPropertyDao.isHasUserpropertyByName(userName)){
 				oldareaCode =userPropertyDao.getPorpertyByName(userName).getRegion_code();
-				userPropertyDao.updateUserAreaCodeByName(userName,interRegionCode.getRegion_code(),interRegionCode.getCountry());
+				List<Gcuser> sameNameList = gcuserDao.getList(gcuser.getName(), gcuser.getUserid());
+				for (Gcuser gcuser2 : sameNameList) {//同名账户的所有区域码修改
+					userPropertyDao.updateUserAreaCodeByName(gcuser2.getUsername(),interRegionCode.getRegion_code(),interRegionCode.getCountry());
+				}
+				
 			}else{
 				UserProperty userproperty= new UserProperty();
 				userproperty.setRegion_code(interRegionCode.getRegion_code());
