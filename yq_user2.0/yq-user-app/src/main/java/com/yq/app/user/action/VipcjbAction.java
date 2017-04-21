@@ -96,23 +96,6 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 			inputUrl= request.getRequestURI();
 			return "noVipToken";
 		}
-		if(gcuser.getVip()==2){
-			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
-			if(farenUser!=null){
-				if(!farenUser.getVipsq().equals(smsCode)){
-					super.setErroCodeNum(2001);
-					return SUCCESS;
-				}
-			}else{
-				super.setErroCodeNum(2002);
-				return SUCCESS;
-			}
-		}else{
-			if(!smsCode.equals(gcuser.getVipsq())){
-				super.setErroCodeNum(2001);
-				return SUCCESS;
-			}
-		}
 		userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass,farenUser);
 		super.setErroCodeNum(2000);;
 		return SUCCESS;
