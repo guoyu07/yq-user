@@ -10,6 +10,7 @@
  
    <package name="agentNoAuth" extends="agentNoLoginInterceptor" namespace="/">
          <action name="agentLogin" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="login" />
+         <action name="applogin" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="applogin" />
          <action name="createOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="createOrder" />
          <action name="appCreateOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="appCreateOrder" />
          <action name="payOrder" class="com.yq.app.agent.action.AgentAppNoAuthAction" method="payOrder" />
@@ -45,7 +46,8 @@
          <action name="getAllUsername" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getAllUsername" />
           <!-- 通过用户名得到玩家信息 -->
          <action name="getUserByUsername" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getUserByUsername" />
-         
+         <!-- 积分拆分前单价 -->
+         <!-- <action name="pointSplitBeforPrice" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="pointSplitBeforPrice" /> -->
    </package>
 	
 	<package name="agentNoLoginInterceptor" extends="myInterceptor">

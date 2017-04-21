@@ -35,57 +35,105 @@ public class AgentAppNoAuthAction extends JsonBaseActionSupport{
 	public String login(){
 		Map<String,String> result = new HashMap<String,String>();
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		/*TreeMap<String, String> treeMap = agentService.analysisData(appId,data,"");
+		user=treeMap.get("user");
+		call=treeMap.get("call");
+		sign=treeMap.get("sign");
+		passWord=treeMap.get("passWord");
+		secondPassWord=treeMap.get("secondPassWord");
+		state=Integer.parseInt(treeMap.get("state"));
 		
-		if(state==0){
-			result.put("tokenId", agentService.login(user, passWord,appId));
-	        return renderObjectResult(result);
-		}else{
-			TreeMap<String, String> treeMap = agentService.analysisData(appId,data,"");
-			user=treeMap.get("user");
-			call=treeMap.get("call");
-			sign=treeMap.get("sign");
-			passWord=treeMap.get("passWord");
-			secondPassWord=treeMap.get("secondPassWord");
-			state=Integer.parseInt(treeMap.get("state"));
-			if(state==1){
-				agentService.checkParam(user, passWord, secondPassWord, call, state);
-				Gcuser gcuser = userService.getUserByUserName(user);
-				if(gcuser==null){
-					throw new ServiceException(1, "用户名不存在！");
-				}
-				int callLenght = gcuser.getCall().length();
-				String callLeft = gcuser.getCall().substring(0, 3);
-				String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
-				String callNumber=callLeft+"*****"+CallRight;
-				result.put("callNumber", callNumber);
-				return renderObjectResult(result);
+		if(state==1){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			Gcuser gcuser = userService.getUserByUserName(user);
+			if(gcuser==null){
+				throw new ServiceException(1, "用户名不存在！");
 			}
-			if(state==2){
-				agentService.checkParam(user, passWord, secondPassWord, call, state);
-				userService.sendSmsMsg(user,14);//发送验证码
-				Gcuser gcuser = userService.getUserByUserName(user);
-				result.put("smsCodeSuccess", gcuser.getVipsq());
-				return renderObjectResult(result);
-			}
-			if(state==3){
-				smsCode=treeMap.get("smsCode");
-				agentService.checkParam(user, passWord, secondPassWord, call, state);
-				result.put("call", agentService.bindAccountCheck(user, passWord, secondPassWord, smsCode, call));
-				String randomString = RandomStringUtils.random(6, UserService.getChars());
-				if(userService.updateSmsCode(user,randomString)){//修改玩家验证码
-					result.put("smsCodeSuccess", randomString);//为了验证app端用户名绑定和支付密码的设定统一步骤~
-				}
-				/*userService.sendSmsMsg(user,777);//发送验证码
-				Gcuser gcuser = userService.getUserByUserName(user);
-				result.put("smsCodeSuccess", gcuser.getVipsq());//为了验证app端用户名绑定和支付密码的设定统一步骤~
-	*/			result.put("token", agentService.setToken(user));//兼容新版本
-				return renderObjectResult(result);
-			}
-			result.put("tokenId", agentService.login(user, passWord,appId));
-	        return renderObjectResult(result);
+			int callLenght = gcuser.getCall().length();
+			String callLeft = gcuser.getCall().substring(0, 3);
+			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
+			String callNumber=callLeft+"*****"+CallRight;
+			result.put("callNumber", callNumber);
+			return renderObjectResult(result);
 		}
+		if(state==2){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			userService.sendSmsMsg(user,14);//发送验证码
+			Gcuser gcuser = userService.getUserByUserName(user);
+			result.put("smsCodeSuccess", gcuser.getVipsq());
+			return renderObjectResult(result);
+		}
+		if(state==3){
+			smsCode=treeMap.get("smsCode");
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			result.put("call", agentService.bindAccountCheck(user, passWord, secondPassWord, smsCode, call));
+			String randomString = RandomStringUtils.random(6, UserService.getChars());
+			if(userService.updateSmsCode(user,randomString)){//修改玩家验证码
+				result.put("smsCodeSuccess", randomString);//为了验证app端用户名绑定和支付密码的设定统一步骤~
+			}
+			userService.sendSmsMsg(user,777);//发送验证码
+			Gcuser gcuser = userService.getUserByUserName(user);
+			result.put("smsCodeSuccess", gcuser.getVipsq());//为了验证app端用户名绑定和支付密码的设定统一步骤~
+			result.put("token", agentService.setToken(user));//兼容新版本
+			return renderObjectResult(result);
+		}*/
+		result.put("tokenId", agentService.login(user, passWord,appId));
+        return renderObjectResult(result);
 	}
+	/**
+	 * app登录接口
+	 * @return
+	 */
+	public String applogin(){
+		Map<String,String> result = new HashMap<String,String>();
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,"");
+		user=treeMap.get("user");
+		call=treeMap.get("call");
+		sign=treeMap.get("sign");
+		passWord=treeMap.get("passWord");
+		secondPassWord=treeMap.get("secondPassWord");
+		state=Integer.parseInt(treeMap.get("state"));
+		
+		if(state==1){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			Gcuser gcuser = userService.getUserByUserName(user);
+			if(gcuser==null){
+				throw new ServiceException(1, "用户名不存在！");
+			}
+			int callLenght = gcuser.getCall().length();
+			String callLeft = gcuser.getCall().substring(0, 3);
+			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
+			String callNumber=callLeft+"*****"+CallRight;
+			result.put("callNumber", callNumber);
+			return renderObjectResult(result);
+		}
+		if(state==2){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			userService.sendSmsMsg(user,14);//发送验证码
+			Gcuser gcuser = userService.getUserByUserName(user);
+			result.put("smsCodeSuccess", gcuser.getVipsq());
+			return renderObjectResult(result);
+		}
+		if(state==3){
+			smsCode=treeMap.get("smsCode");
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			result.put("call", agentService.bindAccountCheck(user, passWord, secondPassWord, smsCode, call));
+			String randomString = RandomStringUtils.random(6, UserService.getChars());
+			if(userService.updateSmsCode(user,randomString)){//修改玩家验证码
+				result.put("smsCodeSuccess", randomString);//为了验证app端用户名绑定和支付密码的设定统一步骤~
+			}
+			/*userService.sendSmsMsg(user,777);//发送验证码
+			Gcuser gcuser = userService.getUserByUserName(user);
+			result.put("smsCodeSuccess", gcuser.getVipsq());//为了验证app端用户名绑定和支付密码的设定统一步骤~
+*/			result.put("token", agentService.setToken(user));//兼容新版本
+			return renderObjectResult(result);
+		}
+		result.put("tokenId", agentService.login(user, passWord,appId));
+        return renderObjectResult(result);
+	}
+	
 	/**
 	 * 创建订单
 	 */
