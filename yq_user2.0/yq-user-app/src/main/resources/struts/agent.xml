@@ -47,7 +47,7 @@
           <!-- 通过用户名得到玩家信息 -->
          <action name="getUserByUsername" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="getUserByUsername" />
          <!-- 积分拆分前单价 -->
-         <!-- <action name="pointSplitBeforPrice" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="pointSplitBeforPrice" /> -->
+         <action name="pointSplitBeforPrice" class="com.yq.app.agent.action.AgentAppPersonalNoAuthAction" method="pointSplitBeforPrice" />
    </package>
 	
 	<package name="agentNoLoginInterceptor" extends="myInterceptor">

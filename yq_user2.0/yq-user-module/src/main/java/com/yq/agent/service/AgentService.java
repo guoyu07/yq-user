@@ -24,6 +24,7 @@ import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.utils.JedisUtils;
 import com.sr178.module.utils.MD5Security;
 import com.sr178.module.web.session.Session;
+import com.yq.agent.bean.PointSplitBeforPrice;
 import com.yq.agent.bean.SameAccountWealth;
 import com.yq.agent.bo.AgentApp;
 import com.yq.agent.bo.AgentOrder;
@@ -39,6 +40,7 @@ import com.yq.agent.dao.AgentScoresChangeLogDao;
 import com.yq.agent.dao.AgentTxpayDao;
 import com.yq.agent.dao.AgentUserDao;
 import com.yq.agent.dao.AppPayRecordDao;
+import com.yq.agent.dao.PointSplitBeforPriceDao;
 import com.yq.app.utils.MacShaUtils;
 import com.yq.common.utils.AES;
 import com.yq.common.utils.Global;
@@ -86,8 +88,8 @@ public class AgentService {
 	private AppPayRecordDao appPayRecordDao;
 	@Autowired
 	private UserPropertyDao userPropertyDao;
-	/*@Autowired
-	private PointSplitBeforPriceDao pointSplitBeforPriceDao;*/
+	@Autowired
+	private PointSplitBeforPriceDao pointSplitBeforPriceDao;
 	
 	
 	private static final String DEFAULT_CHAR_SET = "UTF-8";
@@ -1130,6 +1132,11 @@ public class AgentService {
 			throw new ServiceException(5, "用户名不存在！");
 		}
 		return gcuser;
+	}
+	
+	
+	public List<PointSplitBeforPrice> getSplitBeforPrice() {
+		return pointSplitBeforPriceDao.gettop10();
 	}
 	
 	

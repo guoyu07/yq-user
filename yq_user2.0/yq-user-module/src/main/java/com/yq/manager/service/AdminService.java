@@ -27,6 +27,8 @@ import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
+import com.yq.agent.bean.PointSplitBeforPrice;
+import com.yq.agent.dao.PointSplitBeforPriceDao;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.FileCreatUtil;
@@ -203,7 +205,8 @@ public class AdminService {
 	private Zq2016statDao zq2016statDao;
 	@Autowired
 	private SameUserPropertyDao sameUserPropertyDao;
-	
+	@Autowired
+	private PointSplitBeforPriceDao pointSplitBeforPriceDao;
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
   	
@@ -2647,6 +2650,13 @@ public class AdminService {
 	
 	public synchronized void JygChaifen(){
 		Fcxt fcxt = fcxtDao.get(10);
+		Fcxt fcxt2 = fcxtDao.get(2);
+		
+		PointSplitBeforPrice pointSplitPrice= new PointSplitBeforPrice();
+		pointSplitPrice.setPrice(fcxt2.getJygj()+"");
+		pointSplitPrice.setSplitDate(new Date());
+		pointSplitBeforPriceDao.add(pointSplitPrice);
+		
 		Date d = DateUtils.addDay(fcxt.getJsdate(), 3);
 		int updateNum = gcuserDao.updateJfChaifen(beishu, d);
 		int insertNum = gcuserDao.insertIntoChaifenLog(beishu, d);

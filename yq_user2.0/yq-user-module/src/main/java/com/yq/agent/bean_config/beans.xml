@@ -22,6 +22,7 @@
        <bean id="agentTxpayDao" class="com.yq.agent.dao.AgentTxpayDao"></bean>
        <bean id="agentGpjyDao" class="com.yq.agent.dao.AgentGpjyDao"></bean>
        <bean id="appPayRecordDao" class="com.yq.agent.dao.AppPayRecordDao"></bean>
+       <bean id="pointSplitBeforPriceDao" class="com.yq.agent.dao.PointSplitBeforPriceDao"></bean>
      
        
 </beans>

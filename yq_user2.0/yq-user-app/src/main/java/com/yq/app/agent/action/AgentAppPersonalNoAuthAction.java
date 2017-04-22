@@ -9,6 +9,7 @@ import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.module.web.action.JsonBaseActionSupport;
 import com.yq.agent.bean.PointChangeDetail;
 import com.yq.agent.bean.PointChangeInfo;
+import com.yq.agent.bean.PointSplitBeforPrice;
 import com.yq.agent.bean.SameAccount;
 import com.yq.agent.bean.UserPersonalInfoBean;
 import com.yq.agent.bean.UserPointSplitDetail;
@@ -131,7 +132,7 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 			return renderObjectResult(result);
 		}
 		if(state==2){
-			agentService.checkParam(user, passWord, secondPassWord, call, state);
+			//agentService.checkParam(user, passWord, secondPassWord, call, state);
 			userService.sendSmsMsg(user,15);//发送验证码
 			Gcuser gcuser = userService.getUserByUserName(user);
 			result.put("callNumber", gcuser.getCall());
@@ -239,7 +240,13 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	 * @return
 	 */
 	public String pointSplitBeforPrice(){
-		return amount;
+		
+		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
+/*		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		appId=treeMap.get("appId");
+		user=treeMap.get("user");
+		param=treeMap.get("param");*/
+		return this.renderObjectResult(PointSplitBeforPrice.getSplitPrice(agentService.getSplitBeforPrice()));
 		
 	}
 	
