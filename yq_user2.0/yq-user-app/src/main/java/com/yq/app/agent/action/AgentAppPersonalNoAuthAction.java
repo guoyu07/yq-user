@@ -131,6 +131,7 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 			return renderObjectResult(result);
 		}
 		if(state==2){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			userService.sendSmsMsg(user,15);//发送验证码
 			Gcuser gcuser = userService.getUserByUserName(user);
 			result.put("callNumber", gcuser.getCall());
