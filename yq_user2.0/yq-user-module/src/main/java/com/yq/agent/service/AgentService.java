@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -87,6 +86,9 @@ public class AgentService {
 	private AppPayRecordDao appPayRecordDao;
 	@Autowired
 	private UserPropertyDao userPropertyDao;
+	/*@Autowired
+	private PointSplitBeforPriceDao pointSplitBeforPriceDao;*/
+	
 	
 	private static final String DEFAULT_CHAR_SET = "UTF-8";
 	public static final String ENCRY_TYPE_RSA = "RSA";
@@ -434,10 +436,8 @@ public class AgentService {
 		if(gcuser==null){
 			throw new ServiceException(1, "用户名不存在！");
 		}
-		Map<String, String> param= new HashMap<>();
 		if(step==2){
 			ParamCheck.checkString(call, 5, "手机号不能为空");
-			param.put("call", call);
 			if(!call.equals(gcuser.getCall())){
 				throw new ServiceException(12, "输入的手机号与预留的手机号不匹配！");
 			}
@@ -495,7 +495,6 @@ public class AgentService {
 	public Gcuser getUserInfo(String appId, String user, String param, String sign) {
 		//检测客户端传过来的参数是否为空
 		ParamCheck.checkString(user, 2, "用户名不能为空");
-		//ParamCheck.checkString(sign, 5, "签名不能为空");
 		if(param==null){
 			param = "";
 		}
@@ -508,32 +507,14 @@ public class AgentService {
 		if(agentApp==null){
 			throw new ServiceException(7, "无效的appId");
 		}
-		/*String signString = appId+user+param;
-		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
-		if(!mySign.equals(sign)){
-			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
-			throw new ServiceException(9, "签名不正确！");
-		}*/
 		return guser;
 	}
 
 	public List<PointsChangeLog> getPointsChangeLog(String appId, String param, String sign) {
-		//检测客户端传过来的参数是否为空
-		//ParamCheck.checkString(sign, 5, "签名不能为空");
-		/*if(param==null){
-			param = "";
-		}*/
-		//获得app
-		/*AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
+		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
 		if(agentApp==null){
 			throw new ServiceException(7, "无效的appId");
-		}*/
-		/*String signString = appId+param;
-		String mySign = MacShaUtils.doEncryptBase64(signString, agentApp.getAppKey());
-		if(!mySign.equals(sign)){
-			LogSystem.warn("加密串为:["+signString+"],key=["+agentApp.getAppKey()+"],服务器的签名为["+mySign+"],客户端的签名为["+sign+"]");
-			throw new ServiceException(9, "签名不正确！");
-		}*/
+		}
 		
 		return agentPointsChangeLogDao.get10();
 	}

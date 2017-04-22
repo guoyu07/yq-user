@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.module.web.action.JsonBaseActionSupport;
 import com.yq.agent.bean.PointChangeDetail;
 import com.yq.agent.bean.PointChangeInfo;
@@ -116,7 +117,7 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 		state=Integer.parseInt(treeMap.get("state"));
 		sign=treeMap.get("sign");
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		/*if(state==1){
+		if(state==1){
 			Gcuser gcuser = userService.getUserByUserName(user);
 			if(gcuser==null){
 				throw new ServiceException(1, "用户名不存在！");
@@ -128,9 +129,8 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 			String callNumber=callLeft+"*****"+CallRight;
 			result.put("callNumber", callNumber);
 			return renderObjectResult(result);
-		}*/
+		}
 		if(state==2){
-			//agentService.checkSign(appId, user, param, sign,"");
 			userService.sendSmsMsg(user,15);//发送验证码
 			Gcuser gcuser = userService.getUserByUserName(user);
 			result.put("callNumber", gcuser.getCall());
@@ -138,10 +138,12 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 			return renderObjectResult(result);
 		}
 		if(state==3){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			result.put("info", agentService.setPayPassword(appId, user,payPassword, smsCode, call, sign, passWord, secondPassWord,param));
 			return renderObjectResult(result);
 		}
 		if(state==4){
+			agentService.checkParam(user, passWord, secondPassWord, call, state);
 			result.put("info", agentService.updatePayPassword(appId, user,payPassword, oldPayPassword, smsCode, call, sign, passWord, secondPassWord,param));
 			return renderObjectResult(result);
 		}
@@ -229,6 +231,15 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 		user=treeMap.get("user");
 		param=treeMap.get("param");
 		return this.renderObjectResult(UserPersonalInfoBean.getUserPersonalInfoBeanByGcuser(agentService.getUserName(user)));
+	}
+	
+	/**
+	 * TODO 积分拆分前单价
+	 * @return
+	 */
+	public String pointSplitBeforPrice(){
+		return amount;
+		
 	}
 	
 	public String getFromUserName() {
