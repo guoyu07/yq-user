@@ -242,11 +242,11 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	public String pointSplitBeforPrice(){
 		
 		AgentService agentService = ServiceCacheFactory.getService(AgentService.class);
-/*		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
+		TreeMap<String, String> treeMap = agentService.analysisData(appId,data,rsaKey);
 		appId=treeMap.get("appId");
 		user=treeMap.get("user");
-		param=treeMap.get("param");*/
-		return this.renderObjectResult(PointSplitBeforPrice.getSplitPrice(agentService.getSplitBeforPrice()));
+		param=treeMap.get("param");
+		return this.renderObjectResult(PointSplitBeforPrice.getSplitPrice(agentService.getSplitBeforPrice(user)));
 		
 	}
 	
