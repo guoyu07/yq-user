@@ -1135,7 +1135,11 @@ public class AgentService {
 	}
 	
 	
-	public List<PointSplitBeforPrice> getSplitBeforPrice() {
+	public List<PointSplitBeforPrice> getSplitBeforPrice(String userName) {
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser==null){
+			throw new ServiceException(5, "用户名不存在！");
+		}
 		return pointSplitBeforPriceDao.gettop10();
 	}
 	
