@@ -5746,6 +5746,15 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		
 		return userPropertyDao.updatefaren(userName, faren);
 	}
+
+	public boolean isAgent(String adminName) {
+		Gcuser gcuser = gcuserDao.getUser(adminName);
+		if(gcuser.getUserAgent()!=0){
+			return true;
+		}
+		return false;
+	}
+
 	
 	
 }

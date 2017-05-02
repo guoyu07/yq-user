@@ -118,6 +118,8 @@ public class Gcuser{
 	
 	private int scores;
 	
+	private int userAgent;
+	
 	
 	public void setUsername(String username){
 	this.username=username;
@@ -753,6 +755,12 @@ public class Gcuser{
 	}
 	public void setScores(int scores) {
 		this.scores = scores;
+	}
+	public int getUserAgent() {
+		return userAgent;
+	}
+	public void setUserAgent(int userAgent) {
+		this.userAgent = userAgent;
 	}
 	/**
 	 * 是否限制提现

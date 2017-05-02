@@ -1408,6 +1408,15 @@ public class GcuserDao {
 		}
 		return result;
 	}
+
+	public boolean updateUserAgentState(String name, String userId, int status) {
+		String sql = "update "+table+" set user_Agent=? where name=? and userid=?";
+		SqlParameter parameter = new SqlParameter();
+		parameter.setInt(status);
+		parameter.setString(name);
+		parameter.setString(userId);
+		return this.jdbc.update(sql, parameter)>0;
+	}
 	
 	
 	

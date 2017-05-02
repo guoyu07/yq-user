@@ -2655,6 +2655,7 @@ public class AdminService {
 		PointSplitBeforPrice pointSplitPrice= new PointSplitBeforPrice();
 		pointSplitPrice.setPrice(fcxt2.getJygj()+"");
 		pointSplitPrice.setSplitDate(new Date());
+		pointSplitPrice.setBeiShu(beishu);
 		pointSplitBeforPriceDao.add(pointSplitPrice);
 		
 		Date d = DateUtils.addDay(fcxt.getJsdate(), 3);
@@ -3968,5 +3969,34 @@ public class AdminService {
 	public IPage<AdminOperateLog> getAdminOperateLogPageList(String admin, int type, String queryStartDate,
 			String queryEndDatet, int pageIndex, int pageSize) {
 		return adminOperateLogDao.getPageList(admin,type,pageSize,pageIndex,queryStartDate,queryEndDatet);
+	}
+	
+	
+	/**
+	 * 封号
+	 * @param user
+	 * @return
+	 */
+	public boolean userAgent(String userName,int status) {
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser==null){
+			throw new ServiceException(10, "玩家不存在");
+		}
+		return gcuserDao.updateUserAgentState(gcuser.getName(),gcuser.getUserid(),status);
+	}
+	
+	/**
+	 * 搜索用户
+	 * @param param
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public IPage<Gcuser> getSameUserList(String userName,int pageIndex,int pageSize){
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser==null){
+			throw new ServiceException(10, "玩家不存在");
+		}
+		return gcuserDao.getUserPage(gcuser.getName(),gcuser.getUserid(), pageIndex, pageSize);
 	}
 }

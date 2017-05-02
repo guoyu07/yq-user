@@ -163,8 +163,12 @@ public class AgentService {
 		if(agentApp==null){
 			throw new ServiceException(3, "无效的appid");
 		}
+		
 		//登录成功
 		if(gcUser!=null){
+			if(gcUser.getUserAgent()!=0){
+				throw new ServiceException(406, "此会员账户已被封号，请联系客服！");
+			}
 			if(gcUser.getPassword().equals(passWord)){
 				String tokenId = UUID.randomUUID().toString();
 				Session appSession = new Session(userName, System.currentTimeMillis(), tokenId);
@@ -201,6 +205,9 @@ public class AgentService {
 		Gcuser gcuser = gcuserDao.getUser(orderUserName);
 		if(gcuser==null){
 			throw new ServiceException(6, "用户名不存在！");
+		}
+		if(gcuser.getUserAgent()!=0){
+			throw new ServiceException(406, "此会员账户已被封号，请联系客服！");
 		}
 		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
 		if(agentApp==null){
@@ -263,6 +270,9 @@ public class AgentService {
 		Gcuser gcuser = gcuserDao.getUser(orderUserName);
 		if(gcuser==null){
 			throw new ServiceException(4, "用户名不存在！");
+		}
+		if(gcuser.getUserAgent()!=0){
+			throw new ServiceException(406, "此会员账户已被封号，请联系客服！");
 		}
 		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
 		if(agentApp==null){
@@ -341,12 +351,19 @@ public class AgentService {
 		if(gcuser==null){
 			throw new ServiceException(5, "用户名不存在！");
 		}
+		if(gcuser.getUserAgent()!=0){
+			throw new ServiceException(406, "此会员账户已被封号，请联系客服！");
+		}
 		if (!password.equals(gcuser.getPassword())) {
 			throw new ServiceException(6, "登录密码错误！");
 		}
 		if (!password3.equals(MD5Security.md5_16_Small(gcuser.getPassword3()))) {
 			throw new ServiceException(7, "二级密码错误！");
 		}
+		/*if(agentOrder.getAmount()>gcuser.getPay()-gcuser.getVippay()){
+			throw new ServiceException(19, "您好，您有 "+gcuser.getVippay()+"-一币是[服务中心转入]或[游戏收益部分]，此额度不提供消费，仅用于开户使用，谢谢！");
+		}*/
+		
 		//支付指定的yb
 		boolean result = userService.changeYb(payUserName, -agentOrder.getAmount(),orderId+"-"+agentOrder.getProductDesc(), YbChangeType.AGENT_REDUCE, null, 0, YbChangeType.APPUSE);
 		LogSystem.info("【===app==】"+orderId+"支付完成，result="+result+",payUserName="+payUserName+",agentOrder.getAmount()="+agentOrder.getAmount()+",orderId="+orderId+",desc="+agentOrder.getProductDesc());
@@ -503,6 +520,9 @@ public class AgentService {
 		Gcuser guser=gcuserDao.getUser(user);
 		if(guser==null){
 			throw new ServiceException(1, "用户名不存在！");
+		}
+		if(guser.getUserAgent()!=0){
+			throw new ServiceException(406, "此会员账户已被封号，请联系客服！");
 		}
 		//获得app
 		AgentApp agentApp = agentAppDao.get(new SqlParamBean("app_id", appId));
@@ -668,7 +688,6 @@ public class AgentService {
             throw new ServiceException(19,"商户或商家账号不能转账！");
 		}
 		
-		
 		Gcuser togcuser = gcuserDao.getUser(toUserName);
 		if(togcuser==null){
 			throw new ServiceException(11, "收款用户名不存在！");
@@ -695,6 +714,9 @@ public class AgentService {
 		if(yb<=0){
 			throw new ServiceException(8, "金额必须是正整数！");
 		}
+	/*	if(yb>fromgcuser.getPay()-fromgcuser.getVippay()){
+			throw new ServiceException(20, "您好，您有 "+fromgcuser.getVippay()+"-一币是[服务中心转入]或[游戏收益部分]，此额度不提供消费，仅用于开户使用，谢谢！");
+		}*/
 		SameUserProperty fromsameUserProperty = sameUserPropertyDao.getSameUserProperty(fromgcuser.getName()+fromgcuser.getUserid());
 		if(fromsameUserProperty==null || fromsameUserProperty.getAppPayPassword()==null){
 			throw new ServiceException(17, "扣款账户没有设置支付密码！");
@@ -823,6 +845,7 @@ public class AgentService {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	public String queryTrasactionOder(String appId, String productOrder, String param, String sign) {
 		//检测客户端传过来的参数是否为空
@@ -865,6 +888,8 @@ public class AgentService {
 		
 		private String RSA_DATA_KEY = "data";
 		private String RSA_APP_ID_KEY = "appId";
+		
+		
 		public EasySecureHttp(){
 			
 		}
@@ -890,23 +915,23 @@ public class AgentService {
 		
 		
 		public TreeMap<String, String> response4Md5(String merchantId, String data){
-			try{
 				TreeMap<String, String> treeMap = _decrypt4Md5(data);
 				
 				if(!_checkSign4Md5(treeMap, this.signKey)) {
 					throw new ServiceException(9, "签名不正确！");
 				}
 				return treeMap;
-			}catch(Exception e){
-				throw new ServiceException(111, "解析数据包或者前面异常！");
-			}
 		}
 		
 		public TreeMap<String, String> _decrypt4Md5(String data) {
-			TreeMap<String, String> result	= null;
-			String jsonStr = AES.decryptFromBase64(data, this.appKey);
-			result = JSON.parseObject(jsonStr,new TypeReference<TreeMap<String, String>>() {});
-			return result;
+			try{
+				TreeMap<String, String> result	= null;
+				String jsonStr = AES.decryptFromBase64(data, this.appKey);
+				result = JSON.parseObject(jsonStr,new TypeReference<TreeMap<String, String>>() {});
+				return result;
+			}catch(Exception e){
+				throw new ServiceException(111, "解析数据包异常！");
+			}
 		}
 		
 		
@@ -917,18 +942,23 @@ public class AgentService {
 		 * @return
 		 */
 		public boolean _checkSign4Md5(TreeMap<String, String> dataMap, String encryptKey) {
-			String rsign	= StringUtils.trimToEmpty(dataMap.get(SIGN_KEY));
-			StringBuffer buffer	= new StringBuffer();
-			for(Map.Entry<String, String> entry : dataMap.entrySet()) {
-				String key = _formatStr(entry.getKey());
-				String value = _formatStr(entry.getValue());
-				if(SIGN_KEY.equals(key)) {
-					continue;
+		
+			try{
+				String rsign	= StringUtils.trimToEmpty(dataMap.get(SIGN_KEY));
+				StringBuffer buffer	= new StringBuffer();
+				for(Map.Entry<String, String> entry : dataMap.entrySet()) {
+					String key = _formatStr(entry.getKey());
+					String value = _formatStr(entry.getValue());
+					if(SIGN_KEY.equals(key)) {
+						continue;
+					}
+					buffer.append(value);
 				}
-				buffer.append(value);
+				buffer.append(encryptKey);
+				return rsign.equals(MD5Security.md5_32_Small(buffer.toString()));
+			}catch(Exception e){
+				throw new ServiceException(111, "解析数据包或者前面异常！");
 			}
-			buffer.append(encryptKey);
-			return rsign.equals(MD5Security.md5_32_Small(buffer.toString()));
 		}
 		
 		public String _formatStr(String text) {
@@ -954,10 +984,24 @@ public class AgentService {
 		if(Strings.isNullOrEmpty(appId) || easySecureHttpMap.get(appId)==null){
 			throw new ServiceException(7, "无效的appId");
 		}else{
-			return easySecureHttpMap.get(appId).receiveResponse(data);
+			TreeMap<String, String> dataMap = easySecureHttpMap.get(appId).receiveResponse(data);
+			checkAccountAgent(dataMap.get("user"));
+			return dataMap;
 		}
 	}
 
+	public void checkAccountAgent(String user) {
+		if(!Strings.isNullOrEmpty(user)){
+			Gcuser guser=this.gcuserDao.getUser(user);
+			if(guser==null){
+				throw new ServiceException(1, "用户名不存在！");
+			}
+			if(guser.getUserAgent()!=0){
+				throw new ServiceException(406, "此会员证号已被封号，请联系客服！");
+			}
+		}
+		
+	}
 	/**
 	 * 绑定支付密码
 	 * @param appId
@@ -1080,6 +1124,11 @@ public class AgentService {
 		if(gcuser==null){
 			throw new ServiceException(5, "用户名不存在！");
 		}
+		
+		/*if(agentOrder.getAmount()>gcuser.getPay()-gcuser.getVippay()){
+			throw new ServiceException(19, "您好，您有 "+gcuser.getVippay()+"-一币是[服务中心转入]或[游戏收益部分]，此额度不提供消费，仅用于开户使用，谢谢！");
+		}		*/
+		
 		SameUserProperty fromsameUserProperty = sameUserPropertyDao.getSameUserProperty(gcuser.getName()+gcuser.getUserid());
 		if(fromsameUserProperty==null || fromsameUserProperty.getAppPayPassword()==null){
 			throw new ServiceException(17, "扣款账户没有设置支付密码！");
@@ -1136,10 +1185,10 @@ public class AgentService {
 	
 	
 	public List<PointSplitBeforPrice> getSplitBeforPrice(String userName) {
-		Gcuser gcuser = gcuserDao.getUser(userName);
+		/*Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser==null){
 			throw new ServiceException(5, "用户名不存在！");
-		}
+		}*/
 		return pointSplitBeforPriceDao.gettop10();
 	}
 	

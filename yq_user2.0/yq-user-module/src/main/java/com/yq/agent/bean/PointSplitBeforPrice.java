@@ -13,6 +13,8 @@ public class PointSplitBeforPrice {
 	private Date splitDate;		//拆分日期
 	
 	private String price;		//拆前单价
+	
+	private String beiShu;		//拆分倍数
 
 	public int getId() {
 		return id;
@@ -47,6 +49,15 @@ public class PointSplitBeforPrice {
 		this.price = price;
 	}
 
+	
+	public String getBeiShu() {
+		return beiShu;
+	}
+
+	public void setBeiShu(String beiShu) {
+		this.beiShu = beiShu;
+	}
+
 	public static List<PointSplitBeforPrice> getSplitPrice(List<PointSplitBeforPrice> splitBeforPrice) {
 		PointSplitBeforPrice pointSplitBeforPrice = null;
 		List<PointSplitBeforPrice>	result = new ArrayList<>();
@@ -57,6 +68,7 @@ public class PointSplitBeforPrice {
 				pointSplitBeforPrice.setTimes(list.getId());
 				pointSplitBeforPrice.setPrice(list.getPrice());
 				pointSplitBeforPrice.setSplitDate(list.getSplitDate());
+				pointSplitBeforPrice.setBeiShu(list.getBeiShu());
 				result.add(pointSplitBeforPrice);
 			}
 		}

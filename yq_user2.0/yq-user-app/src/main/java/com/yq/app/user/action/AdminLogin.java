@@ -1,7 +1,5 @@
 package com.yq.app.user.action;
 
-import java.util.ResourceBundle;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -36,6 +34,12 @@ public class AdminLogin extends ALDAdminActionSupport {
 				.getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
+		boolean flag = aus.isAgent(adminName);
+		if(flag){
+			super.setErroCodeNum(99999);
+			super.setErroDescrip("您的号被封啦，请联系管理员！");
+			return SUCCESS;
+		}
 		
 		String rand = (String) sessionhttp.getAttribute("rand");
 		if (rand == null) {

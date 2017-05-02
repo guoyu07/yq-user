@@ -45,6 +45,9 @@
 		            <option value="2043" <c:if test="${beizhu==2043}">selected</c:if>>系统管理后台登录</option>
 		            <option value="2017" <c:if test="${beizhu==2017}">selected</c:if>>商户后台登录</option>
 		            <option value="2044" <c:if test="${beizhu==2044}">selected</c:if>>后台管理登录</option>
+		            <option value="2045" <c:if test="${beizhu==2045}">selected</c:if>>修改法人</option>
+		            <option value="2046" <c:if test="${beizhu==2046}">selected</c:if>>封号操作</option>
+		            <option value="2047" <c:if test="${beizhu==2047}">selected</c:if>>解封操作</option>
 					</select><input type="submit" value="查询" name="B1">
 		 	<!-- <input type="button" onClick="exportExcel()" value="导出excel"/> --><br>
     </form>

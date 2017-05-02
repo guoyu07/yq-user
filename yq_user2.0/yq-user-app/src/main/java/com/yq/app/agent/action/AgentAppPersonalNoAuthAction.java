@@ -236,7 +236,7 @@ public class AgentAppPersonalNoAuthAction extends JsonBaseActionSupport{
 	}
 	
 	/**
-	 * TODO 积分拆分前单价
+	 *  积分拆分前单价
 	 * @return
 	 */
 	public String pointSplitBeforPrice(){

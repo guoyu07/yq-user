@@ -90,6 +90,8 @@
 				    		alert(" <s:text name='index.jsp.index.jsp.-1545864663'/>");
 				    	}else if(responseMsg.erroCodeNum==4){
 				    		location.href='/updateuser';
+				    	}else if(responseMsg.erroCodeNum==99999){
+				    		alert('您的账户已被冻结！');
 				    	}
 					    return;
 				    }else{

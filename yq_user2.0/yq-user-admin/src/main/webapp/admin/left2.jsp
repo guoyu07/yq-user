@@ -99,7 +99,7 @@ a:hover  { color:#428EFF;text-decoration:underline; }
 					</tr>
 					<tr>
 					<td style="display:" id='submenu<%=i%>'>
-					<div class=sec_menu style="width:158px; height:260px">
+					<div class=sec_menu style="width:158px; height:312px">
 					 <table style="cellpadding:0; cellspacing:0;width:150;align:center;height:153;">
 					<%
 					 List<Resource> list2 = list.get(i).getResourceList();

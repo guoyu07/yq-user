@@ -158,6 +158,14 @@ public class AdminGlobal {
 	 * 修改法人
 	 * */
 	public static final int LEGALPERSON_OP						= 2045;
+	/**
+	 * 封号
+	 * */
+	public static final int USER_AGENT							= 2046;
+	/**
+	 * 解封
+	 * */
+	public static final int USER_AGENTCANCEL					= 2047;
 	
 	
 }

@@ -157,6 +157,21 @@
 		    </result>
 		</action>	
 		
+		<action name="searchuseragent" class="com.yq.admin.manager.action.UserAgentAction">
+		    <result name="input">
+		        searchuseragent.jsp
+		    </result>
+		   <result name="success">
+		        searchuseragentresult.jsp
+		    </result>
+		</action>	
+		
+		<action name="useragent" class="com.yq.admin.manager.action.UserAgentAction" method="useragent">
+		   <result name="success">
+		        searchuseragentresult.jsp
+		    </result>
+		</action>
+		
 		<action name="modifyaabuser" class="com.yq.admin.manager.action.ModifyaabuserAction">
 		    <result name="input">
 		        modifyuser.jsp
