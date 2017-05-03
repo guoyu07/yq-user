@@ -95,7 +95,7 @@
 				    	}
 					    return;
 				    }else{
-				    	location.href='/manager?thisState=243';
+				    	location.href='/manager?thisState=243&guanggao=1';
 				    }
 			    }
 			    ajaxobj.send();

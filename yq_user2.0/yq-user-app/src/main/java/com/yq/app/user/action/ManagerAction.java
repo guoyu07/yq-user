@@ -23,6 +23,8 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 	
 	private Gcuser gcuserup;
 	
+	private int guanggao;
+	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		Gcuser gcuserb = userService.getUserByUserName(super.getUserName());
@@ -48,6 +50,15 @@ public class ManagerAction extends ALDAdminPageActionSupport<Dgag> {
 		
 		return SUCCESS;
 	}
+	
+	public int getGuanggao() {
+		return guanggao;
+	}
+
+	public void setGuanggao(int guanggao) {
+		this.guanggao = guanggao;
+	}
+
 	public Gcuser getGcuserup() {
 		return gcuserup;
 	}
