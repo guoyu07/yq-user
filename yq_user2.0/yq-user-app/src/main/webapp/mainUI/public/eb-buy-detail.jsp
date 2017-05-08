@@ -118,8 +118,8 @@ function checkdate() {
     return (allValid);
   }
 
-  if (Form.ebSaleNum.value > 109990) {
-    alert("您的发布不能大于您可卖的109890一币哦!");
+  if (Form.ebSaleNum.value > ${gcuser.pay-gcuser.vippay}) {
+    alert("您的发布不能大于您可卖的${gcuser.pay-gcuser.vippay}一币哦!");
     return false;
   }
   if (Form.ebSaleNum.value < 100) {
