@@ -64,14 +64,14 @@
       <!-- 
 
 
- <li class="cur"><a class="root" href="/hfcz">话费充值（100）</a></li>
-      <li><a class="root" target="_blank" href="http://www.kypwe.com">科赡票务</a></li>
+ <li class="cur"><a class="root" href="/hfcz"><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.1102075283'/>（100）</a></li>
+      <li><a class="root" target="_blank" href="http://www.kypwe.com"><s:text name='keshanpiaowu'/></a></li>
       <li><a class="root" target="_blank" href="http://www.qlsme.com">幸福100云购在线</a></li>
-      <li><a class="root" href="/baby">口才训练营报名</a></li> -->
+      <li><a class="root" href="/baby"><s:text name='eloquence_training_camp'/></a></li> -->
 <!-- 
-      <li class="cur"><a href="/hfcz">话费充值（100）</a></li>
-      <li><a target="_blank" href="http://www.kypwe.com">科赡票务</a></li>
+      <li class="cur"><a href="/hfcz"><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.1102075283'/>（100）</a></li>
+      <li><a target="_blank" href="http://www.kypwe.com"><s:text name='keshanpiaowu'/></a></li>
       <li><a target="_blank" href="http://www.qlsme.com">幸福100云购在线</a></li> -->
-    <%--   <li><a target="_blank" href="http://yb.zgyce.com/index.asp?vipid=<%=gcuserJflc2xx.getUsername() %>&vippa=<%=gcuserJflc2xx.getPassword()%>">一币换购商品</a></li>
-	  <li><a target="_blank" href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=<%=gcuserJflc2xx.getUsername() %>">一币换购记录</a></li>
-      <li><a href="/baby">口才训练营报名</a></li> --%>
+    <%--   <li><a target="_blank" href="http://yb.zgyce.com/index.asp?vipid=<%=gcuserJflc2xx.getUsername() %>&vippa=<%=gcuserJflc2xx.getPassword()%>"><s:text name='Yibiexchange_goods'/></a></li>
+	  <li><a target="_blank" href="http://yb.zgyce.com/admin/ybhg_List.asp?hguser=<%=gcuserJflc2xx.getUsername() %>"><s:text name='Yibiexchange_record'/></a></li>
+      <li><a href="/baby"><s:text name='eloquence_training_camp'/></a></li> --%>

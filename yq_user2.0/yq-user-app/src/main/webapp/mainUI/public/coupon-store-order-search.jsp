@@ -15,12 +15,12 @@ function querydata(){
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|我的客户</title>
+  <title><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.624662580'/>|<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.777812136'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+ <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> <!-- 通用头部 -->
@@ -29,7 +29,7 @@ function querydata(){
 
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 报单币明细</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='viewlinks.html.links.html.-1741306770a'/></p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -39,24 +39,24 @@ function querydata(){
   <div class="member-content" id="J_memberContent">
       <div class="member-main-full">
      <form method="POST" action="usermallorderscoreslog?status=1&secondThisState=${secondThisState}&thisState=${thisState}" name="Form" id="Form">
-      <!-- 购物券变化明细 -->
+      <!-- <s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">商城订单号购物券变化明细</p>
-        <p class="small-button-line"><a href="userscoreslog?secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10">返回购物券变化明细</a></p>
+        <p class="widget-title-line"><s:text name='Mall_order_number_shopping_coupons_change_details'/></p>
+        <p class="small-button-line"><a href="userscoreslog?secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10"><s:text name='Return_coupon_details'/></a></p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
             <caption class="search-line">
-              <span>商城订单号查询：</span>
+              <span><s:text name='mallorderquery'/>：</span>
               <input type="text" name="orderId" id="orderId" value="" size="10" style="padding: 0 5px;" />
-              <button type="submit" class="widget-button-small order-search" onClick="querydata()">查询 </button>
+              <button type="submit" class="widget-button-small order-search" onClick="querydata()"><s:text name='query'/> </button>
             </caption>
             <thead>
               <tr>
-                <th>用户名</th>
-                <th>改变数量</th>
-                <th>当前数量</th>
-                <th>详情</th>
-                <th>时间</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.793443422'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.748079417'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.1135007'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.847550'/></th>
               </tr>
             </thead>
             <tbody>
@@ -91,7 +91,7 @@ function querydata(){
 <!-- 会员中心翻页组件 end -->
 
       </div>
-      <!-- 购物券变化明细 end -->
+      <!-- <s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846'/> end -->
       </form>
     </div>
   </div>

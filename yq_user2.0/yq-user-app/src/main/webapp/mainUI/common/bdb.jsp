@@ -61,28 +61,28 @@ function bdbcz(){
 </script>
     <ul class="list">
       <li class="special">
-		     报单币余额<em><%=yjcxGcuser.getSybdb()%></em><% if(yjcxGcuser.getVip()>0) {%><!-- <a href="bdbzz">转出</a> --><%}%>
+		     <s:text name='balance'/><em><%=yjcxGcuser.getSybdb()%></em><% if(yjcxGcuser.getVip()>0) {%><!-- <a href="bdbzz">转出</a> --><%}%>
 		    </li>
 		<%-- <% if(yjcxGcuser.getVip()==2) {%>
 			<li class="special">
-	        <a href="bybdblog">备用报单币</a><em><%=yjcxGcuser.getSyep()%></em>
+	        <a href="bybdblog"><s:text name='viewlinks.html.links.html.-881818137'/></a><em><%=yjcxGcuser.getSyep()%></em>
 		    </li>
 		    <li class="special">
-		     <a href="bdbdate">报单币明细</a>--<a href="bdbcz">充值</a>
+		     <a href="bdbdate"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>--<a href="bdbcz"><s:text name='Recharge'/></a>
 		    </li>
-		 <li><label onclick="bybdblog()">备用报单币</label><em><%=yjcxGcuser.getSyep()%></em>--<b onclick="bdbzz()">转出</b></p></li>
-      	 <li><label onclick="bdbdate()">报单币明细</label>--<b onclick="bdbcz()">充值</b></li>
+		 <li><label onclick="bybdblog()"><s:text name='viewlinks.html.links.html.-881818137'/></label><em><%=yjcxGcuser.getSyep()%></em>--<b onclick="bdbzz()"><s:text name='viewlinks.html.links.html.1159182'/></b></p></li>
+      	 <li><label onclick="bdbdate()"><s:text name='viewlinks.html.links.html.-1741306770a'/></label>--<b onclick="bdbcz()"><s:text name='Recharge'/></b></li>
 		<%}else{%>
-		 <li><a href="bybdblog">备用报单币<em><%=yjcxGcuser.getSyep()%></em></a></li>
-      	 <li><a href="bdbdate">报单币明细</a></li>
+		 <li><a href="bybdblog"><s:text name='viewlinks.html.links.html.-881818137'/><em><%=yjcxGcuser.getSyep()%></em></a></li>
+      	 <li><a href="bdbdate"><s:text name='viewlinks.html.links.html.-1741306770a'/></a></li>
 		<%}%>
 		
-		<li>周封奖金：<em><%=fdpay%></em></li> --%>
-		<%-- <li>收益比例：<em>
+		<li><s:text name='viewlinks.html.links.html.667104660'/>：<em><%=fdpay%></em></li> --%>
+		<%-- <li><s:text name='viewlinks.html.links.html.801984907'/>：<em>
 		<% if(fbpay<1) {%>
 		<%="0"%>
 		<%}else{ %>
 		<%=fbpay%>
 		<%}%></em></li>
-      <li>当前收益:<em><%=mqfh%></em></li> --%>
+      <li><s:text name='Current_income'/>:<em><%=mqfh%></em></li> --%>
     </ul>

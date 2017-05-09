@@ -6,33 +6,33 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|一币认购明细详情</title>
+  <title><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.624662580'/>|<s:text name='Details_of_the_subscription_details'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
 <div class="member-dialog-container">
   <div class="member-main">
     <div class="dialog-widget">
-      <p class="dialog-title">一币认购明细详情</p>
+      <p class="dialog-title"><s:text name='Details_of_the_subscription_details'/></p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>流水号</th>
-                <th>认购方（自己）</th>
-                <th>认购一币数量</th>
-                <th>认购时间</th>
-                <th>卖出方</th>
-                <th>交易状态</th>
-                <th>操作</th>
-                <th>操作状态</th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.27758404'/></th>
+                <th><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1089491839'/></th>
+                <th><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.868743081'/></th>
+                <th><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1100547719'/></th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.21178581'/></th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.625799226'/></th>
+                <th><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></th>
+                <th><s:text name='operation.state'/></th>
               </tr>
             </thead>
             <tbody>
@@ -45,17 +45,17 @@
 				<td> ${data.payusername}</td>
 				<td> 
 				<c:if test="${not empty zftime}">
-                                                               交易成功-卖出方${data.payusername}已确认。
+                                                               <s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.691355938'/>${data.payusername}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.691355938a'/>。
           </c:if>
           <c:if test="${empty zftime}">
-                <c:if test="${data.ep==1}"><font color="#FF00FF">您已下单，等待您在</font><font color="#0000FF"><b>${data.rgdate}</b></font><font color="#FF00FF">前付款，<b><a target="_blank" href="fbbank?fb=${data.payid}"><font color="#008000">点击查看卖出方收款账号！</font></a></b></font></c:if>                                                
-                <c:if test="${data.ep==2}">${data.dfuser}--已付款，等待卖出方${data.payusername}的确认中。。。</c:if>
+                <c:if test="${data.ep==1}"><font color="#FF00FF"><s:text name='vipepmyjl.jsp.epmyjl.jsp.-2134021130'/></font><font color="#0000FF"><b>${data.rgdate}</b></font><font color="#FF00FF"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-2134021130a'/>，<b><a target="_blank" href="fbbank?fb=${data.payid}"><font color="#008000"><s:text name='vipepmyjl.jsp.epmyjl.jsp.-2134021130b'/>！</font></a></b></font></c:if>                                                
+                <c:if test="${data.ep==2}">${data.dfuser}--<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1073667942'/>${data.payusername}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1073667942a'/>。。。</c:if>
           </c:if>
 	          	</td>
-      						<td><a onClick="return confirm('提示：您确定已向发布方 ${data.payusername} 打款 ${data.paynum9}元了吗？')" href="myepok?ep=${data.payid}"><font color="#FF0000" size="2">
-        						<c:if test="${data.ep==1}">已打款${data.paynum9}元，通知卖出方确认。</c:if></font></a>
+
+        						<c:if test="${data.ep==1}"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621'/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621a'/>。</c:if></font></a>
         					</td>
-        					<td><c:if test="${data.opstate==1}">订单被重置</c:if></td>
+        					<td><c:if test="${data.opstate==1}"><s:text name='Order.is.reset'/></c:if></td>
 				</tr>
 			</s:iterator>
             </tbody>

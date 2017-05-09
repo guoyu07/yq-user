@@ -8,10 +8,10 @@
   System.out.println("secondResource="+secondResource.size());
 %> --%>
 <!-- <ul class="nav-secondary">
-       	<li><a href="/vipgo">积分理财</a></li>
-        <li><a href="/login2j?inputUrl=login2j.jsp">一币理财</a></li>
-        <li><a href="/sgks01">业绩查询</a></li>
-        <li><a href="/datepay">账户概览</a></li>
+       	<li><a href="/vipgo"><s:text name='viewjflc.jsp.jflc.jsp.951062035'/></a></li>
+        <li><a href="/login2j?inputUrl=login2j.jsp"><s:text name='viewyblc.jsp.yblc.jsp.618950045'/></a></li>
+        <li><a href="/sgks01"><s:text name='viewlinks.html.links.html.627723500'/></a></li>
+        <li><a href="/datepay"><s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/></a></li>
     </ul> -->
     <%--  <ul class="nav-secondary JQ_navSecondary">
      <%for (Resource re : secondResource) {
@@ -44,56 +44,56 @@
 				       <% if("248".equals(re.getId()+"")){%> 
 				       <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 				       <div class="list">
-				        <a href="/mysl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">积分买入</a>
-				        <a href="/mcsl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">积分卖出</a>
-				        <a href="/gpjy?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">积分交易明细</a>
-				        <a href="/gpjysc?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">积分交易市场</a>
+				        <a href="/mysl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Integral_buy'/></a>
+				        <a href="/mcsl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='integral_sell'/></a>
+				        <a href="/gpjy?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/></a>
+				        <a href="/gpjysc?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewjflc-mark.jsp.jflc-mark.jsp.-1151358946'/></a>
 				      	</div>
 				      	</li>
 				       <%}else if("249".equals(re.getId()+"")){%>
 				       <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 			       		<div class="list">
-				          <a href="/datepay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币明细</a>
+				          <a href="/datepay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1470113791'/></a>
 				           <% if(gcuserHead.getVip()==0){%>
-				          <a href="/userpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币卖出</a>
-				          <a href="/epmcjl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币卖出明细</a>
+				          <a href="/userpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.618675493'/></a>
+				          <a href="/epmcjl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1842504285'/></a>
 				          <%} %>
-				          <a href="/jztojb?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币购金币卡</a>
-				          <a href="/ybPresent?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币捐助区</a>
+				          <a href="/jztojb?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1995717051'/></a>
+				          <a href="/ybPresent?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2003028320'/></a>
 				        </div>
 				        </li>
 				       <%}else if("251".equals(re.getId()+"")){%>
 				       <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 			       		<div class="list">
-					       <a href="/vipgo?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">我要充值</a>
-					       <a href="/gmjh?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">激活金币卡</a>
-					       <a href="/goldDetail?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">金币明细</a>
+					       <a href="/vipgo?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.782396711'/></a>
+					       <a href="/gmjh?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.1519971254'/></a>
+					       <a href="/goldDetail?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Gold_details'/></a>
 				        </div>
 				        </li>
 				       <%}else if("252".equals(re.getId()+"")){%>
 				       <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 			       		<div class="list">
-					       <a href="/bybdblog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">报单币明细</a>
-					       <a href="/userscoreslog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">购物券</a>
+					       <a href="/bybdblog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>
+					       <a href="/userscoreslog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewuser.jsp.user.jsp.35660508'/></a>
 				        </div>
 				        </li>
 				       <%}else if("253".equals(re.getId()+"") && gcuserHead.getVip()!=0 ){%>
 			       		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 			       		<div class="list">
-					      <a href="/vipjzpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币转出</a>
-				          <a href="/epjysc?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币交易市场</a>
-				          <a href="/epmyjl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">一币认购明细</a>
-				          <a href="/bdbzz?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">报单币转出</a>
-				          <a href="/bdbcz?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">报单币充值</a>
-				          <a href="/vipcjb?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">vip充值币管理</a>
-				          <a href="/bdbdate?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">备用报单币明细</a>
+					      <a href="/vipjzpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Currency_transfer'/></a>
+				          <a href="/epjysc?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1811565864'/></a>
+				          <a href="/epmyjl?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-2008491582'/></a>
+				          <a href="/bdbzz?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='From_the_currency_declaration'/></a>
+				          <a href="/bdbcz?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Account_currency_recharge'/></a>
+				          <a href="/vipcjb?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">vip<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1624937649'/></a>
+				          <a href="/bdbdate?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Reserve_currency_report_details'/></a>
 				        </div>
 				        </li>
 				         <%}else if("254".equals(re.getId()+"") && (gcuserHead.getUsername().equals("300fhk") || gcuserHead.getUsername().equals("zxz888"))){%>
 				         <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 				         <div class="list">
-				          <a href="/glpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">商城退款</a>
-				          <a href="/glpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">商城购物券退款</a>
+				          <a href="/glpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/></a>
+				          <a href="/glpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1199974190'/></a>
 				       	 </div>
 				       	 </li>
 				        <%}else if("250".equals(re.getId()+"")){%>
@@ -112,62 +112,62 @@
 		<%} %>
      <!-- 
       <li>
-        <a class="root" href="/sgks01">业绩查询</a>
+        <a class="root" href="/sgks01"><s:text name='viewlinks.html.links.html.627723500'/></a>
       </li>
       <li >
-        <a class="root" href="/mysl">积分理财</a>
+        <a class="root" href="/mysl"><s:text name='viewjflc.jsp.jflc.jsp.951062035'/></a>
         <div class="list">
           <a href="/mysl" class="item">积分买入</a>
-          <a href="/mcsl" class="item">积分卖出</a>
-          <a href="/gpjy" class="item">积分交易明细</a>
-          <a href="/gpjysc" class="item">积分交易市场</a>
+          <a href="/mcsl" class="item"><s:text name='integral_sell'/></a>
+          <a href="/gpjy" class="item"><s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/></a>
+          <a href="/gpjysc" class="item"><s:text name='viewjflc-mark.jsp.jflc-mark.jsp.-1151358946'/></a>
         </div>
       </li>
       <li>
-        <a class="root" href="/datepay">一币理财</a>
+        <a class="root" href="/datepay"><s:text name='viewyblc.jsp.yblc.jsp.618950045'/></a>
         <div class="list">
-          <a href="/datepay" class="item">一币明细</a>
-          <a href="/userpay" class="item">一币卖出</a>
-          <a href="/epmcjl" class="item">一币卖出明细</a>
-          <a href="/jztojb" class="item">一币购金币卡</a>
-          <a href="/ybPresent" class="item">一币捐助区</a>TOTO
+          <a href="/datepay" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1470113791'/></a>
+          <a href="/userpay" class="item"><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.618675493'/></a>
+          <a href="/epmcjl" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1842504285'/></a>
+          <a href="/jztojb" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1995717051'/></a>
+          <a href="/ybPresent" class="item"><s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2003028320'/></a>TOTO
         </div>
       </li>
       <li>
-        <a class="root" href="/vipgo">金币管理</a>
+        <a class="root" href="/vipgo"><s:text name='Gold_coin_management'/></a>
         <div class="list">
-          <a href="/vipgo" class="item">我要充值</a>
-          <a href="/gmjh" class="item">激活金币卡</a>
+          <a href="/vipgo" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.782396711'/></a>
+          <a href="/gmjh" class="item"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.1519971254'/></a>
           <a href="/goldDetail" class="item">金币明细</a>TOTO
         </div>
       </li>
       <li>
-        <a class="root" href="/bybdblog">报单币明细</a>
+        <a class="root" href="/bybdblog"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>
         <div class="list">
-          <a href="/bybdblog" class="item">报单币明细</a>
-          <a href="/userscoreslog" class="item">购物券</a>TOTO --><!-- TOTO
+          <a href="/bybdblog" class="item"><s:text name='viewlinks.html.links.html.-1741306770a'/></a>
+          <a href="/userscoreslog" class="item"><s:text name='viewuser.jsp.user.jsp.35660508'/></a>TOTO --><!-- TOTO
         </div>
       </li>
       <li>
         <a class="root" href="/vipjzpay">VIP中心</a>
         <div class="list">
           <a href="/vipjzpay" class="item">一币转出</a>
-          <a href="/epjysc" class="item">一币交易市场</a>
-          <a href="/epmyjl" class="item">一币认购明细</a>
+          <a href="/epjysc" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.1811565864'/></a>
+          <a href="/epmyjl" class="item"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-2008491582'/></a>
           <a href="/bdbzz" class="item">报单币转出</a>
-          <a href="/bdbcz" class="item">报单币充值</a>
-          <a href="/vipcjb" class="item">vip充值币管理</a>
+          <a href="/bdbcz" class="item"><s:text name='Account_currency_recharge'/></a>
+          <a href="/vipcjb" class="item">vip<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1624937649'/></a>
           <a href="/bdbdate" class="item">备用报单币明细</a>
         </div>
       </li>
       <li>
-        <a class="root" href="/glpay">商城管理</a>
+        <a class="root" href="/glpay"><s:text name='Mall_management'/></a>
         <div class="list">
-          <a href="/glpay" class="item">商城退款</a>
-          <a href="/glpay" class="item">商城购物券退款</a>TOTO --><!-- TOTO
+          <a href="/glpay" class="item"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.673109126'/></a>
+          <a href="/glpay" class="item"><s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1199974190'/></a>TOTO --><!-- TOTO
         </div>
       </li>
       <li>
-        <a class="root" href="/ybsf">商户管理</a>
+        <a class="root" href="/ybsf"><s:text name='Merchant_management'/></a>
       </li> -->
     </ul> 

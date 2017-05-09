@@ -6,12 +6,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|报单币变化明细|报单日志</title>
+  <title><s:text name='viewlinks.html.links.html.624662580'/>|<s:text name='Coin_change_list_declaration'/>|<s:text name='declaration_coin_log'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 报单币明细</p>
+    <p class="breadcrumb-trail"><s:text name='viewhead.jsp.head.jsp.1099577248'/> >> <s:text name='viewlinks.html.links.html.-1741306770a'/></p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -36,7 +36,7 @@
   
   <!-- 报单币明细左边栏 -->
   <div class="point-info">
-    <p class="title">报单币明细</p>
+    <p class="title"><s:text name='viewlinks.html.links.html.-1741306770a'/></p>
      <%@ include file="/mainUI/common/bdb.jsp" %>
   </div>
   <!-- 报单币明细左边栏  end -->
@@ -44,23 +44,23 @@
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- 报单币变化明细 -->
+      <!-- <s:text name='Coin_change_list_declaration'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">报单币变化明细</p>
+        <p class="widget-title-line"><s:text name='Coin_change_list_declaration'/></p>
         <p class="small-button-line">
-          <%-- <a href="/bdbdate?type=0&secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10">查看转账日志</a>
-          <a href="javascript:void(0);" class="widget-button-small JQ_goDialog" data-url="/bdbdatebaodandetail?status=1&type=1">查看更多</a> --%>
+          <%-- <a href="/bdbdate?type=0&secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10"><s:text name='View_log'/></a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_goDialog" data-url="/bdbdatebaodandetail?status=1&type=1"><s:text name='View_more'/></a> --%>
         </p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <%-- <thead>
               <tr>
-                <th>用户名</th>
-                <th>报单币收入</th>
-                <th>报单币支出</th>
-                <th>剩余报单币</th>
-                <th>更新时间</th>
-                <th>备注</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1788646048'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1788646116'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1361215839'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.811035898'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></th>
               </tr>
             </thead>
             <tbody>
@@ -76,16 +76,16 @@
             </tbody> --%>
             <thead>
               <tr>
-                <th>用户名</th>
-               <!--  <th>报单币收入</th>
-                <th>报单币支出</th>
-                <th>剩余报单币</th> -->
-                <th>左总计</th>
-                <th>右总计</th>
-                <th>左结余</th>
-                <th>右结余</th>
-                <th>更新时间</th>
-                <th>备注</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+               <!--  <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1788646048'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1788646116'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1361215839'/></th> -->
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.23899948'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.21452281'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.24127308'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.21679641'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.811035898'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></th>
               </tr>
             </thead>
             <tbody>
@@ -110,7 +110,7 @@
   <aldtags:pageTag paraStr="type,${type},thisState,${thisState},secondThisState,${secondThisState}"/>
 </p>
       </div>
-      <!-- 报单币变化明细 end -->
+      <!-- <s:text name='Coin_change_list_declaration'/> end -->
     </div>
   </div>
 </div>

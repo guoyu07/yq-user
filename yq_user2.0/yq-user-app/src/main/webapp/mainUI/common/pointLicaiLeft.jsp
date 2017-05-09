@@ -7,13 +7,13 @@ UserService userServiceJflc2 = ServiceCacheFkactory.getServiceCache().getService
 Gcuser gcuserJflc2 = userServiceJflc2.getUserByUserName(userServiceJflc2.isLogin(request.getSession().getId()));
 %> --%>
       <div class="point-info">
-          <p class="title">积分理财</p>
+          <p class="title"><s:text name='viewjflc.jsp.jflc.jsp.951062035'/></p>
            <ul class="list">
-           <!-- <li><a href="/vipgo">我要充值</a></li>
-            <li><a href="/login2j?inputUrl=login6j.jsp">激活金币卡</a></li>
-            <li><a href="/gpjy">积分交易明细</a></li>
-            <li><a href="/gpjysc">积分交易市场</a></li> -->
-           <li>积分拆分次数<em><%=gcuserHead.getCfa() %></em></li>
-           <li>积分拆分倍数<em><%=gcuserHead.getCfb() %></em></li>
+           <!-- <li><a href="/vipgo"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.782396711'/></a></li>
+            <li><a href="/login2j?inputUrl=login6j.jsp"><s:text name='viewjflc-activie-gold-look.jsp.jflc-activie-gold-look.jsp.1519971254'/></a></li>
+            <li><a href="/gpjy"><s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/></a></li>
+            <li><a href="/gpjysc"><s:text name='viewjflc-mark.jsp.jflc-mark.jsp.-1151358946'/></a></li> -->
+           <li><s:text name='viewjflc.jsp.jflc.jsp.-1002641178'/><em><%=gcuserHead.getCfa() %></em></li>
+           <li><s:text name='viewjflc.jsp.jflc.jsp.-1002856070'/><em><%=gcuserHead.getCfb() %></em></li>
           </ul>
         </div>

@@ -24,21 +24,21 @@ if(fcxt!=null){
 %>
         <div class="user-info">
           <div class="head-pic">
-            <p class="title">用户</p>
+            <p class="title"><s:text name='user'/></p>
             <img src="${ctx}/img/user_head.png" width="102" height="102">
           </div>
           <ul class="user-detail">
            <!--  <li class="login-info"><span>上次登录：</span><em></em></li> -->
-            <li ><!-- class="user-name" --><span>用户名：</span><a href="userlist?secondThisState=292&thisState=245"><%=gcuser.getUsername()%></a></li>
-            <li class="eb-exchange"><span>当前可用一币：</span><em><%=gcuser.getPay()%></em></li>
-            <li class="eb-exchange"><span>累计交易一币：</span><em><%=gcuser.getCbpay()%></em></li>
-            <li class="eb-exchange"><span>累计使用一币：</span><em><%=gcuser.getTxpay()%></em></li>
+            <li ><!-- class="user-name" --><span><s:text name='reg.jsp.reg.jsp.29623262'/>：</span><a href="userlist?secondThisState=292&thisState=245"><%=gcuser.getUsername()%></a></li>
+            <li class="eb-exchange"><span><s:text name='viewuser.jsp.user.jsp.1504881972'/>：</span><em><%=gcuser.getPay()%></em></li>
+            <li class="eb-exchange"><span><s:text name='viewuser.jsp.user.jsp.1927395202'/>：</span><em><%=gcuser.getCbpay()%></em></li>
+            <li class="eb-exchange"><span><s:text name='viewuser.jsp.user.jsp.1937629852'/>：</span><em><%=gcuser.getTxpay()%></em></li>
            <%-- 	<% if(Global.OpenScoresPay){
 			 %>
-			<li class="eb-exchange"><span>购物券：</span><a href="/userscoreslog"><%=gcuser.getScores()%></a></li>
+			<li class="eb-exchange"><span><s:text name='viewuser.jsp.user.jsp.35660508'/>：</span><a href="/userscoreslog"><%=gcuser.getScores()%></a></li>
 			<%
 			}
 			%> --%>
-			 <li class="eb-exchange"><span>游戏级别：</span><em><%=gcuser.getSjb()%></em></li>
+			 <li class="eb-exchange"><span><s:text name='viewlinks.html.links.html.865732987'/>：</span><em><%=gcuser.getSjb()%></em></li>
           </ul>
         </div>

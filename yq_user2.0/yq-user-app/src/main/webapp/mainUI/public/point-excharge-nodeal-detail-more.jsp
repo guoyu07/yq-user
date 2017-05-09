@@ -6,35 +6,35 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|未成交积分交易明细详情</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='Not_traded_details_of_transaction_details'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
   <div class="member-dialog-container">
     <div class="member-main">
       <div class="dialog-widget">
-        <p class="dialog-title">未成交积分交易明细详情</p>
+        <p class="dialog-title"><s:text name='Not_traded_details_of_transaction_details'/></p>
         <!-- 图纸为一页13条数据 -->
         <div class="dialog-wrap-border main-widget">
           <div class="dialog-table">
             <table border="0" cellspacing="0" cellpadding="0">
               <thead>
                 <tr>
-                  <th>用户名</th>
-                  <th>卖出数量</th>
-                  <th>买入数量</th>
-                  <th>剩余数量</th>
-                  <th>挂牌时间</th>
-                  <th>单价</th>
-                  <th>交易额</th>
-                  <th>状态</th>
-                  <th>对方</th>
-                  <th>成交时间</th>
+                  <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.656571075'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.619069972'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.648863855'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.784049096'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.681538'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.20195982'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.934923'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.755936'/></th>
+                  <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.768067666'/></th>
                 </tr>
               </thead>
               <tbody>

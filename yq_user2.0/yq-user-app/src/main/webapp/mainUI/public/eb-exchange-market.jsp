@@ -12,7 +12,7 @@
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 

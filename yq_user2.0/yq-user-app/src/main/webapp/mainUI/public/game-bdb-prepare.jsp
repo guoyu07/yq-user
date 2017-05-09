@@ -6,12 +6,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|备用报单币明细变化</title>
+  <title><s:text name='vipgpjymc.jsp.gpjymc.jsp.624662580'/>|<s:text name='Reserve_currency_declaration_details_change'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 报单币明细</p>
+    <p class="breadcrumb-trail"><s:text name='viewhead.jsp.head.jsp.1099577248'/> >> <s:text name='viewlinks.html.links.html.-1741306770a'/></p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -40,17 +40,17 @@
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- 备用报单币明细变化 -->
+      <!-- <s:text name='Reserve_currency_declaration_details_change'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">备用报单币明细变化</p>
+        <p class="widget-title-line"><s:text name='Reserve_currency_declaration_details_change'/></p>
         <div class="widget-table full-size">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>用户名</th>
-                <th>改变数量</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.793443422'/></th>
                 <th>改变后数量</th>
-                <th>时间</th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.847550'/></th>
                 <th>被充值用户</th>
               </tr>
             </thead>
@@ -74,7 +74,7 @@
 <!-- 会员中心翻页组件 end -->
 
       </div>
-      <!-- 备用报单币明细变化 end -->
+      <!-- <s:text name='Reserve_currency_declaration_details_change'/> end -->
     </div>
   </div>
 </div>

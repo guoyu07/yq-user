@@ -6,12 +6,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|登录记录明细</title>
+  <title><s:text name='vipgpjymc.jsp.gpjymc.jsp.624662580'/>|<s:text name='Log_entry_details'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 <body> 
 <!-- 通用头部 -->
@@ -21,7 +21,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">账户管理 >> 登录日志</p>
+    <p class="breadcrumb-trail"><s:text name='Account_manage'/> >> <s:text name='Login_log'/></p>
     <%@ include file="/mainUI/common/accountpart.jsp" %>
   </div>
 </div>
@@ -31,18 +31,18 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
       <div class="member-main-full">
-      <!-- 同名账户列表 -->
+      <!-- <s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.1302371267'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">登录记录明细</p>
+        <p class="widget-title-line"><s:text name='Log_entry_details'/></p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>员工编号</th>
-                <th>最近登录时间</th>
-                <th>退出时间</th>
-                <th>ip地址</th>
-                <th>相关操作</th>
+                <th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.667376878'/></th>
+                <th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.-451364663'/></th>
+                <th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.1119230520'/></th>
+                <th>ip<s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.714256'/></th>
+                <th><s:text name='viewgrxx-loginlog.jsp.grxx-loginlog.jsp.928172778'/></th>
               </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@
 </p>
 <!-- 会员中心翻页组件 end -->
 
-        <!-- 同名账户列表 end -->
+        <!-- <s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.1302371267'/> end -->
       </div>
     </div>
   </div>

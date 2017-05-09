@@ -7,7 +7,7 @@
 <c:if test="${erroCodeNum==5}"><script language=javascript>alert('充值币不足！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('备用报单币不足！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('被充值用户的一币不足！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==8}"><script language=javascript>alert('二级密码不正确');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2022589602'/>');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('年终结算，暂停使用!');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2002}"><script language=javascript>alert('此大vip用户所对应的法人不存在，请联系管理员添加！');history.go(-1);</script></c:if>
@@ -16,12 +16,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|报单币充值</title>
+  <title><s:text name='Member_center'/>|<s:text name='Account_currency_recharge'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+ <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> <!-- 通用头部 -->
@@ -30,7 +30,7 @@
  <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='vipadmin_menu.jsp.admin_menu.jsp.951062035'/></p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -48,14 +48,14 @@
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- 报单币充值 -->
+      <!-- <s:text name='Account_currency_recharge'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">充值50000报单币</p>
+        <p class="widget-title-line"><s:text name='50000_coins_recharge'/></p>
         <form class="widget-form" method="POST" name="Form" action="bdbcz?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item">
-            <label class="title">当前充值币：</label><span class="text">${czgcuser.vipcjcjb}</span></p>
+            <label class="title"><s:text name='Current_recharge:'/></label><span class="text">${czgcuser.vipcjcjb}</span></p>
           <p class="item">
-            <label class="title">当前备用报单币：</label><span class="text">${czgcuser.syep}</span></p>
+            <label class="title"><s:text name='The_current_reserve_currency:'/></label><span class="text">${czgcuser.syep}</span></p>
          <!--  <p class="widget-notice widget-warning mt15">本次操作需要消耗：</p>
           <p class="item mt15">
             <label class="title">当前用户充值币：</label><span class="text">5000</span></p>
@@ -63,14 +63,14 @@
             <label class="title">当前用户备用报单币：</label><span class="text">22200</span></p>
           <p class="item">
             <label class="title">被充值用户一币：</label><span class="text">22800</span></p> -->
-           	<p class="widget-notice widget-warning mt15"> 本次操作需要消耗当前用户5000充值币，22200备用报单币及被充值用户22800一币。</p>
-          <p class="widget-notice widget-warning mt15"> 注：只能给团队下的小vip充值。</p>
+           	<p class="widget-notice widget-warning mt15"> <s:text name='This_operation_requires_the_users_to_recharge_5000_coins,_22200_coins_and_spare_form_prepaid_users_22800_coins.'/></p>
+          <p class="widget-notice widget-warning mt15"> <s:text name='Note:_only_a_small_VIP_recharge_to_the_team.'/></p>
           <p class="item mt15">
-            <label class="title">被充值用户名：</label>
+            <label class="title"><s:text name='recharge_user_name'/>：</label>
             <input type="text" name="touser" />
           </p>
           <p class="item">
-            <label class="title">二级密码：</label>
+            <label class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>：</label>
             <input type="password" name="pa3" />
           </p>
           <%-- 
@@ -83,7 +83,7 @@
           </c:if>
           <c:if test="${gcuser.vip!=2}">
 	          <p class="item">
-	            <label class="title">手机号码：</label>
+	            <label class="title"><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
 	            <span class="text">${gcuser.call}</span>
 	          </p>
 	          <input type="hidden" name="toUserName" value="${gcuser.username}">
@@ -93,16 +93,16 @@
 			<input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input>
 		</p>
            <p class="item">
-            <label class="title">手机验证码：</label>
+            <label class="title"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</label>
             <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
-            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
+            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>"/>
           </p> --%>
           <p class="button-line mt15">
-            <button class="widget-button" type="submit" onclick="return confirm('提示：您确定了吗？')">确定转账</button>
+            <button class="widget-button" type="submit" onclick='return confirm("<s:text name='vipepjysc.jsp.epjysc.jsp.1991539691'/>")'><s:text name='Definite_transfer'/></button>
           </p>
         </form>
       </div>
-      <!-- 报单币充值 end -->
+      <!-- <s:text name='Account_currency_recharge'/> end -->
     </div>
   </div>
 </div>
@@ -120,7 +120,7 @@ function sendmsg(){
 	  var data = $("#Form").serialize();
 	  $.post("/smsother?op=23&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
 	    if (response.erroCodeNum == 2) {
-	      alert('输入的手机号与预留手机号不一致！');
+	      alert('<s:text name='Enter_phone_number_error'/>！');
 	      $("#btn").attr("disabled", false);
 	      Form.inputCall.focus();
 	      return false;
@@ -128,11 +128,11 @@ function sendmsg(){
 	    }
 	    $("#btn").removeAttr("disabled");
 	    if (response.erroCodeNum != 0) {
-	      alert("手机验证码发送失败");
+	      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
 	      return false;
 	    }
 	    settime($("#btn"), '#SESSION_LOCALE');
-	    alert("手机验证码发送成功");
+	    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
 	  });
 	  return true;
 }

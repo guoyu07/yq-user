@@ -6,40 +6,40 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|同名账户列表详情</title>
+  <title><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.624662580'/>|<s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.1302371267'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
 <div class="member-dialog-container">
   <div class="member-main">
     <div class="dialog-widget">
-      <p class="dialog-title">同名账户列表详情</p>
+      <p class="dialog-title"><s:text name='Accounts_with_the_same_list_for_details'/></p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>用户名</th>
-                <th>姓名</th>
-                <th>游戏级别</th>
-                <th>可用一币</th>
-                <th>积分数量</th>
-                <th>可用金币</th>
-                <th>注册时间</th>
-                <th>开户时间</th>
-                <th>信誉星</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='reg.jsp.reg.jsp.734362'/></th>
+                <th><s:text name='viewlinks.html.links.html.865732987'/></th>
+                <th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.669584602'/></th>
+                <th><s:text name='viewshop.html.shop.html.950947478'/></th>
+                <th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.670122793'/></th>
+                <th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.851482466'/></th>
+                <th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.749527093'/></th>
+                <th><s:text name='viewzhgl-tmzhlist.jsp.zhgl-tmzhlist.jsp.20777047'/></th>
               </tr>
             </thead>
             <tbody>
               <s:iterator var="data" value="dataList">
 							<tr>
-								<td><%-- <a href="/relogin?luserName=${data.username}"> --%>${data.username}<!-- </a> --><c:if test="${data.username==gcuser.username}"></font><b><font color="#FF00FF">(当前)</font></b></c:if></td>
+								<td><%-- <a href="/relogin?luserName=${data.username}"> --%>${data.username}<!-- </a> --><c:if test="${data.username==gcuser.username}"></font><b><font color="#FF00FF">(<s:text name='current'/>)</font></b></c:if></td>
 								<td>${data.name}</td>
 								<td>${data.sjb}</td>
 								<td>${data.pay}</td>

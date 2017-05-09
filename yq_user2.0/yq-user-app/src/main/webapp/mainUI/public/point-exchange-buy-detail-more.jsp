@@ -6,19 +6,19 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|当前求购明细详情</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='Current_Buying_Details'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+ <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
 <div class="member-dialog-container">
   <div class="member-main">
     <div class="dialog-widget">
-      <p class="dialog-title">当前求购明细详情</p>
+      <p class="dialog-title"><s:text name='Current_Buying_Details'/></p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">

@@ -6,12 +6,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|一币认购明细</title>
+  <title><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.624662580'/>|<s:text name='vipadmin_menu.jsp.admin_menu.jsp.-2008491582'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+ <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='viewyblc.jsp.yblc.jsp.618950045'/></p>
    <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -34,20 +34,20 @@
       <div class="member-main-full">
       <!-- 一币卖出明细表格 -->
       <div class="main-widget">
-        <p class="widget-title-line">一币认购明细</p>
-        <p class="small-button-line"><!-- <a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epmyjlmrdetail?status=1" id="J_ebSaleDetailMore">查看更多</a></p> -->
+        <p class="widget-title-line"><s:text name='vipadmin_menu.jsp.admin_menu.jsp.-2008491582'/></p>
+        <p class="small-button-line"><!-- <a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epmyjlmrdetail?status=1" id="J_ebSaleDetailMore"><s:text name='View_more'/></a></p> -->
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>流水号</th>
-                <th>认购方（自己）</th>
-                <th>认购一币数量</th>
-                <th>认购时间</th>
-                <th>卖出方</th>
-                <th>交易状态</th>
-                <th>操作</th>
-                <th>操作状态</th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.27758404'/></th>
+                <th><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1089491839'/></th>
+                <th><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.868743081'/></th>
+                <th><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.1100547719'/></th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.21178581'/></th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.625799226'/></th>
+                <th><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></th>
+                <th><s:text name='operation.state'/></th>
               </tr>
             </thead>
             <tbody>
@@ -60,17 +60,17 @@
 				<td> ${data.payusername}</td>
 				<td> 
 				<c:if test="${not empty zftime}">
-                                                               交易成功-卖出方${data.payusername}已确认。
+                                                               <s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.691355938'/>${data.payusername}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.691355938a'/>。
           </c:if>
           <c:if test="${empty zftime}">
-                <c:if test="${data.ep==1}"><font color="#FF00FF">您已下单，等待您在</font><font color="#0000FF"><b>${data.rgdate}</b></font><font color="#FF00FF">前付款，<b><a target="_blank" href="fbbank?fb=${data.payid}&secondThisState=${secondThisState}&thisState=${thisState}"><font color="#008000">点击查看卖出方收款账号！</font></a></b></font></c:if>                                                
-                <c:if test="${data.ep==2}">${data.dfuser}--已付款，等待卖出方${data.payusername}的确认中。。。</c:if>
+                <c:if test="${data.ep==1}"><font color="#FF00FF"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-2134021130'/></font><font color="#0000FF"><b>${data.rgdate}</b></font><font color="#FF00FF"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-2134021130a'/>，<b><a target="_blank" href="fbbank?fb=${data.payid}&secondThisState=${secondThisState}&thisState=${thisState}"><font color="#008000"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-2134021130b'/>！</font></a></b></font></c:if>                                                
+                <c:if test="${data.ep==2}">${data.dfuser}--<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1073667942'/>${data.payusername}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.-1073667942a'/>。。。</c:if>
           </c:if>
 	          	</td>
-      						<td><a onClick="return confirm('提示：您确定已向发布方 ${data.payusername} 打款 ${data.paynum9}元了吗？')" href="myepok?ep=${data.payid}&secondThisState=${secondThisState}&thisState=${thisState}"><font color="#FF0000" size="2">
-        						<c:if test="${data.ep==1}">已打款${data.paynum9}元，通知卖出方确认。</c:if></font></a>
+
+        						<c:if test="${data.ep==1}"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621'/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621a'/>。</c:if></font></a>
         					</td>
-        					<td><c:if test="${data.opstate==1}">订单被重置</c:if></td>
+        					<td><c:if test="${data.opstate==1}"><s:text name='Order.is.reset'/></c:if></td>
 				</tr>
 			</s:iterator>
             </tbody>
@@ -92,11 +92,11 @@
 /*验证交互*/
 function checkdate() {
   if (Form.ebSaleNum.value == 0) {
-    alert("请选择卖出一币的数量!");
+    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-861806777'/>!");
     return false;
   }
   if (!chkinteger(Form.ebSaleNum.value)) {
-    alert('卖出一币只能为整字!');
+    alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.431301541'/>!');
     document.Form.ebSaleNum.focus;
     return false;
   }
@@ -118,16 +118,16 @@ function checkdate() {
     return (allValid);
   }
 
-  if (Form.ebSaleNum.value > 109990) {
-    alert("您的发布不能大于您可卖的109890一币哦!");
+  if (Form.ebSaleNum.value > ${gcuser.pay-gcuser.vippay}) {
+    alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977'/>!");
     return false;
   }
   if (Form.ebSaleNum.value < 100) {
-    alert("您的发布不能小于100一币!");
+    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1837041227'/>!");
     return false;
   }
   if (Form.pa3.value == "") {
-    alert("请输入二级密码密码!");
+    alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>!");
     return false;
   }
 
@@ -136,18 +136,18 @@ function checkdate() {
   $.post("/sms?op=3", data, function(response) {
     $("#btn").removeAttr("disabled");
     if (response.erroCodeNum != 0) {
-      alert("手机验证码发送失败");
+      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
       return false;
     }
     settime($("#btn"), '#SESSION_LOCALE');
-    alert("手机验证码发送成功");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
   });
   return false;
 }
 
 function checkdate1() {
   if (Form.ybcodeid.value == "") {
-    alert("请先点击获取验证码，然后再填入您的手机收到的验证码");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");
     Form.ybcodeid.focus();
     return false;
   }

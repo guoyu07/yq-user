@@ -5,12 +5,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|我的客户</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.777812136'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+<link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> <!-- 通用头部 -->
@@ -20,7 +20,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 购物券变化明细</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846'/></p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -34,26 +34,26 @@
   
   <!-- 报单币明细左边栏 -->
   <div class="point-info">
-    <p class="title">购物券明细</p>
+    <p class="title"><s:text name='Shopping_coupon_details'/></p>
      <%@ include file="/mainUI/common/gwjLeft.jsp" %>
   </div>
 </div>
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- 购物券变化明细 -->
+      <!-- <s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">购物券变化明细</p>
-        <p class="small-button-line"><a href="usermallorderscoreslog?secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10">商城订单号查询</a></p>
+        <p class="widget-title-line"><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846'/></p>
+        <p class="small-button-line"><a href="usermallorderscoreslog?secondThisState=${secondThisState}&thisState=${thisState}" class="widget-warning mr10"><s:text name='mallorderquery'/></a></p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>用户名</th>
-                <th>改变数量</th>
-                <th>当前数量</th>
-                <th>详情</th>
-                <th>时间</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.793443422'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.748079417'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.1135007'/></th>
+                <th><s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.847550'/></th>
               </tr>
             </thead>
             <tbody>
@@ -91,7 +91,7 @@
 <!-- 会员中心翻页组件 end -->
 
       </div>
-      <!-- 购物券变化明细 end -->
+      <!-- <s:text name='viewyblc-userscoreslog.jsp.yblc-userscoreslog.jsp.-505493846'/> end -->
     </div>
   </div>
 </div>

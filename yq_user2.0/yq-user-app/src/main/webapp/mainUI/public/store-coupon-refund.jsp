@@ -14,12 +14,12 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>会员中心|商城购物券退款</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1199974190'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -30,7 +30,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 商城管理</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='Mall_management'/></p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -40,43 +40,43 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
     <div class="member-main-full">
-      <!-- 商城购物券退款 -->
+      <!-- <s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1199974190'/> -->
       <div class="main-widget mt15">
-        <p class="widget-title-line">商城购物券退款</p>
+        <p class="widget-title-line"><s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1199974190'/></p>
         <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/backscores?status=1">
           <p class="item">
-            <label class="title widget-warning">转出用户名:</label>
+            <label class="title widget-warning"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792'/>:</label>
             <input type="text" name="fromUser" size="15" maxlength="20" />
-            <input type="button" class="widget-button-small" value="设置成商户" name="btnn" id="btnn" onclick="setmaller(3)" style="cursor: pointer" />
-            <input type="button" class="widget-button-small" value="取消商家" name="btnn" id="btnn" onclick="setmaller(0)" style="cursor: pointer">
+            <input type="button" class="widget-button-small" value="<s:text name='setsellerasmerchant'/>" name="btnn" id="btnn" onclick="setmaller(3)" style="cursor: pointer" />
+            <input type="button" class="widget-button-small" value="<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1081070777b'/>" name="btnn" id="btnn" onclick="setmaller(0)" style="cursor: pointer">
           </p>
           <p class="item">
-            <label class="title">转入用户名:</label>
+            <label class="title"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-377971233'/>:</label>
             <input type="text" name="jzuser" size="15" maxlength="20" />
           </p>
           <p class="item">
-            <label class="title">转账金额：</label>
+            <label class="title"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1129727398'/>：</label>
             <input type="text" name="jzpay" />
           </p>
           <p class="item">
-            <label class="title">操作密码：</label>
+            <label class="title"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.789039466'/>：</label>
             <input type="password" name="pa3" />
           </p>
           <p class="item">
-            <label class="title">转账原由：</label>
+            <label class="title"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1129224748'/>：</label>
             <input type="text" name="yy" />
           </p>
           <p class="item special">
             <label class="title">
-              <input type="checkbox" name="C1" id="C1" onclick="dbz_show()" value="1">退款订单号：</label>
+              <input type="checkbox" name="C1" id="C1" onclick="dbz_show()" value="1"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.537856614'/>：</label>
             <input type="text" name="dbz" id="dbz"/>
           </p>
           <p class="button-line mt15">
-            <button class="widget-button" type="submit" value="确定转账" name="submit2" onClick="return confirm('提示：您确定了吗？')">确定转账</button>
+            <button class="widget-button" type="submit" value="<s:text name='Definite_transfer'/>" name="submit2" onClick='return confirm("<s:text name='vipgpjymy.jsp.gpjymy.jsp.1046836541'/>")'><s:text name='Definite_transfer'/></button>
           </p>
         </form>
       </div>
-      <!-- 商城购物券退款 end -->
+      <!-- <s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1199974190'/> end -->
     </div>
   </div>
 </div>
@@ -87,30 +87,30 @@
 <script language="JavaScript">
 function checkdate() {
   if (Form.jzpay.value == "") {
-    alert("请填写您要转账的购物券!");
+    alert("<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1476772112'/>!");
     return false;
   }
   if (Form.jzpay.value < 0) {
-    alert("转账的购物券必须大于0!");
+    alert("<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.778936623'/>0!");
     return false;
   }
   if (Form.jzuser.value == "") {
-    alert("请填写您要转入的用户名!");
+    alert("<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1569959089'/>!");
     return false;
   }
   if (Form.adgl.value == "") {
-    alert("请写入操作密码!");
+    alert("<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-201974515'/>!");
     return false;
   }
   if (Form.dbz.value == "" && document.getElementById("C1").checked) {
-    alert("请写入商城订单号，必须为数字!");
+    alert("<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1237533928'/>!");
     return false;
   }
 }
 
 function setmaller(txlb) {
   if (Form.fromUser.value == "") {
-    alert("请填写您设置的商户名!");
+    alert("<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.618310955'/>!");
     return false;
   }
   $("#btnn").attr("disabled", "disabled");
@@ -118,13 +118,13 @@ function setmaller(txlb) {
   $.post("/maller?fromUser=" + Form.fromUser.value + "&txlb=" + txlb, null, function(response) {
     $("#btnn").removeAttr("disabled");
     if (response.erroCodeNum != 0) {
-      alert("设置失败");
+      alert("<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.1097836932'/>");
       return false;
     }
     if (txlb == 3) {
-      alert("设置商户成功");
+      alert("<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.-1580305552'/>");
     } else {
-      alert("取消商户成功！");
+      alert("<s:text name='viewyblc-mallbackscores.jsp.yblc-mallbackscores.jsp.1059539826'/>！");
     }
   });
 

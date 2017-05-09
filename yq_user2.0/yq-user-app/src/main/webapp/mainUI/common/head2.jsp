@@ -21,27 +21,27 @@
       <div class="user-info">
       <form class="user-info" id="J_ebContributionForm" name="headerSameNameIdForm" action="" method="post">
         <div class="user-info-wrap">
-          <span>同名ID</span>
+          <span><s:text name='ID_with_the_same_name'/></span>
           <div class="select-id" id="J_headerSameNameIdSelect" name="nameIdSelect" title="<%=gcuserHead.getUsername()%>">
           <p class="user-name"><span id="J_userName"><%=gcuserHead.getUsername()%></span></p>
           <div class="select-id-list" id="J_headerSameNameIdList"></div>
           </div>
-          <span>当前可用一币：</span><em><%=gcuserHead.getPay()%></em>
-          <span>累计交易一币：</span>
+          <span><s:text name='viewuser.jsp.user.jsp.1504881972'/>：</span><em><%=gcuserHead.getPay()%></em>
+          <span><s:text name='viewuser.jsp.user.jsp.1927395202'/>：</span>
           <em><%=gcuserHead.getCbpay()%></em>
-          <span>累计使用一币：</span>
+          <span><s:text name='viewuser.jsp.user.jsp.1937629852'/>：</span>
           <em><%=gcuserHead.getTxpay()%></em>
-          <span class="logout"><a href="/logout?type=1">退出登录</a></span>
+          <span class="logout"><a href="/logout?type=1"><s:text name='Exit_login'/></a></span>
       	</div>
       	</form>
       </div>
       <div class="nav">
         <ul class="list">
-          <li><a href='/manager'>首页</a></li>
-          <li><a href='/vipgo'>财富中心</a></li>
-          <li><a href='/tgurl'>账户管理</a></li>
-          <li><a href='/hfcz'>消费管理</a></li>
-          <li><a href='/vipup'>客服中心</a></li>
+          <li><a href='/manager'><s:text name='vipbdbdate.jsp.bdbdate.jsp.1257887'/></a></li>
+          <li><a href='/vipgo'><s:text name='viewhead.jsp.head.jsp.1099577248'/></a></li>
+          <li><a href='/tgurl'><s:text name='Account_manage'/></a></li>
+          <li><a href='/hfcz'><s:text name='viewhead.jsp.head.jsp.871093494'/></a></li>
+          <li><a href='/vipup'><s:text name='viewservice.jsp.service.jsp.724834337'/></a></li>
         </ul>
       </div>
     </div>

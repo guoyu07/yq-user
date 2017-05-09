@@ -24,12 +24,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|确认开户信息</title>
+  <title><s:text name='vipgpjymc.jsp.gpjymc.jsp.624662580'/>|<s:text name='Confirm_account_information'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -44,7 +44,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <p class="breadcrumb-trail"><s:text name='viewhead.jsp.head.jsp.1099577248'/> >> <s:text name='viewjflc.jsp.jflc.jsp.951062035'/></p>
      <%@ include file="/mainUI/common/accountpart.jsp" %>
   </div>
 </div>
@@ -58,16 +58,16 @@
   <%-- <%@ include file="/mainUI/common/userLeft.jsp" %> --%>
   <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
   <%@ include file="/mainUI/common/gameservice.jsp" %>
-  <!-- 账户概览  end -->
+  <!-- <s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/>  end -->
 </div>
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- 确认开户信息 -->
+      <!-- <s:text name='Confirm_account_information'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">确认开户信息</p>
+        <p class="widget-title-line"><s:text name='Confirm_account_information'/></p>
         <p class="small-button-line">
-          <a class="widget-warning" href="javascript:history.back();">返回上一页</a>
+          <a class="widget-warning" href="javascript:history.back();"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.326654005'/></a>
         </p>
         <form class="widget-form" method="POST" action="bdreg?step=7&secondThisState=${secondThisState}&thisState=${thisState}" name="Form" id="Form" onSubmit="return showZz()">
             <input type="hidden" name="targetdate" size="8">
@@ -76,41 +76,41 @@
 	      <input type="hidden" name="cjpay" size="10" value="${cjpay}" readonly><input type="hidden" name="remark" size="8" value="3" readonly><input type="hidden" name="user" size="10" value="${userName}" readonly>
           
           <p class="item">
-            <label class="title">选择接点人：</label>
+            <label class="title"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.473018246'/>：</label>
             <b class="text widget-warning"><input type="hidden" name="up" readonly value="${up}">${up}</b>
           </p>
           <p class="item">
-            <label class="title">开户用户名：</label>
+            <label class="title"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1763852615'/>：</label>
             <b class="text widget-warning"><input type="hidden" name="bduser" readonly value="${bduser}">${bduser}</b>
           </p>
           <p class="item">
-          	<label class="title">选择套餐：</label>
+          	<label class="title"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1123565209'/>：</label>
 			<font color="#008000"><b>${cjpay}</b></font><input type="hidden" name="pa1j" size="8" value="${pa1j}"><input type="hidden" name="pa2j" size="8" value="${pa2j}">
 		  </p>
-          <p class="widget-notice mt15 ml10">（将从您的（<b>${userName}</b>）<c:if test="${cjpay<9000}">一币</c:if><c:if test="${cjpay>=9000}">报单币</c:if>账户扣除${cjpay}）</p>
+          <p class="widget-notice mt15 ml10">（<s:text name='vipbdreg.jsp.bdreg.jsp.-808057141'/>（<b>${userName}</b>）<c:if test="${cjpay<9000}"><s:text name='yibi'/></c:if><c:if test="${cjpay>=9000}"><s:text name='Order'/></c:if><s:text name='deduction'/>${cjpay}）</p>
           <c:if test="${cjpay<9000}">
           <p class="item">
-            <label class="title">您的手机号码：</label><span class="text">${call}</span>
+            <label class="title"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1539312043'/>：</label><span class="text">${call}</span>
           </p>
           <p class="item">
-            <label class="title">手机验证码：</label>
+            <label class="title"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</label>
             <input type="text" name="ceid" />
-            <input class="widget-button-small" id="btn" type="button" onclick="checkdate()" value="获取验证码" name="B2" />
+            <input class="widget-button-small" id="btn" type="button" onclick="checkdate()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>" name="B2" />
           </p>
           </c:if>
           <p class="button-line mt15">
-            <input class="widget-button" type="submit" value="确认无误" name="B1" onclick="{if(confirm('确定开通该会员吗?')){this.style.visibility='hidden';return true;}return false;}">
+
           </p>
         </form>
-        <p class="widget-notice mt15"><b class="widget-warning">重要提示：</b>确认无误后，系统进入核算中...期间请停止其它操作，更不要关闭本页！</p>
+        <p class="widget-notice mt15"><b class="widget-warning"><s:text name='vipepmy.jsp.epmy.jsp.-1694703455'/>：</b><s:text name='After_confirmation,_the_system_into_the_accounting_period,_please_stop_other_operations,_not_to_close_the_page!'/></p>
       </div>
-      <!-- 确认开户信息 end -->
+      <!-- <s:text name='Confirm_account_information'/> end -->
     </div>
   </div>
 </div>
 <div class="zzbg"></div>
 <div class="zzcontent">
-<h2 align="center">系统已进入核算中...期间请停止其它操作，更不要关闭本页！</h2>
+<h2 align="center"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.579202987'/>！</h2>
 </div>
 <!-- 业绩查询内容 end -->
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
@@ -122,18 +122,18 @@ function checkdate() {
   $.post("/sms?op=2", data, function(response) {
     $("#btn").removeAttr("disabled");
     if (response.erroCodeNum != 0) {
-      alert("手机验证码发送失败");
+      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
       return false;
     }
     settime($("#btn"), '#SESSION_LOCALE');
-    alert("手机验证码发送成功");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
   });
   return false;
 }
 
 function checkdate1() {
   if (Form.ceid.value == "") {
-    alert("请先点击获取验证码，然后再填入您的手机收到的验证码");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");
     Form.ceid.focus();
     return false;
   }

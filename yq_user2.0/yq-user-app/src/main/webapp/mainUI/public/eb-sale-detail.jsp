@@ -5,12 +5,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|一币卖出明细</title>
+  <title><s:text name='vipgpjymc.jsp.gpjymc.jsp.624662580'/>|<s:text name='vipadmin_menu.jsp.admin_menu.jsp.1842504285'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -21,7 +21,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='viewyblc.jsp.yblc.jsp.618950045'/></p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -33,19 +33,19 @@
   <div class="member-main-full">
       <!-- 一币卖出明细表格 -->
       <div class="main-widget">
-        <p class="widget-title-line">一币求现（卖出）明细</p>
-        <p class="small-button-line"><!-- <a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epmcjlmcdetail?status=1" id="J_ebSaleDetailMore">查看更多</a> --></p>
+        <p class="widget-title-line"><s:text name='A_coin_is_now_(sell)_details'/></p>
+        <p class="small-button-line"><!-- <a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="epmcjlmcdetail?status=1" id="J_ebSaleDetailMore"><s:text name='View_more'/></a> --></p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>流水号</th>
-                <th>卖出方（自己）</th>
-                <th>求现金额</th>
-                <th>发布时间</th>
-                <th>交易状态</th>
-                <th>操作</th>
-                <th>操作状态</th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.27758404'/></th>
+                <th><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-365289126'/></th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.855285018'/></th>
+                <th><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.663201424'/></th>
+                <th><s:text name='viewyblc-mark.jsp.yblc-mark.jsp.625799226'/></th>
+                <th><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></th>
+                <th><s:text name='operation.state'/></th>
               </tr>
             </thead>
             <tbody>
@@ -53,23 +53,23 @@
 							<tr>
 								<td>***${data.simplePayid}</td>
 								<td>${data.payusername}</td>
-								<td>${data.paynum9}元</td>
+								<td>${data.paynum9}<s:text name='YUAN'/></td>
 								<td><fmt:formatDate value="${data.paytime}" type="both"/></td>
-								<td> <c:if test="${not empty data.zftime}">交易成功<c:if test="${data.tp==1}">（系统）</c:if> --对方--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/></c:if>
-								<c:if test="${empty data.zftime}">
-             <c:if test="${data.ep==1}">${data.dfuser}--已下单，等待${data.dfuser}付款中...</c:if>
-             <c:if test="${data.ep==2}">${data.dfuser}--已向您付款-${data.paynum9}元，等待您在<b><font color="#0000FF"><fmt:formatDate value="${data.rgdate}" type="both"/></font></b>前确认。。。</c:if>
-             <c:if test="${data.ep!=1&&data.ep!=2}">等待认购中。。--<b><a onClick="return confirm('提示：您确定了吗？')" href="qxepmc?qx=${data.payid}&thisState=${thisState}&secondThisState=${secondThisState}"><font color="#FF0000">撤销卖出</font></a></b></c:if>
+								<td> <c:if test="${not empty data.zftime}"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.316595986'/><c:if test="${data.tp==1}">（<s:text name="system"></s:text>）</c:if> --<s:text name="viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.316595986a"></s:text>--${data.dfuser}--<fmt:formatDate value="${data.zftime}" type="both"/></c:if>
+								 <c:if test="${empty data.zftime}">
+             <c:if test="${data.ep==1}">${data.dfuser}--<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-507211912a'/>...</c:if>
+             <c:if test="${data.ep==2}">${data.dfuser}--<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008'/>-${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008a'/><b><font color="#0000FF"><fmt:formatDate value="${data.rgdate}" type="both"/></font></b><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-875882008b'/>。。。</c:if>
+             <c:if test="${data.ep!=1&&data.ep!=2}"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928'/>。--<b><a onClick="return confirm('<s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-38357087'/>？')" href="qxepmc?qx=${data.payid}"><font color="#FF0000"><s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1467453928a'/></font></a></b></c:if>
               </c:if>
 								</td>
 								<td>
-								<a onClick="return confirm('提示：您确定已收到认购方 ${data.dfuser}给打款 ${data.paynum9}了吗？ 确定后不可恢复！')" href="/mcepok?payId= ${data.payid}&thisState=${thisState}&secondThisState=${secondThisState}"><font color="#FF0000" size="2">
-          <c:if test="${data.ep==2}"><input type="button" value="确认收到${data.paynum9}元款" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
-          </c:if>
-          </font>
+								<a onClick="return confirm('<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267'/>${data.dfuser}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.-299506267a'/> ${data.paynum9}<s:text name='vipepmcjl.jsp.epmcjl.jsp.-299506267'/>！')" href="/mcepok?payId= ${data.payid}"><font color="#FF0000" size="2">
+          						<c:if test="${data.ep==2}"><input type="button" value="<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994'/>${data.paynum9}<s:text name='viewyblc-mcdetails.jsp.yblc-mcdetails.jsp.1726063994a'/>" name="B1" onclick=disabled=true style="font-size: 10pt; color: #0000FF; font-weight: bold">
+          						</c:if>
+          						</font>
 					         	</a>
 					         	</td>	
-					          	<td><c:if test="${data.opstate==1}">订单被重置</c:if></td>
+					          	<td><c:if test="${data.opstate==1}"><s:text name='Order.is.reset'/></c:if></td>
 							</tr>
 							</s:iterator>
             </tbody>
@@ -91,11 +91,11 @@
 /*验证交互*/
 function checkdate() {
   if (Form.ebSaleNum.value == 0) {
-    alert("请选择卖出一币的数量!");
+    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-861806777'/>!");
     return false;
   }
   if (!chkinteger(Form.ebSaleNum.value)) {
-    alert('卖出一币只能为整字!');
+    alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.431301541'/>!');
     document.Form.ebSaleNum.focus;
     return false;
   }
@@ -117,16 +117,16 @@ function checkdate() {
     return (allValid);
   }
 
-  if (Form.ebSaleNum.value > 109990) {
-    alert("您的发布不能大于您可卖的109890一币哦!");
+  if (Form.ebSaleNum.value > ${gcuser.pay-gcuser.vippay}) {
+    alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977'/>!");
     return false;
   }
   if (Form.ebSaleNum.value < 100) {
-    alert("您的发布不能小于100一币!");
+    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1837041227'/>!");
     return false;
   }
   if (Form.pa3.value == "") {
-    alert("请输入二级密码密码!");
+    alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>!");
     return false;
   }
 
@@ -135,18 +135,18 @@ function checkdate() {
   $.post("/sms?op=3", data, function(response) {
     $("#btn").removeAttr("disabled");
     if (response.erroCodeNum != 0) {
-      alert("手机验证码发送失败");
+      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
       return false;
     }
     settime($("#btn"), '#SESSION_LOCALE');
-    alert("手机验证码发送成功");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
   });
   return false;
 }
 
 function checkdate1() {
   if (Form.ybcodeid.value == "") {
-    alert("请先点击获取验证码，然后再填入您的手机收到的验证码");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");
     Form.ybcodeid.focus();
     return false;
   }

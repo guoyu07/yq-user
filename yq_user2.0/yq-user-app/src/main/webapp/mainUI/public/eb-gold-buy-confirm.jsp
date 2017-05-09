@@ -1,18 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('注意：您的一币小于15，请充值！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('注意：您的一币不够本次购卡，请充值！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1055187381'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1616194221'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|一币购金币卡</title>
+  <title><s:text name='Member_center'/>|<s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1995717051'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+ <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> <!-- 通用头部 -->
@@ -21,7 +21,7 @@
  <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='viewyblc.jsp.yblc.jsp.618950045'/></p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -31,51 +31,51 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
      <div class="member-main-full">
-      <!-- 一币购金币卡 -->
+      <!-- <s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1995717051'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">一币转换电子金币卡录入</p>
+        <p class="widget-title-line"><s:text name='Conversion_of_electronic_coin_card'/></p>
         <div class="widget-article">
           <form class="widget-form" action="jztojb?status=3&mj=${mj}&gmsl=${gmsl}&secondThisState=${secondThisState}&thisState=${thisState}" method="post" onSubmit="return checkdate();" name="Form" id="Form">
             <p class="item">
-              <lable class="title">金币卡面值：</lable>
+              <lable class="title"><s:text name='Gold_card:'/></lable>
               <span class="text widget-warning">
-							<c:if test="${mj==10}">10金币（15一币/张）</c:if>
-							<c:if test="${mj==50}">50金币（75一币/张）</c:if>
-							<c:if test="${mj==100}">100金币（150一币/张）</c:if>
-							<c:if test="${mj==300}">300金币（450一币/张）</c:if>
-							<c:if test="${mj==500}">500金币（750一币/张）</c:if>
-							<c:if test="${mj==1000}">1000金币（1500一币/张）</c:if></span>
+							<c:if test="${mj==10}">10<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1554998638'/>）</c:if>
+							<c:if test="${mj==50}">50<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1726773544'/>）</c:if>
+							<c:if test="${mj==100}">100<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-356053146'/>）</c:if>
+							<c:if test="${mj==300}">300<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.-1988509399'/>）</c:if>
+							<c:if test="${mj==500}">500<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.674001644'/>）</c:if>
+							<c:if test="${mj==1000}">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</c:if></span>
             </p>
             <p class="item">
-              <lable class="title">购买金币卡数量：</lable>
-              <span class="text"><b class="widget-warning">${gmsl}</b>张</span>
+              <lable class="title"><s:text name='Purchase_gold_card_number:'/></lable>
+              <span class="text"><b class="widget-warning">${gmsl}</b><s:text name='Zhang'/></span>
             </p>
             <p class="item">
-              <lable class="title">将获取金币总数：</lable>
-              <span class="text"><b class="widget-warning">${gmsl*mj}</b>个</span>
+              <lable class="title"><s:text name='Total_number_of_coins:'/></lable>
+              <span class="text"><b class="widget-warning">${gmsl*mj}</b><s:text name='individual'/></span>
             </p>
             <p class="item">
-              <lable class="title">消费一币数：</lable>
-              <span class="text"><b class="widget-warning">${gmsl*mj*1.5}</b>一币</span>
+              <lable class="title"><s:text name='Consumption_of_currency:'/></lable>
+              <span class="text"><b class="widget-warning">${gmsl*mj*1.5}</b><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></span>
             </p>
             <p class="item">
-              <lable class="title">二级密码：</lable>
+              <lable class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>：</lable>
               <input type="password" name="pa3" />
             </p>
             <p class="item">
-	            <label class="title">手机验证码：</label>
+	            <label class="title"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</label>
 	            <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/>
-	            <input class="widget-button-small" id="btn" type="button" onclick="sendMsg()" value="获取验证码"/>
-	            <!-- input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()">获取验证码</a> -->
+	            <input class="widget-button-small" id="btn" type="button" onclick="sendMsg()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>"/>
+	            <!-- input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')"/><a href="javascript:void(0);" class="widget-button-small" onclick="sendMsg()"><s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/></a> -->
          	 </p> 
             <p class="button-line mt15">
-              <button type="submit" class="widget-button">确定从我的一币-扣除</button>
+              <button type="submit" class="widget-button"><s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.1964436824'/></button>
             </p>
             
           </form>
         </div>
       </div>
-      <!-- 一币购金币卡 end -->
+      <!-- <s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1995717051'/> end -->
     </div>
   </div>
 </div>
@@ -85,7 +85,7 @@
 <script language="JavaScript">
 function checkdate() {
   if (Form.pa3.value == "") {
-    alert("请输入二级密码!");
+    alert("<s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.-1396482625'/>!");
     return false;
   }
   if (Form.smsCode.value == "") {
@@ -93,7 +93,7 @@ function checkdate() {
 	    Form.smsCode.focus();
 	    return false;
 	  }
-  if (!confirm('提示：您确定了吗？ ')) {
+  if (!confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？ ')) {
     return false;
   }
   return true;
@@ -107,11 +107,11 @@ function sendMsg() {
 	  $.post("/sms?op=17", data, function(response) {
 	    $("#btn").removeAttr("disabled");
 	    if (response.erroCodeNum != 0) {
-	      alert("手机验证码发送失败");
+	      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
 	      return false;
 	    }
 	    settime($("#btn"), '#SESSION_LOCALE');
-	    alert("手机验证码发送成功");
+	    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
 	  });
 	} 
 </script>

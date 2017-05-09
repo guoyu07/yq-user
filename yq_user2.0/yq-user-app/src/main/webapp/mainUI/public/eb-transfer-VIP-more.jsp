@@ -2,17 +2,17 @@
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('用户名输入错误或不属于自己团队的玩家，请检查后再试！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('充值密码不正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('该用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('两分钟内只能充值一次，请稍后再试！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('您的充值币小于${cjpay}，无法完成充值，请联系管理员！！！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('本次充值${cjpay}可一币小于${cjpay*9}，请先补充一币！！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('充值成功！');location.href='vipcjb';</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.2073267590'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1239579686'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.2060105128'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1830047641'/>！');history.go(-1);</script></c:if>
+
+
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.640340070'/>！');location.href='vipcjb';</script></c:if>
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|VIP充值管理明细</title>
+  <title><s:text name='vipgpjymc.jsp.gpjymc.jsp.624662580'/>|<s:text name='VIP_recharge_management_details'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,20 +24,20 @@
 <div class="member-dialog-container">
   <div class="member-main">
     <div class="dialog-widget">
-      <p class="dialog-title">VIP充值管理明细</p>
+      <p class="dialog-title"><s:text name='VIP_recharge_management_details'/></p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>编号</th>
-                <th>充值用户名</th>
-                <th>充值金额</th>
-                <th>备注</th>
-                <th>操作时间</th>
-                <th>操作者</th>
-                <th>剩余充值币</th>
+                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1030049'/></th>
+                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1619451673'/></th>
+                <th><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.640736963'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></th>
+                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.789127981'/></th>
+                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.25461174'/></th>
+                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1365514950'/></th>
               </tr>
             </thead>
             <tbody>

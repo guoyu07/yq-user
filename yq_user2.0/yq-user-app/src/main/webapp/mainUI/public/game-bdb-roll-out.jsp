@@ -19,12 +19,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|报单币转账</title>
+  <title><s:text name='Member_center'/>|<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1788295765'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -35,7 +35,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='viewjflc.jsp.jflc.jsp.951062035'/></p>
    <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -53,30 +53,30 @@
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- 报单币转账 -->
+      <!-- <s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1788295765'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">报单币转账</p>
+        <p class="widget-title-line"><s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1788295765'/></p>
         <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="bdbzz?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item mt15">
-            <label class="title widget-warning">转出用户名：</label>
+            <label class="title widget-warning"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792'/>：</label>
             <input type="text" name="jcname" value="${userName}" readonly="" />
           </p>
           <p class="item">
-            <label class="title">转账数量：</label>
+            <label class="title"><s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.1129373465'/>：</label>
             <select class="widget-select" name="jzpay">
-              <option selected="" value="10000">---- 1万 ----</option>
-              <option value="20000">---- 2万 ----</option>
-              <option value="30000">---- 3万 ----</option>
-              <option value="50000">---- 5万 ----</option>
+              <option selected="" value="10000">---- 1<s:text name='wan'/> ----</option>
+              <option value="20000">---- 2<s:text name='wan'/> ----</option>
+              <option value="30000">---- 3<s:text name='wan'/> ----</option>
+              <option value="50000">---- 5<s:text name='wan'/> ----</option>
             </select>
-            <span class="text"> 剩余：<b class="widget-warning">${sybdb}</b></span>
+            <span class="text"> <s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.674320'/>：<b class="widget-warning">${sybdb}</b></span>
           </p>
           <p class="item">
-            <label class="title">接受用户名：</label>
+            <label class="title"><s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1542679092'/>：</label>
             <input type="text" name="syuser" />
           </p>
           <p class="item">
-            <label class="title">二级密码：</label>
+            <label class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>：</label>
             <input type="password" name="pa3" />
           </p>
          
@@ -89,7 +89,7 @@
           </c:if>
           <c:if test="${gcuser.vip!=2}">
 	          <p class="item">
-	            <label class="title">手机号码：</label>
+	            <label class="title"><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
 	            <span class="text">${gcuser.call}</span>
 	          </p>
 	          <input type="hidden" name="toUserName" value="${gcuser.username}">
@@ -99,16 +99,16 @@
 			<input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input>
 		</p>
            <p class="item">
-            <label class="title">手机验证码：</label>
+            <label class="title"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</label>
             <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
-            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
+            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>"/>
           </p> --%>
           <p class="button-line mt15">
-            <button class="widget-button" type="submit" onclick="return confirm('提示：您确定了吗？')">确定转账</button>
+            <button class="widget-button" type="submit" onclick='return confirm("<s:text name='vipepjysc.jsp.epjysc.jsp.1991539691'/>")'><s:text name='Definite_transfer'/></button>
           </p>
         </form>
       </div>
-      <!-- 报单币转账 end -->
+      <!-- <s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1788295765'/> end -->
     </div>
   </div>
 </div>
@@ -119,27 +119,27 @@
 <script language="JavaScript">
 function checkdate() {
   if (Form.jcname.value == "") {
-    alert("请写入转出用户名!");
+    alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-453586483'/>!");
     return false;
   }
   if (Form.jzpay.value < 5000) {
-    alert("转账的金额必须大于5000!");
+    alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.97164307'/>5000!");
     return false;
   }
   if (Form.syuser.value == "") {
-    alert("请填写接收用户名!");
+    alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1479911832'/>!");
     return false;
   }
   if (Form.jcname.value == Form.syuser.value) {
-    alert("不能转给自己!");
+    alert("<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1929667708'/>!");
     return false;
   }
   if (Form.pa3.value == "") {
-    alert("请输入二级密码!");
+    alert("<s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.-1396482625'/>!");
     return false;
   }
   if (!chkinteger(Form.jzpay.value)) {
-    alert('转账金额只能为整字!');
+    alert('<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.375811844'/>!');
     document.Form.jzpay.focus;
     return (false);
   }
@@ -168,32 +168,32 @@ function checkdate() {
 function sendmsg(){
 	
 	 if (Form.jcname.value == "") {
-		    alert("请写入转出用户名!");
+		    alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-453586483'/>!");
 	    return false;
 	  }
 	  if (Form.jzpay.value < 5000) {
-	    alert("转账的金额必须大于5000!");
+	    alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.97164307'/>5000!");
 	    return false;
 	  }
 	  if (Form.syuser.value == "") {
-	    alert("请填写接收用户名!");
+	    alert("<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.-1479911832'/>!");
 	    return false;
 	  }
 	  if (Form.jcname.value == Form.syuser.value) {
-	    alert("不能转给自己!");
+	    alert("<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1929667708'/>!");
 	    return false;
 	  }
 	  if (Form.pa3.value == "") {
-	    alert("请输入二级密码!");
+	    alert("<s:text name='viewyblc-buy-goldcard3.jsp.yblc-buy-goldcard3.jsp.-1396482625'/>!");
 	    return false;
 	  }
 	  if (!chkinteger(Form.jzpay.value)) {
-	    alert('转账金额只能为整字!');
+	    alert('<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.375811844'/>!');
 	    document.Form.jzpay.focus;
 	    return (false);
 	  }
 	  if (!chkinteger(Form.jzpay.value)) {
-		    alert('转账一币只能为整字!');
+		    alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.-1582955249'/>!');
 		    document.Form.jzpay.focus;
 		    return (false);
 		  }
@@ -218,7 +218,7 @@ function sendmsg(){
 	  var data = $("#Form").serialize();
 	  $.post("/smsother?op=23&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
 	    if (response.erroCodeNum == 2) {
-	      alert('输入的手机号与预留手机号不一致！');
+	      alert('<s:text name='Enter_phone_number_error'/>！');
 	      $("#btn").attr("disabled", false);
 	      Form.inputCall.focus();
 	      return false;
@@ -226,11 +226,11 @@ function sendmsg(){
 	    }
 	    $("#btn").removeAttr("disabled");
 	    if (response.erroCodeNum != 0) {
-	      alert("手机验证码发送失败");
+	      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
 	      return false;
 	    }
 	    settime($("#btn"), '#SESSION_LOCALE');
-	    alert("手机验证码发送成功");
+	    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
 	  });
 	  return true;
 }

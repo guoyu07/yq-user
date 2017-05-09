@@ -19,30 +19,30 @@ if(fcxt!=null){
 }
 %> --%>
         <div class="point-info">
-          <p class="title">账户概览</p>
+          <p class="title"><s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/></p>
           <ul class="list">
-            <%-- <li><a href="/datepay">累计奖励一币 <em><%=gcuserJflc.getDlpay()%></em></a></li> --%>
-            <%-- <li>推广部分一币 <em><%=gcuserJflc.getJbpay()%></em></a></li>
-            <li><a href="/datepay?lb=103&secondThisState=249&thisState=244">平衡部分一币 <em><%=gcuserJflc.getJjpay()%></em></a></li>
-            <li><a href="/datepay?lb=105&secondThisState=249&thisState=244">辅导部分一币 <em><%=gcuserJflc.getJypay()%></em></a></li>
-            <li><a href="/datepay?lb=144&secondThisState=249&thisState=244">累计认购一币 <em><%=gcuserJflc.getRgpay()%></em></a></li>
-            <li><a href="/datepay?lb=111&secondThisState=249&thisState=244">累计卖出一币 <em><%=gcuserJflc.getMcpay()%></em></a></li>
+            <%-- <li><a href="/datepay"><s:text name='Cumulative_reward_currency'/><em><%=gcuserJflc.getDlpay()%></em></a></li> --%>
+            <%-- <li><s:text name='viewshop.html.shop.html.-2060498186'/> <em><%=gcuserJflc.getJbpay()%></em></a></li>
+            <li><a href="/datepay?lb=103&secondThisState=249&thisState=244"><s:text name='viewshop.html.shop.html.-256393235'/> <em><%=gcuserJflc.getJjpay()%></em></a></li>
+            <li><a href="/datepay?lb=105&secondThisState=249&thisState=244"><s:text name='viewshop.html.shop.html.994834486'/> <em><%=gcuserJflc.getJypay()%></em></a></li>
+            <li><a href="/datepay?lb=144&secondThisState=249&thisState=244"><s:text name='viewshop.html.shop.html.-1892736228'/> <em><%=gcuserJflc.getRgpay()%></em></a></li>
+            <li><a href="/datepay?lb=111&secondThisState=249&thisState=244"><s:text name='viewshop.html.shop.html.1958259639'/> <em><%=gcuserJflc.getMcpay()%></em></a></li>
              --%>
-            <li>推广部分一币 <em><%=gcuserJflc.getJbpay()%></em></li>
-            <li>平衡部分一币 <em><%=gcuserJflc.getJjpay()%></em></li>
-            <li>辅导部分一币 <em><%=gcuserJflc.getJypay()%></em></li>
-            <li>累计认购一币 <em><%=gcuserJflc.getRgpay()%></em></li>
-            <li>累计卖出一币 <em><%=gcuserJflc.getMcpay()%></em></li>
-            <li>剩余金币 <em><%=gcuserJflc.getJydb()%></em></li>
-            <li>积分单价 <em><%=ajygj%></em></li>
-            <li>积分数量 <em><%=gcuserJflc.getJyg()%></em></li>
-            <li>积分拆分次数 <em><%=gcuserJflc.getCfa()%></em></li>
-            <li>积分拆分倍数<em><%=gcuserJflc.getCfb()%></em></li>
+            <li><s:text name='viewshop.html.shop.html.-2060498186'/> <em><%=gcuserJflc.getJbpay()%></em></li>
+            <li><s:text name='viewshop.html.shop.html.-256393235'/> <em><%=gcuserJflc.getJjpay()%></em></li>
+            <li><s:text name='viewshop.html.shop.html.994834486'/> <em><%=gcuserJflc.getJypay()%></em></li>
+            <li><s:text name='viewshop.html.shop.html.-1892736228'/> <em><%=gcuserJflc.getRgpay()%></em></li>
+            <li><s:text name='viewshop.html.shop.html.1958259639'/> <em><%=gcuserJflc.getMcpay()%></em></li>
+            <li><s:text name='viewlinks.html.links.html.649202784'/> <em><%=gcuserJflc.getJydb()%></em></li>
+            <li><s:text name='viewshop.html.shop.html.950786681'/> <em><%=ajygj%></em></li>
+            <li><s:text name='viewshop.html.shop.html.950947478'/> <em><%=gcuserJflc.getJyg()%></em></li>
+            <li><s:text name='viewjflc.jsp.jflc.jsp.-1002641178'/> <em><%=gcuserJflc.getCfa()%></em></li>
+            <li><s:text name='viewjflc.jsp.jflc.jsp.-1002856070'/><em><%=gcuserJflc.getCfb()%></em></li>
             <%--
-            <li>分红点总数 <em><%=gcuserJflc.getGdgc() %></em></li>
-            <li>累计分红<em><%=gcuserJflc.getLjfh()%></em></li>
-            <li>当前信用星<em><%=gcuserJflc.getCxt()%></em></li> --%>
-            <li class="member-stars"><span>当前信用星：</span>
+            <li><s:text name='viewgrxx.jsp.grxx.jsp.-1088456654'/> <em><%=gcuserJflc.getGdgc() %></em></li>
+            <li><s:text name='viewgrxx.jsp.grxx.jsp.989746478'/><em><%=gcuserJflc.getLjfh()%></em></li>
+            <li><s:text name='viewyblc.jsp.yblc.jsp.1710120446'/><em><%=gcuserJflc.getCxt()%></em></li> --%>
+            <li class="member-stars"><span><s:text name='viewyblc.jsp.yblc.jsp.1710120446'/>：</span>
             <%if(gcuserJflc.getCxt()==1) {%>
             	<i class="icon-member-star on"></i>
             	<i class="icon-member-star"></i>

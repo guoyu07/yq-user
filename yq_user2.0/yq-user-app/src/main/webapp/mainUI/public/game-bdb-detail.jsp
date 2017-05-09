@@ -6,12 +6,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|保单币明细变化</title>
+  <title><s:text name='reg2.jsp.reg2.jsp.624662580'/>|<s:text name='Details_of_policy_changes'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+ <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <p class="breadcrumb-trail"><s:text name='viewhead.jsp.head.jsp.1099577248'/> >> <s:text name='viewjflc.jsp.jflc.jsp.951062035'/></p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -36,27 +36,27 @@
 	  <%@ include file="/mainUI/common/userLeft.jsp" %>
 	  <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
 	  <%@ include file="/mainUI/common/gameservice.jsp" %>
-	  <!-- 账户概览  end -->
+	  <!-- <s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/>  end -->
 	</div>
 <!-- 会员中心左边栏 end -->
 
 
     <div class="member-main">
-      <!-- 报单币变化明细 -->
+      <!-- <s:text name='Coin_change_list_declaration'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">报单币变化明细</p>
+        <p class="widget-title-line"><s:text name='Coin_change_list_declaration'/></p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="bdbdate?status=1">查看更多</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" data-url="bdbdate?status=1"><s:text name='View_more'/></a>
         </p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>用户名</th>
-                <th>报单币收入</th>
-                <th>剩余报单币</th>
-                <th>更新时间</th>
-                <th>备注</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1788646048'/></th>
+                <th><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.-1361215839'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.811035898'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></th>
               </tr>
             </thead>
             <tbody>
@@ -73,7 +73,7 @@
           </table>
         </div>
       </div>
-      <!-- 报单币变化明细 end -->
+      <!-- <s:text name='Coin_change_list_declaration'/> end -->
     </div>
   </div>
 </div>

@@ -5,12 +5,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|客服中心</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='viewservice.jsp.service.jsp.724834337'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -21,7 +21,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">支持帮助 >> 客服中心</p>
+    <p class="breadcrumb-trail"><s:text name='Support_help'/> >> <s:text name='viewservice.jsp.service.jsp.724834337'/></p>
      <%@ include file="/mainUI/common/help.jsp" %>
   </div>
 </div>
@@ -33,12 +33,12 @@
     <div class="member-content" id="J_memberContent">
           <div class="member-main-full">
         <div class="main-widget customer-service-center">
-          <p class="widget-title-line">客服中心</p>
+          <p class="widget-title-line"><s:text name='viewservice.jsp.service.jsp.724834337'/></p>
           <div class="widget-article">
-            <p class="widget-notice">团队服务中心编号： ${upuname}***</p>
-          <%--   <p class="widget-notice mt5">称谓：${gcuserup.vipuser} </p>  --%>
-            <p class="widget-notice">联系QQ： ${gcuserup.qq}</p>
-            <p class="widget-notice mt5">联系电话： ${gcuserup.call}</p>
+            <p class="widget-notice"><s:text name='viewservice.jsp.service.jsp.858879560'/>： ${upuname}***</p>
+          <%--   <p class="widget-notice mt5"><s:text name='viewservice.jsp.service.jsp.1003555'/>：${gcuserup.vipuser} </p>  --%>
+            <p class="widget-notice"><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.1050407'/>QQ： ${gcuserup.qq}</p>
+            <p class="widget-notice mt5"><s:text name='viewservice.jsp.service.jsp.1010407087'/>： ${gcuserup.call}</p>
             <%-- <c:if test="${not empty gcuserup.vipgh}">
 			  <p class="widget-notice mt5"><s:text name='reg.jsp.reg.jsp.-453899062'/>:${gcuserup.vipgh}</p>
 			</c:if>
@@ -60,12 +60,11 @@
 			<%-- <p widget-notice mt5><s:text name='reg.jsp.reg.jsp.-1009112269'/>：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}<s:text name='vipuserpay.jsp.userpay.jsp.837885'/></p>
 			 <p widget-notice mt5> <s:text name='viewservice.jsp.service.jsp.643086062'/>， <s:text name='viewservice.jsp.service.jsp.-1565630892'/></p>
              --%>
-           <%--  <p class="widget-notice mt10">开户行所在地：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}</p> --%>
-            <!-- <p class="widget-tips mt10">有关业务问题可咨询，如您无法在一币市场进行收购一币的操作或您想省去在收一币中（打款，等待对方确认）的中间环节，就可以联系本团队服务中心快速购买。</p> --> 
+           <%--  <p class="widget-notice mt10"><s:text name='reg.jsp.reg.jsp.-1009112269'/>：${gcuserup.addsheng}${gcuserup.addshi}${gcuserup.addqu}</p> --%>
           </div>
         </div>
       </div>
-      <!-- 客服中心 end -->
+      <!-- <s:text name='viewservice.jsp.service.jsp.724834337'/> end -->
     </div>
     <!-- 首页内容 end -->
   </div>

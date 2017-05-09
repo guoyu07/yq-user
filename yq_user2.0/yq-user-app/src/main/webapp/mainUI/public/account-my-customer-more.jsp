@@ -6,32 +6,32 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|同名账户列表详情</title>
+  <title><s:text name='viewzhgl-bank.jsp.zhgl-bank.jsp.624662580'/>|<s:text name='Accounts_with_the_same_list_for_details'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
 <div class="member-dialog-container">
   <div class="member-main">
     <div class="dialog-widget">
-      <p class="dialog-title">同名账户列表详情</p>
+      <p class="dialog-title"><s:text name='Accounts_with_the_same_list_for_details'/></p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>用户名</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
                 <th>QQ/Email</th>
-                <th>注册时间</th>
-                <th>累计充值</th>
-                <th>最近充值时间</th>
-                <th>双区玩家</th>
-                <th>升级时间</th>
+                <th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.851482466'/></th>
+                <th><s:text name='viewjflc-recharge.jsp.jflc-recharge.jsp.989728617'/></th>
+                <th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.-738867994'/></th>
+                <th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.660492955'/></th>
+                <th><s:text name='viewzhgl-kehu.jsp.zhgl-kehu.jsp.667120382'/></th>
               </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@
 					<td><fmt:formatDate value="${data.regtime}" type="both"/></td>
 					<td>${data.cjtj}</td>
 					<td><fmt:formatDate value="${data.gmdate}" type="both"/></td>
-					<td><c:if test="${data.sjb==0}">否</c:if><c:if test="${data.sjb!=0}">${data.sjb}单</c:if></td>
+
 					<td><fmt:formatDate value="${data.bddate}" type="both"/></td>
 				</tr>
 			   </s:iterator>

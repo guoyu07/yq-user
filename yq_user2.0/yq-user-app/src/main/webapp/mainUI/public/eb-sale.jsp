@@ -12,18 +12,18 @@
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='VIP_users_can_not_withdraw_cash'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('<s:text name='nosuremanytimesforclose'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==12}"><script language=javascript>alert('未激活账户不能提现！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==-1}"><script language=javascript>alert('您的发布已经成功提交，发布成功后如有认购一币方向您下单后2小时内打到您的收款账号上！请您及时查收！');location.replace('epmcjl?secondThisState=249&thisState=244');</script></c:if>
+<c:if test="${erroCodeNum==-1}"><script language=javascript>alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1862966729'/>！');location.replace('epmcjl?secondThisState=249&thisState=244');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|一币卖出</title>
+  <title><s:text name='viewyjcx-bdb-details.jsp.yjcx-bdb-details.jsp.624662580'/>|<s:text name='Sell_a_dollar'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> <!-- 通用头部 -->
@@ -32,7 +32,7 @@
  <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail"><s:text name='viewhead.jsp.head.jsp.1099577248'/> >> <s:text name='viewyblc.jsp.yblc.jsp.618950045'/></p>
    <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -42,33 +42,33 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
    <div class="member-main-full">
-      <!-- 一币卖出说明 -->
+      <!-- <s:text name='One_dollar_note'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">一币卖出说明</p>
+        <p class="widget-title-line"><s:text name='One_dollar_note'/></p>
         <div class="widget-article">
-          <p class="widget-tips">最低100一币起就可以发布卖出，每次发布需等上一次处理（您确认收到款）了才可以发起第二次，发布成功后我们认购一币-方向下单后2小时内打到您的收款账号上！</p>
-          <p class="widget-tips widget-warning mt15">一币卖出低于500（含500），交易手续费为15%，高于500为10%</p>
+          <p class="widget-tips"><s:text name='A_minimum_of_100_dollars'/></p>
+          <p class="widget-tips widget-warning mt15"><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.476105277'/></p>
         </div>
       </div>
-      <!-- 一币卖出说明 end -->
+      <!-- <s:text name='One_dollar_note'/> end -->
       <!-- 当前卖出一币的账户信息 -->
       <div class="main-widget mt15">
-        <p class="widget-title-line">确认当前账户信息</p>
+        <p class="widget-title-line"><s:text name='Confirm_current_account_information'/></p>
         <from class="widget-form">
           <p class="item mt15">
-            <label class="title">真实姓名：</label><span class="text">${gcuser.name}</span>
+            <label class="title"><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.931750201'/>：</label><span class="text">${gcuser.name}</span>
           </p>
           <p class="item">
-            <label class="title">手机号码：</label><span class="text">${gcuser.simpleCall}</span>
+            <label class="title"><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label><span class="text">${gcuser.simpleCall}</span>
           </p>
           <p class="item">
-            <label class="title">收款方式：</label><span class="text">${gcuser.bank}</span>
+            <label class="title"><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.799099710'/>：</label><span class="text">${gcuser.bank}</span>
           </p>
           <p class="item">
-            <label class="title">账号：</label><span class="text">${gcuser.card}</span>
+            <label class="title"><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.1141649'/>：</label><span class="text">${gcuser.card}</span>
           </p>
           <p class="item">
-            <label class="title">开户行：</label><span class="text">${gcuser.addsheng}${gcuser.addshi}${gcuser.addqu}支行</span>
+            <label class="title"><s:text name='vipuserpay.jsp.userpay.jsp.24185845'/>：</label><span class="text">${gcuser.addsheng}${gcuser.addshi}${gcuser.addqu}<s:text name='vipuserpay.jsp.userpay.jsp.837885'/></span>
           </p>
         </from>
       </div>
@@ -77,11 +77,11 @@
       <div class="main-widget mt15">
         <form class="widget-form mt15" method="POST" name="Form" id="Form" onSubmit="return checkdate1()" action="userpay?status=1">
           <p class="item">
-            <label class="title">用户名：</label><span class="text">${userName}</span></p>
+            <label class="title"><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><span class="text User-name">${userName}</span></p>
           <p class="item">
-            <label class="title">卖出一币数量：</label>
-            <select class="widget-select" name="txpay">
-              <option selected value="0">=选择一币卖出数量=</option>
+            <label class="title"><s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-586037884'/>：</label>
+            <select class="widget-select Dollar-amount" name="txpay">
+              <option selected value="0">=<s:text name='Choose_a_dollar_to_sell_quantity'/>=</option>
               <option value="100">100</option>
               <option value="200">200</option>
               <option value="500">500</option>
@@ -94,14 +94,14 @@
             </select>
           </p>
           <p class="item">
-            <label class="title">二级密码：</label>
+            <label class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>：</label>
             <input name="pa3" type="password" />
           </p>
           <p class="button-line mt15 tc">
-            <button class="widget-button" type="submit" id="btn" onClick="return confirm('提示：发布卖出的一币如低于500（含500）交易手续费为15%，高于500的则为10%，您确定了吗？')">发布卖出</button>
+            <button class="widget-button" type="submit" id="btn" onClick='return confirm("<s:text name='vipuserpay.jsp.userpay.jsp.-1517150275a'/>")'><s:text name='Sell_out'/></button>
           </p>
         </form>
-        <p class="widget-tips widget-warning mt15">警告：请认真核对以下收款信息，如有错误请马上点<a href="login2j?inputUrl=login2j.jsp"><b>修改个人资料</b></a>，再进行发布卖出！如不认真核对，造成付款不成功，该笔卖出将冻结，申请解冻将加收20%手续费！</p>
+        <p class="widget-tips widget-warning mt15"><s:text name='_please_check_the_following_information'/><a href="login2j?inputUrl=login2j.jsp"><b><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.472164400'/></b></a>，<s:text name='Sell_again!_If_you_do_not_seriously_check,_resulting_in_the_payment_is_not_successful,_the_pen_will_be_frozen,_the_application_will_be_charged_20%_yuan_fee_thaw!'/></p>
       </div>
       <!-- 一币卖出表单 end -->
     </div>
@@ -114,11 +114,11 @@
 /*验证交互*/
 function checkdate() {
   if (Form.txpay.value == 0) {
-    alert("请选择卖出一币的数量!");
+    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-861806777'/>!");
     return false;
   }
   if (!chkinteger(Form.txpay.value)) {
-    alert('卖出一币只能为整字!');
+    alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.431301541'/>!');
     document.Form.txpay.focus;
     return false;
   }
@@ -145,11 +145,11 @@ function checkdate() {
 	  <c:if test="${transferType==1}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977'/>"); </c:if> <c:if test="${transferType==2}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977a'/>"); </c:if>     return false;   
   }
   if (Form.txpay.value < 100) {
-    alert("您的发布不能小于100一币!");
+    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1837041227'/>!");
     return false;
   }
   if (Form.pa3.value == "") {
-    alert("请输入二级密码密码!");
+    alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>!");
     return false;
   }
 
@@ -158,18 +158,18 @@ function checkdate() {
   $.post("/sms?op=3", data, function(response) {
     $("#btn").removeAttr("disabled");
     if (response.erroCodeNum != 0) {
-      alert("手机验证码发送失败");
+      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
       return false;
     }
     settime($("#btn"), '#SESSION_LOCALE');
-    alert("手机验证码发送成功");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
   });
   return false;
 }
 
 function checkdate1() {
   if (Form.ybcodeid.value == "") {
-    alert("请先点击获取验证码，然后再填入您的手机收到的验证码");
+    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");
     Form.ybcodeid.focus();
     return false;
   }

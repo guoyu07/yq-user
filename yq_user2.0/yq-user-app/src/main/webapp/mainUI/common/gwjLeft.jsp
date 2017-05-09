@@ -61,6 +61,6 @@ function bdbcz(){
 </script>
     <ul class="list">
       <li class="special">
-		     购物券<em><%=yjcxGcuser.getScores()%></em><% if(yjcxGcuser.getVip()>0) {%><!-- <a href="bdbzz">转出</a> --><%}%>
+		    <s:text name='viewuser.jsp.user.jsp.35660508'/><em><%=yjcxGcuser.getScores()%></em><% if(yjcxGcuser.getVip()>0) {%><!-- <a href="bdbzz">转出</a> --><%}%>
 		    </li>
     </ul>

@@ -1,31 +1,31 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('二级密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('您好，您已申请的卖出尚未交易成功，暂时不能使用转账功能，谢谢！');location.replace('epmcjl');</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('操作错误，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('选中了不存在的用户');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('非同名用户,不能转');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('您至少选择一个需要转账的用户名，谢谢！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==7}"><script language=javascript>alert('非双区用户不能使用该功能！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('您已成功批量转账！');location.href='tjz?secondThisState=275&thisState=245'</script></c:if>
-<c:if test="${erroCodeNum==11}"><script language=javascript>alert('转出用户名报单币不能大于剩余报单币！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==12}"><script language=javascript>alert('接收的用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==13}"><script language=javascript>alert('转账保单币小于0！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==14}"><script language=javascript>alert('不能给自己转！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==100}"><script language=javascript>alert('被转用户一币发生了改变！请重试');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==101}"><script language=javascript>alert('被转用户购物券发生了改变！请重试');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.1923400400'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.1141572332'/>！');location.replace('epmcjl');</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewlogin3j.jsp.login3j.jsp.-830018135'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-898207976'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.529929694'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.174913287'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.262431727'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.1396615689'/>！');location.href='tjz?secondThisState=275&thisState=245'</script></c:if>
+<c:if test="${erroCodeNum==11}"><script language=javascript>alert('<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.594399145'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==12}"><script language=javascript>alert('<s:text name='viewyjcx-bdb-zz.jsp.yjcx-bdb-zz.jsp.1926370358'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==13}"><script language=javascript>alert('<s:text name='Transferpolicycurrencylessthan0'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==14}"><script language=javascript>alert('<s:text name='Cannotgiveoneselfto'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==100}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-1964813948'/>');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==101}"><script language=javascript>alert('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.573081321'/>');history.go(-1);</script></c:if>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|同姓名账户批量转账</title>
+  <title><s:text name='vipgpjymc.jsp.gpjymc.jsp.624662580'/>|<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-48484697'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
   <!-- 会员中心导航模块 -->
   <div class="container">
     <div class="member-header" id="J_memberHeader">
-      <p class="breadcrumb-trail">账户管理 >> 同名账户管理</p>
+      <p class="breadcrumb-trail"><s:text name='Account_manage'/> >> <s:text name='The_same_account_management'/></p>
        <%@ include file="/mainUI/common/accountpart.jsp" %>
     </div>
   </div>
@@ -45,10 +45,10 @@
     <div class="member-content" id="J_memberContent">
        <div class="member-main-full">
       <div class="main-widget">
-        <p class="widget-title-line">同姓名账户批量转账</p>
+        <p class="widget-title-line"><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-48484697'/></p>
         <c:if test="${empty dataList}">
 		<div class="a-transfer">
-			<p>没有可转账的同名账户!</p>
+			<p><s:text name='No_transfer_of_the_same_name_account!'/></p>
 		</div>
 		</c:if>
 		<c:if test="${not empty dataList}">
@@ -56,26 +56,26 @@
               <input type="hidden" name="thisState" value="${thisState}">
     <input type="hidden" name="secondThisState" value="${secondThisState}">
           <p class="item">
-            <label class="title">转账类型：</label>
-            <select class="widget-select" name="tp">
-              <option value="0">一币</option>
-              <option value="1">购物券</option>
-              <option value="2">报单币</option>
+            <label class="title"><s:text name="Transferstype"></s:text>：</label>
+            <select class="widget-select Transfer-type" name="tp">
+              <option value="0"><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></option>
+              <option value="1"><s:text name='viewuser.jsp.user.jsp.35660508'/></option>
+              <option value="2"><s:text name='Order'/></option>
             </select>
           </p>
           <p class="item">
-            <label class="title">二级密码：</label>
+            <label class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>：</label>
             <input type="password" name="pa2j" size="15">
           </p>
           </p>
           <p class="item">
-            <button class="widget-button-small" type="submit" onClick="return cf()">批量提交转至</button> 当前登陆的用户名：<b class="widget-warning">${userName}</b>
+            <button class="widget-button-small" type="submit" onClick="return cf()"><s:text name='Batch_submission'/></button><s:text name='Current_login_username'/>：<b class="widget-warning">${userName}</b>
           </p>
           <div class="widget-table">
             <table border="0" cellspacing="0" cellpadding="0">
               <thead>
                 <tr>
-                  <td class="checked-all-wrap" colspan="6"><input class="checked-all" type='checkbox' name="chkall" onclick="CheckAll(this.form)">全选</td>
+                  <td class="checked-all-wrap" colspan="6"><input class="checked-all" type='checkbox' name="chkall" onclick="CheckAll(this.form)"><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.682913'/></td>
                 </tr>
               </thead>
               <tbody>
@@ -86,14 +86,14 @@
                   </td>
                   <td>${data.username}</td>
                   <td>${data.name}</td>
-                  <td>可转一币:
+                  <td><s:text name='Convertible_currency'/>:
                   <c:choose>
                   		<c:when test="${data.pay-data.vippay<0}"><input type="hidden" name="tpay" size="10" value="0" readonly>0</c:when>
                   		<c:otherwise ><input type="hidden" name="tpay" size="10" value="${data.pay-data.vippay}" readonly>${data.pay-data.vippay}</c:otherwise>
                   </c:choose>
                   </td>
-                  <td>购物券:${data.scores}</td>
-                  <td>报单币余额:${data.sybdb}</td>
+                  <td><s:text name='viewuser.jsp.user.jsp.35660508'/>:${data.scores}</td>
+                  <td><s:text name='viewlinks.html.links.html.-1788801323'/>:${data.sybdb}</td>
                 </tr>
                 </s:iterator>
               </tbody>
@@ -125,13 +125,13 @@
 
   function cf() {
     if (form.tp.value == 0) {
-      return confirm('确认转账吗?');
+      return confirm('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-474644738'/>?');
     }
     if (form.tp.value == 1) {
-      return confirm('确认批量转入购物券?');
+      return confirm('<s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.-1733349801'/>?');
     }
     if (form.tp.value == 2) {
-      return confirm('确认批量转入报单币?');
+      return confirm('<s:text name='querenbaodanbishuliang'/>?');
     }
   }
   </script>

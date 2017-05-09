@@ -17,16 +17,16 @@
 %> --%>
 
      <!--   <ul class="list">
-         <li><a href='/manager'>首页</a></li>
-         <li><a href='/vipgo'>财富中心</a></li>
-         <li><a href='/tgurl'>账户管理</a></li>
-         <li><a href='/hfcz'>消费管理</a></li>
-         <li><a href='/vipup'>客服中心</a></li>
+         <li><a href='/manager'><s:text name='vipbdbdate.jsp.bdbdate.jsp.1257887'/></a></li>
+         <li><a href='/vipgo'><s:text name='viewhead.jsp.head.jsp.1099577248'/></a></li>
+         <li><a href='/tgurl'><s:text name='Account_manage'/></a></li>
+         <li><a href='/hfcz'><s:text name='viewhead.jsp.head.jsp.871093494'/></a></li>
+         <li><a href='/vipup'><s:text name='viewservice.jsp.service.jsp.724834337'/></a></li>
        </ul> -->
 		
 	<%-- 	<c:if test="${not empty rootResource}">
 		<c:forEach items="${rootResource}" var="list" varStatus="i">
-		 <li><a href='/manager'>首页</a></li>
+		 <li><a href='/manager'><s:text name='vipbdbdate.jsp.bdbdate.jsp.1257887'/></a></li>
 		</c:forEach>
 		</c:if>
  --%>

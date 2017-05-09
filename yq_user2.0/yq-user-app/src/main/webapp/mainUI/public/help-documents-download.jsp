@@ -5,12 +5,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|公司相关资料下载</title>
+  <title><s:text name='viewshop.html.shop.html.624662580'/>|<s:text name='Company_related_information_download'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -21,7 +21,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">帮助支持 >> 相关资料下载</p>
+    <p class="breadcrumb-trail"><s:text name='Help_support'/> >> <s:text name='Related_data_download'/></p>
     <%@ include file="/mainUI/common/help.jsp" %>
   </div>
 </div>
@@ -31,15 +31,15 @@
 <div class="container">
   <div class="member-content" id="J_memberContent">
     <div class="member-main-full">
-      <!-- 公司相关资料 -->
+      <!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.-948760164'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">公司相关资料下载</p>
+        <p class="widget-title-line"><s:text name='Company_related_information_download'/></p>
         <div class="widget-article">
-          <p class="widget-notice"><a target="_blank" href="download/用户转让申请书.doc">《用户转让申请书》</a></p>
-          <p class="widget-notice mt15"><a target="_blank" href="download/开通卖出申请书.docx">《开通卖出申请书》</a></p>
+          <p class="widget-notice"><a target="_blank" href="download/用户转让申请书.doc"><s:text name='Application_for_transfer_of_user'/></a></p>
+          <p class="widget-notice mt15"><a target="_blank" href="download/开通卖出申请书.docx"><s:text name='Application_for_opening_and_selling'/></a></p>
         </div>
       </div>
-      <!-- 公司相关资料 end -->
+      <!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.-948760164'/> end -->
     </div>
   </div>
 </div>

@@ -6,12 +6,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|商城订单号查询</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='mallorderquery'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
+    <p class="breadcrumb-trail"><s:text name='viewhead.jsp.head.jsp.1099577248'/> >> <s:text name='viewyblc.jsp.yblc.jsp.618950045'/></p>
    <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -35,14 +35,14 @@
 <!-- 会员中心左边栏 end -->
 <form method="post" name="Form" action="datepayfororder?status=1&thisState=${thisState}&secondThisState=${secondThisState}">
     <div class="member-main-full">
-      <!-- 积分交易明细 -->
+      <!-- <s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">商城订单号一币明细</p>
+        <p class="widget-title-line"><s:text name='mallorderqueryforyibi'/></p>
         <p class="small-button-line">
-          <a href="datepay?thisState=${thisState}&secondThisState=${secondThisState}" class="widget-warning mr10">回到一币变化明细</a>
-          <span>商城订单号查询：</span>
+          <a href="datepay?thisState=${thisState}&secondThisState=${secondThisState}" class="widget-warning mr10"><s:text name='Back_to_a_dollar_change_details'/></a>
+          <span><s:text name='mallorderquery'/>：</span>
           <input type="text" name="orderId" id="orderId" value="" size="10" style="padding: 0 5px;" />
-          <button type="submit" class="widget-button-small order-search" onClick="querydata()">查询 </button>
+          <button type="submit" class="widget-button-small order-search" onClick="querydata()"><s:text name='query'/> </button>
         </p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
@@ -76,9 +76,9 @@
             </tbody>
           </table>
         </div>
-        <!-- 积分交易明细 end -->
+        <!-- <s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/> end -->
       </div>
-      <!-- 积分交易明细 end -->
+      <!-- <s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/> end -->
     </div>
     </form>
   </div>

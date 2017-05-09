@@ -6,25 +6,25 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|积分交易市场出售信息</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='Points_trading_market_for_sale_information'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
 <div class="exchange-detail-table sale-info">
   <table>
-    <caption>出售信息</caption>
+    <caption><s:text name='vipgpjymc.jsp.gpjymc.jsp.646808098'/></caption>
     <thead>
       <tr>
-        <td>出售数量</td>
-        <td>单价</td>
-        <td>交易额</td>
-        <td>发布方</td>
-        <td>操作</td>
+        <td><s:text name='vipgpjymc.jsp.gpjymc.jsp.646991827'/></td>
+        <td><s:text name='viewjflc-details.jsp.jflc-details.jsp.681538'/></td>
+        <td><s:text name='viewjflc-details.jsp.jflc-details.jsp.20195982'/></td>
+        <td><s:text name='vipgpjymc.jsp.gpjymc.jsp.21392295'/></td>
+        <td><s:text name='viewjflc-activie-goldcard.jsp.jflc-activie-goldcard.jsp.820271'/></td>
       </tr>
     </thead>
     <tbody>
@@ -45,7 +45,7 @@
 
                                   </td>
          <td>
-         <c:if test="${data.mcsl>0}"><a onClick="return confirm('提示：您确定了吗？')" target="main" href="wymy?id=${data.id}&pay=${data.jypay}&secondThisState=${secondThisState}&thisState=${thisState}">我要买</a></c:if>
+         <c:if test="${data.mcsl>0}"><a onClick='return confirm("<s:text name='vipepjysc.jsp.epjysc.jsp.1991539691'/>")' target="main" href="wymy?id=${data.id}&pay=${data.jypay}&secondThisState=${secondThisState}&thisState=${thisState}"><s:text name='vipgpjymc.jsp.gpjymc.jsp.1526835300a'/></a></c:if>
          </td>
         </tr>
        </s:iterator>

@@ -6,32 +6,32 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|全部分红明细详情</title>
+  <title><s:text name='reg1.jsp.reg1.jsp.624662580'/>|<s:text name='All_the_details_of_share_out_bonus_details'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+ <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body>
 <div class="member-dialog-container">
   <div class="member-main">
     <div class="dialog-widget">
-      <p class="dialog-title">全部分红明细详情</p>
+      <p class="dialog-title"><s:text name='All_the_details_of_share_out_bonus_details'/></p>
       <!-- 图纸为一页13条数据 -->
       <div class="dialog-wrap-border main-widget">
         <div class="dialog-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>用户名</th>
-                <th>个人持点数量</th>
-                <th>每点分红</th>
-                <th>本期累计</th>
-                <th>所有累计</th>
-                <th>分红时间</th>
-                <th>备注</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.-439906297'/></th>
+                <th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.850616742'/></th>
+                <th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.813238533'/></th>
+                <th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.775680731'/></th>
+                <th><s:text name='viewgrxx-gcbftj.jsp.grxx-gcbftj.jsp.657552666'/></th>
+                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></th>
               </tr>
             </thead>
             <tbody>

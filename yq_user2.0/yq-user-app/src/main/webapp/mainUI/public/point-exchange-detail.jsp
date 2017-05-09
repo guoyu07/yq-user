@@ -6,12 +6,12 @@
 
 <head>
   <meta chartset="UTF-8">
-  <title>会员中心|积分交易明细</title>
+  <title><s:text name='vipgpjymc.jsp.gpjymc.jsp.624662580'/>|<s:text name='vipadmin_menu.jsp.admin_menu.jsp.-1151284962'/></title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common.css">
+  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
 </head>
 
 <body> 
@@ -22,7 +22,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail">财富中心 >> 积分理财</p>
+    <p class="breadcrumb-trail"><s:text name='viewhead.jsp.head.jsp.1099577248'/> >> <s:text name='viewjflc.jsp.jflc.jsp.951062035'/></p>
     <ul class="nav-secondary">
       <%@ include file="/mainUI/common/scendhead.jsp" %>
     </ul>
@@ -37,29 +37,29 @@
 <div class="member-aside">
         <!-- 账户概览 积分理财、一币理财、业绩查询、个人信息 的不一样 -->
           <%@ include file="/mainUI/common/pointLicaiLeft.jsp" %>
-        <!-- 账户概览  end -->
+        <!-- <s:text name='viewzhgl.jsp.zhgl.jsp.1101502999'/>  end -->
       </div>
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- 积分交易明细 -->
+      <!-- <s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/> -->
       <div class="main-widget">
-        <p class="widget-title-line">积分交易明细</p>
+        <p class="widget-title-line"><s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/></p>
         <p class="small-button-line">
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointExchangeNodealDetail" data-url="/gpjydesuccess?status=2">未成交详细</a>
-          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointExchangeDealDetail" data-url="/gpjyOfDeal">已成交详细</a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointExchangeNodealDetail" data-url="/gpjydesuccess?status=2"><s:text name='Not_done_in_detail'/></a>
+          <a href="javascript:void(0);" class="widget-button-small JQ_moreDialog" id="J_pointExchangeDealDetail" data-url="/gpjyOfDeal"><s:text name='Has_been_traded_in_detail'/></a>
         </p>
         <div class="widget-table mt5 full-size">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th>用户名</th>
-                <th>卖出数量</th>
-                <th>买入数量</th>
-                <th>单价</th>
-                <th>交易额</th>
-                <th>状态</th>
-                <th>对方</th>
+                <th><s:text name='reg.jsp.reg.jsp.29623262'/></th>
+                <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.656571075'/></th>
+                <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.619069972'/></th>
+                <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.681538'/></th>
+                <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.20195982'/></th>
+                <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.934923'/></th>
+                <th><s:text name='viewjflc-details.jsp.jflc-details.jsp.755936'/></th>
               </tr>
             </thead>
             <tbody>
@@ -80,9 +80,9 @@
             </tbody>
           </table>
         </div>
-        <!-- 积分交易明细 end -->
+        <!-- <s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/> end -->
       </div>
-      <!-- 积分交易明细 end -->
+      <!-- <s:text name='viewjflc-details.jsp.jflc-details.jsp.-1151284962'/> end -->
     </div>
   </div>
   <!-- 积分理财内容 end -->
