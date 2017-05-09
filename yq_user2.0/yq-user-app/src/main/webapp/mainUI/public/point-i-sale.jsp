@@ -47,7 +47,7 @@
 
     <div class="member-main">
       <div class="main-widget">
-        <p class="widget-title-line"><s:text name='integral_sell'/>=</p>
+        <p class="widget-title-line"><s:text name='integral_sell'/></p>
         <form class="widget-form" action="/wymc?status=1&id=${id}&secondThisState=${secondThisState}&thisState=${thisState}" method="POST" onSubmit="return confirm('<s:text name='viewjflc-jfmr-2.jsp.jflc-jfmr-2.jsp.600719861'/>？')">
           <p class="item">
             <lable class="title"><s:text name='vipwymc.jsp.wymc.jsp.-1871713252'/>：</lable>
