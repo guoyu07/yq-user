@@ -53,9 +53,9 @@
         <p class="widget-title-line"><s:text name='50000_coins_recharge'/></p>
         <form class="widget-form" method="POST" name="Form" action="bdbcz?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item">
-            <label class="title"><s:text name='Current_recharge:'/></label><span class="text">${czgcuser.vipcjcjb}</span></p>
+            <label class="title"><s:text name='Current_recharge'/></label><span class="text">${czgcuser.vipcjcjb}</span></p>
           <p class="item">
-            <label class="title"><s:text name='The_current_reserve_currency:'/></label><span class="text">${czgcuser.syep}</span></p>
+            <label class="title"><s:text name='The_current_reserve_currency'/></label><span class="text">${czgcuser.syep}</span></p>
          <!--  <p class="widget-notice widget-warning mt15">本次操作需要消耗：</p>
           <p class="item mt15">
             <label class="title">当前用户充值币：</label><span class="text">5000</span></p>
@@ -64,7 +64,7 @@
           <p class="item">
             <label class="title">被充值用户一币：</label><span class="text">22800</span></p> -->
            	<p class="widget-notice widget-warning mt15"> <s:text name='This_operation_requires_the_users_to_recharge_5000_coins,_22200_coins_and_spare_form_prepaid_users_22800_coins.'/></p>
-          <p class="widget-notice widget-warning mt15"> <s:text name='Note:_only_a_small_VIP_recharge_to_the_team.'/></p>
+          <p class="widget-notice widget-warning mt15"> <s:text name='Note_only_a_small_VIP_recharge_to_the_team.'/></p>
           <p class="item mt15">
             <label class="title"><s:text name='recharge_user_name'/>：</label>
             <input type="text" name="touser" />

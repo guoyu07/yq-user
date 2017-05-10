@@ -73,15 +73,67 @@
         <p class="widget-title-line"><s:text name='viewindex2.jsp.index2.jsp.70014993'/></p>
         <ul class="news-list">
           <s:iterator var="data" value="dataList">
-            <li class="item">
+           <%--  <li class="item">
               <p class="article-info">
                 <span class="time"><fmt:formatDate value="${data.ggdate}" type="date"/></span>
                 <br/>
                 <span class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt}</a></span>
               </p>
               <a class="more" href="/ggck?ck=${data.id}"><s:text name='See'/></a>
+            </li> --%>
+              <li class="item">
+              <p class="article-info">
+                <c:choose>  
+				<c:when test="${SESSION_LOCALE=='en_US'}"> 
+				<span class="time"><fmt:formatDate value="${data.ggdate}" type="date"/></span><br/>
+				<c:if test="${data.ggbt_en==null}">
+					<span  class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt}</a></span>
+				</c:if>
+				<span class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></span>
+  				</c:when>
+  				<c:when test="${SESSION_LOCALE=='zh_CN'}">   
+  					<span class="time"><fmt:formatDate value="${data.ggdate}" type="date"/></span>
+				<c:if test="${data.ggbt==null}">
+					<span  class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></span>
+				</c:if>
+				<span  class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt}</a></span>
+  				</c:when>  
+				<c:otherwise>
+				<span class="time"><fmt:formatDate value="${data.ggdate}" type="date"/></span><br/>
+				<span class="article-title"><a href="/ggck?ck=${data.id}">${data.ggbt}</a></span>
+  				</c:otherwise> 
+  				</c:choose>
+              </p>
+              <a class="more" href="/ggck?ck=${data.id}"><s:text name='See'/></a>
             </li>
            </s:iterator>
+           <%-- <s:iterator var="data" value="dataList">
+			 <li class="item">
+			<a href="/ggck?ck=${data.id}" class="ck">
+			<img src="/images/ck${SESSION_LOCALE}.png" />  
+			</a>
+			<c:choose>  
+			<c:when test="${SESSION_LOCALE=='en_US'}"> 
+				<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
+				<c:if test="${data.ggbt_en==null}">
+					<p><a href="/ggck?ck=${data.id}">${data.ggbt}</a></p>
+				</c:if>
+				<p><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></p>
+  				</c:when>
+  				<c:when test="${SESSION_LOCALE=='zh_CN'}">   
+  					<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
+				<c:if test="${data.ggbt==null}">
+					<p><a href="/ggck?ck=${data.id}">${data.ggbt_en}</a></p>
+				</c:if>
+				<p><a href="/ggck?ck=${data.id}">${data.ggbt}</a></p>
+  				</c:when>  
+			<c:otherwise>
+				<span><fmt:formatDate value="${data.ggdate}" type="date"/></span>
+				<p><a href="/ggck?ck=${data.id}">${data.ggbt}</a></p>
+  				</c:otherwise> 
+  				</c:choose>
+			</li>
+			</s:iterator> --%>
         </ul>
         <!-- 会员中心翻页组件 -->
 <p class="widget-pages">

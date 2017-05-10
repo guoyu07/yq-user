@@ -38,13 +38,13 @@
         <div class="widget-article">
           <form class="widget-form" method="POST" name="Form" onSubmit="return checkdate()" action="/mysl?status=2&txpay=${txpay}&secondThisState=${secondThisState}&thisState=${thisState}">
             <p class="item">
-              <label class="title"><s:text name='You_want_to_buy_the_number_of_points:'/></label><span class="text">${txpay}</span>
+              <label class="title"><s:text name='You_want_to_buy_the_number_of_points'/></label><span class="text">${txpay}</span>
             </p>
             <p class="item">
-              <label class="title"><s:text name='Current_unit_price:'/></label><span class="text">${jygj}</span>
+              <label class="title"><s:text name='Current_unit_price'/></label><span class="text">${jygj}</span>
             </p>
             <p class="item">
-              <label class="title"><s:text name='Will_be_deducted_from_your_gold_account:'/>：</label><span class="text"><b class="widget-warning">${needJf}</b><s:text name='Gold'/></span>
+              <label class="title"><s:text name='Will_be_deducted_from_your_gold_account'/></label><span class="text"><b class="widget-warning">${needJf}</b><s:text name='Gold'/></span>
             </p>
             <p class="button-line mt15">
               <button type="submit" class="widget-button" onclick="bitch()"><s:text name='Definite_buying'/></button>

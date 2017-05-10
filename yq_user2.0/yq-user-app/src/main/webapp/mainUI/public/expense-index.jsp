@@ -36,8 +36,8 @@
     <div class="member-main-grey-full">
       <!-- <s:text name='Young_leaders_of_the_future_training_camp_eloquence_notice'/> -->
       <div class="widget-list">
-        <a class="item"  target="_blank" href="http://www.qlsme.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserJflc2xxx.getUsername()%>&sign=<%=sign%>&time=<%=time%>"><img src="${ctx}/img/expense_list_01.jpg" alt="<s:text name='HAPPY100_online'/>" title="<s:text name='HAPPY100_online'/>"></a>
-        <a class="item"  target="_blank" href="http://www.kypwe.com/Ebooking/index!toindex.jspx"><img src="${ctx}/img/expense_list_02.jpg" alt="<s:text name='keshanpiaowu'/>" title="<s:text name='keshanpiaowu'/>"></a>
+        <a class="item"  target="_blank" href="http://www.qlsme.com/shop/index.php?act=login&op=ycvipindex&userName=<%=gcuserJflc2xxx.getUsername()%>&sign=<%=sign%>&time=<%=time%>"><img src="${ctx}/img/expense_list_01${SESSION_LOCALE}.jpg" alt="<s:text name='HAPPY100_online'/>" title="<s:text name='HAPPY100_online'/>"></a>
+        <a class="item"  target="_blank" href="http://www.kypwe.com/Ebooking/index!toindex.jspx"><img src="${ctx}/img/expense_list_02${SESSION_LOCALE}.jpg" alt="<s:text name='keshanpiaowu'/>" title="<s:text name='keshanpiaowu'/>"></a>
       </div>
     </div>
   </div>

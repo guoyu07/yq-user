@@ -54,7 +54,7 @@
                 <c:if test="${gmmj==50}">500<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.674001644'/>）</c:if>
                <c:if test="${gmmj==100}">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</c:if>
               </span></p>
-            <p class="widget-notice mt15"><b><s:text name='Please_choose_the_quantity_to_be_purchased:'/></b></p>
+            <p class="widget-notice mt15"><b><s:text name='Please_choose_the_quantity_to_be_purchased'/></b></p>
             <p class="select-line">
               <select class="widget-select" name="gmsl">
                 <option value="0" selected="">==<s:text name='viewyblc-buy-goldcard2.jsp.yblc-buy-goldcard2.jsp.-145398058'/>==</option>

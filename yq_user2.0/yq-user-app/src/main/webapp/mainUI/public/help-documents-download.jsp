@@ -35,8 +35,17 @@
       <div class="main-widget">
         <p class="widget-title-line"><s:text name='Company_related_information_download'/></p>
         <div class="widget-article">
-          <p class="widget-notice"><a target="_blank" href="download/用户转让申请书.doc"><s:text name='Application_for_transfer_of_user'/></a></p>
-          <p class="widget-notice mt15"><a target="_blank" href="download/开通卖出申请书.docx"><s:text name='Application_for_opening_and_selling'/></a></p>
+        <c:choose>
+        		<c:when test="${SESSION_LOCALE=='en_US'}">
+        			 <p class="widget-notice"><a target="_blank" href="download/用户转让申请书(英文).doc"><s:text name='Application_for_transfer_of_user'/></a></p>
+          			 <p class="widget-notice mt15"><a target="_blank" href="download/开通卖出申请书(英文).docx"><s:text name='Application_for_opening_and_selling'/></a></p>
+        		</c:when>
+        		<c:otherwise>
+        			 <p class="widget-notice"><a target="_blank" href="download/用户转让申请书.doc"><s:text name='Application_for_transfer_of_user'/></a></p>
+          			 <p class="widget-notice mt15"><a target="_blank" href="download/开通卖出申请书.docx"><s:text name='Application_for_opening_and_selling'/></a></p>
+        		</c:otherwise>
+        </c:choose>
+         
         </div>
       </div>
       <!-- <s:text name='viewgrxx-edit-jc.jsp.grxx-edit-jc.jsp.-948760164'/> end -->

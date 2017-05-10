@@ -6,7 +6,7 @@
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1055187381'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1616194221'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.670003458'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('手机验证码为空！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viphgyb.jsp.hgyb.jsp.-495031333'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==6}"><script language=javascript>alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.39306141'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.200453681'/>！');location.href='datepay?secondThisState=${secondThisState}&thisState=${thisState}'</script></c:if>
 <head>
