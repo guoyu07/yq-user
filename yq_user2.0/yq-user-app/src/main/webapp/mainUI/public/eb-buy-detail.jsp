@@ -68,9 +68,10 @@
           </c:if>
 	          	</td>
 
-        						<c:if test="${data.ep==1}"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621'/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621a'/>。</c:if></font></a>
+        					<td><c:if test="${data.ep==1}"><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621'/>${data.paynum9}<s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.314771621a'/>。</c:if></font></a>
         					</td>
         					<td><c:if test="${data.opstate==1}"><s:text name='Order.is.reset'/></c:if></td>
+							
 				</tr>
 			</s:iterator>
             </tbody>
