@@ -48,7 +48,7 @@
                <input type="hidden" name="pdpa" value="${pdpa}" />
             </p>
             <p class="item">
-              <lable class="title"><s:text name='Security_number:'/></lable>
+              <lable class="title"><s:text name='Security_number'/></lable>
               <span class="text widget-warning">${fwid}</span>
               <input type="hidden" name="fwid" value="${fwid}" />
               <input type="hidden" name="status" value="1" />

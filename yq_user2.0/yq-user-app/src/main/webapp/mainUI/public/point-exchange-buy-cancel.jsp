@@ -2,7 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2022589602'/>！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='vipdiyjygj.jsp.diyjygj.jsp.-791568500'/>！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('系统代买不能撤销！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='Systempurchasecannotberevoked'/>！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipqxqg.jsp.qxqg.jsp.1013019213'/>！');location.replace('mysl?secondThisState=${secondThisState}&thisState=${thisState}');</script></c:if>
 
 <!DOCTYPE html>

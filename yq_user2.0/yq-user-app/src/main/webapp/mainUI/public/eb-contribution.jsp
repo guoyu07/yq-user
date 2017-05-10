@@ -80,7 +80,7 @@ function checkdate() {
     alert("<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.387731406'/>100!");
     return false;
   }
-  if (Form.jzpay.value > ${gcuser.pay}) {
+  if (Form.jzpay.value > ${gcuser.pay}){
     alert("<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.387731406'/>"+${gcuser.pay});
     return false;
   }

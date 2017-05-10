@@ -37,7 +37,7 @@
         <div class="widget-article">
           <form class="widget-form" action="jztojb?status=3&mj=${mj}&gmsl=${gmsl}&secondThisState=${secondThisState}&thisState=${thisState}" method="post" onSubmit="return checkdate();" name="Form" id="Form">
             <p class="item">
-              <lable class="title"><s:text name='Gold_card:'/></lable>
+              <lable class="title"><s:text name='Gold_card'/></lable>
               <span class="text widget-warning">
 							<c:if test="${mj==10}">10<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1554998638'/>）</c:if>
 							<c:if test="${mj==50}">50<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.1726773544'/>）</c:if>
@@ -47,15 +47,15 @@
 							<c:if test="${mj==1000}">1000<s:text name='viewyblc-buy-goldcard1.jsp.yblc-buy-goldcard1.jsp.530883694'/>）</c:if></span>
             </p>
             <p class="item">
-              <lable class="title"><s:text name='Purchase_gold_card_number:'/></lable>
+              <lable class="title"><s:text name='Purchase_gold_card_number'/></lable>
               <span class="text"><b class="widget-warning">${gmsl}</b><s:text name='Zhang'/></span>
             </p>
             <p class="item">
-              <lable class="title"><s:text name='Total_number_of_coins:'/></lable>
+              <lable class="title"><s:text name='Total_number_of_coins'/></lable>
               <span class="text"><b class="widget-warning">${gmsl*mj}</b><s:text name='individual'/></span>
             </p>
             <p class="item">
-              <lable class="title"><s:text name='Consumption_of_currency:'/></lable>
+              <lable class="title"><s:text name='Consumption_of_currency'/></lable>
               <span class="text"><b class="widget-warning">${gmsl*mj*1.5}</b><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/></span>
             </p>
             <p class="item">
