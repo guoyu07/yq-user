@@ -99,7 +99,7 @@
           </p>
           </c:if>
           <p class="button-line mt15">
-
+			<input class="widget-button" type="submit" value="<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165'/>" name="B1" onclick="{if(confirm('<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165a'/>?')){this.style.visibility='hidden';return true;}return false;}">
           </p>
         </form>
         <p class="widget-notice mt15"><b class="widget-warning"><s:text name='vipepmy.jsp.epmy.jsp.-1694703455'/>：</b><s:text name='After_confirmation,_the_system_into_the_accounting_period,_please_stop_other_operations,_not_to_close_the_page!'/></p>
