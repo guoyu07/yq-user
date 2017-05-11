@@ -42,19 +42,27 @@
       <div class="main-widget">
     	<c:choose>  
 		<c:when test="${SESSION_LOCALE=='en_US' && (data.ggbt_en!=null || data.ggbt_en!='')}"> 
-		 <p class="widget-title-line">${dgag.ggbt_en}</p>
-		 <div class="widget-article">
-			 <c:if test=" ${dgag.ggny_en==null || dgag.ggny_en==''}">
-			  ${dgag.ggny}
-			 </c:if>
-			  ${dgag.ggny_en}
-	      </div>
+		
+			 <c:choose>  
+				<c:when test=" ${dgag.ggny_en!=null || dgag.ggny_en!=''}">
+				 <p class="widget-title-line">${dgag.ggbt_en}</p>
+		 			<div class="widget-article">
+					${dgag.ggny_en}
+					</div>
+				</c:when>
+				<c:otherwise>
+				 <p class="widget-title-line">${dgag.ggbt}</p>
+				 <div class="widget-article">
+					${dgag.ggny}
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</c:when>
 		<c:otherwise>
-		 <p class="widget-title-line">${dgag.ggbt}</p>
-        <div class="widget-article">
-         ${dgag.ggny}
-        </div>
+		 	<p class="widget-title-line">${dgag.ggbt}</p>
+	        <div class="widget-article">
+	         ${dgag.ggny}
+	        </div>
 		</c:otherwise> 
 		</c:choose>
         <p class="button-line mt15 tc"><a href="javascript:history.go(-1);" class="widget-button"><s:text name='viewzhgl-notice.jsp.zhgl-notice.jsp.1118943080'/></a></p>
