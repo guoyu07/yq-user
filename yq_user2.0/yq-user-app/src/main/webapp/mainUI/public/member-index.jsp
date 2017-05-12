@@ -147,7 +147,27 @@
   </div>
   <!-- 首页内容 end -->
 </div>
-
+<c:if test="${guanggao==1 && SESSION_LOCALE!='en_US'}">
+<div id="mask"></div>
+<div id="passport-login-pop-dialog">
+<div id='tang-title'><span>幸福一百会员中心</span><span id="close"></span>
+	<div class="dialog-content">
+		<p>尊敬的家人您好:</p>
+		<p class="p-indent">随着公司的不断发展，会员数量的不断增加，为了给您提供更加优质、高效的服务,公司决定增加服务器数量;新增访问入口为:vip.ycgje.com;同时vip.zgyce.com都是可登录我公司网站,望家人们相互告知~！</p>
+		<p>这个是最终确认的公告内容···</p>
+	</div>
+</div>
+</div>
+</c:if>
+<script>
+	function $$(close){
+		return document.getElementById(close)
+	}
+	$$('close').onclick=function(){
+		$$('mask').style.display="none";
+		$$('passport-login-pop-dialog').style.display="none";
+	}
+</script>
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/js/member-index.js"></script>
