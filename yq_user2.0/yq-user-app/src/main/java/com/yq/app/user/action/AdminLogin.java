@@ -34,12 +34,6 @@ public class AdminLogin extends ALDAdminActionSupport {
 				.getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
-		boolean flag = aus.isAgent(adminName);
-		if(flag){
-			super.setErroCodeNum(99999);
-			super.setErroDescrip("您的号被封啦，请联系管理员！");
-			return SUCCESS;
-		}
 		
 		String rand = (String) sessionhttp.getAttribute("rand");
 		if (rand == null) {
@@ -58,6 +52,12 @@ public class AdminLogin extends ALDAdminActionSupport {
 			super.setErroDescrip("登录失败，用户名或密码错误");
 			return SUCCESS;
 		} else {
+			if(au.getUserAgent()!=0){
+				super.setErroCodeNum(99999);
+				super.setErroDescrip("您的号被封啦，请联系管理员！");
+				return SUCCESS;
+			}
+			
 			if(au.getGanew()!=0){
 				super.setErroCodeNum(4);//重定向去修改用户信息
 				return SUCCESS;
