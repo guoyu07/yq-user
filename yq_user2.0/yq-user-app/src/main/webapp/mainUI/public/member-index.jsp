@@ -147,7 +147,7 @@
   </div>
   <!-- 首页内容 end -->
 </div>
-<c:if test="${guanggao==1 && SESSION_LOCALE!='en_US'}">
+<%-- <c:if test="${guanggao==1 && SESSION_LOCALE!='en_US'}">
 <div id="mask"></div>
 <div id="passport-login-pop-dialog">
 <div id='tang-title'><span>幸福一百会员中心</span><span id="close"></span>
@@ -167,7 +167,7 @@
 		$$('mask').style.display="none";
 		$$('passport-login-pop-dialog').style.display="none";
 	}
-</script>
+</script> --%>
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/js/member-index.js"></script>
