@@ -2,31 +2,31 @@
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-125850672'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-271901504'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-752014255'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.386612509'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==5}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2022589602'/>');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==6}"><script language=javascript>alert('VIP<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1681297541'/>60w！');history.go(-1);</script></c:if>
-
-<c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1580362770'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==9}"><script language=javascript>alert('VIP<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1681297541'/>5w！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.306392805'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==11}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.231633818'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==12}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1495661441'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==13}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.571194964'/>vip！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==14}"><script language=javascript>alert('<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-2079296314'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.246684949'/>！');location.replace('datepay?secondThisState=249&thisState=244');</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('您好，您转账一币不能小于零或超过100000，谢谢！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('转账必须是100的倍整数如：100，200，300，400，500，1000，5000，请检查输入是否正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('您好，不能转给自己，谢谢！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('只能转给自己团队的并已进入双区的玩家！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('二级密码不正确');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('VIP玩家一币账户余额必须大于或等于60w！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==7}"><script language=javascript>alert('您好，您转账一币不能大于您剩余一币 ${gcuser.pay} ，谢谢！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==8}"><script language=javascript>alert('转入的用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==9}"><script language=javascript>alert('VIP玩家一币账户余额必须大于或等于5w！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('非vip不能操作该功能！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==11}"><script language=javascript>alert('该玩家的上级vip不是您！您不能转给他！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==12}"><script language=javascript>alert('该玩家是大vip！您不能转给他！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==13}"><script language=javascript>alert('您只是小vip！不能转给您团队下的小vip！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==14}"><script language=javascript>alert('被转对象vip标识错误，请截图后联系管理员！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('您好！转账成功！');location.replace('datepay?secondThisState=249&thisState=244');</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2002}"><script language=javascript>alert('此大vip用户所对应的法人不存在，请联系管理员添加！');history.go(-1);</script></c:if>
 <head>
   <meta chartset="UTF-8">
-  <title><s:text name='viewyblc-mrdetails.jsp.yblc-mrdetails.jsp.624662580'/>|<s:text name='Currency_transfer'/></title>
+  <title>会员中心|一币转出</title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
-  <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
+  <link rel="stylesheet" href="${ctx}/css/common.css">
 </head>
 
 <body> 
@@ -37,7 +37,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='viewyblc.jsp.yblc.jsp.618950045'/></p>
+    <p class="breadcrumb-trail">财富中心 >> 一币理财</p>
     <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -57,34 +57,34 @@
     <div class="member-main">
       <!-- 一币转出 -->
       <div class="main-widget">
-        <p class="widget-title-line"><s:text name='Currency_transfer'/></p>
+        <p class="widget-title-line">一币转出</p>
         <form class="widget-form" method="POST" name="Form" onsubmit="return checkdate()" action="vipjzpay?status=1&secondThisState=${secondThisState}&thisState=${thisState}">
           <p class="item">
-            <label class="title"><s:text name='reg.jsp.reg.jsp.29623262'/>：</label><span class="text"><b class="widget-warning">${userName}</b></span></p>
+            <label class="title">用户名：</label><span class="text"><b class="widget-warning">${userName}</b></span></p>
           <p class="item">
-            <label class="title"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.-1994385923'/>：</label><span class="text"><b class="widget-warning">${gcuser.pay}</b></span></p>
+            <label class="title">您的一币为：</label><span class="text"><b class="widget-warning">${gcuser.pay}</b></span></p>
           <p class="item">
-            <label class="title widget-warning"><s:text name='vipbdbjzpay.jsp.bdbjzpay.jsp.-1410198515'/>：</label>
-            <input type="text" name="jzuser" id="jzuser" size="15"><a herf="#" class="widget-button-small" id="J_chkUserName"><s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.370420792a'/></a></p>
+            <label class="title widget-warning">接收用户名：</label>
+            <input type="text" name="jzuser" id="jzuser" size="15"><a herf="#" class="widget-button-small" id="J_chkUserName">查看姓名</a></p>
           <p class="item">
-            <label class="title"><s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.1129174203'/>：</label>
+            <label class="title">转账一币：</label>
             <input type="text" name="jzpay" size="15" maxlength="10">
           </p>
           <p class="item">
-            <label class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>：</label>
+            <label class="title">二级密码：</label>
             <input type="password" name="pa3" size="20">
           </p>
           <%-- <c:if test="${vipgcuser==null || vipgcuser==''}">
           <c:if test="${gcuser.vip==2}">
 	          <p class="item">
-	            <label class="title"><s:text name='Corporate_phone_number'/>：</label>
+	            <label class="title">法人手机号码：</label>
 	            <span class="text">${farenUser.call}(${farenUser.name})</span>
 	          </p>
 	          <input type="hidden" name="toUserName" value="${farenUser.username}">
           </c:if>
           <c:if test="${gcuser.vip!=2}">
 	          <p class="item">
-	            <label class="title"><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
+	            <label class="title">手机号码：</label>
 	            <span class="text">${gcuser.call}</span>
 	          </p>
 	          <input type="hidden" name="toUserName" value="${gcuser.username}">
@@ -95,16 +95,16 @@
 			<input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input>
 		</p>
            <p class="item">
-            <label class="title"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</label>
+            <label class="title">手机验证码：</label>
             <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
-            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>"/>
+            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
           </p>
           </c:if> --%>
           <p class="button-line mt15">
-            <button class="widget-button" type="submit" name="submit2" onclick="return confirm('<s:text name="vipgpjymc.jsp.gpjymc.jsp.1526835300"/>')"><s:text name='Definite_transfer'/></button>
+            <button class="widget-button" type="submit" name="submit2" onclick="return confirm('提示：您确定了吗？')">确定转账</button>
           </p>
         </form>
-        <%-- <c:if test="${gcuser.vip==2}"><p class="widget-tips mt10"><a href="vipcjb"><s:text name='VIP_recharge_management'/>（<s:text name='Cumulative_recharge'/>：${gcuser.vipljcjb}）（<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1480031139a'/>：${gcuser.vipsycjb}）（<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1817777369a'/>：${gcuser.vipcjcjb}）</a></p></c:if> --%>
+        <%-- <c:if test="${gcuser.vip==2}"><p class="widget-tips mt10"><a href="vipcjb">VIP充值管理（累计充值币：${gcuser.vipljcjb}）（已使用：${gcuser.vipsycjb}）（剩余：${gcuser.vipcjcjb}）</a></p></c:if> --%>
       </div>
     </div>
     <!-- 一币转出 end -->
@@ -118,40 +118,40 @@
 /*验证交互*/
 function checkdate() {
  if (Form.jzuser.value == "") {
-	    alert("<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1569959089'/>!");
+	    alert("请填写您要转入的用户名!");
 	    Form.jzuser.focus;
 	    return false;
 	  }
 	  if (Form.jzuser.value == "${gcuser.username}") {
-	    alert("<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1929667708'/>!");
+	    alert("不能转给自己!");
 	    Form.jzuser.focus;
 	    return false;
 	  }
   if (Form.jzpay.value == "") {
-    alert("<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1060233581'/>!");
+    alert("请填写您要转账的一币!");
     Form.jzpay.focus;
     return false;
   }
   if (Form.jzpay.value < 99) {
-    alert("<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1705620723'/>100!");
+    alert("转账的一币必须大于等于100!");
     Form.jzpay.focus;
     return false;
   }
   if (Form.jzpay.value > ${gcuser.pay}) {
-    alert("<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2136440982'/>${gcuser.pay}");
+    alert("您的转账一币不能超过您剩余的一币${gcuser.pay}");
     Form.jzpay.focus;
     return false;
   }
  
   if (Form.pa3.value == "") {
-    alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>!");
+    alert("请输入二级密码密码!");
     Form.pa3.focus;
     return false;
   }
   if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
   if (Form.smsCode.value=="") {   alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");  Form.smsCode.focus();   return false;    }
   if (!chkinteger(Form.jzpay.value)) {
-    alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.-1582955249'/>!');
+    alert('转账一币只能为整字!');
     document.Form.jzpay.focus;
     return (false);
   }
@@ -180,7 +180,7 @@ $('#J_chkUserName').on('click', function() {
 
 function Check(user) {
   if (user == "") {
-    alert("<s:text name='index.jsp.index.jsp.-2036326914'/>!！");
+    alert("提示：用户名不能为空!！");
     return false;
   }
   $.post("checkUserName?user=" + user, null, function(response) {
@@ -196,39 +196,39 @@ function Check(user) {
 function sendmsg(){
 	
 	 if (Form.jzuser.value == "") {
-		    alert("<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1569959089'/>!");
+		    alert("请填写您要转入的用户名!");
 		    Form.jzuser.focus;
 		    return false;
 		  }
 		  if (Form.jzuser.value == "${gcuser.username}") {
-		    alert("<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1929667708'/>!");
+		    alert("不能转给自己!");
 		    Form.jzuser.focus;
 		    return false;
 		  }
 	if (Form.jzpay.value == "") {
-	    alert("<s:text name='viewyblc-mallback.jsp.yblc-mallback.jsp.1060233581'/>!");
+	    alert("请填写您要转账的一币!");
 	    Form.jzpay.focus;
 	    return false;
 	  }
 	  if (Form.jzpay.value < 99) {
-	    alert("<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1705620723'/>100!");
+	    alert("转账的一币必须大于等于100!");
 	    Form.jzpay.focus;
 	    return false;
 	  }
 	  if (Form.jzpay.value > ${gcuser.pay}) {
-	    alert("<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.2136440982'/>${gcuser.pay}");
+	    alert("您的转账一币不能超过您剩余的一币${gcuser.pay}");
 	    Form.jzpay.focus;
 	    return false;
 	  }
 	 
 	  if (Form.pa3.value == "") {
-	    alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>!");
+	    alert("请输入二级密码密码!");
 	    Form.pa3.focus;
 	    return false;
 	  }
 	  if (Form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  Form.inputCall.focus();  return false;  }
 	  if (!chkinteger(Form.jzpay.value)) {
-	    alert('<s:text name='viewyblc-transferout-present.jsp.yblc-transferout-present.jsp.-1582955249'/>!');
+	    alert('转账一币只能为整字!');
 	    document.Form.jzpay.focus;
 	    return (false);
 	  }
@@ -252,7 +252,7 @@ function sendmsg(){
 	  var data = $("#Form").serialize();
 	  $.post("/smsother?op=19&other=1&toUserName="+Form.toUserName.value+"&inputCall="+Form.inputCall.value, data, function(response) {
 		  if (response.erroCodeNum == 2) {
-	      alert('<s:text name='Enter_phone_number_error'/>！');
+	      alert('输入的手机号与预留手机号不一致！');
 	      $("#btn").attr("disabled", false);
 	      Form.inputCall.focus();
 	      return false;
@@ -260,11 +260,11 @@ function sendmsg(){
 	    }
 	    $("#btn").removeAttr("disabled");
 	    if (response.erroCodeNum != 0) {
-	      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
+	      alert("手机验证码发送失败");
 	      return false;
 	    }
 	    settime($("#btn"), '#SESSION_LOCALE');
-	    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
+	    alert("手机验证码发送成功");
 	  });
 	  return true;
 }
