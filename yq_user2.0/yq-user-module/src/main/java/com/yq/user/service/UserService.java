@@ -115,6 +115,7 @@ import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
 import com.yq.user.utils.Ref;
+import com.yq.user.utils.StringCheck;
 import com.yq.user.utils._99douInterface;
 
 import cn.submsg.client.util.SubMsgSendUtils;
@@ -474,6 +475,7 @@ public class UserService {
 		if(!Strings.isNullOrEmpty(upvip)&&getUserByUserName(upvip)==null){
 			return 2;//推荐人不存在
 		}
+		
 		List<Gcuser> list = getUserByIdCard(gguserid);
 		if(list!=null&&list.size()>0){
 			return 3;// 该姓名["&request.Form("ggname")&"]及身份证号码["&Request.Form("gguserid")&"]已经被注册过，请您登录后在-[业务查询]下-[添加同名账户]！

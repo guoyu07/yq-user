@@ -22,7 +22,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="x-dns-prefetch-control" content="on">
    <link rel="stylesheet" href="${ctx}/css/common${SESSION_LOCALE}.css">
-    <link rel="stylesheet" href="${ctx}/css/member-index.css">
+    <link rel="stylesheet" href="${ctx}/css/member-index${SESSION_LOCALE}.css">
 </head>
 
 <body> 
