@@ -51,11 +51,11 @@ public class UserAgentAction extends BaseManageAction<Gcuser> {
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		if(adminService.userAgent(user,state)){
 			if(state==1){
-				AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.USER_AGENT, "封号账户:"+user+",备注:"+URLDecoderUtil.decode(resionMassage,"utf-8"));
+				AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.USER_AGENT, "封号账户:"+user+",备注:"+URLDecoderUtil.decode(resionMassage,"utf-8"));
 				adminService.addAdminOperateLog(log);
 			}
 			if(state==0){
-				AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.USER_AGENTCANCEL, "解封账户:"+user+",备注:"+URLDecoderUtil.decode(resionMassage,"utf-8"));
+				AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.USER_AGENTCANCEL, "解封账户:"+user+",备注:"+URLDecoderUtil.decode(resionMassage,"utf-8"));
 				adminService.addAdminOperateLog(log);
 			}
 		}

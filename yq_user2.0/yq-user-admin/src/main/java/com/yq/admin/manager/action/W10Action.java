@@ -38,7 +38,7 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.syusers(payid, op);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.TXSH, "訂單:"+payid+",提現審核："+op);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.TXSH, "訂單:"+payid+",提現審核："+op);
 		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
@@ -53,7 +53,7 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 */
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.setVerifile(user, verify);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.YB_MSH, "用戶："+user+"免審核："+verify);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.YB_MSH, "用戶："+user+"免審核："+verify);
 		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2001);
 		return SUCCESS;
@@ -67,7 +67,7 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
         }*/
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.cancleYbSale(super.getUserName(), payid, resionMassage, super.ip());
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.TXTH, "体现id："+payid+"，说明："+resionMassage);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.TXTH, "体现id："+payid+"，说明："+resionMassage);
 		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2002);
 		return SUCCESS;
@@ -79,7 +79,7 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
         }*/
 		AdminService adminService=ServiceCacheFactory.getService(AdminService.class);
 		adminService.resetYbOrder(super.getUserName(), payid, opstate, super.ip());
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.RESET_YB_ORDER, "體現id："+payid);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.RESET_YB_ORDER, "體現id："+payid);
 		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2003);
 		return SUCCESS;

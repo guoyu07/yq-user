@@ -34,7 +34,7 @@ public class BtpayAction extends ALDAdminActionSupport {
 		LogSystem.log("用户["+super.getUserName()+"]操作，加btpay["+new Date()+"],给--->["+uid+"],积分数量:"+btpay);
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addBtPay(uid, btpay);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.CHANGE_YB_BT, "給用戶:"+uid+",一筆補貼数量："+uid);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.CHANGE_YB_BT, "給用戶:"+uid+",一筆補貼数量："+uid);
 		adminService.addAdminOperateLog(log);
 		gcuser = userService.getUserByUserName(uid);
 		return SUCCESS;

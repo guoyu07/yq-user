@@ -45,7 +45,9 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 			super.setErroDescrip("短信验证码不正确！");
 			return SUCCESS;
 		}
+		
 		if(adminService.adminUserLoginOp(adminusername, password, sessionhttp,ServletActionContext.getRequest().getRemoteAddr())){
+			manageService.invalidateSmsCode(adminusername);
 			return "redirect";
 		}else{
 			super.setErroCodeNum(3);

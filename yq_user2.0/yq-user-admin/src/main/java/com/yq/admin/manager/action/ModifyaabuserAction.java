@@ -13,7 +13,9 @@ import com.yq.admin.manage.action.BaseManageAction;
 import com.yq.common.utils.MD5Security;
 import com.yq.cw.bo.VipDownTemp;
 import com.yq.cw.service.CwService;
+import com.yq.manage.bean.AdminOperateLog;
 import com.yq.manage.bean.Role;
+import com.yq.manage.util.AdminGlobal;
 import com.yq.manager.service.AdminService;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
@@ -101,7 +103,9 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 			
 			return INPUT;
 		}
-		adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode,super.getUserName(),updateAllDownProperty);
+		 adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode,super.getUserName(),updateAllDownProperty);
+		 AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.OP_MODIFYVIP, "修改资料"+name);
+		 adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}

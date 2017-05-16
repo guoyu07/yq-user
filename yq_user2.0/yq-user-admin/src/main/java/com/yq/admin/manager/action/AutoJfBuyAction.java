@@ -57,7 +57,7 @@ public class AutoJfBuyAction extends ALDAdminActionSupport{
 		 needNum = AdminService.mcneedDealNum;
 		 currentNum = AdminService.mccurrentNum;
 		super.setErroCodeNum(2001);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.AUTO_JB_SALE, "自動賣出數："+num);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.AUTO_JB_SALE, "自動賣出數："+num);
 		adminService.addAdminOperateLog(log);
 		return SUCCESS;
 	}

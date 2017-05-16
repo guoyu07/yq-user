@@ -39,7 +39,7 @@ public class BigVipLegalPersonAction extends ALDAdminActionSupport {
 		if(userService.updateFaren(uid,faren)){
 			userp = userService.getUserProperty(uid);
 		}
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.LEGALPERSON_OP, "修改大vip法人为:"+faren+","+"玩家:"+uid);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.LEGALPERSON_OP, "修改大vip法人为:"+faren+","+"玩家:"+uid);
 		userService.addAdminOperateLog(log);
 		return SUCCESS;
 	}

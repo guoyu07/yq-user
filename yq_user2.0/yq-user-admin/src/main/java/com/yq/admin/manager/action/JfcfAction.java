@@ -72,7 +72,7 @@ public class JfcfAction extends ALDAdminActionSupport {
 		needNum = AdminService.needDealNum;
 		currentNum = AdminService.currentNum;
 		super.setErroCodeNum(2001);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),"", new Date(), AdminGlobal.AUTO_JB_BUY, "自動買入數："+num);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.AUTO_JB_BUY, "自動買入數："+num);
 		adminService.addAdminOperateLog(log);
 		return SUCCESS;
 	}
