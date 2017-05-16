@@ -94,6 +94,10 @@ public class ManageService {
 		}
 		return false;
 	}
+	
+	public void invalidateSmsCode(String userName){
+		adminSmscode.invalidate(userName);
+	}
 
 	
 	/**

@@ -56,8 +56,8 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 				return SUCCESS;
 			}
 			
-			
 			if(adminService.adminUserLogin(adminUserName, passWord, sessionhttp, ServletActionContext.getRequest().getRemoteAddr())){
+				manageService.invalidateSmsCode(adminUserName);
 				return "redirect";
 			}else{
 				super.setErroCodeNum(402);

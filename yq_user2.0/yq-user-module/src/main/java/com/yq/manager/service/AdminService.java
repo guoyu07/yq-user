@@ -124,6 +124,7 @@ import com.yq.user.dao.ZuoMingxiDao;
 import com.yq.user.service.LogService;
 import com.yq.user.service.UserService;
 import com.yq.user.utils.Ref;
+import com.yq.user.utils.StringCheck;
 import com.yq.user.utils._99douInterface;
 
 public class AdminService {
@@ -208,7 +209,20 @@ public class AdminService {
 	@Autowired
 	private PointSplitBeforPriceDao pointSplitBeforPriceDao;
 	
-  	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(2000).build();
+  	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(600, TimeUnit.SECONDS).maximumSize(2000).build();
+  	private Cache<String,String> userNameSessionMap = CacheBuilder.newBuilder().expireAfterAccess(600, TimeUnit.SECONDS).maximumSize(2000).build();
+  	
+  	public boolean setUserNameSessionMap(String userName,String sessionId){
+  		userNameSessionMap.put(userName, sessionId);
+  		return true;
+  	}
+  	public String getUserNameSession(String userName){
+		return userNameSessionMap.getIfPresent(userName);
+	}
+  	public boolean removeUserNameSession(String userName){
+  		userNameSessionMap.invalidate(userName);
+  		return true;
+  	}
   	
     public static boolean isClose = ConfigLoader.getIntValue("is_stop_jf_mc",0)==0?false:true;
     
@@ -226,8 +240,18 @@ public class AdminService {
 		String md5pass = MD5Security.md5_16(password);
 		ManageUser admin = manageDao.getByUserNameAndPassword(userName, md5pass);
 		if(admin!=null){
+			//移除此用户玩家老会话 增加用户会话
+			String oldSessionId = getUserNameSession(userName);
+			if(getLoginAdminUserName(userName)!=null || !Strings.isNullOrEmpty(oldSessionId)){
+				logout(oldSessionId);
+				removeUserNameSession(userName);
+				LogSystem.info("移除后台登录重会话userName:"+userName+",sessionId："+oldSessionId);
+			}
+			//如果存在则移除，不存在添加
 			Session session = new Session(userName, System.currentTimeMillis(), sessionId);
 			adminUserMap.put(sessionId, session);
+			setUserNameSessionMap(userName,sessionId);
+			LogSystem.info("后台登录会话重注册原sessionId："+oldSessionId+",sessionId:"+sessionId);
 			return true;
 		}else{
 			return false;
@@ -243,6 +267,7 @@ public class AdminService {
 	public boolean adminUserLogin(String adminUserName, String passWord, HttpSession session, String ip) {
 		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.ADMIN_LOGIN, "系统管理后台登录");
 		adminOperateLogDao.addLog(log);
+		LogSystem.info("系统管理后台登录:"+adminUserName+",sessionId:"+session.getId());
 		return adminLogin(adminUserName, passWord, session.getId());
 	}
 	
@@ -255,6 +280,7 @@ public class AdminService {
 	public boolean adminUserLoginOp(String adminUserName, String passWord, HttpSession session, String ip) {
 		AdminOperateLog log= new AdminOperateLog(adminUserName,ip , new Date(), AdminGlobal.ADMIN_LOGIN_OP, "后台管理登录");
 		adminOperateLogDao.addLog(log);
+		LogSystem.info("后台管理登录:"+adminUserName+",sessionId:"+session.getId());
 		return adminLogin(adminUserName, passWord, session.getId());
 	}
 	
@@ -466,6 +492,10 @@ public class AdminService {
 	 */
 	@Transactional
 	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,String areaCode,String operator,String updateAllDownProperty){
+		if(StringCheck.checkUnlawful(userName,password3,card, bank, name, call,  email, qq, userid,jcname, jcuserid, password, pwdate)){
+			throw new ServiceException(777, "还非法字符！");
+		}
+		
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		String oldnameUserId = gcuser.getName()+gcuser.getUserid();
 		Date date = null;
@@ -515,8 +545,6 @@ public class AdminService {
 		
 		modifyUserLogDao.add(modifyUserLog);
 		
-		 AdminOperateLog log= new AdminOperateLog(operator,"", new Date(), AdminGlobal.OP_MODIFYVIP, "修改资料"+userName);
-		 adminOperateLogDao.addLog(log);
 		
 		if(!beforUserId.equals(nowUserId)||!beforName.equals(nowName)){
 			//写身份证和名字修改日志
@@ -2460,6 +2488,9 @@ public class AdminService {
 	 */
 	@Transactional
 	public void updateUserVipInfo(String adminUserName,String userName,int vipType,String vipuser,String vipgh,String vipnh,String vipzh,String vipjh,String phone,String qq,String ip){
+		if(StringCheck.checkUnlawful(adminUserName,userName,vipuser, vipgh, vipnh, vipzh,  vipjh, qq, phone,qq)){
+			throw new ServiceException(777, "还非法字符！");
+		}
 		String commitParam = userName+":"+vipType+":"+vipuser+":"+vipgh+":"+vipnh+":"+vipjh+":"+vipzh+":"+phone+":"+qq;
 		 if(vipType==0){ // 取消vip
 			 gcuserDao.updateVip(userName, 0);
