@@ -10,6 +10,7 @@
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('<s:text name='notinternationalareacode'/>');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='emptyinternationalareacode'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('<s:text name='Overseasnotchina'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==777}"><script language=javascript>alert('<s:text name='commonglober_error.jsp.glober_error.jsp.-2017014779'/>！');history.go(-1);</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>

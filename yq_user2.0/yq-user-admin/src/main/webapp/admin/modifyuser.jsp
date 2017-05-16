@@ -2,7 +2,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <c:if test="${erroCodeNum==10}"><script language=javascript>alert('国际编码不存在！');location.href='/admin/modifyaabuser?userid=${userid}';</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('用户资料修改成功！');location.href='/admin/modifyaabuser?userid=${userid}';</script></c:if>
-
+<c:if test="${erroCodeNum==777}"><script language=javascript>alert('含非法字符！');location.href='/admin/modifyaabuser?userid=${userid}';</script></c:if>
 <html><head><title>会员资料查看</title>
 <style>
 <!--

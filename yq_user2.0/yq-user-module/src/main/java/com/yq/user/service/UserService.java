@@ -456,6 +456,9 @@ public class UserService {
 	 * @return
 	 */
 	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan, String countryCode){
+		if(StringCheck.checkUnlawful(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName, countryCode)){
+			return 777;//"还非法字符！"
+		}
 		gguser = gguser.trim();
 		ggname = ggname.trim();
 		gguserid = gguserid.trim();
@@ -692,6 +695,9 @@ public class UserService {
 	
 	
 	public boolean updateUser(String userName,String jdName,String jcUserId){
+		if(StringCheck.checkUnlawful(userName, jdName, jcUserId)){
+			throw new ServiceException(777, "非法字符");
+		}
 		return gcuserDao.updateUser(userName, jdName, jcUserId);
 	}
 	/**
@@ -5323,6 +5329,9 @@ public class UserService {
 public String updateUser(String userName, String newSecondPassword1, String newSecondPassword2, String secondPassword,
 			String card, String idCard, String bank, String smsCode, String provinceName, String provinceName2,
 			String cityName, String areaName, String newPassWord1, String newPassWord2, String remoteAddr, int areaCode) {
+		if(StringCheck.checkUnlawful(userName, newSecondPassword1, newSecondPassword2, secondPassword, card, idCard, bank, smsCode, provinceName, provinceName2, cityName, areaName, newPassWord1, newPassWord2, remoteAddr)){
+			throw new ServiceException(777, "还非法字符！");
+		}
 	    Gcuser guser = gcuserDao.getUser(userName);
 		if(guser==null){
 			throw new ServiceException(1, "用户不存在!");

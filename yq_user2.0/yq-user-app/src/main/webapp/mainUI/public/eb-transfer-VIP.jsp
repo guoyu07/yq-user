@@ -2,18 +2,18 @@
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
-<c:if test="${erroCodeNum==1}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.2073267590'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1239579686'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.2060105128'/>！');history.go(-1);</script></c:if>
-<c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1830047641'/>！');history.go(-1);</script></c:if>
-
-
-<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.640340070'/>！');location.href='vipcjb?secondThisState=253&thisState=244';</script></c:if>
+<c:if test="${erroCodeNum==1}"><script language=javascript>alert('用户名输入错误或不属于自己团队的玩家，请检查后再试！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2}"><script language=javascript>alert('充值密码不正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==3}"><script language=javascript>alert('该用户名不存在，请检查输入是否正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==4}"><script language=javascript>alert('两分钟内只能充值一次，请稍后再试！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==5}"><script language=javascript>alert('您的充值币小于${cjpay}，无法完成充值，请联系管理员！！！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==6}"><script language=javascript>alert('本次充值${cjpay}可一币小于${cjpay*9}，请先补充一币！！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('充值成功！');location.href='vipcjb?secondThisState=253&thisState=244';</script></c:if>
 <c:if test="${erroCodeNum==2001}"><script language=javascript>alert('验证码不正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2002}"><script language=javascript>alert('此大vip用户所对应的法人不存在，请联系管理员添加！');history.go(-1);</script></c:if>
 <head>
   <meta chartset="UTF-8">
-  <title><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.624662580'/>|<s:text name='VIP_recharge_management'/></title>
+  <title>会员中心|VIP充值管理</title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -29,7 +29,7 @@
 <!-- 会员中心导航模块 -->
 <div class="container">
   <div class="member-header" id="J_memberHeader">
-    <p class="breadcrumb-trail"><s:text name='Wealth-center'/> >> <s:text name='VIP_recharge_currency_management'/></p>
+    <p class="breadcrumb-trail">财富中心 >> VIP充值币管理</p>
      <%@ include file="/mainUI/common/scendhead.jsp" %>
   </div>
 </div>
@@ -47,38 +47,38 @@
 <!-- 会员中心左边栏 end -->
 
     <div class="member-main">
-      <!-- VIP<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1480031139'/> -->
+      <!-- VIP充值管理 -->
       <div class="main-widget">
-        <p class="widget-title-line">VIP<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1480031139'/></p>
+        <p class="widget-title-line">VIP充值管理</p>
         <form class="widget-form" method="POST" action="vipcj?secondThisState=${secondThisState}&thisState=${thisState}" name="form" onsubmit="return checkdate()">
           <p class="item">
-            <label class="title"><s:text name='reg.jsp.reg.jsp.29623262'/>：</label>
+            <label class="title">用户名：</label>
             <input type="text" name="cjuser">
           </p>
           <p class="item">
-            <label class="title"><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.640736963'/>：</label>
+            <label class="title">充值金额：</label>
             <select class="widget-select" name="cjpay">
-              <option selected="" value="0">==<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.35601975'/>==</option>
+              <option selected="" value="0">==请选择==</option>
               <option value="1000">1000</option>
               <option value="2000">2000</option>
               <option value="5000">5000</option>
             </select>
           </p>
           <p class="item">
-            <label class="title widget-warning"><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.640299730'/>：</label>
+            <label class="title widget-warning">充值密码：</label>
             <input type="password" name="cjpass">
           </p>
           
           <%--  <c:if test="${gcuser.vip==2}">
 	          <p class="item">
-	            <label class="title"><s:text name='Corporate_phone_number'/>：</label>
+	            <label class="title">法人手机号码：</label>
 	            <span class="text">${farenUser.call}(${farenUser.name})</span>
 	          </p>
 	          <input type="hidden" name="toUserName" value="${farenUser.username}">
           </c:if>
           <c:if test="${gcuser.vip!=2}">
 	          <p class="item">
-	            <label class="title"><s:text name='reg2.jsp.reg2.jsp.775723385'/>：</label>
+	            <label class="title">手机号码：</label>
 	            <span class="text">${gcuser.call}</span>
 	          </p>
 	          <input type="hidden" name="toUserName" value="${gcuser.username}">
@@ -88,30 +88,30 @@
 			<input type="text" id="inputCall" name="inputCall" size="20" tabindex="18" ></input>
 		</p>
            <p class="item">
-            <label class="title"><s:text name='resetUserPass.jsp.resetUserPass.jsp.-1704827075'/>：</label>
+            <label class="title">手机验证码：</label>
             <input type="text" name="smsCode" size="20" onKeyUp="value=value.replace(/[\W]/g,'')">
-            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>"/>
+            <input class="widget-button-small" name="B2" id="btn" type="button" onclick="sendmsg()" value="获取验证码"/>
           </p>--%>
           <p class="button-line mt15">
-            <input class="widget-button" type="submit" value="<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1817777369'/>" name="B1" id="B1"><span class="widget-tips ml10">（<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1817777369a'/>：<b class="widget-warning">${gcuser.vipcjcjb}</b>）</span>
+            <input class="widget-button" type="submit" value="提交充值" name="B1" id="B1"><span class="widget-tips ml10">（剩余：<b class="widget-warning">${gcuser.vipcjcjb}</b>）</span>
           </p>
         </form>
       </div>
-      <!-- VIP<s:text name='viewyblc-transferout.jsp.yblc-transferout.jsp.-1480031139'/> end -->
+      <!-- VIP充值管理 end -->
       <!-- VIP充值管理明细 -->
       <div class="main-widget mt15">
-        <p class="widget-title-line"><s:text name='VIP_recharge_management_details'/></p>
-        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="vipcjbcjbdetail?status=1" id="J_ebSaleDetailMore"><s:text name='View_more'/></a></p>
+        <p class="widget-title-line">VIP充值管理明细</p>
+        <p class="small-button-line"><a href="javascript:void(0)" class="widget-button-small JQ_moreDialog" data-url="vipcjbcjbdetail?status=1" id="J_ebSaleDetailMore">查看更多</a></p>
         <div class="widget-table">
           <table border="0" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
-                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1030049'/></th>
-                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1619451673'/></th>
-                <th><s:text name='viewxfgl-mobilecharge.jsp.xfgl-mobilecharge.jsp.640736963'/></th>
-                <th><s:text name='viewgrxx-gcbf.jsp.grxx-gcbf.jsp.734401'/></th>
-                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.789127981'/></th>
-                <th><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1365514950'/></th>
+                <th>编号</th>
+                <th>充值用户名</th>
+                <th>充值金额</th>
+                <th>备注</th>
+                <th>操作时间</th>
+                <th>剩余充值币</th>
               </tr>
             </thead>
             <tbody>
@@ -140,28 +140,28 @@
 <script language="JavaScript">
 function checkdate() {
   if (form.cjuser.value == "") {
-    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1508540713'/>!");
+    alert("请输入要充值的用户名!");
     form.cjuser.focus();
     return false;
   }
   if (form.cjpay.value == 0) {
-    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1837640058'/>!");
+    alert("请选择充值金额!");
     form.cjpay.focus();
     return false;
   }
   if (form.cjpay.value > ${gcuser.vipcjcjb}) {
-    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1671689850'/>!");
+    alert("您的余额不足!");
     form.cjpay.focus();
     return false;
   }
   if (form.cjpass.value == "") {
-    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-127108265'/>!");
+    alert("请输入您的充值密码!");
     form.cjpass.focus();
     return false;
   }
   if (form.inputCall.value=="") {  alert("<s:text name='reg.jsp.reg.jsp.1688991270'/>！");  form.inputCall.focus();  return false;  }
   if (form.smsCode.value=="") {   alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");  form.smsCode.focus();   return false;    }
-  if (confirm("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.138357933'/>？")) {
+  if (confirm("温馨提示：请认真核对后再充值,一经充值不可以恢复,您确定了吗？")) {
     $("#B1").hide();
     return true;
   }
@@ -172,22 +172,22 @@ function checkdate() {
 function sendmsg(){
 	
 	if (form.cjuser.value == "") {
-	    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1508540713'/>!");
+	    alert("请输入要充值的用户名!");
 	    form.cjuser.focus();
 	    return false;
 	  }
 	  if (form.cjpay.value == 0) {
-	    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.1837640058'/>!");
+	    alert("请选择充值金额!");
 	    form.cjpay.focus();
 	    return false;
 	  }
 	  if (form.cjpay.value > ${gcuser.vipcjcjb}) {
-	    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1671689850'/>!");
+	    alert("您的余额不足!");
 	    form.cjpay.focus();
 	    return false;
 	  }
 	  if (form.cjpass.value == "") {
-	    alert("<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-127108265'/>!");
+	    alert("请输入您的充值密码!");
 	    form.cjpass.focus();
 	    return false;
 	  }
@@ -196,7 +196,7 @@ function sendmsg(){
 	  var data = $("#Form").serialize();
 	  $.post("/smsother?op=23&other=1&toUserName="+form.toUserName.value+"&inputCall="+form.inputCall.value, data, function(response) {
 	    if (response.erroCodeNum == 2) {
-	      alert('<s:text name='Enter_phone_number_error'/>！');
+	      alert('输入的手机号与预留手机号不一致！');
 	      $("#btn").attr("disabled", false);
 	      form.inputCall.focus();
 	      return false;
@@ -204,11 +204,11 @@ function sendmsg(){
 	    }
 	    $("#btn").removeAttr("disabled");
 	    if (response.erroCodeNum != 0) {
-	      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
+	      alert("手机验证码发送失败");
 	      return false;
 	    }
 	    settime($("#btn"), '#SESSION_LOCALE');
-	    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
+	    alert("手机验证码发送成功");
 	  });
 	  return true;
 }
