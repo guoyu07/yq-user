@@ -1,5 +1,6 @@
 package com.yq.agent.service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -104,7 +105,7 @@ public class AgentService {
   	
   	private Cache<String,String> tokenBindAndPay = CacheBuilder.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(20000).build();
   	
-  	
+  
   	public String setToken(String userName){
   		tokenBindAndPay.put(userName, UUID.randomUUID().toString());
   		return tokenBindAndPay.getIfPresent(userName);
@@ -132,6 +133,11 @@ public class AgentService {
     	String key = generatorCacheKey(sessionId);
     	JedisUtils.delete(key);
     }
+    
+	//private Cache<String,Long> userPayPassTime = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(20000).build();
+	private Cache<String,Integer> userPayPassTimes = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(20000).build();
+    
+    
 	/**
 	 * 查看是否登录了
 	 * 
@@ -721,8 +727,24 @@ public class AgentService {
 		if(fromsameUserProperty==null || fromsameUserProperty.getAppPayPassword()==null){
 			throw new ServiceException(17, "扣款账户没有设置支付密码！");
 		}
-		if(!fromsameUserProperty.getAppPayPassword().equals(MD5Security.md5_16_Small(payPassWord))){
-			throw new ServiceException(18, "支付密码不正确！");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		if(!fromsameUserProperty.getAppPayPassword().equals(payPassWord)){
+			Integer times = userPayPassTimes.getIfPresent(fromUserName);
+			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" + fromUserName);
+			if (times != null) {
+				if(times>=3){
+					throw new ServiceException(18, "账户已被锁定,请明天再试！");
+				}
+				userPayPassTimes.put(df+fromUserName, times + 1);
+			} else {
+				userPayPassTimes.put(df+fromUserName, 1);
+				
+			}
+			Integer times2 = userPayPassTimes.getIfPresent(fromUserName);
+			int cishu=3-times2;
+			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
+		}else{
+			userPayPassTimes.invalidate(df+fromUserName);
 		}
 		
 		/*String signStr = appId+fromUserName+toUserName+amount+productOrder+productDesc+param;
@@ -1133,8 +1155,24 @@ public class AgentService {
 		if(fromsameUserProperty==null || fromsameUserProperty.getAppPayPassword()==null){
 			throw new ServiceException(17, "扣款账户没有设置支付密码！");
 		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassword)){
-			throw new ServiceException(18, "支付密码不正确！");
+			Integer times = userPayPassTimes.getIfPresent(payUserName);
+			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" + payUserName);
+			if (times != null) {
+				if(times>=3){
+					throw new ServiceException(18, "账户已被锁定,请明天再试！");
+				}
+				userPayPassTimes.put(df+payUserName, times + 1);
+			} else {
+				userPayPassTimes.put(df+payUserName, 1);
+				
+			}
+			Integer times2 = userPayPassTimes.getIfPresent(payUserName);
+			int cishu=3-times2;
+			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
+		}else{
+			userPayPassTimes.invalidate(df+payUserName);
 		}
 		
 		//支付指定的yb
@@ -1191,6 +1229,7 @@ public class AgentService {
 		}*/
 		return pointSplitBeforPriceDao.gettop10();
 	}
+	
 	
 	
 }
