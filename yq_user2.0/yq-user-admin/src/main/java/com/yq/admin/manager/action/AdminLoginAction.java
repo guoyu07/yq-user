@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.manage.service.ManageService;
@@ -40,11 +41,18 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 			super.setErroDescrip("验证码不正确！");
 			return SUCCESS;
 		}
-		if(!manageService.getAminSmscode(adminusername).equals(smsCode)){
+		if(!Strings.isNullOrEmpty(manageService.getAminSmscode(adminusername))){
+			if(!manageService.getAminSmscode(adminusername).equals(smsCode)){
+				super.setErroCodeNum(407);
+				super.setErroDescrip("短信验证码不正确！");
+				return SUCCESS;
+			}
+		}else{
 			super.setErroCodeNum(407);
 			super.setErroDescrip("短信验证码不正确！");
 			return SUCCESS;
 		}
+		
 		
 		if(adminService.adminUserLoginOp(adminusername, password, sessionhttp,ServletActionContext.getRequest().getRemoteAddr())){
 			manageService.invalidateSmsCode(adminusername);
