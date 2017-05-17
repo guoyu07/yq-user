@@ -493,7 +493,7 @@ public class AdminService {
 	@Transactional
 	public boolean updateUser(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,String pwdate,int cxt,String ip,String updateDownPayOk,String areaCode,String operator,String updateAllDownProperty){
 		if(StringCheck.checkUnlawful(userName,password3,card, bank, name, call,  email, qq, userid,jcname, jcuserid, password, pwdate)){
-			throw new ServiceException(777, "还非法字符！");
+			throw new ServiceException(777, "含非法字符！");
 		}
 		
 		Gcuser gcuser = gcuserDao.getUser(userName);
@@ -2489,7 +2489,7 @@ public class AdminService {
 	@Transactional
 	public void updateUserVipInfo(String adminUserName,String userName,int vipType,String vipuser,String vipgh,String vipnh,String vipzh,String vipjh,String phone,String qq,String ip){
 		if(StringCheck.checkUnlawful(adminUserName,userName,vipuser, vipgh, vipnh, vipzh,  vipjh, qq, phone,qq)){
-			throw new ServiceException(777, "还非法字符！");
+			throw new ServiceException(777, "含非法字符！");
 		}
 		String commitParam = userName+":"+vipType+":"+vipuser+":"+vipgh+":"+vipnh+":"+vipjh+":"+vipzh+":"+phone+":"+qq;
 		 if(vipType==0){ // 取消vip

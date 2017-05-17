@@ -457,7 +457,7 @@ public class UserService {
 	 */
 	public int reg(String gguser,String upvip,String ggname,String gguserid,String ggpa1,String ggpa3,String ggbank,String ggcard,String ggcall,String ggqq,String provinceName,String cityName,String areaName,int lan, String countryCode){
 		if(StringCheck.checkUnlawful(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName, countryCode)){
-			return 777;//"还非法字符！"
+			return 777;//"含非法字符！"
 		}
 		gguser = gguser.trim();
 		ggname = ggname.trim();
@@ -662,6 +662,9 @@ public class UserService {
 	 * @return
 	 */
 	public boolean updateUser(String userName,String name, String idCard, String password, String password3, int ganew, String qq,String  call,String ip){
+		if(StringCheck.checkUnlawful(userName, name, idCard, password,password3, qq, call, ip)){
+			throw new ServiceException(777, "含非法字符！");
+		}
 		boolean result =  gcuserDao.updateUser(name, idCard, password, password3, ganew, qq, call);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", ip);
@@ -683,6 +686,9 @@ public class UserService {
 	 * @return
 	 */
 	public boolean updateUser(String userName,String name, String idCard, String password,  String card, String bank,String  addsheng,String addshi,String addqu,String ip, int areaCode){
+		if(StringCheck.checkUnlawful(userName, name, idCard, password, card, bank, addsheng, addshi, addqu)){
+			throw new ServiceException(777, "含非法字符！");
+		}
 		boolean result =  gcuserDao.updateUser(name, idCard, password, card, bank, addsheng, addshi, addqu);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", ip);
@@ -5330,7 +5336,7 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 			String card, String idCard, String bank, String smsCode, String provinceName, String provinceName2,
 			String cityName, String areaName, String newPassWord1, String newPassWord2, String remoteAddr, int areaCode) {
 		if(StringCheck.checkUnlawful(userName, newSecondPassword1, newSecondPassword2, secondPassword, card, idCard, bank, smsCode, provinceName, provinceName2, cityName, areaName, newPassWord1, newPassWord2, remoteAddr)){
-			throw new ServiceException(777, "还非法字符！");
+			throw new ServiceException(777, "含非法字符！");
 		}
 	    Gcuser guser = gcuserDao.getUser(userName);
 		if(guser==null){
