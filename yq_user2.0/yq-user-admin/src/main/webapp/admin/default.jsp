@@ -3,6 +3,7 @@
 <c:if test="${erroCodeNum==1}"><script language=javascript>alert('验证码已过期！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('验证码错误！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('登录密码错误，请检查输入是否正确！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==407}"><script language=javascript>alert('短信验证码错误！');history.go(-1);</script></c:if>
 <html>
 <head>
 <title>增值服务-管理登录</title>
@@ -107,14 +108,14 @@ function checkdate()  {
         </td>
         <td width="69%" height="29" style="border-right: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" colspan="2" bgcolor="#FFFFFF" bordercolor="#336699"> 
             <font size="2"> 
-            <input type="password" name="password" size="20" style="float: left"></font></td>
+            <input type="password" name="password" id="password"  size="20" style="float: left"></font></td>
   			</tr>
   			<tr>
         <td width="143" height="29" style="border-left: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" align="right" bgcolor="#FFFFFF" bordercolor="#336699"> 
 <font size="2">短信验证码：</font></td>
         <td width="13%" height="29" style="border-right: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" bgcolor="#FFFFFF" bordercolor="#336699"> 
 <font size="2">
-<input name="smsCode" size="8" style="float: left"></font></td>
+<input name="smsCode" id="smsCode" size="8" style="float: left"></font></td>
         <td width="50%" height="29" style="border-right: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" bgcolor="#FFFFFF" bordercolor="#336699" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF"> 
 		<input style="width: 45px;" id="btn" type="button" onclick="checkdate()" value="发送" ></input>
 </td>
@@ -124,7 +125,7 @@ function checkdate()  {
 <font size="2">验证码：</font></td>
         <td width="13%" height="29" style="border-right: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" bgcolor="#FFFFFF" bordercolor="#336699"> 
 <font size="2">
-<input name="ValidCode" size="8" style="float: left"></font></td>
+<input name="ValidCode"  id="ValidCode"  size="8" style="float: left"></font></td>
         <td width="50%" height="29" style="border-right: 1px solid #C9D8AD; font-family:宋体; font-size:9pt" bgcolor="#FFFFFF" bordercolor="#336699" bordercolorlight="#FFFFFF" bordercolordark="#FFFFFF"> 
 <font size="2">
 <img src="/VerifyCode.jsp" title="点击刷新" onclick="this.src='/VerifyCode.jsp?'+Math.random()" align="left"></font></td>
