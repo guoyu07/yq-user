@@ -50,7 +50,13 @@ public class AdminLoginAction extends ALDAdminActionSupport {
 				super.setErroDescrip("短信验证码不能为空！");
 				return SUCCESS;
 			}
-			if(!manageService.getAminSmscode(adminUserName).equals(smsCode)){
+			if(manageService.getAminSmscode(adminUserName)!=null){
+				if(!manageService.getAminSmscode(adminUserName).equals(smsCode)){
+					super.setErroCodeNum(407);
+					super.setErroDescrip("短信验证码不正确！");
+					return SUCCESS;
+				}
+			}else{
 				super.setErroCodeNum(407);
 				super.setErroDescrip("短信验证码不正确！");
 				return SUCCESS;
