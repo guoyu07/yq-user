@@ -496,10 +496,16 @@ public class AgentService {
 			throw new ServiceException(11, "验证码为空!");
 		}
 		Gcuser gcuser = userService.getUserByUserName(userName);
-		
-		if(!smsCode.equals(gcuser.getVipsq())){
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(!smsCode.equals(gcuser.getVipsq())){
+				throw new ServiceException(10, "验证码有误!");
+			}
+		}else{
 			throw new ServiceException(10, "验证码有误!");
 		}
+		/*if(!smsCode.equals(gcuser.getVipsq())){
+			throw new ServiceException(10, "验证码有误!");
+		}*/
 		LogSystem.info("玩家：["+userName+"],绑定账号成功！");
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		return gcuser.getCall();

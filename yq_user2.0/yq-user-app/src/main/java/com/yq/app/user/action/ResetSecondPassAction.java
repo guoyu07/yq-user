@@ -58,6 +58,9 @@ public class ResetSecondPassAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
 					return SUCCESS;
 				}
+			}else{
+				super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
+				return SUCCESS;
 			}
 			
 			if(Strings.isNullOrEmpty(newSecondPassword1)||Strings.isNullOrEmpty(newSecondPassword1)||!newSecondPassword1.equals(newSecondPassword2)){

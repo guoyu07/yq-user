@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.MD5Security;
 import com.yq.user.bo.Gcuser;
@@ -119,6 +120,9 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
 					return SUCCESS;
 				}
+			}else{
+				super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
+				return SUCCESS;
 			}
 			
 			if(Strings.isNullOrEmpty(secondPassword)||!secondPassword.equals(guser.getPassword3())){
@@ -132,6 +136,7 @@ public class UpdateUserInfoAction extends ALDAdminActionSupport {
 			}			
 			
 			if(!Strings.isNullOrEmpty(userName)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)){
+				LogSystem.info("玩家更新资料"+"userName:"+userName+",新二级密码:"+newSecondPassword1+",原二级密码:"+guser.getPassword3()+",登录密码:"+newPassWord1+",原登录密码:"+guser.getPassword()+",银行卡:"+card+",身份证:"+idCard+",银行:"+bank+",手机验证码:"+smsCode+",省:"+smsCode+",市:"+cityName+",区:"+areaName);	
 				//开始更新资料操作
 				userService.updateUser(userName, guser.getName(), idCard, MD5Security.md5_16(newPassWord1), card, bank, provinceName, cityName, areaName, ServletActionContext.getRequest().getRemoteAddr(), areaCode);
 				return SUCCESS;

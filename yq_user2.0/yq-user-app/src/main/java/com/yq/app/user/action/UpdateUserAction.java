@@ -65,9 +65,14 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 				return SUCCESS;
 			}
 			
-			if(!smsCode.equals(guser.getVipsq())){
-					super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
-					return SUCCESS;
+			if(!Strings.isNullOrEmpty(smsCode)){
+				if(!smsCode.equals(guser.getVipsq())){
+						super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
+						return SUCCESS;
+				}
+			}else{
+				super.setErroCodeNum(2);//alert('您填入的手机验证码不正确！');
+				return SUCCESS;
 			}
 			
 			if(!Strings.isNullOrEmpty(super.getUserName())&&!Strings.isNullOrEmpty(password)&&!Strings.isNullOrEmpty(name)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)&&!Strings.isNullOrEmpty(secondPassword)&&!Strings.isNullOrEmpty(newSecondPassword1)&&!Strings.isNullOrEmpty(newSecondPassword2)){

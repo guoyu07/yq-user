@@ -640,12 +640,17 @@ public class UserService {
 		if(guser==null){
 			throw new ServiceException(1, "用户不存在!");
 		}
-		if(!smsCode.equals(guser.getVipsq())){
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(!smsCode.equals(guser.getVipsq())){
+				throw new ServiceException(2, "验证码有误!");
+			}
+		}else{
 			throw new ServiceException(2, "验证码有误!");
 		}
 		if(Strings.isNullOrEmpty(newPassWord1) || Strings.isNullOrEmpty(newPassWord2)){
 			throw new ServiceException(3, "有值为空!");
 		}
+		LogSystem.info("重置密码"+"userName:"+userName+",原密码:"+guser.getPassword()+",新密码:"+newPassWord1);
 		boolean result =  gcuserDao.resetUserPass(guser.getName(), guser.getUserid(), MD5Security.md5_16(newPassWord1));
 		if(result){
 			addUserDateIpLog(userName, "重置密码", ip);
@@ -696,10 +701,12 @@ public class UserService {
 		boolean result =  gcuserDao.updateUser(name, idCard, password, card, bank, addsheng, addshi, addqu);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", ip);
+			gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		}
 		/*if(areaCode!=0&&interRegionCodeDao.isHasByRegioncode(areaCode)){
 			userPropertyDao.updateUserAreaCodeByName(userName,areaCode);
 		}*/
+		
 		return result;
 	}
 	
@@ -2166,7 +2173,11 @@ public class UserService {
 			throw new ServiceException(4,"您好，您二级密码不正确，请重新输入！");
 		}
 		
-		if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
+				throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
+			}
+		}else{
 			throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
 		}
 		
@@ -2793,9 +2804,14 @@ public class UserService {
 		if(!gcuser.getPassword3().equals(password3)){
 			throw new ServiceException(3, "二级密码输入错误，请检查输入是否正确！");
 		}
-		if(!gcuser.getVipsq().equals(smsCode)){
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(!smsCode.equals(gcuser.getVipsq())){
+				throw new ServiceException(4, "手机验证码输入错误，请检查输入是否正确！");
+			}
+		}else{
 			throw new ServiceException(4, "手机验证码输入错误，请检查输入是否正确！");
 		}
+		
 		//重置短信码
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		//更新订单状态
@@ -2899,8 +2915,12 @@ public class UserService {
 			throw new ServiceException(3, "二级密码不正确！");
 		}
 		
-		if(!smsCode.equals(gcuser.getVipsq())){
-			throw new ServiceException(6, "您填入的手机验证码不正确!");
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(!gcuser.getVipsq().equals(smsCode)){
+				throw new ServiceException(6, "手机验证码不正确");
+			}
+		}else{
+			throw new ServiceException(6, "手机验证码不正确");
 		}
 		
 		if(gcuser.getPay()<needYbCount){
@@ -4171,11 +4191,19 @@ public class UserService {
 			throw new ServiceException(7, "");
 		}
 		
+		if(!Strings.isNullOrEmpty(sfcode)){
+			if(!sfcode.equals(beReduceUser.getVipsq())){
+				throw new ServiceException(8, "您好，手机验证码不正确，请重新输入!");
+			}
+		}else{
+			throw new ServiceException(8, "您好，手机验证码不正确，请重新输入!");
+		}
+	/*	
 		if(!beReduceUser.getVipsq().equals(sfcode)){
 //			super.setErroCodeNum(8);//alert('您好，手机验证码不正确，请重新输入！');
 //			return SUCCESS;
 			throw new ServiceException(8, "");
-		}
+		}*/
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		//减一币
 		if(!this.changeYb(user, -ybpay,gcuser.getName(),12,null,0, YbChangeType.SHANGHUUSE)){
@@ -4552,9 +4580,15 @@ public class UserService {
 		if(!gcuser.getPassword3().equals(pa3)){
 			throw new ServiceException(4, "您好，二级密码不正确，请重新输入！");
 		}
-		if(!hgcode.equals(gcuser.getVipsq())){
+		if(!Strings.isNullOrEmpty(hgcode)){
+			if(!gcuser.getVipsq().equals(hgcode)){
+				throw new ServiceException(5, "手机验证码不正确");
+			}
+		}else{
 			throw new ServiceException(5, "手机验证码不正确");
 		}
+		
+		
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
 		if(!this.changeYb(userName, -ybsl, "换购-"+gwno, 4, null,0,YbChangeType.HUANGOU)){
 			throw new ServiceException(2, "一币不够！");
@@ -4624,9 +4658,17 @@ public class UserService {
 		if(gcuser.getPay()<ybsl){
 			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 		}
-		if(!hgcode.equals(gcuser.getVipsq())){
-			throw new ServiceException(7, "手机验证码不正确");
+		
+		if(!Strings.isNullOrEmpty(hgcode)){
+			if(!hgcode.equals(gcuser.getVipsq())){
+				throw new ServiceException(7, "手机验证码不正确!");
+			}
+		}else{
+			throw new ServiceException(7, "手机验证码不正确!");
 		}
+		/*if(!hgcode.equals(gcuser.getVipsq())){
+			throw new ServiceException(7, "手机验证码不正确");
+		}*/
 		if(scores>0){
 			//判断是否重复处理订单
 			UserScoresLog log = userScoresLogDao.get(new SqlParamBean("user_name", user),new SqlParamBean("and", "param", order));
@@ -4845,7 +4887,11 @@ public class UserService {
 		if(gcuser.getPay()<ybsl){
 			throw new ServiceException(6, "您的一币余额不足，请检查输入是否正确！");
 		}
-		if(!hgcode.equals(gcuser.getVipsq())){
+		if(!Strings.isNullOrEmpty(hgcode)){
+			if(!gcuser.getVipsq().equals(hgcode)){
+				throw new ServiceException(7, "手机验证码不正确");
+			}
+		}else{
 			throw new ServiceException(7, "手机验证码不正确");
 		}
 		int day = 0;
@@ -4931,6 +4977,7 @@ public class UserService {
 			if(!smdCode.equals(gcuser.getVipsq())){
 				throw new ServiceException(5,"您好，您输入的手机验证码不正确，请重新输入！");
 			}
+			
 		}else{
 			throw new ServiceException(3000, "用户不存在！");
 		}
@@ -5194,7 +5241,11 @@ public class UserService {
 		if(!gcuser.getPassword3().equals(pa3)){
 			throw new ServiceException(2, "二级密码不正确");
 		}
-		if(!gcuser.getVipsq().equals(smsCode)){
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(!gcuser.getVipsq().equals(smsCode)){
+				throw new ServiceException(3, "手机验证码不正确");
+			}
+		}else{
 			throw new ServiceException(3, "手机验证码不正确");
 		}
 		gcuserDao.updateSmsCode(userName, Global.INIT_SMS_CODE);
@@ -5349,7 +5400,11 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 			throw new ServiceException(1, "用户不存在!");
 		}
 		
-		if(Strings.isNullOrEmpty(smsCode)|| !smsCode.equals(guser.getVipsq())){
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(!guser.getVipsq().equals(smsCode)){
+				throw new ServiceException(2, "您填入的手机验证码不正确!");
+			}
+		}else{
 			throw new ServiceException(2, "您填入的手机验证码不正确!");
 		}
 		
@@ -5360,7 +5415,7 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		if(Strings.isNullOrEmpty(idCard)||!idCard.equals(guser.getUserid())){
 			throw new ServiceException(4, "您填入的身份证号码不正确！");
 		}		
-		
+		LogSystem.info("玩家更新资料"+"userName:"+userName+",新二级密码:"+newSecondPassword1+",原二级密码:"+guser.getPassword3()+",登录密码:"+newPassWord1+",原登录密码:"+guser.getPassword()+",银行卡:"+card+",身份证:"+idCard+",银行:"+bank+",手机验证码:"+smsCode+",省:"+smsCode+",市:"+cityName+",区:"+areaName);	
 		boolean result = gcuserDao.updateUser(guser.getName(), newSecondPassword1, card, idCard, bank, smsCode, provinceName, cityName, areaName, newPassWord1);
 		if(result){
 			addUserDateIpLog(userName, "更新资料", remoteAddr);
