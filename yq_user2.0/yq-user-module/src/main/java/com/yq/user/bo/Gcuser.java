@@ -606,9 +606,9 @@ public class Gcuser{
 	this.vipsq=vipsq;
 	}
 	public String getVipsq(){
-//		if(vipsq==null||vipsq.equals(Global.INIT_SMS_CODE)){
-//			return "252493618";//测试时用的短信码 
-//		}
+		if(vipsq==null||vipsq.equals(Global.INIT_SMS_CODE)){
+			return null;//测试时用的短信码 
+		}
 		return vipsq;
 	}
 	public void setPwdate(Date pwdate){
