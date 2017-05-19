@@ -104,7 +104,7 @@ public class ModifyaabuserAction extends BaseManageAction<Object> {
 			return INPUT;
 		}
 		 adminService.updateUser(userid, password3, card, bank, name, call, email, qq, userid2, payok, jcname, jcuserid, password,pwdate,cxt,super.ip(),updateAllDown,areaCode,super.getUserName(),updateAllDownProperty);
-		 AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.OP_MODIFYVIP, "修改资料"+name);
+		 AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.OP_MODIFYVIP, "修改资料:"+userid,userid);
 		 adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2000);
 		return SUCCESS;

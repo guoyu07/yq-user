@@ -21,6 +21,8 @@ public class AdminOperateLog {
 	
 	private String operateDesc;	//操作描述
 	
+	private String duser;
+	
 	
 	public AdminOperateLog(){
 	}
@@ -33,7 +35,25 @@ public class AdminOperateLog {
 		this.operateType = operateType;
 		this.operateDesc = operateDesc;
 	}
+	
+	public AdminOperateLog(String operator, String ip, Date operateDate, int operateType, String operateDesc, String duser) {
+		super();
+		this.operator = operator;
+		this.ip = ip;
+		this.operateDate = operateDate;
+		this.operateType = operateType;
+		this.operateDesc = operateDesc;
+		this.duser = duser;
+	}
 
+
+	public String getDuser() {
+		return duser;
+	}
+
+	public void setDuser(String duser) {
+		this.duser = duser;
+	}
 
 	public int getId() {
 		return id;

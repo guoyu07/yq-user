@@ -343,9 +343,13 @@ public class UserService {
     	 */
     	userName = userName.toLowerCase();
 		Gcuser gcUser = gcuserDao.getUser(userName);
+		
 		String md5pass = MD5Security.md5_16(pwd).toLowerCase();
 		//登录成功
 		if(gcUser!=null && gcUser.getPassword().equals(md5pass)){
+			if(gcUser.getUserAgent()!=0){
+				return gcUser;
+			}
 			Session userSessionBean = new Session(gcUser.getUsername(), System.currentTimeMillis(),sessionId);
 			this.setSession(sessionId, userSessionBean);
 			gcuserDao.updateLoginTime(userName);
@@ -1738,7 +1742,7 @@ public class UserService {
 		if(to==null){
 			throw new ServiceException(4, "接收的用户名不存在，请检查输入是否正确！");
 		}
-		 AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_BDBZZ,"转出用户："+fromUser+"转入用户："+toUser+"数量："+amount);
+		 AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_BDBZZ,"转出用户："+fromUser+"转入用户："+toUser+"数量："+amount,fromUser);
 		 adminOperateLogDao.addLog(log);
 		
 		if(!this.updateSybdb(fromUser, -amount, "转给-"+toUser+"备注：",remark)){
