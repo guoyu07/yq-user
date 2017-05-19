@@ -2173,11 +2173,7 @@ public class UserService {
 			throw new ServiceException(4,"您好，您二级密码不正确，请重新输入！");
 		}
 		
-		if(!Strings.isNullOrEmpty(smsCode)){
-			if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
-				throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
-			}
-		}else{
+		if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
 			throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
 		}
 		
