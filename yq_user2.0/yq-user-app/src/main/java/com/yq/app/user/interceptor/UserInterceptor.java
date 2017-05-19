@@ -9,12 +9,8 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.context.ServiceCacheFactory;
-import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
-import com.yq.app.user.action.SmsAction;
-import com.yq.app.user.action.UpdateUserAction;
 import com.yq.common.action.ALDAdminActionSupport;
-import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
 public class UserInterceptor extends AbstractInterceptor {

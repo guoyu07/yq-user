@@ -12,6 +12,7 @@
 <c:if test="${erroCodeNum==7}"><script language=javascript>alert('该一币交易进行中或已经由它人交易成功了，不能重复，请选择其它交易！');location.href='epjysc?secondThisState=253&thisState=244';</script></c:if>
 <c:if test="${erroCodeNum==8}"><script language=javascript>alert('您好，您的二级密码不正确，请检查输入是否正确！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==9}"><script language=javascript>alert('<s:text name='auditedis'/>！');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==10}"><script language=javascript>alert('非VIP玩家不能购买一币！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==2000}"><script language=javascript>alert('下单认购一币-"${txpay.paynum}"成功，请您及时付款，建立诚信交易渠道！');location.replace('epmyjl?status=1&?secondThisState=253&thisState=244');</script></c:if>
 
 <head>
