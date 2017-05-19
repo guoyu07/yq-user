@@ -29,7 +29,7 @@ public class JzbdbAction extends ALDAdminActionSupport {
 		}
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addSyep(jzid, jzbdb,super.getUserName());
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.CHANGE_BDB, "改變數量："+jzbdb);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.CHANGE_BDB, "改變數量："+jzbdb,jzid);
 		adminService.addAdminOperateLog(log);
 		gcuser =  userService.getUserByUserName(jzid);
 		return SUCCESS;

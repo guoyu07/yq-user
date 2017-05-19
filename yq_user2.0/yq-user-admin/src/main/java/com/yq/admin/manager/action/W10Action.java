@@ -53,7 +53,7 @@ public class W10Action extends ALDAdminPageActionSupport<W10Bean> {
 */
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.setVerifile(user, verify);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.YB_MSH, "用戶："+user+"免審核："+verify);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.YB_MSH, "用戶："+user+"免審核："+verify,user);
 		adminService.addAdminOperateLog(log);
 		super.setErroCodeNum(2001);
 		return SUCCESS;

@@ -2683,12 +2683,11 @@ public class UserService {
 	}
 	
 	public Txpay buyYb(String userName,int payId,String password3){
-		Txpay txpay = buyYbPre(userName,payId);
-		
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if(gcuser.getVip()==0){
 			throw new ServiceException(10, "非vip玩家不能购买一币！");
 		}
+		Txpay txpay = buyYbPre(userName,payId);
 		
 		if(!password3.equals(gcuser.getPassword3())){
 			throw new ServiceException(8, "您好，您的二级密码不正确，请检查输入是否正确！");

@@ -1030,10 +1030,10 @@ public class AdminService {
 		gcuserDao.updateGwuid(userName, sjid);
 		AdminOperateLog log=null;
 		if(sjid==0){
-			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成国内玩家");
+			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成国内玩家",userName);
 		}
 		if(sjid==1){
-			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成海外玩家");
+			log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_SETOVERSEAS, userName+"被设置成海外玩家",userName);
 		}
 		adminOperateLogDao.addLog(log);
 	}
@@ -1623,7 +1623,7 @@ public class AdminService {
                 vipcjgl.setBz("入账");
                 vipcjgl.setCjdate(new Date());
                 vipcjglDao.add(vipcjgl);
-        		AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_VIPCZJ, userName+"入账："+addAmount);
+        		AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_VIPCZJ, userName+"入账："+addAmount,userName);
         		adminOperateLogDao.addLog(log);
             }
         }else{
@@ -2464,7 +2464,7 @@ public class AdminService {
 			throw new ServiceException(100, "充值话费失败！稍后再试");
 		}
         LogSystem.info("话费充值返回 :"+result+" 消息:"+msg);
-        AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_MOBILEFEE, userName+":手机号："+call+"充值："+amount);
+        AdminOperateLog log= new AdminOperateLog(oparetor,"", new Date(), AdminGlobal.OP_MOBILEFEE, userName+":手机号："+call+"充值："+amount,userName);
 		adminOperateLogDao.addLog(log);
         if(result==0){//成功
         	return true;
@@ -3931,7 +3931,7 @@ public class AdminService {
 		if(!this.changeYb(toUser, amount, regId, 6, null,ration,  YbChangeType.MALLHUANKUAN)){
 			throw new ServiceException(3000, "未知错误！");
 		}
-		AdminOperateLog log= new AdminOperateLog(operator,"", new Date(), AdminGlobal.MALL_TRANFER, "转账金额:"+amount+",订单号:["+orderId+"],"+"转出者:"+fromUser+",接收者:"+toUser+",折扣:"+ration+",转账说明:"+yy);
+		AdminOperateLog log= new AdminOperateLog(operator,"", new Date(), AdminGlobal.MALL_TRANFER, "转账金额:"+amount+",订单号:["+orderId+"],"+"转出者:"+fromUser+",接收者:"+toUser+",折扣:"+ration+",转账说明:"+yy,fromUser);
 		this.addAdminOperateLog(log);
 	}
 	
@@ -3997,9 +3997,9 @@ public class AdminService {
 		
 	}
 	
-	public IPage<AdminOperateLog> getAdminOperateLogPageList(String admin, int type, String queryStartDate,
+	public IPage<AdminOperateLog> getAdminOperateLogPageList(String admin, int type,String user, String queryStartDate,
 			String queryEndDatet, int pageIndex, int pageSize) {
-		return adminOperateLogDao.getPageList(admin,type,pageSize,pageIndex,queryStartDate,queryEndDatet);
+		return adminOperateLogDao.getPageList(admin,type,user,pageSize,pageIndex,queryStartDate,queryEndDatet);
 	}
 	
 	

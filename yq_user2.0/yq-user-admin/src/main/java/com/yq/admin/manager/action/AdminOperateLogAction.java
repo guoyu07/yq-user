@@ -12,6 +12,7 @@ public class AdminOperateLogAction extends ALDAdminPageActionSupport<AdminOperat
 	private String endDate1;
 	private String admin;
 	private int beizhu;
+	private String user;
 	public String execute() {
 		AdminService adminService = ServiceCacheFactory.getServiceCache().getService(AdminService.class);
 		String queryStartDate = null;
@@ -20,9 +21,19 @@ public class AdminOperateLogAction extends ALDAdminPageActionSupport<AdminOperat
 			queryStartDate = startDate1+" 00:00:00";
 			queryEndDatet = endDate1 + " 23:59:59";
 		}
-		super.initPage(adminService.getAdminOperateLogPageList(admin,beizhu,queryStartDate, queryEndDatet, super.getToPage(), 30));
+		super.initPage(adminService.getAdminOperateLogPageList(admin,beizhu,user,queryStartDate, queryEndDatet, super.getToPage(), 30));
 		return SUCCESS;
 	}
+	
+	
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+
 	public String getStartDate1() {
 		return startDate1;
 	}

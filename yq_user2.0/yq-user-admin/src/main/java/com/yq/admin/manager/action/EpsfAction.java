@@ -39,7 +39,7 @@ public class EpsfAction extends ALDAdminActionSupport {
 		LogSystem.log("用户["+super.getUserName()+"]操作，修改一币["+new Date()+"],给--->["+uid+"],sfpay:"+sfpay+",sflb="+sflb);
 		userService.changeYbCanFu(uid, -sfpay, sflb, 0, null, super.getUserName());
 		gcuser = userService.getUserByUserName(uid);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.REDUCE_YB, "修改一币金额:"+sfpay+","+"转出者:"+uid+",sflb:"+sflb);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.REDUCE_YB, "修改一币金额:"+sfpay+","+"转出者:"+uid+",sflb:"+sflb,uid);
 		userService.addAdminOperateLog(log);
 		return SUCCESS;
 	}

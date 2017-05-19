@@ -47,7 +47,7 @@ public class BdbjzpayAction extends ALDAdminActionSupport {
 			return INPUT;
 		}
 		userService.addBdbByAdmin(syuser, jzpay);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.CHANGE_BDB, "給用戶:"+syuser+",報單幣数量："+jzpay);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.CHANGE_BDB, "給用戶:"+syuser+",報單幣数量："+jzpay,syuser);
 		userService.addAdminOperateLog(log);
 		super.setErroCodeNum(2000);
 		return SUCCESS;

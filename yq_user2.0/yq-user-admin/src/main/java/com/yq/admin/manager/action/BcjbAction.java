@@ -34,7 +34,7 @@ public class BcjbAction extends ALDAdminActionSupport {
 		LogSystem.log("用户["+super.getUserName()+"]操作，加金币["+new Date()+"],给--->["+bcid+"],积分数量:"+bcjb);
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.addJb(bcid, bcjb);
-		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.CHANGE_JB, "給用戶:"+bcid+",金幣数量："+bcjb);
+		AdminOperateLog log= new AdminOperateLog(super.getUserName(),super.getUserSession().getSessionId(), new Date(), AdminGlobal.CHANGE_JB, "給用戶:"+bcid+",金幣数量："+bcjb,bcid);
 		adminService.addAdminOperateLog(log);
 		gcuser =  userService.getUserByUserName(bcid);
 		return SUCCESS;

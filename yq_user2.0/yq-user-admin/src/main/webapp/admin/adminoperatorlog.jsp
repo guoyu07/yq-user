@@ -23,7 +23,7 @@
   <tr> 
     <td width="100%" style="border-left: 1px solid #E5EAC2; border-right: 1px solid #E5EAC2; border-bottom: 1px solid #E5EAC2" height="87" bgcolor="#C3DAF9">
     <form method="POST" action="adminoperatelog" name="Form" id="Form">
-	<p align="center">管理员：<input name="admin" id="admin" type="text" value="${admin}"/>
+	<p align="center">管理员：<input name="admin" id="admin" type="text" value="${admin}"/>玩家：<input name="user" id="user" type="text" value="${user}"/>
 		 	开始日期:<input name="startDate1" id="startDate1" type="text" value="${startDate1}"/>结束日期:<input name="endDate1" id="endDate1" type="text" value="${endDate1}"/>
 		 	<select size="1" name="beizhu">
 					<option  <c:if test="${empty beizhu or beizhu==0}">selected</c:if> value="0">全部</option>
@@ -57,6 +57,8 @@
           <td  align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font face="宋体" color="#000000" size="2"><strong>操作者</strong></font></td>
 			<td  align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
+			<font color="#000000" style="font-weight:700" face="宋体" size="2">玩家</font></td>
+			<td  align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" style="font-weight:700" face="宋体" size="2">操作时间</font></td>
 			<td  align="center" height="29" bgcolor="#C3DAF9"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" style="font-weight:700" face="宋体" size="2">操作描述</font></td>
@@ -66,13 +68,15 @@
           <td valign="middle"align="center"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" face="宋体" size="2">${data.operator}</font></td>
 			<td valign="middle"  align="center"><p style="margin-top: 0; margin-bottom: 0">
+			<font color="#000000" face="宋体" size="2">${data.duser}</font></td>
+			<td valign="middle"  align="center"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" face="宋体" size="2">${data.operateDate}</font></td>
 			<td valign="middle"  align="center"><p style="margin-top: 0; margin-bottom: 0">
 			<font color="#000000" face="宋体" size="2">${data.operateDesc}</font></td>
           </tr>
          </s:iterator>
             </table> 
-</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="admin,${admin},beizhu,${beizhu},startDate1,${startDate1},endDate1,${endDate1}"/>
+</div><font face="宋体" style="font-size: 11pt"><aldtags:pageTag paraStr="admin,${admin},user,${user},beizhu,${beizhu},startDate1,${startDate1},endDate1,${endDate1}"/>
 </font> 
 </tr> 
 </table> 

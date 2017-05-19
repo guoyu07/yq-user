@@ -25,7 +25,7 @@ public class AdminOperateLogDao {
 		
 	}
 
-	public IPage<AdminOperateLog> getPageList(String admin, int type, int pageSize, int pageIndex,
+	public IPage<AdminOperateLog> getPageList(String admin, int type,String user, int pageSize, int pageIndex,
 			String startDate, String endDate) {
 		String sql ="select * from "+table+" where 1=1 ";
 		SqlParameter sqlParameter = new SqlParameter();
@@ -36,6 +36,10 @@ public class AdminOperateLogDao {
 		if(!Strings.isNullOrEmpty(admin)){
 			sql = sql +" and operator = ?";
 			sqlParameter.setString(admin);
+		}
+		if(!Strings.isNullOrEmpty(user)){
+			sql = sql +" and duser = ?";
+			sqlParameter.setString(user);
 		}
 		if(!Strings.isNullOrEmpty(startDate)&&!Strings.isNullOrEmpty(endDate)){
 			sql = sql +" and operate_date between ? and ?";
