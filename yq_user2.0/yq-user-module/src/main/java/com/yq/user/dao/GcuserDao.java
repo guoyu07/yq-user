@@ -162,7 +162,8 @@ public class GcuserDao {
 	}
 	
 	public boolean updateUserByAdmin(String userName,String password3,String card, String bank,  String name, String call,String  email,String qq,String userid,int payok,String jcname,String jcuserid,String password,Date pwdate,int cxt){
-		String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,`call`=?,email=?,qq=?,userid=?,payok=?,jcname=?,jcuserid=?,cxt=?";
+		//String sql = "update "+table+" set password3=? , card=? , bank=? ,name=?,`call`=?,email=?,qq=?,userid=?,payok=?,jcname=?,jcuserid=?,cxt=?";
+		String sql = "update "+table+" set card=? , bank=? ,name=?,`call`=?,email=?,qq=?,userid=?,payok=?,jcname=?,jcuserid=?,cxt=?";
 		boolean isChangePassword = false;
 		boolean isChangePwdate = false;
 		if(password!=null&&!password.equals("")){
@@ -175,7 +176,7 @@ public class GcuserDao {
 		}
 		sql = sql + " where username=? limit 1";
 		SqlParameter parameter = new SqlParameter();
-		parameter.setString(password3);
+		//parameter.setString(password3);
 		parameter.setString(card);
 		parameter.setString(bank);
 		parameter.setString(name);
@@ -1041,7 +1042,8 @@ public class GcuserDao {
 	}
 	
 	public boolean updateThenSameUserInfo(String userId,String name,String password,String password3,String card,String bank,String call,String email,String qq){
-		String sql = "update "+table+" set password3=? , card=? , bank=? ,`call`=?,email=?,qq=?";
+		//String sql = "update "+table+" set password3=? , card=? , bank=? ,`call`=?,email=?,qq=?";
+		String sql = "update "+table+" set card=? , bank=? ,`call`=?,email=?,qq=?";
 		boolean isChangePassword = false;
 		if(password!=null&&!password.equals("")){
 			sql = sql+ ",password=?";
@@ -1049,7 +1051,7 @@ public class GcuserDao {
 		}
 		sql = sql + " where userid=? and name=?";
 		SqlParameter parameter = new SqlParameter();
-		parameter.setString(password3);
+		//parameter.setString(password3);
 		parameter.setString(card);
 		parameter.setString(bank);
 		parameter.setString(call);

@@ -75,17 +75,21 @@ public class UpdateUserAction extends ALDAdminActionSupport {
 				return SUCCESS;
 			}
 			
-			if(!Strings.isNullOrEmpty(super.getUserName())&&!Strings.isNullOrEmpty(password)&&!Strings.isNullOrEmpty(name)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)&&!Strings.isNullOrEmpty(secondPassword)&&!Strings.isNullOrEmpty(newSecondPassword1)&&!Strings.isNullOrEmpty(newSecondPassword2)){
+			if(!Strings.isNullOrEmpty(super.getUserName())&&!Strings.isNullOrEmpty(password)&&!Strings.isNullOrEmpty(name)&&!Strings.isNullOrEmpty(newPassWord1)&&!Strings.isNullOrEmpty(newPassWord2)&&!Strings.isNullOrEmpty(newSecondPassword1)&&!Strings.isNullOrEmpty(newSecondPassword2)){//&&!Strings.isNullOrEmpty(secondPassword)
 				if(!MD5Security.md5_16(password).toLowerCase().equals(guser.getPassword())){
 					super.setErroCodeNum(3);//alert("您填入的登录密码与您所登记的不相符！");
 					return SUCCESS;
 				}
-				if(!secondPassword.equals(guser.getPassword3())){
+			/*	if(!secondPassword.equals(guser.getPassword3())){
 					super.setErroCodeNum(4);//alert('您填入的原二级密码与您所登记的不相符，请重新输入！');
 					return SUCCESS;
-				}
-				if(newSecondPassword1.equals(secondPassword)){
+				}*/
+				/*if(newSecondPassword1.equals(secondPassword)){
 					super.setErroCodeNum(5);//alert('新二级密码不能与原二级密码相同，请重新输入！');
+					return SUCCESS;
+				}*/
+				if(!newSecondPassword1.equals(newSecondPassword2)){
+					super.setErroCodeNum(5);//alert('两次输入新二级密码二级密码不相同，请重新输入！');
 					return SUCCESS;
 				}
 				if(!idCard.equals(guser.getUserid())){

@@ -2172,15 +2172,20 @@ public class UserService {
 		if(!password3.equals(gcuser.getPassword3())){
 			throw new ServiceException(4,"您好，您二级密码不正确，请重新输入！");
 		}
-		
-		if(gcuser.getGanew()!=0&&!gcuser.getVipsq().equals(smsCode)){
+		if(!smsCode.equals(gcuser.getVipsq())){
+			throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
+		}
+		if(!Strings.isNullOrEmpty(smsCode)){
+			if(!smsCode.equals(gcuser.getVipsq())&&gcuser.getGanew()!=0){
+				throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
+			}
+		}else{
 			throw new ServiceException(5,"您好，手机验证码不正确，请重新输入！");
 		}
 		
 		if(saleNum<100){
 			throw new ServiceException(6,"您好，您发布的一币数量不能小于100，谢谢！");
 		}
-		
 		if(gcuser.isLimitTx()){
 			throw new ServiceException(7,"您好，您已发布成功过，请耐心等待处理完成后再发布第二笔，或认购方已向您付款，请先确认收款再发布第二笔，谢谢！");
 		}

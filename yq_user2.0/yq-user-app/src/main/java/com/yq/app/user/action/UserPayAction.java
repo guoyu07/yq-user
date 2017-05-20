@@ -30,6 +30,12 @@ public class UserPayAction extends ALDAdminActionSupport {
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
+		if(gcuser!=null){
+			int callLenght = gcuser.getCall().length();
+			String callLeft = gcuser.getCall().substring(0, 3);
+			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
+			gcuser.setCall(callLeft+"*****"+CallRight);
+		}
 		if(status!=0){
 			userService.saleYb(super.getUserName(), pa3, txpay, ybcodeid, ServletActionContext.getRequest().getRemoteAddr());
 			super.setErroCodeNum(-1);

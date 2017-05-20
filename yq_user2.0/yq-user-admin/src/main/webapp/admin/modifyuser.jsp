@@ -12,12 +12,11 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 </style>
 </head>
 <body bgcolor="#E8F1FF" topmargin="5" leftmargin="5">
-
 </body>
 </html>
 <div align="center">
 <font face="宋体" style="font-size: 11pt">
-</font><form name="form" METHOD="POST" action="/admin/modifyaabuser?userid=${userid}&status=1">
+</font><form name="form" METHOD="POST" id="form" action="/admin/modifyaabuser?userid=${userid}&status=1">
     <div align="center">
       <center>
     　<table border="1" width="100%" cellpadding="4" class=lowcolor cellspacing="0" style="border-collapse: collapse" bordercolor="#FFFFFF" height="359">
@@ -44,10 +43,10 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
         <c:if test="${gcuser.vipsq=='252493618'}">无</c:if><c:if test="${gcuser.vipsq!='252493618'}"><%-- ${gcuser.vipsq} --%></c:if>----所属vip服务中心：${gcuser.vipname}
         </font><font style="font-size: 11pt"></font> </td>
       </tr>
- <tr> 
+ <%-- <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">提现密码：</font></td>
         <td width="63%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input name="password3" value="${gcuser.password3}" size="20"></span></font><font color="#FF0000" style="font-size: 11pt"> **必须填写</font><font style="font-size: 11pt"></font></td>
-      </tr>
+      </tr> --%>
       </c:if>
                   <tr> 
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">之前送的报单币：</font></td>
@@ -142,7 +141,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font style="font-size: 11pt">级别：</font></td>
         <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"> <font face="宋体"><span style="font-size: 11pt"><input type="text" name="jb" size="10" value="${gcuser.jb}" readonly><font color="#FF0000">&nbsp;</font></span></font><font color="#0000FF" style="font-size: 11pt">2省级管理 3市级管理 4区级管理 5合作商家</font></td>
       </tr>
-      <tr bgcolor="#ffffdd"> 
+      <tr bgcolor="#ffffdd">
         <td align="right" width="36%" height="30" style="border-left: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><span style="font-size: 11pt">充值累计：</span></td>
         <td width="62%" align="left" style="border-right: 1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF"><font face="宋体"><span style="font-size: 11pt"><input type="text" name="cjtj" size="15" value="${gcuser.cjtj}" >最近一次充值时间：${gcuser.gmdate}</span></font></td>
       </tr>
@@ -178,7 +177,7 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
        <td align="center" colspan="2" style="border-left:1px solid #C9D8AD; border-right:1px solid #C9D8AD; border-bottom:1px solid #C9D8AD; color:#0000000; font-family:宋体; font-size:9pt; line-height:18px" bgcolor="#D9E6FF" height="22"> 
        <div align="center">
        <c:if test="${role.roleLevel<6}">
-       <font face="宋体"><span style="font-size: 11pt"><input type="submit" value="提 交 修 改" name="B1" style="font-weight: bold; font-size:12pt"></span></font>
+       <font face="宋体"><span style="font-size: 11pt"><input type="button" id="btn" onclick="sub()" value="提 交 修 改" name="B1" style="font-weight: bold; font-size:12pt"/></span></font>
        </c:if>
        <font face="黑体"><b>
      	<%-- <c:if test="${role.roleLevel<3}"> --%>
@@ -232,4 +231,75 @@ p{color:000000;FONT-FAMILY: "宋体"; font-size: 9pt ;line-height: 18px;}
 	</tr>	
 </table>
 
+<script type="text/javascript">
+function $$(close){
+	return document.getElementById(close)
+}
 
+function getCookie(name)
+{
+	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+	if(arr=document.cookie.match(reg))
+		return unescape(arr[2]);
+	else
+		return null;
+}
+function setCookie(name,value,time){
+	var strsec = getsec(time);
+	var exp = new Date();
+	exp.setTime(exp.getTime() + strsec*1);
+	document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+function getsec(str){
+	var str1=str.substring(1,str.length)*1;
+	var str2=str.substring(0,1);
+if (str2=="s")
+{
+	return str1*1000;
+}
+else if (str2=="h")
+{
+	return str1*60*60*1000;
+}
+else if (str2=="d")
+{
+	return str1*24*60*60*1000;
+}
+}
+
+function delCookie(name){
+var exp = new Date();
+exp.setTime(exp.getTime() - 1);
+var cval=getCookie(name);
+if(cval!=null)
+document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+}
+
+//s20是代表20秒
+//h是指小时，如12小时则是：h12
+//d是天数，30天则：d30
+if(getCookie('name')!=null){
+ if(new Date().getTime()-parseInt(getCookie('name'))<15000){
+	$$('btn').setAttribute('disabled',true);
+ }else{
+	$$('btn').removeAttribute('disabled')
+ }
+ setTimeout(function(){
+	$$('btn').removeAttribute('disabled');
+	delCookie('name')
+},15000-(new Date().getTime()-parseInt(getCookie('name'))))
+}else{
+$$('btn').removeAttribute('disabled')
+} 
+/* function sub(){
+	setCookie("name",new Date().getTime(),'s15');
+	$$('btn').setAttribute('disabled',true);
+} */
+function sub(){
+	var that=$$('btn');
+	that.setAttribute('disabled',true);
+	setCookie("name",new Date().getTime(),'s15');
+	document.getElementById("form").submit()
+}
+
+</script>

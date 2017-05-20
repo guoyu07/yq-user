@@ -26,12 +26,12 @@ function checkdate()  {
   if (!CheckIfEnglish(Form.newPassWord1.value)) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-627569921'/>！");  Form.newPassWord1.focus();      return false;    } 
   if (Form.newPassWord1.value.length > 18 || Form.newPassWord1.value.length < 6) {  alert("<s:text name='vipupuser.jsp.upuser.jsp.-525641962'/>！");  Form.newPassWord1.focus();  return false;  } 
   if (Form.newPassWord1.value != Form.newPassWord2.value) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.856129909'/>！"); Form.newPassWord1.focus();     return false;    } 
-  if (Form.secondPassword.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.1467433192'/>！");  Form.secondPassword.focus();      return false;    } 
+ /*  if (Form.secondPassword.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.1467433192'/>！");  Form.secondPassword.focus();      return false;    } */
   if (Form.newSecondPassword1.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.1443750521'/>！");  Form.newSecondPassword1.focus();      return false;    }  
-  if (Form.newSecondPassword1.value == Form.secondPassword.value) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-440377455'/>！"); Form.newSecondPassword1.focus();     return false;    }
-  if (!CheckIfEnglish(Form.newSecondPassword1.value)) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-1791992834'/>！");  Form.newSecondPassword1.focus();      return false;    } 
+ /*  if (Form.newSecondPassword1.value == Form.secondPassword.value) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-440377455'/>！"); Form.newSecondPassword1.focus();     return false;    } */ 
+   if (!CheckIfEnglish(Form.newSecondPassword1.value)) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-1791992834'/>！");  Form.newSecondPassword1.focus();      return false;    } 
   if (Form.newSecondPassword1.value.length > 18 || Form.newSecondPassword1.value.length < 10) {  alert("<s:text name='vipupuser.jsp.upuser.jsp.-976914480'/>！");  Form.newSecondPassword1.focus();  return false;  }
-  if (Form.newSecondPassword1.value != Form.newSecondPassword2.value) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-947047850'/>！"); Form.newSecondPassword2.focus();     return false;    } 
+  if (Form.newSecondPassword1.value != Form.newSecondPassword2.value) {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-947047850'/>！"); Form.newSecondPassword2.focus();     return false;    }
   if (Form.qq.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.35593833'/>QQ！");Form.qq.focus();      return false;    }  
   if (Form.idCard.value=="") {      alert("<s:text name='vipupuser.jsp.upuser.jsp.-1745964948'/>！");  Form.idCard.focus();      return false;    }
   
@@ -68,7 +68,7 @@ function checkdate1()  {
 			alert('<s:text name='vipupuser.jsp.upuser.jsp.-1979303873'/>！');
 			return;
 		}else if(response.erroCodeNum==5){
-			alert('<s:text name='vipupuser.jsp.upuser.jsp.748117169'/>！');
+			alert('<s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.-947047850'/>！');
 			return;
 		}else if(response.erroCodeNum==6){
 			alert('<s:text name='vipupuser.jsp.upuser.jsp.1803174555'/>！');
@@ -108,11 +108,12 @@ function checkdate1()  {
 			<td width="260" align="right"><font color="#FF0000"><s:text name='vipupuser.jsp.upuser.jsp.1750523051'/>：</font></td>
 			<td width="396" align="left"><input type="password" name="newPassWord2" size="20" tabindex="18" onKeyUp="value=value.replace(/[\W]/g,'')"></td>
 		</tr>
-		<tr>
+		<%-- <tr>
 			<td width="260" align="right"><s:text name='vipupuser.jsp.upuser.jsp.-1074067467'/>：</td>
 			<td width="396" align="left"><input type="password" name="secondPassword" size="20"></td>
 		</tr>
-		<tr>
+		 --%>
+		 <tr>
 			<td width="260" align="right"><font color="#FF0000"><s:text name='vipupuser.jsp.upuser.jsp.-1097750138'/>：</font></td>
 			<td width="396" align="left"><input type="password" name="newSecondPassword1" size="20" maxlength="18" onKeyUp="value=value.replace(/[\W]/g,'')"><input type="hidden" name="remark" size="5" value="1" readonly></td>
 		</tr>

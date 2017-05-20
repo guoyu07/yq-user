@@ -97,8 +97,21 @@
             <label class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>：</label>
             <input name="pa3" type="password" />
           </p>
+           <p class="item">
+            <label class="title"><s:text name="viphgyb.jsp.hgyb.jsp.775723385"></s:text>：</label>
+           <span class="text">${gcuser.call}(${gcuser.name})</span>
+          </p>
+		<!--   <p class="item">
+            <label class="title">输入手机号：</label>
+            <input name="inputCall" type="text" />
+          </p> -->
+		  <p class="item">
+            <label class="title"><s:text name="viphgyb.jsp.hgyb.jsp.-1704827075"></s:text>：</label>
+            <input name="ybcodeid" type="text" onkeyup="value=value.replace(/[\W]/g,'')"/>
+			<input class="widget-button-small" name="B2" id="btn" type="button" onclick="checkdate()" value="获取验证码">
+          </p>
           <p class="button-line mt15 tc">
-            <button class="widget-button" type="submit" id="btn" onClick='return confirm("<s:text name='vipuserpay.jsp.userpay.jsp.-1517150275a'/>")'><s:text name='Sell_out'/></button>
+            <button class="widget-button" type="submit" onClick='return confirm("<s:text name='vipuserpay.jsp.userpay.jsp.-1517150275a'/>")'><s:text name='Sell_out'/></button>
           </p>
         </form>
         <p class="widget-tips widget-warning mt15"><s:text name='_please_check_the_following_information'/><a href="login2j?inputUrl=login2j.jsp"><b><s:text name='viewgrxx-edit-userinfo.jsp.grxx-edit-userinfo.jsp.472164400'/></b></a>，<s:text name='Sell_again!_If_you_do_not_seriously_check,_resulting_in_the_payment_is_not_successful,_the_pen_will_be_frozen,_the_application_will_be_charged_20%_yuan_fee_thaw!'/></p>
@@ -140,10 +153,9 @@ function checkdate() {
     return (allValid);
   }
 
-
-  if (Form.txpay.value > ${gcuser.pay}) {
+  /* if (Form.txpay.value > ${gcuser.pay}) {
 	  <c:if test="${transferType==1}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977'/>"); </c:if> <c:if test="${transferType==2}"> alert("<s:text name='vipuserpay.jsp.userpay.jsp.1247340977a'/>"); </c:if>     return false;   
-  }
+  } */
   if (Form.txpay.value < 100) {
     alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1837041227'/>!");
     return false;
@@ -153,21 +165,62 @@ function checkdate() {
     return false;
   }
 
-  $("#btn").attr("disabled", "disabled");
-  var data = $("#Form").serialize();
-  $.post("/sms?op=3", data, function(response) {
-    $("#btn").removeAttr("disabled");
-    if (response.erroCodeNum != 0) {
-      alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886666017'/>");
-      return false;
-    }
-    settime($("#btn"), '#SESSION_LOCALE');
-    alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.1886721436'/>");
-  });
-  return false;
+  /*  if (Form.inputCall.value=="") {  
+	 alert("请填入您的手机号码！");  
+	 Form.inputCall.focus();  
+	 return false;  
+	} */
+   $("#btn").attr("disabled", "disabled");
+	  var data = $("#Form").serialize();
+	  $.post("/sms?op=3", function(response) {
+	    $("#btn").removeAttr("disabled");
+	    if (response.erroCodeNum != 0) {
+	      alert("<s:text name='vipkypwe.jsp.kypwe.jsp.1886666017'/>");
+	      return false;
+	    }
+	    settime($("#btn"), '#SESSION_LOCALE');
+	    alert("<s:text name='vipkypwe.jsp.kypwe.jsp.1886721436'/>");
+	  });
+	  return true;
 }
 
 function checkdate1() {
+	if (Form.txpay.value == 0) {
+	    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-861806777'/>!");
+	    return false;
+	  }
+	  if (!chkinteger(Form.txpay.value)) {
+	    alert('<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.431301541'/>!');
+	    document.Form.txpay.focus;
+	    return false;
+	  }
+
+	  function chkinteger(checkStr) {
+	    var checkOK = "0123456789";
+	    var allValid = true;
+	    for (i = 0; i < checkStr.length; i++) {
+	      ch = checkStr.charAt(i);
+	      if (checkOK.indexOf(ch) == -1) {
+	        allValid = false;
+	        break;
+	      }
+	      if ((ch == '+' || ch == '-') && i > 0) {
+	        allValid = false;
+	        break;
+	      }
+	    }
+	    return (allValid);
+	  }
+
+	  if (Form.txpay.value < 100) {
+	    alert("<s:text name='viewyblc-sales.jsp.yblc-sales.jsp.-1837041227'/>!");
+	    return false;
+	  }
+	  if (Form.pa3.value == "") {
+	    alert("<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-1989247238'/>!");
+	    return false;
+	  }
+
   if (Form.ybcodeid.value == "") {
     alert("<s:text name='resetUserPass.jsp.resetUserPass.jsp.-352812950'/>");
     Form.ybcodeid.focus();
