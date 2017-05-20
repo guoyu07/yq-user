@@ -84,7 +84,7 @@ function checkdate()  {
 	<p>　</td>
   </tr><BR>
   <tr valign="top"> 
-            <form name="Form" id="Form" method="POST" action="adminindex?status=1" onsubmit="return checkdata()">
+            <form name="Form" id="Form" method="POST" action="adminindexmanager?status=1" onsubmit="return checkdata()">
     <td style="font-family: 宋体; font-size: 9pt"> 
       <table width="575" border="0" cellspacing="2" cellpadding="0" background="../images/2.gif" height="142">
         <tr>

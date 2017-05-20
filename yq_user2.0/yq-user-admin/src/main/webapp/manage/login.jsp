@@ -91,7 +91,7 @@
     <DIV id=main>
       <DIV id=right>
         <DIV class=login-frm>
-        <form id="newForm"  method="post" name='newForm' action='houtailogin?status=1'>
+        <form id="newForm"  method="post" name='newForm' action='houtailoginmanager?status=1'>
           <table border="0">
             <tr>
               <td height="25">用户名<br /></td>
