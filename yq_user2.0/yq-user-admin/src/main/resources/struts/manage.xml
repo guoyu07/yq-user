@@ -33,7 +33,7 @@
 			<global-results>
 			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
 			<result name="nologin" type="redirect">
-				/houtailogin
+				/houtailoginmanager
 			</result>
 			<result name="noPermission" type="redirect">
 				/manage/noPermission.jsp
@@ -43,8 +43,8 @@
 	</package>
 
 
-	<package name="houtailogin" extends="noLoginInterceptor" namespace="/">
-		<action name="houtailogin" class="com.yq.admin.manage.action.AdminLoginAction">
+	<package name="houtailoginmanager" extends="noLoginInterceptor" namespace="/">
+		<action name="houtailoginmanager" class="com.yq.admin.manage.action.AdminLoginAction">
 			<result name="success" >/manage/login.jsp</result>
 			<result name="redirect" type="redirect">/manage/manageindex</result>
 		</action>
