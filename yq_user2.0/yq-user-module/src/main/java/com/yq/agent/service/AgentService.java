@@ -1162,20 +1162,26 @@ public class AgentService {
 			throw new ServiceException(17, "扣款账户没有设置支付密码！");
 		}
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String mark=df.format(new Date());
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassword)){
-			Integer times = userPayPassTimes.getIfPresent(payUserName);
-			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" + payUserName);
+			Integer times = userPayPassTimes.getIfPresent(mark+payUserName);
+			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" +payUserName);
 			if (times != null) {
 				if(times>=3){
 					throw new ServiceException(18, "账户已被锁定,请明天再试！");
 				}
-				userPayPassTimes.put(df+payUserName, times + 1);
+				userPayPassTimes.put(mark+payUserName, times.intValue() + 1);
+				LogSystem.info("今天又一次连续支付密码错误，userName=" +payUserName+",times="+times);
 			} else {
-				userPayPassTimes.put(df+payUserName, 1);
-				
+				userPayPassTimes.put(mark+payUserName, 1);
+				LogSystem.info("今天第一次连续支付密码错误，userName=" +payUserName+",times="+times);
 			}
-			Integer times2 = userPayPassTimes.getIfPresent(payUserName);
-			int cishu=3-times2;
+			Integer times2 = userPayPassTimes.getIfPresent(mark+payUserName);
+			LogSystem.info("今天连续支付密码错误，userName=" + mark+payUserName+",times2="+times2);
+			int cishu=3-times2.intValue();
+			if(cishu<=0){
+				cishu=0;
+			}
 			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
 		}else{
 			userPayPassTimes.invalidate(df+payUserName);
