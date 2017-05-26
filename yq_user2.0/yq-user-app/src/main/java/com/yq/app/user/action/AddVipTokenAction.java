@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.module.web.session.Session;
 import com.yq.common.action.ALDAdminActionSupport;
@@ -39,16 +40,27 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 				if(farenUser!=null){
-					if(!farenUser.getVipsq().equals(smsCode)){
+					if(!Strings.isNullOrEmpty(smsCode)){
+						if(!smsCode.equals(farenUser.getVipsq())){
+							super.setErroCodeNum(2001);
+							return "noVipToken";
+						}
+					}else{
 						super.setErroCodeNum(2001);
 						return "noVipToken";
 					}
+					
 				}else{
 					super.setErroCodeNum(2002);
 					return SUCCESS;
 				}
 		}else{
-			if(!smsCode.equals(gcuser.getVipsq())){
+			if(!Strings.isNullOrEmpty(smsCode)){
+				if(!smsCode.equals(farenUser.getVipsq())){
+					super.setErroCodeNum(2001);
+					return "noVipToken";
+				}
+			}else{
 				super.setErroCodeNum(2001);
 				return "noVipToken";
 			}

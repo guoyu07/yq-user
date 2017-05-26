@@ -8,6 +8,7 @@ import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.utils.JedisUtils;
 import com.sr178.module.web.session.Session;
+import com.yq.common.utils.MD5Security;
 import com.yq.common.utils.ParamCheck;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.dao.GcuserDao;

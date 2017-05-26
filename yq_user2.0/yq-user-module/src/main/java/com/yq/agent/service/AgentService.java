@@ -734,6 +734,32 @@ public class AgentService {
 			throw new ServiceException(17, "扣款账户没有设置支付密码！");
 		}
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String mark=df.format(new Date());
+		LogSystem.info("玩家："+fromgcuser.getName()+fromgcuser.getUserid()+"玩家支付密码：" +fromsameUserProperty.getAppPayPassword()+",输入支付密码："+payPassWord);
+		if(!fromsameUserProperty.getAppPayPassword().equals(payPassWord)){
+			Integer times = userPayPassTimes.getIfPresent(mark+fromUserName);
+			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" +fromUserName);
+			if (times != null) {
+				if(times>=3){
+					throw new ServiceException(18, "账户已被锁定,请明天再试！");
+				}
+				userPayPassTimes.put(mark+fromUserName, times.intValue() + 1);
+				LogSystem.info("今天又一次连续支付密码错误，userName=" +fromUserName+",times="+times);
+			} else {
+				userPayPassTimes.put(mark+fromUserName, 1);
+				LogSystem.info("今天第一次连续支付密码错误，userName=" +fromUserName+",times="+times);
+			}
+			Integer times2 = userPayPassTimes.getIfPresent(mark+fromUserName);
+			LogSystem.info("今天连续支付密码错误，userName=" + mark+fromUserName+",times2="+times2);
+			int cishu=3-times2.intValue();
+			if(cishu<=0){
+				cishu=0;
+			}
+			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
+		}else{
+			userPayPassTimes.invalidate(mark+fromUserName);
+		}/*
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassWord)){
 			Integer times = userPayPassTimes.getIfPresent(fromUserName);
 			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" + fromUserName);
@@ -751,7 +777,7 @@ public class AgentService {
 			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
 		}else{
 			userPayPassTimes.invalidate(df+fromUserName);
-		}
+		}*/
 		
 		/*String signStr = appId+fromUserName+toUserName+amount+productOrder+productDesc+param;
 		String mySign = MacShaUtils.doEncryptBase64(signStr, agentApp.getAppKey());
@@ -1184,7 +1210,7 @@ public class AgentService {
 			}
 			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
 		}else{
-			userPayPassTimes.invalidate(df+payUserName);
+			userPayPassTimes.invalidate(mark+payUserName);
 		}
 		
 		//支付指定的yb

@@ -88,7 +88,7 @@
 			<font color="#008000"><b>${cjpay}</b></font><input type="hidden" name="pa1j" size="8" value="${pa1j}"><input type="hidden" name="pa2j" size="8" value="${pa2j}">
 		  </p>
           <p class="widget-notice mt15 ml10">（<s:text name='vipbdreg.jsp.bdreg.jsp.-808057141'/>（<b>${userName}</b>）<c:if test="${cjpay<9000}"><s:text name='yibi'/></c:if><c:if test="${cjpay>=9000}"><s:text name='Order'/></c:if><s:text name='deduction'/>${cjpay}）</p>
-          <c:if test="${cjpay<9000}">
+         <%--  <c:if test="${cjpay<9000}"> --%>
           <p class="item">
             <label class="title"><s:text name='viewyjcx-choose-empty-sure.jsp.yjcx-choose-empty-sure.jsp.-1539312043'/>：</label><span class="text">${call}</span>
           </p>
@@ -97,7 +97,7 @@
             <input type="text" name="ceid" />
             <input class="widget-button-small" id="btn" type="button" onclick="checkdate()" value="<s:text name='resetUserPass.jsp.resetUserPass.jsp.1753968781'/>" name="B2" />
           </p>
-          </c:if>
+         <%--  </c:if> --%>
           <p class="button-line mt15">
 			<input class="widget-button" type="submit" value="<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165'/>" name="B1" onclick="{if(confirm('<s:text name='vipbdreg.jsp.bdreg.jsp.-1719272165a'/>?')){this.style.visibility='hidden';return true;}return false;}">
           </p>

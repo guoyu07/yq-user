@@ -1192,6 +1192,14 @@ public class UserService {
 			
 
 			if(cjpay>=9000){//使用报单币开户
+				if(!Strings.isNullOrEmpty(idCardNum)){
+					if(!idCardNum.equals(operatorUser.getVipsq())){
+						throw new ServiceException(16,"验证码错误，请检查输入是否正确！");
+					}
+				}else{
+					throw new ServiceException(16,"验证码错误，请检查输入是否正确！");
+				}
+				gcuserDao.updateSmsCode(operatorUser.getUsername(), Global.INIT_SMS_CODE);
 				if(!updateSybdb(userName, -cjpay, "给"+bduser+"开户"+cjpay, 0)){
 					throw new ServiceException(6,"报单币余额小于开户金额"+cjpay+"，无法完成开户，请充值后再试！");
 				}
