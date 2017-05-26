@@ -56,7 +56,7 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 				}
 		}else{
 			if(!Strings.isNullOrEmpty(smsCode)){
-				if(!smsCode.equals(farenUser.getVipsq())){
+				if(!smsCode.equals(gcuser.getVipsq())){
 					super.setErroCodeNum(2001);
 					return "noVipToken";
 				}
