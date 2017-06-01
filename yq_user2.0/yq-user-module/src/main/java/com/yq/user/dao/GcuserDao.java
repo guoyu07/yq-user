@@ -1084,8 +1084,8 @@ public class GcuserDao {
 		return this.jdbc.update(sql, parameter);
 	}
 	
-	public int insertIntoChaifenLog(String beishu,Date date){
-		String sql = "insert into gpjy select null,0,0,username,floor(jyg-jyg/"+beishu+"),0,jyg,0,0,null,'拆分"+beishu+"倍',now(),1,null,null,0 from gcuser where regtime>? and jyg>0 and name<>'公司'";
+	public int insertIntoChaifenLog(String beishu,Date date,String d){
+		String sql = "insert into gpjy select null,0,0,username,floor(jyg-jyg/"+beishu+"),0,jyg,0,0,null,'拆分"+beishu+"倍','"+d+"',1,null,null,0 from gcuser where regtime>? and jyg>0 and name<>'公司'";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(date);
 		System.out.println(sql);
