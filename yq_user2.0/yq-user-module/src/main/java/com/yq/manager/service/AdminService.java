@@ -2688,8 +2688,9 @@ public class AdminService {
 	/**
 	 * 积分拆分
 	 */
-	public static final String beishu = "2.3";//拆分倍数
+	public static final String beishu = "2.1";//拆分倍数
 	private final double dijia = 0.78;//底价
+	private final String cfdate = "2017-06-02 9:32:00";
 	
 	public synchronized void JygChaifen(){
 		Fcxt fcxt = fcxtDao.get(10);
@@ -2703,7 +2704,7 @@ public class AdminService {
 		
 		Date d = DateUtils.addDay(fcxt.getJsdate(), 3);
 		int updateNum = gcuserDao.updateJfChaifen(beishu, d);
-		int insertNum = gcuserDao.insertIntoChaifenLog(beishu, d);
+		int insertNum = gcuserDao.insertIntoChaifenLog(beishu, d,cfdate);
 		fcxtDao.updateChaiFen(2, dijia);
 		
 		gcuserDao.updateJygdateAndJygt1(">50000", 0, new Date(), 1);
