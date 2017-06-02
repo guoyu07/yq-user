@@ -2,6 +2,7 @@ package com.yq.app.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.utils.BigDecimalUtil;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
@@ -23,9 +24,11 @@ public class WymcAction extends ALDAdminActionSupport {
 	
 	private int dqpay;
 	
-	private int mc70;
+	private int mc65;
 	
 	private int mc30;
+	
+	private double mc5;
 	
 	private String pa3;
 	
@@ -43,10 +46,11 @@ public class WymcAction extends ALDAdminActionSupport {
 		
 		double dqpay92=(0.9*gpjy.getJypay());
 		dqpay=(int)(dqpay92*1+0.1);
-		double	mc70a=0.7*dqpay;
-		mc70=(int)(mc70a*1+0.1);
+		double	mc65a=0.65*dqpay;
+		mc65=(int)(mc65a*1+0.1);
 		double	mc30a=0.3*dqpay;
-		mc30=(int)(mc30a*1+0.1);	
+		mc30=(int)(mc30a*1+0.1);
+		mc5 = BigDecimalUtil.multiply(0.05, dqpay);
 		Gcuser gcuser = userService.getUserByUserName(super.getUserName());
 		myjyg = gcuser.getJyg();
 		if(myjyg<gpjy.getMysl()){
@@ -76,11 +80,18 @@ public class WymcAction extends ALDAdminActionSupport {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getMc70() {
-		return mc70;
+	public int getMc65() {
+		return mc65;
 	}
-	public void setMc70(int mc70) {
-		this.mc70 = mc70;
+	public void setMc65(int mc65) {
+		this.mc65 = mc65;
+	}
+	
+	public double getMc5() {
+		return mc5;
+	}
+	public void setMc5(double mc5) {
+		this.mc5 = mc5;
 	}
 	public int getMc30() {
 		return mc30;

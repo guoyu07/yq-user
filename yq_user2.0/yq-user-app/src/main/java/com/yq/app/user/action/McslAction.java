@@ -2,6 +2,7 @@ package com.yq.app.user.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
+import com.yq.common.utils.BigDecimalUtil;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
@@ -28,7 +29,8 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 	private int txpay;//卖出数量
 	
 	private int dqpay;
-	private int mc70;
+	private int mc65;
+	private double mc5;
 	private int mc30;
 	
 	
@@ -46,10 +48,11 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 			double dqpay10 = txpay*jygj;
 			double dqpay92=(0.9*dqpay10);
 				   dqpay=(int)(dqpay92*1+0.1);
-			double	mc70a=0.7*dqpay;
-					mc70=(int)(mc70a*1+0.1);
+			double	mc65a=0.65*dqpay;
+					mc65=(int)(mc65a*1+0.1);
 			double	mc30a=0.3*dqpay;
 					mc30=(int)(mc30a*1+0.1);
+			mc5 = BigDecimalUtil.multiply(0.05, dqpay);
 			return "mcsl2";
 		}
 		if(status==2){
@@ -135,15 +138,19 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 	public void setDqpay(int dqpay) {
 		this.dqpay = dqpay;
 	}
-
-	public int getMc70() {
-		return mc70;
+	
+	public int getMc65() {
+		return mc65;
 	}
-
-	public void setMc70(int mc70) {
-		this.mc70 = mc70;
+	public void setMc65(int mc65) {
+		this.mc65 = mc65;
 	}
-
+	public double getMc5() {
+		return mc5;
+	}
+	public void setMc5(double mc5) {
+		this.mc5 = mc5;
+	}
 	public int getMc30() {
 		return mc30;
 	}

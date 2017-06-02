@@ -1409,10 +1409,11 @@ html[xmlns] .clearfix {
 	z-index:10;
 	background:black;
 	opacity:0.2;
+	display:block;
 }
 #passport-login-pop-dialog{
-	width:393px;
-	height:505px;
+	width:450px;
+	height:600px;
 	position:absolute;
 	left:50%;
 	top:50%;
@@ -1451,12 +1452,18 @@ html[xmlns] .clearfix {
 	margin-top:5px;
 	font-family:"微软雅黑";
 	color:black;
+	padding-bottom:10px;
 }
 .dialog-content p{
 	line-height:32px;
-	font-size:27px;
+	font-size:15px;
 	margin-left:12px;
+	margin-right:10px;
 }
 .dialog-content .p-indent{
 	text-indent:2em;
+}
+.p-1{
+	text-align:center;
+	padding: 7px 0 7px 0;
 }

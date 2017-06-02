@@ -24,4 +24,8 @@
     <bean id="sendCallBackScheduler" class="com.yq.user.scheduler.SendChargeMsgScheduler">
           <property name="cronExpression" value="0 0/1 * * * ?"></property>
    </bean>
+    <!-- 每日 5秒执行一次重试发送-->
+    <bean id="appSendCallBackScheduler" class="com.yq.user.scheduler.AppSendCallBackScheduler">
+          <property name="cronExpression" value="0/27 * * * * ?"></property>
+   </bean>
 </beans>

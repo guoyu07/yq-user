@@ -1,26 +1,36 @@
 package com.yq.user.service;
 
 import java.util.Date;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.utils.BigDecimalUtil;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
+import com.yq.common.utils.UrlRequestUtils.Mode;
 import com.yq.manager.service.AdminService;
+import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.bo.Datepay;
 import com.yq.user.bo.Fcxt;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Gpjy;
+import com.yq.user.bo.MoneyPotLog;
 import com.yq.user.constant.GpjyChangeType;
+import com.yq.user.constant.PasswordKey;
 import com.yq.user.constant.YbChangeType;
 import com.yq.user.dao.FcxtDao;
 import com.yq.user.dao.GcuserDao;
 import com.yq.user.dao.GpjyDao;
+import com.yq.user.dao.MoneyPotLogDao;
+import com.yq.user.scheduler.AppSendCallBackScheduler;
+import com.yq.user.utils.EasySecureHttpService.EasySecureHttp;
+import com.yq.user.utils.EasySecureHttpService.ResultObject;
 
 public class ExtendUserService {
 
@@ -35,6 +45,8 @@ public class ExtendUserService {
 	    private GpjyDao gpjyDao;
 	    @Autowired
 	    private FcxtDao fcxtDao;
+	    @Autowired
+	    private MoneyPotLogDao moneyPotLogDao;
 		
 		/**
 		 * 自动积分卖出,正常流程
@@ -51,10 +63,12 @@ public class ExtendUserService {
 			
 			double dqpay92 = (0.9 * gpjy1.getJypay());
 			int dqpay = (int) (dqpay92 * 1 + 0.1);
-			double mc70a = 0.7 * dqpay;
-			int mc70 = (int) (mc70a * 1 + 0.1);
+			double mc65a = 0.65 * dqpay;
+			int mc65 = (int) (mc65a * 1 + 0.1);
 			double mc30a = 0.3 * dqpay;
 			int mc30 = (int) (mc30a * 1 + 0.1);
+			double mc5a = BigDecimalUtil.multiply(0.05, dqpay);
+			
 			LogSystem.info("积分自动卖出扣除开始"+"userName:"+userName+"卖家剩余一币为："+gcuser.getPay()+",卖家剩余积分为："+gcuser.getJyg());
 			//扣除积分
 			if (!useUserItem(userName, "积分", gpjy1.getMysl().intValue())) {
@@ -62,7 +76,7 @@ public class ExtendUserService {
 			}
 
 			//增加一币
-			if(!giveUserItem(userName, "一币", mc70)){
+			if(!giveUserItem(userName, "一币", mc65)){
 				throw new ServiceException(3000, "未知錯誤");
 			};
 			
@@ -77,6 +91,27 @@ public class ExtendUserService {
 			};
 	        Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
 	        
+	        LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+	      //5%给如钱罐
+	        String orderId=System.currentTimeMillis()+userName;
+			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, userName, gcuser.getName(), gcuser.getUserid(), mc5a, 0, new Date(), null, gpjy1.getUsername());
+			int logId = moneyPotLogDao.add(moneyPotLog);
+			if(logId!=0){//TODO 回调APP端
+				TreeMap<String,String> paramMap = new TreeMap<String,String>();
+				paramMap.put("username", gcuser.getUsername());
+				paramMap.put("name", gcuser.getName());
+				paramMap.put("userid", gcuser.getUserid());
+				paramMap.put("amount", mc5a+"");
+				paramMap.put("id", orderId);
+				paramMap.put("appId", this.getConfigPassword(PasswordKey.APPID_CALLBACK));
+				String callBackUrl = this.getConfigPassword(PasswordKey.APP_MONEYPOT_CALLBACK);
+				callBackToServerApp(callBackUrl, paramMap);
+			}else{
+				throw new ServiceException(3000, "未知错误");
+			}
+			
+			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+			
 	        
 			if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl(),gpjy1.getJypay())) {
 				gpjyDao.cleanCache(id);
@@ -107,13 +142,14 @@ public class ExtendUserService {
 
 			Datepay datePay1 = new Datepay();
 			datePay1.setUsername(userName);
-			datePay1.setSyjz(mc70);
+			datePay1.setSyjz(mc65);
 			datePay1.setPay(gcuser.getPay());
 			datePay1.setJydb(gcuser.getJydb());
 			datePay1.setJyjz(mc30);
 			datePay1.setRegid("卖出" + gpjy1.getMysl() + "积分单价" + mydj + "到" + gpjy1.getUsername());
 			datePay1.setAbdate(new Date());
 			datePay1.setOrigintype(YbChangeType.JF_SELL);
+			//datePay1.setMoneypot(mc5a);
 			logService.addDatePay(datePay1);
 			String d = DateUtils.DateToString(gpjy1.getCgdate(), DateStyle.YYYY_MM_DD_HH_MM_SS);
 			String dStr = d==null?"":d;
@@ -153,10 +189,11 @@ public class ExtendUserService {
 			
 			double dqpay92 = (0.9 * needJb);
 			int dqpay = (int) (dqpay92 * 1 + 0.1);
-			double mc70a = 0.7 * dqpay;
-			int mc70 = (int) (mc70a * 1 + 0.1);
+			double mc65a = 0.65 * dqpay;
+			int mc65 = (int) (mc65a * 1 + 0.1);
 			double mc30a = 0.3 * dqpay;
 			int mc30 = (int) (mc30a * 1 + 0.1);
+			double mc5a = BigDecimalUtil.multiply(0.05, dqpay);
 
 			//扣除积分
 			if(!useUserItem(userName, "积分", saleCount)){
@@ -164,7 +201,7 @@ public class ExtendUserService {
 			}
 			
 			//获得一币
-			if(!giveUserItem(userName, "一币", mc70)){
+			if(!giveUserItem(userName, "一币", mc65)){
 				throw new ServiceException(3000,"未知错误！");
 			}
 			
@@ -216,14 +253,37 @@ public class ExtendUserService {
 
 			Datepay datePay1 = new Datepay();
 			datePay1.setUsername(userName);
-			datePay1.setSyjz(mc70);
+			datePay1.setSyjz(mc65);
 			datePay1.setPay(gcuser.getPay());
 			datePay1.setJydb(gcuser.getJydb());
 			datePay1.setJyjz(mc30);
 			datePay1.setRegid("卖出" + saleCount + "积分单价" + mydj + "到" + gpjy1.getUsername());
 			datePay1.setAbdate(new Date());
 			datePay1.setOrigintype(YbChangeType.JF_SELL);
+			//datePay1.setMoneypot(mc5a);
 			logService.addDatePay(datePay1);
+			
+			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+			//5%给如钱罐
+			 String orderId=System.currentTimeMillis()+userName;
+			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, userName, gcuser.getName(), gcuser.getUserid(), mc5a, 0, new Date(), null, gpjy1.getUsername());
+			int logId = moneyPotLogDao.add(moneyPotLog);
+			if(logId!=0){//TODO 回调APP端
+				TreeMap<String,String> paramMap = new TreeMap<String,String>();
+				paramMap.put("username", gcuser.getUsername());
+				paramMap.put("name", gcuser.getName());
+				paramMap.put("userid", gcuser.getUserid());
+				paramMap.put("amount", mc5a+"");
+				paramMap.put("id", orderId);
+				paramMap.put("appId", this.getConfigPassword(PasswordKey.APPID_CALLBACK));
+				String callBackUrl = this.getConfigPassword(PasswordKey.APP_MONEYPOT_CALLBACK);
+				callBackToServerApp(callBackUrl, paramMap);
+			}else{
+				throw new ServiceException(3000, "未知错误");
+			}
+			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+			
+	        
 			
 			Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
 			// 记录日志
@@ -380,25 +440,25 @@ public class ExtendUserService {
 
 			double dqpay92 = (0.9 * gpjy1.getJypay());
 			int dqpay = (int) (dqpay92 * 1 + 0.1);
-			double mc70a = 0.7 * dqpay;
-			int mc70 = (int) (mc70a * 1 + 0.1);
+			double mc65a = 0.65 * dqpay;
+			int mc65 = (int) (mc65a * 1 + 0.1);
 			double mc30a = 0.3 * dqpay;
 			int mc30 = (int) (mc30a * 1 + 0.1);
-
-			if (!giveUserItem(gpjy1.getUsername(),"一币", mc70)){
+			double mc5a = BigDecimalUtil.multiply(0.05, dqpay);
+			
+			if (!giveUserItem(gpjy1.getUsername(),"一币", mc65)){
 				throw new ServiceException(3000, "未知错误");
 			};
 			if(!giveUserItem(gpjy1.getUsername(),"金币", mc30)){
 				throw new ServiceException(3000, "未知错误");
 			};
-			if(!gcuserDao.reduceStopjyg(gpjy1.getUsername())){
-				throw new ServiceException(3000, "未知错误");
-			};
+			
+			
 
 			Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());
 			Datepay datePay2 = new Datepay();
 			datePay2.setUsername(gpjy1.getUsername());
-			datePay2.setSyjz(mc70);
+			datePay2.setSyjz(mc65);
 			datePay2.setPay(gcuser2.getPay());
 			datePay2.setJydb(gcuser2.getJydb());
 			datePay2.setJyjz(mc30);
@@ -407,11 +467,42 @@ public class ExtendUserService {
 			datePay2.setOrigintype(YbChangeType.JF_SELL);
 			logService.addDatePay(datePay2);
 
+			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			//5%给如钱罐
+			String orderId=System.currentTimeMillis()+gpjy1.getUsername();
+			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId,gpjy1.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null, userName);
+			int logId = moneyPotLogDao.add(moneyPotLog);
+			if(logId!=0){//TODO 回调APP端
+				TreeMap<String,String> paramMap = new TreeMap<String,String>();
+				paramMap.put("username", gcuser2.getUsername());
+				paramMap.put("name", gcuser2.getName());
+				paramMap.put("userid", gcuser2.getUserid());
+				paramMap.put("amount", mc5a+"");
+				paramMap.put("id", orderId);
+				paramMap.put("appId", this.getConfigPassword(PasswordKey.APPID_CALLBACK));
+				String callBackUrl = this.getConfigPassword(PasswordKey.APP_MONEYPOT_CALLBACK);
+				callBackToServerApp(callBackUrl, paramMap);
+			}else{
+				throw new ServiceException(3000, "未知错误");
+			}
+
+			
+			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			
+			if(!gcuserDao.reduceStopjyg(gpjy1.getUsername())){
+				throw new ServiceException(3000, "未知错误");
+			};
+			
 			fcxtDao.update(2,gpjy1.getMcsl().intValue());
 			
 			return buycount - gpjy1.getMcsl().intValue();
 			 
 		}
+
+		private String getConfigPassword(String key) {
+			return ConfigLoader.getStringValue(key, "");
+		}
+
 
 		/**
 		 * 改变买入积分 此处需要处理两个行为：1、买入成功后的记录，2、买入后卖出订单的剩余数量作为新增卖出积分的一个订单
@@ -484,12 +575,13 @@ public class ExtendUserService {
 
 			double dqpay92 = (0.9 * needJb);
 			int dqpay = (int) (dqpay92 * 1 + 0.1);
-			double mc70a = 0.7 * dqpay;
-			int mc70 = (int) (mc70a * 1 + 0.1);
+			double mc65a = 0.65 * dqpay;
+			int mc65 = (int) (mc65a * 1 + 0.1);
 			double mc30a = 0.3 * dqpay;
 			int mc30 = (int) (mc30a * 1 + 0.1);
+			double mc5a = BigDecimalUtil.multiply(0.05, dqpay);
 
-			if(!giveUserItem(gpjy1.getUsername(),"一币", mc70)){
+			if(!giveUserItem(gpjy1.getUsername(),"一币", mc65)){
 				throw new ServiceException(3000, "未知错误");
 			}
 			if(!giveUserItem(gpjy1.getUsername(),"金币", mc30)){
@@ -503,15 +595,37 @@ public class ExtendUserService {
 			//记录卖出者日志
 			Datepay datePay2 = new Datepay();
 			datePay2.setUsername(gpjy1.getUsername());
-			datePay2.setSyjz(mc70);
+			datePay2.setSyjz(mc65);
 			datePay2.setPay(gcuser2.getPay());
 			datePay2.setJydb(gcuser2.getJydb());
 			datePay2.setJyjz(mc30);
 			datePay2.setRegid("卖出" + buyCount + "积分单价" + mcdj + "到" + userName);
 			datePay2.setAbdate(new Date());
 			datePay2.setOrigintype(YbChangeType.JF_SELL);
+			//datePay2.setMoneypot(mc5a);
 			logService.addDatePay(datePay2);
 
+			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			//5%给如钱罐
+			String orderId=System.currentTimeMillis()+gpjy1.getUsername();
+			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, gpjy1.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null, userName);
+			int logId = moneyPotLogDao.add(moneyPotLog);
+			if(logId!=0){//TODO 回调APP端
+				TreeMap<String,String> paramMap = new TreeMap<String,String>();
+				paramMap.put("username", gcuser2.getUsername());
+				paramMap.put("name", gcuser2.getName());
+				paramMap.put("userid", gcuser2.getUserid());
+				paramMap.put("amount", mc5a+"");
+				paramMap.put("id", orderId);
+				paramMap.put("appId", this.getConfigPassword(PasswordKey.APPID_CALLBACK));
+				String callBackUrl = this.getConfigPassword(PasswordKey.APP_MONEYPOT_CALLBACK);
+				callBackToServerApp(callBackUrl, paramMap);
+			}else{
+				throw new ServiceException(3000, "未知错误");
+			}
+			
+			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			
 			//增加一条卖出成功的记录（作为卖出数量的）
 			Gpjy gpjy2 = new Gpjy();
 			gpjy2.setUsername(gpjy1.getUsername());
@@ -531,5 +645,52 @@ public class ExtendUserService {
 			return 0;
 			 
 		}
+		
+
+		private static final String SUCCESS_TAG = "SUCCESS";
+		private void callBackToServerApp(String url, TreeMap<String, String> paramMap) {
+			String callBackUrl = url;
+			CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
+				@Override
+				public void afterSuccess() {
+					moneyPotLogDao.updateUser(this.getParamMap().get("id"));
+				}
+				@Override
+				public void afterLoseEffect() {
+					
+				}
+				@Override
+				public void afterFail() {
+					
+				}
+			};
+			try {
+				
+				
+				EasySecureHttp server= new EasySecureHttp(paramMap.get("appId"), "", "", "MD5", this.getConfigPassword(PasswordKey.APP_MONEYPOT_PASS));
+				
+				ResultObject result = server.sendRequest(callBackUrl, paramMap, true);
+				LogSystem.log("开始第三方请求回调："+result);
+				if(result.getCode() < 0){
+					LogSystem.log("第三方请求失败:" + result.getMsg());
+					throw new ServiceException(300, result.getMsg());
+					
+				}
+				String strjson = (String) result.getData();
+				if (SUCCESS_TAG.equals(strjson)) {
+					callbackMsg.afterSuccess();
+					LogSystem.info("成功！");
+				}else{
+					LogSystem.log("第三方回调失败！"+result);
+					//AppSendCallBackScheduler.addMsg(callbackMsg);
+				}
+			} catch (Exception e) {
+				LogSystem.error(e, "第三方回调失败！");
+				//放到队列中进行处理
+				//AppSendCallBackScheduler.addMsg(callbackMsg);
+			}
+			
+		}
+
 
 }

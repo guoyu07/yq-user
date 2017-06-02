@@ -147,30 +147,32 @@
   </div>
   <!-- 首页内容 end -->
 </div>
-<%-- <c:if test="${guanggao==1 && SESSION_LOCALE!='en_US'}">
+<c:if test="${guanggao==1 && SESSION_LOCALE!='en_US'}">
 <div id="mask"></div>
 <div id="passport-login-pop-dialog">
-<div id='tang-title'><span>幸福一百会员中心</span><span id="close"></span>
+<div id='tang-title'><span>幸福100会员中心</span><span id="close"></span>
 	<div class="dialog-content">
-		<p>尊敬的家人您好:</p>
-		<p class="p-indent">随着公司的不断发展，会员数量的不断增加，为了给您提供更加优质、高效的服务,公司决定增加服务器数量;新增访问入口为:vip.ycgje.com;同时vip.zgyce.com都是可登录我公司网站,望家人们相互告知~！</p>
-		<p>这个是最终确认的公告内容···</p>
+		<p class="p-1">幸福一百APP钱罐正式上线及积分卖出规则变更通知</p>
+		<p class="p-indent">“幸福一百APP钱罐”将于2017年06月02日正式上线，从即日起会员中心积分卖出规则变更为：</p>
+		<p>积分卖出总额扣除10%手续费后，余下部分65%进入一币账户（可提现、复利），5%进入钱罐可用于消费（幸福一百APP、实体店、科瞻票务、幸福商城等），30%返回到金币账户（可进行回购积分再次获取差价利润和增值收益）。</p>
+		<p class="p-indent">“钱罐”是用户在使用“幸福一百app”支付中的现金。 “钱罐”中的货币可以用于APP内的各项消费（充值手机话费，购买机票，商城购物等）“钱罐”内的余额可以通过 微信 支付宝 银行卡 一币充值。“幸福一百APP钱罐”将成为您今后消费理财的新助手，欢迎家人使用。</p>
 	</div>
 </div>
 </div>
 </c:if>
 <script>
-	function $$(close){
-		return document.getElementById(close)
-	}
-	$$('close').onclick=function(){
-		$$('mask').style.display="none";
-		$$('passport-login-pop-dialog').style.display="none";
-	}
-</script> --%>
+	    function $$(close){
+			return document.getElementById(close)
+		}
+		$$('close').onclick=function(){
+			$$('mask').style.display="none";
+			$$('passport-login-pop-dialog').style.display="none";
+		}
+	</script>
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/js/member-index.js"></script>
 </body>
 
 </html>
+
