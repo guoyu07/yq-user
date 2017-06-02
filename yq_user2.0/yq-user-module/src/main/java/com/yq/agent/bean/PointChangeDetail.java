@@ -151,7 +151,11 @@ public class PointChangeDetail {
 				}
 				
 				//bean.setSurplusCount(gpjy.getSysl());
-				bean.setPrice(gpjy.getPay());
+				if(gpjy.getPay()!=null){
+					bean.setPrice(gpjy.getPay());
+				}else{
+					bean.setPrice(0);
+				}
 				//bean.setDesc(gpjy.getBz());
 				//bean.setListingDate(gpjy.getAbdate());
 				bean.setTradeDate(gpjy.getCgdate());
