@@ -30,6 +30,7 @@ public class Datepay{
 	private int txbz;
 	private double ration;
 	private int origintype;		//途径
+	//private double moneypot;	//钱罐加钱
 	
 	public void setUsername(String username){
 	this.username=username;
@@ -157,6 +158,12 @@ public class Datepay{
 	public void setOrigintype(int origintype) {
 		this.origintype = origintype;
 	}
-	
+	/*public double getMoneypot() {
+		return moneypot;
+	}
+	public void setMoneypot(double moneypot) {
+		this.moneypot = moneypot;
+	}
+	*/
 }
 

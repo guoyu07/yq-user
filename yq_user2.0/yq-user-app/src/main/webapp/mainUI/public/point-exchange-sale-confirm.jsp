@@ -67,10 +67,13 @@
               <label class="title"><s:text name='Deduct_10%_commission_you_get'/>：</label><span class="text"><b class="widget-warning">${dqpay}</b></span>
             </p>
             <p class="item">
-              <label class="title"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188'/></label><span class="text"><b class="widget-warning">${mc70}</b></span>
+              <label class="title"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188'/></label><span class="text"><b class="widget-warning">${mc65}</b></span>
             </p>
             <p class="item">
               <label class="title"><s:text name='vipmcsl2.jsp.mcsl2.jsp.-817911047'/>：</label><span class="text"><b class="widget-warning">${mc30}</b></span>
+            </p>
+             <p class="item">
+              <label class="title"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188a'/></label><span class="text"><b class="widget-warning">${mc5}</b></span>
             </p>
             <p class="button-line mt15">
               <a href="/mcsl?status=2&txpay=${txpay}&jygj=${jygj}&secondThisState=${secondThisState}&thisState=${thisState}" class="widget-button"><s:text name='vipepmy.jsp.epmy.jsp.941836283'/></a>

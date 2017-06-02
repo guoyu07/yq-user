@@ -3811,7 +3811,6 @@ public class AdminService {
 		gcuserDao.reduceStopjyg(gpjy1.getUsername());
 		
 		
-		
 		String mcdj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
 
 		Gcuser gcuser2 = gcuserDao.getUser(gpjy1.getUsername());

@@ -4,7 +4,7 @@
 <c:if test="${erroCodeNum==2}"><script language=javascript>alert('<s:text name='vipdiyjygj.jsp.diyjygj.jsp.-791568500'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==3}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.-949213936'/>！');history.go(-1);</script></c:if>
 <c:if test="${erroCodeNum==4}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.2022589602'/>！');history.go(-1);</script></c:if>
-
+<c:if test="${erroCodeNum==2000}"><script language=javascript>alert('<s:text name='vipwymc.jsp.wymc.jsp.1671642723'/>！');location.replace('/gpjysc?secondThisState=248&thisState=244');</script></c:if>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -75,11 +75,15 @@
           </p>
           <p class="item">
             <lable class="title"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188'/></lable>
-            <span class="text widget-warning">${mc70}</span><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>
+            <span class="text widget-warning">${mc65}</span><s:text name='viewzhgl-tmzhgl.jsp.zhgl-tmzhgl.jsp.643073'/>
           </p>
           <p class="item">
             <lable class="title"><s:text name='vipmcsl2.jsp.mcsl2.jsp.-817911047'/>：</lable>
             <span class="text widget-warning">${mc30}</span><s:text name='Gold'/>
+          </p>
+            <p class="item">
+            <lable class="title"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188a'/></lable>
+            <span class="text widget-warning">${mc5}</span>
           </p>
           <p class="item">
             <lable class="title"><s:text name='reg.jsp.reg.jsp.630954966'/>:</lable>
