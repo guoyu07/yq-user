@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -29,11 +30,13 @@ import com.sr178.game.framework.log.LogSystem;
 import com.sr178.module.web.session.Session;
 import com.yq.agent.bean.PointSplitBeforPrice;
 import com.yq.agent.dao.PointSplitBeforPriceDao;
+import com.yq.common.utils.BigDecimalUtil;
 import com.yq.common.utils.DateStyle;
 import com.yq.common.utils.DateUtils;
 import com.yq.common.utils.FileCreatUtil;
 import com.yq.common.utils.Global;
 import com.yq.common.utils.MD5Security;
+import com.yq.common.utils.UrlRequestUtils.Mode;
 import com.yq.cservice.bean.SqDayAddBean;
 import com.yq.manage.bean.AdminOperateLog;
 import com.yq.manage.bean.ManageUser;
@@ -61,6 +64,7 @@ import com.yq.manager.dao.PointsChangeLogDao;
 import com.yq.manager.dao.SgtjDao;
 import com.yq.manager.dao.UserVipLogDao;
 import com.yq.manager.dao.Zq2016statDao;
+import com.yq.user.bean.CallBackMsgBean;
 import com.yq.user.bo.AbsModifyUserLog;
 import com.yq.user.bo.Addsheng;
 import com.yq.user.bo.Bdbdate;
@@ -77,6 +81,7 @@ import com.yq.user.bo.GcuserForExcel;
 import com.yq.user.bo.Gpjy;
 import com.yq.user.bo.InterRegionCode;
 import com.yq.user.bo.ModifyUserLog;
+import com.yq.user.bo.MoneyPotLog;
 import com.yq.user.bo.Mtfhtj;
 import com.yq.user.bo.SameUserProperty;
 import com.yq.user.bo.Sgtj;
@@ -108,6 +113,7 @@ import com.yq.user.dao.GpjyDao;
 import com.yq.user.dao.InterRegionCodeDao;
 import com.yq.user.dao.JfcpDao;
 import com.yq.user.dao.ModifyUserLogDao;
+import com.yq.user.dao.MoneyPotLogDao;
 import com.yq.user.dao.SameUserPropertyDao;
 import com.yq.user.dao.SgxtDao;
 import com.yq.user.dao.SysBiLogDao;
@@ -121,11 +127,14 @@ import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
+import com.yq.user.scheduler.AppSendCallBackScheduler;
 import com.yq.user.service.LogService;
 import com.yq.user.service.UserService;
 import com.yq.user.utils.Ref;
 import com.yq.user.utils.StringCheck;
 import com.yq.user.utils._99douInterface;
+import com.yq.user.utils.EasySecureHttpService.EasySecureHttp;
+import com.yq.user.utils.EasySecureHttpService.ResultObject;
 
 public class AdminService {
 	@Autowired
@@ -208,6 +217,9 @@ public class AdminService {
 	private SameUserPropertyDao sameUserPropertyDao;
 	@Autowired
 	private PointSplitBeforPriceDao pointSplitBeforPriceDao;
+	@Autowired
+	private MoneyPotLogDao moneyPotLogDao;
+	
 	
   	private Cache<String,Session> adminUserMap = CacheBuilder.newBuilder().expireAfterAccess(600, TimeUnit.SECONDS).maximumSize(2000).build();
   	private Cache<String,String> userNameSessionMap = CacheBuilder.newBuilder().expireAfterAccess(600, TimeUnit.SECONDS).maximumSize(2000).build();
@@ -3785,17 +3797,18 @@ public class AdminService {
 
 		double dqpay92 = (0.9 * gpjy1.getJypay());
 		int dqpay = (int) (dqpay92 * 1 + 0.1);
-		double mc70a = 0.7 * dqpay;
-		int mc70 = (int) (mc70a * 1 + 0.1);
+		double mc65a = 0.65 * dqpay;
+		int mc65 = (int) (mc65a * 1 + 0.1);
 		double mc30a = 0.3 * dqpay;
 		int mc30 = (int) (mc30a * 1 + 0.1);
-
+		double mc5a = BigDecimalUtil.multiply(0.05, dqpay);
 		//给卖出玩家一币
-		gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc70);
+		gcuserDao.addWhenOtherPersionBuyJbCard(gpjy1.getUsername(), mc65);
 		//给卖出玩家金币
 		gcuserDao.addOnlyJB(gpjy1.getUsername(), mc30);
 
 		gcuserDao.reduceStopjyg(gpjy1.getUsername());
+		
 		
 		
 		String mcdj = gpjy1.getPay() < 1 ? "0" + gpjy1.getPay() : "" + gpjy1.getPay();
@@ -3804,7 +3817,7 @@ public class AdminService {
 		//记录一币和金币日志
 		Datepay datePay = new Datepay();
 		datePay.setUsername(gpjy1.getUsername());
-		datePay.setSyjz(mc70);
+		datePay.setSyjz(mc65);
 		datePay.setPay(gcuser2.getPay());
 		datePay.setJydb(gcuser2.getJydb());
 		datePay.setJyjz(mc30);
@@ -3813,6 +3826,30 @@ public class AdminService {
 		datePay.setOrigintype(YbChangeType.JF_SELL);
 		logService.addDatePay(datePay);
 
+		LogSystem.info("系统积分买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+		//5%给如钱罐
+		String orderId=System.currentTimeMillis()+gcuser2.getUsername();
+		MoneyPotLog moneyPotLog = new MoneyPotLog(orderId,gcuser2.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null,dfuser);
+		int logId = moneyPotLogDao.add(moneyPotLog);
+		if(logId!=0){//TODO 回调APP端
+			TreeMap<String,String> paramMap = new TreeMap<String,String>();
+			paramMap.put("username", gcuser2.getUsername());
+			paramMap.put("name", gcuser2.getName());
+			paramMap.put("userid", gcuser2.getUserid());
+			paramMap.put("amount", mc5a+"");
+			paramMap.put("id", orderId);
+			paramMap.put("appId", this.getConfigPassword(PasswordKey.APPID_CALLBACK));
+			String callBackUrl = this.getConfigPassword(PasswordKey.APP_MONEYPOT_CALLBACK);
+			callBackToServerApp(callBackUrl, paramMap);
+		}else{
+			throw new ServiceException(3000, "未知错误");
+		}
+				
+		
+		LogSystem.info("系统积分买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+		
+		
+		
 		//删除索引
 		gpjyDao.deleteIndex(gpjy1.getId());
 		
@@ -3821,6 +3858,51 @@ public class AdminService {
 		
 	}
 	
+	private static final String SUCCESS_TAG = "SUCCESS";
+	private void callBackToServerApp(String url, TreeMap<String, String> paramMap) {
+		String callBackUrl = url;
+		CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
+			@Override
+			public void afterSuccess() {
+				moneyPotLogDao.updateUser(this.getParamMap().get("id"));
+			}
+			@Override
+			public void afterLoseEffect() {
+				
+			}
+			@Override
+			public void afterFail() {
+				
+			}
+		};
+		try {
+			
+			
+			EasySecureHttp server= new EasySecureHttp(paramMap.get("appId"), "", "", "MD5", this.getConfigPassword(PasswordKey.APP_MONEYPOT_PASS));
+			
+			ResultObject result = server.sendRequest(callBackUrl, paramMap, true);
+			LogSystem.log("开始第三方请求回调："+result);
+			if(result.getCode() < 0){
+				LogSystem.log("第三方请求失败:" + result.getMsg());
+				throw new ServiceException(300, result.getMsg());
+				
+			}
+			String strjson = (String) result.getData();
+			if (SUCCESS_TAG.equals(strjson)) {
+				callbackMsg.afterSuccess();
+				LogSystem.info("成功！username:"+paramMap.get("username")+",orderId:"+paramMap.get("id"));
+			}else{
+				LogSystem.log("第一次请求失败:" + result);
+				//AppSendCallBackScheduler.addMsg(callbackMsg);
+			}
+		} catch (Exception e) {
+			LogSystem.error(e, "第三方回调失败！");
+			//放到队列中进行处理
+			//AppSendCallBackScheduler.addMsg(callbackMsg);
+		}
+		
+	}
+
 	/**
 	 * 得到分页记录列表
 	 * @param user
@@ -4029,5 +4111,61 @@ public class AdminService {
 			throw new ServiceException(10, "玩家不存在");
 		}
 		return gcuserDao.getUserPage(gcuser.getName(),gcuser.getUserid(), pageIndex, pageSize);
+	}
+	
+	//TODO app钱罐回调工作
+	public void appbackjob(){
+			IPage<MoneyPotLog> page= moneyPotLogDao.getPageList(0, 100);
+	    	if(page!=null){
+	    		Collection<MoneyPotLog> tempList = page.getData();
+	    		if(tempList!=null&&tempList.size()>0){
+	    			LogSystem.info("处理第一页，有数量 ="+tempList.size());
+	    			long sigleStartTime = System.currentTimeMillis();
+	    			for (MoneyPotLog moneyPotLog : tempList) {
+	    				TreeMap<String,String> paramMap = new TreeMap<String,String>();
+	    				paramMap.put("username", moneyPotLog.getUsername());
+	    				paramMap.put("name", moneyPotLog.getName());
+	    				paramMap.put("userid", moneyPotLog.getUserId());
+	    				paramMap.put("amount", moneyPotLog.getMoneyCount()+"");
+	    				paramMap.put("id", moneyPotLog.getMoneypotorderid());
+	    				paramMap.put("appId", this.getConfigPassword(PasswordKey.APPID_CALLBACK));
+	    				String callBackUrl = this.getConfigPassword(PasswordKey.APP_MONEYPOT_CALLBACK);
+		    			CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
+		    				@Override
+		    				public void afterSuccess() {
+		    					moneyPotLogDao.updateUser(this.getParamMap().get("id"));
+		    				}
+		    				@Override
+		    				public void afterLoseEffect() {
+		    					
+		    				}
+		    				@Override
+		    				public void afterFail() {
+		    					
+		    				}
+		    			};
+		    			EasySecureHttp server= new EasySecureHttp(paramMap.get("appId"), "", "", "MD5", this.getConfigPassword(PasswordKey.APP_MONEYPOT_PASS));
+		    			ResultObject result;
+						try {
+							result = server.sendRequest(callBackUrl, paramMap, true);
+			    			LogSystem.log("后台开始第三方请求回调："+result+",orderid:"+paramMap.get("appId"));
+			    			if(result.getCode() < 0){
+			    				LogSystem.log("后台第三方请求失败:" + result.getMsg()+",orderid:"+paramMap.get("appId"));
+			    				throw new ServiceException(300, result.getMsg());
+			    				
+			    			}
+			    			String strjson = (String) result.getData();
+			    			if (SUCCESS_TAG.equals(strjson)) {
+			    				callbackMsg.afterSuccess();
+			    				LogSystem.info("后台开始第三方请求回调成功！orderid:"+paramMap.get("appId"));
+			    			}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+	    			long sigleEndTime = System.currentTimeMillis();
+	    			LogSystem.info("处理完毕，有数量 ="+tempList.size()+",时长="+(sigleEndTime-sigleStartTime)+"毫秒");
+	    		}
+	    	}
 	}
 }

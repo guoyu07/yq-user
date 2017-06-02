@@ -82,6 +82,8 @@
        <bean id="logService" class="com.yq.user.service.LogService"></bean>
        <!-- 系统币日志表 -->
        <bean id="sysBiLogDao" class="com.yq.user.dao.SysBiLogDao"></bean>
+        <!--钱罐日志 -->
+       <bean id="moneyPotLogDao" class="com.yq.user.dao.MoneyPotLogDao"></bean>
        
       
           

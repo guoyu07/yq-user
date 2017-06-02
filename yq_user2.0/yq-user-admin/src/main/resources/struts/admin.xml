@@ -46,7 +46,7 @@
 		
 		<action name="logout001" class="com.yq.admin.manager.action.LogoutAction">
 		    <result name="success" type="redirect">
-		        /adminindexmanager
+		        /adminindex
 		    </result>
 		</action>
 		
@@ -800,9 +800,15 @@
 	<!-- 一个包可以就是一个模块 -->
 	<package name="adminLogin" extends="noLoginInterceptor" namespace="/">
 		<!-- 一个包下可以放这个模块下的所有action -->
-		<action name="adminindexmanager" class="com.yq.admin.manager.action.AdminLoginAction">
+		<action name="adminindex" class="com.yq.admin.manager.action.AdminLoginAction">
 			<result name="success" >/admin/default.jsp</result>
 			<result name="redirect" type="redirect">/admin/adminmanager</result>
+		</action>
+		
+		<action name="adminindexlogin" class="com.yq.admin.manager.action.RedAdminAction">
+			<result name="success" type="json">
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
 		</action>
 		
 		<action name="allp" class="com.yq.admin.manager.action.AllPerformance">
@@ -864,7 +870,7 @@
 		<global-results>
 			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
 			<result name="nologin" type="redirect">
-				/adminindexmanager
+				/adminindex
 			</result>
 			<result name="noPermission" type="redirect">
 				/manage/noPermission.jsp
