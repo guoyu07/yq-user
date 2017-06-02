@@ -736,13 +736,15 @@ public class AgentService {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String mark=df.format(new Date());
 		LogSystem.info("玩家："+fromgcuser.getName()+fromgcuser.getUserid()+"玩家支付密码：" +fromsameUserProperty.getAppPayPassword()+",输入支付密码："+payPassWord);
+		Integer times = userPayPassTimes.getIfPresent(mark+fromUserName);
+		if (times != null) {
+			if(times>=3){
+				throw new ServiceException(18, "账户已被锁定,请明天再试！");
+			}
+		}
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassWord)){
-			Integer times = userPayPassTimes.getIfPresent(mark+fromUserName);
 			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" +fromUserName);
 			if (times != null) {
-				if(times>=3){
-					throw new ServiceException(18, "账户已被锁定,请明天再试！");
-				}
 				userPayPassTimes.put(mark+fromUserName, times.intValue() + 1);
 				LogSystem.info("今天又一次连续支付密码错误，userName=" +fromUserName+",times="+times);
 			} else {
@@ -1189,13 +1191,15 @@ public class AgentService {
 		}
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String mark=df.format(new Date());
+		Integer times = userPayPassTimes.getIfPresent(mark+payUserName);
+		if (times != null) {
+			if(times>=3){
+				throw new ServiceException(18, "账户已被锁定,请明天再试！");
+			}
+		}
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassword)){
-			Integer times = userPayPassTimes.getIfPresent(mark+payUserName);
 			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" +payUserName);
 			if (times != null) {
-				if(times>=3){
-					throw new ServiceException(18, "账户已被锁定,请明天再试！");
-				}
 				userPayPassTimes.put(mark+payUserName, times.intValue() + 1);
 				LogSystem.info("今天又一次连续支付密码错误，userName=" +payUserName+",times="+times);
 			} else {
