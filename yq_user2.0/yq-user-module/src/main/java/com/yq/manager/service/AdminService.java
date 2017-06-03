@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
@@ -4113,6 +4114,9 @@ public class AdminService {
 		return gcuserDao.getUserPage(gcuser.getName(),gcuser.getUserid(), pageIndex, pageSize);
 	}
 	
+
+	@Autowired
+	private ThreadPoolTaskExecutor taskExecuter;
 	//TODO app钱罐回调工作
 	public void appbackjob(){
 			IPage<MoneyPotLog> page= moneyPotLogDao.getPageList(0, 100);
@@ -4121,7 +4125,7 @@ public class AdminService {
 	    		if(tempList!=null&&tempList.size()>0){
 	    			LogSystem.info("处理第一页，有数量 ="+tempList.size());
 	    			long sigleStartTime = System.currentTimeMillis();
-	    			for (MoneyPotLog moneyPotLog : tempList) {
+	    			for (final MoneyPotLog moneyPotLog : tempList) {
 	    				TreeMap<String,String> paramMap = new TreeMap<String,String>();
 	    				paramMap.put("username", moneyPotLog.getUsername());
 	    				paramMap.put("name", moneyPotLog.getName());
@@ -4162,10 +4166,102 @@ public class AdminService {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						
+						/****************************************************线程池执行钱罐回调start**********************************************************/
+    					
+		    			taskExecuter.execute(new Runnable() {
+		    				@Override
+		    				public void run() {
+		    					/*if(!callbackmoneypot(moneyPotLog)){
+		    						//重试一次
+		    						if(!callRemoteCharge(call,amount,ip,userName)){
+		    							//再重试一次
+		    							if(!callRemoteCharge(call,amount,ip,userName)){
+		    								//再重试一次
+		    								LogSystem.warn("用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】,充值话费失败！");
+		    							}
+		    						}
+		    					}*/
+		    				}
+
+		    			});
+		    		/****************************************************线程池执行钱罐回调end**********************************************************/
+		    			
+		    			
+		    		
 					}
 	    			long sigleEndTime = System.currentTimeMillis();
 	    			LogSystem.info("处理完毕，有数量 ="+tempList.size()+",时长="+(sigleEndTime-sigleStartTime)+"毫秒");
+	    		
 	    		}
 	    	}
 	}
+	
+	/**
+	 * 取消出售积分
+	 * @param userName
+	 * @param orderId
+	 * @param pa3
+	 */
+	@Transactional
+	public void cancelSale(String userName,int orderId,String pa3){
+		if(AdminService.isClose){
+			throw new ServiceException(1860,"系统已关闭！请稍后再操作！");
+		}
+		Gcuser gcuser = gcuserDao.getUser(userName);
+		if(gcuser==null){
+			throw new ServiceException(1,"玩家不存在！");
+		}
+		
+		Gpjy gpjy1 = gpjyDao.getById(orderId);
+		
+		if(!gpjy1.getUsername().equals(userName)){
+			throw new ServiceException(3,"操作玩家不同！");
+		}
+		
+		double mcsl=gpjy1.getMcsl();
+		
+		if(gpjy1.getNewjy()==3){
+			throw new ServiceException(3000,"非法操作");
+		}
+		
+		if(!gcuserDao.updateJyg(userName, -(int)mcsl)){
+			throw new ServiceException(3000,"更新积分失败");
+		}
+		
+		if(!gcuserDao.resetStopjyg(userName)){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		if(!gpjyDao.updateJy(1, orderId)){
+			throw new ServiceException(2,"该积分交易进行中或已经由它人交易成功了，不能撒消，请选择其它交易！");
+		}
+		
+		if(!gpjyDao.updateBz(orderId, "已撒单")){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		if(!gpjyDao.updateCgdate(orderId)){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		if(!gpjyDao.updateDqdate(orderId)){
+			throw new ServiceException(3000,"更新失败");
+		}
+		
+		gpjyDao.deleteIndex(orderId);
+		
+		gcuser = gcuserDao.getUser(userName);
+		
+		Gpjy gpjy = new Gpjy();
+		gpjy.setUsername(userName);
+		gpjy.setMysl(mcsl);
+		gpjy.setSysl(Double.valueOf(gcuser.getJyg()));
+		gpjy.setBz("撒单成功");
+		gpjy.setCgdate(new Date());
+		gpjy.setJy(1);
+		gpjyDao.add(gpjy);
+	}
+	
+	
 }

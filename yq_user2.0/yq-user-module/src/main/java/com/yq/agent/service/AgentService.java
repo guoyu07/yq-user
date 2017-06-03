@@ -755,7 +755,7 @@ public class AgentService {
 			LogSystem.info("今天连续支付密码错误，userName=" + mark+fromUserName+",times2="+times2);
 			int cishu=3-times2.intValue();
 			if(cishu<=0){
-				cishu=0;
+				throw new ServiceException(18, "账户已被锁定,请明天再试！");
 			}
 			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
 		}else{
@@ -1210,7 +1210,7 @@ public class AgentService {
 			LogSystem.info("今天连续支付密码错误，userName=" + mark+payUserName+",times2="+times2);
 			int cishu=3-times2.intValue();
 			if(cishu<=0){
-				cishu=0;
+				throw new ServiceException(18, "账户已被锁定,请明天再试！");
 			}
 			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
 		}else{

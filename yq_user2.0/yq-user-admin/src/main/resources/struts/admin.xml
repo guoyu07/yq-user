@@ -155,6 +155,21 @@
 		   <result name="success">
 		        searchresult.jsp
 		    </result>
+		</action>
+		
+		<action name="searchuserpoint" class="com.yq.admin.manager.action.CancelUserPointSaleAction">
+		    <result name="input">
+		        searchuserpoint.jsp
+		    </result>
+		   <result name="success">
+		        searchuserpointresult.jsp
+		    </result>
+		</action>	
+		
+		<action name="canclePointSale" class="com.yq.admin.manager.action.CancelUserPointSaleAction" method="canclePointSale">
+		   <result name="success">
+		        searchuserpointresult.jsp
+		    </result>
 		</action>	
 		
 		<action name="searchuseragent" class="com.yq.admin.manager.action.UserAgentAction">

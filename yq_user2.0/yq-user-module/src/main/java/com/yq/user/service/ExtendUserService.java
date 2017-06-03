@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -646,49 +647,61 @@ public class ExtendUserService {
 			 
 		}
 		
-
+		@Autowired
+		private ThreadPoolTaskExecutor taskExecuter;
 		private static final String SUCCESS_TAG = "SUCCESS";
-		private void callBackToServerApp(String url, TreeMap<String, String> paramMap) {
-			String callBackUrl = url;
-			CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
+		private void callBackToServerApp(final String callBackUrl, final TreeMap<String, String> paramMap) {
+
+			/****************************************************线程池执行钱罐回调start**********************************************************/
+			taskExecuter.execute(new Runnable() {
 				@Override
-				public void afterSuccess() {
-					moneyPotLogDao.updateUser(this.getParamMap().get("id"));
-				}
-				@Override
-				public void afterLoseEffect() {
+				public void run() {
+					LogSystem.log("第三方线程请求:" + paramMap.get("id"));
+					CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
+						@Override
+						public void afterSuccess() {
+							moneyPotLogDao.updateUser(this.getParamMap().get("id"));
+							LogSystem.log("更新成功:" + this.getParamMap().get("id"));
+						}
+						@Override
+						public void afterLoseEffect() {
+							
+						}
+						@Override
+						public void afterFail() {
+							
+						}
+					};
+					try {
+						
+						EasySecureHttp server= new EasySecureHttp(paramMap.get("appId"), "", "", "MD5", getConfigPassword(PasswordKey.APP_MONEYPOT_PASS));
+						
+						ResultObject result = server.sendRequest(callBackUrl, paramMap, true);
+						LogSystem.log("开始第三方请求回调："+result);
+						if(result.getCode() < 0){
+							LogSystem.log("第三方请求失败:" + result.getMsg());
+							throw new ServiceException(300, result.getMsg());
+							
+						}
+						String strjson = (String) result.getData();
+						if (SUCCESS_TAG.equals(strjson)) {
+							callbackMsg.afterSuccess();
+							LogSystem.info("成功！");
+						}else{
+							LogSystem.log("第一次请求失败:" + result);
+							//AppSendCallBackScheduler.addMsg(callbackMsg);
+						}
+					} catch (Exception e) {
+						LogSystem.error(e, "第三方回调失败！");
+						//放到队列中进行处理
+						//AppSendCallBackScheduler.addMsg(callbackMsg);
+					}
 					
 				}
-				@Override
-				public void afterFail() {
-					
-				}
-			};
-			try {
-				
-				
-				EasySecureHttp server= new EasySecureHttp(paramMap.get("appId"), "", "", "MD5", this.getConfigPassword(PasswordKey.APP_MONEYPOT_PASS));
-				
-				ResultObject result = server.sendRequest(callBackUrl, paramMap, true);
-				LogSystem.log("开始第三方请求回调："+result);
-				if(result.getCode() < 0){
-					LogSystem.log("第三方请求失败:" + result.getMsg());
-					throw new ServiceException(300, result.getMsg());
-					
-				}
-				String strjson = (String) result.getData();
-				if (SUCCESS_TAG.equals(strjson)) {
-					callbackMsg.afterSuccess();
-					LogSystem.info("成功！");
-				}else{
-					LogSystem.log("第三方回调失败！"+result);
-					//AppSendCallBackScheduler.addMsg(callbackMsg);
-				}
-			} catch (Exception e) {
-				LogSystem.error(e, "第三方回调失败！");
-				//放到队列中进行处理
-				//AppSendCallBackScheduler.addMsg(callbackMsg);
-			}
+
+			});
+		/****************************************************线程池执行钱罐回调end**********************************************************/
+			
 			
 		}
 
