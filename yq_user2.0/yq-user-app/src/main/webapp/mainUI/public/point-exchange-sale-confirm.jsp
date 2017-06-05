@@ -76,7 +76,7 @@
               <label class="title"><s:text name='vipwymc.jsp.wymc.jsp.-1140375188a'/></label><span class="text"><b class="widget-warning">${mc5}</b></span>
             </p>
             <p class="button-line mt15">
-              <a href="/mcsl?status=2&txpay=${txpay}&jygj=${jygj}&secondThisState=${secondThisState}&thisState=${thisState}" class="widget-button"><s:text name='vipepmy.jsp.epmy.jsp.941836283'/></a>
+              <a href="/mcsl?status=2&txpay=${txpay}&jygj=${jygj}&secondThisState=${secondThisState}&thisState=${thisState}&token=${token}" class="widget-button"><s:text name='vipepmy.jsp.epmy.jsp.941836283'/></a>
             </p>
           </form>
           <p class="widget-warning mt15"><s:text name='vipmcsl2.jsp.mcsl2.jsp.21752002'/>！</p>

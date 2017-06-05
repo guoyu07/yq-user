@@ -1,5 +1,9 @@
 package com.yq.app.user.action;
 
+import java.util.Map;
+
+import com.google.common.base.Strings;
+import com.opensymphony.xwork2.ActionContext;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.common.utils.BigDecimalUtil;
@@ -33,7 +37,7 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 	private double mc5;
 	private int mc30;
 	
-	
+	private String token;
 	
 	public String execute(){
 		UserService userService  = ServiceCacheFactory.getServiceCache().getService(UserService.class);
@@ -53,11 +57,22 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 			double	mc30a=0.3*dqpay;
 					mc30=(int)(mc30a*1+0.1);
 			mc5 = BigDecimalUtil.multiply(0.05, dqpay);
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			session.put("token", System.currentTimeMillis());
 			return "mcsl2";
 		}
 		if(status==2){
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			if(session.get("token")==null || Strings.isNullOrEmpty(token)){
+				super.setErroCodeNum(2222);
+				return SUCCESS;
+			}
+			if(token.equals(session.get("token"))){
+				super.setErroCodeNum(2222);
+				return SUCCESS;
+			}
 			userService.saleJf(super.getUserName(), jygj, txpay, "-1");
-			
+			session.remove("token");
 			super.setErroCodeNum(2000);
 			return "mcsl2";
 		}
@@ -158,5 +173,13 @@ public class McslAction extends ALDAdminPageActionSupport<Gpjy> {
 	public void setMc30(int mc30) {
 		this.mc30 = mc30;
 	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 
+	
+	
 }

@@ -11,6 +11,8 @@
 
 
 <c:if test="${erroCodeNum==11}"><script language=javascript>alert('<s:text name='viewjflc-jfmc.jsp.jflc-jfmc.jsp.1997417452'/>!');history.go(-1);</script></c:if>
+<c:if test="${erroCodeNum==2222}"><script language=javascript>alert('<s:text name='Please_do_not_submit_repeat_order'/>!');history.go(-1);</script></c:if>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 
