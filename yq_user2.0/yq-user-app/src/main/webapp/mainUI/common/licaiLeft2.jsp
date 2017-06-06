@@ -35,8 +35,8 @@ if(fcxt!=null){
             <li><a href="/datepay?lb=111&secondThisState=249&thisState=244"><s:text name='viewshop.html.shop.html.1958259639'/> <em><%=gcuserJflc.getMcpay()%></em></a></li>
              --%>
             <li><font color="red"><s:text name='moneypot'/></font><em>
-            <%if(moneypot==null) {%>
-            	暂时无数据
+            <%if(moneypot.equals("FAIL")) {%>
+            	获取数据失败
             <%}else{%>
             <%=moneypot%><%} %></em>
             <li><s:text name='viewshop.html.shop.html.-2060498186'/> <em><%=gcuserJflc.getJbpay()%></em></li>
