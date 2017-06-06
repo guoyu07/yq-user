@@ -482,7 +482,8 @@ public class UserService {
 		if(StringCheck.checkUnlawful(gguser, upvip, ggname, gguserid, ggpa1, ggpa3, ggbank, ggcard, ggcall, ggqq, provinceName, cityName, areaName, countryCode)){
 			return 777;//"含非法字符！"
 		}
-		gguser = gguser.trim();
+		//gguser = gguser.trim();
+		gguser = gguser.replaceAll(" ", "");//用户名不能含有空格
 		ggname = ggname.trim();
 		gguserid = gguserid.trim();
 		if(!Strings.isNullOrEmpty(upvip)){
@@ -590,7 +591,7 @@ public class UserService {
 	 * @param oldUserName
 	 */
 	public void regTheSameUser(String newUserName,String oldUserName){
-		newUserName = newUserName.trim();
+		newUserName = newUserName.replaceAll(" ", "");
 		if(gcuserDao.getUser(newUserName)!=null){
 			throw new ServiceException(1, "此用户名已有人使用！请更换！");
 		}
