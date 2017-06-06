@@ -49,6 +49,12 @@ public class UrlRequestUtils {
 		public final static String GET = "GET";
 	};
 
+	/**
+	 * @param url
+	 * @param paraMap
+	 * @param mode
+	 * @return
+	 */
 	public static String execute(String url, Map<String, String> paraMap, String mode) {
 		// 请求者
 		HttpUriRequest request = null;

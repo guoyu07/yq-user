@@ -1,5 +1,7 @@
 package com.yq.user.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -5975,7 +5977,13 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	
 	
 	public String getMoneyPot(String username){
-		return UrlRequestUtils.execute(this.getConfigPassword(PasswordKey.MONEYPOT_ADRESS)+"?username="+username, null, Mode.GET);
+		try {
+			username = URLEncoder.encode(username, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String result = UrlRequestUtils.execute(this.getConfigPassword(PasswordKey.MONEYPOT_ADRESS)+"?username="+username, null, Mode.GET);
+		return result;
 	}
 	
 }
