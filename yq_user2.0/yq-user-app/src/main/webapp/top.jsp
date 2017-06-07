@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 		<div class="d-header">
-				<p class="dh-logo"><img src="/images/dlogo.jpg" title="<s:text name='reg1.jsp.reg1.jsp.624662580'/>" /></p>
+				<p class="dh-logo"><%-- <img src="/images/dlogo.jpg" title="<s:text name='reg1.jsp.reg1.jsp.624662580'/>" /> --%></p>
 				<p class="dh-title"><s:text name='top.jsp.top.jsp.-1925633782'/></p>
 				<p class="dh-link"><a href="http://www.zgyce.com">[<span><s:text name='Company_official_website'/></span>]</a></p>
 				<s:set name="SESSION_LOCALE" value="#session['WW_TRANS_I18N_LOCALE']" />
