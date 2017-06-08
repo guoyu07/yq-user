@@ -5191,6 +5191,7 @@ public class UserService {
 		List<Txpay> listNoGiveMoney = txPayDao.getAllNoGiveMoneyRecord();
 		if(listNoGiveMoney!=null&&listNoGiveMoney.size()>0){
 			for(Txpay txpay:listNoGiveMoney){
+				LogSystem.info("获取到超时未付款需要重置的订单数量为:"+listNoGiveMoney.size());
 //				Gpjy gpjy = gpjyDao.get(txpay.getDfuser(), txpay.getPayid()+"");
 //				if(gpjy!=null){
 				try {
@@ -5229,6 +5230,7 @@ public class UserService {
 		List<Txpay> listNoSureReceiveMoney = txPayDao.getAllNoSureReceiveMoneyRecord();
 		//List<Txpay> listNoSureReceiveMoney = txPayDao.getAllNoSureReceiveMoneyRecord1();
 		if(listNoSureReceiveMoney!=null&&listNoSureReceiveMoney.size()>0){
+			LogSystem.info("获取到超时收款未确认的订单数量为:"+listNoGiveMoney.size());
 			for(Txpay txpay:listNoSureReceiveMoney){
 				try {
 					Gcuser user = gcuserDao.getUser(txpay.getPayusername());
@@ -5272,6 +5274,7 @@ public class UserService {
 		//5日后 没有确认就 自动确认
 		List<Txpay> listNoSureReceiveMoneyAfter5Days = txPayDao.getAllNoSureReceiveMoneyRecordAfter5Days();
 		if(listNoSureReceiveMoneyAfter5Days!=null&&listNoSureReceiveMoneyAfter5Days.size()>0){
+			LogSystem.info("获取到超时5天未付款需要重置的订单数量为:"+listNoGiveMoney.size());
 			for(Txpay txpay:listNoSureReceiveMoneyAfter5Days){
 				try {
 					//系统自己确认

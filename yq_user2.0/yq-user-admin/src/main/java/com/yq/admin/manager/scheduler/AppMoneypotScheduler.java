@@ -14,10 +14,10 @@ public class AppMoneypotScheduler extends SchedulerEntry{
 	
 	@Override
 	public void executeJob(JobExecutionContext arg0) throws JobExecutionException {
-		LogSystem.info("开始执行钱罐请求"+new Date());
+//		LogSystem.info("开始执行钱罐请求"+new Date());
 		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
 		adminService.appbackjob();
-		LogSystem.info("结束执行钱罐请求"+new Date());
+//		LogSystem.info("结束执行钱罐请求"+new Date());
 	}
 
 
