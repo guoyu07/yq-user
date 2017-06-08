@@ -25,7 +25,7 @@ public  class AppSendCallBackScheduler extends SchedulerEntry{
 	
 	@Override
 	public void executeJob(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-		LogSystem.info("开始执行钱罐异步回调app,当前数量["+appcallBackMsg.size()+"]");
+		//LogSystem.info("开始执行钱罐异步回调app,当前数量["+appcallBackMsg.size()+"]");
         for(Entry<Integer,CallBackMsgBean> entry:appcallBackMsg.entrySet()){
      	   if(callBackToServer(entry.getValue())){
      		   entry.getValue().afterSuccess();
@@ -40,7 +40,7 @@ public  class AppSendCallBackScheduler extends SchedulerEntry{
      		   }
      	   }
         }
-        	LogSystem.info("钱罐异步回调结束app,还剩数量["+appcallBackMsg.size()+"]");  
+        	//LogSystem.info("钱罐异步回调结束app,还剩数量["+appcallBackMsg.size()+"]");  
 	}
 	
 	private boolean callBackToServer(CallBackMsgBean callBackMsg) {

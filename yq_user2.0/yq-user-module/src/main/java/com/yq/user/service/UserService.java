@@ -3977,10 +3977,10 @@ public class UserService {
 
 		LogSystem.info("买入积分start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
 		//5%给如钱罐
-		String orderId=System.currentTimeMillis()+gpjy1.getUsername();
+		String orderId=gpjy1.getUsername()+id;
 		MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, gpjy1.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null, userName);
-		int logId = moneyPotLogDao.add(moneyPotLog);
-		if(logId!=0){//TODO 回调APP端
+		boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
+		if(flag){//TODO 回调APP端
 			TreeMap<String,String> paramMap = new TreeMap<String,String>();
 			paramMap.put("username", gcuser2.getUsername());
 			paramMap.put("name", gcuser2.getName());
@@ -4179,12 +4179,12 @@ public class UserService {
 		logService.addDatePay(datePay1);
 		
 
-		LogSystem.info("卖出积分start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+		LogSystem.info("卖出积分start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a+",orderId:"+id);
 		//5%给如钱罐
-		String orderId=System.currentTimeMillis()+gcuser.getUsername();
+		String orderId=gcuser.getUsername()+id;
 		MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, gcuser.getUsername(), gcuser.getName(), gcuser.getUserid(), mc5a, 0, new Date(), null, gpjy1.getUsername());
-		int logId = moneyPotLogDao.add(moneyPotLog);
-		if(logId!=0){//TODO 回调APP端
+		boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
+		if(flag){//TODO 回调APP端
 			TreeMap<String,String> paramMap = new TreeMap<String,String>();
 			paramMap.put("username", gcuser.getUsername());
 			paramMap.put("name", gcuser.getName());
@@ -4198,7 +4198,7 @@ public class UserService {
 			throw new ServiceException(3000, "未知错误");
 		}
 		
-		LogSystem.info("卖出积分end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+		LogSystem.info("卖出积分end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a+",orderId:"+id);
 		
 
 		

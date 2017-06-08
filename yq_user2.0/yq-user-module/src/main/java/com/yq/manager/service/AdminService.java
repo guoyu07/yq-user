@@ -3827,12 +3827,12 @@ public class AdminService {
 		datePay.setOrigintype(YbChangeType.JF_SELL);
 		logService.addDatePay(datePay);
 
-		LogSystem.info("系统积分买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+		LogSystem.info("系统积分买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a+",orderId:"+gpjy1.getId());
 		//5%给如钱罐
-		String orderId=System.currentTimeMillis()+gcuser2.getUsername();
+		String orderId=gcuser2.getUsername()+gpjy1.getId();
 		MoneyPotLog moneyPotLog = new MoneyPotLog(orderId,gcuser2.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null,dfuser);
-		int logId = moneyPotLogDao.add(moneyPotLog);
-		if(logId!=0){//TODO 回调APP端
+		boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
+		if(flag){//TODO 回调APP端
 			TreeMap<String,String> paramMap = new TreeMap<String,String>();
 			paramMap.put("username", gcuser2.getUsername());
 			paramMap.put("name", gcuser2.getName());
@@ -3847,7 +3847,7 @@ public class AdminService {
 		}
 				
 		
-		LogSystem.info("系统积分买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+		LogSystem.info("系统积分买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a+",orderId:"+gpjy1.getId());
 		
 		
 		

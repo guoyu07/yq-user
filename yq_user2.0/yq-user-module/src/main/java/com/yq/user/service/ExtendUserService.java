@@ -92,12 +92,12 @@ public class ExtendUserService {
 			};
 	        Gcuser dfuser = gcuserDao.getUser(gpjy1.getUsername());
 	        
-	        LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+	        LogSystem.info("积分自动卖出start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a+",orderId:"+id);
 	      //5%给如钱罐
-	        String orderId=System.currentTimeMillis()+userName;
+	        String orderId=userName+id;
 			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, userName, gcuser.getName(), gcuser.getUserid(), mc5a, 0, new Date(), null, gpjy1.getUsername());
-			int logId = moneyPotLogDao.add(moneyPotLog);
-			if(logId!=0){//TODO 回调APP端
+			boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
+			if(flag){//TODO 回调APP端
 				TreeMap<String,String> paramMap = new TreeMap<String,String>();
 				paramMap.put("username", gcuser.getUsername());
 				paramMap.put("name", gcuser.getName());
@@ -111,7 +111,7 @@ public class ExtendUserService {
 				throw new ServiceException(3000, "未知错误");
 			}
 			
-			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+			LogSystem.info("积分自动卖出end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a+",orderId:"+id);
 			
 	        
 			if (!gpjyDao.updateBuySuccess(id, userName, "买入成功",dfuser.getJyg(),gpjy1.getPay(),gpjy1.getMysl(),gpjy1.getJypay())) {
@@ -264,12 +264,12 @@ public class ExtendUserService {
 			//datePay1.setMoneypot(mc5a);
 			logService.addDatePay(datePay1);
 			
-			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a+",orderId:"+id);
 			//5%给如钱罐
-			 String orderId=System.currentTimeMillis()+userName;
+			 String orderId=userName+id;
 			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, userName, gcuser.getName(), gcuser.getUserid(), mc5a, 0, new Date(), null, gpjy1.getUsername());
-			int logId = moneyPotLogDao.add(moneyPotLog);
-			if(logId!=0){//TODO 回调APP端
+			boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
+			if(flag){//TODO 回调APP端
 				TreeMap<String,String> paramMap = new TreeMap<String,String>();
 				paramMap.put("username", gcuser.getUsername());
 				paramMap.put("name", gcuser.getName());
@@ -282,7 +282,7 @@ public class ExtendUserService {
 			}else{
 				throw new ServiceException(3000, "未知错误");
 			}
-			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a);
+			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a+",orderId:"+id);
 			
 	        
 			
@@ -468,12 +468,12 @@ public class ExtendUserService {
 			datePay2.setOrigintype(YbChangeType.JF_SELL);
 			logService.addDatePay(datePay2);
 
-			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a+",orderId:"+id);
 			//5%给如钱罐
-			String orderId=System.currentTimeMillis()+gpjy1.getUsername();
+			String orderId=gpjy1.getUsername()+id;
 			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId,gpjy1.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null, userName);
-			int logId = moneyPotLogDao.add(moneyPotLog);
-			if(logId!=0){//TODO 回调APP端
+			boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
+			if(flag){//TODO 回调APP端
 				TreeMap<String,String> paramMap = new TreeMap<String,String>();
 				paramMap.put("username", gcuser2.getUsername());
 				paramMap.put("name", gcuser2.getName());
@@ -488,7 +488,7 @@ public class ExtendUserService {
 			}
 
 			
-			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a+",orderId:"+id);
 			
 			if(!gcuserDao.reduceStopjyg(gpjy1.getUsername())){
 				throw new ServiceException(3000, "未知错误");
@@ -606,12 +606,12 @@ public class ExtendUserService {
 			//datePay2.setMoneypot(mc5a);
 			logService.addDatePay(datePay2);
 
-			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			LogSystem.info("积分自动买入start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a+",orderId:"+id);
 			//5%给如钱罐
-			String orderId=System.currentTimeMillis()+gpjy1.getUsername();
+			String orderId=gpjy1.getUsername()+id;
 			MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, gpjy1.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null, userName);
-			int logId = moneyPotLogDao.add(moneyPotLog);
-			if(logId!=0){//TODO 回调APP端
+			boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
+			if(flag){//TODO 回调APP端
 				TreeMap<String,String> paramMap = new TreeMap<String,String>();
 				paramMap.put("username", gcuser2.getUsername());
 				paramMap.put("name", gcuser2.getName());
@@ -625,7 +625,7 @@ public class ExtendUserService {
 				throw new ServiceException(3000, "未知错误");
 			}
 			
-			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
+			LogSystem.info("积分自动买入end[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a+",orderId:"+id);
 			
 			//增加一条卖出成功的记录（作为卖出数量的）
 			Gpjy gpjy2 = new Gpjy();
