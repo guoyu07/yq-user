@@ -3977,7 +3977,7 @@ public class UserService {
 
 		LogSystem.info("买入积分start[钱罐加钱]"+"userName:"+gpjy1.getUsername()+",数量:"+mc5a);
 		//5%给如钱罐
-		String orderId=gpjy1.getUsername()+id;
+		String orderId=System.currentTimeMillis()+gpjy1.getUsername()+id;
 		MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, gpjy1.getUsername(), gcuser2.getName(), gcuser2.getUserid(), mc5a, 0, new Date(), null, userName);
 		boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
 		if(flag){//TODO 回调APP端
@@ -4181,7 +4181,7 @@ public class UserService {
 
 		LogSystem.info("卖出积分start[钱罐加钱]"+"userName:"+userName+",数量:"+mc5a+",orderId:"+id);
 		//5%给如钱罐
-		String orderId=gcuser.getUsername()+id;
+		String orderId=System.currentTimeMillis()+gcuser.getUsername()+id;
 		MoneyPotLog moneyPotLog = new MoneyPotLog(orderId, gcuser.getUsername(), gcuser.getName(), gcuser.getUserid(), mc5a, 0, new Date(), null, gpjy1.getUsername());
 		boolean flag = moneyPotLogDao.addMoneyPotLog(moneyPotLog);
 		if(flag){//TODO 回调APP端
