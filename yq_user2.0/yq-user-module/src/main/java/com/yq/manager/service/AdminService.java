@@ -3865,7 +3865,7 @@ public class AdminService {
 		CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
 			@Override
 			public void afterSuccess() {
-				moneyPotLogDao.updateUser(this.getParamMap().get("id"));
+				moneyPotLogDao.update(this.getParamMap().get("id"));
 			}
 			@Override
 			public void afterLoseEffect() {
@@ -4137,7 +4137,7 @@ public class AdminService {
 		    			CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
 		    				@Override
 		    				public void afterSuccess() {
-		    					moneyPotLogDao.updateUser(this.getParamMap().get("id"));
+		    					moneyPotLogDao.update(this.getParamMap().get("id"));
 		    				}
 		    				@Override
 		    				public void afterLoseEffect() {

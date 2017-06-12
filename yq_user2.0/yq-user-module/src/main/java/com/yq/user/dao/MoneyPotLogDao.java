@@ -1,9 +1,11 @@
 package com.yq.user.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.common.base.Strings;
 import com.sr178.common.jdbc.Jdbc;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
@@ -47,11 +49,12 @@ public class MoneyPotLogDao {
 		return this.jdbc.update(sql, parameter)>0;
 	}
 	
-	public boolean updateUser(String id){
+	public boolean update(String id){
 		String sql = "update "+table+" set state=1,update_time=? where moneypotorderid=? ";
 		SqlParameter parameter = new SqlParameter();
 		parameter.setObject(new Date());
 		parameter.setString(id);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+	
 }

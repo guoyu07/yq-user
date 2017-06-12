@@ -4237,7 +4237,7 @@ public class UserService {
 				CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
 					@Override
 					public void afterSuccess() {
-						moneyPotLogDao.updateUser(this.getParamMap().get("id"));
+						moneyPotLogDao.update(this.getParamMap().get("id"));
 						LogSystem.log("更新成功:" + this.getParamMap().get("id"));
 					}
 					@Override
@@ -5989,5 +5989,6 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		String result = UrlRequestUtils.execute(this.getConfigPassword(PasswordKey.MONEYPOT_ADRESS)+"?username="+username, null, Mode.GET);
 		return result;
 	}
+	
 	
 }
