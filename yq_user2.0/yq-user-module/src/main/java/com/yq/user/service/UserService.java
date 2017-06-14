@@ -4233,12 +4233,12 @@ public class UserService {
 		taskExecuter.execute(new Runnable() {
 			@Override
 			public void run() {
-				LogSystem.log("第三方线程请求:" + paramMap.get("id"));
+				LogSystem.log("第三方钱罐线程请求:" + paramMap.get("id"));
 				CallBackMsgBean callbackMsg = new CallBackMsgBean(callBackUrl, paramMap, Mode.POST, SUCCESS_TAG) {
 					@Override
 					public void afterSuccess() {
 						moneyPotLogDao.update(this.getParamMap().get("id"));
-						LogSystem.log("更新成功:" + this.getParamMap().get("id"));
+						LogSystem.log("更新钱罐成功:" + this.getParamMap().get("id"));
 					}
 					@Override
 					public void afterLoseEffect() {
@@ -4252,20 +4252,20 @@ public class UserService {
 				try {
 					
 					EasySecureHttp server= new EasySecureHttp(paramMap.get("appId"), "", "", "MD5", getConfigPassword(PasswordKey.APP_MONEYPOT_PASS));
-					
+					LogSystem.log("开始第三方钱罐请求回调："+paramMap.get("id")+",username:"+paramMap.get("username")+",amount:"+paramMap.get("amount"));
 					ResultObject result = server.sendRequest(callBackUrl, paramMap, true);
-					LogSystem.log("开始第三方请求回调："+result);
+					LogSystem.log("第三方钱罐请求回调结果："+result);
 					if(result.getCode() < 0){
-						LogSystem.log("第三方请求失败:" + result.getMsg());
+						LogSystem.log("第三方钱罐请求失败:" + result.getMsg());
 						throw new ServiceException(300, result.getMsg());
 						
 					}
 					String strjson = (String) result.getData();
 					if (SUCCESS_TAG.equals(strjson)) {
 						callbackMsg.afterSuccess();
-						LogSystem.info("成功！");
+						LogSystem.info("钱罐成功！");
 					}else{
-						LogSystem.log("第一次请求失败:" + result);
+						LogSystem.log("第一次钱罐请求失败:" + result);
 						//AppSendCallBackScheduler.addMsg(callbackMsg);
 					}
 				} catch (Exception e) {

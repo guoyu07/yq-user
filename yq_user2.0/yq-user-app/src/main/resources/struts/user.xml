@@ -114,7 +114,7 @@
 			<result name="success" type="json"></result>
 		</action>
 
-		<action name="gcbfde" class="com.yq.app.user.action.GcfhAction" method="gcbfde">
+		<action name="gcbfde" class="com.yq.app.user.action.GcfhAction">
 		<!-- 	<result name="p0">view/grxx-gcbf.jsp</result>
 			<result name="p1">view/grxx-gcbftj.jsp</result> -->
 			<result name="success">mainUI/public/personal-total-dividend-point.jsp</result>
@@ -548,6 +548,14 @@
 				<param name="includeProperties">code,name</param>
 			</result>
 		</action>
+		
+		<action name="getmoneypot" class="com.yq.app.user.action.UserMoneypotAction">
+			<result name="success" type="json"></result>
+		</action>
+		
+		
+		
+		
 	</package>
 	<!-- <package name="viptoken" extends="vipInterceptor" namespace="/">
 		<action name="vipjzpay" class="com.yq.app.user.action.VipjzpayAction">

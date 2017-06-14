@@ -33,15 +33,15 @@ public class GcfhAction extends ALDAdminPageActionSupport<Gcfh> {
 		IPage<Gcfh> page = logService.getGcfhListPage(super.getUserName(),lb, super.getToPage(), 15);
 		
 		super.initPage(page);
-		
+		/*
 		String result = "p0";
 		if(lb==1){
 			if(status==1){
 				return "p1detail";
 			}
 			result ="p1detail";
-		}
-		return result;
+		}*/
+		return SUCCESS;
 	}
 	
 	

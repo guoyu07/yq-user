@@ -34,11 +34,11 @@ if(fcxt!=null){
             <li><a href="/datepay?lb=144&secondThisState=249&thisState=244"><s:text name='viewshop.html.shop.html.-1892736228'/> <em><%=gcuserJflc.getRgpay()%></em></a></li>
             <li><a href="/datepay?lb=111&secondThisState=249&thisState=244"><s:text name='viewshop.html.shop.html.1958259639'/> <em><%=gcuserJflc.getMcpay()%></em></a></li>
              --%>
-            <li><font color="red"><s:text name='moneypot'/></font><em>
+            <li><font color="red"><s:text name='moneypot'/></font><em id="em"><%-- 
             <%if(moneypot.equals("FAIL")) {%>
             	获取数据失败
             <%}else{%>
-            <%=moneypot%><%} %></em>
+            <%=moneypot%><%} %> --%></em>
             <li><s:text name='viewshop.html.shop.html.-2060498186'/> <em><%=gcuserJflc.getJbpay()%></em></li>
             <li><s:text name='viewshop.html.shop.html.-256393235'/> <em><%=gcuserJflc.getJjpay()%></em></li>
             <li><s:text name='viewshop.html.shop.html.994834486'/> <em><%=gcuserJflc.getJypay()%></em></li>
@@ -97,17 +97,16 @@ if(fcxt!=null){
 	        </li>
           </ul>
         </div>
-       <%--  <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+        <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script type="text/javascript">
 $(function(){	
 	$.ajax({
-		 url:'http://192.168.2.3:8100/web/ym/get_moneybox_amt?username=william123',
+		 url:'/getmoneypot',
 		 success:function(data){
-			 console.info(data);
-			 document.getElementById('em').innerHTML=data.data;
+			 document.getElementById('em').innerHTML=data.moneypot;
 			 
 		 }
 		
 	});
   })
-</script> --%>
+</script>
