@@ -128,16 +128,15 @@ import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
-import com.yq.user.scheduler.AppSendCallBackScheduler;
 import com.yq.user.service.LogService;
 import com.yq.user.service.UserService;
+import com.yq.user.utils.EasySecureHttpService.EasySecureHttp;
+import com.yq.user.utils.EasySecureHttpService.ResultObject;
 import com.yq.user.utils.Ref;
 import com.yq.user.utils.StringCheck;
 import com.yq.user.utils._99douInterface;
-import com.yq.user.utils.EasySecureHttpService.EasySecureHttp;
-import com.yq.user.utils.EasySecureHttpService.ResultObject;
 
-public class AdminService {
+public class AdminService{
 	@Autowired
 	private FcxtDao fcxtDao;
 	@Autowired
@@ -4152,43 +4151,21 @@ public class AdminService {
 		    			ResultObject result;
 						try {
 							result = server.sendRequest(callBackUrl, paramMap, true);
-			    			LogSystem.log("后台开始第三方请求回调："+result+",orderid:"+paramMap.get("appId"));
+			    			LogSystem.log("后台开始第三方请求回调："+result+",orderid:"+paramMap.get("id"));
 			    			if(result.getCode() < 0){
-			    				LogSystem.log("后台第三方请求失败:" + result.getMsg()+",orderid:"+paramMap.get("appId"));
+			    				LogSystem.log("后台第三方请求失败:" + result.getMsg()+",orderid:"+paramMap.get("id"));
 			    				throw new ServiceException(300, result.getMsg());
 			    				
 			    			}
 			    			String strjson = (String) result.getData();
 			    			if (SUCCESS_TAG.equals(strjson)) {
 			    				callbackMsg.afterSuccess();
-			    				LogSystem.info("后台开始第三方请求回调成功！orderid:"+paramMap.get("appId"));
+			    				LogSystem.info("后台开始第三方请求回调成功！orderid:"+paramMap.get("id"));
 			    			}
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 						
-						/****************************************************线程池执行钱罐回调start**********************************************************/
-    					
-		    			taskExecuter.execute(new Runnable() {
-		    				@Override
-		    				public void run() {
-		    					/*if(!callbackmoneypot(moneyPotLog)){
-		    						//重试一次
-		    						if(!callRemoteCharge(call,amount,ip,userName)){
-		    							//再重试一次
-		    							if(!callRemoteCharge(call,amount,ip,userName)){
-		    								//再重试一次
-		    								LogSystem.warn("用户充值话费开始,用户名【"+userName+"】"+"，充值手机号【"+call+"】"+",金额【"+amount+"】,ip【"+ip+"】,充值话费失败！");
-		    							}
-		    						}
-		    					}*/
-		    				}
-
-		    			});
-		    		/****************************************************线程池执行钱罐回调end**********************************************************/
-		    			
-		    			
-		    		
 					}
 	    			long sigleEndTime = System.currentTimeMillis();
 	    			LogSystem.info("处理完毕，有数量 ="+tempList.size()+",时长="+(sigleEndTime-sigleStartTime)+"毫秒");
@@ -4262,6 +4239,8 @@ public class AdminService {
 		gpjy.setJy(1);
 		gpjyDao.add(gpjy);
 	}
+	
+	
 	
 	
 }

@@ -53,8 +53,8 @@
           <property name="cronExpression" value="0 5 3 * * ?"></property>
        </bean>
         <!-- 每日 5秒执行一次重试发送-->
-	   <bean id="appSendCallBackScheduler" class="com.yq.admin.manager.scheduler.AppMoneypotScheduler">
+	   <!-- <bean id="appSendCallBackScheduler" class="com.yq.admin.manager.scheduler.AppMoneypotScheduler">
 	         <property name="cronExpression" value="0/5 * * * * ?"></property>
-	  </bean>
+	  </bean> -->
        
 </beans>

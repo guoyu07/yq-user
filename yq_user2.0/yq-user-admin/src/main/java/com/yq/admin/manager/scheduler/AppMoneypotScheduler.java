@@ -1,6 +1,7 @@
 package com.yq.admin.manager.scheduler;
 
 import java.util.Date;
+import java.util.concurrent.Executors;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -15,9 +16,13 @@ public class AppMoneypotScheduler extends SchedulerEntry{
 	@Override
 	public void executeJob(JobExecutionContext arg0) throws JobExecutionException {
 //		LogSystem.info("开始执行钱罐请求"+new Date());
-		AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
-		adminService.appbackjob();
+		/*AdminService adminService = ServiceCacheFactory.getService(AdminService.class);
+		adminService.appbackjob();*/
 //		LogSystem.info("结束执行钱罐请求"+new Date());
+		
+		
+		
+		//Executors.newScheduledThreadPool(1).schedule(command, delay, unit)
 	}
 
 

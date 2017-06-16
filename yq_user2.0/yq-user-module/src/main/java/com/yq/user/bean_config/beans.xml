@@ -84,8 +84,8 @@
        <bean id="sysBiLogDao" class="com.yq.user.dao.SysBiLogDao"></bean>
         <!--钱罐日志 -->
        <bean id="moneyPotLogDao" class="com.yq.user.dao.MoneyPotLogDao"></bean>
-       
-      
+       <!--钱罐服务 -->
+       <bean id="moneyPotTimerService" class="com.yq.user.timer.service.MoneyPotTimerService"></bean>
           
        <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
 		<property name="corePoolSize" value="8" />
