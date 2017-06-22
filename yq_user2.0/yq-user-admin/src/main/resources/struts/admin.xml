@@ -911,7 +911,7 @@
 		    <!-- 并发访问限制 -->
 		    <interceptor name="webLocalSessiontUserVisitSpeedInterceptor"
 				class="com.yq.common.interceptor.WebLocalSessiontUserVisitSpeedInterceptor" />
-			<!-- sql注入烂机器-->
+			<!-- sql注入拦截器-->
 			<interceptor name="illegalCharacterInterceptor"
 				class="com.sr178.module.web.interceptor.IllegalCharacterInterceptor" />
 			<interceptor-stack name="someStack">

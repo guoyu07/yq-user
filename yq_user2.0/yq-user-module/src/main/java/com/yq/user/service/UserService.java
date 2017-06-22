@@ -282,6 +282,40 @@ public class UserService {
     
     
     
+    //TODO 提取vip部分
+  	private static final String VIP_TOKEN_CACHE_PRE = "vip_session_token_";
+  	private static final int VIP_TOKEN_EXPERI_SECONDS = 12*3600;
+  	
+  	public String vipTokenCacheKey(String sessionId){
+  		return VIP_TOKEN_CACHE_PRE+sessionId;
+  	}
+  	
+  	public Session getVipTokenSession(String sessionId){
+    	String key = vipTokenCacheKey(sessionId);
+    	return JedisUtils.getObject(key, Session.class);
+    }
+    
+    public void setVipTokenSession(String sessionId,Session session){
+    	String key = vipTokenCacheKey(sessionId);
+    	JedisUtils.setObject(key, session);
+    	JedisUtils.expireKey(key, VIP_TOKEN_EXPERI_SECONDS);
+    }
+    
+    public void delVipTokenSession(String sessionId){
+    	String key = vipTokenCacheKey(sessionId);
+    	JedisUtils.delete(key);
+    }
+    
+    public String isHasVipLogin(String sessionId){
+    	Session userSessionBean = getVipTokenSession(sessionId);
+    	if(userSessionBean!=null){
+    		return userSessionBean.getUserName();
+    	}
+    	return null;
+    }
+    
+    
+    
     
     
     
@@ -2468,6 +2502,11 @@ public class UserService {
 	private static final String[] ration_0_9_user = new String[]{"qaz363363b","lyl5577a","qal999999a","cmj999999a","gyc363363a","csp5218a"};
 	@Transactional
 	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount, Gcuser farenUser){
+		
+		if(Strings.isNullOrEmpty(fromUser)||Strings.isNullOrEmpty(toUser)||Strings.isNullOrEmpty(password3)){
+			throw new ServiceException(400,"您输入的信息不完整！");
+		}
+		
 		if(!fromUser.equals("300fhk")&&!fromUser.equals("xtgc001")){//公司账号转不限制金额
 	        if(amount<0 || amount==0 || amount >50000){
 	        	throw new ServiceException(1,"您好，您转账一币不能小于零或超过50000，谢谢！");
@@ -2776,6 +2815,10 @@ public class UserService {
 	 */
 	public void sureIGivedMoney(String userName,int payId){
 		Txpay txpay = txPayDao.getByPayid(payId);
+		if(txpay==null){
+			throw new ServiceException(3, "订单Id不存在！");
+		}
+		
 		if(!txpay.getDfuser().equals(userName)||txpay.getKjygid()==0){
 			throw new ServiceException(1, "认购方出错，请检查输入是否正确！");
 		}else{
@@ -4449,8 +4492,8 @@ public class UserService {
 	 * 短信模板2
 	 * @param userName
 	 * @param op  777不用发送到玩家手机上
-	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18			19		20		21			22			23
-	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码","一币转账","报单币转账","充值币充值","报单币充值","校验vip权限"};
+	 */        //                            0      1       2     3      4        5     6      7       8      9        10      11      12		13		14			15				16		17		18			19		20		21			22			23			24
+	private String[] OP_STR = new String[]{"更新资料","修改资料","开户","卖一币","确认收款","卖积分","购金币","商城消费","换购","话费的充值","票务消费","商户消费","活动报名","重置密码","账号绑定","设置或修改支付密码","激活金币卡","购金币卡","重置二级密码","一币转账","报单币转账","充值币充值","报单币充值","校验vip权限","vip登录"};
 	public void sendSmsMsg(String userName,int op){
 		Gcuser gcuser = gcuserDao.getUser(userName);
 		if (op != 777 && gcuser.getVip()==0) {
@@ -5988,6 +6031,31 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 		}
 		String result = UrlRequestUtils.execute(this.getConfigPassword(PasswordKey.MONEYPOT_ADRESS)+"?username="+username, null, Mode.GET);
 		return result;
+	}
+
+	public Gcuser viplogin(String sessionId,String userName,String pwd,String ip) {
+    	if(userName==null){
+			throw new ServiceException(2001, "用户名不存在！");
+		}
+    	userName = userName.toLowerCase();
+		Gcuser gcUser = gcuserDao.getUser(userName);
+		if(gcUser==null){
+			throw new ServiceException(2001, "用户名不存在！");
+		}
+		
+		String md5pass = MD5Security.md5_16(pwd).toLowerCase();
+		//登录成功
+		if(gcUser!=null && gcUser.getPassword().equals(md5pass)){
+			if(gcUser.getUserAgent()!=0){
+				return gcUser;
+			}
+			Session userSessionBean = new Session(gcUser.getUsername(), System.currentTimeMillis(),sessionId);
+			this.setVipTokenSession(sessionId, userSessionBean);
+			gcuserDao.updateLoginTime(userName);
+			this.addUserDateIpLog(userName, "VIP登录", ip);
+			return gcUser;
+		}
+		return null;
 	}
 	
 	

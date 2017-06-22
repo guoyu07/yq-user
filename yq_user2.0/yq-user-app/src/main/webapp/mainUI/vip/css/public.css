@@ -1,0 +1,161 @@
+﻿body{
+    font-family:'微软雅黑';
+}
+.Business-head{
+    width:1155px;
+    height:63px;
+    background:#ffffff;
+    margin:0  auto;
+}
+@font-face{
+    font-family:myFirstFont;
+    src: url('../font/方正兰亭超细黑.TTF');
+}
+.Business-head .Business-center{
+    font-family:myFirstFont;
+    font-size:30px;
+    line-height:63px;
+    color:#000000;
+    margin-left:24px;
+    float:left;
+}
+.Business-head p{
+    float:right;
+    margin-right:26px;
+    line-height:63px;
+}
+.Business-head p span{
+     color:#737373;
+}
+.Business-head p a{
+    margin-left:30px;
+    color:#8a8a8a;
+    text-decoration:underline;
+}
+.A-coin{
+    width:1155px;
+    margin:0 auto;
+}
+.A-coin-left{
+    width:220px;
+    background:#171c20;
+    float:left;
+   /* padding-bottom:422px;*/
+   height:793px;
+}
+.A-coin-right{
+    width:935px;
+    float:right;
+    /*padding-bottom:193px;*/
+    height:793px;
+}
+.A-coin-list a{
+    display:block;
+    height:53px;
+    line-height:53px;
+    text-align:center;
+    color:#ffffff;
+    border-bottom:1px solid #5f676d;
+    background-color:#232c33;
+}
+.A-coin-list a:hover{
+    background:#171c20;
+    color:#e97159;
+}
+.A-coin-bg{
+    width:935px;
+    height:175px;
+    background:url(../img/1004.jpg) no-repeat;
+    background-size:100% 100%;
+}
+ .A-coin-bg h2{
+    font-family:myFirstFont;
+    font-size:30px;
+    color:white;
+    margin-left:23px;
+    padding-top:13px;
+ }
+.A-coin-bg var{
+      display:block;
+      margin-left:23px;
+      margin-top:4px;
+      color:#ffffff;
+      font-family:myFirstFont;
+      font-size:14px;
+}
+.A-coin-bg div{
+      width:161px;
+      height:60px;
+      float:left;
+      margin-top:12px;
+      margin-left:23px;
+}
+.A-coin-bg div i{
+    display:block;
+    font-style:normal;
+    height:19px;
+    font-size:14px;
+    font-family:myFirstFont;
+    color:white;
+    padding-left:7px;
+    line-height:19px;
+}
+.A-coin-bg div p{
+    height:43px;
+    background:url(../img/4.png) no-repeat;
+    text-align:center;
+    line-height:42px;
+    margin-top: -1px;
+    margin-left: -1px;
+    background-size: 162px 43px;
+}
+.Money-pot{
+    background-color:#e46570;
+}
+.Rechargeable-coin{
+    background-color:#ea765d;
+}
+.Recharge-number{
+    background-color:#dbb467;
+}
+.Rechargeable-coins{
+    background-color:#30bad6;
+}
+.Currency-declaration{
+    background-color:#4bb764;
+}
+/*公共的表格和分页*/
+table{
+    margin-top:20px;
+    margin-left:28px;
+}
+table thead tr th,table tbody tr td{    
+    height:30px;
+    padding-left:20px;
+    padding-right:15px;
+    border: 1px solid #828282;
+    text-align: center;
+    font-size:14px;
+    color:#000000;
+}
+table .user-first{
+        border-left:0;
+}
+table .user-last{
+    border-right:0;
+}
+.widget-pages{
+    text-align:center;
+    margin-top:96px;
+}
+.widget-pages a,.widget-pages span{
+    color:#000000;
+    font-size:14px;
+    margin-left:12px;
+}
+.widget-pages input{
+    width:49px;
+    height:15px;
+    border:1px solid #828282;
+    margin-left:12px;
+}

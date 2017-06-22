@@ -77,7 +77,7 @@
 					       <a href="/userscoreslog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewuser.jsp.user.jsp.35660508'/></a>
 				        </div>
 				        </li>
-				       <%}else if("253".equals(re.getId()+"") && gcuserHead.getVip()!=0 ){%>
+				       <%-- <%}else if("253".equals(re.getId()+"") && gcuserHead.getVip()!=0 ){%>
 			       		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 			       		<div class="list">
 					      <a href="/vipjzpay?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Currency_transfer'/></a>
@@ -88,7 +88,7 @@
 				          <a href="/vipcjb?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item">vip<s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1624937649'/></a>
 				          <a href="/bdbdate?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Reserve_currency_report_details'/></a>
 				        </div>
-				        </li>
+				        </li> --%>
 				         <%}else if("254".equals(re.getId()+"") && (gcuserHead.getUsername().equals("300fhk") || gcuserHead.getUsername().equals("zxz888"))){%>
 				         <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><a class="root" href='<%=re.getResoUrl()%>?secondThisState=<%=re.getId()%>&thisState=${thisState}'><%=re.getResoName()%></a>
 				         <div class="list">

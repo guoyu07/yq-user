@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/public.css">
+    <style>
+        .Turn-out ul li{
+            height:49px;
+            border-bottom:1px solid #c6c6c6;
+            line-height:49px;
+            font-size:19px;
+            padding-left:38px;
+            color:#000000;
+        }
+        .Turn-out .Turn-out-Crumbs{
+            padding-left:28px;
+            font-size:20px;
+            color:#000000;
+           
+        }
+        
+        .Turn-out ul li label{
+            display:block;
+            width:174px;
+            float:left;
+        }
+        .Turn-out ul li input{
+            width:195px;
+            height:29px;
+            border:1px solid #c6c6c6;
+        }
+        .Turn-out .Turn-out-btn {
+            width:336px;
+            height:65px;
+            display:block;
+            background-color:#2ebddb;
+            margin:0 auto;
+            font-size:30px;
+            color:white;
+            margin-top:66px;
+        }
+    </style>
+   </head>
+   <body>
+      <div class="Business-head">
+            <span class="Business-center">商务中心</span>
+            <p><span>用户名:njfdhs</span><a href="index.html">退出登入</a></p>
+      </div>   
+      <div class="A-coin">
+        <div class="A-coin-left">
+            <div class="A-coin-list">
+               <a href="./一币转出.html">一币转出</a>
+                <a href="./一币交易市场.html">一币交易市场</a>
+                <a href="./一币认购明细.html">一币认购明细</a>
+                <a href="./报单币转出.html">报单币转出</a>
+                <a href="./报单币充值.html">报单币充值</a>
+                <a href="./VIP充值管理.html">充值币管理</a>
+                <a href="./备用报单币明细变化.html">备用报单币明细</a>
+            </div>
+        </div>
+        <div class="A-coin-right">
+            <div class="A-coin-bg">
+                <h2>数据面板</h2>
+                <var>Dashboard</var>
+                <div>
+                    <i class="Money-pot">钱罐余额</i>
+                    <p>
+                      99999999999
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coin">充值币余额</i>
+                    <p>
+                      99999999999
+                    </p>
+                </div>
+                <div>
+                    <i class="Recharge-number">累计充值数</i>
+                    <p>
+                      99999999999
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coins">已用充值币</i>
+                    <p>
+                      99999999999
+                    </p>
+                </div>
+                <div>
+                    <i class="Currency-declaration">备用报单币</i>
+                    <p>
+                      99999999999
+                    </p>
+                </div>
+            </div>
+            <div class="Turn-out">
+                <ul>
+                    <li class="Turn-out-Crumbs">报单币充值</li>
+                    <li><label>转出用户名</label><input type="text"/></li>
+                    <li><label>转账数量</label><input type="text"/><span>&nbsp;&nbsp;剩余 <i style="font-style:normal;color:red;">0</i></span></li>
+                    <li><label>接收用户名</label><input type="text"/></li>
+                    <li><label>二级密码</label><input type="password"/></li>
+                </ul>
+                <input type="button" class="Turn-out-btn" value="确认转账">
+            </div>
+        </div>
+      </div>
+   </body>
+</html>

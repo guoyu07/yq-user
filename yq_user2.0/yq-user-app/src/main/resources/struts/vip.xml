@@ -1,0 +1,198 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="vip" extends="vipmanagerInterceptor" namespace="/vip">
+		
+		<!-- 得到玩家属性值 -->
+		<action name="getUserProperty" class="com.yq.app.vip.action.UserProperty">
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 一币转账 -->
+		<action name="vipmanager" class="com.yq.app.vip.action.VipjzpayAction">
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 一币交易市场 -->
+		<action name="ybmarket" class="com.yq.app.vip.action.EphyscAction">
+			<result name="success" type="json" >
+			<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 报单币转出 -->
+		<action name="bdbzc" class="com.yq.app.vip.action.BdbZzAction" >
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+				<param name="includeProperties">erroCodeNum,erroDescrip</param>
+			</result>
+		</action>
+		<!-- 报单币充值 -->
+		<action name="bdbcz" class="com.yq.app.vip.action.BdbZzAction" method="bdbcz">
+			<result name="success" type="json" >
+			<param name="callbackParameter">callback</param>
+				<param name="includeProperties">erroCodeNum,erroDescrip</param>
+			</result>
+		</action>
+		<!-- 充值币充值 -->
+		<action name="vipcjb" class="com.yq.app.vip.action.VipcjbAction" method="cj">
+			<result name="success" type="json" >
+			<param name="callbackParameter">callback</param>
+				<param name="includeProperties">erroCodeNum,erroDescrip</param>
+			</result>
+		</action>
+		<!-- 充值币明细 -->
+		<action name="czbdetil" class="com.yq.app.vip.action.VipcjbAction" method="vipcjbcjbdetail">
+			<result name="success" type="json" >
+			<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 备用报单币明细 -->
+		<action name="bybdbdetail" class="com.yq.app.vip.action.BybdbLogAction">
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 一币认购明细 -->
+		<action name="buyYbdetail" class="com.yq.app.vip.action.EpmyjlAction">
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 确认买入一币 -->
+		<action name="myepok" class="com.yq.app.vip.action.MyepokAction">
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 查看银行账号 -->
+		<action name="fbbank" class="com.yq.app.vip.action.FbbankAction">
+			<!-- <result name="success">vip/fbbank.jsp</result> -->
+			<!-- <result name="success">/mainUI/public/fbbank.jsp</result> -->
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 退出 -->
+		<action name="loginout" class="com.yq.app.vip.action.LoginoutAction">
+			<result name="success" >/mainUI/vip/index.html</result>
+		</action>
+		
+		
+	</package>
+
+	<package name="viplogin" extends="noLoginInterceptor" namespace="/">
+		<!-- 检测玩家属性 -->
+		<action name="checkUserParam" class="com.yq.app.user.action.CheckUserParamAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
+		<!-- 检查用户是否存在 -->
+		<action name="checkusername" class="com.yq.app.vip.action.CheckUserName">
+			<result name="success" type="json" >
+			<param name="callbackParameter">callback</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
+		<!-- vip登录 -->
+		<action name="viplogin" class="com.yq.app.vip.action.VipLogin">
+			<result name="success" type="json">
+				<param name="callbackParameter">callback</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
+		
+	</package>
+	
+
+	<package name="vipmanagerInterceptor" extends="someInterceptor">
+
+		<interceptors>
+			<!-- 认证拦截器 -->
+			<interceptor name="viptokenUserInterceptor"
+				class="com.yq.app.vip.interceptor.VIPInterceptor" />
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="viptokenUserInterceptor" />
+				<interceptor-ref name="someStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="adminStack" />
+
+		<global-results>
+			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
+			<result name="nologin" type="redirect">
+				/mainUI/vip/index.html
+			</result>
+			<!-- 更新资料界面 -->
+			<result name="upuserg" type="redirect">
+				${redirectBaseUrl}/updateuser
+			</result>
+
+			<result name="glober_alert">
+				/glober_alert.jsp
+			</result>
+		</global-results>
+	</package>
+
+	<package name="noLoginInterceptor" extends="someInterceptor">
+		<interceptors>
+			<!-- 认证拦截器 -->
+			<interceptor name="noLoginInterceptor"
+				class="com.yq.common.interceptor.NoLoginInterceptor" />
+			<interceptor-stack name="noLoginStack">
+				<interceptor-ref name="noLoginInterceptor" />
+				<interceptor-ref name="someStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="noLoginStack" />
+	</package>
+
+
+	<package name="someInterceptor" extends="myInterceptor">
+		<interceptors>
+			<!-- 并发访问限制 -->
+			<interceptor name="webRedisSessiontVipVisitSpeedInterceptor"
+				class="com.yq.app.vip.interceptor.WebRedisSessiontVipVisitSpeedInterceptor" />
+			<!-- sql注入烂机器 -->
+			<interceptor name="illegalCharacterInterceptor"
+				class="com.sr178.module.web.interceptor.IllegalCharacterInterceptor" />
+			<interceptor-stack name="someStack">
+				<interceptor-ref name="webRedisSessiontVipVisitSpeedInterceptor" />
+				<interceptor-ref name="illegalCharacterInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="someStack" />
+	</package>
+	
+	<!-- <package name="vipInterceptor" extends="managerInterceptor">
+		<interceptors>
+			认证拦截器
+			<interceptor name="vipUserInterceptor"
+				class="com.yq.app.vip.interceptor.VipUserInterceptor" />
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="vipUserInterceptor" />
+				<interceptor-ref name="someStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="adminStack" />
+
+		<global-results>
+			<result name="noVipToken" type="redirect">
+				/mainUI/public/checkVipToken.html
+			</result>
+			<result name="noFaren" type="redirect">
+				/mainUI/public/noFaren.html
+			</result>
+		</global-results>
+	</package> -->
+	
+</struts>

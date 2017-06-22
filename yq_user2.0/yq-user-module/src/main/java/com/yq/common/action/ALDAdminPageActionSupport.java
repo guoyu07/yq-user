@@ -69,6 +69,15 @@ public class ALDAdminPageActionSupport<T> extends ALDAdminActionSupport {
 		}
 	}
 	
+	public void initList(IPage<T> page){
+		if(page!=null){
+			dataList = (List<T>)page.getData();
+			this.totalPage = page.getTotalPage();
+			this.totalSize = page.getTotalSize();
+			this.pageSize = page.getPageSize();
+		}
+	}
+	
 	public List<T> getDataList() {
 		return dataList;
 	}
@@ -77,4 +86,12 @@ public class ALDAdminPageActionSupport<T> extends ALDAdminActionSupport {
 		this.dataList = dataList;
 	}
 	
+	public void setDataList(IPage<T> page) {
+		if(page!=null){
+			dataList = (List<T>)page.getData();
+			this.totalPage = page.getTotalPage();
+			this.totalSize = page.getTotalSize();
+			this.pageSize = page.getPageSize();
+		}
+	}
 }

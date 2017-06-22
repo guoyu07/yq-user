@@ -123,7 +123,7 @@
 					       <a href="/bdbzhuanzhang?secondThisState=<%=re.getId()%>&thisState=${thisState}&type=0" class="item"><s:text name='Transfer_details'/></a>
 				        </div>
 				        </li>
-				       <%}else if("253".equals(re.getId()+"") && gcuserHead.getVip()!=0 ){%>
+				      <%--  <%}else if("253".equals(re.getId()+"") && gcuserHead.getVip()!=0 ){%>
 			       		<li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><span class="root">
 			       		<c:choose>  
 						<c:when test="${SESSION_LOCALE=='en_US'}"> 
@@ -147,7 +147,7 @@
 				          <a href="/vipcjb?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='viewyblc-vipcjb.jsp.yblc-vipcjb.jsp.-1624937649'/></a>
 				          <%} %>
 				           <a href="/bybdblog?secondThisState=<%=re.getId()%>&thisState=${thisState}" class="item"><s:text name='Reserve_currency_report_details'/></a>
-				        </div>
+				        </div> --%>
 				        </li>
 				         <%-- <%}else if("254".equals(re.getId()+"") && (gcuserHead.getUsername().equals("300fhk") || gcuserHead.getUsername().equals("zxz888"))){%>
 				         <li <% if(secondThisStatetemp.equals(re.getId()+"")){%> class="cur" <%} %>><span class="root"><%=re.getResoName()%></a>

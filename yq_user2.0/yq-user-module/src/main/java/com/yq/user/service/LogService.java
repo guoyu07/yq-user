@@ -285,7 +285,6 @@ public class LogService {
 	}
 	
 	
-	
 	/**
 	 * @param zuser
 	 * @param startTime
