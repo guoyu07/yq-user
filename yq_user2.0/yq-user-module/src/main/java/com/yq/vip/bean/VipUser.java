@@ -1,34 +1,6 @@
 package com.yq.vip.bean;
 
-import java.util.Date;
-
-import com.yq.common.utils.DateUtils;
-import com.yq.common.utils.Global;
-import com.yq.user.service.UserService;
-   /**
-    * gcuser 实体类
-    */ 
-
-
 public class VipUser{
-	/*
-	private String up;				//上级
-	private int vip;				//vip
-	private int cbpay;				//累计交易一币
-	private int pay;				//当前可用一币
-	private int txpay;				//累计使用一币(已提现)
-	private int vippay;				//表示服务中心转入或游戏收益部分的一币
-	private int jydb;				//金币
-	private int jyg;				//积分
-	private int vipcjcjb;			//充值币余额、
-	private int vipljcjb;			//累计充值数
-	private int vipsycjb;			//已用充值币
-	private int syep;				//备用报单币
-	private String moneypot;		//钱罐余额
-
-
-*/
-	
 	private Integer id;
 	private String user;			//用户名
 	private String up;				//上级
