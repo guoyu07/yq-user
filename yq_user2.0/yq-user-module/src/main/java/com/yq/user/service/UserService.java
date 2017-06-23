@@ -4656,7 +4656,7 @@ public class UserService {
 	}
 	
 	public IPage<Vipcjgl> getVipcjbPageList(String userName,int pageIndex,int pageSize){
-		return vipcjglDao.getPageList(pageIndex, pageSize, "order by cjid desc", new SqlParamBean("vipuser", userName));
+		return vipcjglDao.getPageVipcjbDetailList(pageIndex, pageSize, userName);
 	}
 	
 

@@ -108,7 +108,7 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
 		gcuser = userService.getUserByUserName(super.getUserName());
 		super.setDataList(userService.getVipcjbPageList(super.getUserName(), super.getToPage(), super.getPageSize()));
-		super.setErroCodeNum(2000);;
+		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.base.Strings;
 import com.sr178.common.jdbc.SqlParameter;
 import com.sr178.common.jdbc.bean.IPage;
+import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.yq.common.dao.YqDaoBase;
 import com.yq.cw.bean.VipCjglForDc;
 import com.yq.user.bo.Vipcjgl;
@@ -147,6 +148,14 @@ public class VipcjglDao extends YqDaoBase<Vipcjgl> {
 			sqlParameter.setString(endTime);
 		}
 		return super.getJdbc().getDouble(sql, sqlParameter);
+	}
+
+	public IPage<Vipcjgl> getPageVipcjbDetailList(int pageIndex, int pageSize, String userName) {
+		String sql = "select * from "+super.getTable()+" where vipuser=?";
+		SqlParameter sqlParameter = SqlParameter.Instance();
+		sqlParameter.withString(userName);
+		sql = sql +" order by cjid desc";
+		return super.getJdbc().getListPage(sql, Vipcjgl.class, sqlParameter,pageSize, pageIndex);
 	}
 	
 	
