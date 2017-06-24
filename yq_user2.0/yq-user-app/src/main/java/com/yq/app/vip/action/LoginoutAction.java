@@ -18,6 +18,7 @@ public class LoginoutAction extends ALDAdminActionSupport {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		userService.delVipTokenSession(sessionhttp.getId());
+		userService.delVipSession(sessionhttp.getId());
 		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
