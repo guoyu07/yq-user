@@ -44,8 +44,7 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 				.getSession();
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		HttpServletRequest request=ServletActionContext.getRequest();
-		//gcuser = userService.getUserByUserName(super.getUserName());
-		/*TODO 測試
+		gcuser = userService.getUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
@@ -70,11 +69,12 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			return "noVipToken";
-		}*/
+			super.setErroCodeNum(2003);
+			return SUCCESS;
+		}
 		
 		if(status==1){
-				/*if(gcuser.getVip()==2){
+				if(gcuser.getVip()==2){
 					farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 						if(farenUser!=null){
 							if(!farenUser.getVipsq().equals(smsCode)){
@@ -90,7 +90,7 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 						super.setErroCodeNum(2001);
 						return SUCCESS;
 					}
-				}*/
+				}
 				userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay,farenUser);
 				super.setErroCodeNum(2000);
 		}

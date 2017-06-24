@@ -75,9 +75,18 @@
 			</result>
 		</action>
 		<!-- vip权限验证 -->
-		<action name="addviptoken" class="com.yq.app.user.action.AddVipTokenAction">
+		<action name="addviptoken" class="com.yq.app.vip.action.AddVipTokenAction">
 			<result name="success" type="json" >
 				<param name="callbackParameter">callback</param>
+				<param name="includeProperties">erroCodeNum,erroDescrip</param>
+			</result>
+		</action>
+		<!-- vip短信验证 -->
+		<action name="vipsmsother" class="com.yq.app.vip.action.Sms3Action">
+			<result name="success" type="json">
+				<param name="callbackParameter">callback</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
 		<!-- 退出 -->
@@ -112,8 +121,6 @@
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
-		
-		
 	</package>
 	
 

@@ -115,6 +115,12 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 	public void setSmsCode(String smsCode) {
 		this.smsCode = smsCode;
 	}
+	public String getErroDescrip() {
+		return super.getErroDescrip();
+	}
+	public int getErroCodeNum() {
+		return super.getErroCodeNum();
+	}
 	
 	
 }
