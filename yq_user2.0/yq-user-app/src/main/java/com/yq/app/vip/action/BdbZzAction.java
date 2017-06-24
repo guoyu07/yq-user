@@ -39,7 +39,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();
-		/*gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
@@ -53,8 +53,8 @@ public class BdbZzAction extends ALDAdminActionSupport {
 				farenUser.setCall(callLeft+"*****"+CallRight);
 			}
 		}
-		*/
-		/*if(!Strings.isNullOrEmpty(gcuser.getCall())){
+		
+		if(!Strings.isNullOrEmpty(gcuser.getCall())){
 			int callLenght = gcuser.getCall().length();
 			String callLeft = gcuser.getCall().substring(0, 3);
 			String CallRight = gcuser.getCall().substring(callLenght-3, callLenght);
@@ -63,11 +63,12 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			return "noVipToken";
-		}*/
+			super.setErroCodeNum(2003);
+			return SUCCESS;
+		}
 		
 		if(status==1){
-			/*if(gcuser.getVip()==2){
+			if(gcuser.getVip()==2){
 				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 				if(farenUser!=null){
 					if(!farenUser.getVipsq().equals(smsCode)){
@@ -83,7 +84,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(2001);
 					return SUCCESS;
 				}
-			}*/
+			}
 			userService.trasferBdb(super.getUserName(), syuser, jzpay,pa3,farenUser);
 			super.setErroCodeNum(2000);
 			return  SUCCESS;
@@ -107,7 +108,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();
-		/*gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
@@ -132,12 +133,13 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			return "noVipToken";
+			super.setErroCodeNum(2001);
+			return SUCCESS;
 		}
-		*/
+		
 		if(status==1){
 			
-			/*if(gcuser.getVip()==2){
+			if(gcuser.getVip()==2){
 				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 				if(farenUser!=null){
 					if(!farenUser.getVipsq().equals(smsCode)){
@@ -153,7 +155,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(2001);
 					return SUCCESS;
 				}
-			}*/
+			}
 			userService.chargeBdbByBigVip(super.getUserName(),pa3,touser);
 			super.setErroCodeNum(2000);
 			return SUCCESS;

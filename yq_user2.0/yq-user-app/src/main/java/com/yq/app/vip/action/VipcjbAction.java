@@ -70,13 +70,14 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	private String cjpass;
 	public String cj(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
-		/*gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getUserByUserName(super.getUserName());
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
 				super.setErroCodeNum(2002);
+				super.setErroDescrip("法人不存在！");
 				return SUCCESS;
 			}
 			if(!Strings.isNullOrEmpty(farenUser.getCall())){
@@ -97,10 +98,11 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			return "noVipToken";
-		}*/
+			super.setErroCodeNum(2001);
+			return SUCCESS;
+		}
 		userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass,farenUser);
-		super.setErroCodeNum(2000);;
+		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
 	

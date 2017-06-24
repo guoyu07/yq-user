@@ -1,4 +1,4 @@
-package com.yq.app.user.action;
+package com.yq.app.vip.action;
 
 import javax.servlet.http.HttpSession;
 
@@ -35,7 +35,8 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 		gcuser = userService.getUserByUserName(super.getUserName());
 		if(gcuser.getVip()==0){
 			super.setErroCodeNum(2003);
-			return "noVipToken";
+			super.setErroDescrip("您不是vip账户！");
+			return SUCCESS;
 		}
 		if(gcuser.getVip()==2){
 			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
@@ -43,26 +44,31 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 					if(!Strings.isNullOrEmpty(smsCode)){
 						if(!smsCode.equals(farenUser.getVipsq())){
 							super.setErroCodeNum(2001);
-							return "noVipToken";
+							super.setErroDescrip("短信验证码不正确！");
+							return SUCCESS;
 						}
 					}else{
 						super.setErroCodeNum(2001);
-						return "noVipToken";
+						super.setErroDescrip("短信验证码不正确！");
+						return SUCCESS;
 					}
 					
 				}else{
 					super.setErroCodeNum(2002);
+					super.setErroDescrip("法人不存在！");
 					return SUCCESS;
 				}
 		}else{
 			if(!Strings.isNullOrEmpty(smsCode)){
 				if(!smsCode.equals(gcuser.getVipsq())){
 					super.setErroCodeNum(2001);
-					return "noVipToken";
+					super.setErroDescrip("短信验证码不正确！");
+					return SUCCESS;
 				}
 			}else{
 				super.setErroCodeNum(2001);
-				return "noVipToken";
+				super.setErroDescrip("短信验证码不正确！");
+				return SUCCESS;
 			}
 		}
 		if(gcuser.getVip()!=0){//vip用户给予大门
@@ -74,6 +80,7 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 		}else{
 			userService.updateSmsCode(gcuser.getUsername(), Global.INIT_SMS_CODE);
 		}
+		super.setErroCodeNum(2000);
 		return SUCCESS;
 	}
 
@@ -107,13 +114,6 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 
 	public void setSmsCode(String smsCode) {
 		this.smsCode = smsCode;
-	}
-	
-	public String getErroDescrip() {
-		return super.getErroDescrip();
-	}
-	public int getErroCodeNum() {
-		return super.getErroCodeNum();
 	}
 	
 	

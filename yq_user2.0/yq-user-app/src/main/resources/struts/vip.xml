@@ -70,8 +70,12 @@
 		</action>
 		<!-- 查看银行账号 -->
 		<action name="fbbank" class="com.yq.app.vip.action.FbbankAction">
-			<!-- <result name="success">vip/fbbank.jsp</result> -->
-			<!-- <result name="success">/mainUI/public/fbbank.jsp</result> -->
+			<result name="success" type="json" >
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- vip权限验证 -->
+		<action name="addviptoken" class="com.yq.app.user.action.AddVipTokenAction">
 			<result name="success" type="json" >
 				<param name="callbackParameter">callback</param>
 			</result>
