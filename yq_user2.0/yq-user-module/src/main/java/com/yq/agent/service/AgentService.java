@@ -22,6 +22,7 @@ import com.sr178.common.jdbc.bean.IPage;
 import com.sr178.common.jdbc.bean.SqlParamBean;
 import com.sr178.game.framework.exception.ServiceException;
 import com.sr178.game.framework.log.LogSystem;
+import com.sr178.game.framework.plugin.IAppPlugin;
 import com.sr178.module.utils.JedisUtils;
 import com.sr178.module.utils.MD5Security;
 import com.sr178.module.web.session.Session;
@@ -103,16 +104,6 @@ public class AgentService {
   	private static final String AGENT_APP_SESSION_CACHE_PRE = "agent_app_session_";
   	private static final int SESSION_EXPERI_SECONDS = 24*3600;
   	
-  	private Cache<String,String> tokenBindAndPay = CacheBuilder.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(20000).build();
-  	
-  
-  	public String setToken(String userName){
-  		tokenBindAndPay.put(userName, UUID.randomUUID().toString());
-  		return tokenBindAndPay.getIfPresent(userName);
-  	}
-  	public String getToken(String userName){
-  		return tokenBindAndPay.getIfPresent(userName);
-  	}
   	
   	public String generatorCacheKey(String sessionId){
   		return AGENT_APP_SESSION_CACHE_PRE+sessionId;
@@ -133,9 +124,71 @@ public class AgentService {
     	String key = generatorCacheKey(sessionId);
     	JedisUtils.delete(key);
     }
+   
     
-	//private Cache<String,Long> userPayPassTime = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(20000).build();
-	private Cache<String,Integer> userPayPassTimes = CacheBuilder.newBuilder().expireAfterAccess(24, TimeUnit.HOURS).maximumSize(20000).build();
+ 	private static final String APP_PAY_PAYPASS = "app_pay_paypass";
+  	private static final int APP_PAY_PAYPASS_SECONDS = 24*3600;
+  	
+  	public String getapppayCacheKey(String sessionId){
+  		return APP_PAY_PAYPASS+sessionId;
+  	}
+  	
+  	public void setapppayTimes(String sessionId,Integer times){
+    	String key = getapppayCacheKey(sessionId);
+    	JedisUtils.setObject(key, times);
+    	JedisUtils.expireKey(key, APP_PAY_PAYPASS_SECONDS);
+    }
+  	
+  	public Integer getapppayTimes(String sessionId){
+    	String key = getapppayCacheKey(sessionId);
+    	return JedisUtils.getObject(key, Integer.class);
+    }
+  	
+    public void delapppayTimes(String sessionId){
+    	String key = getapppayCacheKey(sessionId);
+    	JedisUtils.delete(key);
+    }
+   
+  	
+  	
+  	/*private static final String APP_TRANSACTIONPAY_PAYPASS = "app_transactionpay_paypass";
+  	private static final int APP_TRANSACTIONPAY_PAYPASS_SECONDS = 24*3600;
+    
+	public String getapptransactionpayCacheKey(String sessionId){
+  		return APP_TRANSACTIONPAY_PAYPASS+sessionId;
+  	}
+  	
+  	public void setapptransactionpayTimes(String sessionId,Integer times){
+    	String key = getapptransactionpayCacheKey(sessionId);
+    	JedisUtils.setObject(key, times);
+    	JedisUtils.expireKey(key, APP_TRANSACTIONPAY_PAYPASS_SECONDS);
+    }
+  	
+  	public Integer getapptransactionpayTimes(String sessionId){
+    	String key = getapptransactionpayCacheKey(sessionId);
+    	return JedisUtils.getObject(key, Integer.class);
+    }
+  	
+    public void delapptransactionpayTimes(String sessionId){
+    	String key = getapptransactionpayCacheKey(sessionId);
+    	JedisUtils.delete(key);
+    }
+    */
+    
+    
+    
+  	private Cache<String,String> tokenBindAndPay = CacheBuilder.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES).maximumSize(20000).build();
+  	
+    
+  	public String setToken(String userName){
+  		tokenBindAndPay.put(userName, UUID.randomUUID().toString());
+  		return tokenBindAndPay.getIfPresent(userName);
+  	}
+  	public String getToken(String userName){
+  		return tokenBindAndPay.getIfPresent(userName);
+  	}
+
+    
     
     
 	/**
@@ -672,6 +725,10 @@ public class AgentService {
 			}
 			LogSystem.info("玩家：["+user+"],设置支付密码成功！");
 		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String mark=df.format(new Date());
+		String sessionId = mark+user;
+		delapppayTimes(sessionId);
 		gcuserDao.updateSmsCode(user, Global.INIT_SMS_CODE);
 		
 		return "设置成功";
@@ -736,7 +793,8 @@ public class AgentService {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String mark=df.format(new Date());
 		LogSystem.info("玩家："+fromgcuser.getName()+fromgcuser.getUserid()+"玩家支付密码：" +fromsameUserProperty.getAppPayPassword()+",输入支付密码："+payPassWord);
-		Integer times = userPayPassTimes.getIfPresent(mark+fromUserName);
+		String sessionId =  mark+fromUserName;
+		Integer times = getapppayTimes(sessionId);
 		if (times != null) {
 			if(times>=3){
 				throw new ServiceException(18, "账户已被锁定,请明天再试！");
@@ -745,13 +803,13 @@ public class AgentService {
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassWord)){
 			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" +fromUserName);
 			if (times != null) {
-				userPayPassTimes.put(mark+fromUserName, times.intValue() + 1);
+				setapppayTimes(sessionId, times.intValue() + 1);
 				LogSystem.info("今天又一次连续支付密码错误，userName=" +fromUserName+",times="+times);
 			} else {
-				userPayPassTimes.put(mark+fromUserName, 1);
+				setapppayTimes(sessionId, 1);
 				LogSystem.info("今天第一次连续支付密码错误，userName=" +fromUserName+",times="+times);
 			}
-			Integer times2 = userPayPassTimes.getIfPresent(mark+fromUserName);
+			Integer times2 = getapppayTimes(sessionId);
 			LogSystem.info("今天连续支付密码错误，userName=" + mark+fromUserName+",times2="+times2);
 			int cishu=3-times2.intValue();
 			if(cishu<=0){
@@ -759,7 +817,7 @@ public class AgentService {
 			}
 			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
 		}else{
-			userPayPassTimes.invalidate(mark+fromUserName);
+			delapppayTimes(sessionId);
 		}/*
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassWord)){
@@ -1191,7 +1249,8 @@ public class AgentService {
 		}
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String mark=df.format(new Date());
-		Integer times = userPayPassTimes.getIfPresent(mark+payUserName);
+		String sessionId = mark+payUserName;
+		Integer times = getapppayTimes(sessionId);
 		if (times != null) {
 			if(times>=3){
 				throw new ServiceException(18, "账户已被锁定,请明天再试！");
@@ -1200,21 +1259,21 @@ public class AgentService {
 		if(!fromsameUserProperty.getAppPayPassword().equals(payPassword)){
 			LogSystem.info("今天连续支付密码错误第"+times+"次，userName=" +payUserName);
 			if (times != null) {
-				userPayPassTimes.put(mark+payUserName, times.intValue() + 1);
+				setapppayTimes(sessionId, times.intValue() + 1);
 				LogSystem.info("今天又一次连续支付密码错误，userName=" +payUserName+",times="+times);
 			} else {
-				userPayPassTimes.put(mark+payUserName, 1);
+				setapppayTimes(sessionId, 1);
 				LogSystem.info("今天第一次连续支付密码错误，userName=" +payUserName+",times="+times);
 			}
-			Integer times2 = userPayPassTimes.getIfPresent(mark+payUserName);
-			LogSystem.info("今天连续支付密码错误，userName=" + mark+payUserName+",times2="+times2);
+			Integer times2 = getapppayTimes(sessionId);
+			LogSystem.info("今天连续支付密码错误，userName=" + sessionId+",times2="+times2);
 			int cishu=3-times2.intValue();
 			if(cishu<=0){
 				throw new ServiceException(18, "账户已被锁定,请明天再试！");
 			}
 			throw new ServiceException(18, "您还有"+cishu+"次输入机会，支付密码不正确，请重新输入");
 		}else{
-			userPayPassTimes.invalidate(mark+payUserName);
+			delapppayTimes(sessionId);
 		}
 		
 		//支付指定的yb
@@ -1271,7 +1330,7 @@ public class AgentService {
 		}*/
 		return pointSplitBeforPriceDao.gettop10();
 	}
-	
+
 	
 	
 }

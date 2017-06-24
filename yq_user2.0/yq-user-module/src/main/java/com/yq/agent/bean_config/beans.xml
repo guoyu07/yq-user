@@ -23,6 +23,7 @@
        <bean id="agentGpjyDao" class="com.yq.agent.dao.AgentGpjyDao"></bean>
        <bean id="appPayRecordDao" class="com.yq.agent.dao.AppPayRecordDao"></bean>
        <bean id="pointSplitBeforPriceDao" class="com.yq.agent.dao.PointSplitBeforPriceDao"></bean>
+       <bean id="serviceThreadTask" class="com.yq.agent.thread.task.ServiceThreadTask"></bean>
      
        
 </beans>
