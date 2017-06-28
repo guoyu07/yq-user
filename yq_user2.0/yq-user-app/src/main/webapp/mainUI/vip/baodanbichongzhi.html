@@ -140,7 +140,7 @@
                 return ;
             }
             var obj={'status':1,'touser':touser.value,'pa3':pa3.value};
-            ajax('get','/vip/bdbcz?callback=?',obj,function(data){
+            ajax('get','/vip/bdbcz',obj,function(data){
                    if(data.erroCodeNum==2000){
                        alert("报单币充值成功")
                        touser.value="";
@@ -149,7 +149,7 @@
                    }else{
                        alert(data.erroDescrip)
                    } 
-            },'jsonp')        
+            })        
         }
        </script>
    </body>
