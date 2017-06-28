@@ -63,12 +63,12 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			super.setErroCodeNum(2003);
+			super.setErroCodeNum(2005);
 			return SUCCESS;
 		}
 		
 		if(status==1){
-			if(gcuser.getVip()==2){
+			/*if(gcuser.getVip()==2){
 				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 				if(farenUser!=null){
 					if(!farenUser.getVipsq().equals(smsCode)){
@@ -84,7 +84,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 					super.setErroCodeNum(2001);
 					return SUCCESS;
 				}
-			}
+			}*/
 			userService.trasferBdb(super.getUserName(), syuser, jzpay,pa3,farenUser);
 			super.setErroCodeNum(2000);
 			return  SUCCESS;
@@ -133,29 +133,11 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			super.setErroCodeNum(2001);
+			super.setErroCodeNum(2005);
 			return SUCCESS;
 		}
 		
 		if(status==1){
-			
-			if(gcuser.getVip()==2){
-				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
-				if(farenUser!=null){
-					if(!farenUser.getVipsq().equals(smsCode)){
-						super.setErroCodeNum(2001);
-						return SUCCESS;
-					}
-				}else{
-					super.setErroCodeNum(2002);
-					return SUCCESS;
-				}
-			}else{
-				if(!smsCode.equals(gcuser.getVipsq())){
-					super.setErroCodeNum(2001);
-					return SUCCESS;
-				}
-			}
 			userService.chargeBdbByBigVip(super.getUserName(),pa3,touser);
 			super.setErroCodeNum(2000);
 			return SUCCESS;

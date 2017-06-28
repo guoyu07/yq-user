@@ -1,0 +1,25 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>  
+    <package name="errorPermissionJSON-default" extends="agentNoLoginInterceptor1"  namespace="/error">  
+        <action name="noPermissionJSON" class="com.yq.app.vip.action.ErrorPermissionJSON" method="noPermission">  
+        </action>  
+        <action name="noLoginJSON" class="com.yq.app.vip.action.ErrorPermissionJSON" method="noLogin">  
+        </action>  
+    </package>  
+    
+   <package name="agentNoLoginInterceptor1" extends="myInterceptor">
+		<interceptors>
+			<!-- 不需要认证的拦截器-->
+			<interceptor name="noLoginInterceptor"
+				class="com.yq.app.vip.interceptor.NoLoginInterceptor" />
+			<interceptor-stack name="noLoginStack">
+				<interceptor-ref name="noLoginInterceptor" />
+				<interceptor-ref name="myStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="noLoginStack" />
+	</package>
+    
+</struts>  

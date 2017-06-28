@@ -23,6 +23,8 @@
     float:right;
     margin-right:26px;
     line-height:63px;
+    font-size:14px;
+    font-family:'微软雅黑';
 }
 .Business-head p span{
      color:#737373;
@@ -57,6 +59,7 @@
     color:#ffffff;
     border-bottom:1px solid #5f676d;
     background-color:#232c33;
+    font-size:16px;
 }
 .A-coin-list a:hover{
     background:#171c20;
@@ -146,7 +149,7 @@ table .user-last{
 }
 .widget-pages{
     text-align:center;
-    margin-top:96px;
+    margin-top: 40px;
 }
 .widget-pages a,.widget-pages span{
     color:#000000;

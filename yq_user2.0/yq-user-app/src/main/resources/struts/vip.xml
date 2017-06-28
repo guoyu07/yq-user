@@ -27,21 +27,20 @@
 		<action name="bdbzc" class="com.yq.app.vip.action.BdbZzAction" >
 			<result name="success" type="json" >
 				<param name="callbackParameter">callback</param>
-				<param name="includeProperties">erroCodeNum,erroDescrip</param>
+				<!-- <param name="includeProperties">erroCodeNum,erroDescrip</param> -->
 			</result>
 		</action>
 		<!-- 报单币充值 -->
 		<action name="bdbcz" class="com.yq.app.vip.action.BdbZzAction" method="bdbcz">
 			<result name="success" type="json" >
 			<param name="callbackParameter">callback</param>
-				<param name="includeProperties">erroCodeNum,erroDescrip</param>
+				<!-- <param name="includeProperties">erroCodeNum,erroDescrip</param> -->
 			</result>
 		</action>
 		<!-- 充值币充值 -->
 		<action name="vipcjb" class="com.yq.app.vip.action.VipcjbAction" method="cj">
 			<result name="success" type="json" >
 			<param name="callbackParameter">callback</param>
-				<param name="includeProperties">erroCodeNum,erroDescrip</param>
 			</result>
 		</action>
 		<!-- 充值币明细 -->
@@ -89,9 +88,23 @@
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
+		<!-- 一币买入 -->
+		<action name="ybmr" class="com.yq.app.vip.action.EpmyAction">
+			<!-- <result name="success">mainUI/public/eb-exchange-market-buy.jsp</result> -->
+			<result name="success" type="json">
+				<param name="callbackParameter">callback</param>
+			</result>
+		</action>
+		<!-- 撤销一币卖出 -->
+		<action name="qxepmc" class="com.yq.app.user.action.QxepmcAction">
+			<result name="success">vip/qxepmc.jsp</result>
+		</action>
 		<!-- 退出 -->
 		<action name="loginout" class="com.yq.app.vip.action.LoginoutAction">
-			<result name="success" >/mainUI/vip/index.html</result>
+			<result name="success" type="json">
+				<param name="callbackParameter">callback</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
 		</action>
 		
 		
@@ -121,8 +134,26 @@
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
+		
+		<!-- vip短信登录 -->
+		<action name="vipsms2" class="com.yq.app.vip.action.SmsAction">
+			<result name="success" type="json">
+				<param name="callbackParameter">callback</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="includeProperties">erroCodeNum</param>
+			</result>
+		</action>
+		
+		<!-- <action name="noPermission" class="com.yq.app.vip.action.ErrorPermissionJSON">  
+            <result type="json">  
+                <param name="root">dataMap</param>  
+                <param name="ignoreHierarchy">false</param>  
+            </result>  
+        </action>   -->
 	</package>
 	
+
+
 
 	<package name="vipmanagerInterceptor" extends="someInterceptor">
 
@@ -140,13 +171,8 @@
 		<global-results>
 			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
 			<result name="nologin" type="redirect">
-				/mainUI/vip/index.html
+				/error/noLoginJSON
 			</result>
-			<!-- 更新资料界面 -->
-			<result name="upuserg" type="redirect">
-				${redirectBaseUrl}/updateuser
-			</result>
-
 			<result name="glober_alert">
 				/glober_alert.jsp
 			</result>
@@ -197,6 +223,9 @@
 		<default-interceptor-ref name="adminStack" />
 
 		<global-results>
+			<result name="nologin" type="redirect">
+				/mainUI/public/index.html
+			</result>
 			<result name="noVipToken" type="redirect">
 				/mainUI/public/checkVipToken.html
 			</result>

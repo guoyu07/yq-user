@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .currency-transaction .currency-transaction-title{
+            height:48px;
+            border-bottom:1px solid #c6c6c6;
+            line-height:48px;
+            font-size:20px;
+            color:#000000;
+            padding-left:28px;
+        }
+        .dialog-title span{
+            display:block;
+            width:100px;
+        }
+        .dialog-title .span-1{
+            float:left;
+        }
+        
+        .dialog-title .span-2{
+            background:url('img/X.png') no-repeat;
+            background-position:68px 3px;
+            height:20px;
+            float:right;
+            cursor: pointer;
+            margin-top:7px;
+            background-size:16px 14px;
+        }
+    </style>
+   </head>
+   <body>
+      <div class="Business-head">
+            <span class="Business-center">商务中心</span>
+            <p><span id="username"></span><a href="javascript:void(0)" id="Log-out">退出登入</a></p>
+      </div>   
+      <div class="A-coin">
+        <div class="A-coin-left">
+            <div class="A-coin-list" id="A-coin-list">
+               <a href="./yibizhuanchu.html">一币转出</a>
+                <a href="./yibijiaoyishichang.html">一币交易市场</a>
+                <a href="./yibirengoumingxi.html">一币认购明细</a>
+                <a href="./baodanbizhuanchu.html">报单币转出</a>
+                <a href="./baodanbichongzhi.html">报单币充值</a>
+                <a href="./VIPchongzhiguanli.html">充值币管理</a>
+                <a href="./VIPchongzhimingxi.html">VIP充值明细</a>
+                <a href="./beiyongbaodanbimingxi.html">备用报单币明细</a>
+            </div>
+        </div>
+        <div class="A-coin-right">
+            <div class="A-coin-bg">
+                <h2>数据面板</h2>
+                <var>Dashboard</var>
+                <div>
+                    <i class="Money-pot">钱罐余额</i>
+                    <p id="p-1">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coin">充值币余额</i>
+                    <p id="p-2">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Recharge-number">累计充值数</i>
+                    <p id="p-3">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coins">已用充值币</i>
+                    <p id="p-4">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Currency-declaration">备用报单币</i>
+                    <p id="p-5">
+                     
+                    </p>
+                </div>
+            </div>
+            <div class="currency-transaction" id="scroll" style="overflow-y:scroll">
+                <p class="currency-transaction-title">一币交易市场</p>
+                <table border="0" cellpadding="0" cellspacing="0" >
+                    <thead>
+                      <tr>
+                        <th class="user-first">流水号</th>
+                        <th>卖出方</th>
+                        <th>信用星</th>
+                        <th>求现金额</th>
+                        <th>认购后可获一币</th>
+                        <th>认购后可获利</th>
+                        <th>卖出时间</th>
+                        <th>交易状态</th>
+                        <th class="user-last">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbody">
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <!-- 一币理财内容 -->
+    <div class="container" style="display:none;position:absolute;left:50%;top:50%;margin-left:-512px;margin-top:-361px;z-index:2;">
+      <div class="member-content" id="J_memberContent">
+          <div class="member-main-full">
+        <div class="dialog-widget">
+          <p class="dialog-title"><span class="span-1">一币认购</span><span class="span-2"></span></p>
+          <!-- 图纸为一页13条数据 -->
+          <div class="dialog-wrap-border main-widget customer-service-center">
+            <div class="widget-form"  name="Form">
+              <p class="widget-notice mt15 ml10">本次交易倒计时还剩<b class="widget-warning" id="sec"></b>秒，超时没确认将会自动取消该交易！</p>
+              <p class="widget-tips mt15 ml10">下单成功后必须在“<b class="widget-warning">2小时</b>”内向发布方<b class="widget-warning" id="payusername"></b>的指定银行账号打入不低于<b class="widget-warning" id="paynum">元</b>！同时在登录平台点“一币-理财”下“认购明细”查看该笔交易状态-发布方<b class="widget-warning" id="txpay-payusername"></b>收款账号，并进行“我已付款<span id="v-paynum"></span>通知发布方确认”的操作！</p>
+              <p class="item mt15">
+                <label class="title">发布方收款方式：</label><span class="text widget-warning" id="txpay-paybank"></span>
+              </p>
+              <p class="item">
+                <label class="title">认购方：</label><span class="text" id="userName"></span>
+              </p>
+              <p class="item">
+                <label class="title">发布方：</label><span class="text" id="f-txpay-payusername"></span>
+              </p>
+              <p class="item">
+                <label class="title">本次认购一币数量为：</label><span class="text"><b class="widget-warning" id="b-txpay-paynum"></b> 一币 （将增加到您的“一币-余额”）</span></p>
+              <p class="item">
+                <label class="title">认购方将支付：</label><span class="text"><b class="widget-warning" id="r-txpay-paynum"></b>元</span></p>
+              <p class="item">
+                <label class="title">二级密码：</label>
+                <input type="password" name="epnm3" id="er-pwd"/>
+              </p>
+              <p class="button-line mt15">
+                <input type="button" class="widget-button" id="widget-button" style="width:150px; height:35px; background:#2ebddb;" value="确定无误" name="B1" />
+              </p>
+              <p class="widget-tips mt30 ml10 tc">根据您注册用户时选择的地区，本服务中心为您提供贴身的服务，以提高办事效率！</p>
+             <!--  <p class="widget-tips mt10 ml10 tc">有任何事情请与我联系:<b class="widget-warning"><s:text name="vipepmy.jsp.epmy.jsp.643357742">QQ：${qq}</s:text></b>
+                <a class="contact-qq" target="_blank" href="https://wpa.qq.com/msgrd?v=3&amp;uin=${qq}&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:613697152:41" alt="点击这里发消息" title="点击这里发消息"></a> -->
+              </p>
+              <!-- <p class="widget-tips widget-warning mt15 ml10 tc">各部门服务中心人员分工有序,请不要重复添加好友,更不要向每个客服在同一时段咨询同一个问题，感谢您的配合。</p> -->
+              <p class="button-line mt15 tc"><a class="widget-button-small" id="widget-button-small" style="text-decoration: none"  href="javascript:void(0)">返回交易市场</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--弹层 -->
+    <div id="mask" style="display:none;width:100%;height:100%;background:black;opacity:0.3; position:absolute; left:0; top:0;z-index:1;"></div>
+      <script src="js/jq.js"></script>
+      <script src="js/public.js"></script>
+      <script>
+            ele[1].style.background="#171c20";
+            ele[1].style.color="#e97159";
+        //一币交易市场
+        ajax('get','/vip/ybmarket',null,function(data){
+                var str="";
+                for(var i=0; i<data.dataList.length; i++){
+                        if(data.dataList[i].payusername==$$('username').innerHTML){
+                            var z="撤销卖出";
+                        }else{
+                            var z="等待认购中。。。";
+                        }
+     
+                        str+="<tr>"+"<td class='user-first'>"+data.dataList[i].payid+'</td>'+
+                            "<td>"+data.dataList[i].payusername+"</td>"+
+                            "<td>"+data.dataList[i].cxt+"</td>"+
+                            "<td>"+data.dataList[i].paynum9+"</td>"+
+                            "<td>"+data.dataList[i].paynum+"</td>"+
+                            "<td>"+data.dataList[i].paynum+data.dataList[i].paynum9+"</td>"+
+                            "<td>"+data.dataList[i].paytime+"</td>"+
+                            "<td>"+z+"</td>"+
+                            "<td class='user-last'>"+"<a data-payid='"+data.dataList[i].payid+"' data-bank='"+data.dataList[i].paybank+"' href='javascript:void(0)'><font color='#FF0000' size='2'>我要认购</font></a></td>"
+                        "</tr>";
+                }
+                $$('tbody').innerHTML=str;
+                $('.user-last').mousedown(function(){
+                    var attribute=$(this).find('a').attr('data-bank');
+                    var id=$(this).find('a').attr('data-payid');
+                     if(confirm('提示：对方使用的收款方式是'+attribute+'您确定认购了吗')){
+                        ajax('get','/vip/ybmr',{'ep':id},function(data){
+                            //console.log(data)
+                            if(data.erroCodeNum==0){
+                                $$('payusername').innerHTML=data.txpay.payusername;
+                                if(data.txpay.paynum<900){
+                                    $$('paynum').innerHTML=data.txpay.paynum*0.85;  
+                                    $$('v-paynum').innerHTML=data.txpay.paynum*0.85; 
+                                    $$('r-txpay-paynum').innerHTML=data.txpay.paynum*0.85;
+                                }else{
+                                    $$('paynum').innerHTML=data.txpay.paynum*0.90;
+                                    $$('v-paynum').innerHTML=data.txpay.paynum*0.90;
+                                    $$('r-txpay-paynum').innerHTML=data.txpay.paynum*0.90;
+                                }
+                                $$('txpay-payusername').innerHTML=data.txpay.payusername;
+                                $$('txpay-paybank').innerHTML=data.txpay.paybank;
+                                $$('userName').innerHTML=data.gcuser.username;
+                                $$('f-txpay-payusername').innerHTML=data.txpay.payusername;
+                                $$('b-txpay-paynum').innerHTML=data.txpay.paynum;
+                                $('.container').attr({'id':id}).show();//我要认购显示的时候把订单id保存到该元素上
+                                $('#mask').show();
+                            }else{
+                                alert(data.erroDescrip)
+                            }    
+                        })
+                        
+                     }
+                })
+        },'jsonp')
+        
+        $$('widget-button').onclick=function(){
+            if($$('er-pwd').value==''){
+                alert('二级密码不能为空')
+                $$('er-pwd').focus();
+                return ;
+            }
+            ajax('get','/vip/ybmr',{'ep':$('.container').attr('id'),'epnm3':$$('er-pwd').value,'status':2},function(data){
+                        if(data.erroCodeNum==2000){
+                            alert('一币认购成功')
+                        }else{
+                            alert(data.erroDescrip)
+                        }
+                           
+            })
+        }
+        
+        $$('widget-button-small').onclick=function(){
+              if(confirm('提示：您确定取消本次交易吗？？ ')){
+                $('.container').hide().removeAttr('id');
+                $('#mask').hide();
+              }
+        }
+        
+        $('.span-2').mousedown(function(){
+            $('.container').hide().removeAttr('id');
+            $('#mask').hide();
+        })
+      </script>
+   </body>
+</html>

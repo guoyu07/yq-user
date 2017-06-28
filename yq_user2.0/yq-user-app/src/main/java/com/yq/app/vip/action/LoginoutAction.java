@@ -30,4 +30,13 @@ public class LoginoutAction extends ALDAdminActionSupport {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
+	public String getErroDescrip() {
+		return super.getErroDescrip();
+	}
+	public int getErroCodeNum() {
+		return super.getErroCodeNum();
+	}
+	
+	
 }

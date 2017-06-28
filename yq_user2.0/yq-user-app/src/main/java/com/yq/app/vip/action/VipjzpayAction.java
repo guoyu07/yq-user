@@ -69,28 +69,11 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			super.setErroCodeNum(2003);
+			super.setErroCodeNum(2005);
 			return SUCCESS;
 		}
 		
 		if(status==1){
-				if(gcuser.getVip()==2){
-					farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
-						if(farenUser!=null){
-							if(!farenUser.getVipsq().equals(smsCode)){
-								super.setErroCodeNum(2001);
-								return SUCCESS;
-							}
-						}else{
-							super.setErroCodeNum(2002);
-							return SUCCESS;
-						}
-				}else{
-					if(!smsCode.equals(gcuser.getVipsq())){
-						super.setErroCodeNum(2001);
-						return SUCCESS;
-					}
-				}
 				userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay,farenUser);
 				super.setErroCodeNum(2000);
 		}

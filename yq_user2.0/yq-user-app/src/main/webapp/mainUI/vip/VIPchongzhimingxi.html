@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/public.css">
+    <style>
+        .Recharge-details-title{
+            height:49px;
+            line-height:49px;
+            padding-left:28px;
+            border-bottom:1px solid #c6c6c6;
+            overflow:hidden;
+        }
+        .Recharge-details-title span{
+             font-size:20px;
+              float:left;
+        }
+        .Recharge-details-title a{
+            display:block;
+            width:136px;
+            height:26px;
+            float:right;
+            background:#ea765d;
+            text-align:center;
+            line-height:26px;
+            font-size:12px;
+            color:white;
+            margin-right:34px; 
+        }
+        .Turn-out table{
+            margin-top:20px;
+            margin-left:28px;
+        }
+    </style>
+   </head>
+   <body>
+      <div class="Business-head">
+            <span class="Business-center">商务中心</span>
+            <p><span id="username"></span><a href="javascript:void(0)" id="Log-out">退出登入</a></p>
+      </div>   
+      <div class="A-coin">
+        <div class="A-coin-left">
+            <div class="A-coin-list" id="A-coin-list">
+                <a href="./yibizhuanchu.html">一币转出</a>
+                <a href="./yibijiaoyishichang.html">一币交易市场</a>
+                <a href="./yibirengoumingxi.html">一币认购明细</a>
+                <a href="./baodanbizhuanchu.html">报单币转出</a>
+                <a href="./baodanbichongzhi.html">报单币充值</a>
+                <a href="./VIPchongzhiguanli.html">充值币管理</a>
+                <a href="./VIPchongzhimingxi.html">VIP充值明细</a>
+                <a href="./beiyongbaodanbimingxi.html">备用报单币明细</a>
+            </div>
+        </div>
+        <div class="A-coin-right">
+            <div class="A-coin-bg">
+                <h2>数据面板</h2>
+                <var>Dashboard</var>
+                <div>
+                    <i class="Money-pot">钱罐余额</i>
+                    <p id="p-1">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coin">充值币余额</i>
+                    <p id="p-2">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Recharge-number">累计充值数</i>
+                    <p id="p-3">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coins">已用充值币</i>
+                    <p id="p-4">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Currency-declaration">备用报单币</i>
+                    <p id="p-5">
+                     
+                    </p>
+                </div>
+            </div>
+            <div class="Turn-out" id="scroll" style="overflow-y:scroll">
+                <div class="Recharge-details">
+                    <p class="Recharge-details-title">
+                        <span>VIP充值管理明细</span>
+                    </p>
+                </div>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th class="user-first">编号</th>
+                        <th>充值用户名</th>
+                        <th>充值金额</th>
+                        <th>备注</th>
+                        <th>卖出方</th>
+                        <th>操作时间</th>
+                        <th class="user-last" style="width:221px;">剩余数量</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
+             <p class="widget-pages" id="barcon">
+                     
+            </p>
+        </div>
+      </div>
+      <script src="js/jq.js"></script>
+      <script src="js/public.js"></script>
+      <script>
+        ele[6].style.background="#171c20";
+        ele[6].style.color="#e97159"; 
+        goPage(1)
+        var currentPage=1,count="",num="",totalPage = 1; //总页数
+        function goPage(currentPage){
+            var pageSize=3;
+            if(typeof $('#toPageInputText').val()!='undefined'&&$('#toPageInputText').val()!=""){
+                currentPage=$('#toPageInputText').val();
+            }
+            count=currentPage;
+            ajax('get','/vip/czbdetil',{'toPage':count-1,'pageSize':pageSize},function(data){
+                var str="";num=data.totalSize;
+                for(var i=0; i<data.dataList.length; i++){
+                    str+="<tr>"+"<td class='user-first'>"+data.dataList[i].cjid+'</td>'+
+                        "<td>"+data.dataList[i].cjuser+"</td>"+
+                        "<td>"+data.dataList[i].cjjo+"</td>"+
+                        "<td>"+data.dataList[i].bz+"</td>"+
+                        "<td>"+data.dataList[i].vipuser+"</td>"+
+                        "<td>"+data.dataList[i].cjdate+"</td>"+
+                        "<td class='user-last'>"+data.dataList[i].sycjb+"</td>";
+                }
+                $$('tbody').innerHTML=str;
+               //总共分几页 
+                if(num/pageSize > parseInt(num/pageSize)){   
+                        totalPage=parseInt(num/pageSize)+1;   
+                }else{   
+                       totalPage=parseInt(num/pageSize);   
+                }   
+               //当前页数
+                var tempStr="";
+                if(currentPage>1){
+                    tempStr += "<a href=\"#\" onClick=\"goPage("+(1)+")\"首页</a>";
+                    tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage-1)+")\">上一页</a>"
+                }else{
+                    tempStr += "<a href='javascript:void(0)'>首页</a>";
+                    tempStr += "<a href='javascript:void(0)'><上一页</a>";    
+                }
+
+                if(currentPage<totalPage){
+                    tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage+1)+")\">下一页</a>";
+                    tempStr += "<a href=\"#\" onClick=\"goPage("+(totalPage)+")\">尾页</a>";
+                }else{
+                    tempStr += "<a href='javascript:void(0)'><下一页</a>";
+                    tempStr += "<a href='javascript:void(0)'><尾页</a>";    
+                }
+                    tempStr +='<a href="#">页数：'+currentPage+'/'+totalPage+'页</a>';
+                    tempStr +='<a href="#">总共:'+num+'条</a>';
+                    tempStr +='<a href="#">'+num+'条/'+totalPage+'页</a>';
+                    tempStr +='<input id="toPageInputText" type="text" name="toPage"  value="" onkeydown="">'
+                    tempStr +='<a href="javascript:void(0)" class="page-go-button" id="pageGo" onClick=\"goPage()\">跳转</a>'
+                    document.getElementById("barcon").innerHTML = tempStr;  
+            });
+        }
+       </script>
+   </body>
+</html>

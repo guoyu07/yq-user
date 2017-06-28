@@ -35,7 +35,6 @@ public class VipUserInterceptor extends AbstractInterceptor {
 		Session userSession = aus.getVipTokenSession(sessionhttp.getId());
 		
 		gcuser = aus.getUserByUserName(userSession.getUserName());
-		
 		if(gcuser.getVip()==2){
 			farenUser = aus.getUserByUserName(aus.getUserProperty(userSession.getUserName()).getFaren());
 			if(farenUser==null){

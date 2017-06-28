@@ -101,12 +101,129 @@
             <div  class="Business-login">
                 <span class="bg"></span>
                 <div class="login">
-                    <p><label>用户名</label><input type="text"/><p>
-                    <p><label>密码</label><input type="text" class="pwd"/><p>
-                    <p><label>手机验证码</label><input type="text" class="code"/><input type="button" class="code-btn" value="发送验证码"><p>
+                    <p><label>用户名</label><input type="text" id="user"/><p>
+                    <p><label>密码</label><input type="password" class="pwd" id="pwd"/><p>
+                    <p><label>手机验证码</label><input type="text" class="code" id="code"/><input type="button" class="code-btn"  id="code-btn" value="发送验证码"><p>
                 </div>
-                <div class='btn'>登录</div>
+                <div class='btn' id="btn">登录</div>
             </div>
         </div>
+    <script src="js/jq.js"></script>
+    <script>
+        function $$(ele){return document.getElementById(ele)};
+        var v,p,c;
+        function getCookie(name){
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+            return unescape(arr[2]);
+            else
+            return null;
+        }
+        function delCookie(name){
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval=getCookie(name);
+            if(cval!=null)
+            document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+        }
+        if(getCookie('name')!=null){
+            delCookie('name')
+        }
+        
+        if(getCookie('page')!=null){
+            delCookie('page')
+        }
+        var countdown=60; 
+        
+        function checkdata(){
+              v=$$('user').value; p=$$('pwd').value; c=$$('code').value;
+            if(v==""){
+                alert("请写入您的用户名")
+                $$('user').focus()
+                return ;
+            }
+            if(p==""){
+                alert("请写入登录密码")
+                $$('pwd').focus()
+                return ;
+            } 
+            return 1;
+        }
+        var countdown=60;
+        function settime(val){ 
+            if (countdown == 0) { 
+                val.removeAttribute("disabled");    
+                val.value="发送验证码"; 
+                countdown = 60; 
+                clearTimeout(time)
+                return ;
+            }else{ 
+                val.setAttribute("disabled", true); 
+                val.value="重新发送(" + countdown + ")"; 
+                countdown--; 
+            } 
+            var time=setTimeout(function() { 
+                settime(val) 
+            },1000) 
+    } 
+        $$('code-btn').onclick=function(){
+            if(checkdata()){
+                settime(this)
+                ajax('get','/vipsms2',{'toUserName':v,'op':24},function(data){
+                    if(data.erroCodeNum==0){
+                        alert('手机验证码发成功')
+                    }else{
+                        alert('手机验证码失败')
+                    }
+                },'jsonp')
+            }
+        }
+        $$('btn').onclick=function(){
+            if(!checkdata()){
+               return ;
+            }
+            if(c==""){
+              alert("验证码不能为空")
+              $$('code').focus();
+              return ;
+            }
+            ajax('get','/viplogin?callback=?',{'vipName':v,'vipPassword':p,'smsCode':c},function(data){
+                 if(data.erroCodeNum==2001){
+                    alert('用户名不正确')
+                    return ;
+                  }
+                  if(data.erroCodeNum==2003){
+                    alert('用户名或密码错误')
+                    return ;
+                  }
+                  if(data.erroCodeNum==99999){
+                      alert('账户被封')
+                      return ;
+                  }
+                  if(data.erroCodeNum==2002) {
+                      alert('无权登入')
+                      return ;
+                  }
+                  if(data.erroCodeNum==2004){
+                      alert('短信验证码不正确')
+                      return ;
+                  }
+                  if(data.erroCodeNum==2000){
+                    location.href="./yibizhuanchu.html";
+                  }
+            },'jsonp')
+        }
+        function ajax(action,url,obj,callback,jsonp){
+           $.ajax({
+                type:action,
+                url:url,
+                data:obj,
+                dataType:jsonp,
+                success:function(data){
+                    callback(data)
+                }
+            });
+        }
+    </script>
   </body>
 </html>

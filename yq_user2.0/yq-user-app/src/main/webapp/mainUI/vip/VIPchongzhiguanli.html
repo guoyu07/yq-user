@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/public.css">
+    <style>
+        .Turn-out ul li{
+            height:49px;
+            border-bottom:1px solid #c6c6c6;
+            line-height:49px;
+            font-size:19px;
+            padding-left:38px;
+            color:#000000;
+        }
+        .Turn-out .Turn-out-Crumbs{
+            padding-left:28px;
+            font-size:20px;
+            color:#000000;
+           
+        }
+        .Turn-out ul li label{
+            display:block;
+            width:174px;
+            float:left;
+        }
+        .Turn-out ul li input,.Turn-out ul li select{
+            width:195px;
+            height:29px;
+            border:1px solid #c6c6c6;
+        }
+        
+        .Turn-out .Turn-out-btn {
+            width:336px;
+            height:65px;
+            display:block;
+            background-color:#2ebddb;
+            margin:0 auto;
+            font-size:30px;
+            color:white;
+        }
+        .Surplus{
+            padding-left:38px;
+            font-size:14px;
+            margin-top:20px;
+        }
+        .Surplus span{
+            color:red;
+        } 
+    </style>
+   </head>
+   <body>
+      <div class="Business-head">
+            <span class="Business-center">商务中心</span>
+            <p><span id="username"></span><a href="javascript:void(0)" id="Log-out">退出登入</a></p>
+      </div>   
+      <div class="A-coin">
+        <div class="A-coin-left">
+            <div class="A-coin-list" id="A-coin-list">
+               <a href="./yibizhuanchu.html">一币转出</a>
+                <a href="./yibijiaoyishichang.html">一币交易市场</a>
+                <a href="./yibirengoumingxi.html">一币认购明细</a>
+                <a href="./baodanbizhuanchu.html">报单币转出</a>
+                <a href="./baodanbichongzhi.html">报单币充值</a>
+                <a href="./VIPchongzhiguanli.html">充值币管理</a>
+                <a href="./VIPchongzhimingxi.html">VIP充值明细</a>
+                <a href="./beiyongbaodanbimingxi.html">备用报单币明细</a>
+            </div>
+        </div>
+        <div class="A-coin-right">
+            <div class="A-coin-bg">
+                <h2>数据面板</h2>
+                <var>Dashboard</var>
+                <div>
+                    <i class="Money-pot">钱罐余额</i>
+                    <p id="p-1">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coin">充值币余额</i>
+                    <p id="p-2">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Recharge-number">累计充值数</i>
+                    <p id="p-3">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Rechargeable-coins">已用充值币</i>
+                    <p id="p-4">
+                      
+                    </p>
+                </div>
+                <div>
+                    <i class="Currency-declaration">备用报单币</i>
+                    <p id="p-5">
+                     
+                    </p>
+                </div>
+            </div>
+            <div class="Turn-out">
+                <ul>
+                    <li class="Turn-out-Crumbs">VIP充值管理</li>
+                    <li><label>用户名</label><input type="text" id="cjuser"/></li>
+                    <li><label>充值金额</label>
+                        <select  name="cjpay" id="cjpay">
+                            <option selected="" value="">请选择充值金额</option>
+                            <option value="1000">1000</option>
+                            <option value="2000">2000</option>
+                            <option value="5000">5000</option>
+                        </select>
+                    </li>
+                    <li><label>充值密码</label><input type="password" id="cjpass"/></li>
+                </ul>
+                <p class="Surplus">剩余：<span id="sy"></span></p>
+                <input type="button" class="Turn-out-btn" id="Turn-out-btn" style="cursor:pointer;" value="提交充值">
+            </div>
+        </div>
+      </div>
+      <script src="js/jq.js"></script>
+      <script src="js/public.js"></script>
+      <script>
+           ele[5].style.background="#171c20";
+           ele[5].style.color="#e97159"; 
+           ajax('get','/vip/vipcjb',null,function(data){
+                     console.log(data)
+                    if(data.erroCodeNum==2001||data.erroCodeNum==2002||data.erroCodeNum==2005){
+                        document.cookie="name=vipcjb";
+                        var c=escape("VIPchongzhiguanli");
+                        document.cookie="page="+c;
+                        location.href="./yanzhengvipquanxian.html";
+                    }
+            },'jsonp')
+        $$("Turn-out-btn").onclick=function(){
+            var c=$$('cjuser'),p=$$('cjpay'),j=$$('cjpass');
+                if(c.value==""){
+                    alert("用户名不存在");
+                    c.focus();
+                    return ;
+                }
+                if(p.value==""){
+                    alert("请选择充值金额")
+                    return ;
+                }
+                if(j.value==""){
+                    alert("充值密码不能为空")
+                    j.focus()
+                    return ;
+                }
+                var obj={'cjuser':c.value,'cjpay':p.value,'cjpass':j.value,'status':1};
+                 ajax('get','/vip/vipcjb',obj,function(data){
+                        console.log(data)
+                        if(data.erroCodeNum==2000){
+                            alert("充值成功")
+                            c.value="";p.value="";j.value="";
+                            getUserProperty() 
+                        }else{
+                            alert(data.erroDescrip)
+                        }
+                 })
+        }
+       </script>
+   </body>
+</html>

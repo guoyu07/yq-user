@@ -98,11 +98,14 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		String vipuserSession = userService.isHasVipToken(sessionhttp.getId());
 		if(vipuserSession==null || !vipuserSession.equals(super.getUserName())){
 			inputUrl= request.getRequestURI();
-			super.setErroCodeNum(2001);
+			super.setErroCodeNum(2005);
 			return SUCCESS;
 		}
-		userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass,farenUser);
-		super.setErroCodeNum(2000);
+		if(status==1){
+			userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass,farenUser);
+			super.setErroCodeNum(2000);
+			return SUCCESS;
+		}
 		return SUCCESS;
 	}
 	

@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.sr178.game.framework.config.ConfigLoader;
 import com.sr178.game.framework.context.ServiceCacheFactory;
+import com.sr178.module.web.action.JsonBaseActionSupport;
 import com.sr178.module.web.session.Session;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
@@ -21,6 +22,7 @@ public class VIPInterceptor extends AbstractInterceptor {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Gcuser gcuser;
+	private String islogin;
 	
 	@Override
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
@@ -29,8 +31,7 @@ public class VIPInterceptor extends AbstractInterceptor {
 		HttpSession sessionhttp = ServletActionContext.getRequest()
 				.getSession();
 		Session userSession = aus.getVipTokenSession(sessionhttp.getId());
-		
-		if (userSession==null) {
+		if (userSession==null ) {
 			return "nologin";
 		} else {
 			String userName = userSession.getUserName();
@@ -73,6 +74,16 @@ public class VIPInterceptor extends AbstractInterceptor {
 	public void setGcuser(Gcuser gcuser) {
 		this.gcuser = gcuser;
 	}
+
+	public String getIslogin() {
+		return islogin;
+	}
+
+	public void setIslogin(String islogin) {
+		this.islogin = islogin;
+	}
+
+	
 	
 	
 }
