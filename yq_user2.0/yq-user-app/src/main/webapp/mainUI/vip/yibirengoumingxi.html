@@ -22,8 +22,8 @@
     </div>   
     <div class="A-coin">
         <div class="A-coin-left">
-            <div class="A-coin-list" id="A-coin-list">
-                <a href="./yibizhuanchu.html">一币转出</a>
+             <div class="A-coin-list" id="A-coin-list">
+               <a href="./yibizhuanchu.html">一币转出</a>
                 <a href="./yibijiaoyishichang.html">一币交易市场</a>
                 <a href="./yibirengoumingxi.html">一币认购明细</a>
                 <a href="./baodanbizhuanchu.html">报单币转出</a>
@@ -140,8 +140,8 @@
                 }
                 if(data.dataList[i].zftime==null){
                     if(data.dataList[i].ep==1){
-                      alert(data.dataList[i].rgdate)
-                      var z='<font color="#FF00FF">您已下单，等待您在</font><font color="#0000FF"><b>'+data.dataList[i].rgdate+'</b></font><font color="#FF00FF">前付款，<b><a target="_blank" href="#"><font color="#008000">点击查看卖出方收款账号！</font></a></b></font>';
+                     // alert('0'+data.dataList[i].rgdate)
+                      var z='<font color="#FF00FF">您已下单，等待您在</font><font color="#0000FF"><b>'+data.dataList[i].rgdate+'</b></font><font color="#FF00FF">前付款，<b><a target="_blank" href="javascript:void(0)" class="caozuo-btn"><font color="#008000">点击查看卖出方收款账号！</font></a></b></font>';
                     }
                     if(data.dataList[i].ep==2){
                       var z=data.dataList[i].dfuser+"--已付款，等待卖出方"+data.dataList[i].payusername+"的确认中。。。";
@@ -162,10 +162,8 @@
                     "<td>"+data.dataList[i].paynum+"</td>"+
                     "<td>"+data.dataList[i].rgdate+"</td>"+
                     "<td>"+data.dataList[i].payusername+"</td>"+
-                    "<td>"+z+"</td>"+
-                    '<td>'+"<a class='caozuo-btn'" +"data-fb='"+data.dataList[i].payid +"'data-paynum9='"+data.dataList[i].paynum9  +"'data-payusername='"+data.dataList[i].payusername +"'href='javascript:void(0)'>"+"<font color='#FF0000' size='2'>"
-                        +k+"</font></a>"+
-                        
+                    "<td data-fb='"+data.dataList[i].payid+"'data-paynum9='"+data.dataList[i].paynum9+"' data-payusername='"+data.dataList[i].payusername+"'>"+z+"</td>"+
+                    '<td>'+"<a class='caozuo' data-fb='"+data.dataList[i].payid+"'  href='javascript:void(0)'>"+"<font color='#FF0000' size='2'>"+k+"</font></a>"+
                     "</td>"+"<td class=user-last>"+h+"</td>"+"</tr>";
             }
                     $$('tbody').innerHTML=str;
@@ -203,11 +201,11 @@
             });
     }
     $('.caozuo-btn').live('mousedown',function(){
-          var that=$(this);
+          var that=$(this).parents('td');
           var payusername=that.attr('data-payusername');
           var paynum9=that.attr('data-paynum9');
           if(confirm('提示：您确定已向发'+payusername+'打款'+paynum9+'元了吗')){
-            var Number=that.parent().prevAll('.user-first').text();
+            //var Number=that.parent().prevAll('.user-first').text();
             var id=that.attr('data-fb');
             ajax('get','/vip/fbbank',{'fb':id},function(data){
                     $$('title-1').innerHTML=data.txpay.payusername;
@@ -217,11 +215,24 @@
                     $$('title-5').innerHTML=data.gcuser.addsheng+'&nbsp'+data.gcuser.addshi+'&nbsp;'+data.gcuser.addqu;
                     $$('title-6').innerHTML=data.txpay.rgdate;
                     $$('title-7').innerHTML=data.txpay.paynum9;
-            })
+            },'jsonp')
             $$('mask').style.display="block";
             $$('member-dialog-container').style.display="block";
           }
     })
+    
+    $('.caozuo').live('mousedown',function(){
+        ajax('get','/vip/myepok',{'ep':$(this).attr('data-fb')},function(data){
+                if(data.erroCodeNum==2000){
+                    alert('已打款成功')
+                    goPage(1)
+                }else{
+                    alert(data.erroDescrip)
+                }
+                //console.log(data)
+        })
+    })
+    
     $$('span-2').onclick=function(){
         $$('mask').style.display="none";
         $$('member-dialog-container').style.display="none";

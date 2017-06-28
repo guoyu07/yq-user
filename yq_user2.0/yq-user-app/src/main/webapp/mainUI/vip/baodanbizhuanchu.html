@@ -103,10 +103,10 @@
                    <li><label>转账数量</label>
                         <select  name="cjpay" id="jzpay" style="width:195px; height:31px;">
                             <option selected="" value="">请选择转账数量</option>
-                            <option value="10000">10000</option>
-                            <option value="20000">20000</option>
-                            <option value="30000">30000</option>
-                            <option value="50000">50000</option>
+                            <option value="10000">1万</option>
+                            <option value="20000">2万</option>
+                            <option value="30000">3万</option>
+                            <option value="50000">5万</option>
                         </select><span>&nbsp;&nbsp;剩余 <i style="font-style:normal;color:red;" id="sy"></i></span></li>
                     <li><label>接收用户名</label><input type="text" id="syuser"/></li>
                     <li><label>二级密码</label><input type="password" id="pa3"/></li>
@@ -122,7 +122,7 @@
            ele[3].style.color="#e97159";
             ajax('get','/vip/bdbzc',null,function(data){
                      console.log(data)
-                    if(data.erroCodeNum==2001||data.erroCodeNum==2002){
+                    if(data.erroCodeNum==2001||data.erroCodeNum==2002||data.erroCodeNum==2005){
                         document.cookie="name=vipcjb";
                         var c=escape("baodanbizhuanchu");
                         document.cookie="page="+c;
