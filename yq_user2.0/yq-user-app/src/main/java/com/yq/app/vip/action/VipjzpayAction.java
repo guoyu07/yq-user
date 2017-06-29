@@ -1,18 +1,16 @@
 package com.yq.app.vip.action;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.google.common.base.Strings;
-import com.opensymphony.xwork2.ActionContext;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
+import com.yq.vip.bean.VipUser;
 
 public class VipjzpayAction extends ALDAdminActionSupport {
 
@@ -21,7 +19,7 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Gcuser gcuser;
+	private VipUser gcuser;
 	
 	private int status;
 	
@@ -33,7 +31,7 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 	
 	private String dlpa;//独立密码
 	
-	private Gcuser farenUser;
+	private VipUser farenUser;
 	
 	private String smsCode;
 	
@@ -44,9 +42,9 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 				.getSession();
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		HttpServletRequest request=ServletActionContext.getRequest();
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
-			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			farenUser = userService.getVipUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
 				super.setErroCodeNum(2002);
 				return SUCCESS;
@@ -74,16 +72,16 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 		}
 		
 		if(status==1){
-				userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay,farenUser);
+				userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay);
 				super.setErroCodeNum(2000);
 		}
 		
 		return SUCCESS;
 	}
-	public Gcuser getGcuser() {
+	public VipUser getGcuser() {
 		return gcuser;
 	}
-	public void setGcuser(Gcuser gcuser) {
+	public void setGcuser(VipUser gcuser) {
 		this.gcuser = gcuser;
 	}
 	public int getStatus() {
@@ -116,10 +114,10 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 	public void setDlpa(String dlpa) {
 		this.dlpa = dlpa;
 	}
-	public Gcuser getFarenUser() {
+	public VipUser getFarenUser() {
 		return farenUser;
 	}
-	public void setFarenUser(Gcuser farenUser) {
+	public void setFarenUser(VipUser farenUser) {
 		this.farenUser = farenUser;
 	}
 	public String getSmsCode() {

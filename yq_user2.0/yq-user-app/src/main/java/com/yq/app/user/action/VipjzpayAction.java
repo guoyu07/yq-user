@@ -89,7 +89,7 @@ public class VipjzpayAction extends ALDAdminActionSupport {
 						return SUCCESS;
 					}
 				}*/
-				userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay,farenUser);
+				userService.trasferYbToOtherPersion(super.getUserName(), jzuser,pa3,jzpay);
 				super.setErroCodeNum(2000);
 		}
 		

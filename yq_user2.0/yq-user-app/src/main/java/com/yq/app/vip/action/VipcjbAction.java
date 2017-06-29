@@ -11,9 +11,9 @@ import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminPageActionSupport;
 import com.yq.user.bo.Gcuser;
-import com.yq.user.bo.SysBiLog;
 import com.yq.user.bo.Vipcjgl;
 import com.yq.user.service.UserService;
+import com.yq.vip.bean.VipUser;
 
 public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 
@@ -22,17 +22,17 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Gcuser gcuser;
+	private VipUser gcuser;
 	private int status;
-	private Gcuser farenUser;
+	private VipUser farenUser;
 	private String smsCode;
 	
 	private String inputUrl;
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
-			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			farenUser = userService.getVipUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
 				super.setErroCodeNum(2002);
 				return SUCCESS;
@@ -70,11 +70,11 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	private String cjpass;
 	public String cj(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();
 		if(gcuser.getVip()==2){
-			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			farenUser = userService.getVipUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
 				super.setErroCodeNum(2002);
 				super.setErroDescrip("法人不存在！");
@@ -102,7 +102,7 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 			return SUCCESS;
 		}
 		if(status==1){
-			userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass,farenUser);
+			userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass);
 			super.setErroCodeNum(2000);
 			return SUCCESS;
 		}
@@ -111,7 +111,7 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 	
 	public String vipcjbcjbdetail(){
 		UserService userService = ServiceCacheFactory.getService(UserService.class);
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		super.setDataList(userService.getVipcjbPageList(super.getUserName(), super.getToPage(), super.getPageSize()));
 		super.setErroCodeNum(2000);
 		return SUCCESS;
@@ -126,11 +126,11 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 		this.inputUrl = inputUrl;
 	}
 
-	public Gcuser getFarenUser() {
+	public VipUser getFarenUser() {
 		return farenUser;
 	}
 
-	public void setFarenUser(Gcuser farenUser) {
+	public void setFarenUser(VipUser farenUser) {
 		this.farenUser = farenUser;
 	}
 
@@ -154,11 +154,11 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 
 
 
-	public Gcuser getGcuser() {
+	public VipUser getGcuser() {
 		return gcuser;
 	}
 
-	public void setGcuser(Gcuser gcuser) {
+	public void setGcuser(VipUser gcuser) {
 		this.gcuser = gcuser;
 	}
 

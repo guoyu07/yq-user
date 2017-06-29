@@ -1,5 +1,7 @@
 package com.yq.vip.bean;
 
+import com.yq.user.bo.Gcuser;
+
 public class VipUser{
 	private Integer id;
 	private String user;			//用户名
@@ -17,6 +19,9 @@ public class VipUser{
 	private int bybdb;				//备用报单币
 	private String moneypot;		//钱罐余额
 	private int sybdb;				//报单币
+	private String call;			//电话号码
+	private String vipsq;
+	private String name;			
 	public Integer getId() {
 		return id;
 	}
@@ -114,6 +119,48 @@ public class VipUser{
 		this.sybdb = sybdb;
 	}
 	
+	public String getCall() {
+		return call;
+	}
+	public void setCall(String call) {
+		this.call = call;
+	}
+	public String getVipsq() {
+		return vipsq;
+	}
+	public void setVipsq(String vipsq) {
+		this.vipsq = vipsq;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public static VipUser getVipUser(Gcuser user){
+		if(user!=null){
+			VipUser vipuser = new VipUser();
+			vipuser.setUser(user.getUsername());
+			vipuser.setUp(user.getUp());
+			vipuser.setVip(user.getVip());
+			vipuser.setLjjyyb(user.getCbpay());
+			vipuser.setYb(user.getPay());
+			vipuser.setLjsyyb(user.getTxpay());
+			vipuser.setVipyb(user.getVippay());
+			vipuser.setCzbye(user.getVipcjcjb());
+			vipuser.setCzbljczs(user.getVipljcjb());
+			vipuser.setYyczb(user.getVipsycjb());
+			vipuser.setBybdb(user.getSyep());
+			vipuser.setSybdb(user.getSybdb());
+			vipuser.setCall(user.getCall());
+			vipuser.setVipsq(user.getVipsq());
+			vipuser.setName(user.getName());
+			return vipuser;
+		}else{
+			return null;
+		}
+	}
 	
 	
 	

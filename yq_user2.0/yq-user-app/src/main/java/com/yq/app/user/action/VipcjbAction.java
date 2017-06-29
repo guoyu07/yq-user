@@ -96,7 +96,7 @@ public class VipcjbAction extends ALDAdminPageActionSupport<Vipcjgl> {
 			inputUrl= request.getRequestURI();
 			return "noVipToken";
 		}
-		userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass,farenUser);
+		userService.vipCj(super.getUserName(), cjuser, cjpay, cjpass);
 		super.setErroCodeNum(2000);;
 		return SUCCESS;
 	}

@@ -41,7 +41,7 @@ public class VIPInterceptor extends AbstractInterceptor {
 			}
 			gcuser = aus.getUserByUserName(userName);
 			if(gcuser.getVip()==0){
-				return "nologin";
+				return "noPermission";
 			}
 			
 			ALDAdminActionSupport aldAction = null;

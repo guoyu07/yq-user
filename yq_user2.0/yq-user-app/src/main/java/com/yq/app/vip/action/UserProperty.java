@@ -16,31 +16,8 @@ public class UserProperty extends ALDAdminActionSupport{
 	private VipUser vipuser;
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		Gcuser user = userService.getUserByUserName(super.getUserName());
-		String moneypot = userService.getMoneyPot(super.getUserName());
-		if(user!=null){
-			if(user.getVip()!=0){
-				vipuser = new VipUser();
-				vipuser.setUser(user.getUsername());
-				vipuser.setUp(user.getUp());
-				vipuser.setVip(user.getVip());
-				vipuser.setLjjyyb(user.getCbpay());
-				vipuser.setYb(user.getPay());
-				vipuser.setLjsyyb(user.getTxpay());
-				vipuser.setVipyb(user.getVippay());
-				vipuser.setCzbye(user.getVipcjcjb());
-				vipuser.setCzbljczs(user.getVipljcjb());
-				vipuser.setYyczb(user.getVipsycjb());
-				vipuser.setBybdb(user.getSyep());
-				vipuser.setMoneypot(moneypot);
-				vipuser.setSybdb(user.getSybdb());
-				super.setErroCodeNum(2000);
-				return SUCCESS;
-			}else{
-				super.setErroCodeNum(2002);
-				return SUCCESS;
-			}
-		}
+		vipuser = userService.getVipUserByUserName(super.getUserName());
+		super.setErroCodeNum(2002);
 		return SUCCESS;
 	}
 	

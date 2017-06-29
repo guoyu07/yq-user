@@ -1419,6 +1419,7 @@ public class GcuserDao {
 		parameter.setString(userId);
 		return this.jdbc.update(sql, parameter)>0;
 	}
+
 	
 	
 	

@@ -122,18 +122,17 @@
         }
         
         ajax('get','/vip/'+getCookie('name'),null,function(data){
-                console.log(data)
-                $$('name').innerHTML=data.farenUser.username;
+                $$('name').innerHTML=data.gcuser.user;
                 $$('mobile').innerHTML=data.farenUser.call+'&nbsp;&nbsp;&nbsp;'+data.farenUser.name;
                 $$('mobile-code').innerHTML=data.gcuser.call;
-                $('#mobile').next().val(data.farenUser.username);
-                $('#mobile-code').next().val(data.gcuser.username)
+                $('#mobile').next().val(data.farenUser.user);
+                $('#mobile-code').next().val(data.gcuser.user)
                 if(data.gcuser.vip == 2){
                   $$('mobile').parentNode.style.display='block';
-                  username=data.farenUser.username;
+                  username=data.farenUser.user;
                 }else{
                   $$('mobile-code').parentNode.style.display='block';
-                  username=data.gcuser.username;
+                  username=data.gcuser.user;
                 }
         })
         $$('btn-code').onclick=function(){

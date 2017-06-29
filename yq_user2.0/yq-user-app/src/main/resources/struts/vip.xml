@@ -8,101 +8,80 @@
 		<!-- 得到玩家属性值 -->
 		<action name="getUserProperty" class="com.yq.app.vip.action.UserProperty">
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 一币转账 -->
 		<action name="vipmanager" class="com.yq.app.vip.action.VipjzpayAction">
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 一币交易市场 -->
 		<action name="ybmarket" class="com.yq.app.vip.action.EphyscAction">
 			<result name="success" type="json" >
-			<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 报单币转出 -->
 		<action name="bdbzc" class="com.yq.app.vip.action.BdbZzAction" >
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
-				<!-- <param name="includeProperties">erroCodeNum,erroDescrip</param> -->
 			</result>
 		</action>
 		<!-- 报单币充值 -->
 		<action name="bdbcz" class="com.yq.app.vip.action.BdbZzAction" method="bdbcz">
 			<result name="success" type="json" >
-			<param name="callbackParameter">callback</param>
-				<!-- <param name="includeProperties">erroCodeNum,erroDescrip</param> -->
 			</result>
 		</action>
 		<!-- 充值币充值 -->
 		<action name="vipcjb" class="com.yq.app.vip.action.VipcjbAction" method="cj">
 			<result name="success" type="json" >
-			<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 充值币明细 -->
 		<action name="czbdetil" class="com.yq.app.vip.action.VipcjbAction" method="vipcjbcjbdetail">
 			<result name="success" type="json" >
-			<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 备用报单币明细 -->
 		<action name="bybdbdetail" class="com.yq.app.vip.action.BybdbLogAction">
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 一币认购明细 -->
 		<action name="buyYbdetail" class="com.yq.app.vip.action.EpmyjlAction">
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 确认买入一币 -->
 		<action name="myepok" class="com.yq.app.vip.action.MyepokAction">
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- 查看银行账号 -->
 		<action name="fbbank" class="com.yq.app.vip.action.FbbankAction">
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
 			</result>
 		</action>
 		<!-- vip权限验证 -->
 		<action name="addviptoken" class="com.yq.app.vip.action.AddVipTokenAction">
 			<result name="success" type="json" >
-				<param name="callbackParameter">callback</param>
 				<param name="includeProperties">erroCodeNum,erroDescrip</param>
 			</result>
 		</action>
 		<!-- vip短信验证 -->
 		<action name="vipsmsother" class="com.yq.app.vip.action.Sms3Action">
 			<result name="success" type="json">
-				<param name="callbackParameter">callback</param>
 				<param name="ignoreHierarchy">false</param>
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
 		<!-- 一币买入 -->
 		<action name="ybmr" class="com.yq.app.vip.action.EpmyAction">
-			<!-- <result name="success">mainUI/public/eb-exchange-market-buy.jsp</result> -->
 			<result name="success" type="json">
 				<param name="callbackParameter">callback</param>
 			</result>
 		</action>
-		<!-- 撤销一币卖出 -->
-		<action name="qxepmc" class="com.yq.app.user.action.QxepmcAction">
-			<result name="success">vip/qxepmc.jsp</result>
-		</action>
 		<!-- 退出 -->
 		<action name="loginout" class="com.yq.app.vip.action.LoginoutAction">
 			<result name="success" type="json">
-				<param name="callbackParameter">callback</param>
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
@@ -122,7 +101,6 @@
 		<!-- 检查用户是否存在 -->
 		<action name="checkusername" class="com.yq.app.vip.action.CheckUserName">
 			<result name="success" type="json" >
-			<param name="callbackParameter">callback</param>
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
@@ -130,7 +108,6 @@
 		<!-- vip登录 -->
 		<action name="viplogin" class="com.yq.app.vip.action.VipLogin">
 			<result name="success" type="json">
-				<param name="callbackParameter">callback</param>
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
@@ -138,18 +115,11 @@
 		<!-- vip短信登录 -->
 		<action name="vipsms2" class="com.yq.app.vip.action.SmsAction">
 			<result name="success" type="json">
-				<param name="callbackParameter">callback</param>
 				<param name="ignoreHierarchy">false</param>
 				<param name="includeProperties">erroCodeNum</param>
 			</result>
 		</action>
 		
-		<!-- <action name="noPermission" class="com.yq.app.vip.action.ErrorPermissionJSON">  
-            <result type="json">  
-                <param name="root">dataMap</param>  
-                <param name="ignoreHierarchy">false</param>  
-            </result>  
-        </action>   -->
 	</package>
 	
 
@@ -172,6 +142,9 @@
 			<!-- 当没有登录的时候就会跳到首页要求其进行登录 -->
 			<result name="nologin" type="redirect">
 				/error/noLoginJSON
+			</result>
+			<result name="noPermission" type="redirect">
+				/error/noPermissionJSON
 			</result>
 			<result name="glober_alert">
 				/glober_alert.jsp
@@ -198,7 +171,7 @@
 			<!-- 并发访问限制 -->
 			<interceptor name="webRedisSessiontVipVisitSpeedInterceptor"
 				class="com.yq.app.vip.interceptor.WebRedisSessiontVipVisitSpeedInterceptor" />
-			<!-- sql注入烂机器 -->
+			<!-- sql注入拦截器 -->
 			<interceptor name="illegalCharacterInterceptor"
 				class="com.sr178.module.web.interceptor.IllegalCharacterInterceptor" />
 			<interceptor-stack name="someStack">

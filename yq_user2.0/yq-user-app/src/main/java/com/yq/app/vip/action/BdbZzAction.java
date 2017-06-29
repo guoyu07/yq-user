@@ -10,6 +10,7 @@ import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
+import com.yq.vip.bean.VipUser;
 
 public class BdbZzAction extends ALDAdminActionSupport {
 
@@ -28,9 +29,9 @@ public class BdbZzAction extends ALDAdminActionSupport {
 	
 	private int sybdb;
 	
-	private Gcuser farenUser;
+	private VipUser farenUser;
 	
-	private Gcuser gcuser;
+	private VipUser gcuser;
 	
 	private String smsCode;
 	
@@ -39,9 +40,9 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
-			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			farenUser = userService.getVipUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
 				super.setErroCodeNum(2002);
 				return SUCCESS;
@@ -68,24 +69,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		}
 		
 		if(status==1){
-			/*if(gcuser.getVip()==2){
-				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
-				if(farenUser!=null){
-					if(!farenUser.getVipsq().equals(smsCode)){
-						super.setErroCodeNum(2001);
-						return SUCCESS;
-					}
-				}else{
-					super.setErroCodeNum(2002);
-					return SUCCESS;
-				}
-			}else{
-				if(!smsCode.equals(gcuser.getVipsq())){
-					super.setErroCodeNum(2001);
-					return SUCCESS;
-				}
-			}*/
-			userService.trasferBdb(super.getUserName(), syuser, jzpay,pa3,farenUser);
+			userService.trasferBdb(super.getUserName(), syuser, jzpay,pa3);
 			super.setErroCodeNum(2000);
 			return  SUCCESS;
 		}else{
@@ -100,7 +84,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 	}
 	
 	//报单币充值
-	private Gcuser czgcuser;
+	private VipUser czgcuser;
 	private String touser;
 	public String bdbcz(){
 //		super.setErroCodeNum(9);
@@ -108,9 +92,9 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		if(gcuser.getVip()==2){
-			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			farenUser = userService.getVipUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 			if(farenUser==null){
 				super.setErroCodeNum(2002);
 				return SUCCESS;
@@ -143,7 +127,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 			return SUCCESS;
 			
 		}else{
-			czgcuser = userService.getUserByUserName(super.getUserName());
+			czgcuser = userService.getVipUserByUserName(super.getUserName());
 			if(czgcuser.getVip()!=2){
 				super.setErroCodeNum(1);
 				super.setErroDescrip("只有大vip才能使用此功能");
@@ -167,12 +151,12 @@ public class BdbZzAction extends ALDAdminActionSupport {
 
 
 
-	public Gcuser getGcuser() {
+	public VipUser getGcuser() {
 		return gcuser;
 	}
 
 
-	public void setGcuser(Gcuser gcuser) {
+	public void setGcuser(VipUser gcuser) {
 		this.gcuser = gcuser;
 	}
 
@@ -217,11 +201,11 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		this.sybdb = sybdb;
 	}
 
-	public Gcuser getCzgcuser() {
+	public VipUser getCzgcuser() {
 		return czgcuser;
 	}
 
-	public void setCzgcuser(Gcuser czgcuser) {
+	public void setCzgcuser(VipUser czgcuser) {
 		this.czgcuser = czgcuser;
 	}
 
@@ -233,11 +217,11 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		this.touser = touser;
 	}
 
-	public Gcuser getFarenUser() {
+	public VipUser getFarenUser() {
 		return farenUser;
 	}
 
-	public void setFarenUser(Gcuser farenUser) {
+	public void setFarenUser(VipUser farenUser) {
 		this.farenUser = farenUser;
 	}
 

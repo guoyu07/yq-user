@@ -11,6 +11,7 @@ import com.yq.common.action.ALDAdminActionSupport;
 import com.yq.common.utils.Global;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
+import com.yq.vip.bean.VipUser;
 
 public class AddVipTokenAction extends ALDAdminActionSupport{
 
@@ -22,9 +23,9 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 	private static final long serialVersionUID = 1L;
 	private String inputUrl;
 	
-	private Gcuser farenUser;
+	private VipUser farenUser;
 	
-	private Gcuser gcuser;
+	private VipUser gcuser;
 	
 	private String smsCode;
 	
@@ -32,14 +33,14 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 	public String execute() throws Exception {
 		HttpSession sessionhttp = ServletActionContext.getRequest().getSession();
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);	
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		if(gcuser.getVip()==0){
 			super.setErroCodeNum(2003);
 			super.setErroDescrip("您不是vip账户！");
 			return SUCCESS;
 		}
 		if(gcuser.getVip()==2){
-			farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
+			farenUser = userService.getVipUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
 				if(farenUser!=null){
 					if(!Strings.isNullOrEmpty(smsCode)){
 						if(!smsCode.equals(farenUser.getVipsq())){
@@ -76,9 +77,9 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 			userService.setVipSession(sessionhttp.getId(), vipSessionBean);
 		}
 		if(gcuser.getVip()==2){
-			userService.updateSmsCode(farenUser.getUsername(), Global.INIT_SMS_CODE);
+			userService.updateSmsCode(farenUser.getUser(), Global.INIT_SMS_CODE);
 		}else{
-			userService.updateSmsCode(gcuser.getUsername(), Global.INIT_SMS_CODE);
+			userService.updateSmsCode(gcuser.getUser(), Global.INIT_SMS_CODE);
 		}
 		super.setErroCodeNum(2000);
 		return SUCCESS;
@@ -92,19 +93,19 @@ public class AddVipTokenAction extends ALDAdminActionSupport{
 		this.inputUrl = inputUrl;
 	}
 
-	public Gcuser getFarenUser() {
+	public VipUser getFarenUser() {
 		return farenUser;
 	}
 
-	public void setFarenUser(Gcuser farenUser) {
+	public void setFarenUser(VipUser farenUser) {
 		this.farenUser = farenUser;
 	}
 
-	public Gcuser getGcuser() {
+	public VipUser getGcuser() {
 		return gcuser;
 	}
 
-	public void setGcuser(Gcuser gcuser) {
+	public void setGcuser(VipUser gcuser) {
 		this.gcuser = gcuser;
 	}
 

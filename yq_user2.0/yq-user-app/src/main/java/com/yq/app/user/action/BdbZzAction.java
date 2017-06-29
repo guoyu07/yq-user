@@ -67,24 +67,7 @@ public class BdbZzAction extends ALDAdminActionSupport {
 		}
 		
 		if(status==1){
-			/*if(gcuser.getVip()==2){
-				farenUser = userService.getUserByUserName(userService.getUserProperty(super.getUserName()).getFaren());
-				if(farenUser!=null){
-					if(!farenUser.getVipsq().equals(smsCode)){
-						super.setErroCodeNum(2001);
-						return SUCCESS;
-					}
-				}else{
-					super.setErroCodeNum(2002);
-					return SUCCESS;
-				}
-			}else{
-				if(!smsCode.equals(gcuser.getVipsq())){
-					super.setErroCodeNum(2001);
-					return SUCCESS;
-				}
-			}*/
-			userService.trasferBdb(super.getUserName(), syuser, jzpay,pa3,farenUser);
+			userService.trasferBdb(super.getUserName(), syuser, jzpay,pa3);
 			return "bdbdate";
 		}else{
 			

@@ -175,7 +175,7 @@
                     }else{
                         alert('手机验证码失败')
                     }
-                },'jsonp')
+                })
             }
         }
         $$('btn').onclick=function(){
@@ -187,7 +187,7 @@
               $$('code').focus();
               return ;
             }
-            ajax('get','/viplogin?callback=?',{'vipName':v,'vipPassword':p,'smsCode':c},function(data){
+            ajax('get','/viplogin',{'vipName':v,'vipPassword':p,'smsCode':c},function(data){
                  if(data.erroCodeNum==2001){
                     alert('用户名不正确')
                     return ;
@@ -211,14 +211,13 @@
                   if(data.erroCodeNum==2000){
                     location.href="./yibizhuanchu.html";
                   }
-            },'jsonp')
+            })
         }
-        function ajax(action,url,obj,callback,jsonp){
+        function ajax(action,url,obj,callback){
            $.ajax({
                 type:action,
                 url:url,
                 data:obj,
-                dataType:jsonp,
                 success:function(data){
                     callback(data)
                 }

@@ -1,5 +1,5 @@
-ï»¿body{
-    font-family:'å¾®è½¯é›…é»‘';
+body{
+    font-family:'Î¢ÈíÑÅºÚ';
 }
 .Business-head{
     width:1155px;
@@ -9,7 +9,7 @@
 }
 @font-face{
     font-family:myFirstFont;
-    src: url('../font/æ–¹æ­£å…°äº­è¶…ç»†é»‘.TTF');
+    src: url('../font/·½ÕýÀ¼Í¤³¬Ï¸ºÚ.TTF');
 }
 .Business-head .Business-center{
     font-family:myFirstFont;
@@ -24,7 +24,7 @@
     margin-right:26px;
     line-height:63px;
     font-size:14px;
-    font-family:'å¾®è½¯é›…é»‘';
+    font-family:'Î¢ÈíÑÅºÚ';
 }
 .Business-head p span{
      color:#737373;
@@ -127,7 +127,7 @@
 .Currency-declaration{
     background-color:#4bb764;
 }
-/*å…¬å…±çš„è¡¨æ ¼å’Œåˆ†é¡µ*/
+/*¹«¹²µÄ±í¸ñºÍ·ÖÒ³*/
 table{
     margin-top:20px;
     margin-left:28px;

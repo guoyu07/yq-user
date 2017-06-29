@@ -8,6 +8,7 @@ import com.google.common.base.Strings;
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.sr178.game.framework.log.LogSystem;
 import com.yq.common.action.ALDAdminActionSupport;
+import com.yq.common.utils.Global;
 import com.yq.user.bo.Gcuser;
 import com.yq.user.service.UserService;
 
@@ -44,6 +45,8 @@ public class VipLogin extends ALDAdminActionSupport {
 					super.setErroCodeNum(2004);
 					super.setErroDescrip("短信验证码不正确！");
 					return SUCCESS;
+				}else{
+					aus.updateSmsCode(vipName, Global.INIT_SMS_CODE);
 				}
 			}else{
 				super.setErroCodeNum(2004);

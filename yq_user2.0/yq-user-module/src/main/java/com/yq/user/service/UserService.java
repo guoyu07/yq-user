@@ -22,8 +22,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.google.common.base.Strings;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -125,12 +123,12 @@ import com.yq.user.dao.VipcjglDao;
 import com.yq.user.dao.VipxtgcDao;
 import com.yq.user.dao.YouMingXiDao;
 import com.yq.user.dao.ZuoMingxiDao;
-import com.yq.user.scheduler.AppSendCallBackScheduler;
 import com.yq.user.utils.EasySecureHttpService.EasySecureHttp;
 import com.yq.user.utils.EasySecureHttpService.ResultObject;
 import com.yq.user.utils.Ref;
 import com.yq.user.utils.StringCheck;
 import com.yq.user.utils._99douInterface;
+import com.yq.vip.bean.VipUser;
 
 import cn.submsg.client.util.SubMsgSendUtils;
 
@@ -1696,7 +1694,7 @@ public class UserService {
 	 * @param amount
 	 */
 	@Transactional
-	public void trasferBdb(String fromUser,String toUser,int amount,String password3,Gcuser farenUser){
+	public void trasferBdb(String fromUser,String toUser,int amount,String password3){
 		Gcuser from = gcuserDao.getUser(fromUser);
 		if(from.getVip()==0){
 			throw new ServiceException(1, "vip用户才能玩这个功能！");
@@ -2501,7 +2499,7 @@ public class UserService {
 	//转出折扣为0.9的vip用户名
 	private static final String[] ration_0_9_user = new String[]{"qaz363363b","lyl5577a","qal999999a","cmj999999a","gyc363363a","csp5218a"};
 	@Transactional
-	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount, Gcuser farenUser){
+	public void trasferYbToOtherPersion(String fromUser,String toUser,String password3,int amount){
 		
 		if(Strings.isNullOrEmpty(fromUser)||Strings.isNullOrEmpty(toUser)||Strings.isNullOrEmpty(password3)){
 			throw new ServiceException(400,"您输入的信息不完整！");
@@ -4677,7 +4675,7 @@ public class UserService {
 	 * @param farenUser 
 	 */
 	@Transactional
-	public void vipCj(String fromUserName,String toUserName,int amount,String password, Gcuser farenUser){
+	public void vipCj(String fromUserName,String toUserName,int amount,String password){
 		if(zuoMingxiDao.get(fromUserName, toUserName)==null&&youMingXiDao.get(fromUserName, toUserName)==null){
 			throw new ServiceException(1, "用户名输入错误或不属于自己团队的玩家，请检查后再试！");
 		}
@@ -6056,6 +6054,40 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 			return gcUser;
 		}
 		return null;
+	}
+
+	public Gcuser getCacheUserByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public VipUser getVipUserByUserName(String userName) {
+		Gcuser gcuer = getCacheUser(userName);
+		VipUser vipUser =null;
+		if(gcuer!=null){
+			vipUser = VipUser.getVipUser(gcuer);
+			vipUser.setMoneypot(this.getMoneyPot(userName));
+			return vipUser;
+		}
+		return vipUser;
+	}
+
+ 	private Cache<String,Gcuser> cacheUser = CacheBuilder.newBuilder().expireAfterAccess(20, TimeUnit.SECONDS).maximumSize(20000).build();
+  	
+	private String getCacheVipKey(String userName){
+		return "vip_cache_"+userName;
+	}
+ 	
+	public Gcuser getCacheUser(String userName) {
+		String key=getCacheVipKey(userName);
+		Gcuser gcuser = cacheUser.getIfPresent(key);
+		if(gcuser!=null){
+			return gcuser;
+		}else{
+			gcuser = gcuserDao.getUser(userName);
+			cacheUser.put(key, gcuser);
+			return cacheUser.getIfPresent(key);
+		}
 	}
 	
 	

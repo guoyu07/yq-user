@@ -2,9 +2,9 @@ package com.yq.app.vip.action;
 
 import com.sr178.game.framework.context.ServiceCacheFactory;
 import com.yq.common.action.ALDAdminActionSupport;
-import com.yq.user.bo.Gcuser;
 import com.yq.user.bo.Txpay;
 import com.yq.user.service.UserService;
+import com.yq.vip.bean.VipUser;
 
 public class EpmyAction extends ALDAdminActionSupport {
 
@@ -12,7 +12,7 @@ public class EpmyAction extends ALDAdminActionSupport {
 	
 	private int ep;
 	
-	private Gcuser gcuser;
+	private VipUser gcuser;
 	
 	private Txpay txpay;
 	
@@ -23,7 +23,7 @@ public class EpmyAction extends ALDAdminActionSupport {
 	
 	public String execute(){
 		UserService userService = ServiceCacheFactory.getServiceCache().getService(UserService.class);
-		gcuser = userService.getUserByUserName(super.getUserName());
+		gcuser = userService.getVipUserByUserName(super.getUserName());
 		if(status==0){
 			txpay = userService.buyYbPre(super.getUserName(), ep);
 		}else{
@@ -41,11 +41,11 @@ public class EpmyAction extends ALDAdminActionSupport {
 		this.ep = ep;
 	}
 
-	public Gcuser getGcuser() {
+	public VipUser getGcuser() {
 		return gcuser;
 	}
 
-	public void setGcuser(Gcuser gcuser) {
+	public void setGcuser(VipUser gcuser) {
 		this.gcuser = gcuser;
 	}
 
