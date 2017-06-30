@@ -6079,7 +6079,7 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 	}
  	
 	public Gcuser getCacheUser(String userName) {
-		String key=getCacheVipKey(userName);
+		/*String key=getCacheVipKey(userName);
 		Gcuser gcuser = cacheUser.getIfPresent(key);
 		if(gcuser!=null){
 			return gcuser;
@@ -6087,7 +6087,8 @@ public String updateUser(String userName, String newSecondPassword1, String newS
 			gcuser = gcuserDao.getUser(userName);
 			cacheUser.put(key, gcuser);
 			return cacheUser.getIfPresent(key);
-		}
+		}*/
+		return gcuserDao.getUser(userName);
 	}
 	
 	
